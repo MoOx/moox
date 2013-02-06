@@ -1,4 +1,7 @@
 node_modules
+src/_assets/components
+src/_assets/styles/unused
+src/_todo
 npm-debug.log
 .sass-cache
 build

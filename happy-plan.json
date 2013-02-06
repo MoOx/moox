@@ -1,0 +1,65 @@
+{
+    "name": "MoOx.fr",
+    "url": "http://moox.fr/",
+    "description": "Web Developer Front-End",
+    "baseUrl": "",
+    "src": {
+        "_path": "src",
+        "assets": {
+            "_path": "src/_assets",
+            "scripts": "src/_assets/scripts",
+            "styles": "src/_assets/styles",
+            "images": "src/_assets/images",
+            "fonts": "src/_assets/fonts",
+            "webfonts": "src/_assets/webfonts",
+            "components": "src/_assets/components"
+        },
+        "medias": "medias"
+    },
+    "build": {
+        "_path": "build",
+        "assets": {
+            "_path": "build/assets",
+            "scripts": "build/assets/js",
+            "styles": "build/assets/css",
+            "images": "build/assets/i",
+            "fonts": "build/assets/fonts",
+            "webfonts": "build/assets/fonts",
+            "components": "build/assets/components"
+        },
+        "medias": "medias"
+    },
+    "jekyll": {
+        "permalink": "/:categories/:title"
+    },
+    "compass": {
+        "require": [
+            "modular-scale",
+            "zurb-foundation",
+            "compass-recipes"
+        ]
+    },
+    "requirejs": {
+        "name": "main"
+    },
+    "components": {
+        "files": [
+            {
+                "expand": true,
+                "cwd": "<%= happyPlan.src.assets.components %>/requirejs/",
+                "src": "require.js",
+                "dest": "<%= happyPlan.build.assets.components %>/"
+            }
+        ]
+    },
+    "jshint": {
+        "files": [
+            "Gruntfile.js",
+            "component.json",
+            "happy-plan.json",
+            "package.json",
+            "<%= happyPlan.src.assets.scripts %>/**/*.js",
+            "!<%= happyPlan.src.assets.scripts %>/foundation/**/*.js"
+        ]
+    }
+}
