@@ -228,6 +228,8 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['configs', 'jekyll:build', 'copy:jekyllTmp', 'copy:fonts', 'copy:components', 'webfont:icons']);
     grunt.registerTask('dev', ['jshint', 'build', 'compass:dev', 'copy:js', 'copy:fakeImagemin']);
     grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify', 'imagemin:dist']);
+    
+    grunt.registerTask('test', ['dev', 'dist']);
 
     grunt.registerTask('server', 'jekyll:server');
 };
