@@ -11,3 +11,5 @@ http_javascripts_path = "@@http_javascripts_path"
 http_fonts_path = "@@http_fonts_path"
 
 @@require
+
+@@add_import_path

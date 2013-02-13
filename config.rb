@@ -11,5 +11,7 @@ http_javascripts_path = "/assets/js"
 http_fonts_path = "/assets/fonts"
 
 require "modular-scale"
-require "zurb-foundation"
+require "ceaser-easing"
 require "compass-recipes"
+
+add_import_path "src/_assets/components"

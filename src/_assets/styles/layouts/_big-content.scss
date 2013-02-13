@@ -1,0 +1,139 @@
+.grid--title {
+	@include media-m {
+		padding: 1em 0;
+		
+		.grid__cell {
+			text-align: center;
+		}
+		
+		// quotes title
+		.grid-title--quotes & {
+			
+			h1 { text-align: left; }
+			h2 { text-align: right; }
+			
+			h1,
+			h1:before,
+			h2,
+			h2:after {
+				z-index: 2;
+				position: relative;
+			}
+			h1:before,
+			h2:after {
+				position: absolute;
+				font-size: 6em;
+				opacity: .6;
+			}
+			h1:before {
+				content: '\201C';
+				left: -.7em;
+				top: -.2em;
+				font-size: 1.4em;
+			}
+			h2:after {
+				content: '\201D';
+				right: -.7em;
+				top: 0em;
+				font-size: 2.2em; // restore h1 size
+			}
+		}
+	}
+}
+
+.grid--blabla {
+	position: relative;
+}
+
+@import "recipes/icon-font";
+$icons--big-size: 4em;
+.icons--big {
+	text-align: center;
+	margin: 1em auto !important;
+	line-height: 1.2;
+
+	a {
+		font-size: $icons--big-size;
+		position: relative;
+		display: inline-block;
+		padding: 0 .3em;
+		@include transition(all .2s);
+		//@include ceaser-transition($easeInOutBack, all, .3s);
+
+		.text {
+			color: $text-color;
+			font-weight: bold;
+			font-size: .25em;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			opacity: 0;
+			@include translateY(0%);
+			@include ceaser-transition($easeInOutBack, all, .3s);
+		}
+
+		@include accessibleHover {
+			.text {
+				@include translateY($icons--big-size*1.1);
+				opacity: 1;
+			}
+		}
+	}
+}
+
+	.stretch-img_column {
+		padding-top: 1em;
+	}
+	
+	$mooxSmallMaxWidth: 200px;
+	.stretch-img_column_img {
+		display: block;
+		margin: auto;
+		max-width: $mooxSmallMaxWidth;
+		//@include media-min($mooxSmallMaxWidth) { max-width: 110%; }
+		@include media-m { max-width: 100%; }
+	}
+
+
+// strectch layout on home for moox img
+@media (min-height: 50em) and (min-width: $screen-m) {
+	.stretch-img,
+	body,
+	.body-wrapper {
+		height: 100%;
+	}
+	
+	.stretch-img {
+		.annonce-box,
+		.navbar--top {
+			position: absolute;
+		}
+
+		.navbar--top {
+			top: $annonceBoxHeight;
+		}
+		
+	}
+	
+	.grid--title {
+		padding-top: $annonceBoxHeight + $navbar-height + 1em;
+		height: 30%;
+	}
+	
+	.grid--blabla { height: 70%; }
+	
+	.stretch-img_column {
+		position: static;
+		padding-top: 0;
+	}
+
+		.stretch-img_column_img {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			height: 100%;
+			max-width: none;
+		}
+}

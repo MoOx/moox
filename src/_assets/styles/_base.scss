@@ -1,0 +1,82 @@
+@import "compass";
+
+@-webkit-viewport { width: device-width }
+@-moz-viewport { width: device-width }
+@-o-viewport { width: device-width }
+@-ms-viewport { width: device-width }
+@viewport { width: device-width }
+
+* { @include box-sizing(border-box); }
+
+@import "normalize.scss/normalize";
+
+@import "ceaser-easing";
+@import "recipes";
+
+$screen-debug: false !default;
+
+$screen-s: 30em !default;
+$screen-m: 55em !default;
+$screen-l: 70em !default;
+$screen-xl: 100em !default;
+
+@mixin media-s() { @include media-min($screen-s) { @content; } }
+@mixin media-m() { @include media-min($screen-m) { @content; } }
+@mixin media-l() { @include media-min($screen-l) { @content; } }
+@mixin media-xl() { @include media-min($screen-xl) { @content; } }
+
+@if ($screen-debug) {
+	body:before {
+		@include pseudo-element($position: fixed);
+		bottom: 0; left: 0;
+		@include background-gradient(rgba(#f00, .4), bevel);
+		color: #fff;
+		text-shadow: 0 -1px 0 rgba(#000, .8);
+		border-radius: 0 3px 0 0;
+		padding: .4em 1em;
+		
+		content: "Screen XS";
+		@include media-s { content: "* Screen S *"; }
+		@include media-m { content: "** Screen M **"; }
+		@include media-l { content: "*** Screen L ***"; }
+		@include media-xl { content: "**** Screen XL ****"; }
+	}
+}
+
+$use-griddle: true !default;
+$grid-gutter: 2em !default;
+
+@import "griddle/scss/grid-helpers";
+@import "griddle/scss/grid-core";
+
+@if $use-griddle {
+	$grid-screen-s: 2 3 4 !default;
+	$grid-screen-m: 2 3 4 5 6 12 !default;
+
+	@include grid-build-units($grid-screen-s);
+
+	@include media-m {
+		@include grid-build-units($grid-screen-m, '--medium');
+	}
+}
+
+$use-simple-sprite-map: false !default;
+@if $use-simple-sprite-map {
+	$simple-sprite-map: simple-sprite-map();
+}
+
+$use-icon-font: false !default;
+@if ($use-icon-font) {
+	@font-face {
+		font-family: "icons";
+		src: font-url("icons/icons.eot?#iefix") format("embedded-opentype"),
+			font-url("icons/icons.woff") format("woff"),
+			font-url("icons/icons.ttf") format("truetype"),
+			font-url("icons/icons.svg#fontcustom") format("svg");
+		font-weight: normal;
+		font-style: normal;
+	}
+}
+@import "icons";
+
+@import "fonts";

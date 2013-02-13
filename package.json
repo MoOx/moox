@@ -1,19 +1,19 @@
 {
-  "name": "happy-plan",
-  "version": "0.2.0",
-  "description": "Happy plan is bundle of amazing tools to be used as a static website generator.",
+  "name": "MoOx.fr",
+  "version": "7.0.0",
+  "description": "MoOx personal website",
   "dependencies": {
-    "grunt": ">=0.4.0rc7",
-    "grunt-contrib-jshint": ">=0.1.1rc6",
+    "grunt": "git://github.com/gruntjs/grunt",
+    "grunt-contrib-jshint": "git://github.com/gruntjs/grunt-contrib-jshint.git",
     "grunt-replace": "git://github.com/outaTiME/grunt-replace.git",
-    "grunt-contrib-clean": ">=0.4.0rc6",
+    "grunt-contrib-clean": "git://github.com/gruntjs/grunt-contrib-clean.git",
     "grunt-jekyll": "~0.2.2",
-    "grunt-contrib-copy": ">=0.4.0rc7",
-    "grunt-contrib-concat": ">=0.1.2rc6",
-    "grunt-webfont": "git://github.com/MoOx/grunt-webfont.git",
-    "grunt-contrib-compass": ">=0.1.1rc7",
-    "grunt-contrib-imagemin": ">=0.1.1rc8",
-    "grunt-contrib-requirejs": "git://github.com/gruntjs/grunt-contrib-requirejs.git"
+    "grunt-contrib-copy": "git://github.com/gruntjs/grunt-contrib-copy.git",
+    "grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
+    "grunt-webfont": "git://github.com/sapegin/grunt-webfont.git",
+    "grunt-contrib-compass": "git://github.com/gruntjs/grunt-contrib-compass.git",
+    "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git",
+    "grunt-contrib-imagemin": "git://github.com/gruntjs/grunt-contrib-imagemin.git"
   },
   "devDependencies": {
     "grunt-regarde": "git://github.com/yeoman/grunt-regarde.git",
@@ -21,15 +21,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kud/happy-plan.git"
+    "url": "git://github.com/MoOx/moox.fr.git"
   },
-  "keywords": [
-    "static",
-    "website",
-    "generator",
-    "jekyll",
-    "frontend"
-  ],
-  "author": "Erwann MEST",
-  "license": "BSD"
+  "author": "Maxime Thirouin",
+  "license": "MIT"
 }

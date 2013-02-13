@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js no-touch {{ page.class }}">
 <meta charset="utf-8">
 <title>{{ page.title }}</title>
+{% include scripts-first.html %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/assets/css/style.css">
 <link href="{{site.baseurl}}/feed.xml" rel="alternate" type="application/rss+xml">
-<div class="alert-box" style="margin-bottom: 0; text-align: center; border-radius: 0">
-	My website is currently under heavy development. So, it's kinda like an unfinished fresh paint for now. Sorry :)</div>
-<a class="ribbon-freelance" href="/contact/">Now available as Freelance !</a>
+<div class="annonce-box">
+	<small>My website is currently under heavy development. So, it's kinda like an unfinished fresh paint for now :)</small>
+</div>
+<a class="source-code" href="https://github.com/MoOx/moox.fr">source code</a>
 {% include nav.html %}
 <div class="body-wrapper">
 {{ content }}
 </div>
-{% include scripts.html %}
+{% include scripts-last.html %}
 </html>

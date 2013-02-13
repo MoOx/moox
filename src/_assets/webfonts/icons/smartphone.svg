@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<path id="smartphone-4-icon" d="M334.832,50H177.168c-18.227,0-33,14.774-33,33v346c0,18.226,14.773,33,33,33h157.664
+	c18.227,0,33-14.774,33-33V83C367.832,64.774,353.059,50,334.832,50z M238.5,80.222h37c2.209,0,4,1.791,4,4s-1.791,4-4,4h-37
+	c-2.209,0-4-1.791-4-4S236.291,80.222,238.5,80.222z M257.002,443.056c-8.838,0-16-7.163-16-16s7.162-16,16-16
+	c8.834,0,16,7.163,16,16S265.836,443.056,257.002,443.056z M342.75,393.75H169.252v-275.5H342.75V393.75z"/>
+</svg>
