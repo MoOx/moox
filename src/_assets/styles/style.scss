@@ -191,6 +191,9 @@ $navbar__item--font-size: .8em;
 	.active {
 		position: relative;
 		overflow: hidden;
+		
+		vertical-align: middle; // FIX Firefox alignment bug https://bugzilla.mozilla.org/show_bug.cgi?id=491549
+		
 		&::after {
 			@include glowing-indicator-pseudo-element-requirements($highlight-color);
 			@include glowing-indicator-pseudo-element-position(left);
