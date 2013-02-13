@@ -229,7 +229,7 @@ module.exports = function(grunt) {
     grunt.registerTask('dev', ['jshint', 'build', 'compass:dev', 'copy:js', 'copy:fakeImagemin']);
     grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify', 'imagemin:dist']);
     
-    grunt.registerTask('test', ['dev', 'dist']);
+    grunt.registerTask('test', ['dist']);
 
     grunt.registerTask('server', 'jekyll:server');
 };

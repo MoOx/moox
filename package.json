@@ -1,7 +1,9 @@
 {
   "name": "MoOx.fr",
   "version": "7.0.0",
+  "author": "Maxime Thirouin",
   "description": "MoOx personal website",
+  "license": "MIT",
   "dependencies": {
     "grunt": "git://github.com/gruntjs/grunt",
     "grunt-contrib-jshint": "git://github.com/gruntjs/grunt-contrib-jshint.git",
@@ -23,6 +25,7 @@
     "type": "git",
     "url": "git://github.com/MoOx/moox.fr.git"
   },
-  "author": "Maxime Thirouin",
-  "license": "MIT"
+  "scripts": {
+    "test": "grunt test"
+  }
 }
