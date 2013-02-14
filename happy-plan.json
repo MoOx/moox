@@ -41,6 +41,12 @@
 		},
 		"medias": "medias"
 	},
+	"assets": {
+		"main": {
+			"style": "style.css",
+			"script": "vanilla.css"
+		}
+	},
 	"jshint": {
 		"files": [
 			"Gruntfile.js",

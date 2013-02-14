@@ -36,6 +36,7 @@ module.exports = function(grunt) {
                     variables: {
                         __warningComment__: '# <%= warningComment %>',
                         dev: grunt.option('dev') ? 'true' : 'false',
+                        version: '<%= pkg.version %>',
                         name: '<%= happyPlan.name %>',
                         url: '<%= happyPlan.url %>',
                         description: '<%= happyPlan.description %>',

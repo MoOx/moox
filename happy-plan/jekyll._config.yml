@@ -1,6 +1,7 @@
 @@__warningComment__
 
 dev: @@dev
+version: @@version
 
 url: @@url
 name: @@name
