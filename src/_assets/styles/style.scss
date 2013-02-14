@@ -229,14 +229,6 @@ $title--site--font-size: 1.4em;
 	@include media-gap ($screen-s, $screen-m) { padding: 0 $grid-gutter*$unit/$title--site--font-size; }
 	text-decoration: none;
 	font-weight: bold;
-
-	@include transition(all .2s);
-
-	@include accessibleHover {
-		color: #fff;
-		background: none;
-		@include transform(rotate(1deg) scaleX(1.1) scaleY(1.1));
-	}
 }
 
 .text-less-visible {
