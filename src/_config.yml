@@ -1,8 +1,0 @@
-# DO NOT EDIT THIS GENERATED FILE, IT WILL BE OVERWRITTEN AUTOMATICALLY - REFER TO Gruntfile OR happy-plan/*
-
-dev: true
-
-url: http://moox.fr/
-name: MoOx.fr
-description: Web Developer Front-End
-permalink: /:categories/:title

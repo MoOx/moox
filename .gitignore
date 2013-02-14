@@ -1,7 +1,7 @@
 node_modules
 .sass-cache
 build
+config.rb
+src/_config.yml
 src/_assets/components
-.ftppass
-src/_assets/styles/unused
-src/_todo
+src/_unused
