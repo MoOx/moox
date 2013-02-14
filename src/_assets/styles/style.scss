@@ -47,7 +47,7 @@ body {
 	font-size: 90%;
 	@include media-m { font-size: 100%; }
 	//@include media-l { font-size: 110%; }
-	-webkit-font-smoothing: auto;
+	-webkit-font-smoothing: antialiased;
 }
 
 .body-wrapper {
@@ -229,6 +229,11 @@ $title--site--font-size: 1.4em;
 	@include media-gap ($screen-s, $screen-m) { padding: 0 $grid-gutter*$unit/$title--site--font-size; }
 	text-decoration: none;
 	font-weight: bold;
+}
+
+.title--light {
+	color: #fff;
+	text-shadow: 0 1px 0 #000;
 }
 
 .text-less-visible {
