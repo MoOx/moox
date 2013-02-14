@@ -1,4 +1,3 @@
-# MAINTENANCE-PAGE REDIRECT
 <IfModule mod_rewrite.c>
 RewriteEngine on
 RewriteCond %{REQUEST_URI} /(blog|portfolio|about|category|web-developer|tag)/ [NC]

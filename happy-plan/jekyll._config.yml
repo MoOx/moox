@@ -6,3 +6,6 @@ url: @@url
 name: @@name
 description: @@description
 permalink: @@permalink
+baseurl: @@baseurl
+
+include: ['.htaccess']

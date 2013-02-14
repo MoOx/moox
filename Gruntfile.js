@@ -39,7 +39,8 @@ module.exports = function(grunt) {
                         name: '<%= happyPlan.name %>',
                         url: '<%= happyPlan.url %>',
                         description: '<%= happyPlan.description %>',
-                        permalink: '<%= happyPlan.jekyll.permalink %>'
+                        permalink: '<%= happyPlan.jekyll.permalink %>',
+                        baseurl: '<%= happyPlan.baseUrl %>'
                     }
                 },
                 files: { 'src/_config.yml': ['happy-plan/jekyll._config.yml'] }
@@ -97,8 +98,9 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: '<%= happyPlan.build._path %>/_tmp',
-                        src: ['**'],
-                        dest: '<%= happyPlan.build._path %>' }
+                        src: ['{**,.*}'],
+                        dest: '<%= happyPlan.build._path %>'
+                    }
                 ]
             },
             fonts: {
@@ -190,8 +192,16 @@ module.exports = function(grunt) {
         },
         
         regarde: {
+            configs: {
+                files: ['happy-plan/**/*'],
+                tasks: ['configs']
+            },
             html: {
-                files: ['<%= happyPlan.src._path %>/**/*.html', '<%= happyPlan.src._path %>/**/*.md'],
+                files: [
+                    '<%= happyPlan.src._path %>/**/*.{html,md,txt}',
+                    '<%= happyPlan.src._path %>/_config.yml',
+                    '<%= happyPlan.src._path %>/.htaccess'
+                ],
                 tasks: ['jekyll:build', 'copy:jekyllTmp', 'livereload']
             },
             js: {
@@ -214,7 +224,7 @@ module.exports = function(grunt) {
                 files: ['<%= happyPlan.src.assets.webfonts %>/icons/*.svg'],
                 tasks: 'webfont:icons'
             },
-                        livereload: {
+            livereload: {
                 files: ['<%= happyPlan.build.assets._path %>/**'],
                 tasks: 'livereload'
             }
