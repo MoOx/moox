@@ -27,6 +27,7 @@
 		"type": "git",
 		"url": "git://github.com/MoOx/moox.fr.git"
 	},
+	"main": "Gruntfile.js",
 	"scripts": {
 		"test": "grunt test --verbose"
 	}
