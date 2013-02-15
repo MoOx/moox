@@ -176,7 +176,7 @@ module.exports = function(grunt) {
         imagemin: {
             dist: {
                 options: {
-                    optimizationLevel: 7,
+                    optimizationLevel: 4,
                     progressive: true
                 },
                 files: [
@@ -240,7 +240,7 @@ module.exports = function(grunt) {
     grunt.registerTask('dev', ['jshint', 'build', 'compass:dev', 'copy:js', 'copy:fakeImagemin']);
     grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify', 'imagemin:dist']);
     
-    grunt.registerTask('test', ['dist']);
+    grunt.registerTask('test', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify', , 'copy:fakeImagemin']); // waiting for https://github.com/gruntjs/grunt-contrib-imagemin/issues/11 to use just 'dist' here
 
     grunt.registerTask('server', 'jekyll:server');
 };
