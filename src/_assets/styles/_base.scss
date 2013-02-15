@@ -46,17 +46,16 @@ $screen-xl: 100em !default;
 $use-griddle: true !default;
 $grid-gutter: 2em !default;
 
-@import "griddle/scss/grid-helpers";
-@import "griddle/scss/grid-core";
+@import "griddle";
 
 @if $use-griddle {
 	$grid-screen-s: 2 3 4 !default;
 	$grid-screen-m: 2 3 4 5 6 12 !default;
 
-	@include grid-build-units($grid-screen-s);
+	@include griddle-build($grid-screen-s);
 
 	@include media-m {
-		@include grid-build-units($grid-screen-m, '--medium');
+		@include griddle-build($grid-screen-m, '--medium');
 	}
 }
 

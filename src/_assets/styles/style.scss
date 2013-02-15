@@ -101,13 +101,13 @@ h4,
 	& :last-child { margin-bottom: 0; }
 }
 
-@import "hint.css/src/hint-variables";
-@import "hint.css/src/hint-mixins";
-@import "hint.css/src/hint-core";
-@import "hint.css/src/hint-position";
-@import "hint.css/src/hint-color-types";
-@import "hint.css/src/hint-always";
-@import "tooltip";
+@import "hint-variables";
+@import "hint-mixins";
+@import "hint-core";
+@import "hint-position";
+@import "hint-color-types";
+@import "hint-always";
+//@import "tooltip";
 
 [href="#not-ready"] {
 	@extend .hint;

@@ -67,9 +67,13 @@
 			"ceaser-easing",
 			"compass-recipes"
 		],
-		"add_import_path": [
-			"<%= happyPlan.src.assets.components %>"
-		]
+		"additional_import_paths": [
+			"<%= happyPlan.src.assets.components %>/",
+			"<%= happyPlan.src.assets.components %>/griddle/",
+			"<%= happyPlan.src.assets.components %>/hint.css/src/",
+			"<%= happyPlan.src.assets.components %>/"
+		],
+		"meh": "last path is stupid, it's because of a compass import path issue I think. I should take a deeper look."
 	},
 	"uglify": {
 		"options": {

@@ -12,4 +12,4 @@ http_fonts_path = "@@http_fonts_path"
 
 @@require
 
-@@add_import_path
+@@additional_import_paths

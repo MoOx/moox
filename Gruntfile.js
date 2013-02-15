@@ -72,7 +72,7 @@ module.exports = function(grunt) {
                         http_javascripts_path: happyPlan.baseUrls.scripts,
                         http_fonts_path: happyPlan.baseUrls.fonts,
                         require: happyPlan.compass.require.length>0 ? "require \"" + happyPlan.compass.require.join("\"\nrequire \"") + "\"" : "",
-                        add_import_path: happyPlan.compass.add_import_path.length>0 ? "add_import_path \"" + happyPlan.compass.add_import_path.join("\"add_import_path \"") + "\"" : ""
+                        additional_import_paths: happyPlan.compass.additional_import_paths ? ("additional_import_paths = [" + (happyPlan.compass.additional_import_paths.length>0 ? ("\n    \"" + happyPlan.compass.additional_import_paths.join("\",\n    \"") + "\"\n]") : "]")) : ''
                     }
                 },
                 files: { 'config.rb': ['happy-plan/compass.config.rb'] }
@@ -165,8 +165,7 @@ module.exports = function(grunt) {
             dist: {
                 options: {
                     outputStyle: 'compressed',
-                    noLineComments: true,
-                    force: true
+                    noLineComments: true
                 }
             }
         },
