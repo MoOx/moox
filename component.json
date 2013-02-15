@@ -1,9 +1,10 @@
 {
   "name": "MoOx.fr",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "dependencies": {
     "hint.css": "git://github.com/chinchang/hint.css.git",
     "griddle": "git://github.com/necolas/griddle.git",
-    "normalize.scss": "~2.1.0"
+    "normalize.scss": "~2.1.0",
+    "picturefill": "git://github.com/scottjehl/picturefill.git"
   }
 }

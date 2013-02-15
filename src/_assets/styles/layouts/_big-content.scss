@@ -84,17 +84,16 @@ $icons--big-size: 4em;
 
 	.stretch-img_column {
 		padding-top: 1em;
+		
+		$mooxSmallMaxWidth: 200px;
+		img {
+			display: block;
+			margin: auto;
+			max-width: $mooxSmallMaxWidth;
+			//@include media-min($mooxSmallMaxWidth) { max-width: 110%; }
+			@include media-m { max-width: 100%; }
+		}
 	}
-	
-	$mooxSmallMaxWidth: 200px;
-	.stretch-img_column_img {
-		display: block;
-		margin: auto;
-		max-width: $mooxSmallMaxWidth;
-		//@include media-min($mooxSmallMaxWidth) { max-width: 110%; }
-		@include media-m { max-width: 100%; }
-	}
-
 
 // strectch layout on home for moox img
 @media (min-height: 50em) and (min-width: $screen-m) {
@@ -126,9 +125,8 @@ $icons--big-size: 4em;
 	.stretch-img_column {
 		position: static;
 		padding-top: 0;
-	}
-
-		.stretch-img_column_img {
+		
+		img {
 			position: absolute;
 			top: 0;
 			right: 0;
@@ -136,4 +134,5 @@ $icons--big-size: 4em;
 			height: 100%;
 			max-width: none;
 		}
+	}
 }

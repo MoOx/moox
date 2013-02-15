@@ -77,7 +77,11 @@
 		},
 		"files": {
 			"<%= happyPlan.build.assets.scripts %>/lib/aight.js": ["<%= happyPlan.src.assets.scripts %>/lib/aight.js"],
-			"<%= happyPlan.build.assets.scripts %>/vanilla.js": ["<%= happyPlan.src.assets.scripts %>/vanilla.js"]
+			"<%= happyPlan.build.assets.scripts %>/vanilla.js": [
+				"<%= happyPlan.src.assets.components %>/picturefill/external/matchmedia.js",
+				"<%= happyPlan.src.assets.components %>/picturefill/picturefill.js",
+				"<%= happyPlan.src.assets.scripts %>/vanilla.js"
+			]
 		}
 	},
 	"components": {
