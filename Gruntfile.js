@@ -20,6 +20,13 @@ module.exports = function(grunt) {
     // Project configuration.
     var happyPlan = grunt.file.readJSON('happy-plan.json');
 
+    // used for sourcemap :)
+    happyPlan.baseUrls = {
+        scripts: happyPlan.baseUrl + happyPlan.build.assets.scripts.replace(happyPlan.build._path, happyPlan.baseUrl),
+        images: happyPlan.baseUrl + happyPlan.build.assets.images.replace(happyPlan.build._path, happyPlan.baseUrl),
+        fonts: happyPlan.baseUrl + happyPlan.build.assets.fonts.replace(happyPlan.build._path, happyPlan.baseUrl)
+    };
+
     grunt.initConfig({
         
         pkg: grunt.file.readJSON('package.json'),
@@ -56,9 +63,9 @@ module.exports = function(grunt) {
                         javascripts_dir: '<%= happyPlan.src.assets.scripts %>',
                         fonts_dir: '<%= happyPlan.src.assets.fonts %>',
                         http_path: '<%= happyPlan.baseUrl %>',
-                        http_images_path: happyPlan.baseUrl + happyPlan.build.assets.images.replace(happyPlan.build._path, ''),
-                        http_javascripts_path: happyPlan.baseUrl + happyPlan.build.assets.scripts.replace(happyPlan.build._path, ''),
-                        http_fonts_path: happyPlan.baseUrl + happyPlan.build.assets.fonts.replace(happyPlan.build._path, ''),
+                        http_images_path: happyPlan.baseUrls.images,
+                        http_javascripts_path: happyPlan.baseUrls.scripts,
+                        http_fonts_path: happyPlan.baseUrls.fonts,
                         require: happyPlan.compass.require.length>0 ? "require \"" + happyPlan.compass.require.join("\"\nrequire \"") + "\"" : "",
                         add_import_path: happyPlan.compass.add_import_path.length>0 ? "add_import_path \"" + happyPlan.compass.add_import_path.join("\"add_import_path \"") + "\"" : ""
                     }
@@ -124,21 +131,11 @@ module.exports = function(grunt) {
                     }
                 ]
             },
-            js: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= happyPlan.src.assets.scripts %>/', 
-                        src: ['**'],
-                        dest: '<%= happyPlan.build.assets.scripts %>/'
-                    }
-                ]
-            },
             components: {
                 files: happyPlan.components.files
             }
         },
-
+        
         webfont: {
             icons: {
                 src: '<%= happyPlan.src.assets.webfonts %>/icons/*.svg',
@@ -170,6 +167,22 @@ module.exports = function(grunt) {
         },
         
         uglify: {
+            // just merge hp options correctly
+            dev: grunt.util._.extend(
+                {},
+                happyPlan.uglify,
+                {
+                    options: grunt.util._.extend({
+                        "mangle": false,
+                        "compress": false,
+                        "beautify": true,
+                        "sourceMapRoot": "file:///Users/MoOx/Development/moox.fr/", // is there something like '<%= grunt.pwd %>' ?
+                        "sourceMap": "<%= happyPlan.build.assets.scripts %>/uglify.js.map",
+                        "sourceMappingURL": "<%= happyPlan.baseUrls.scripts %>/uglify.js.map"
+                    },
+                    happyPlan.uglify.options || {})
+                }
+            ),
             dist: happyPlan.uglify
         },
 
@@ -207,7 +220,7 @@ module.exports = function(grunt) {
             },
             js: {
                 files: ['<%= happyPlan.src.assets.scripts %>/**/*'],
-                tasks: ['jshint', 'copy:js']
+                tasks: ['jshint', 'uglify:dev']
             },
             scss: {
                 files: ['<%= happyPlan.src.assets.styles %>/**/*'],
@@ -237,10 +250,11 @@ module.exports = function(grunt) {
     grunt.registerTask('configs', ['replace:compass', 'replace:jekyll']);
     
     grunt.registerTask('build', ['configs', 'jekyll:build', 'copy:jekyllTmp', 'copy:fonts', 'copy:components', 'webfont:icons']);
-    grunt.registerTask('dev', ['jshint', 'build', 'compass:dev', 'copy:js', 'copy:fakeImagemin']);
-    grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify', 'imagemin:dist']);
+    grunt.registerTask('dev', ['jshint', 'build', 'compass:dev', 'uglify:dev', 'copy:fakeImagemin']);
+    grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify:dist', 'imagemin:dist']);
     
-    grunt.registerTask('test', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify', , 'copy:fakeImagemin']); // waiting for https://github.com/gruntjs/grunt-contrib-imagemin/issues/11 to use just 'dist' here
+    // waiting for https://github.com/gruntjs/grunt-contrib-imagemin/issues/11 to use just 'dist' here
+    grunt.registerTask('test', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify:dist', 'copy:fakeImagemin']);
 
     grunt.registerTask('server', 'jekyll:server');
 };
