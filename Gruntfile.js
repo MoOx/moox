@@ -22,6 +22,7 @@ module.exports = function(grunt) {
 
     // used for sourcemap :)
     happyPlan.baseUrls = {
+        styles: happyPlan.baseUrl + happyPlan.build.assets.styles.replace(happyPlan.build._path, happyPlan.baseUrl),
         scripts: happyPlan.baseUrl + happyPlan.build.assets.scripts.replace(happyPlan.build._path, happyPlan.baseUrl),
         images: happyPlan.baseUrl + happyPlan.build.assets.images.replace(happyPlan.build._path, happyPlan.baseUrl),
         fonts: happyPlan.baseUrl + happyPlan.build.assets.fonts.replace(happyPlan.build._path, happyPlan.baseUrl)
@@ -48,6 +49,10 @@ module.exports = function(grunt) {
                         url: '<%= happyPlan.url %>',
                         description: '<%= happyPlan.description %>',
                         permalink: '<%= happyPlan.jekyll.permalink %>',
+                        baseurls_scripts: '<%= happyPlan.baseUrls.scripts %>',
+                        baseurls_styles: '<%= happyPlan.baseUrls.styles %>',
+                        baseurls_images: '<%= happyPlan.baseUrls.images %>',
+                        baseurls_fonts: '<%= happyPlan.baseUrls.fonts %>',
                         baseurl: '<%= happyPlan.baseUrl %>'
                     }
                 },

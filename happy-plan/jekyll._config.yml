@@ -1,12 +1,17 @@
 @@__warningComment__
 
 dev: @@dev
-version: @@version
+version: "@@version"
 
-url: @@url
-name: @@name
-description: @@description
-permalink: @@permalink
-baseurl: @@baseurl
+url: "@@url"
+name: "@@name"
+description: "@@description"
+permalink: "@@permalink"
+baseurl: "@@baseurl"
+baseurls: 
+  scripts: "@@baseurls_scripts"
+  styles: "@@baseurls_styles"
+  images: "@@baseurls_images"
+  fonts: "@@baseurls_fonts"
 
 include: ['.htaccess']
