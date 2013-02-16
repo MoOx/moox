@@ -15,7 +15,7 @@
 }
 
 // smartphone landscape or other devices.
-@include media-s { 
+// @include media-s { // @todo don't load the font for slow connection
 	.title,
 	h1, .h1,
 	h2, .h2,
@@ -25,7 +25,7 @@
 	h6, .h6 {
 		font-family: ArmataRegular, $base-font-family;
 	}
-}
+// }
 
 //%font--monospace { font-family: Consolas, Monaco, Courrier New, Courrier, monospace;}
 
