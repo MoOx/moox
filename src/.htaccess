@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteCond %{REQUEST_URI} /(blog|portfolio|about|category|web-developer|tag)/ [NC]
+RewriteCond %{REQUEST_URI} /(portfolio|about|category|web-developer|tag)/ [NC]
 RewriteRule .* /?content=outdated [R=302,L]
 </IfModule>
 

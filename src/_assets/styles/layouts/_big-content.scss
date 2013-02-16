@@ -115,12 +115,14 @@ $icons--big-size: 4em;
 		
 	}
 	
-	.grid--title {
-		padding-top: $annonceBoxHeight + $navbar-height + 1em;
-		height: 30%;
+	.stretch-img {
+		.grid--title {
+			padding-top: $annonceBoxHeight + $navbar-height + 1em;
+			height: 30%;
+		}
+		
+		.grid--blabla { height: 70%; }
 	}
-	
-	.grid--blabla { height: 70%; }
 	
 	.stretch-img_column {
 		position: static;

@@ -1,6 +1,55 @@
 ---
 layout: default
+class: grid-title--quotes
+nav: blog
 ---
-<article>
-	{{ content }}
-</article>
+<div class="grid grid--center grid--title">
+	<hgroup class="grid__cell unit-8-12--medium title--light">
+		<h1>MoOx' hut</h1>
+		<h2>... where he talks about web & dev.</h2>
+	</hgroup>
+</div>
+
+<div class="grid grid--blabla">
+	<div class="grid__cell body-box">
+		<article class="module" lang="{{ page.lang }}">
+			<header>
+				<h1><span class="text-less-visible">[{{ page.lang }}]</span> {{ page.title }}</h1>
+				<time class="text-less-visible" pubdate datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%b %d %Y" }}</time>
+			</header>
+			<!-- {% if page.tags != empty %}
+			<div class="category">
+				<ul>
+					{% for item in page.tags %}
+						<li><a href="#">{{ item }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %} -->
+			<div class="content">
+				{{ content }}
+			</div>
+			<br /><br />
+			----
+			<br /><br />
+			<footer>
+				<div class="report">
+					See something wrong here ? Please tell me <a href="https://github.com/MoOx/moox.fr/issues">with an issue on Github</a>, or just some words on twitter at <a href="https://www.twitter.com/MoOx/">@MoOx</a>.
+				</div>
+				<!-- <div class="about-author">
+					<img src="//gravatar.com/avatar/d2a1c95e2af59538301c3ee6d2907f6f?s=96" alt="" class="pic"> <strong>MoOx</strong>.. bla todo :)
+				</div> -->
+			</footer>
+		</article>
+		<footer class="module">
+			<h3>This is a temporary footer</h3>
+			<div class="icons--big">
+				<a href="https://twitter.com/MoOx"><i class="icon icon_twitter"></i><span class="text">Twitter</span></a>
+				<a href="https://github.com/MoOx"><i class="icon icon_github"></i><span class="text">Github</span></a>
+				<a href="http://www.linkedin.com/in/maxthirouin"><i class="icon icon_linkedin"></i><span class="text">LinkedIn</span></a>
+				<a href="skype:maxime.thirouin?add"><i class="icon icon_skype"></i><span class="text">Skype</span></a>
+				<a href="contact/"><i class="icon icon_email"></i><span class="text">Contact</span></a>
+			</div>
+		</footer>
+	</div>
+</div>
