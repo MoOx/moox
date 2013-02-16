@@ -229,6 +229,7 @@ $title--site--font-size: 1.4em;
 	@include media-gap ($screen-s, $screen-m) { padding: 0 $grid-gutter*$unit/$title--site--font-size; }
 	text-decoration: none;
 	font-weight: bold;
+	&:hover { color: #fff; }
 }
 
 .title--light {
