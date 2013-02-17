@@ -16,13 +16,13 @@ tags:
   - tips
 ---
 Maybe you done what I just made : remove a folder which was in your Finder sidebar. Now you can’t remove from it.  
-<!--more-->
-
   
 So here is the solution which require Xcode installed.  
 In your terminal do
 
-<code class="block">open Library/Preferences/com.apple.sidebarlists.plist</code>
+```bash
+open Library/Preferences/com.apple.sidebarlists.plist
+```
 
 Or open this file manually.
 
@@ -33,7 +33,10 @@ You should have « Property List Editor » app to do this.
 Open each entries to find what you want under Root » useritems » CustomListItems. Try to open each item and check the name of the folder. When you found the correct entry, delete the « Item x » and save the file.
 
 When it’s done, just restart Finder.  
-<code class="block">killall Finder</code>
+
+```bash
+killall Finder
+```
 
 Or just make option+click on Finder’s icon in your dock, then Relaunch.
 

@@ -18,7 +18,7 @@ tags:
   - sass
 ---
 Comme je l’ai expliqué dans mon précédent article, aujourd’hui il est possible de passer la vitesse supérieure avec ses CSS, afin d’avoir à sa disposition [variables et fonctions CSS][1]. Voici donc un petit mémo concernant la solution que j’ai choisi [Sass][2] avec la librairie Compass.  
-<!--more-->
+
 
   
 Pour vous donner l’eau à la bouche, voici une petite vidéo que j’ai trouvé sur le site de Compass.
@@ -40,46 +40,56 @@ Si vous êtes sous Mac OS X, c’est même très simple car cela nécessite Ruby
 Pour les autres il suffira d’installer ces 2 paquets.
 
 Sous une distribution linux ça devrait ressembler à :  
-<code  class="block">sudo aptitude install ruby rubygems</code>
+
+```bash
+sudo aptitude install ruby rubygems
+```
 
 Sous Windows il faudra installer ça avec un [installeur Ruby][10].
 
 Maintenant, on vérifie que Ruby et RubyGem sont bien présents :  
-<code  class="block"># we check that ruby exists
+
+```bash
+# we check that ruby exists
 which ruby
 # this command should return something like /usr/bin/ruby
 
 # same thing for gem
 which gem
 # /usr/bin/gem
-</code>
+```
 
 Une fois qu’on a RubyGem d’opérationnel, on peut installer Sass de la façon suivante :  
-<code  class="block"># sudo is probably required if you are not logged as root
+
+```bash
+# sudo is probably required if you are not logged as root
 sudo gem install sass
-</code>
+```
 
 Une fois ceci fait, faites un petit tour sur le [tutorial Sass][11] afin de faire un petit test pour vérifier que tout marche bien.
 
 On crée un fichier test.scss avec le code suivant :  
-<code class="block css">body
-{
+
+```css
+body {
     color: rgba(#fff, .8);
 }
-</code>
+```
 
 Ensuite on lance le binaire Sass depuis le dossier où se trouve le fichier de test :
 
-<code class="block shell">sass --watch test.scss:style.css</code>
+```bash
+sass --watch test.scss:style.css
+```
 
 On vérifie que le fichier contient bien du code css valide.  
 Et pour vérifier que l’aspect de tracking des modifications on peut modifier le fichier ainsi:
 
-<code class="block css">body
-{
+```css
+body {
     color: darken(rgba(#fff, .8), 10%);
 }
-</code>
+```
 
 On peut vérifier que la CSS a bien été modifié.
 
@@ -89,22 +99,25 @@ Une autre chose à savoir au niveau de Sass, très importante, et surtout très 
 
 Exemple de structure de dossier/fichiers SCSS :
 
-<code class="block files">/partials/
+
+```
+/partials/
     _header.scss
     _body.scss
     _footer.scss
 style.scss
-</code>
+```
 
 style.scss contiendra des includes :
 
-<code class="block scss">@import "partials/header";
+```scss
+@import "partials/header";
 @import "partials/footer";
 
 @import "partials/body";
 
 // some others rules ?
-</code>
+```
 
 La librairie Compass utilise se système à outrance ([la preuve sur le Github de Compass][13]) :) Pratique non? 
 
@@ -116,14 +129,19 @@ La librairie Compass utilise se système à outrance ([la preuve sur le Github d
 Maintenant que vous êtes équipé de la boite à outils CSS, il faut bien commencer à la remplir !  
 Pour ce faire je vous propose d’installer la super [librairie Compass][8] qui comporte moult fonctionnalités utile pour [utiliser du CSS 3 sans les préfixes dans tous les sens][14] ou [générer des sprites CSS sans prises de têtes][15]. Rien que ça, ça vaut le détour !  
 Hop hop on installe Compass, aussi vite que Sass :  
-<code  class="block">sudo gem install compass</code>
+
+```bash
+sudo gem install compass
+```
 
 Du coup une fois Compass installé, on ne va plus utiliser directement Sass, mais le binaire compass. Tout est parfaitement clair dans [le Tutorial de base sur le site de Compass][16] *(pour peu que vous ne soyez pas anglophobe)*  
 Pour donner un petit exemple de création de projet :
 
-<code  class="block">compass create test-project
+```bash
+compass create test-project
 cd test-project
-compass watch</code>
+compass watch
+```
 
 Dès maintenant, vous pouvez créer et modifier dans ce dossier des fichiers .scss (ou .sass). Le processus de surveillance de Compass va automatiquement compiler vos feuilles de styles dans le répertoire contenant les CSS, et ce à la moindre modification.
 

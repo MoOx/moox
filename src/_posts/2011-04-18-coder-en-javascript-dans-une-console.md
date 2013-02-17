@@ -19,7 +19,7 @@ tags:
 ---
 Depuis l’apparition des consoles Javascript, on peut debugger plus facilement des erreurs de scripts, qui à l’époque d’IE6 & co se faisait à coup de alert().  
 Un chose que je ne trouve pas très répandu, c’est d’utiliser ces consoles pour coder directement, de petit morceaux de code, sans se (re)taper d’ajouter du script inline, ou un fichier juste pour avoir bonne conscience. Avec une console avancée, on peut même éditer des scripts en cours d’exécution !  
-<!--more-->
+
 
 ## A quoi ça sert de coder du Javascript dans une console ?
 
@@ -32,8 +32,11 @@ $0 est très simple d’utilisation, et peut être très utile. Choisissez un é
 
 ### Utilisation : compter le texte d’un paragraphe
 
-Admettons que vous cherchez à compter le nombre de caractères dans une <div>, inspectez là, puis dans votre console entrez-y la ligne suivante:  
-`$0.innerHTML.length`
+Admettons que vous cherchez à compter le nombre de caractères dans une `<div>`, inspectez là, puis dans votre console entrez-y la ligne suivante:  
+
+```js
+$0.innerHTML.length
+```
 
 Et voilà vous avez votre résultat !
 
@@ -51,16 +54,20 @@ Voici quelques trucs utile à savoir pour avoir une utilisation correcte des con
 
 Lorsque l’on fait vite mumuse avec cette technique, il peut s’avérer judicieux d’utiliser jQuery ou une librairie quelconque de votre choix pour gagner encore en rapidité, et jQuery n’est pas encore sur toutes les pages web ([même si ça s’en reproche][1])  
 Alors voilà une petite technique de sioux afin d’ajouter jQuery (ou autre) dans la page en cours.  
-<code class="block">if (typeof jQuery == 'undefined')
-{
+
+```js
+if (typeof jQuery == 'undefined') {
     var myScript = document.createElement('script');
     myScript.setAttribute("src", "http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"); // you can change this filename
     document.getElementsByTagName("head")[0].appendChild(myScript);
-}</code>
+}
+```
 
 N.B. : Si justement vous n’avez pas jQuery déjà inclus, il se peut que l’ajouter provoque des soucis si la variable $ est utile à la page (ce qui peut être le cas si une librairie tel que ProtoypeJs est inclus). Il faut donc utiliser la méthode de jQuery pour palier à ce problème : 
 
-<code class="block">jQuery.noConflict(); // if you think there will be a problem with "$"</code>
+```js
+jQuery.noConflict(); // if you think there will be a problem with "$"
+```
 
 Ce qui impliquer d’utiliser par la suite jQuery avec son vrai nom plutôt que $ (ex: jQuery(‘.selector’).plugin() ).
 
@@ -68,7 +75,9 @@ Ainsi on pourra faire des choses plus avancés facilement.
 Si on reprends mon exemple de tout à l’heure où j’ai compté les caractères d’une div, vous avez peut être remarqué le soucis que cette technique peut avoir : si vous avez de l’HTML dedans, le nombre de caractère est faussé puisque cela va compter les caractères réservés à l’HTML.  
 Avec jQuery, ça devient aussi simple que ça pour contourner le problème :
 
-<code class="block">jQuery($0).text().length</code>
+```
+jQuery($0).text().length
+```
 
 And voilà… Vous prendrez vite goût à cette technique qui peut devenir très utile. D’ailleurs si vous avez des petits snippets sympathiques, n’hésitez pas à les poster dans les commentaires, je pourrais très bien ajouter une liste de commandes utiles en dessous de cette article !
 

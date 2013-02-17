@@ -18,7 +18,7 @@ tags:
   - xdebug
 ---
 Ayant mis à jour récemment mon système d’exploitation (OS X 10.6 *Snow Leopard* à **OS X 10.7 *Lion***), j’ai du réinstaller mon serveur web dessus.  
-La précédente technique que j’avais utilisé était basé sur MacPorts, j’avais donc écris un article à ce sujet: [Installer Apache PHP MySQL sous Mac OS X][1]. Comme je l’expliquais dans cette article, cette solution est pour moi la plus intéressante lorsque l’on cherche un serveur web AMP complet.<!--more-->
+La précédente technique que j’avais utilisé était basé sur MacPorts, j’avais donc écris un article à ce sujet: [Installer Apache PHP MySQL sous Mac OS X][1]. Comme je l’expliquais dans cette article, cette solution est pour moi la plus intéressante lorsque l’on cherche un serveur web AMP complet.
 
   
 Mais aujourd’hui, j’utilise lorsque j’ai besoin d’un vrai serveur digne de ce nom, j’utilise la virtualisation avec Vagrant et VirtualBox (cela fera peut être l’objet d’un autre billet) afin d’avoir un environnement proche de celui que j’ai en production.
@@ -53,10 +53,13 @@ Un petit tour dans la configuration de PHP pour ajuster le lien entre MySQL et P
 Allez dans `/private/etc/` et copier `php.ini.default` en `php.ini`, ceci afin de pouvoir adapter la configuration. Modifier directement le `php.ini.default` ne servirait à rien.
 
 Avec Terminal.app , rien de plus simple il vous suffit d’exécuter les lignes suivantes:  
-<code class="block"># copie du fichier
+
+```bash
+# copie du fichier
 sudo cp /private/etc/php.ini.default /private/etc/php.ini
 # ouverture pour édition
-sudo open -a TextEdit /private/etc/php.ini</code>
+sudo open -a TextEdit /private/etc/php.ini
+```
 
 Modifiez dedans (en plus de vos ajustements personnels) les valeurs des sockets pour MySQL : remplacez `/var/mysql` en `/tmp` aux différents endroits (pour l’extension [MySQL], [MySQLi] et [Pdo_mysql]) afin d’avoir un socket qui pointe sur `/tmp/mysql.sock` (valeur par défaut du package MySQL pour Mac OS X)
 
@@ -64,9 +67,13 @@ Modifiez dedans (en plus de vos ajustements personnels) les valeurs des sockets 
 
 xDebug est déjà présent sur le système dans `/usr/lib/php/extensions`, il suffit de l’activer.  
 Ajouter dans votre php.ini (cf configuration de php ci-dessus)  
-<code class="block">[xdebug]
+
+```ini
+[xdebug]
 zend_extension=/usr/lib/php/extensions/no-debug-non-zts-20090626/xdebug.so
-; more option ?</code>  
+; more option ?
+```
+  
 Toutes les [options de xdebug][5] sont disponibles accessible sur le site officiel.
 
 Et voilà le tour est joué ! Vous voilà avec **Apache 2, PHP 5.3.6 et MySQL 5.5 et xDebug sur MAC OS X Lion 10.7 !**

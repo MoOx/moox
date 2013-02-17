@@ -16,7 +16,7 @@ tags:
 ---
 *Before read this just be aware that, if you sometimes use a plugged keyboard (I use one at home to be more confortable, with a numeric pad) this technic should « broke » your <kbd>ctrl</kbd> key (which act like an <kbd>fn</kbd>). Maybe you can just use the first part whenever you just use the laptop keyboard.*
 
-<!--more-->
+
 
 ## Switch <kbd>ctrl</kbd> and <kbd>fn</kbd> on Mac OS X
 

@@ -18,9 +18,9 @@ tags:
 You are running on a OS X à la Hackintosh ? You have a « **VT-x is not available. VERR\_VMX\_NO_VMX** » when you start a virtual machine ? Do not panic !
 
 Under the `~/Library/VirtualBox/Machines` directory you will find a folder for each virtual machine you have created. Within this directly you will find an XML file with the machine settings.  
-<!--more-->
 
-<ins datetime="2012-02-22T16:58:23+00:00">Update: You can now just type in your terminal: <code>VBoxManage modifyvm &lt;VMname> --hwvirtex off</code> (change <code>&lt;VMname></code> with your VM name)</ins>
+
+<ins datetime="2012-02-22T16:58:23+00:00">Update: You can now just type in your terminal: `VBoxManage modifyvm &lt;VMname&gt; --hwvirtex off` (change `&lt;VMname&gt;` with your VM name)</ins>
 
 ## Edit XML VBox file
 

@@ -18,12 +18,8 @@ tags:
   - sass
 ---
 Suite à mes précédents articles sur [les pré-processeurs CSS qui permettent d’utiliser des variables et fonctions][1], et [un petit tutoriel sur l’installation et utilisation du combo Sass/Compass][2], voici la présentation d’un petite application, qui permet de s’affranchir des toujours utiliser des lignes de commandes pour lancer Compass.  
-<!--more-->
 
-  
 Voici une petite vidéo d’intro (sans son) provenant du [site officiel de Compass.app][3]
-
-
 
 C’est quand même plus sympa d’avoir une petite appli discrète, avec les notifications systèmes ! Quelques options sont configurables via un menu (pour activer/désactiver certains types de notifications, ou spécifier la version de compass à utiliser).
 
@@ -41,7 +37,9 @@ Pour mémo, voici de quoi l’installer (sur Mac OS X, doit donc fonctionner sur
 ## Compass.app
 
 En ligne de commande,  
-<code class="block"># pour la session en cours, on ajoute jruby dans le path pour simplifier les appels
+
+```bash
+# pour la session en cours, on ajoute jruby dans le path pour simplifier les appels
 PATH=/usr/local/jruby/bin:$PATH
 # installation d'un gem depuis jruby (autrement ça marche pas)
 jruby -S gem install rawr
@@ -54,7 +52,7 @@ git clone git://github.com/handlino/CompassApp.git "CompassApp"
 
 # et on compile (un peu de patience)
 ./bin/build-all.sh
-</code>
+```
 
 Vous trouverez ensuite les applis compilés et zippé pour Mac, Linux et Windows dans ./packages
 
@@ -62,18 +60,19 @@ Vous trouverez ensuite les applis compilés et zippé pour Mac, Linux et Windows
 
 Pour faire une mise à jour (de temps en temps)
 
-<code class="block">PATH=/usr/local/jruby/bin:$PATH
+```bash
+PATH=/usr/local/jruby/bin:$PATH
 jruby -S gem update
 cd ~/Applications/CompassApp
 git pull
 ./bin/build-all.sh
-</code>
+```
 
 Là encore il vous reste à réinstaller la version compilé (dézipé et déplacement).
 
 Certains risques de se demander pourquoi je n’ai pas ajouté jruby à mon PATH de manière permanente, c’est tout simplement car il y’a des binaires en double (ex: gem).
 
-Bonne utilisation de Compass <img src='http://moox.fr/wp-includes/images/smilies/icon_wink.gif' alt=';)' class='wp-smiley' />
+Bonne utilisation de Compass ;)
 
  [1]: http://moox.fr/blog/utiliser-des-variables-fonctions-css
  [2]: http://moox.fr/blog/fonctions-variables-css-generer-ses-css-avec-sass-compass/

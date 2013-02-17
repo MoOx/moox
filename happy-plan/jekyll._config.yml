@@ -15,3 +15,7 @@ baseurls:
   fonts: "@@baseurls_fonts"
 
 include: ['.htaccess']
+
+markdown: redcarpet
+#redcarpet:
+#  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]

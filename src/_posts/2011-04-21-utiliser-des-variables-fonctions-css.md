@@ -19,7 +19,7 @@ tags:
   - stylus
 ---
 Depuis la création d’Internet à aujourd’hui, les interfaces web ont bien évolués. Les langages et méthodes aussi. On est passé de sites statiques à des sites dynamiques, puis hautement dynamiques (la fameuse période 2.0…). Dans tous ça, CSS n’a, à mon sens, que très peu évolué d’un point de vue des possibilités du langage. Certains disent que la puissance des CSS réside dans la simplicité de celles-ci. Ce qui n’est pas forcément faux. Ca se discute.  
-<!--more-->
+
 
 ## CSS n’a ni variables, ni fonctions
 
@@ -48,7 +48,8 @@ Voici des textes traduits des sites officiels, qui résument très bien les outi
 
 #### Petit exemple de code Sass avec la syntaxe Scss
 
-<code class="block">// note : ceci est bien un commentaire valide avec sass. Au revoir les /**/
+```scss
+// note : ceci est bien un commentaire valide avec sass. Au revoir les /**/
 
 $blue: #3bbfce; // Variable
 .content-navigation {
@@ -74,7 +75,8 @@ $margin: 16px;
   margin: $margin / 2;
   border-color: $blue;
 }
-</code>
+```
+
 
 ### LESS
 
@@ -82,7 +84,8 @@ $margin: 16px;
 
 #### Petit exemple de code LESS
 
-<code class="block">.box-shadow (@x: 0, @y: 0, @blur: 1px, @alpha) {
+```
+.box-shadow (@x: 0, @y: 0, @blur: 1px, @alpha) {
   @val: @x @y @blur rgba(0, 0, 0, @alpha);
 
   box-shadow:         @val;
@@ -93,7 +96,8 @@ $margin: 16px;
   color:        saturate(@base, 5%);
   border-color: lighten(@base, 30%);
   div { .box-shadow(0, 0, 5px, 0.4) }
-}</code>
+}
+```
 
 ### Stylus
 
@@ -101,7 +105,9 @@ $margin: 16px;
 
 #### Petit exemple de code Stylus
 
-<code class="block">border-radius()
+
+```
+border-radius()
   -webkit-border-radius arguments
   -moz-border-radius arguments
   border-radius arguments  
@@ -110,7 +116,9 @@ body
   font 12px Helvetica, Arial, sans-serif  
 
 a.button
-  border-radius 5px</code>
+  border-radius 5px
+```
+
 
 ## Quel langage choisir pour générer ses CSS ?
 
