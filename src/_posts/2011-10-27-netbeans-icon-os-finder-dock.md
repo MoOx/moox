@@ -29,7 +29,7 @@ Then open `etc/netbeans.conf`
 You should see in the file :
 
 ```bash
-# Default location of JDK, can be overridden by using --jdkhome [&lt;dir&gt;:
+# Default location of JDK, can be overridden by using --jdkhome [<dir>:
 #netbeans_jdkhome="/path/to/jdk"
 ```
 Just add `netbeans_jdkhome="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/"` after theses lines.
