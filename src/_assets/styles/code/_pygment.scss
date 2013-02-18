@@ -1,0 +1,191 @@
+/**
+ * Sass base code highlighter theme
+ *
+ * @author @MoOx
+ */
+
+$code-selector: ".highlight";
+$code-selector-block: "div.highlight";
+
+$code-tab-size: 		4;
+$code-hyphens: 			none;
+$code-font-family: 		Menlo, Monaco, "Courier New", monospace	!default;
+$code-font-size: 		12px !default;
+$code-padding: 			12px !default;
+$code-line-height:		18px !default;
+$code-border-radius: 	5px !default;
+
+$code-border: 			1px solid #e1e1e8 !default;
+$code-background: 		#2a2a2a !default;
+$code-color: 			#fff !default;
+$code-color-fade:		#bebec5 !default;
+$code-text-shadow: 		0 1px 0 #000 !default;
+$code-box-shadow: 		1px 1px .3em -.1em #000 inset;;
+
+
+#{$code-selector} {
+	-moz-tab-size: $code-tab-size;
+	-o-tab-size: $code-tab-size;
+	tab-size: $code-tab-size;
+
+	-webkit-hyphens: $code-hyphens;
+	-moz-hyphens: $code-hyphens;
+	-ms-hyphens: $code-hyphens;
+	hyphens: $code-hyphens;
+
+	// whitespace management
+	white-space: pre; // fallback
+	white-space: pre-wrap;
+	word-break: break-all;
+	word-wrap: break-word;
+	
+	font-family: $code-font-family;
+	font-size: 	$code-font-size;
+	line-height: $code-line-height;
+
+	color: $code-color;
+	text-shadow: $code-text-shadow;
+	background: $code-background;
+}
+
+#{$code-selector-block} {
+	padding: $code-padding;
+	border-radius: $code-border-radius;
+	border: $code-border;
+	box-shadow: $code-box-shadow;
+}
+
+$code-color-comment: 								null !default;
+$code-color-error: 									null !default;
+$code-color-keyword: 								null !default;
+$code-color-literal: 								null !default;
+$code-color-name: 									null !default;
+$code-color-operator: 								null !default;
+$code-color-punctuation: 							null !default;
+
+$code-color-comment--multiline: 					$code-color-comment !default;
+$code-color-comment--preproc: 						$code-color-comment !default;
+$code-color-comment--single: 						$code-color-comment !default;
+$code-color-comment--special: 						$code-color-comment !default;
+
+$code-color-keyword--constant: 						$code-color-keyword !default;
+$code-color-keyword--declaration: 					$code-color-keyword !default;
+$code-color-keyword--namespace: 					$code-color-keyword !default;
+$code-color-keyword--pseudo: 						$code-color-keyword !default;
+$code-color-keyword--reserved: 						$code-color-keyword !default;
+$code-color-keyword--type: 							$code-color-keyword !default;
+
+$code-color-name--attribute: 						$code-color-name !default;
+$code-color-name--builtin: 							$code-color-name !default;
+$code-color-name--class: 							$code-color-name !default;
+$code-color-name--constant: 						$code-color-name !default;
+$code-color-name--decorator: 						$code-color-name !default;
+$code-color-name--entity: 							$code-color-name !default;
+$code-color-name--exception: 						$code-color-name !default;
+$code-color-name--function: 						$code-color-name !default;
+$code-color-name--label: 							$code-color-name !default;
+$code-color-name--namespace: 						$code-color-name !default;
+$code-color-name--other: 							$code-color-name !default;
+$code-color-name--property: 						$code-color-name !default;
+$code-color-name--tag: 								$code-color-name !default;
+$code-color-name--variable: 						$code-color-name !default;
+$code-color-name--builtin--pseudo: 					$code-color-name !default;
+$code-color-name--variable--class: 					$code-color-name--variable !default;
+$code-color-name--variable--global: 				$code-color-name--variable !default;
+$code-color-name--variable--instance: 				$code-color-name--variable !default;
+
+$code-color-literal--date: 							$code-color-literal !default;
+$code-color-literal--number: 						$code-color-literal !default;
+$code-color-literal--string: 						$code-color-literal !default;
+
+$code-color-literal--number--oct: 					$code-color-literal--number!default;
+$code-color-literal--number--hex: 					$code-color-literal--number!default;
+$code-color-literal--number--float: 				$code-color-literal--number!default;
+$code-color-literal--number--integer: 				$code-color-literal--number!default;
+$code-color-literal--number--integer--long: 		$code-color-literal--number--integer !default;
+
+$code-color-literal--string--backtick: 				$code-color-literal--string !default;
+$code-color-literal--string--char: 					$code-color-literal--string !default;
+$code-color-literal--string--doc: 					$code-color-literal--string !default;
+$code-color-literal--string--double: 				$code-color-literal--string !default;
+$code-color-literal--string--escape: 				$code-color-literal--string !default;
+$code-color-literal--string--heredoc: 				$code-color-literal--string !default;
+$code-color-literal--string--interpol: 				$code-color-literal--string !default;
+$code-color-literal--string--other: 				$code-color-literal--string !default;
+$code-color-literal--string--regex: 				$code-color-literal--string !default;
+$code-color-literal--string--single: 				$code-color-literal--string !default;
+$code-color-literal--string--symbol: 				$code-color-literal--string !default;
+
+$code-color-operator--word: 						$code-color-operator !default;
+$code-color-text--whitespace: 						null !default;
+
+
+#{$code-selector} {
+	
+	.ge { font-style: italic } // Generic.Emph 
+	.gs { font-weight: bold } // Generic.Strong
+	
+	.c { color: $code-color-comment } 
+	.err { color: $code-color-error; }
+	.k { color: $code-color-keyword } 
+	.l { color: $code-color-literal } 
+	.n { color: $code-color-name } 
+	.o { color: $code-color-operator } 
+	.p { color: $code-color-punctuation } 
+	
+	.cm { color: $code-color-comment--multiline } 
+	.cp { color: $code-color-comment--preproc } 
+	.c1 { color: $code-color-comment--single } 
+	.cs { color: $code-color-comment--special } 
+	
+	.kc { color: $code-color-keyword--constant } 
+	.kd { color: $code-color-keyword--declaration } 
+	.kn { color: $code-color-keyword--namespace } 
+	.kp { color: $code-color-keyword--pseudo } 
+	.kr { color: $code-color-keyword--reserved } 
+	.kt { color: $code-color-keyword--type } 
+	
+	.na { color: $code-color-name--attribute } 
+	.nb { color: $code-color-name--builtin } 
+	.nc { color: $code-color-name--class } 
+	.no { color: $code-color-name--constant } 
+	.nd { color: $code-color-name--decorator } 
+	.ni { color: $code-color-name--entity } 
+	.ne { color: $code-color-name--exception } 
+	.nf { color: $code-color-name--function } 
+	.nl { color: $code-color-name--label } 
+	.nn { color: $code-color-name--namespace } 
+	.nx { color: $code-color-name--other } 
+	.py { color: $code-color-name--property } 
+	.nt { color: $code-color-name--tag } 
+	.nv { color: $code-color-name--variable } 
+	.bp { color: $code-color-name--builtin--pseudo } 
+	.vc { color: $code-color-name--variable--class } 
+	.vg { color: $code-color-name--variable--global } 
+	.vi { color: $code-color-name--variable--instance }
+	
+	.ld { color: $code-color-literal--date } 
+	.m { color: $code-color-literal--number } 
+	.s { color: $code-color-literal--string }
+	
+	.mf { color: $code-color-literal--number--float } 
+	.mh { color: $code-color-literal--number--hex } 
+	.mi { color: $code-color-literal--number--integer }
+	.il { color: $code-color-literal--number--integer--long } 
+	.mo { color: $code-color-literal--number--oct } 
+	
+	.sb { color: $code-color-literal--string--backtick } 
+	.sc { color: $code-color-literal--string--char } 
+	.sd { color: $code-color-literal--string--doc } 
+	.s2 { color: $code-color-literal--string--double } 
+	.se { color: $code-color-literal--string--escape } 
+	.sh { color: $code-color-literal--string--heredoc } 
+	.si { color: $code-color-literal--string--interpol } 
+	.sx { color: $code-color-literal--string--other } 
+	.sr { color: $code-color-literal--string--regex } 
+	.s1 { color: $code-color-literal--string--single } 
+	.ss { color: $code-color-literal--string--symbol } 
+	
+	.ow { color: $code-color-operator--word } 
+	.w { color: $code-color-text--whitespace }
+}

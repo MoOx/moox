@@ -1,0 +1,79 @@
+// [FreshCut theme](https://github.com/daylerees/colour-schemes#freshcut)
+// https://github.com/daylerees/colour-schemes/blob/master/FreshCut.tmTheme
+$code-color-theme-freshcut-bg: #2F3030;
+$code-color-theme-freshcut-grey: #556270;
+$code-color-theme-freshcut-turquoise: #00a8c6;
+$code-color-theme-freshcut-skyblue: #4ecdc4;
+$code-color-theme-freshcut-whitepurple: #c8d7e8;
+$code-color-theme-freshcut-green-flash: #e9ee00;
+$code-color-theme-freshcut-green-lighten: #aee239;
+$code-color-theme-freshcut-green: #a6e22e;
+$code-color-theme-freshcut-green-darken: #8fbe00;
+
+$code-background: $code-color-theme-freshcut-bg;
+
+$code-color-comment: 								$code-color-theme-freshcut-grey;
+//  $code-color-error: 									null;
+$code-color-keyword: 								$code-color-theme-freshcut-whitepurple;
+//  $code-color-literal: 								null;
+//  $code-color-name: 									null;
+//  $code-color-operator: 								null;
+$code-color-punctuation: 							rgba(#fff, .8);
+
+//  $code-color-comment--multiline: 					$code-color-comment;
+//  $code-color-comment--preproc: 						$code-color-comment;
+//  $code-color-comment--single: 						$code-color-comment;
+//  $code-color-comment--special: 						$code-color-comment;
+
+//  $code-color-keyword--constant: 						$code-color-keyword;
+$code-color-keyword--declaration: 					$code-color-theme-freshcut-skyblue;
+//  $code-color-keyword--namespace: 					$code-color-keyword;
+//  $code-color-keyword--pseudo: 						$code-color-keyword;
+//  $code-color-keyword--reserved: 						$code-color-keyword;
+//  $code-color-keyword--type: 							$code-color-keyword;
+
+$code-color-name--attribute: 						$code-color-theme-freshcut-skyblue;
+$code-color-name--builtin: 							$code-color-theme-freshcut-green-darken;
+$code-color-name--class: 							$code-color-theme-freshcut-green;
+$code-color-name--constant: 						$code-color-theme-freshcut-green-darken;
+//  $code-color-name--decorator: 						$code-color-name;
+//  $code-color-name--entity: 							$code-color-name;
+//  $code-color-name--exception: 						$code-color-name;
+$code-color-name--function: 						$code-color-theme-freshcut-green-lighten;
+//  $code-color-name--label: 							$code-color-name;
+//  $code-color-name--namespace: 						$code-color-name;
+//  $code-color-name--other: 							$code-color-name;
+//  $code-color-name--property: 						$code-color-name;
+$code-color-name--tag: 								$code-color-theme-freshcut-turquoise;
+$code-color-name--builtin--pseudo: 					$code-color-theme-freshcut-skyblue;
+$code-color-name--variable: 						$code-color-theme-freshcut-turquoise;
+//  $code-color-name--variable--class: 					$code-color-name--variable;
+//  $code-color-name--variable--global: 				$code-color-name--variable;
+//  $code-color-name--variable--instance: 				$code-color-name--variable;
+
+//  $code-color-literal--date: 							$code-color-literal;
+$code-color-literal--number: 						$code-color-theme-freshcut-green-darken;
+$code-color-literal--string: 						$code-color-theme-freshcut-green-flash;
+
+//  $code-color-literal--number--oct: 					$code-color-literal--number;
+//  $code-color-literal--number--hex: 					$code-color-literal--number;
+//  $code-color-literal--number--float: 				$code-color-literal--number;
+//  $code-color-literal--number--integer: 				$code-color-literal--number;
+//  $code-color-literal--number--integer--long: 		$code-color-literal--number--integer;
+
+//  $code-color-literal--string--backtick: 				$code-color-literal--string;
+//  $code-color-literal--string--char: 					$code-color-literal--string;
+//  $code-color-literal--string--doc: 					$code-color-literal--string;
+//  $code-color-literal--string--double: 				$code-color-literal--string;
+//  $code-color-literal--string--escape: 				$code-color-literal--string;
+//  $code-color-literal--string--heredoc: 				$code-color-literal--string;
+//  $code-color-literal--string--interpol: 				$code-color-literal--string;
+//  $code-color-literal--string--other: 				$code-color-literal--string;
+//  $code-color-literal--string--regex: 				$code-color-literal--string;
+//  $code-color-literal--string--single: 				$code-color-literal--string;
+//  $code-color-literal--string--symbol: 				$code-color-literal--string;
+
+//  $code-color-operator--word: 						$code-color-operator;
+//  $code-color-text--whitespace: 						null;
+
+@import "code/pygment";
