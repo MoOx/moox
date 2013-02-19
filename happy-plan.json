@@ -71,6 +71,7 @@
 			"<%= happyPlan.src.assets.components %>/",
 			"<%= happyPlan.src.assets.components %>/griddle/",
 			"<%= happyPlan.src.assets.components %>/hint.css/src/",
+			"<%= happyPlan.src.assets.components %>/pygments-sass-base-theme/",
 			"<%= happyPlan.src.assets.components %>/"
 		],
 		"meh": "last path is stupid, it's because of a compass import path issue I think. I should take a deeper look."
