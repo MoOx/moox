@@ -1,0 +1,3 @@
+[submodule "src/slides"]
+	path = src/slides
+	url = git://github.com/MoOx/slides.git
