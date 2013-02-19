@@ -20,11 +20,19 @@ Here is the solution :
 
 Go into the `/Applications/Netbeans` folder, and open the Netbeans package.
 
-[<img src="{{site.baseurl}}/medias/2011/10/open-netbeans-package.png" alt="" title="Open Netbeans.app package" width="541" height="207" class="aligncenter size-full wp-image-102" />][1]
+<figure class="embed--unknown">
+    <a href="{{site.baseurl}}/medias/2011/10/open-netbeans-package.png">
+        <img class="embed__media" src="{{site.baseurl}}/medias/2011/10/open-netbeans-package.png" alt="" title="Open Netbeans.app package" />
+    </a>
+</figure>
 
 Then open `etc/netbeans.conf`
 
-[<img src="{{site.baseurl}}/medias/2011/10/open-netbeans-conf.png" alt="" title="Edit netbeans.conf" width="342" height="303" class="aligncenter size-full wp-image-103" />][2]
+<figure class="embed--unknown">
+    <a href="{{site.baseurl}}/medias/2011/10/open-netbeans-conf.png">
+        <img class="embed__media" src="{{site.baseurl}}/medias/2011/10/open-netbeans-conf.png" alt="" title="Edit netbeans.conf" />
+    </a>
+</figure>
 
 You should see in the file :
 
@@ -35,6 +43,3 @@ You should see in the file :
 Just add `netbeans_jdkhome="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/"` after theses lines.
 
 Restart Netbeans and voilà !
-
- [1]: {{site.baseurl}}/medias/2011/10/open-netbeans-package.png
- [2]: {{site.baseurl}}/medias/2011/10/open-netbeans-conf.png

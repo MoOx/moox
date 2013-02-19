@@ -18,7 +18,7 @@ tags:
   - xdebug
 ---
 Ayant mis à jour récemment mon système d’exploitation (OS X 10.6 *Snow Leopard* à **OS X 10.7 *Lion***), j’ai du réinstaller mon serveur web dessus.  
-La précédente technique que j’avais utilisé était basé sur MacPorts, j’avais donc écris un article à ce sujet: [Installer Apache PHP MySQL sous Mac OS X][1]. Comme je l’expliquais dans cette article, cette solution est pour moi la plus intéressante lorsque l’on cherche un serveur web AMP complet.
+La précédente technique que j’avais utilisé était basé sur MacPorts, j’avais donc écris un article à ce sujet: [Installer Apache PHP MySQL sous Mac OS X](/blog/installer-serveur-web-apache-php-mysql-mac-os-x-macports/). Comme je l’expliquais dans cette article, cette solution est pour moi la plus intéressante lorsque l’on cherche un serveur web AMP complet.
 
   
 Mais aujourd’hui, j’utilise lorsque j’ai besoin d’un vrai serveur digne de ce nom, j’utilise la virtualisation avec Vagrant et VirtualBox (cela fera peut être l’objet d’un autre billet) afin d’avoir un environnement proche de celui que j’ai en production.
@@ -29,9 +29,17 @@ Du coup, nativement sur mon Mac OS, je n’ai besoin que d’un simple **serveur
 
 Maintenant que *OS X Lion* vient de sortir, les versions des logiciels qu’ils embarquent sont assez récente. **Apache 2** est juste à activer dans les préférences du système dans la partie qui concerne le *Partage* (*Sharing* si votre OS est en anglais)
 
-[<img src="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing" width="782" height="750" class="alignright size-full wp-image-95" />][2]
+<figure class="embed--unknown">
+    <a href="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing.png">
+        <img src="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing" class="embed__media" />
+    </a>
+</figure>
 
-[<img src="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing--Web-Sharing" width="782" height="662" class="alignright size-full wp-image-96" />][3]
+<figure class="embed--unknown">
+    <a href="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png"></a>
+        <img src="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing--Web-Sharing" class="embed__media" />
+    </a>
+</figure>
 
 Vous pouvez vérifier en cliquant sur un des liens que Apache fonctionne bien. Vous devriez voir une page avec « It works ! ».
 
@@ -45,7 +53,7 @@ Cherchez et décommentez dans le premier quart du fichier la ligne `LoadModule p
 
 ## Installer MySQL sur OS X Lion
 
-Pour installer MySQL simplement, il suffit d’utiliser les packages du site officiel: [http://dev.mysql.com/downloads/mysql/][4].  
+Pour installer MySQL simplement, il suffit d’utiliser les packages du site officiel: [http://dev.mysql.com/downloads/mysql/](http://dev.mysql.com/downloads/mysql/). 
 Installez MySQL, puis le panneau de préférence afin de pouvoir activer/désactiver MySQL à souhait, ainsi que si vous en avez besoin, le paquet pour avoir MySQL avec qui démarre avec le système.  
 Une fois les paquets installés, il reste à « brancher » PHP et MySQL ensemble.
 
@@ -74,12 +82,6 @@ zend_extension=/usr/lib/php/extensions/no-debug-non-zts-20090626/xdebug.so
 ; more option ?
 ```
   
-Toutes les [options de xdebug][5] sont disponibles accessible sur le site officiel.
+Toutes les [options de xdebug](http://xdebug.org/docs/all_settings) sont disponibles accessible sur le site officiel.
 
 Et voilà le tour est joué ! Vous voilà avec **Apache 2, PHP 5.3.6 et MySQL 5.5 et xDebug sur MAC OS X Lion 10.7 !**
-
- [1]: http://moox.fr/blog/installer-serveur-web-apache-php-mysql-mac-os-x-macports/
- [2]: {{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing.png
- [3]: {{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png
- [4]: http://dev.mysql.com/downloads/mysql/ "http://dev.mysql.com/downloads/mysql/"
- [5]: http://xdebug.org/docs/all_settings

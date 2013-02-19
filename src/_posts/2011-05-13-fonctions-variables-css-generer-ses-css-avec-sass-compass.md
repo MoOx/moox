@@ -17,12 +17,15 @@ tags:
   - less
   - sass
 ---
+
+<figure class="embed--3-1"><a href="http://sass-lang.com/"><img class="embed__media" src="{{site.baseurl}}/medias/2011/05/sass.jpg" alt="sass" /></a></figure>
+
 Comme je l’ai expliqué dans mon précédent article, aujourd’hui il est possible de passer la vitesse supérieure avec ses CSS, afin d’avoir à sa disposition [variables et fonctions CSS][1]. Voici donc un petit mémo concernant la solution que j’ai choisi [Sass][2] avec la librairie Compass.  
 
-
-  
 Pour vous donner l’eau à la bouche, voici une petite vidéo que j’ai trouvé sur le site de Compass.
 
+<figure class="embed--4-3">
+  <iframe class="embed__media" src="http://player.vimeo.com/video/11671458" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></figure>
 [An introduction to Compass][3] from [Lorin Tackett][4] on [Vimeo][5].
 
 ## Pourquoi j’ai choisi **Sass**
@@ -125,7 +128,8 @@ La librairie Compass utilise se système à outrance ([la preuve sur le Github d
 
 ## La librairie Compass<figure>
 
-<img src="{{site.baseurl}}/medias/2011/05/compass.jpg" alt="" title="compass" width="900" height="300" class="alignnone size-full wp-image-64" /></figure> 
+<figure class="embed--3-1"><a href="http://compass-style.org/"><img class="embed__media" src="{{site.baseurl}}/medias/2011/05/compass.jpg" alt="compass" /></a></figure>
+
 Maintenant que vous êtes équipé de la boite à outils CSS, il faut bien commencer à la remplir !  
 Pour ce faire je vous propose d’installer la super [librairie Compass][8] qui comporte moult fonctionnalités utile pour [utiliser du CSS 3 sans les préfixes dans tous les sens][14] ou [générer des sprites CSS sans prises de têtes][15]. Rien que ça, ça vaut le détour !  
 Hop hop on installe Compass, aussi vite que Sass :  

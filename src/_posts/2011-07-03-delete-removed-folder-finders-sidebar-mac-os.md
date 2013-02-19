@@ -28,7 +28,7 @@ Or open this file manually.
 
 You should have « Property List Editor » app to do this.
 
-[<img class="size-full wp-image-86 aligncenter" title="Remove-deleted-folder-osx-finder-sidebar" src="{{site.baseurl}}/medias/2011/06/Remove-deleted-folder-osx-finder-sidebar.png" alt="" width="749" height="472" />][1]
+<figure class="embed--unknown"><a href="{{site.baseurl}}/medias/2011/06/Remove-deleted-folder-osx-finder-sidebar.png"><img class="embed__media" title="Remove-deleted-folder-osx-finder-sidebar" src="{{site.baseurl}}/medias/2011/06/Remove-deleted-folder-osx-finder-sidebar.png" alt="" /></a></figure>
 
 Open each entries to find what you want under Root » useritems » CustomListItems. Try to open each item and check the name of the folder. When you found the correct entry, delete the « Item x » and save the file.
 
@@ -40,9 +40,6 @@ killall Finder
 
 Or just make option+click on Finder’s icon in your dock, then Relaunch.
 
-[<img class="size-full wp-image-85 aligncenter" title="relaunch-finder" src="{{site.baseurl}}/medias/2011/06/relaunch-finder.png" alt="" width="324" height="295" />][2]
+<figure class="embed--unknown"><a href="{{site.baseurl}}/medias/2011/06/relaunch-finder.png"><img class="embed__media" title="relaunch-finder" src="{{site.baseurl}}/medias/2011/06/relaunch-finder.png" alt="" /></a></figure>
 
 It’s that simple :)
-
- [1]: {{site.baseurl}}/medias/2011/06/Remove-deleted-folder-osx-finder-sidebar.png
- [2]: {{site.baseurl}}/medias/2011/06/relaunch-finder.png

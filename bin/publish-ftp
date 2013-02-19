@@ -4,4 +4,4 @@ HOST="217.70.180.140"
 USER="120940"
 LCD="build"
 RCD="/lamp0/web/vhosts/moox.fr/htdocs"
-lftp -e "lcd $LCD; cd $RCD; mirror --reverse --delete --verbose; exit" $PROTOCOL://$USER@$HOST
+lftp -e "lcd $LCD; cd $RCD; mirror --reverse --delete --use-cache --verbose; exit" $PROTOCOL://$USER@$HOST

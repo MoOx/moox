@@ -26,9 +26,10 @@ Under the `~/Library/VirtualBox/Machines` directory you will find a folder for e
 
 So, in your « user folder » (~/), there will be a Library folder, hidden in OS X Lion, so to see it, open the Finder, in the « Go » menu, hold <kbd>⌥</kbd>.
 
-<p style="text-align: center;">
-  <a href="{{site.baseurl}}/medias/2011/10/Open-Library-folder-wtih-Finder.png"><img class="size-full wp-image-99 aligncenter" title="Open Library folder with Finder" src="{{site.baseurl}}/medias/2011/10/Open-Library-folder-wtih-Finder.png" alt="" width="693" height="454" /></a>
-</p>
+<figure class="embed--unknown">
+  <a href="{{site.baseurl}}/medias/2011/10/Open-Library-folder-wtih-Finder.png">
+    <img class="embed__media" title="Open Library folder with Finder" src="{{site.baseurl}}/medias/2011/10/Open-Library-folder-wtih-Finder.png" alt="" /></a>
+</figure>
 
 Inside that Library folder, there is a folder called VirtualBox, which contains a Machines folder. In each VM folder, open the *.vbox file using a text-editor. It’s a XML file.
 
@@ -43,9 +44,11 @@ It looks like:
 
 Exit Virtual Box, change this « true » to « false » and Save. Restart Virtual Box and (or open it if you had it closed) and the hardware virtualization extensions will be disabled.
 
-<p style="text-align: center;">
-  <a href="{{site.baseurl}}/medias/2011/10/Edit-Virtualbox-xml-file.png"><img class="size-full wp-image-100 aligncenter" title="Edit Virtualbox xml file" src="{{site.baseurl}}/medias/2011/10/Edit-Virtualbox-xml-file.png" alt="" width="770" height="716" /></a>
-</p>
+<figure class="embed--unknown">
+  <a href="{{site.baseurl}}/medias/2011/10/Edit-Virtualbox-xml-file.png">
+    <img class="embed__media" title="Edit Virtualbox xml file" src="{{site.baseurl}}/medias/2011/10/Edit-Virtualbox-xml-file.png" alt="" />
+  </a>
+</figure>
 
 Seems like a clear bug with VirtualBox, being that the setting is grayed out in the GUI but you can change it in the XML config file and that fixes the problem.
 
