@@ -3,11 +3,9 @@ lang: fr
 title: Coder en Javascript dans une console
 author: MoOx
 layout: post
-permalink: /blog/coder-en-javascript-dans-une-console/
-dsq_thread_id:
-  - 264802206
+comments: true
+permalink: blog/coder-en-javascript-dans-une-console/
 categories:
-  - French
   - Web Development
 tags:
   - console

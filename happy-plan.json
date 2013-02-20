@@ -2,7 +2,7 @@
 	"name": "MoOx.fr",
 	"url": "http://moox.fr/",
 	"description": "Web Developer Front-End",
-	"baseUrl": "",
+	"baseUrl": "/",
 	"paths": {
 		"src": {
 			"scripts": "scripts/",

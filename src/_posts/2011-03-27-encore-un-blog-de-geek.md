@@ -3,12 +3,8 @@ lang: fr
 title: Encore un blog de geek ?!
 author: MoOx
 layout: post
-permalink: /blog/encore-un-blog-de-geek/
-dsq_thread_id:
-  - 264802206
-categories:
-  - French
-  - Non classé
+comments: true
+permalink: blog/encore-un-blog-de-geek/
 tags:
   - blog
 ---

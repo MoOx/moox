@@ -3,9 +3,10 @@
 <meta charset="utf-8">
 <title>{{ page.title }}</title>
 {% include scripts-first.html %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="{{ site.baseurls.styles }}/style.{{ 'now' | date: "%Y%m%d%H%M%S" }}.css">
-<link href="{{ site.baseurl }}/feed.xml" rel="alternate" type="application/rss+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<base href="{{ site.baseurl }}" />
+<link rel="stylesheet" type="text/css" href="{{ site.baseurls.styles }}/style.{{ 'now' | date: "%Y%m%d%H%M%S" }}.css" />
+<link href="feed.xml" rel="alternate" type="application/rss+xml" />
 <div class="annonce-box">
 	<small>My website is currently under heavy development. So, it's kinda like an unfinished fresh paint for now :)</small>
 </div>

@@ -3,11 +3,9 @@ lang: fr
 title: 'Utiliser des variables et fonctions CSS, c&#8217;est possible !'
 author: MoOx
 layout: post
-permalink: /blog/utiliser-des-variables-fonctions-css/
-dsq_thread_id:
-  - 264802206
+comments: true
+permalink: blog/utiliser-des-variables-fonctions-css/
 categories:
-  - French
   - Web Development
 tags:
   - compass

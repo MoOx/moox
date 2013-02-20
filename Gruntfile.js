@@ -22,10 +22,10 @@ module.exports = function(grunt) {
 
     // used for sourcemap :)
     happyPlan.baseUrls = {
-        styles: happyPlan.baseUrl + happyPlan.build.assets.styles.replace(happyPlan.build._path, happyPlan.baseUrl),
-        scripts: happyPlan.baseUrl + happyPlan.build.assets.scripts.replace(happyPlan.build._path, happyPlan.baseUrl),
-        images: happyPlan.baseUrl + happyPlan.build.assets.images.replace(happyPlan.build._path, happyPlan.baseUrl),
-        fonts: happyPlan.baseUrl + happyPlan.build.assets.fonts.replace(happyPlan.build._path, happyPlan.baseUrl)
+        styles: happyPlan.build.assets.styles.replace(happyPlan.build._path + '/', happyPlan.baseUrl),
+        scripts: happyPlan.build.assets.scripts.replace(happyPlan.build._path + '/', happyPlan.baseUrl),
+        images: happyPlan.build.assets.images.replace(happyPlan.build._path + '/', happyPlan.baseUrl),
+        fonts: happyPlan.build.assets.fonts.replace(happyPlan.build._path + '/', happyPlan.baseUrl)
     };
 
     grunt.initConfig({

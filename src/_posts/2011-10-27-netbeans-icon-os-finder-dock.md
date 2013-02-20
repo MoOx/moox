@@ -3,9 +3,8 @@ lang: en
 title: Keep one Netbeans icon in your OS X Finder Dock
 author: MoOx
 layout: post
-permalink: /blog/netbeans-icon-os-finder-dock/
-dsq_thread_id:
-  - 264802206
+comments: true
+permalink: blog/netbeans-icon-os-finder-dock/
 categories:
   - IDE
   - Web Development
@@ -21,16 +20,16 @@ Here is the solution :
 Go into the `/Applications/Netbeans` folder, and open the Netbeans package.
 
 <figure class="embed--unknown">
-    <a href="{{site.baseurl}}/medias/2011/10/open-netbeans-package.png">
-        <img class="embed__media" src="{{site.baseurl}}/medias/2011/10/open-netbeans-package.png" alt="" title="Open Netbeans.app package" />
+    <a href="medias/2011/10/open-netbeans-package.png">
+        <img class="embed__media" src="medias/2011/10/open-netbeans-package.png" alt="" title="Open Netbeans.app package" />
     </a>
 </figure>
 
 Then open `etc/netbeans.conf`
 
 <figure class="embed--unknown">
-    <a href="{{site.baseurl}}/medias/2011/10/open-netbeans-conf.png">
-        <img class="embed__media" src="{{site.baseurl}}/medias/2011/10/open-netbeans-conf.png" alt="" title="Edit netbeans.conf" />
+    <a href="medias/2011/10/open-netbeans-conf.png">
+        <img class="embed__media" src="medias/2011/10/open-netbeans-conf.png" alt="" title="Edit netbeans.conf" />
     </a>
 </figure>
 

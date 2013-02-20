@@ -3,11 +3,9 @@ lang: fr
 title: Configurer un Serveur Web Apache PHP MySQL sur OS X Lion
 author: MoOx
 layout: post
-permalink: /blog/configurer-serveur-web-apache-php-mysql-sur-os-lion/
-dsq_thread_id:
-  - 264802206
+comments: true
+permalink: blog/configurer-serveur-web-apache-php-mysql-sur-os-lion/
 categories:
-  - French
   - Server
   - Web Development
 tags:
@@ -30,14 +28,14 @@ Du coup, nativement sur mon Mac OS, je n’ai besoin que d’un simple **serveur
 Maintenant que *OS X Lion* vient de sortir, les versions des logiciels qu’ils embarquent sont assez récente. **Apache 2** est juste à activer dans les préférences du système dans la partie qui concerne le *Partage* (*Sharing* si votre OS est en anglais)
 
 <figure class="embed--unknown">
-    <a href="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing.png">
-        <img src="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing" class="embed__media" />
+    <a href="medias/2011/07/OS-X-Lion-System-Preferences-Sharing.png">
+        <img src="medias/2011/07/OS-X-Lion-System-Preferences-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing" class="embed__media" />
     </a>
 </figure>
 
 <figure class="embed--unknown">
-    <a href="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png"></a>
-        <img src="{{site.baseurl}}/medias/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing--Web-Sharing" class="embed__media" />
+    <a href="medias/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png"></a>
+        <img src="medias/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing--Web-Sharing" class="embed__media" />
     </a>
 </figure>
 

@@ -3,9 +3,8 @@ lang: en
 title: 'Delete a removed folder in your Finder&#8217;s sidebar on Mac OS X'
 author: MoOx
 layout: post
-permalink: /blog/delete-removed-folder-finders-sidebar-mac-os/
-dsq_thread_id:
-  - 264802206
+comments: true
+permalink: blog/delete-removed-folder-finders-sidebar-mac-os/
 categories:
   - Computer
   - Fix
@@ -28,7 +27,7 @@ Or open this file manually.
 
 You should have « Property List Editor » app to do this.
 
-<figure class="embed--unknown"><a href="{{site.baseurl}}/medias/2011/06/Remove-deleted-folder-osx-finder-sidebar.png"><img class="embed__media" title="Remove-deleted-folder-osx-finder-sidebar" src="{{site.baseurl}}/medias/2011/06/Remove-deleted-folder-osx-finder-sidebar.png" alt="" /></a></figure>
+<figure class="embed--unknown"><a href="medias/2011/06/Remove-deleted-folder-osx-finder-sidebar.png"><img class="embed__media" title="Remove-deleted-folder-osx-finder-sidebar" src="medias/2011/06/Remove-deleted-folder-osx-finder-sidebar.png" alt="" /></a></figure>
 
 Open each entries to find what you want under Root » useritems » CustomListItems. Try to open each item and check the name of the folder. When you found the correct entry, delete the « Item x » and save the file.
 
@@ -40,6 +39,6 @@ killall Finder
 
 Or just make option+click on Finder’s icon in your dock, then Relaunch.
 
-<figure class="embed--unknown"><a href="{{site.baseurl}}/medias/2011/06/relaunch-finder.png"><img class="embed__media" title="relaunch-finder" src="{{site.baseurl}}/medias/2011/06/relaunch-finder.png" alt="" /></a></figure>
+<figure class="embed--unknown"><a href="medias/2011/06/relaunch-finder.png"><img class="embed__media" title="relaunch-finder" src="medias/2011/06/relaunch-finder.png" alt="" /></a></figure>
 
 It’s that simple :)

@@ -3,11 +3,9 @@ lang: fr
 title: Installer Apache PHP MySQL sous Mac OS X
 author: MoOx
 layout: post
-permalink: /blog/installer-serveur-web-apache-php-mysql-mac-os-x-macports/
-dsq_thread_id:
-    - 264802206
+comments: true
+permalink: blog/installer-serveur-web-apache-php-mysql-mac-os-x-macports/
 categories:
-    - French
     - Web Development
 tags:
     - apache

@@ -18,7 +18,7 @@ nav: blog
 			
 			<ul class="posts">
 			{% for post in site.posts %}
-				<li><time datetime="{{ post.date }}" class="time">{{ post.date | date_to_string }}</time> <a href="{{site.baseurl}}{{ post.url }}" class="title"><span class="text-less-visible">[{{ post.lang }}]</span> {{ post.title }}</a>
+				<li><time datetime="{{ post.date }}" class="time">{{ post.date | date_to_string }}</time> <a href="{{ post.url }}" class="title"><span class="text-less-visible">[{{ post.lang }}]</span> {{ post.title }}</a>
 			{% endfor %}
 			</ul>
 		</div>

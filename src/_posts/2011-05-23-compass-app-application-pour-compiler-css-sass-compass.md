@@ -3,9 +3,8 @@ lang: fr
 title: 'Compass.app, une application qu&#8217;elle est bien pour compiler ses CSS avec Sass / Compass'
 author: MoOx
 layout: post
-permalink: /blog/compass-app-application-pour-compiler-css-sass-compass/
-dsq_thread_id:
-  - 264802206
+comments: true
+permalink: blog/compass-app-application-pour-compiler-css-sass-compass/
 categories:
   - CSS
   - French
@@ -18,7 +17,7 @@ tags:
   - sass
 ---
 
-<figure class="embed--3-1"><a href="http://compass-style.org/"><img class="embed__media" src="{{site.baseurl}}/medias/2011/05/compass.app_.jpg" alt="compass app" /></a></figure>
+<figure class="embed--3-1"><a href="http://compass-style.org/"><img class="embed__media" src="medias/2011/05/compass.app_.jpg" alt="compass app" /></a></figure>
 
 Suite à mes précédents articles sur [les pré-processeurs CSS qui permettent d’utiliser des variables et fonctions][1], et [un petit tutoriel sur l’installation et utilisation du combo Sass/Compass][2], voici la présentation d’un petite application, qui permet de s’affranchir des toujours utiliser des lignes de commandes pour lancer Compass.  
 
