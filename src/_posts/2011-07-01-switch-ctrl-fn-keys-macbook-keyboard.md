@@ -39,10 +39,13 @@ Eventually you can remove the menu bar icon under the « MenuBar » tab. Just 
 
 ## Switch <kbd>ctrl</kbd> and <kbd>fn</kbd> on the Macbook (Pro/Air) Keyboard
 
-<figure class="embed--unknown"><a href="medias/2011/06/Macbook-Pro-Keyboard-Switch-Ctrl-and-Fn-Remove-keys.jpg"><img class="embed__media" title="Macbook Pro Keyboard - Switch Ctrl and Fn - Remove keys" src="medias/2011/06/Macbook-Pro-Keyboard-Switch-Ctrl-and-Fn-Remove-keys-1024x764.jpg" alt="" /></a></figure>
+<figure class="embed--unknown"><a href="medias/2011/06/Macbook-Pro-Keyboard-Switch-Ctrl-and-Fn-Remove-keys.jpg"><img class="embed__media" title="Macbook Pro Keyboard - Switch Ctrl and Fn - Remove keys" src="medias/2011/06/Macbook-Pro-Keyboard-Switch-Ctrl-and-Fn-Remove-keys.jpg" alt="" /></a></figure>
 
 Now <kbd>ctrl</kbd> and <kbd>fn</kbd> are switched on your OS, you need to switch the real keys ! This part is quite easy, it just require some delicacy.  
 Checkout the following video to see how to switch the keys on your Macbook Keyboard.
+
+<figure class="embed--16-9">
+<iframe class="embed__media" src="http://www.youtube.com/embed/kh88cn_rtLo" frameborder="0" allowfullscreen></iframe></figure>
 
 Now you can use your <kbd>ctrl</kbd> as your <kbd>fn</kbd> and your <kbd>fn</kbd> as <kbd>ctrl</kbd> !
 
