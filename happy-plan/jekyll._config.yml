@@ -19,3 +19,8 @@ include: ['.htaccess']
 markdown: redcarpet
 #redcarpet:
 #  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
+
+disqus_short_name: moox
+#disqus_developer: true
+
+google_analytics_tracking_id: UA-1716762-6
