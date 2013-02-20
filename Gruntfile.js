@@ -80,6 +80,9 @@ module.exports = function(grunt) {
         },
 
         clean: {
+            build: {
+                src: ['<%= happyPlan.build._path %>']
+            },
             jekyll: {
                 src: ['<%= happyPlan.build._path %>/_tmp']
             }
@@ -254,10 +257,10 @@ module.exports = function(grunt) {
     
     grunt.registerTask('init', ['configs']);
     
-    grunt.registerTask('build', ['jekyll:build', 'copy:jekyllTmp', 'copy:fonts', 'copy:components', 'webfont:icons']);
+    grunt.registerTask('build', ['configs', 'jekyll:build', 'copy:jekyllTmp', 'copy:fonts', 'copy:components', 'webfont:icons']);
     
     grunt.registerTask('dev', ['jshint', 'build', 'compass:dev', 'uglify:dev', 'copy:fakeImagemin']);
-    grunt.registerTask('dist', ['jshint', 'build', 'clean:jekyll', 'compass:dist', 'uglify:dist', 'imagemin:dist']);
+    grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify:dist', 'imagemin:dist']);
     
     // waiting for https://github.com/gruntjs/grunt-contrib-imagemin/issues/11 to use just 'dist' here
     grunt.registerTask('test', ['jshint', 'configs', 'build', 'clean:jekyll', 'compass:dist', 'uglify:dist', 'copy:fakeImagemin']);
