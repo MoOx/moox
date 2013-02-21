@@ -36,11 +36,15 @@ nav: blog
 				<div class="report">
 					See something wrong here ? Please tell me <a href="https://github.com/MoOx/moox.fr/issues">with an issue on Github</a>, or just some words on twitter at <a href="https://www.twitter.com/MoOx/">@MoOx</a>.
 				</div>
-				<!-- <div class="about-author">
-					<img src="//gravatar.com/avatar/d2a1c95e2af59538301c3ee6d2907f6f?s=96" alt="" class="pic"> <strong>MoOx</strong>.. bla todo :)
-				</div> -->
 			</footer>
 		</article>
+		
+		{% if page.lang == 'en' %}
+			{% include author-en.html %}
+		{% else %}
+			{% include author-fr.html %}
+		{% endif %}
+		
 		{% if site.disqus_short_name and page.comments == true %}
 		<section class="module">
 			<h1>Comments</h1>
