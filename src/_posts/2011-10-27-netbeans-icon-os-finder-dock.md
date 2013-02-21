@@ -19,17 +19,17 @@ Here is the solution :
 
 Go into the `/Applications/Netbeans` folder, and open the Netbeans package.
 
-<figure class="embed--unknown">
+<figure class="flex-media--unknown">
     <a href="medias/2011/10/open-netbeans-package.png">
-        <img class="embed__media" src="medias/2011/10/open-netbeans-package.png" alt="" title="Open Netbeans.app package" />
+        <img class="flex-media__item" src="medias/2011/10/open-netbeans-package.png" alt="" title="Open Netbeans.app package" />
     </a>
 </figure>
 
 Then open `etc/netbeans.conf`
 
-<figure class="embed--unknown">
+<figure class="flex-media--unknown">
     <a href="medias/2011/10/open-netbeans-conf.png">
-        <img class="embed__media" src="medias/2011/10/open-netbeans-conf.png" alt="" title="Edit netbeans.conf" />
+        <img class="flex-media__item" src="medias/2011/10/open-netbeans-conf.png" alt="" title="Edit netbeans.conf" />
     </a>
 </figure>
 

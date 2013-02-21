@@ -1,0 +1,100 @@
+$flex-media-selector: false !default; // false: @extend will be used (or include if extend is not appropriate);
+$flex-media-default-ratio: 1 !default;
+$flex-media-ratios:  "16-9" 16/9, "4-3" 4/3, "1-1" 1 !default;
+$flex-media-selector-prefix: ".flex-media--" !default;
+$flex-media-class: ".flex-media__item" !default;
+$flex-media-overflow: hidden !default;
+$flex-media-unknown-suffix: "unknown" !default;
+
+// requirements
+@mixin flex-media-requirements(
+  $item-class: $flex-media-class,
+  $overflow: $flex-media-overflow
+) {
+  position: relative;
+  overflow: $overflow;
+  
+  #{$item-class} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  // img don't include height 100% to avoid weird images ratio
+  // just in case
+  img#{$item-class} { height: auto; }
+}
+
+%flex-media {
+  @include flex-media-requirements;
+}
+
+// $ratio : any valid ratio like 16/9, 4/3...
+@mixin flex-media(
+  $ratio: $flex-media-default-ratio,
+  $item-class: $flex-media-class,
+  $overflow: $flex-media-overflow,
+  $extend: if($flex-media-selector, false, true)
+) {
+  @if ($extend) {
+    // item will inherit from the placeholder if value are default ones
+    @if ($item-class == $flex-media-class and $overflow == $flex-media-overflow) {
+      @extend %flex-media;
+    }
+    // otherwise, just include new value
+    @else {
+      @include flex-media-requirements($item-class, $overflow);
+    }
+  }
+  padding-bottom: 100%/$ratio;
+}
+
+@mixin flex-media-unknown(
+  $selector-prefix: $flex-media-selector-prefix,
+  $item-class: $flex-media-class,
+  $item-unknown-suffix: $flex-media-unknown-suffix
+) {
+  @if ($item-unknown-suffix != null) {
+    #{$selector-prefix}#{$item-unknown-suffix} {
+      text-align: center;
+      
+      #{$item-class} {
+        display: inline-block;
+        max-width: 100%;
+      }
+    }
+  }
+  
+}
+
+@mixin flex-medias(
+  $ratios: $flex-media-ratios,
+  $selector-prefix: $flex-media-selector-prefix,
+  $item-class: $flex-media-class,
+  $item-unknown-suffix: $flex-media-unknown-suffix,
+  $overflow: $flex-media-overflow,
+  $selector: $flex-media-selector
+) {
+  
+  @include flex-media-unknown($selector-prefix, $item-class, $item-unknown-suffix);
+  
+  @if ($selector) {
+    #{$selector} {
+      @include flex-media-requirements($item-class, $overflow);
+    }
+  }
+  
+  @each $ratio in $ratios {
+    @if (length($ratio)<2) {
+      @warn "Flex media ratio list should contain a list of 2 values (ratio name, for css selector & value for math)"
+    }
+    $selector-ratio: nth($ratio, 1);
+    $ratio-value: nth($ratio, 2);
+    #{unquote("#{$selector-prefix}#{$selector-ratio}")} {
+      @include flex-media($ratio-value, $item-class, $overflow, if($selector, false, true));
+    }
+  }
+}
+

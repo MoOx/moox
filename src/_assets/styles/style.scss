@@ -275,6 +275,6 @@ blockquote {
 }
 
 @import "pygments-theme-freshcut";
-@import "responsive-embeds";
-$responsive-embeds-ratios: "3-1" 3, "16-9" 16/9, "4-3" 4/3, "1-1" 1;
-@include responsive-embeds();
+@import "flex-media";
+$flex-media-ratios: "3-1" 3, "16-9" 16/9, "4-3" 4/3, "1-1" 1;
+@include flex-medias();

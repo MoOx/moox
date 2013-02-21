@@ -25,9 +25,9 @@ Under the `~/Library/VirtualBox/Machines` directory you will find a folder for e
 
 So, in your « user folder » (~/), there will be a Library folder, hidden in OS X Lion, so to see it, open the Finder, in the « Go » menu, hold <kbd>⌥</kbd>.
 
-<figure class="embed--unknown">
+<figure class="flex-media--unknown">
   <a href="medias/2011/10/Open-Library-folder-wtih-Finder.png">
-    <img class="embed__media" title="Open Library folder with Finder" src="medias/2011/10/Open-Library-folder-wtih-Finder.png" alt="" /></a>
+    <img class="flex-media__item" title="Open Library folder with Finder" src="medias/2011/10/Open-Library-folder-wtih-Finder.png" alt="" /></a>
 </figure>
 
 Inside that Library folder, there is a folder called VirtualBox, which contains a Machines folder. In each VM folder, open the *.vbox file using a text-editor. It’s a XML file.
@@ -43,9 +43,9 @@ It looks like:
 
 Exit Virtual Box, change this « true » to « false » and Save. Restart Virtual Box and (or open it if you had it closed) and the hardware virtualization extensions will be disabled.
 
-<figure class="embed--unknown">
+<figure class="flex-media--unknown">
   <a href="medias/2011/10/Edit-Virtualbox-xml-file.png">
-    <img class="embed__media" title="Edit Virtualbox xml file" src="medias/2011/10/Edit-Virtualbox-xml-file.png" alt="" />
+    <img class="flex-media__item" title="Edit Virtualbox xml file" src="medias/2011/10/Edit-Virtualbox-xml-file.png" alt="" />
   </a>
 </figure>
 
