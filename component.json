@@ -6,6 +6,7 @@
     "griddle": "git://github.com/necolas/griddle.git",
     "normalize.scss": "~2.1.0",
     "picturefill": "git://github.com/scottjehl/picturefill.git",
-    "pygments-sass-base-theme": "git://github.com/MoOx/pygments-sass-base-theme.git"
+    "pygments-sass-base-theme": "git://github.com/MoOx/pygments-sass-base-theme.git",
+    "suit-utils": "latest"
   }
 }
