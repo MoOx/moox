@@ -3,18 +3,19 @@
 
 
 /* TEAM */
-  <your title>: <your name>
-  Site:
-  Twitter:
-  Location:
+  Developer: Maxime Thirouin
+  Site: http://moox.fr/
+  Twitter: https://twitter.com/MoOx 
+  Github: https://github.com/MoOx 
+  Location: Toulouse, France
 
 /* THANKS */
-  Names (& URL):
+  Names (& URL): kud (kud.fr) for the Happy Plan
 
 /* SITE */
   Standards: HTML5, CSS3
-  Components: Modernizr, jQuery
-  Software:
+  Components: Happy Plan (Jekyll, Grunt, Compass, Bower)
+  Software: SublimeText 2
 
 
 
