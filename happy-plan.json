@@ -65,7 +65,7 @@
 				"banner": "/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today('yyyy-mm-dd') %> */\n"
 			},
 			"files": {
-				"<%= happyPlan.paths.build.scripts %>/ieshim.js": ["<%= happyPlan.paths.src.scripts %>/lib/aight.js"],
+				"<%= happyPlan.paths.build.scripts %>/ieshim.js": ["<%= happyPlan.paths.src.bower_components %>/aight/aight.js"],
 				"<%= happyPlan.paths.build.scripts %>/vanilla.js": [
 					"<%= happyPlan.paths.src.bower_components %>/picturefill/external/matchmedia.js",
 					"<%= happyPlan.paths.src.bower_components %>/picturefill/picturefill.js",
