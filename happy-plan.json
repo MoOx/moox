@@ -19,7 +19,7 @@
 			"fonts": "<%= happyPlan.paths.src._ %>/fonts",
 			"webfonts": "<%= happyPlan.paths.src._ %>/webfonts",
 			"bower_components": "<%= happyPlan.paths.src._ %>/bower_components",
-			"medias": "<%= happyPlan.paths.src._ %>/medias/"
+			"medias": "<%= happyPlan.paths.src._ %>/medias"
 		},
 		"build": {
 			"_": "dist",
@@ -30,7 +30,7 @@
 			"fonts": "<%= happyPlan.paths.build._ %>/_/f",
 			"webfonts": "<%= happyPlan.paths.build._ %>/_/f",
 			"bower_components": "<%= happyPlan.paths.build._ %>/_/bc",
-			"medias": "<%= happyPlan.paths.build._ %>/medias/"
+			"medias": "<%= happyPlan.paths.build._ %>/medias"
 		}
 	},
 	"baseUrls": {
@@ -41,7 +41,7 @@
 		"fonts": "<%= happyPlan.baseUrl %>_/f",
 		"webfonts": "<%= happyPlan.baseUrl %>_/f",
 		"bower_components": "<%= happyPlan.baseUrl %>_/bc",
-		"medias": "<%= happyPlan.baseUrl %>medias/"
+		"medias": "<%= happyPlan.baseUrl %>medias"
 	},
 	"assets": {
 		"main": {

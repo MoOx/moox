@@ -13,7 +13,7 @@ baseurls:
   styles: "@@baseurls_styles"
   images: "@@baseurls_images"
   fonts: "@@baseurls_fonts"
-  medias: "@@baseurls_media"
+  medias: "@@baseurls_medias"
 
 # if you use apache & the .htaccess conf
 include: ['.htaccess']

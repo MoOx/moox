@@ -20,16 +20,16 @@ Here is the solution :
 Go into the `/Applications/Netbeans` folder, and open the Netbeans package.
 
 <figure class="flex-media--unknown">
-    <a href="medias/2011/10/open-netbeans-package.png">
-        <img class="flex-media__item" src="medias/2011/10/open-netbeans-package.png" alt="" title="Open Netbeans.app package" />
+    <a href="{{ site.baseurls.medias }}/2011/10/open-netbeans-package.png">
+        <img class="flex-media__item" src="{{ site.baseurls.medias }}/2011/10/open-netbeans-package.png" alt="" title="Open Netbeans.app package" />
     </a>
 </figure>
 
 Then open `etc/netbeans.conf`
 
 <figure class="flex-media--unknown">
-    <a href="medias/2011/10/open-netbeans-conf.png">
-        <img class="flex-media__item" src="medias/2011/10/open-netbeans-conf.png" alt="" title="Edit netbeans.conf" />
+    <a href="{{ site.baseurls.medias }}/2011/10/open-netbeans-conf.png">
+        <img class="flex-media__item" src="{{ site.baseurls.medias }}/2011/10/open-netbeans-conf.png" alt="" title="Edit netbeans.conf" />
     </a>
 </figure>
 

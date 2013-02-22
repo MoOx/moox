@@ -45,6 +45,7 @@ module.exports = function(grunt) {
                         baseurls_styles: '<%= happyPlan.baseUrls.styles %>',
                         baseurls_images: '<%= happyPlan.baseUrls.images %>',
                         baseurls_fonts: '<%= happyPlan.baseUrls.fonts %>',
+                        baseurls_medias: '<%= happyPlan.baseUrls.medias %>',
                         baseurl: '<%= happyPlan.baseUrl %>'
                     }
                 },
