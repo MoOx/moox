@@ -76,8 +76,8 @@ module.exports = function(grunt) {
             build: {
                 src: ['<%= happyPlan.paths.build._ %>']
             },
-            jekyll: {
-                src: ['<%= happyPlan.paths.build._ %>/_tmp']
+            tmp: {
+                src: ['_tmp']
             }
         },
 
@@ -85,7 +85,7 @@ module.exports = function(grunt) {
             server : {
                 baseurl:        '<%= happyPlan.baseUrl %>',
                 src:            '<%= happyPlan.paths.src.jekyll %>',
-                dest:           '<%= happyPlan.paths.build.jekyll %>',
+                dest:           '_tmp',
                 server:         true,
                 server_port:    8000,
                 auto:           false
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
             build: {
                 baseurl:        '<%= happyPlan.baseUrl %>',
                 src:            '<%= happyPlan.paths.src.jekyll %>',
-                dest:           '<%= happyPlan.paths.build.jekyll %>/_tmp',
+                dest:           '_tmp',
                 pygments:       true
             }
         },
@@ -103,7 +103,7 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: '<%= happyPlan.paths.build.jekyll %>/_tmp',
+                        cwd: '_tmp',
                         src: ['{**,.*}'],
                         dest: '<%= happyPlan.paths.build.jekyll %>'
                     }
@@ -253,10 +253,10 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['configs', 'jekyll:build', 'copy:jekyllTmp', 'copy:fonts', 'copy:bower_components', 'webfont:icons']);
     
     grunt.registerTask('dev', ['jshint', 'build', 'compass:dev', 'uglify:dev', 'copy:fakeImagemin']);
-    grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:jekyll', 'compass:dist', 'uglify:dist', 'imagemin:dist']);
+    grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:tmp', 'compass:dist', 'uglify:dist', 'imagemin:dist']);
     
     // waiting for https://github.com/gruntjs/grunt-contrib-imagemin/issues/11 to use just 'dist' here
-    grunt.registerTask('test', ['jshint', 'configs', 'build', 'clean:jekyll', 'compass:dist', 'uglify:dist', 'copy:fakeImagemin']);
+    grunt.registerTask('test', ['jshint', 'configs', 'build', 'clean:tmp', 'compass:dist', 'uglify:dist', 'copy:fakeImagemin']);
 
     grunt.registerTask('server', 'jekyll:server');
 };
