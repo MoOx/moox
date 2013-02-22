@@ -2,6 +2,6 @@
 PROTOCOL="sftp"
 HOST="217.70.180.140"
 USER="120940"
-LCD="build"
+LCD="dist"
 RCD="/lamp0/web/vhosts/moox.fr/htdocs"
 lftp -e "lcd $LCD; cd $RCD; mirror --reverse --delete --use-cache --verbose; exit" $PROTOCOL://$USER@$HOST

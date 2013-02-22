@@ -1,7 +1,7 @@
 node_modules
 .sass-cache
-build
+dist
 config.rb
-src/_config.yml
-src/_assets/components
-src/_unused
+jekyll/_config.yml
+bower_components
+jekyll/_unused

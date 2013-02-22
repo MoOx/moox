@@ -4,52 +4,44 @@
 	"description": "Web Developer Front-End",
 	"baseUrl": "/",
 	"paths": {
+		"configs": {
+			"_": "configs",
+			"jekyll": "<%= happyPlan.paths.configs._ %>/jekyll._config.yml",
+			"compass": "<%= happyPlan.paths.configs._ %>/compass.config.rb",
+			"bowerrc": "<%= happyPlan.paths.configs._ %>/bowerrc"
+		},
 		"src": {
-			"_": "",
-			"scripts": "<%= config.paths.src._ %>scripts/",
-			"styles": "<%= config.paths.src._ %>styles/",
-			"images": "<%= config.paths.src._ %>images/",
-			"fonts": "<%= config.paths.src._ %>fonts/",
-			"webfonts": "<%= config.paths.src._ %>webfonts/",
-			"components": "<%= config.paths.src._ %>components/",
-			"medias": "<%= config.paths.src._ %>medias/",
+			"_": ".",
+			"jekyll": "<%= happyPlan.paths.src._ %>/jekyll",
+			"scripts": "<%= happyPlan.paths.src._ %>/scripts",
+			"styles": "<%= happyPlan.paths.src._ %>/styles",
+			"images": "<%= happyPlan.paths.src._ %>/images",
+			"fonts": "<%= happyPlan.paths.src._ %>/fonts",
+			"webfonts": "<%= happyPlan.paths.src._ %>/webfonts",
+			"bower_components": "<%= happyPlan.paths.src._ %>/bower_components",
+			"medias": "<%= happyPlan.paths.src._ %>/medias/"
 		},
 		"build": {
-			"_": "dist/",
-			"scripts": "<%= config.paths.build._ %>_/js/",
-			"styles": "<%= config.paths.build._ %>_/css/",
-			"images": "<%= config.paths.build._ %>_/i/",
-			"fonts": "<%= config.paths.build._ %>_/f/",
-			"webfonts": "<%= config.paths.build._ %>_/f/",
-			"components": "<%= config.paths.build._ %>_/c/",
-			"medias": "<%= config.paths.build._ %>medias/"
+			"_": "dist",
+			"jekyll": "<%= happyPlan.paths.build._ %>",
+			"scripts": "<%= happyPlan.paths.build._ %>/_/js",
+			"styles": "<%= happyPlan.paths.build._ %>/_/css",
+			"images": "<%= happyPlan.paths.build._ %>/_/i",
+			"fonts": "<%= happyPlan.paths.build._ %>/_/f",
+			"webfonts": "<%= happyPlan.paths.build._ %>/_/f",
+			"bower_components": "<%= happyPlan.paths.build._ %>/_/bc",
+			"medias": "<%= happyPlan.paths.build._ %>/medias/"
 		}
 	},
-	"src": {
-		"_path": "src",
-		"assets": {
-			"_path": "src/_assets",
-			"scripts": "src/_assets/scripts",
-			"styles": "src/_assets/styles",
-			"images": "src/_assets/images",
-			"fonts": "src/_assets/fonts",
-			"webfonts": "src/_assets/webfonts",
-			"components": "src/_assets/components"
-		},
-		"medias": "medias"
-	},
-	"build": {
-		"_path": "build",
-		"assets": {
-			"_path": "build/assets",
-			"scripts": "build/assets/js",
-			"styles": "build/assets/css",
-			"images": "build/assets/i",
-			"fonts": "build/assets/fonts",
-			"webfonts": "build/assets/fonts",
-			"components": "build/assets/components"
-		},
-		"medias": "medias"
+	"baseUrls": {
+		"_": "<%= happyPlan.baseUrl %>",
+		"scripts": "<%= happyPlan.baseUrl %>_/js",
+		"styles": "<%= happyPlan.baseUrl %>_/css",
+		"images": "<%= happyPlan.baseUrl %>_/i",
+		"fonts": "<%= happyPlan.baseUrl %>_/f",
+		"webfonts": "<%= happyPlan.baseUrl %>_/f",
+		"bower_components": "<%= happyPlan.baseUrl %>_/bc",
+		"medias": "<%= happyPlan.baseUrl %>medias/"
 	},
 	"assets": {
 		"main": {
@@ -57,16 +49,30 @@
 			"script": "vanilla.css"
 		}
 	},
-	"jshint": {
-		"files": [
-			"Gruntfile.js",
-			"component.json",
-			"happy-plan.json",
-			"package.json",
-			"<%= happyPlan.src.assets.scripts %>/**/*.js",
-			"!<%= happyPlan.src.assets.scripts %>/lib/**/*",
-			".ftppass"
-		]
+	"grunt": {
+		"jshint": {
+			"files": [
+				"Gruntfile.js",
+				"package.json",
+				"happy-plan.json",
+				"<%= happyPlan.bower.bowerrc.json %>",
+				"<%= happyPlan.paths.src.scripts %>/**/*.js",
+				"!<%= happyPlan.paths.src.scripts %>/lib/**/*"
+			]
+		},
+		"uglify": {
+			"options": {
+				"banner": "/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today('yyyy-mm-dd') %> */\n"
+			},
+			"files": {
+				"<%= happyPlan.paths.build.scripts %>/ieshim.js": ["<%= happyPlan.paths.src.scripts %>/lib/aight.js"],
+				"<%= happyPlan.paths.build.scripts %>/vanilla.js": [
+					"<%= happyPlan.paths.src.bower_components %>/picturefill/external/matchmedia.js",
+					"<%= happyPlan.paths.src.bower_components %>/picturefill/picturefill.js",
+					"<%= happyPlan.paths.src.scripts %>/vanilla.js"
+				]
+			}
+		}
 	},
 	"jekyll": {
 		"permalink": "/:categories/:title"
@@ -78,28 +84,19 @@
 			"compass-recipes"
 		],
 		"additional_import_paths": [
-			"<%= happyPlan.src.assets.components %>/",
-			"<%= happyPlan.src.assets.components %>/griddle/",
-			"<%= happyPlan.src.assets.components %>/hint.css/src/",
-			"<%= happyPlan.src.assets.components %>/pygments-sass-base-theme/",
-			"<%= happyPlan.src.assets.components %>/"
+			"<%= happyPlan.paths.src.bower_components %>",
+			"<%= happyPlan.paths.src.bower_components %>/griddle",
+			"<%= happyPlan.paths.src.bower_components %>/hint.css/src",
+			"<%= happyPlan.paths.src.bower_components %>/pygments-sass-base-theme",
+			"<%= happyPlan.paths.src.bower_components %>/"
 		],
 		"meh": "last path is stupid, it's because of a compass import path issue I think. I should take a deeper look."
 	},
-	"uglify": {
-		"options": {
-			"banner": "/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today('yyyy-mm-dd') %> */\n"
+	"bower": {
+		"bowerrc": {
+			"directory" : "<%= happyPlan.paths.src.bower_components %>",
+			"json"      : "bower.json"
 		},
-		"files": {
-			"<%= happyPlan.build.assets.scripts %>/ieshim.js": ["<%= happyPlan.src.assets.scripts %>/lib/aight.js"],
-			"<%= happyPlan.build.assets.scripts %>/vanilla.js": [
-				"<%= happyPlan.src.assets.components %>/picturefill/external/matchmedia.js",
-				"<%= happyPlan.src.assets.components %>/picturefill/picturefill.js",
-				"<%= happyPlan.src.assets.scripts %>/vanilla.js"
-			]
-		}
-	},
-	"components": {
 		"files": []
 	}
 }

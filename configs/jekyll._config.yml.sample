@@ -14,13 +14,8 @@ baseurls:
   images: "@@baseurls_images"
   fonts: "@@baseurls_fonts"
 
-include: ['.htaccess']
+# if you use apache & the .htaccess conf
+#include: ['.htaccess']
 
-markdown: redcarpet
-#redcarpet:
-#  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
-
-disqus_short_name: moox
-#disqus_developer: true
-
-google_analytics_tracking_id: UA-1716762-6
+# if you want more github like flowered markdown
+#markdown: redcarpet
