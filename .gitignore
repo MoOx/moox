@@ -1,7 +1,17 @@
-node_modules
+# cache
 .sass-cache
+
+# packages
+node_modules
+bower_components
+
+# build
 dist
+_tmp
+
+# generated config
 config.rb
 jekyll/_config.yml
-bower_components
+
+# temp ignored folder
 jekyll/_unused
