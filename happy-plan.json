@@ -5,14 +5,24 @@
 	"baseUrl": "/",
 	"paths": {
 		"src": {
-			"scripts": "scripts/",
-			"styles": "styles/",
-			"images": "images/"
+			"_": "",
+			"scripts": "<%= config.paths.src._ %>scripts/",
+			"styles": "<%= config.paths.src._ %>styles/",
+			"images": "<%= config.paths.src._ %>images/",
+			"fonts": "<%= config.paths.src._ %>fonts/",
+			"webfonts": "<%= config.paths.src._ %>webfonts/",
+			"components": "<%= config.paths.src._ %>components/",
+			"medias": "<%= config.paths.src._ %>medias/",
 		},
 		"build": {
-			"scripts": "build/assets/js/",
-			"styles": "build/assets/css/",
-			"images": "build/img/"
+			"_": "dist/",
+			"scripts": "<%= config.paths.build._ %>_/js/",
+			"styles": "<%= config.paths.build._ %>_/css/",
+			"images": "<%= config.paths.build._ %>_/i/",
+			"fonts": "<%= config.paths.build._ %>_/f/",
+			"webfonts": "<%= config.paths.build._ %>_/f/",
+			"components": "<%= config.paths.build._ %>_/c/",
+			"medias": "<%= config.paths.build._ %>medias/"
 		}
 	},
 	"src": {
