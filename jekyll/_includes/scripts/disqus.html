@@ -7,7 +7,6 @@ var disqus_shortname = '{{ site.disqus_short_name }}',
 {% endif %}
 {% if page.comments == true %}
 	{% comment %} `page.comments` can be only be set to true on pages/posts, so we embed the comments here. {% endcomment %}
-	
 	disqus_identifier = '{{ site.url }}{{ page.url }}',
 	disqus_url = '{{ site.url }}{{ page.url }}',
 	disqus_script = 'embed.js';
