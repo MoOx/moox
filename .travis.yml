@@ -3,13 +3,19 @@ node_js:
   - "0.8"
 before_install:
   - gem update --system
-  - gem install jekyll
-  - gem install redcarpet
-  - gem install compass
+# jekyll stuff
+  - gem install jekyll redcarpet
+# compass & compass extensions
+  - gem install compass modular-scale ceaser-easing compass-recipes
+# grunt-webfont requirements
   - sudo apt-get install fontforge eot-utils
   - wget http://people.mozilla.com/~jkew/woff/woff-code-latest.zip
   - unzip woff-code-latest.zip -d sfnt2woff && cd sfnt2woff && make && sudo mv sfnt2woff /usr/local/bin/
-  - npm install -g grunt-cli bower
+# grunt
+  - npm install -g grunt-cli
   - npm install
+# bower
+  - npm install -g bower
+  - bower install
 script:
   - grunt test
