@@ -10,6 +10,7 @@ dist
 _tmp
 
 # generated config
+.bowerrc
 config.rb
 jekyll/_config.yml
 

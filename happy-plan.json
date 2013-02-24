@@ -74,6 +74,13 @@
 			}
 		}
 	},
+	"bower": {
+		"bowerrc": {
+			"directory" : "<%= happyPlan.paths.src.bower_components %>",
+			"json"      : "component.json"
+		},
+		"files": []
+	},
 	"jekyll": {
 		"permalink": "/:categories/:title"
 	},
@@ -91,12 +98,5 @@
 			"<%= happyPlan.paths.src.bower_components %>/"
 		],
 		"meh": "last path is stupid, it's because of a compass import path issue I think. I should take a deeper look."
-	},
-	"bower": {
-		"bowerrc": {
-			"directory" : "<%= happyPlan.paths.src.bower_components %>",
-			"json"      : "bower.json"
-		},
-		"files": []
 	}
 }
