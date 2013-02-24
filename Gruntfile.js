@@ -245,7 +245,7 @@ module.exports = function(grunt) {
     grunt.registerTask('bowerrc', "Create a .bowerrc file from the Happy-Plan configuration", function() {
         grunt.file.write('.bowerrc', JSON.stringify(grunt.config.get('happyPlan').bower.bowerrc, null, 4));
         grunt.log.writeln('.bowerrc'.cyan + ' created.'.grey);
-    })
+    });
 
     grunt.registerTask('default', ['dev', 'livereload-start', 'regarde']);
 
