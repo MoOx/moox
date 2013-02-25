@@ -247,21 +247,19 @@ module.exports = function(grunt) {
         grunt.log.writeln('.bowerrc'.cyan + ' created.'.grey);
     });
 
-    grunt.registerTask('default', ['dev', 'livereload-start', 'regarde']);
+    grunt.registerTask('init', ['configs']);
 
     // configs shouldn't be fired each build, because if we do so, compass just start with a fresh cache (no-cache = fews seconds...)
     // So, 'regarde' fire 'configs' :)
     grunt.registerTask('configs', ['replace:compass', 'replace:jekyll', 'bowerrc']);
-
-    grunt.registerTask('init', ['configs']);
-
     grunt.registerTask('build', ['configs', 'jekyll:build', 'copy:jekyllTmp', 'copy:fonts', 'copy:bower_components', 'webfont:icons']);
 
     grunt.registerTask('dev', ['jshint', 'build', 'compass:dev', 'uglify:dev', 'copy:fakeImagemin']);
     grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:tmp', 'compass:dist', 'uglify:dist', 'imagemin:dist']);
-
     // waiting for https://github.com/gruntjs/grunt-contrib-imagemin/issues/11 to use just 'dist' here
     grunt.registerTask('test', ['jshint', 'build', 'clean:tmp', 'compass:dist', 'uglify:dist', 'copy:fakeImagemin']);
 
     grunt.registerTask('server', 'jekyll:server');
+
+    grunt.registerTask('default', ['dev', 'livereload-start', 'regarde']);
 };
