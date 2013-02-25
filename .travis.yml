@@ -16,6 +16,7 @@ before_install:
   - npm install -g grunt-cli
   - npm install
   - grunt init
+  - ls -al # to see if configs is well created
 # bower
   - export PATH=$PATH:`npm bin` # add local bower
   - bower --version
