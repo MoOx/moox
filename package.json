@@ -30,6 +30,6 @@
 	},
 	"main": "Gruntfile.js",
 	"scripts": {
-		"test": "grunt test --verbose"
+		"test": "grunt test"
 	}
 }
