@@ -1,6 +1,6 @@
 {
   "name": "MoOx.fr",
-  "dependencies": {
+  "devDependencies": {
     "hint.css": "git://github.com/chinchang/hint.css.git",
     "griddle": "git://github.com/necolas/griddle.git",
     "normalize.scss": "~2.1.0",
