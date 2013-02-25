@@ -18,6 +18,6 @@ before_install:
 # bower
   - export PATH=$PATH:`npm bin` # add local bower
   - bower --version
-  - bower -v install
+  - bower install
 script:
   - grunt test
