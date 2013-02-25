@@ -9,6 +9,7 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
+		"bower": "0.8",
 		"grunt": "git://github.com/gruntjs/grunt",
 		"grunt-contrib-jshint": "git://github.com/gruntjs/grunt-contrib-jshint.git",
 		"grunt-replace": "git://github.com/outaTiME/grunt-replace.git",

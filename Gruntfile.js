@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-regarde');
     grunt.loadNpmTasks('grunt-contrib-livereload');
-    
+
     // set dev option to be true by default
     grunt.option('dev', typeof grunt.option('dev') !== 'undefined' ? grunt.option('dev') : true);
 
@@ -21,15 +21,15 @@ module.exports = function(grunt) {
     var happyPlan = grunt.file.readJSON('happy-plan.json');
 
     grunt.initConfig({
-        
+
         pkg: grunt.file.readJSON('package.json'),
 
         happyPlan : happyPlan,
-        
+
         warningComment: "DO NOT EDIT THIS GENERATED FILE, IT WILL BE OVERWRITTEN AUTOMATICALLY - REFER TO Gruntfile OR configs/*",
-        
+
         jshint: happyPlan.grunt.jshint,
-        
+
         replace: {
             jekyll: {
                 options: {
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: '<%= happyPlan.paths.src.images %>/', 
+                        cwd: '<%= happyPlan.paths.src.images %>/',
                         src: ['**'],
                         dest: '<%= happyPlan.paths.build.images %>/'
                     }
@@ -133,7 +133,7 @@ module.exports = function(grunt) {
                 files: happyPlan.bower.files
             }
         },
-        
+
         webfont: {
             icons: {
                 src: '<%= happyPlan.paths.src.webfonts %>/icons/*.svg',
@@ -162,7 +162,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        
+
         uglify: {
             // just merge hp options correctly
             dev: grunt.util._.extend(
@@ -201,7 +201,7 @@ module.exports = function(grunt) {
                 ]
             }
         },
-        
+
         regarde: {
             configs: {
                 files: ['<%= happyPlan.paths.configs._ %>/**/*'],
@@ -252,16 +252,16 @@ module.exports = function(grunt) {
     // configs shouldn't be fired each build, because if we do so, compass just start with a fresh cache (no-cache = fews seconds...)
     // So, 'regarde' fire 'configs' :)
     grunt.registerTask('configs', ['replace:compass', 'replace:jekyll', 'bowerrc']);
-    
+
     grunt.registerTask('init', ['configs']);
-    
+
     grunt.registerTask('build', ['configs', 'jekyll:build', 'copy:jekyllTmp', 'copy:fonts', 'copy:bower_components', 'webfont:icons']);
-    
+
     grunt.registerTask('dev', ['jshint', 'build', 'compass:dev', 'uglify:dev', 'copy:fakeImagemin']);
     grunt.registerTask('dist', ['jshint', 'clean:build', 'build', 'clean:tmp', 'compass:dist', 'uglify:dist', 'imagemin:dist']);
-    
+
     // waiting for https://github.com/gruntjs/grunt-contrib-imagemin/issues/11 to use just 'dist' here
-    grunt.registerTask('test', ['jshint', 'configs', 'build', 'clean:tmp', 'compass:dist', 'uglify:dist', 'copy:fakeImagemin']);
+    grunt.registerTask('test', ['jshint', 'build', 'clean:tmp', 'compass:dist', 'uglify:dist', 'copy:fakeImagemin']);
 
     grunt.registerTask('server', 'jekyll:server');
 };
