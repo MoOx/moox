@@ -98,5 +98,12 @@
 			"<%= happyPlan.paths.src.bower_components %>/"
 		],
 		"meh": "last path is stupid, it's because of a compass import path issue I think. I should take a deeper look."
+	},
+	"css_to_scss": {
+		"files": {
+			"<%= happyPlan.paths.src.styles %>/_bower_components.scss": [
+				"<%= happyPlan.paths.src.bower_components %>/suit-utils/*.css"
+			]
+		}
 	}
 }

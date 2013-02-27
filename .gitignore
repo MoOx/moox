@@ -16,3 +16,6 @@ jekyll/_config.yml
 
 # temp ignored folder
 jekyll/_unused
+
+# compass css to scss trick
+styles/_bower_components.scss
