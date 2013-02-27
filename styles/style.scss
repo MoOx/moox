@@ -94,7 +94,7 @@ h4,
 	margin: $grid-gutter/2 0;
 	background-color: #f9f9f9;
 	background-color: rgba(#fff, .9);
-	box-shadow: 0 0 1px 1px rgba(#000, .1); //, 0 0 1em .4em rgba(0, 0, 0, 0.3)
+	box-shadow: 0 0 1px 1px rgba(#000, .1); //, 0 0 1em .4em rgba(#000, .3)
 	text-shadow: 0 1px 0 #fff;
 	border-radius: 6px;
 	text-align: justify;
@@ -186,7 +186,7 @@ $annonceBoxHeight: 2em;
 }
 
 @import "layouts/nav";
-@import "glowing-indicator";
+@import "components/glowing-indicator";
 $navbar__item--font-size: .8em;
 
 .navbar--top {
@@ -280,6 +280,6 @@ blockquote {
 }
 
 @import "pygments-theme-freshcut";
-@import "flex-media";
+@import "components/flex-media";
 $flex-media-ratios: "3-1" 3, "16-9" 16/9, "4-3" 4/3, "1-1" 1;
 @include flex-medias();
