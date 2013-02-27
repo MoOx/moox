@@ -108,21 +108,6 @@ h4,
 	& :last-child { margin-bottom: 0; }
 }
 
-@import "hint-variables";
-@import "hint-mixins";
-@import "hint-core";
-@import "hint-position";
-@import "hint-color-types";
-@import "hint-always";
-//@import "tooltip";
-
-[href="#not-ready"] {
-	@extend .hint;
-	@extend .hint--bottom;
-	//@extend .tooltip;
-	.navbar & { color: #444 !important; }
-}
-
 $annonceBoxHeight: 2em;
 .annonce-box {
 	color: #fff;
@@ -187,25 +172,6 @@ $annonceBoxHeight: 2em;
 	}
 }
 
-@import "components/glowing-indicator";
-
-
-		position: relative;
-			@include media-m {
-				left: auto;
-				margin-top: 0;
-		}
-	}
-}
-.navbar__section {
-	a {
-		font-size: $navbar__item--font-size;
-		padding: 0 .5*$grid-gutter*$unit/$navbar__item--font-size;
-		@include media-gap ($screen-s, $screen-m) { padding: 0 $grid-gutter*$unit/$navbar__item--font-size; }
-}
-
-.navbar__toggler {
-}
 @import "layout/nav";
 
 $title--site--font-size: 1.4em;
@@ -229,7 +195,6 @@ $title--site--font-size: 1.4em;
 	opacity: .6;
 }
 
-@import "layouts/big-content";
 @import "layout/big-content";
 
 blockquote {
@@ -266,3 +231,5 @@ blockquote {
 @import "components/flex-media";
 $flex-media-ratios: "3-1" 3, "16-9" 16/9, "4-3" 4/3, "1-1" 1;
 @include flex-medias();
+
+@import "components/tooltip";
