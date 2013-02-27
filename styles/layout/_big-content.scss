@@ -1,22 +1,22 @@
 .grid--title {
 	@include media-m {
 		padding: 1em 0;
-		
+
 		.grid__cell {
 			text-align: center;
 		}
-		
+
 		// quotes title
 		.grid-title--quotes & {
-			
+
 			h1 { text-align: left; }
 			h2 { text-align: right; }
-			
+
 			h1,
 			h1:before,
 			h2,
 			h2:after {
-				z-index: 2;
+				//z-index: 2;
 				position: relative;
 			}
 			h1:before,
@@ -84,7 +84,7 @@ $icons--big-size: 4em;
 
 	.stretch-img_column {
 		padding-top: 1em;
-		
+
 		$mooxSmallMaxWidth: 200px;
 		img {
 			display: block;
@@ -102,7 +102,7 @@ $icons--big-size: 4em;
 	.body-wrapper {
 		height: 100%;
 	}
-	
+
 	.stretch-img {
 		.annonce-box,
 		.navbar--top {
@@ -112,22 +112,22 @@ $icons--big-size: 4em;
 		.navbar--top {
 			top: $annonceBoxHeight;
 		}
-		
+
 	}
-	
+
 	.stretch-img {
 		.grid--title {
 			padding-top: $annonceBoxHeight + $navbar-height + 1em;
 			height: 30%;
 		}
-		
+
 		.grid--blabla { height: 70%; }
 	}
-	
+
 	.stretch-img_column {
 		position: static;
 		padding-top: 0;
-		
+
 		img {
 			position: absolute;
 			top: 0;

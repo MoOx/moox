@@ -1,8 +1,8 @@
-$navbar-height: 2.6em;
-$navbar-background: #111;
-$navbar-link-color: #fff;
-$navbar-link-color--hover: #fff;
-$navbar__section-background--hover: #000;
+$navbar-height: 2.6em !default;
+$navbar-background: #111 !default;
+$navbar-link-color: #fff !default;
+$navbar-link-color--hover: #fff !default;
+$navbar__section-background--hover: #000 !default;
 
 $sep-color: #000 !default;
 $sep-color-alt: rgba(#fff, .1) !default;
@@ -67,11 +67,11 @@ $navbar-screen-breakpoint: $screen-m !default;
 	position: relative;
 	z-index: 1;
 	width: 100%;
-	
+
 	line-height: $navbar-height;
 	background: $navbar-background;
 	text-shadow: 0 1px 0 #000;
-	
+
 	.icon { font-size: 1.2em; }
 }
 
@@ -82,23 +82,23 @@ $navbar-screen-breakpoint: $screen-m !default;
 			margin: 0;
 			padding: 0;
 		}
-		
+
 		a {
 			display: block;
 			font-weight: bold;
 
 			text-decoration: none;
-			
+
 			color: $navbar-link-color;
 			background: $navbar-background;
-			
+
 			&:hover {
 				color: $navbar-link-color;
 				background: $navbar__section-background--hover;
 			}
 		}
 	}
-	
+
 	@include media-min($navbar-screen-breakpoint) {
 		// inline menu for larger screen
 		.navbar__section {
@@ -108,7 +108,7 @@ $navbar-screen-breakpoint: $screen-m !default;
 				display: inline-block;
 			}
 		}
-		
+
 		.navbar__section--left { float: left }
 		.navbar__section--right { float: right }
 	}
