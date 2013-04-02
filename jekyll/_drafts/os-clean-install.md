@@ -319,10 +319,12 @@ Edit
 
 ### Git(hub) Configuration
 
+Paste your token into ~/.github_token, then
+
 	git config --global user.name "Maxime Thirouin"
 	git config --global user.email m@moox.fr
 	git config --global github.user MoOx
-	git config --global github.token 88e450edc831fbcfa2960f65dde83b52
+	git config --global github.token $(cat ~/.github_token)
 	
 #### [Github SSH Key](https://help.github.com/articles/generating-ssh-keys)
 
