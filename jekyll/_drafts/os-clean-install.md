@@ -319,7 +319,9 @@ Edit
 
 ### Git(hub) Configuration
 
-Paste your token into ~/.github_token, then
+	curl -u 'MoOx' -d '{"note":"Update token"}' https://api.github.com/authorizations
+	
+Copy your token from the token field & paste your token into ~/.github_token (`echo TOKEN > ./.github_token`), then
 
 	git config --global user.name "Maxime Thirouin"
 	git config --global user.email m@moox.fr
