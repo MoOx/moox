@@ -319,6 +319,8 @@ Edit
 
 ### Git(hub) Configuration
 
+[Token info](https://help.github.com/articles/creating-an-oauth-token-for-command-line-use)
+
 	curl -u 'MoOx' -d '{"note":"Update token"}' https://api.github.com/authorizations
 	
 Copy your token from the token field & paste your token into ~/.github_token (`echo TOKEN > ./.github_token`), then
