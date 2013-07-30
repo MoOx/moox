@@ -1,5 +1,5 @@
 {
-  "name": "MoOx.fr",
+  "name": "MoOx.io",
   "version": "7.2.0",
   "description": "MoOx personal website",
   "author": "Maxime Thirouin",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/MoOx/moox.fr.git"
+    "url": "git://github.com/MoOx/moox.io.git"
   },
   "scripts": {
     "test": "happyplan dist"

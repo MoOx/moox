@@ -1,5 +1,7 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
+RewriteCond %{HTTP_HOST} !moox.io$ [NC]
+RewriteRule ^(.*)$ http://moox.io/$1 [L,R=301]
 RewriteCond %{REQUEST_URI} /(portfolio|about|category|web-developer|tag)/ [NC]
 RewriteRule .* /?content=outdated [R=302,L]
 </IfModule>

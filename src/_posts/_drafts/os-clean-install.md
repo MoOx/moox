@@ -542,7 +542,7 @@ then link them all
 Copy your token from the token field & paste your token into ~/.github_token (`echo TOKEN > ./.github_token`), then
 
 	git config --global user.name "Maxime Thirouin"
-	git config --global user.email m@moox.fr
+	git config --global user.email m@moox.io
 	git config --global github.user MoOx
 	git config --global github.token $(cat ~/.github_token)
 	
@@ -552,7 +552,7 @@ Copy your token from the token field & paste your token into ~/.github_token (`e
 	mkdir key_backup
 	cp id_rsa* key_backup
 	rm id_rsa*
-	ssh-keygen -t rsa -C "m@moox.fr"
+	ssh-keygen -t rsa -C "m@moox.io"
 	pbcopy < ~/.ssh/id_rsa.pub
 
 [Paste clipboard content as a new key on your Github account settings](https://github.com/settings/ssh)

@@ -1,44 +1,17 @@
-/* the humans responsible & colophon */
-/* humanstxt.org */
+# humanstxt.org/
+# The humans responsible & technology colophon
 
+# TEAM
 
-/* TEAM */
-  Developer: Maxime Thirouin
-  Site: http://moox.fr/
-  Twitter: https://twitter.com/MoOx 
-  Github: https://github.com/MoOx 
-  Location: Toulouse, France
+    Maxime Thirouin (MoOx) -- Developer -- http://moox.io/ - https://twitter.com/MoOx - https://github.com/MoOx
 
-/* THANKS */
-  Names (& URL): kud (kud.fr) for the Happy Plan
+# THANKS
 
-/* SITE */
-  Standards: HTML5, CSS3
-  Components: Happy Plan (Jekyll, Grunt, Compass, Bower)
-  Software: SublimeText 2
+    kud (kud.io) for HappyPlan
 
+# TECHNOLOGY COLOPHON
 
-
-                               -o/-
-                               +oo//-
-                              :ooo+//:
-                             -ooooo///-
-                             /oooooo//:
-                            :ooooooo+//-
-                           -+oooooooo///-
-           -://////////////+oooooooooo++////////////::
-            :+ooooooooooooooooooooooooooooooooooooo+:::-
-              -/+ooooooooooooooooooooooooooooooo+/::////:-
-                -:+oooooooooooooooooooooooooooo/::///////:-
-                  --/+ooooooooooooooooooooo+::://////:-
-                     -:+ooooooooooooooooo+:://////:--
-                       /ooooooooooooooooo+//////:-
-                      -ooooooooooooooooooo////-
-                      /ooooooooo+oooooooooo//:
-                     :ooooooo+/::/+oooooooo+//-
-                    -oooooo/::///////+oooooo///-
-                    /ooo+::://////:---:/+oooo//:
-                   -o+/::///////:-      -:/+o+//-
-                   :-:///////:-            -:/://
-                     -////:-                 --//:
-                       --                       -:
+    SublimeText 3
+    HTML5, CSS3
+    HappyPlan (Jekyll, Grunt, Bower, Sass)
+    Normalize.css

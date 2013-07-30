@@ -173,4 +173,4 @@ Et maintenant, [je vous explique comment se passer des quelques lignes de comman
  [15]: http://compass-style.org/reference/compass/utilities/sprites/
  [16]: http://compass-style.org/help/
  [17]: https://github.com/MoOx/Compass-Recipes
- [18]: http://moox.fr/blog/compass-app-application-pour-compiler-css-sass-compass/
+ [18]: /blog/compass-app-application-pour-compiler-css-sass-compass/

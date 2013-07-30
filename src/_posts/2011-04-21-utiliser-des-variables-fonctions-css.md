@@ -158,5 +158,5 @@ Edit: Depuis j’ai publié d’autres articles relatifs, un plus détaillé sur
  [15]: https://github.com/hlb/SassSalon
  [16]: http://compass.handlino.com/
  [17]: http://beta.compass-style.org/
- [18]: http://moox.fr/blog/fonctions-variables-css-generer-ses-css-avec-sass-compass/
- [19]: http://moox.fr/blog/compass-app-application-pour-compiler-css-sass-compass/
+ [18]: /blog/fonctions-variables-css-generer-ses-css-avec-sass-compass/
+ [19]: /blog/compass-app-application-pour-compiler-css-sass-compass/

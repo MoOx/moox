@@ -76,8 +76,8 @@ Certains risques de se demander pourquoi je n’ai pas ajouté jruby à mon PATH
 
 Bonne utilisation de Compass ;)
 
- [1]: http://moox.fr/blog/utiliser-des-variables-fonctions-css
- [2]: http://moox.fr/blog/fonctions-variables-css-generer-ses-css-avec-sass-compass/
+ [1]: /blog/utiliser-des-variables-fonctions-css
+ [2]: /blog/fonctions-variables-css-generer-ses-css-avec-sass-compass/
  [3]: http://compass.handlino.com/
  [4]: https://github.com/handlino/CompassApp
  [5]: http://jruby.org/download
