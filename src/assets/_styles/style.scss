@@ -1,0 +1,236 @@
+@import "bower_components/dimension.css";
+//@import "bower_components";
+
+//$screen-debug: true;
+$use-simple-sprite-map: false;
+$use-icon-font: true;
+
+$unit: 1em; // used for grid/font ratio maths with em
+
+$base-font-size: 14px;
+$base-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+$text-color: #222;
+$highlight-color: #5da423;
+$dark-color: #111;
+
+@import "compass/typography/links/link-colors";
+a {
+	$link-color: darken($highlight-color, 5%);
+	text-decoration: none;
+	@include link-colors(
+		$link-color,
+		$hover: darken($link-color, 4%),
+		$focus: darken($link-color, 10%),
+		$active: lighten($link-color, 5%)//,
+		//$visited: lighten($highlight-color, 2%)
+	);
+}
+
+@import "base";
+
+@mixin accessibleHover {
+	&:hover,
+	&:focus,
+	.touch & {
+		@content;
+	}
+}
+
+html {
+	background: image-url('perfection-cold-blur-small.jpg') no-repeat center fixed;
+	background-size: cover;
+
+	@media (min-width: 50em) {
+		background-image: image-url('perfection-cold-blur.jpg');
+	}
+
+	text-shadow: 0 1px 0 rgba(#fff, .8);
+}
+
+body {
+	font-size: 90%;
+	@include media-m { font-size: 100%; }
+	//@include media-l { font-size: 110%; }
+	-webkit-font-smoothing: antialiased;
+}
+
+.body-wrapper {
+	// hide grid negative padding on xs screen
+	padding: 0 0.5 * $grid-gutter;
+
+	// add a tiny grid padding
+	@include media-s { padding: 0 $grid-gutter; }
+
+	// add max-width for center layout
+	@include media-m {
+		margin: auto;
+		max-width: 1024px;
+	}
+
+	// remove padding previously set on large screen (useless)
+	@include media-l { padding: 0; }
+}
+
+h1,
+h2,
+h3,
+h4,
+.annonce-box,
+.navbar { -webkit-font-smoothing: antialiased; }
+
+// h1,
+// h2,
+// h3 { @include text-gradient($secondaryColor, matte); }
+
+.body-box {
+	background: rgba(#fff, .3);
+	border-radius: 6px;
+	padding: $grid-gutter/2;
+}
+
+@import "recipes/utilities/clearfix";
+
+.module {
+	@extend %clearfix-hack;
+	padding: $grid-gutter/2;
+	margin: $grid-gutter/2 0;
+	background-color: #f9f9f9;
+	background-color: rgba(#fff, .9);
+	box-shadow: 0 0 1px 1px rgba(#000, .1); //, 0 0 1em .4em rgba(#000, .3)
+	text-shadow: 0 1px 0 #fff;
+	border-radius: 6px;
+	text-align: justify;
+}
+
+.body-box,
+.module {
+	& :first-child { margin-top: 0; }
+	& :last-child { margin-bottom: 0; }
+}
+
+$annonceBoxHeight: 2em;
+.annonce-box {
+	color: #fff;
+	background: $highlight-color;
+	border: 1px solid rgba(#000, .1);
+	text-shadow: 0 -1px rgba(#000, .3);
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+	line-height: $annonceBoxHeight;
+}
+
+@import "recipes/effect/ribbon";
+@mixin ribbon-corner-classic(
+	$color: #fff,
+	$background-color: #c73b3c,
+	$background-color-alt: #b8201f,
+	$border-color: #631a15,
+	$border-dot-subcolor: #da5050,
+	$border-width: 1px,
+	$border-dot-offset: 3px
+) {
+
+	color: $color !important;
+	text-shadow: 0 1px 0 rgba(#000, .8);
+
+	border: $border-width solid $border-color;
+
+	background: $background-color; //fallback
+	@include background(linear-gradient($background-color,$background-color-alt));
+	box-shadow: 0 .2em .6em rgba(#000, .6);
+
+	// todo replace this use of pseudo elements by appropriate backgrounds properties (tricky gradients)
+	&:before,
+	&:after {
+		@include pseudo-element(100%, 0);
+		border: $border-width dashed;
+		border-left: 0;
+		border-right: 0;
+		border-top-color: $border-color;
+		border-bottom-color: $border-dot-subcolor;
+	}
+
+	&:before { top: $border-dot-offset; }
+	&:after { bottom: $border-dot-offset - $border-width *2; }
+}
+
+.source-code {
+	display: none;
+
+	@include media-m {
+		display: block;
+		@include effect-ribbon-corner($position: 'bottom right', $width: 10em, $skin: null);
+		padding: 0 2em;
+		position: fixed;
+		z-index: 1;
+		@include transition(all .2s);
+		opacity: .2;
+		@include accessibleHover { opacity: 1; }
+		white-space: nowrap;
+		@include ribbon-corner-classic();
+	}
+}
+
+@import "layout/nav";
+
+$title--site--font-size: 1.4em;
+.title--site {
+	color: #fff;
+	font-size: $title--site--font-size;
+	padding: 0 .5*$grid-gutter*$unit/$title--site--font-size;
+	@include media-gap ($screen-s, $screen-m) { padding: 0 $grid-gutter*$unit/$title--site--font-size; }
+	text-decoration: none;
+	font-weight: bold;
+	&:hover { color: #fff; }
+}
+
+.title--light {
+	color: #fff;
+	text-shadow: 0 1px 0 #000;
+}
+
+.text-less-visible {
+	font-size: .8em;
+	opacity: .6;
+}
+
+@import "layout/big-content";
+
+blockquote {
+	margin: 2em 2em;
+	padding: 1em 2em;
+	font-style: italic;
+	opacity: .7;
+	position: relative;
+
+	&:before,
+	&:after {
+		z-index: 2;
+		position: relative;
+	}
+	$quotes-font-size: 6em;
+	&:before,
+	&:after {
+		position: absolute;
+		font-size: $quotes-font-size;
+		opacity: .3;
+	}
+
+	&:before {
+		content: '\201C';
+		left: -1em/$quotes-font-size*1em;
+	}
+	&:after {
+		content: '\201D';
+		right: -1em/$quotes-font-size*1em;
+	}
+}
+
+@import "pygments-theme-freshcut";
+@import "components/flex-media";
+$flex-media-ratios: "3-1" 3, "16-9" 16/9, "4-3" 4/3, "1-1" 1;
+@include flex-medias();
+
+@import "components/tooltip";

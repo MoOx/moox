@@ -1,4 +1,5 @@
 # cache
+.DS_Store
 .sass-cache
 
 # packages
@@ -7,15 +8,7 @@ bower_components
 
 # build
 dist
-_tmp
+build
 
-# generated config
-.bowerrc
-config.rb
-jekyll/_config.yml
-
-# temp ignored folder
-jekyll/_unused
-
-# compass css to scss trick
-styles/_bower_components.scss
+# gh-page
+.grunt

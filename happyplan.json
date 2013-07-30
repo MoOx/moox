@@ -1,0 +1,44 @@
+{
+	"name": "MoOx.fr",
+	"url": "http://moox.fr/",
+	"description": "Web Developer Front-End",
+	"assets": {
+		"main": {
+			"style": "style.css",
+			"script": "vanilla.js"
+		},
+		"scripts": {
+			"<%= happyplan.dist.assets.scripts %>/ieshim.js": [
+				"<%= happyplan.bower_components %>/aight/aight.js"
+			],
+			"<%= happyplan.dist.assets.scripts %>/<%= happyplan.assets.main.script %>": [
+				"<%= happyplan.bower_components %>/picturefill/external/matchmedia.js",
+				"<%= happyplan.bower_components %>/picturefill/picturefill.js",
+				"<%= happyplan.theme.local.assets.scripts %>/<%= happyplan.assets.main.script %>"
+			]
+		}
+	},
+	"jekyll": {
+		"include": [".htaccess"],
+
+		"markdown": "redcarpet",
+
+		"disqus_short_name": "moox",
+		"disqus_developer": false,
+
+		"google_analytics_tracking_id": "UA-1716762-6"
+	},
+	"compass": {
+		"require": [
+			"modular-scale",
+			"ceaser-easing",
+			"compass-recipes"
+		],
+		"additional_import_paths": [
+			"<%= happyplan.bower_components %>/",
+			"<%= happyplan.bower_components %>/griddle/",
+			"<%= happyplan.bower_components %>/hint.css/src",
+			"<%= happyplan.bower_components %>/sass-pygments-theme-base"
+		]
+	}
+}

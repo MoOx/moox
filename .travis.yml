@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "0.8"
+  - "0.10"
 before_install:
   - gem --version
   - gem update --system
@@ -15,7 +15,6 @@ before_install:
 # grunt
   - npm install -g grunt-cli
   - npm install
-  - grunt init
 # bower
   - export PATH=$PATH:`npm bin` # add local bower
   - bower --version

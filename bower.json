@@ -5,7 +5,7 @@
     "griddle": "git://github.com/necolas/griddle.git",
     "suit-utils": "latest",
     "hint.css": "git://github.com/chinchang/hint.css.git",
-    "pygments-sass-base-theme": "git://github.com/MoOx/pygments-sass-base-theme.git",
+    "sass-pygments-theme-base": "git://github.com/MoOx/sass-pygments-theme-base.git",
     "aight": "git://github.com/shawnbot/aight.git#~1.0.3",
     "picturefill": "git://github.com/scottjehl/picturefill.git"
   }

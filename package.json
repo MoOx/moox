@@ -1,35 +1,17 @@
 {
-	"name": "MoOx.fr",
-	"version": "7.0.3",
-	"author": "Maxime Thirouin",
-	"description": "MoOx personal website",
-	"license": "MIT",
-	"engines": {
-		"node": ">=0.8"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"bower": "0.8",
-		"grunt": "~0.4",
-		"grunt-contrib-jshint": "~0.1.1",
-		"grunt-replace": "git://github.com/outaTiME/grunt-replace.git",
-		"grunt-contrib-clean": "~0.4.0",
-		"grunt-jekyll": "~0.2.2",
-		"grunt-contrib-copy": "0.4.0",
-		"grunt-contrib-concat": "~0.1.2",
-		"grunt-webfont": "0.1.0",
-		"grunt-contrib-compass": "0.1.2",
-		"grunt-contrib-uglify": "~0.1.1",
-		"grunt-contrib-imagemin": "~0.1.1",
-		"grunt-regarde": "0.1.1",
-		"grunt-contrib-livereload": "0.1.1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/MoOx/moox.fr.git"
-	},
-	"main": "Gruntfile.js",
-	"scripts": {
-		"test": "grunt test"
-	}
+  "name": "MoOx.fr",
+  "version": "7.2.0",
+  "description": "MoOx personal website",
+  "author": "Maxime Thirouin",
+  "license": "MIT",
+  "dependencies": {
+    "happyplan": "git://github.com/happyplan/happyplan.git"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MoOx/moox.fr.git"
+  },
+  "scripts": {
+    "test": "happyplan dist"
+  }
 }

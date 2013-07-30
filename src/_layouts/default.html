@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--
+	HEY YOU, STOP LOOKING AT MY SOURCE CODE
+	Just check it out directly on Github :
+	https://github.com/MoOx/moox.fr
+-->
+<html lang="en" class="no-js no-touch {{ page.class }}">
+<meta charset="utf-8">
+<title>{{ page.title }}</title>
+{% include scripts-first.html %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<base href="{{ site.baseurl }}" />
+<link rel="stylesheet" type="text/css" href="{{ site.base_urls.styles }}/style.css?{{ 'now' | date: "%Y%m%d%H%M%S" }}" />
+<link href="feed.xml" rel="alternate" type="application/rss+xml" />
+<body>
+<div class="annonce-box">
+	<small>My website is currently under heavy development. So, it's kinda like an unfinished fresh paint for now :)</small>
+</div>
+<a class="source-code" href="https://github.com/MoOx/moox.fr">source code</a>
+{% include nav.html %}
+<div class="body-wrapper">
+{{ content }}
+</div>
+{% include scripts-last.html %}
+</body>
+</html>
