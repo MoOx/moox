@@ -186,7 +186,7 @@ $title--site--font-size: 1.4em;
 .title--site {
 	color: #fff;
 	font-size: $title--site--font-size;
-	padding: 0 .5*$grid-gutter*$unit/$title--site--font-size;
+	padding: 0 .5*$grid-gutter*$unit/$title--site--font-size 0 0;
 	@include media-gap ($screen-s, $screen-m) { padding: 0 $grid-gutter*$unit/$title--site--font-size; }
 	text-decoration: none;
 	font-weight: bold;

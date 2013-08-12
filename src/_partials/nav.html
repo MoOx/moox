@@ -1,18 +1,20 @@
-<nav class="navbar navbar--top js-togglable">
-	<a class="navbar__section navbar__section--left title title--site hint hint--bottom" href="{{ site.baseurl }}" data-hint="Home">{{ site.name }}</a>
-	<button class="navbar__toggler js-togglable__toggler">☰</button>
-	<ul class="navbar__section navbar__section--left js-togglable__item js-togglable__item--hide">
-			<li class="sep-before sep-after"><a class="{% if page.nav == 'profile' %}active{% endif %}"  href="profile/"><i class="icon icon_user"></i> Profile</a>
-		</li><li class="sep-after"><a class="{% if page.nav == 'portfolio' %}active{% endif %}"  href="#not-ready"><i class="icon icon_gears"></i> Portfolio</a>
-		</li><li class="sep-after"><a class="{% if page.nav == 'code' %}active{% endif %}"  href="#not-ready"><i class="icon icon_gears"></i> Code</a>
-		</li><li class="sep-after"><a class="{% if page.nav == 'blog' %}active{% endif %}"  href="blog/"><i class="icon icon_pencil"></i> Blog</a>
-		</li><li class="sep-after"><a class="{% if page.nav == 'about' %}active{% endif %}"  href="about/"><i class="icon icon_help"></i> About</a>
-		</li><li class="sep-after"><a class="{% if page.nav == 'contact' %}active{% endif %}"  href="contact/"><i class="icon icon_speech-bubble"></i> Contact</a></li>
-	</ul>
+<nav class="navbar navbar--top js-togglable ">
+	<div class="body-wrapper">
+		<a class="navbar__section navbar__section--left title title--site hint hint--bottom" href="{{ site.baseurl }}" data-hint="Home">{{ site.happyplan.name }}</a>
+		<button class="navbar__toggler js-togglable__toggler">☰</button>
+		<ul class="navbar__section navbar__section--left js-togglable__item js-togglable__item--hide">
+				<li class="sep-before sep-after"><a class="{% if page.nav == 'profile' %}active{% endif %}"  href="profile/"><i class="icon icon_user"></i> Profile</a>
+			</li><li class="sep-after"><a class="{% if page.nav == 'portfolio' %}active{% endif %}"  href="#not-ready"><i class="icon icon_gears"></i> Portfolio</a>
+			</li><li class="sep-after"><a class="{% if page.nav == 'code' %}active{% endif %}"  href="#not-ready"><i class="icon icon_gears"></i> Code</a>
+			</li><li class="sep-after"><a class="{% if page.nav == 'blog' %}active{% endif %}"  href="blog/"><i class="icon icon_pencil"></i> Blog</a>
+			</li><li class="sep-after"><a class="{% if page.nav == 'about' %}active{% endif %}"  href="about/"><i class="icon icon_help"></i> About</a>
+			</li><li class="sep-after"><a class="{% if page.nav == 'contact' %}active{% endif %}"  href="contact/"><i class="icon icon_speech-bubble"></i> Contact</a></li>
+		</ul>
 
-	<ul class="navbar__section navbar__section--right js-togglable__item js-togglable__item--hide">
-			<li class="sep-before sep-after"><a href="https://twitter.com/MoOx"><i class="icon icon_twitter"></i> Twitter</a>
-		</li><li class="sep-after"><a href="https://github.com/MoOx"><i class="icon icon_github"></i> Github</a>
-		</li><li class="sep-after"><a href="http://www.linkedin.com/in/maxthirouin">Linked <i class="icon icon_linkedin"></i></a></li>
-	</ul>
+		<ul class="navbar__section navbar__section--right js-togglable__item js-togglable__item--hide">
+				<li class="sep-before sep-after"><a href="https://twitter.com/MoOx"><i class="icon icon_twitter"></i> Twitter</a>
+			</li><li class="sep-after"><a href="https://github.com/MoOx"><i class="icon icon_github"></i> Github</a>
+			</li><li class="sep-after"><a href="http://www.linkedin.com/in/maxthirouin">Linked <i class="icon icon_linkedin"></i></a></li>
+		</ul>
+	</div>
 </nav>
