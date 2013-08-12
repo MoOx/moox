@@ -183,7 +183,7 @@ Run apps you want to open during startup & activate that option in _Preferences_
 	open /Applications/Shortcat.app
 	open /Applications/Tunnelblick.app
 	open /Applications/XtraFinder.app
-	open /Users/${USER}/Dropbox/Applications/Utilities/Day-O.app
+	open /Users/${USER}/BTSync/Applications/Utilities/Day-O.app
 
 ## Setup Internet Accounts
 
@@ -301,119 +301,25 @@ You "just need" to create a bootable Windows UEFI device. [Read more about MBR, 
     - check your computer
 - Remove icons you don't want into menu bar by command+click on them and move away
 
-### OS X File explorer specific app
+## Development
 
-Install [XtraFinder](http://www.trankynam.com/xtrafinder/)
+### Compass
 
-### Web browsing 
+	# for Compass.app
+	#sudo gem install tilt erb haml active_support
 
-- Open defautl browser
-  - Install [Google Chrome](https://www.google.com/intl/en/chrome/browser/) or your favorite browser & synchronize it
+	# Compass development (install development dependencies)
+	sudo gem install bundler
+	cd $DIR_DEV/compass
+	bundle install --binstubs devbin
+	# Running core library and stylesheet tests
+	#bundle exec rake test features
+	# Running behavior tests
+	#./devbin/cucumber
 
-### Setup cloud sync service
-
-- Download [Dropbox](https://www.dropbox.com/downloading?src=index) or similar & login to sync.
-
-### Better screen lighting
-
-Download & install [F.lux](http://stereopsis.com/flux/) app
-
-### Add your custom .bashprofile or .bashrc
-
-	# Delete .bashprofile
-	@todo
-	# Link bashprofile from your Cloud drive
-	@todo
-
-### Download a screenshot sharing service…
-
-- …Like [CloudApp](http://getcloudapp.com)
-  
-### App Store or similar
-
-- Open it & retrieve all your purchased app
-
-### Install a decent Dev environnement
-
-
-- Xcode (from App Store)
-- Install [iTerm2](http://www.iterm2.com) ([download list](http://code.google.com/p/iterm2/downloads/list))
-
-- Install [Oh My Zsh]
-		
-		wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-		chsh -s /bin/zsh
-
-- Install a package manager is there is not (ex: for OS X [Homebrew](https://github.com/mxcl/homebrew/wiki/installation))
-
-		/usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
-		# install some packages you use
-		brew install wget unrar
-		
-		# Nginx
-		brew install nginx
-		
-		# PHP with Unicode, FPM, MySQL & PostreSQL
-		brew tap homebrew/dupes
-		brew tap josegonzalez/homebrew-php
-		brew install php54 --with-intl --with-mysql --with-pgsql
-		cp /usr/local/opt/php54/homebrew-php.josegonzalez.php54.plist ~/Library/LaunchAgents/
-		launchctl load -w ~/Library/LaunchAgents/homebrew-php.josegonzalez.php54.plist
-		
-		# For PostgreSQL, [if you have an issue about shared memory](http://stackoverflow.com/questions/10300750/postgresql-server-does-not-start)
-		subl /etc/sysctl.conf
-		
-		# add
-		kern.sysv.shmmax=16777216
-		kern.sysv.shmall=65536
-		
-		# PEAR & PHPUNIT
-		# if not already done, add php bin commands to your PATH in your .bash*
-		#PATH="$(brew --prefix josegonzalez/php/php54)/bin:$PATH"
-		sudo pear channel-discover pear.phpunit.de
-		sudo pear channel-discover pear.symfony.com # for deps
-		sudo pear install --alldeps phpunit/PHPUnit
-		# If this is not working, check that the /usr/local/opt/php54/lib/php is in your include_path in the php.ini
-		
-		# Git-Flow
-		brew install git-flow
-		
-		# Git-FTP deploy
-		brew install git-ftp
-		# config personal ftp
-		git config --global git-ftp.url YOUR_VPS_SERVER
-		git config --global git-ftp.user YOUR_VPS_FTP_USER
-		git config --global git-ftp.password YOUR_VPS_FTP_PWD
-		
-		# For OS X, Rsync 3 if not present (to support hfs+)
-		rsync --version
-		brew install https://raw.github.com/adamv/homebrew-alt/master/duplicates/rsync.rb
-
-- Install Ruby gems if not already present on your OS
-		
-	- Sass/Compass + Livreload
-			sudo gem install sass compass compass-recipes guard-livereload
-
-			# for Compass.app
-			#sudo gem install tilt erb haml active_support
-
-			# Compass development (install development dependencies)
-			sudo gem install bundler
-			cd $DIR_DEV/compass
-			bundle install --binstubs devbin
-			# Running core library and stylesheet tests
-			#bundle exec rake test features
-			# Running behavior tests
-			#./devbin/cucumber
-
-- Install some others dev tools
-
-		# Yeoman
-		curl -L get.yeoman.io | bash
-
-- IE VMs
+### IE VMs
 	
-		curl -s https://raw.github.com/xdissent/ievms/master/ievms.sh | INSTALL_PATH="$HD/Users/MoOx/VMs/ievms" IEVMS_VERSIONS="6 9" bash
+	curl -s https://raw.github.com/xdissent/ievms/master/ievms.sh | INSTALL_PATH="$HD/Users/MoOx/VMs/ievms" IEVMS_VERSIONS="6 9" bash
 
 ### Activate remote login (for personal use or emergency like thief)
 
@@ -439,9 +345,6 @@ Edit
 
 ### Install some classic apps if not already present or from an App Store
 
-- You watch Movies ? Install [VLC](http://www.videolan.org/vlc/index.html) or MPlayer (available on the App Store)
-- Install [LibreOffice](http://www.libreoffice.org/download/) (+ MS Office ?)
-- Install your favorites programs for fun/work like [Steam](http://store.steampowered.com/about/)
 - For OS X, install [AppCleaner](http://www.freemacsoft.net/appcleaner/) (or TrashMe) to be able to really "uninstall" (I mean, delete prefs & similar stuffs)
 
 ### Link some files from your Sync Cloud service into
@@ -455,6 +358,10 @@ Edit
 	ln -s $DIR_DOTFILES/.gitconfig ~/
 	ln -s $DIR_DOTFILES/.slate.js ~/
 	ln -s $DIR_DOTFILES/.zshrc ~/
+	
+
+	mkdir ~/Library/Application\ Support/Steam
+	ln -s $DIR_SYNC_BT/SteamApps ~/Library/Application\ Support/Steam/
 
 	# Hide some files & folders on OS X
 	chflags hidden $DIR_DOT_FILES
