@@ -109,7 +109,7 @@ $icons--big-size: 4em;
 			position: absolute;
 		}
 
-		.navbar--top {
+		&.annonce .navbar--top {
 			top: $annonceBoxHeight;
 		}
 
