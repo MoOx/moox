@@ -37,16 +37,23 @@ a {
 	}
 }
 
-html {
-	background: image-url('perfection-cold-blur-small.jpg') no-repeat center fixed;
+@mixin html-background($background-image--small, $background-image--large) {
+	background: image-url($background-image--small) no-repeat center fixed;
 	background-size: cover;
 
 	@media (min-width: 50em) {
-		background-image: image-url('perfection-cold-blur.jpg');
+		background-image: image-url($background-image--large);
 	}
+}
+
+html {
+	@include html-background('perfection-cold-blur--small.jpg', 'perfection-cold-blur--large.jpg');
 
 	text-shadow: 0 1px 0 rgba(#fff, .8);
 }
+
+.error-404 { @include html-background('lost-woods--small.jpg', 'lost-woods--large.jpg'); }
+
 
 body {
 	font-size: 90%;
