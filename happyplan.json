@@ -1,26 +1,21 @@
 {
-	"name": "MoOx.io",
-	"url": "http://moox.io/",
-	"description": "Web Developer Front-End",
 	"assets": {
-		"main": {
-			"style": "style.css",
-			"script": "vanilla.js"
-		},
-		"scripts": {
-			"<%= happyplan.dist.assets.scripts %>/ieshim.js": [
+		"scripts": [{
+			"src": [
 				"<%= happyplan.bower_components %>/aight/aight.js"
 			],
-			"<%= happyplan.dist.assets.scripts %>/<%= happyplan.assets.main.script %>": [
+			"dest": "<%= happyplan.dist.assets.scripts %>/ieshim.js"
+		},
+		{
+			"src": [
 				"<%= happyplan.bower_components %>/picturefill/external/matchmedia.js",
 				"<%= happyplan.bower_components %>/picturefill/picturefill.js",
-				"<%= happyplan.theme.local.assets.scripts %>/<%= happyplan.assets.main.script %>"
-			]
-		}
+				"<%= happyplan.theme.local.assets.scripts %>/vanilla.js"
+			],
+			"dest": "<%= happyplan.dist.assets.scripts %>/vanilla.js"
+		}]
 	},
 	"jekyll": {
-		"include": [".htaccess"],
-
 		"markdown": "redcarpet",
 
 		"disqus_short_name": "moox",

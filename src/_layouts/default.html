@@ -5,14 +5,14 @@
 	https://github.com/MoOx/moox.io
 -->
 <html lang="en" class="no-js no-touch {{ page.class }}">
-<meta charset="utf-8">
-<title>{{ page.title }}</title>
-{% include scripts-first.html %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<base href="{{ site.baseurl }}" />
-<link rel="stylesheet" type="text/css" href="{{ site.base_urls.styles }}/style.css?{{ 'now' | date: "%Y%m%d%H%M%S" }}" />
-<link href="feed.xml" rel="alternate" type="application/rss+xml" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<script>(function(docEl) {
+	docEl.className = docEl.className.replace(/\bno-js\b/, 'js');
+	if ('ontouchstart' in docEl) { docEl.className = docEl.className.replace(/\bno-touch\b/, 'touch'); }
+})(document.documentElement);</script>
+{% include head.html %}
 <body>
+{{ site.happyplan.html.hooks.body_open }}
 <div class="annonce-box">
 	<small>My website is currently under heavy development. So, it's kinda like an unfinished fresh paint for now :)</small>
 </div>
@@ -21,6 +21,8 @@
 <div class="body-wrapper">
 {{ content }}
 </div>
-{% include scripts-last.html %}
+{{ site.happyplan.html.hooks.body_close }}
+{% include scripts/google-analytics.html %}
+{% include scripts/disqus.html %}
 </body>
 </html>
