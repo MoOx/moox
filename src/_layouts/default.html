@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<!--
+{% if site.happyplan.repository.url %}<!--
 	HEY YOU, STOP LOOKING AT MY SOURCE CODE
 	Just check it out directly on Github :
-	https://github.com/MoOx/moox.io
--->
+	
+	{{ site.happyplan.repository.url }}
+-->{% endif %}
 <html lang="en" class="no-js no-touch {{ page.class }}">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <script>(function(docEl) {
@@ -18,7 +19,9 @@
 	<small></small>
 </div>
 {% endcomment %}
-<a class="source-code" href="https://github.com/MoOx/moox.io">source code</a>
+{% if site.happyplan.repository.url %}
+<a class="source-code" href="{{ site.happyplan.repository.url }}">source code</a>
+{% endif %}
 {% include nav.html %}
 <div class="body-wrapper">
 {{ content }}
