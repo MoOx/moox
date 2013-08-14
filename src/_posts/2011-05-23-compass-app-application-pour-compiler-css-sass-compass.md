@@ -17,7 +17,7 @@ tags:
   - sass
 ---
 
-<figure class="flex-media--3-1"><a href="http://compass-style.org/"><img class="flex-media__item" src="{{ site.happyplan.baseUrls.medias }}/2011/05/compass.app_.jpg" alt="compass app" /></a></figure>
+<figure class="flex-media--3-1"><a href="http://compass-style.org/"><img class="flex-media__item" src="{{ site.happyplan.baseUrls.media }}/2011/05/compass.app_.jpg" alt="compass app" /></a></figure>
 
 Suite à mes précédents articles sur [les pré-processeurs CSS qui permettent d’utiliser des variables et fonctions][1], et [un petit tutoriel sur l’installation et utilisation du combo Sass/Compass][2], voici la présentation d’un petite application, qui permet de s’affranchir des toujours utiliser des lignes de commandes pour lancer Compass.  
 

@@ -28,14 +28,14 @@ Du coup, nativement sur mon Mac OS, je n’ai besoin que d’un simple **serveur
 Maintenant que *OS X Lion* vient de sortir, les versions des logiciels qu’ils embarquent sont assez récente. **Apache 2** est juste à activer dans les préférences du système dans la partie qui concerne le *Partage* (*Sharing* si votre OS est en anglais)
 
 <figure class="flex-media--unknown">
-    <a href="{{ site.happyplan.baseUrls.medias }}/2011/07/OS-X-Lion-System-Preferences-Sharing.png">
-        <img src="{{ site.happyplan.baseUrls.medias }}/2011/07/OS-X-Lion-System-Preferences-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing" class="flex-media__item" />
+    <a href="{{ site.happyplan.baseUrls.media }}/2011/07/OS-X-Lion-System-Preferences-Sharing.png">
+        <img src="{{ site.happyplan.baseUrls.media }}/2011/07/OS-X-Lion-System-Preferences-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing" class="flex-media__item" />
     </a>
 </figure>
 
 <figure class="flex-media--unknown">
-    <a href="{{ site.happyplan.baseUrls.medias }}/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png"></a>
-        <img src="{{ site.happyplan.baseUrls.medias }}/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing--Web-Sharing" class="flex-media__item" />
+    <a href="{{ site.happyplan.baseUrls.media }}/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png"></a>
+        <img src="{{ site.happyplan.baseUrls.media }}/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing--Web-Sharing" class="flex-media__item" />
     </a>
 </figure>
 

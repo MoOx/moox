@@ -27,7 +27,7 @@ Or open this file manually.
 
 You should have « Property List Editor » app to do this.
 
-<figure class="flex-media--unknown"><a href="{{ site.happyplan.baseUrls.medias }}/2011/06/Remove-deleted-folder-osx-finder-sidebar.png"><img class="flex-media__item" title="Remove-deleted-folder-osx-finder-sidebar" src="{{ site.happyplan.baseUrls.medias }}/2011/06/Remove-deleted-folder-osx-finder-sidebar.png" alt="" /></a></figure>
+<figure class="flex-media--unknown"><a href="{{ site.happyplan.baseUrls.media }}/2011/06/Remove-deleted-folder-osx-finder-sidebar.png"><img class="flex-media__item" title="Remove-deleted-folder-osx-finder-sidebar" src="{{ site.happyplan.baseUrls.media }}/2011/06/Remove-deleted-folder-osx-finder-sidebar.png" alt="" /></a></figure>
 
 Open each entries to find what you want under Root » useritems » CustomListItems. Try to open each item and check the name of the folder. When you found the correct entry, delete the « Item x » and save the file.
 
@@ -39,6 +39,6 @@ killall Finder
 
 Or just make option+click on Finder’s icon in your dock, then Relaunch.
 
-<figure class="flex-media--unknown"><a href="{{ site.happyplan.baseUrls.medias }}/2011/06/relaunch-finder.png"><img class="flex-media__item" title="relaunch-finder" src="{{ site.happyplan.baseUrls.medias }}/2011/06/relaunch-finder.png" alt="" /></a></figure>
+<figure class="flex-media--unknown"><a href="{{ site.happyplan.baseUrls.media }}/2011/06/relaunch-finder.png"><img class="flex-media__item" title="relaunch-finder" src="{{ site.happyplan.baseUrls.media }}/2011/06/relaunch-finder.png" alt="" /></a></figure>
 
 It’s that simple :)
