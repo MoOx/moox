@@ -1,8 +1,8 @@
 {
   "name": "MoOx",
   "description": "Front-end web developer",
-  "url": "http://moox.io/",
-  "version": "8.0.0",
+  "url": "http://moox.io",
+  "version": "8.0.1",
   "author": "Maxime Thirouin",
   "license": "MIT",
   "dependencies": {

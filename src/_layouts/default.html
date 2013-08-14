@@ -6,12 +6,14 @@
 	{{ site.happyplan.repository.url }}
 -->{% endif %}
 <html lang="en" class="no-js no-touch {{ page.class }}">
+<head>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <script>(function(docEl) {
 	docEl.className = docEl.className.replace(/\bno-js\b/, 'js');
 	if ('ontouchstart' in docEl) { docEl.className = docEl.className.replace(/\bno-touch\b/, 'touch'); }
 })(document.documentElement);</script>
 {% include head.html %}
+</head>
 <body>
 {{ site.happyplan.html.hooks.body_open }}
 {% comment %}
