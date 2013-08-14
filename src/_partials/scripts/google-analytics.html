@@ -1,5 +1,10 @@
 {% if site.google_analytics_tracking_id %}
-<script>var _gaq=[['_setAccount','{{ site.google_analytics_tracking_id }}'],['_trackPageview']];
-{% assign script_async_src = "('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js'" %}
-{% include scripts/_script-async.js %}</script>
+<script>
+	(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+	function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+	e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+	e.src='//www.google-analytics.com/analytics.js';
+	r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+	ga('create','{{ site.google_analytics_tracking_id }}');ga('send','pageview');
+</script>
 {% endif %}
