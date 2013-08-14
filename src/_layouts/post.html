@@ -11,8 +11,8 @@ nav: blog
 </div>
 
 <div class="grid grid--blabla">
-	<div class="grid__cell body-box">
-		<article class="module" lang="{{ page.lang }}">
+	<div class="grid__cell Box">
+		<article class="Box-module" lang="{{ page.lang }}">
 			<header>
 				<h1><span class="text-less-visible">[{{ page.lang }}]</span> {{ page.title }}</h1>
 				<time class="text-less-visible" pubdate datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%b %d %Y" }}</time>
@@ -47,14 +47,14 @@ nav: blog
 		{% endif %}
 		
 		{% if site.disqus_short_name and page.comments == true %}
-		<section class="module">
+		<section class="Box-module">
 			<h1>Comments</h1>
 			<div id="disqus_thread" aria-live="polite">
 				<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 			</div>
 		</section>
 		{% endif %}
-		<footer class="module">
+		<footer class="Box-module">
 			<h3>This is a temporary footer</h3>
 			<div class="icons--big">
 				<a href="https://twitter.com/MoOx"><i class="icon icon_twitter"></i><span class="text">Twitter</span></a>

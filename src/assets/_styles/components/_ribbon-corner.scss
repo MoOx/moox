@@ -1,0 +1,34 @@
+@import "recipes/effect/ribbon";
+@mixin ribbon-corner-classic(
+	$color: #fff,
+	$background-color: #c73b3c,
+	$background-color-alt: #b8201f,
+	$border-color: #631a15,
+	$border-dot-subcolor: #da5050,
+	$border-width: 1px,
+	$border-dot-offset: 3px
+) {
+
+	color: $color !important;
+	text-shadow: 0 1px 0 rgba(#000, .8);
+
+	border: $border-width solid $border-color;
+
+	background: $background-color; //fallback
+	@include background(linear-gradient($background-color,$background-color-alt));
+	box-shadow: 0 .2em .6em rgba(#000, .6);
+
+	// todo replace this use of pseudo elements by appropriate backgrounds properties (tricky gradients)
+	&:before,
+	&:after {
+		@include pseudo-element(100%, 0);
+		border: $border-width dashed;
+		border-left: 0;
+		border-right: 0;
+		border-top-color: $border-color;
+		border-bottom-color: $border-dot-subcolor;
+	}
+
+	&:before { top: $border-dot-offset; }
+	&:after { bottom: $border-dot-offset - $border-width *2; }
+}

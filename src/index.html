@@ -6,30 +6,53 @@ nav: home
 ---
 <div class="grid grid--center grid--title">
 	<hgroup class="grid__cell unit-8-12--medium title--light">
-		<h1>Front-End Web Developer</h1>
-		<h2>HTML5, CSS 3, JavaScript...</h2>
+		<h1>Hi I'm Maxime Thirouin,</h1>
+		<h2>a professional front-end web developer</h2>
 	</hgroup>
 </div>
 
 <div class="grid grid--blabla">
-	<div class="grid__cell unit-1-2--medium body-box">
-		<div class="module">
+	<div class="grid__cell unit-1-2--medium">
+		<div class="Box"><div class="Box-module">
 			<h2>
 				<span class="text-less-visible">{" </span>Hello World !<span class="text-less-visible"> "}</span>
 			</h2>
 
-			<p>My name is <a href="#not-ready">Maxime Thirouin</a>, also known as <a href="https://github.com/MoOx">MoOx</a>, and I'm a french web developer living in Toulouse, France.</p>
-
 			<p>
-				<strong class="text--light">I like to work on the client-side, designing interfaces with CSS (using pre-processor like Sass with Compass) and programming awesome experiences with JavaScript. But I also do some back-end when it's needed no matter what the language is.</strong>
+				My name is <a href="#not-ready">Maxime Thirouin</a>,
+				also known as <a href="https://github.com/MoOx">MoOx</a>,
+				and I'm a french web developer living in Toulouse, France
+				who likes to focus on client-side programming (mostly with JavaScript &amp; CSS)
 			</p>
 			<p>
-				I also like to share everything I learned: I enjoy giving some talks and I'm a teacher in my previous University.
-			</p>
-			<p>
-				Beside that, I like to enjoy time with the love of my live, create stuff with my hands, take a walk in the forest or play paintball with my friends. Want know more <a href="#not-ready">about me</a> ?
+				Want know more <a href="#not-ready">about me</a> ?
 			</p>
 {% include big-icons.html %}
+		</div></div>
+		<div class="Box">
+			<div class="Box-module">
+				<h3>Projects I'm working on</h3>
+				<ul>
+					<li><a href="https://github.com/happyplan/happyplan">HappyPlan</a>, a static website generator base on Grunt &amp; Jekyll</li>
+					<li><a href="//putaindecode.fr">Putain de code!</a>, a community to share some good coding practices</li>
+					<li><a href="//compass-recipes.moox.fr">Compass Recipes</a>, a bundle of CSS Recipes, made with Sass &amp; Compass</li>
+					<li><a href="//dame-bio.fr/">D'Âme Bio</a>, the website of my wife where she shares organic &amp; gluten free food recipes</li>
+				</ul>
+			</div>
+			{% comment %}
+			<div class="Box-module">
+				<h3>Latest blog posts</h3>
+				<ul>
+				{% for post in site.posts limit: 5 %}
+					<li><time datetime="{{ post.date }}" class="time">{{ post.date | date_to_string }}</time> <a href="{{ post.url }}" class="title"><span class="text-less-visible">[{{ post.lang }}]</span> {{ post.title }}</a>
+				{% endfor %}
+				</ul>
+				
+				<p><a href="/blog/">► More posts</a></p>
+				
+				<small>Note: Why don't I blog that much ? Because I'm open sourcing :)</small>
+			</div>
+			{% endcomment %}
 		</div>
 	</div>
 	<div class="grid__cell unit-1-2--medium stretch-img_column">

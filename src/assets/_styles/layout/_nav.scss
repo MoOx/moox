@@ -1,40 +1,86 @@
+$Navbar-height: 4em;
+$Navbar-background: $Box--background;
+$Navbar__section-background--hover: $Box--background;
+$Navbar__item--font-size: .8em;
+
+$Navbar-separator: false;
+
 @import "components/nav";
 @import "components/glowing-indicator";
-$navbar__item--font-size: .8em;
 
-.navbar--top {
-	@include box-shadow(0 .2em .6em rgba(#000, .8));
-	@include media-l { font-size: 1.1em;}
+.Navbar {
+	[href="#not-ready"] { color: rgba(#fff, .3) !important; }
+}
 
-	.active {
-		position: relative;
-		overflow: hidden;
+	.Navbar--top {
+		//padding-top: 1em;
+		//@include box-shadow(0 .2em .6em rgba(#000, .8));
+		@include media-l { font-size: 1.1em;}
 
-		vertical-align: middle; // FIX Firefox alignment bug https://bugzilla.mozilla.org/show_bug.cgi?id=491549
+		.active {
+			position: relative;
+			overflow: hidden;
 
-		&::after {
-			@include glowing-indicator-pseudo-element-requirements($highlight-color);
-			@include glowing-indicator-pseudo-element-position(left);
-			@include media-m {
-				// disable previous style
-				top: auto;
-				left: auto;
-				margin-top: 0;
-				@include glowing-indicator-pseudo-element-position(bottom);
+			vertical-align: middle; // FIX Firefox alignment bug https://bugzilla.mozilla.org/show_bug.cgi?id=491549
+
+			&::after {
+				@include glowing-indicator-pseudo-element-requirements($highlight-color);
+				@include glowing-indicator-pseudo-element-position(left);
+				@include media-m {
+					// disable previous style
+					top: auto;
+					left: auto;
+					margin-top: 0;
+					@include glowing-indicator-pseudo-element-position(top);
+				}
 			}
 		}
 	}
-}
 
-.navbar__section {
-	a {
-		font-size: $navbar__item--font-size;
-		padding: 0 .5*$grid-gutter*$unit/$navbar__item--font-size;
-		@include media-gap ($screen-s, $screen-m) { padding: 0 $grid-gutter*$unit/$navbar__item--font-size; }
+	.Navbar__section {
+		a {
+			font-size: $Navbar__item--font-size;
+			padding: 0 1em;
+		}
 	}
+
+	.Navbar__toggler {
+		
+	}
+
+	.js {
+		@include media-max($Navbar-screen-breakpoint) {
+			.js-togglable__toggler { display: inline-block; }
+			.js-togglable__item--hide { display: none; }
+		}
+		@include media-min($Navbar-screen-breakpoint) {
+			.js-togglable__toggler { display: none; }
+		}
+	}
+
+////
+
+$SiteLogo-title--font-size: 1.4em;
+.SiteLogo {
+	line-height: 1;
+	padding: .6em 1em;
 }
 
-.navbar__toggler {
-	padding: 0 .5*$grid-gutter*$unit/($navbar-height*$navbar__toggler-ratio);
-	@include media-gap ($screen-s, $screen-m) { padding: 0 $grid-gutter*$unit/($navbar-height*$navbar__toggler-ratio); }
-}
+	.SiteLogo-title,
+	.SiteLogo-description {
+		line-height: 1;
+		
+		color: #fff;
+		&:hover { color: #fff; }
+		
+		text-decoration: none;
+	}
+
+		.SiteLogo-title {
+			font-weight: bold;
+			font-size: $SiteLogo-title--font-size;
+		}
+
+		.SiteLogo-description {
+			margin-top: -1.2em;
+		}

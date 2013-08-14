@@ -1,0 +1,29 @@
+blockquote {
+	margin: 2em 2em;
+	padding: 1em 2em;
+	font-style: italic;
+	opacity: .7;
+	position: relative;
+
+	&:before,
+	&:after {
+		z-index: 2;
+		position: relative;
+	}
+	$quotes-font-size: 6em;
+	&:before,
+	&:after {
+		position: absolute;
+		font-size: $quotes-font-size;
+		opacity: .3;
+	}
+
+	&:before {
+		content: '\201C';
+		left: -1em/$quotes-font-size*1em;
+	}
+	&:after {
+		content: '\201D';
+		right: -1em/$quotes-font-size*1em;
+	}
+}

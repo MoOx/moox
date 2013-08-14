@@ -15,7 +15,7 @@ $defaultColor: hsl(0, 0%, 22%);
 @import "hint-position";
 //@import "hint-color-types";
 //@import "hint-always";
-$hint--color: $navbar-background; // was #1f2a30
+$hint--color: #1f2a30;
 $hint--border-width: 1px;
 .hint {
 	// tooltip
@@ -52,5 +52,4 @@ $hint--border-width: 1px;
 	@extend .hint;
 	@extend .hint--bottom;
 	//@extend .tooltip;
-	.navbar & { color: #444 !important; }
 }

@@ -1,11 +1,3 @@
-@mixin background-glow($color: #1dd5fe) {
-	box-shadow:
-		0 .1em 0 lighten($color, 20%),
-		0 0 0.2em darken($color, 5%),
-		0 -0.15em 0.4em darken($color, 10%),
-		0 -0.3em 0.6em darken($color, 20%);
-}
-
 $glowing-indicator-color: #1dd5fe !default;
 $glowing-indicator-position: bottom !default;
 $glowing-indicator-width: 1em !default;
@@ -13,14 +5,44 @@ $glowing-indicator-shape: circle !default;
 $glowing-indicator-hover-effect: false !default;
 $glowing-indicator-offset: -$glowing-indicator-width*.8 !default;
 
+@mixin glowing-indicator-effect(
+	$color: $glowing-indicator-color,
+	$position: $glowing-indicator-position
+) {
+	@if ($position == top or $position == bottom) {
+		box-shadow:
+			0 0 .2em darken($color, 5%),
+			// 0 .1em 0 lighten($color, 20%),
+			// 0 -.1em 0 lighten($color, 20%),
+			0 .15em .4em darken($color, 10%),
+			0 -.15em .4em darken($color, 10%),
+			0 .3em .6em darken($color, 20%),
+			0 -.3em .6em darken($color, 20%);
+	}
+	@elseif ($position == left or $position == right) {
+		box-shadow:
+			0 0 .2em darken($color, 5%),
+			// 0 .1em 0 lighten($color, 20%),
+			// 0 -.1em 0 lighten($color, 20%),
+			.15em 0 .4em darken($color, 10%),
+			-.15em 0 .4em darken($color, 10%),
+			.3em 0 .6em darken($color, 20%),
+			-.3em 0 .6em darken($color, 20%);
+	}
+	@else {
+		@warn "glowing-indicator-effect: Unrecognized position #{$position}";
+	}
+}
+
 @mixin glowing-indicator-pseudo-element-requirements(
 	$color: glowing-indicator-color,
 	$width: $glowing-indicator-width,
-	$shape: $glowing-indicator-shape
+	$shape: $glowing-indicator-shape,
+	$position: $glowing-indicator-position
 ) {
 	content: "";
 	background-color: $color;
-	@include background-glow($color);
+	@include glowing-indicator-effect($color, $position);
 	
 	@if ($shape == circle) {
 		@include circle($width);

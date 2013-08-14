@@ -56,7 +56,7 @@ $icons--big-size: 4em;
 		font-size: $icons--big-size;
 		position: relative;
 		display: inline-block;
-		padding: 0 .3em;
+		padding: 0 .2em;
 		@include transition(all .2s);
 		//@include ceaser-transition($easeInOutBack, all, .3s);
 
@@ -105,11 +105,11 @@ $icons--big-size: 4em;
 
 	.stretch-img {
 		.annonce-box,
-		.navbar--top {
+		.Navbar--top {
 			position: absolute;
 		}
 
-		&.annonce .navbar--top {
+		&.annonce .Navbar--top {
 			top: $annonceBoxHeight;
 		}
 
@@ -117,7 +117,7 @@ $icons--big-size: 4em;
 
 	.stretch-img {
 		.grid--title {
-			padding-top: $annonceBoxHeight + $navbar-height + 2em;
+			padding-top: $annonceBoxHeight + $Navbar-height + 2em;
 			height: 30%;
 		}
 
