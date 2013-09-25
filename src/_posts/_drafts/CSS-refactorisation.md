@@ -114,7 +114,7 @@ $media-width-large: 30em !default;
 
 selector {
 	width: $small;
-	@include media-small() { width: $large } 
+	@include crp-Media-small() { width: $large } 
 }
 ```
 

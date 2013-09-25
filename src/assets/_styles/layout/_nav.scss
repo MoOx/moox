@@ -15,7 +15,7 @@ $Navbar-separator: false;
 	.Navbar--top {
 		//padding-top: 1em;
 		//@include box-shadow(0 .2em .6em rgba(#000, .8));
-		@include media-l { font-size: 1.1em;}
+		@include crp-Media-l { font-size: 1.1em;}
 
 		.active {
 			position: relative;
@@ -26,7 +26,7 @@ $Navbar-separator: false;
 			&::after {
 				@include glowing-indicator-pseudo-element-requirements($highlight-color);
 				@include glowing-indicator-pseudo-element-position(left);
-				@include media-m {
+				@include crp-Media-m {
 					// disable previous style
 					top: auto;
 					left: auto;
@@ -49,11 +49,11 @@ $Navbar-separator: false;
 	}
 
 	.js {
-		@include media-max($Navbar-screen-breakpoint) {
+		@include crp-Media-max($Navbar-screen-breakpoint) {
 			.js-togglable__toggler { display: inline-block; }
 			.js-togglable__item--hide { display: none; }
 		}
-		@include media-min($Navbar-screen-breakpoint) {
+		@include crp-Media-min($Navbar-screen-breakpoint) {
 			.js-togglable__toggler { display: none; }
 		}
 	}

@@ -1,5 +1,5 @@
 .grid--title {
-	@include media-m {
+	@include crp-Media-m {
 		padding: 1em 0;
 
 		.grid__cell {
@@ -45,7 +45,6 @@
 	position: relative;
 }
 
-@import "recipes/icon-font";
 $icons--big-size: 4em;
 .icons--big {
 	text-align: center;
@@ -57,7 +56,7 @@ $icons--big-size: 4em;
 		position: relative;
 		display: inline-block;
 		padding: 0 .2em;
-		@include transition(all .2s);
+		transition: all .2s;
 		//@include ceaser-transition($easeInOutBack, all, .3s);
 
 		.text {
@@ -69,13 +68,13 @@ $icons--big-size: 4em;
 			left: 0;
 			width: 100%;
 			opacity: 0;
-			@include translateY(0%);
-			@include ceaser-transition($easeInOutBack, all, .3s);
+			transform:  translateY(0%);
+			//@include ceaser-transition($easeInOutBack, all, .3s);
 		}
 
 		@include accessibleHover {
 			.text {
-				@include translateY($icons--big-size*1.1);
+				transform: translateY($icons--big-size*1.1);
 				opacity: 1;
 			}
 		}
@@ -90,13 +89,13 @@ $icons--big-size: 4em;
 			display: block;
 			margin: auto;
 			max-width: $mooxSmallMaxWidth;
-			//@include media-min($mooxSmallMaxWidth) { max-width: 110%; }
-			@include media-m { max-width: 100%; }
+			//@include crp-Media-min($mooxSmallMaxWidth) { max-width: 110%; }
+			@include crp-Media-m { max-width: 100%; }
 		}
 	}
 
 // strectch layout on home for moox img
-@media (min-height: 50em) and (min-width: $screen-m) {
+@media (min-height: 50em) and (min-width: $crp-Media-size-m) {
 	.stretch-img,
 	body,
 	.body-wrapper {

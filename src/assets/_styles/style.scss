@@ -1,17 +1,16 @@
-@import "recipes/utilities/clearfix";
+//$crp-Media-debug: true;
 
-//$screen-debug: true;
+//// ! \\\\
 
 $unit: 1em; // used for grid/font ratio maths with em
 
-$base-font-size: 14px;
 $base-font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 
 // palette from http://www.pantone-france.com/pages/index.aspx?pg=21055
 // Emerald mood "Energize"
 $mx-Color-greenLime: #bed736;
 $mx-Color-greenLeaf: #6dcb54;
-$mx-Color-green: #00a15d;
+$mx-Color-green: #00a15d; //try 4bad00
 $mx-Color-greenEmerald: #009776;
 $mx-Color-greenBlue: #00adae;
 
@@ -20,6 +19,34 @@ $highlight-color: $mx-Color-greenLeaf;// was #5da423;
 $dark-color: #222;
 
 $mx-borderRadius: 4px;
+
+@viewport { width: device-width }
+* { box-sizing: border-box; }
+
+@import "normalize-css/normalize";
+
+@import "css-recipe-clearfix/index";
+@import "css-recipe-font-smoothing/index";
+@import "css-recipe-media/index";
+
+$use-griddle: true !default;
+$grid-gutter: 2em !default;
+
+@import "griddle";
+
+@if $use-griddle {
+	$grid-screen-s: 2 3 4 !default;
+	$grid-screen-m: 2 3 4 5 6 12 !default;
+
+	@include griddle-build($grid-screen-s);
+
+	@include crp-Media-m {
+		@include griddle-build($grid-screen-m, '--medium');
+	}
+}
+
+@import "icons";
+@import "fonts";
 
 %mx-Text--light {
 	color: $text-color;
@@ -31,20 +58,16 @@ $mx-borderRadius: 4px;
 	text-shadow: 0 1px 0 rgba(#fff, .8);
 }
 
-@import "compass/typography/links/link-colors";
+$mx-Link-color: darken($highlight-color, 5%);
 a {
-	$link-color: darken($highlight-color, 5%);
 	text-decoration: none;
-	@include link-colors(
-		$link-color,
-		$hover: darken($link-color, 4%),
-		$focus: darken($link-color, 10%),
-		$active: lighten($link-color, 5%)//,
-		//$visited: lighten($highlight-color, 2%)
-	);
+	color: $mx-Link-color;
+	&:hover { color: darken($mx-Link-color, 4%); }
+	&:focus { color: darken($mx-Link-color, 10%); }
+	&:active { color: lighten($mx-Link-color, 5%); }
+	//&:visited { color: lighten($highlight-color, 2%); }
 }
 
-@import "base";
 
 @mixin accessibleHover {
 	&:hover,
@@ -54,48 +77,52 @@ a {
 	}
 }
 
-@mixin html-background($background-image--small, $background-image--large) {
-	background: image-url($background-image--small) no-repeat center fixed;
+@mixin html-background($background-image--portrait, $background-image--landscape) {
+	background: image-url($background-image--portrait) no-repeat center fixed;
+	@media (orientation: landscape) and (min-width: 50em) { background-image: image-url($background-image--landscape); }
 	background-size: cover;
-
-	@media (min-width: 50em) {
-		background-image: image-url($background-image--large);
-	}
 }
 
 html {
+	@extend %crp-FontSmoothing;
+	font-size: .8rem;
+	@include crp-Media-m { font-size: .9rem; }
+	//@include crp-Media-xl { font-size: 1rem; }
+	line-height: 1.6rem;
+
+	font-family: $base-font-family;
+	//font-weight: 300;
+
 	@extend %mx-Text--light;
-	@include html-background('forest-ruins--small.jpg', 'forest-ruins--large.jpg');
-	//&:hover { @include html-background('perfection-cold-blur--small.jpg', 'forest.jpg'); }
-	
-	&.error-404 { @include html-background('lost-woods--small.jpg', 'lost-woods--large.jpg'); }
+	// update twitter background when you update that & also colors :)
+	// https://twitter.com/settings/design
+	@include html-background('forest-ruins--portrait.jpg', 'forest-ruins--landscape.jpg');
+
+	&.error-404 { @include html-background('lost-woods--portrait.jpg', 'lost-woods--landscape.jpg'); }
 }
 
 
 body {
-	font-size: 90%;
-	@include media-m { font-size: 100%; }
-	//@include media-l { font-size: 110%; }
-	-webkit-font-smoothing: antialiased;
+
 }
 
 .body-wrapper {
 	position: relative;
-	
+
 	// hide grid negative padding on xs screen
 	padding: 0 0.5 * $grid-gutter;
 
 	// add a tiny grid padding
-	@include media-s { padding: 0 $grid-gutter; }
+	@include crp-Media-s { padding: 0 $grid-gutter; }
 
 	// add max-width for center layout
-	@include media-m {
+	@include crp-Media-m {
 		margin: auto;
 		max-width: 1024px;
 	}
 
 	// remove padding previously set on large screen (useless)
-	@include media-l { padding: 0; }
+	@include crp-Media-l { padding: 0; }
 }
 
 h1,
@@ -124,17 +151,18 @@ h4,
 // h2,
 // h3 { @include text-gradient($secondaryColor, matte); }
 
+@import "css-recipe-corner-ribbon/index";
 @import "components/ribbon-corner";
 .source-code {
 	display: none;
 
-	@include media-m {
+	@include crp-Media-m {
 		display: block;
-		@include effect-ribbon-corner($position: 'bottom right', $width: 10em, $skin: null);
+		@include crp-CornerRibbon($position: 'bottom right', $width: 10em, $skin: null);
 		padding: 0 2em;
 		position: fixed;
 		z-index: 1;
-		@include transition(all .2s);
+		transition: all .2s;
 		opacity: .2;
 		@include accessibleHover { opacity: 1; }
 		white-space: nowrap;

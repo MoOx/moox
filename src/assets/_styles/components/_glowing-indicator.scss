@@ -43,14 +43,16 @@ $glowing-indicator-offset: -$glowing-indicator-width*.8 !default;
 	content: "";
 	background-color: $color;
 	@include glowing-indicator-effect($color, $position);
-	
+
 	@if ($shape == circle) {
-		@include circle($width);
+		width: $width;
+		height: $width;
+		border-radius: 100%;
 	}
 	@else {
 		@warn "glowing-indicator-pseudo-element-requirements: Unrecognized shape #{$shape}";
 	}
-	
+
 	position: absolute;
 }
 
@@ -101,7 +103,7 @@ $glowing-indicator-offset: -$glowing-indicator-width*.8 !default;
 	@if ($hover-effect) {
 		&::after {
 			opacity: 0;
-			@include transition(all .2s);
+			transition: all .2s;
 		}
 
 		&:hover::after { opacity: 1; }

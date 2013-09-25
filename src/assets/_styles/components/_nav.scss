@@ -7,10 +7,10 @@ $Navbar__section-background--hover: rgba(#000, .4) !default;
 $Navbar-separator--color: rgba(#000, .8) !default;
 $Navbar-separator--color-alt: rgba(#fff, .1) !default;
 
-$Navbar-screen-breakpoint: $screen-m !default;
+$Navbar-screen-breakpoint: $crp-Media-size-m !default;
 
 .Navbar {
-	@extend %clearfix-hack;
+	@extend %crp-Clearfix;
 	position: relative;
 	z-index: 1;
 	width: 100%;
@@ -45,7 +45,7 @@ $Navbar-screen-breakpoint: $screen-m !default;
 		}
 	}
 
-	@include media-min($Navbar-screen-breakpoint) {
+	@include crp-Media-min($Navbar-screen-breakpoint) {
 		// inline menu for larger screen
 		.Navbar__section {
 			&,
@@ -63,16 +63,17 @@ $Navbar-screen-breakpoint: $screen-m !default;
 	$Navbar__toggler-ratio: .7 !default;
 	@if $Navbar__toggler {
 		.Navbar__toggler {
-			@include position(absolute, 0, 0, null);
-			@include media-min($Navbar-screen-breakpoint) {
-				display: none; // by default hidden since it's a javascript button
-			}
-			
+			position: absolute;
+			top: 0;
+			right: 0;
+			// by default hidden since it's a javascript button
+			@include crp-Media-min($Navbar-screen-breakpoint) { display: none;  }
+
 			font-size: $Navbar-height*$Navbar__toggler-ratio;
 			line-height: 1*(1/$Navbar__toggler-ratio);
 			padding: 0;
 			border: 0;
-			
+
 			color: $Navbar-link-color;
 			background: none;
 		}
@@ -104,7 +105,7 @@ $Navbar-screen-breakpoint: $screen-m !default;
 		}
 
 		// separator for horizontal layout
-		@include media-min($Navbar-screen-breakpoint) {
+		@include crp-Media-min($Navbar-screen-breakpoint) {
 
 			.Navbar-separator--before::before {
 				top: auto;

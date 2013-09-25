@@ -1,4 +1,3 @@
-@import "recipes/effect/ribbon";
 @mixin ribbon-corner-classic(
 	$color: #fff,
 	$background-color: #c73b3c,
@@ -15,13 +14,16 @@
 	border: $border-width solid $border-color;
 
 	background: $background-color; //fallback
-	@include background(linear-gradient($background-color,$background-color-alt));
+	background: linear-gradient($background-color, $background-color-alt);
 	box-shadow: 0 .2em .6em rgba(#000, .6);
 
 	// todo replace this use of pseudo elements by appropriate backgrounds properties (tricky gradients)
 	&:before,
 	&:after {
-		@include pseudo-element(100%, 0);
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 0;
 		border: $border-width dashed;
 		border-left: 0;
 		border-right: 0;

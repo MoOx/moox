@@ -2,12 +2,6 @@
 	"assets": {
 		"scripts": [{
 			"src": [
-				"<%= happyplan.bower_components %>/aight/aight.js"
-			],
-			"dest": "<%= happyplan.dist.assets.scripts %>/ieshim.js"
-		},
-		{
-			"src": [
 				"<%= happyplan.bower_components %>/picturefill/external/matchmedia.js",
 				"<%= happyplan.bower_components %>/picturefill/picturefill.js",
 				"<%= happyplan.theme.local.assets.scripts %>/vanilla.js"
@@ -24,11 +18,6 @@
 		"google_analytics_tracking_id": "UA-1716762-6"
 	},
 	"compass": {
-		"require": [
-			"modular-scale",
-			"ceaser-easing",
-			"compass-recipes"
-		],
 		"additional_import_paths": [
 			"<%= happyplan.bower_components %>/",
 			"<%= happyplan.bower_components %>/griddle/",

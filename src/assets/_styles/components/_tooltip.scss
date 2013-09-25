@@ -1,55 +1,55 @@
-//@import "compass/css3/filter";
-//
-@import "hint-variables";
-$tooltipHeight: 28px;
-$arrowBorderWidth: 6px;
-$arrowOffsetX: 3 * $arrowBorderWidth;
-$textShadowDarkenAmount: 25%;
-$transitionDistance: 8px;
+// //@import "compass/css3/filter";
+// //
+// @import "hint-variables";
+// $tooltipHeight: 28px;
+// $arrowBorderWidth: 6px;
+// $arrowOffsetX: 3 * $arrowBorderWidth;
+// $textShadowDarkenAmount: 25%;
+// $transitionDistance: 8px;
 
-// Various colors
-// Default color is blackish
-$defaultColor: hsl(0, 0%, 22%);
-@import "hint-mixins";
-@import "hint-core";
-@import "hint-position";
-//@import "hint-color-types";
-//@import "hint-always";
-$hint--color: #1f2a30;
-$hint--border-width: 1px;
-.hint {
-	// tooltip
-	&::after {
-		background: $hint--color;
-		background: rgba($hint--color, .95);
-		@include background(linear-gradient(
-			rgba($hint--color, .4) 10%,
-			rgba($hint--color, .8)  80%
-		));
+// // Various colors
+// // Default color is blackish
+// $defaultColor: hsl(0, 0%, 22%);
+// @import "hint-mixins";
+// @import "hint-core";
+// @import "hint-position";
+// //@import "hint-color-types";
+// //@import "hint-always";
+// $hint--color: #1f2a30;
+// $hint--border-width: 1px;
+// .hint {
+// 	// tooltip
+// 	&::after {
+// 		background: $hint--color;
+// 		background: rgba($hint--color, .95);
+// 		@include background(linear-gradient(
+// 			rgba($hint--color, .4) 10%,
+// 			rgba($hint--color, .8)  80%
+// 		));
 
-		text-shadow: 0 -1px 0 $hint--color;
-		box-shadow:
-			inset 0 1px 0 rgba(#fff, .2), // inset top
-			0 0 0 1px rgba($hint--color, .8), // border
-			0 6px 6px rgba($hint--color, .6) // shadow
-		;
+// 		text-shadow: 0 -1px 0 $hint--color;
+// 		box-shadow:
+// 			inset 0 1px 0 rgba(#fff, .2), // inset top
+// 			0 0 0 1px rgba($hint--color, .8), // border
+// 			0 6px 6px rgba($hint--color, .6) // shadow
+// 		;
 
-		border-radius: 2px;
-	}
+// 		border-radius: 2px;
+// 	}
 
-	// arrow
-	&::before {
-		border-bottom-color: rgba($hint--color, .8);
-	}
+// 	// arrow
+// 	&::before {
+// 		border-bottom-color: rgba($hint--color, .8);
+// 	}
 
-	&::after,
-	&::before {
-		z-index: 1;
-	}
-}
+// 	&::after,
+// 	&::before {
+// 		z-index: 1;
+// 	}
+// }
 
-[href="#not-ready"] {
-	@extend .hint;
-	@extend .hint--bottom;
-	//@extend .tooltip;
-}
+// [href="#not-ready"] {
+// 	@extend .hint;
+// 	@extend .hint--bottom;
+// 	//@extend .tooltip;
+// }

@@ -47,19 +47,19 @@ nav: home
 					<li><time datetime="{{ post.date }}" class="time">{{ post.date | date_to_string }}</time> <a href="{{ post.url }}" class="title"><span class="text-less-visible">[{{ post.lang }}]</span> {{ post.title }}</a>
 				{% endfor %}
 				</ul>
-				
+
 				<p><a href="/blog/">► More posts</a></p>
-				
+
 				<small>Note: Why don't I blog that much ? Because I'm open sourcing :)</small>
 			</div>
 			{% endcomment %}
 		</div>
 	</div>
 	<div class="grid__cell unit-1-2--medium stretch-img_column">
-		<div data-picture data-alt="MoOx photo">
-			<div data-src="{{ site.happyplan.baseUrls.images }}/moox/home-200x.png"></div>
-			<div data-src="{{ site.happyplan.baseUrls.images }}/moox/home-400x.png" data-media="(min-width: 55em)"></div>
+		<span data-picture data-alt="MoOx photo">
+			<span data-src="{{ site.happyplan.baseUrls.images }}/moox/home-200x.png"></span>
+			<span data-src="{{ site.happyplan.baseUrls.images }}/moox/home-400x.png" data-media="(min-width: 55em)"></span>
 			<noscript><img class="stretch-img_column_img" alt="MoOx photo" src="{{ site.happyplan.baseUrls.images }}/moox/home-400x.png" /></noscript>
-		</div>
+		</span>
 	</div>
 </div>

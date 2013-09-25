@@ -11,7 +11,7 @@ $Box--background: rgba(#000, .65);
 }
 
 .Box-module {
-	@extend %clearfix-hack;
+	@extend %crp-Clearfix;
 	padding: $grid-gutter/2;
 	margin: $grid-gutter/2 0;
 	background-color: #222;
