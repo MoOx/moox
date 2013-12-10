@@ -5,7 +5,7 @@
     "griddle": "git://github.com/necolas/griddle.git",
     "sass-pygments-theme-base": "git://github.com/MoOx/sass-pygments-theme-base.git",
     "css-recipe-font-smoothing": "~0.1.0",
-    "css-recipe-media": "~0.1.1",
+    "css-recipe-media": "~0.1.2",
     "css-recipe-clearfix": "~0.1.0",
     "css-recipe-math": "~0.1.0",
     "css-recipe-corner-ribbon": "*",

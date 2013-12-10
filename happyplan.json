@@ -1,28 +1,20 @@
 {
-	"assets": {
-		"scripts": [{
-			"src": [
-				"<%= happyplan.bower_components %>/picturefill/external/matchmedia.js",
-				"<%= happyplan.bower_components %>/picturefill/picturefill.js",
-				"<%= happyplan.theme.local.assets.scripts %>/vanilla.js"
-			],
-			"dest": "<%= happyplan.dist.assets.scripts %>/vanilla.js"
-		}]
-	},
-	"jekyll": {
-		"markdown": "redcarpet",
+  "assets": {
+    "styles": [{
+      "src": "<%= happyplan.path.assets.styles %>/moox.scss"
+    , "dest": "<%= happyplan.path.dist.assets.styles %>/moox.css"
+    }]
+  , "scripts": [{
+      "src": [
+        "<%= happyplan.bower_components %>/picturefill/external/matchmedia.js"
+      , "<%= happyplan.bower_components %>/picturefill/picturefill.js"
+      , "<%= happyplan.path.assets.scripts %>/vanilla.js"
+      ]
+    , "dest": "<%= happyplan.path.dist.assets.scripts %>/vanilla.js"
+    }]
+  }
+, "disqus_short_name": "moox"
+, "disqus_developer": false
 
-		"disqus_short_name": "moox",
-		"disqus_developer": false,
-
-		"google_analytics_tracking_id": "UA-1716762-6"
-	},
-	"compass": {
-		"additional_import_paths": [
-			"<%= happyplan.bower_components %>/",
-			"<%= happyplan.bower_components %>/griddle/",
-			"<%= happyplan.bower_components %>/hint.css/src",
-			"<%= happyplan.bower_components %>/sass-pygments-theme-base"
-		]
-	}
+, "google_analytics_tracking_id": "UA-1716762-6"
 }

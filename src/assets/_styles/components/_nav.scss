@@ -10,128 +10,129 @@ $Navbar-separator--color-alt: rgba(#fff, .1) !default;
 $Navbar-screen-breakpoint: $crp-Media-size-m !default;
 
 .Navbar {
-	@extend %crp-Clearfix;
-	position: relative;
-	z-index: 1;
-	width: 100%;
+  //@extend %crp-Clearfix; // libsass bug
+  @include crp-Clearfix;
+  position: relative;
+  z-index: 1;
+  width: 100%;
 
-	line-height: $Navbar-height;
-	background: $Navbar-background;
-	text-shadow: 0 1px 0 #000;
+  line-height: $Navbar-height;
+  background: $Navbar-background;
+  text-shadow: 0 1px 0 #000;
 
-	.icon { font-size: 1.2em; }
+  .icon { font-size: 1.2em; }
 }
 
-	.Navbar__section {
-		&,
-		li,
-		a {
-			margin: 0;
-			padding: 0;
-		}
+  .Navbar__section {
+    &,
+    li,
+    a {
+      margin: 0;
+      padding: 0;
+    }
 
-		a {
-			display: block;
-			font-weight: bold;
+    a {
+      display: block;
+      font-weight: bold;
 
-			text-decoration: none;
+      text-decoration: none;
 
-			color: $Navbar-link-color;
+      color: $Navbar-link-color;
 
-			&:hover {
-				color: $Navbar-link-color;
-				background: $Navbar__section-background--hover;
-			}
-		}
-	}
+      &:hover {
+        color: $Navbar-link-color;
+        background: $Navbar__section-background--hover;
+      }
+    }
+  }
 
-	@include crp-Media-min($Navbar-screen-breakpoint) {
-		// inline menu for larger screen
-		.Navbar__section {
-			&,
-			li,
-			a {
-				display: inline-block;
-			}
-		}
+  @include crp-Media-min($Navbar-screen-breakpoint) {
+    // inline menu for larger screen
+    .Navbar__section {
+      &,
+      li,
+      a {
+        display: inline-block;
+      }
+    }
 
-		.Navbar__section--left { float: left }
-		.Navbar__section--right { float: right }
-	}
+    .Navbar__section--left { float: left }
+    .Navbar__section--right { float: right }
+  }
 
-	$Navbar__toggler: true !default;
-	$Navbar__toggler-ratio: .7 !default;
-	@if $Navbar__toggler {
-		.Navbar__toggler {
-			position: absolute;
-			top: 0;
-			right: 0;
-			// by default hidden since it's a javascript button
-			@include crp-Media-min($Navbar-screen-breakpoint) { display: none;  }
+  $Navbar__toggler: true !default;
+  $Navbar__toggler-ratio: .7 !default;
+  @if $Navbar__toggler {
+    .Navbar__toggler {
+      position: absolute;
+      top: 0;
+      right: 0;
+      // by default hidden since it's a javascript button
+      @include crp-Media-min($Navbar-screen-breakpoint) { display: none;  }
 
-			font-size: $Navbar-height*$Navbar__toggler-ratio;
-			line-height: 1*(1/$Navbar__toggler-ratio);
-			padding: 0;
-			border: 0;
+      font-size: $Navbar-height*$Navbar__toggler-ratio;
+      line-height: 1*(1/$Navbar__toggler-ratio);
+      padding: 0;
+      border: 0;
 
-			color: $Navbar-link-color;
-			background: none;
-		}
-	}
+      color: $Navbar-link-color;
+      background: none;
+    }
+  }
 
 
-	$Navbar-separator: true !default;
-	@if ($Navbar-separator) {
-		.Navbar-separator--before,
-		.Navbar-separator--after {
-			position: relative;
-		}
+  $Navbar-separator: true !default;
+  @if ($Navbar-separator) {
+    .Navbar-separator--before,
+    .Navbar-separator--after {
+      position: relative;
+    }
 
-		// separator for vertical layout
-		.Navbar-separator--before::before {
-			top: -1px;
-			border-top: 1px solid;
-		}
+    // separator for vertical layout
+    .Navbar-separator--before::before {
+      top: -1px;
+      border-top: 1px solid;
+    }
 
-		.Navbar-separator--after::after {
-			bottom: -1px;
-			border-bottom: 1px solid;
-		}
+    .Navbar-separator--after::after {
+      bottom: -1px;
+      border-bottom: 1px solid;
+    }
 
-		.Navbar-separator--before::before,
-		.Navbar-separator--after::after {
-			@include pseudo-element(100%, 1px, $display: inline-block);
-			left: 0;
-		}
+    .Navbar-separator--before::before,
+    .Navbar-separator--after::after {
+      @include pseudo-element(100%, 1px, $display: inline-block);
+      left: 0;
+    }
 
-		// separator for horizontal layout
-		@include crp-Media-min($Navbar-screen-breakpoint) {
+    // separator for horizontal layout
+    @include crp-Media-min($Navbar-screen-breakpoint) {
 
-			.Navbar-separator--before::before {
-				top: auto;
-				border-top: 0;
-				left: -1px;
-				border-left: 1px solid;
-			}
+      .Navbar-separator--before::before {
+        top: auto;
+        border-top: 0;
+        left: -1px;
+        border-left: 1px solid;
+      }
 
-			.Navbar-separator--after::after {
-				bottom: auto;
-				border-bottom: 0;
-				left: auto; // disable vertical layout
-				right: -1px;
-				border-right: 1px solid;
-			}
+      .Navbar-separator--after::after {
+        bottom: auto;
+        border-bottom: 0;
+        left: auto; // disable vertical layout
+        right: -1px;
+        border-right: 1px solid;
+      }
 
-			.Navbar-separator--before::before,
-			.Navbar-separator--after::after {
-				@include pseudo-element(1px, 100%, $display: inline-block);
-				top: 0;
-			}
-		}
+      .Navbar-separator--before::before,
+      .Navbar-separator--after::after {
+        @include pseudo-element(1px, 100%, $display: inline-block);
+        top: 0;
+      }
+    }
 
-		.Navbar-separator--before::before,
-		.Navbar-separator--after::after {
-			background: $Navbar-separator--color;
-			border-color: $Navbar-separator--color-alt;
-		}
-	}
+    .Navbar-separator--before::before,
+    .Navbar-separator--after::after {
+      background: $Navbar-separator--color;
+      border-color: $Navbar-separator--color-alt;
+    }
+  }

@@ -13,7 +13,7 @@ $flex-media-unknown-suffix: "unknown" !default;
 ) {
   position: relative;
   overflow: $overflow;
-  
+
   #{$item-class} {
     position: absolute;
     top: 0;
@@ -59,14 +59,14 @@ $flex-media-unknown-suffix: "unknown" !default;
   @if ($item-unknown-suffix != null) {
     #{$selector-prefix}#{$item-unknown-suffix} {
       text-align: center;
-      
+
       #{$item-class} {
         display: inline-block;
         max-width: 100%;
       }
     }
   }
-  
+
 }
 
 @mixin flex-medias(
@@ -77,22 +77,22 @@ $flex-media-unknown-suffix: "unknown" !default;
   $overflow: $flex-media-overflow,
   $selector: $flex-media-selector
 ) {
-  
+
   @include flex-media-unknown($selector-prefix, $item-class, $item-unknown-suffix);
-  
+
   @if ($selector) {
     #{$selector} {
       @include flex-media-requirements($item-class, $overflow);
     }
   }
-  
+
   @each $ratio in $ratios {
     @if (length($ratio)<2) {
       @warn "Flex media ratio list should contain a list of 2 values (ratio name, for css selector & value for math)"
     }
     $selector-ratio: nth($ratio, 1);
     $ratio-value: nth($ratio, 2);
-    #{unquote("#{$selector-prefix}#{$selector-ratio}")} {
+    #{$selector-prefix}#{$selector-ratio}) {
       @include flex-media($ratio-value, $item-class, $overflow, if($selector, false, true));
     }
   }

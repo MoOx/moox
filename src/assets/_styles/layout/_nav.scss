@@ -5,11 +5,12 @@ $Navbar__item--font-size: .8em;
 
 $Navbar-separator: false;
 
-@import "components/nav";
-@import "components/glowing-indicator";
+@import "../components/nav";
+@import "../components/glowing-indicator";
 
 .Navbar {
 	[href="#not-ready"] { color: rgba(#fff, .3) !important; }
+	border-radius: 0 0 $mx-borderRadius $mx-borderRadius;
 }
 
 	.Navbar--top {
@@ -45,7 +46,7 @@ $Navbar-separator: false;
 	}
 
 	.Navbar__toggler {
-		
+
 	}
 
 	.js {
@@ -69,10 +70,10 @@ $SiteLogo-title--font-size: 1.4em;
 	.SiteLogo-title,
 	.SiteLogo-description {
 		line-height: 1;
-		
+
 		color: #fff;
 		&:hover { color: #fff; }
-		
+
 		text-decoration: none;
 	}
 

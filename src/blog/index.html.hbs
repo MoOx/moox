@@ -1,0 +1,36 @@
+---
+layout: default.hbs
+title: Développeur Web Front-End HTML5, CSS 3, Javascript
+class: grid-title--quotes
+nav: blog
+---
+<div class="grid grid--center grid--title">
+	<hgroup class="grid__cell unit-8-12--medium title--light">
+		<h1>MoOx' hut</h1>
+		<h2>... where he talks about web & dev.</h2>
+	</hgroup>
+</div>
+
+<div class="grid grid--blabla">
+	<div class="grid__cell Box">
+		<div class="Box-module">
+			<h2>Posts</h2>
+
+			<ul class="posts">
+			{{#posts pages}}
+				<li><time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time> <a href="{{url this.dest}}" class="title"><span class="text-less-visible">[{{ data.lang }}]</span> {{ data.title }}</a>
+			{{/posts}}
+			</ul>
+		</div>
+		<footer class="Box-module">
+			<h3>This is a temporary footer</h3>
+			<div class="icons--big">
+				<a href="https://twitter.com/MoOx"><i class="icon icon_twitter"></i><span class="text">Twitter</span></a>
+				<a href="https://github.com/MoOx"><i class="icon icon_github"></i><span class="text">Github</span></a>
+				<a href="http://www.linkedin.com/in/maxthirouin"><i class="icon icon_linkedin"></i><span class="text">LinkedIn</span></a>
+				<a href="skype:maxime.thirouin?add"><i class="icon icon_skype"></i><span class="text">Skype</span></a>
+				<a href="contact/"><i class="icon icon_email"></i><span class="text">Contact</span></a>
+			</div>
+		</footer>
+	</div>
+</div>

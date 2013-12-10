@@ -1,0 +1,12 @@
+{{{ happyplan.html.hooks.head_open }}}
+<meta charset="utf-8">
+{{#if page.title }}<title>{{ page.title }}</title>{{/if}}
+{{#if page.description }}<meta name="description" content="{{ page.description }}">{{/if}}
+<base href="{{#is happyplan.env 'dist' }}{{ happyplan.url }}{{ else }}http://{{ happyplan.server.hostname }}:{{ happyplan.server.port }}{{/is}}{{ happyplan.baseUrl }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<link href="feed.xml" rel="alternate" type="application/rss+xml">
+{{{ happyplan.html.hooks.head_before_stylesheets }}}
+{{{ happyplan.html.hooks.head_stylesheets }}}
+{{{ happyplan.html.hooks.head_after_stylesheets }}}
+{{{ happyplan.html.hooks.head_close }}}

@@ -1,0 +1,68 @@
+---
+layout: default.hbs
+class: grid-title--quotes
+nav: blog
+---
+<div class="grid grid--center grid--title">
+	<hgroup class="grid__cell unit-8-12--medium title--light">
+		<h1>MoOx' hut</h1>
+		<h2>... where he talks about web &amp; dev.</h2>
+	</hgroup>
+</div>
+
+<div class="grid grid--blabla">
+	<div class="grid__cell Box">
+		<article class="Box-module" lang="{{ page.lang }}">
+			<header>
+				<h1><span class="text-less-visible">[{{ page.lang }}]</span> {{ page.title }}</h1>
+				<time class="text-less-visible" pubdate datetime="{{moment data.date format="YYYY-MM-DD" }}">{{moment data.date format="DD MMMM YYYY" }}</time>
+			</header>
+			<!-- {{#isnt page.tags empty }}
+			<div class="category">
+				<ul>
+					{{#each page.tags }}
+						<li><a href="#">{{ tag }}</a></li>
+					{{/each}}
+				</ul>
+			</div>
+			{{/isnt}} -->
+			<div class="content">
+				{{> body }}
+			</div>
+			<br /><br />
+			---
+			<br /><br />
+			<footer>
+				<div class="report">
+					See something wrong here ? Please tell me <a href="https://github.com/MoOx/moox.io/issues">with an issue on Github</a>,
+					or just some words on twitter at <a href="https://twitter.com/MoOx/">@MoOx</a>.
+				</div>
+			</footer>
+		</article>
+
+		{{#is page.lang 'en' }}
+			{{> author-en }}
+		{{ else }}
+			{{> author-fr }}
+		{{/is}}
+
+		{{#and happyplan.disqus_short_name page.comments }}
+		<section class="Box-module">
+			<h1>Comments</h1>
+			<div id="disqus_thread" aria-live="polite">
+				<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			</div>
+		</section>
+		{{/and}}
+		<footer class="Box-module">
+			<h3>This is a temporary footer</h3>
+			<div class="icons--big">
+				<a href="https://twitter.com/MoOx"><i class="icon icon_twitter"></i><span class="text">Twitter</span></a>
+				<a href="https://github.com/MoOx"><i class="icon icon_github"></i><span class="text">Github</span></a>
+				<a href="http://www.linkedin.com/in/maxthirouin"><i class="icon icon_linkedin"></i><span class="text">LinkedIn</span></a>
+				<a href="skype:maxime.thirouin?add"><i class="icon icon_skype"></i><span class="text">Skype</span></a>
+				<a href="contact/"><i class="icon icon_email"></i><span class="text">Contact</span></a>
+			</div>
+		</footer>
+	</div>
+</div>

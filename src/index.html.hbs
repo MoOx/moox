@@ -1,0 +1,52 @@
+---
+layout: default.hbs
+title: Développeur Web Front-End HTML5, CSS 3, Javascript
+class: stretch-img grid-title--quotes
+nav: home
+---
+
+<div class="grid grid--center grid--title">
+  <hgroup class="grid__cell unit-8-12--medium title--light">
+    <h1>Hi I'm Maxime Thirouin,</h1>
+    <h2>a professional front-end web developer</h2>
+  </hgroup>
+</div>
+
+<div class="grid grid--blabla">
+  <div class="grid__cell unit-1-2--medium">
+    <div class="Box"><div class="Box-module">
+      <h2>
+        <span class="text-less-visible">{" </span>Hello World !<span class="text-less-visible"> "}</span>
+      </h2>
+
+      <p>
+        My name is <a href="#not-ready">Maxime Thirouin</a>,
+        also known as <a href="https://github.com/MoOx">MoOx</a>,
+        and I'm a french web developer living in Toulouse, France
+        who likes to focus on client-side programming (mostly with JavaScript &amp; CSS)
+      </p>
+      <p>
+        Want know more <a href="#not-ready">about me</a> ?
+      </p>
+{{> big-icons }}
+    </div></div>
+    <div class="Box">
+      <div class="Box-module">
+        <h3>Projects I'm working on</h3>
+        <ul class="Home-projects">
+          <li><a href="//putaindecode.fr">Putain de code!</a>, a french community to share some good coding practices,
+          <li><a href="https://github.com/css-recipes">CSS Recipes</a>, CSS &amp; Sass reusable components, mixins &amp; functions (<a href="//compass-recipes.moox.fr">Compass Recipes</a> ported as standalone components),
+          <li><a href="https://github.com/happyplan/happyplan">HappyPlan</a>, a static website generator base on Grunt &amp; Jekyll,
+          <li><a href="//dame-bio.fr/">D'Âme Bio</a>, the website of my wife where she shares organic &amp; gluten free food recipes.
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="grid__cell unit-1-2--medium stretch-img_column">
+    <span data-picture data-alt="MoOx photo">
+      <span data-src="{{ happyplan.baseUrls.images }}/moox/home-200x.png"></span>
+      <span data-src="{{ happyplan.baseUrls.images }}/moox/home-400x.png" data-media="(min-width: 55em)"></span>
+      <noscript><img class="stretch-img_column_img" alt="MoOx photo" src="{{ happyplan.baseUrls.images }}/moox/home-400x.png" /></noscript>
+    </span>
+  </div>
+</div>
