@@ -18,7 +18,13 @@ nav: blog
 
 			<ul class="posts">
 			{{#posts pages}}
-				<li><time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time> <a href="{{url this.dest}}" class="title"><span class="text-less-visible">[{{ data.lang }}]</span> {{ data.title }}</a>
+				<li>
+          <time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time>
+          <a href="{{url this.dest}}" class="title">
+            <span class="text-less-visible">[{{ data.lang }}]</span>
+            {{ data.title }}
+          </a>
+        </li>
 			{{/posts}}
 			</ul>
 		</div>

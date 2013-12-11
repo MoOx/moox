@@ -15,7 +15,7 @@ nav: blog
 		<article class="Box-module" lang="{{ page.lang }}">
 			<header>
 				<h1><span class="text-less-visible">[{{ page.lang }}]</span> {{ page.title }}</h1>
-				<time class="text-less-visible" pubdate datetime="{{moment data.date format="YYYY-MM-DD" }}">{{moment data.date format="DD MMMM YYYY" }}</time>
+				<time class="text-less-visible" pubdate datetime="{{moment data.date format="YYYY-MM-DD" }}">{{moment page.data.date format="DD MMMM YYYY" }}</time>
 			</header>
 			<!-- {{#isnt page.tags empty }}
 			<div class="category">
