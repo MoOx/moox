@@ -1,0 +1,26 @@
+---
+layout: default.hbs
+title: Développeur Web Front-End HTML5, CSS 3, Javascript
+class: grid-title--quotes
+nav: blog
+---
+<div class="grid grid--center grid--title">
+	<hgroup class="grid__cell unit-8-12--medium title--light">
+		<h1>MoOx' portfolio</h1>
+		<!-- <h2></h2> -->
+	</hgroup>
+</div>
+
+<div class="grid grid--blabla">
+	<div class="grid__cell Box">
+		<div class="Box-module">
+			<h2>Portfolio</h2>
+
+			<ul class="posts">
+			{{#each happyplan.xps }}
+				<li><time datetime="{{ this.date }}" class="time">{{ this.date }}</time> <a href="{{ this.url }}" class="title"><span class="text-less-visible">[{{ this.lang }}]</span> {{ this.title }}</a>
+			{{/each}}
+			</ul>
+		</div>
+	</div>
+</div>
