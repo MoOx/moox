@@ -6,7 +6,7 @@
 , "author": "Maxime Thirouin"
 , "license": "MIT"
 , "devDependencies": {
-    "happyplan": "git://github.com/happyplan/happyplan.git"
+    "happyplan": "~0.4.0-beta.3"
   }
 , "repository": {
     "type": "git"

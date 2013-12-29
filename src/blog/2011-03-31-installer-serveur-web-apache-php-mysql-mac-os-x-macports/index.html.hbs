@@ -104,20 +104,20 @@ sudo /opt/local/apache2/bin/apxs -a -e -n "php5" libphp5.so
 
 Il faut maintenant préciser à Apache que les fichiers index.php peuvent être les fichiers index par défaut. Pour ce faire, il faut éditer le fichier /opt/local/apache2/conf/httpd.conf et rechercher « DirectoryIndex index.html »
 
-```bash
-# add "index.php" at the end
+```ini
+; add "index.php" at the end
 DirectoryIndex index.html index.php
 ```
 
 On peut aussi ajouter la conf du module apache php (en fin de fichier ?)
 
-```bash
+```
 Include conf/extra/mod_php.conf
 ```
 
 Ayant déjà vécu un paquet de reinstall système, j’ai l’habitude de mettre mes configs dans mes dossiers perso indépendamment du système, voilà donc ce que j’ai ajouté en à la fin du httpd.conf.
 
-```bash
+```
 Include /Users/YOUR-USERNAME/Dropbox/Servers/conf/development/*
 ```
 
@@ -144,7 +144,7 @@ sudo open /opt/local/etc/php5/php.ini
 
 Prenez 2 secondes pour éviter des warnings avec les fonctions/classes date, time etc… en ajoutant ceci à la fin du fichier php.ini
 
-```bash
+```ini
 # set a default timezone for your server
 date.timezone="Europe/Paris"
 ```
@@ -155,7 +155,7 @@ Il reste à configurer  notre serveur de base de données SQL.
 
 Pendant qu’on est encore chaud sur le php.ini, on en profite pour adapter les réglages MySQL. Voilà ce qui va être nécessaire (*cherchez dans le fichier les clés de configs et modifiez les comme ici*)
 
-```bash
+```ini
 # edit php.ini to add default mysql socket
 # ...
 pdo_mysql.default_socket=/tmp/mysql.sock
@@ -181,7 +181,7 @@ sudo open /opt/local/etc/mysql5/my.cnf
 
 Voilà les ajouts/modifications à apporter
 
-```bash
+```ini
 # add this into the configuration file, or edit current settings
 [mysqld_safe]
 socket = /tmp/mysql.sock
