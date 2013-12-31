@@ -16,9 +16,9 @@ nav: blog
 		<div class="Box-module">
 			<h2>Posts</h2>
 
-			<ul class="posts">
+			<ul class="Posts">
 			{{#posts pages}}
-				<li>
+				<li class="Posts-item">
           <time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time>
           <a href="{{url this.dest}}" class="title">
             <span class="text-less-visible">[{{ data.lang }}]</span>
