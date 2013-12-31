@@ -206,6 +206,17 @@ $flex-media-ratios: "3-1" 3, "16-9" 1.77777, "4-3" 1.33333, "1-1" 1;
 
 @import "./highlight";
 
+// custom tiny parts
+
+.AvailabilityStatus {
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.8;
+
+  background: darken($mx-Color-greenLeaf, 20%);
+  border-radius: $mx-borderRadius;
+}
+
 .Home-projects {
   text-align: left;
   padding-left: 1rem;
@@ -232,5 +243,5 @@ $flex-media-ratios: "3-1" 3, "16-9" 1.77777, "4-3" 1.33333, "1-1" 1;
   .AboutAuthor-avatar {
     float: left;
     margin-right: 1em;
-    border-radius: .2em;
+    border-radius: $mx-borderRadius;
   }

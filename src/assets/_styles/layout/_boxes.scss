@@ -19,7 +19,10 @@ $Box--background: rgba(#000, .65);
   background-color: rgba(#fff, .1);
   box-shadow: 0 0 1px 1px rgba(#fff, .1); //, 0 0 1em .4em rgba(#000, .3)
   border-radius: $mx-borderRadius;
-  text-align: justify;
+
+  p {
+    text-align: justify;
+  }
 }
 
 .Box,
