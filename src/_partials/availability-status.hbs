@@ -1,5 +1,13 @@
+{{#is page.nav 'contact' }}
 <div class="Box AvailabilityStatus">
+{{else}}
+<a class="Box AvailabilityStatus" href="/contact/">
+{{/is}}
   <div class="Box-module">
-    I'm open for <strong>collaboration on new projects</strong> starting <strong>February, 2014</strong>.
+      I'm open for <strong>collaboration on new projects</strong> starting <strong>February, 2014</strong>.
   </div>
+{{#is page.nav 'contact' }}
 </div>
+{{else}}
+</a>
+{{/is}}
