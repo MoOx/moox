@@ -48,37 +48,41 @@
 $icons--big-size: 4em;
 .icons--big {
 	text-align: center;
-	margin: 1em auto !important;
-	line-height: 1.2;
+	margin: 1rem auto !important;
+	font-size: $icons--big-size;
+  line-height: 1;
 
 	a {
-		font-size: $icons--big-size;
-		position: relative;
-		display: inline-block;
-		padding: 0 .2em;
-		transition: all .2s;
-		//@include ceaser-transition($easeInOutBack, all, .3s);
-
-		.text {
-			color: $text-color;
-			font-weight: bold;
-			font-size: .25em;
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			opacity: 0;
-			transform:  translateY(0%);
-			//@include ceaser-transition($easeInOutBack, all, .3s);
-		}
-
-		@include accessibleHover {
-			.text {
-				transform: translateY($icons--big-size*1.1);
-				opacity: 1;
-			}
-		}
+    position: relative;
+    display: inline-block;
+    transition: all .2s;
+    //@include ceaser-transition($easeInOutBack, all, .3s);
 	}
+
+    .icon {
+      display: inline-block;
+      margin: 0 .2em;
+    }
+
+    .text {
+      color: $text-color;
+      font-weight: bold;
+      font-size: .25em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transform:  translateY(0%);
+      //@include ceaser-transition($easeInOutBack, all, .3s);
+    }
+
+    @include accessibleHover {
+      .text {
+        transform: translateY($icons--big-size*1.1);
+        opacity: 1;
+      }
+    }
 }
 
 	.stretch-img_column {
