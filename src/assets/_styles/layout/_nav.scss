@@ -46,7 +46,7 @@ $Navbar-separator: false;
 	}
 
 	.Navbar__toggler {
-
+    right: 1rem;
 	}
 
 	.js {
@@ -65,6 +65,7 @@ $SiteLogo-title--font-size: 1.4em;
 .SiteLogo {
 	line-height: 1;
 	padding: .6em 1em;
+  display: inline-block;
 }
 
 	.SiteLogo-title,

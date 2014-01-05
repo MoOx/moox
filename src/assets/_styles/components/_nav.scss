@@ -24,6 +24,8 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
 }
 
   .Navbar__section {
+    list-style: none;
+
     &,
     li,
     a {
@@ -60,6 +62,8 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
     .Navbar__section--right { float: right }
   }
 
+// Button toggler
+
   $Navbar__toggler: true !default;
   $Navbar__toggler-ratio: .7 !default;
   @if $Navbar__toggler {
@@ -67,19 +71,21 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
       position: absolute;
       top: 0;
       right: 0;
+
       // by default hidden since it's a javascript button
       @include crp-Media-min($Navbar-screen-breakpoint) { display: none;  }
 
-      font-size: $Navbar-height*$Navbar__toggler-ratio;
-      line-height: 1*(1/$Navbar__toggler-ratio);
-      padding: 0;
-      border: 0;
+        font-size: $Navbar-height*$Navbar__toggler-ratio;
+        line-height: 1*(1/$Navbar__toggler-ratio);
+        padding: 0;
+        border: 0;
 
-      color: $Navbar-link-color;
-      background: none;
-    }
+        color: $Navbar-link-color;
+        background: none;
+      }
   }
 
+// Separator
 
   $Navbar-separator: true !default;
   @if ($Navbar-separator) {
