@@ -11,6 +11,7 @@ $annonceBoxHeight: 2em;
 }
 
 .AvailabilityStatus {
+  position: relative;
   text-align: center;
   font-size: 1.1rem;
   line-height: 1.8;
@@ -19,12 +20,29 @@ $annonceBoxHeight: 2em;
 
   display: block;
   color: #fff !important;
-
-  .Box-body { border-color: rgba(#000, .15) }
 }
 
-  a.AvailabilityStatus {
-    &:hover {
-      box-shadow: inset 0 0 .4rem rgba(#000, .1);
+    .AvailabilityStatus-body {
+      display: table;
+      border-color: rgba(#000, .15);
     }
-  }
+
+      a.AvailabilityStatus {
+        &:hover .AvailabilityStatus-body {
+          box-shadow: 0 0 .4rem rgba(#000, .2);
+        }
+      }
+
+        .AvailabilityStatus-icon
+      , .AvailabilityStatus-txt
+      {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+        .AvailabilityStatus-icon
+        {
+          font-size: 4rem;
+          line-height: 1;
+          padding-right: 1rem;
+        }
