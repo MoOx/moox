@@ -83,6 +83,7 @@ $icons--big-size: 4em;
 
 	.stretch-img_column {
 		padding-top: 1em;
+    vertical-align: bottom;
 
 		$mooxSmallMaxWidth: 200px;
 		img {
@@ -94,7 +95,7 @@ $icons--big-size: 4em;
 		}
 	}
 
-// strectch layout on home for moox img
+// stretch layout on home for moox img
 @media (min-height: 50em) and (min-width: $crp-Media-size-m) {
 	.stretch-img,
 	body,
