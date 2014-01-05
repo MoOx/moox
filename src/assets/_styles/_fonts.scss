@@ -42,3 +42,8 @@
 .h6 { font-weight: bold; }
 
 .text--light { font-weight: normal; }
+
+// fix Normalize
+h1 {
+  line-height: 1.2;
+}
