@@ -1,0 +1,23 @@
+.Posts {
+  margin: 0;
+  padding: 0;
+  list-style: inside;
+
+  @include crp-Media-m {
+    padding-left: 2em;
+  }
+}
+
+  .Posts-item {
+
+  }
+
+.AboutAuthor {
+
+}
+
+  .AboutAuthor-avatar {
+    float: left;
+    margin-right: 1em;
+    border-radius: $mx-borderRadius;
+  }

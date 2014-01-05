@@ -4,29 +4,30 @@ $Box--background: rgba(#000, .65);
   background: $Box--background;
   border-radius: $mx-borderRadius;
   padding: $grid-gutter/2;
+  box-shadow: 0 .2rem 1rem rgba(#000, .4);
 }
 
-.Box + .Box {
-  margin-top: 1em;
-}
-
-.Box-module {
-  //@extend %crp-Clearfix; // libsass bug
-  @include crp-Clearfix;
-  padding: $grid-gutter/2;
-  margin: $grid-gutter/2 0;
-  background-color: #222;
-  background-color: rgba(#fff, .1);
-  box-shadow: 0 0 1px 1px rgba(#fff, .1); //, 0 0 1em .4em rgba(#000, .3)
-  border-radius: $mx-borderRadius;
-
-  p {
-    text-align: justify;
+  .Box + .Box {
+    margin-top: 1em;
   }
-}
+
+  .Box-body {
+    //@extend %crp-Clearfix; // libsass bug
+    @include crp-Clearfix;
+    padding: $grid-gutter/2;
+    margin: $grid-gutter/2 0;
+    background-color: #222;
+    background-color: rgba(#fff, .1);
+    border: 1px solid rgba(#000, .4);
+    border-radius: $mx-borderRadius;
+
+    p {
+      text-align: justify;
+    }
+  }
 
 .Box,
-.Box-module {
+.Box-body {
   & :first-child { margin-top: 0; }
   & :last-child { margin-bottom: 0; }
 }

@@ -12,7 +12,7 @@ nav: blog
 
 <div class="grid grid--blabla">
 	<div class="grid__cell Box">
-		<article class="Box-module" lang="{{ page.lang }}">
+		<article class="Box-body" lang="{{ page.lang }}">
 			<header>
 				<h1><span class="text-less-visible">[{{ page.lang }}]</span> {{ page.title }}</h1>
 				<time class="text-less-visible" pubdate datetime="{{moment data.date format="YYYY-MM-DD" }}">{{moment page.data.date format="DD MMMM YYYY" }}</time>
@@ -47,14 +47,14 @@ nav: blog
 		{{/is}}
 
 		{{#and happyplan.disqus_short_name page.comments }}
-		<section class="Box-module">
+		<section class="Box-body">
 			<h1>Comments</h1>
 			<div id="disqus_thread" aria-live="polite">
 				<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 			</div>
 		</section>
 		{{/and}}
-		<footer class="Box-module">
+		<footer class="Box-body">
 			<h3>This is a temporary footer</h3>
 			<div class="icons--big">
 				<a href="https://twitter.com/MoOx"><i class="icon icon_twitter"></i><span class="text">Twitter</span></a>
