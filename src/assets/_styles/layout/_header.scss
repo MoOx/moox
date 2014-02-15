@@ -1,0 +1,59 @@
+.mx-Header {
+  @extend %mx-Text--light;
+
+  padding-top: $Navbar-height;
+  border-bottom: 0.4em solid $mx-Color-green;
+  box-shadow: 0 0 1rem rgba(#000, .3);
+
+  // update twitter background when you update that & also colors :)
+  // https://twitter.com/settings/design
+
+  @include html-background('forest-ruins--portrait.jpg', 'forest-ruins--landscape.jpg');
+
+  .error-404 & {
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+  }
+
+  @include crp-Media-m {
+    padding: ($Navbar-height + 6em) 0 6em;
+
+    .grid__cell {
+      text-align: center;
+    }
+
+    // quotes title
+    .grid-title--quotes & {
+
+      h1 { text-align: left; }
+      h2 { text-align: right; }
+
+      h1,
+      h1:before,
+      h2,
+      h2:after {
+        //z-index: 2;
+        position: relative;
+      }
+      h1:before,
+      h2:after {
+        position: absolute;
+        font-size: 6em;
+        opacity: .6;
+      }
+      h1:before {
+        content: '\201C';
+        left: -.7em;
+        top: -.2em;
+        font-size: 1.4em;
+      }
+      h2:after {
+        content: '\201D';
+        right: -.7em;
+        top: 0em;
+        font-size: 2.2em; // restore h1 size
+      }
+    }
+  }
+}

@@ -23,8 +23,10 @@
 {{#if happyplan.repository.url }}
 <a class="source-code" href="{{ happyplan.repository.url }}">source code</a>
 {{/if}}
+<div class="body-wrapper">
 {{> nav }}
 {{> body }}
+</div>
 {{{ happyplan.html.hooks.body_close }}}
 {{> google-analytics }}
 {{> disqus }}

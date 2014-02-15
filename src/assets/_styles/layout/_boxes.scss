@@ -1,10 +1,12 @@
 $Box--background: rgba(#000, .65);
 
 .Box {
+  @extend %mx-Text--light;
   background: $Box--background;
   border-radius: $mx-borderRadius;
   padding: $grid-gutter/2;
-  box-shadow: 0 .2rem 1rem rgba(#000, .4);
+  margin: $grid-gutter 0;
+  box-shadow: 0 .2rem 1rem rgba(#000, .2);
 }
 
   .Box + .Box {

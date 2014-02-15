@@ -1,63 +1,27 @@
-.grid--title {
-	@include crp-Media-m {
-		padding: 1em 0;
 
-		.grid__cell {
-			text-align: center;
-		}
 
-		// quotes title
-		.grid-title--quotes & {
 
-			h1 { text-align: left; }
-			h2 { text-align: right; }
-
-			h1,
-			h1:before,
-			h2,
-			h2:after {
-				//z-index: 2;
-				position: relative;
-			}
-			h1:before,
-			h2:after {
-				position: absolute;
-				font-size: 6em;
-				opacity: .6;
-			}
-			h1:before {
-				content: '\201C';
-				left: -.7em;
-				top: -.2em;
-				font-size: 1.4em;
-			}
-			h2:after {
-				content: '\201D';
-				right: -.7em;
-				top: 0em;
-				font-size: 2.2em; // restore h1 size
-			}
-		}
-	}
-}
-
-.grid--blabla {
-	position: relative;
-}
 
 $icons--big-size: 4em;
 .icons--big {
-	text-align: center;
-	margin: 1rem auto !important;
-	font-size: $icons--big-size;
+  text-align: center;
+  margin: 1rem auto !important;
+  font-size: $icons--big-size;
   line-height: 1;
 
-	a {
+  a {
     position: relative;
     display: inline-block;
     transition: all .2s;
     //@include ceaser-transition($easeInOutBack, all, .3s);
-	}
+
+    @include accessibleHover {
+      .text {
+        transform: translateY($icons--big-size*1.1);
+        opacity: 1;
+      }
+    }
+  }
 
     .icon {
       display: inline-block;
@@ -65,7 +29,7 @@ $icons--big-size: 4em;
     }
 
     .text {
-      color: $text-color;
+      //color: $text-color;
       font-weight: bold;
       font-size: .25em;
       position: absolute;
@@ -76,69 +40,49 @@ $icons--big-size: 4em;
       transform:  translateY(0%);
       //@include ceaser-transition($easeInOutBack, all, .3s);
     }
-
-    @include accessibleHover {
-      .text {
-        transform: translateY($icons--big-size*1.1);
-        opacity: 1;
-      }
-    }
 }
 
-	.stretch-img_column {
-		padding-top: 1em;
+  .mx-StretchImg {
+    padding-top: 1em;
     vertical-align: bottom;
 
-		$mooxSmallMaxWidth: 200px;
-		img {
-			display: block;
-			margin: auto;
-			max-width: $mooxSmallMaxWidth;
-			//@include crp-Media-min($mooxSmallMaxWidth) { max-width: 110%; }
-			@include crp-Media-m { max-width: 100%; }
-		}
-	}
+    $mooxSmallMaxWidth: 200px;
+    img {
+      display: block;
+      margin: auto;
+      max-width: $mooxSmallMaxWidth;
+      //@include crp-Media-min($mooxSmallMaxWidth) { max-width: 110%; }
+      @include crp-Media-m { max-width: 100%; }
+    }
+  }
 
 // stretch layout on home for moox img
 @media (min-height: 50em) and (min-width: $crp-Media-size-m) {
-	.stretch-img,
-	body,
-	.body-wrapper {
-		height: 100%;
-	}
+  .mx--StretchImg,
+  body {
+    height: 100%;
+  }
 
-	.stretch-img {
-		.annonce-box,
-		.Navbar--top {
-			position: absolute;
-		}
-
-		&.annonce .Navbar--top {
-      top: $annonceBoxHeight;
+  .mx--StretchImg {
+    .mx-Header {
+      padding-top: $Navbar-height + 6em;
+      height: 30%;
     }
 
-	}
+    .mx-Content { height: 70%; }
+  }
 
-	.stretch-img {
-		.grid--title {
-			padding-top: $annonceBoxHeight + $Navbar-height + 2em;
-			height: 30%;
-		}
+  .mx-StretchImg {
+    position: static;
+    padding-top: 0;
 
-		.grid--blabla { height: 70%; }
-	}
-
-	.stretch-img_column {
-		position: static;
-		padding-top: 0;
-
-		img {
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			height: 100%;
-			max-width: none;
-		}
-	}
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      max-width: none;
+    }
+  }
 }

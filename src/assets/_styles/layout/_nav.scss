@@ -1,6 +1,6 @@
 $Navbar-height: 4em;
-$Navbar-background: $Box--background;
-$Navbar__section-background--hover: $Box--background;
+$Navbar-background: rgba(#000, .65);
+$Navbar__section-background--hover: rgba(#000, .65);
 $Navbar__item--font-size: .8em;
 
 $Navbar-separator: false;
@@ -9,80 +9,84 @@ $Navbar-separator: false;
 @import "../components/glowing-indicator";
 
 .Navbar {
-	[href="#not-ready"] { color: rgba(#fff, .3) !important; }
-	border-radius: 0 0 $mx-borderRadius $mx-borderRadius;
+  position: absolute;
+  [href="#not-ready"] { color: rgba(#fff, .3) !important; }
 }
 
-	.Navbar--top {
-		//padding-top: 1em;
-		//@include box-shadow(0 .2em .6em rgba(#000, .8));
-		@include crp-Media-l { font-size: 1.1em;}
+  .Navbar--top {
+    //padding-top: 1em;
+    //@include box-shadow(0 .2em .6em rgba(#000, .8));
+    @include crp-Media-l { font-size: 1.1em;}
 
-		.active {
-			position: relative;
-			overflow: hidden;
+    .active {
+      position: relative;
+      overflow: hidden;
 
-			vertical-align: middle; // FIX Firefox alignment bug https://bugzilla.mozilla.org/show_bug.cgi?id=491549
+      vertical-align: middle; // FIX Firefox alignment bug https://bugzilla.mozilla.org/show_bug.cgi?id=491549
 
-			&::after {
-				@include glowing-indicator-pseudo-element-requirements($highlight-color);
-				@include glowing-indicator-pseudo-element-position(left);
-				@include crp-Media-m {
-					// disable previous style
-					top: auto;
-					left: auto;
-					margin-top: 0;
-					@include glowing-indicator-pseudo-element-position(top);
-				}
-			}
-		}
-	}
+      &::after {
+        @include glowing-indicator-pseudo-element-requirements($highlight-color);
+        @include glowing-indicator-pseudo-element-position(left);
+        @include crp-Media-m {
+          // disable previous style
+          top: auto;
+          left: auto;
+          margin-top: 0;
+          @include glowing-indicator-pseudo-element-position(top);
+        }
+      }
+    }
+  }
 
-	.Navbar__section {
-		a {
-			font-size: $Navbar__item--font-size;
-			padding: 0 1em;
-		}
-	}
+  .Navbar__section {
+    a {
+      font-size: $Navbar__item--font-size;
+      padding: 0 1em;
+    }
+  }
 
-	.Navbar__toggler {
+  .Navbar__toggler {
     right: 1rem;
-	}
+  }
 
-	.js {
-		@include crp-Media-max($Navbar-screen-breakpoint) {
-			.js-togglable__toggler { display: inline-block; }
-			.js-togglable__item--hide { display: none; }
-		}
-		@include crp-Media-min($Navbar-screen-breakpoint) {
-			.js-togglable__toggler { display: none; }
-		}
-	}
+  @include crp-Media-max($Navbar-screen-breakpoint) {
+    .js-togglable--toggled { background: rgba(#000, .9) }
+  }
+
+  .js {
+    @include crp-Media-max($Navbar-screen-breakpoint) {
+      .js-togglable__toggler { display: inline-block; }
+      .js-togglable__item--hide { display: none; }
+    }
+    @include crp-Media-min($Navbar-screen-breakpoint) {
+      .js-togglable__toggler { display: none; }
+    }
+  }
 
 ////
 
 $SiteLogo-title--font-size: 1.4em;
 .SiteLogo {
-	line-height: 1;
-	padding: .6em 1em;
+  line-height: 1;
+  padding: .6em 0;
   display: inline-block;
 }
 
-	.SiteLogo-title,
-	.SiteLogo-description {
-		line-height: 1;
+  .SiteLogo-title,
+  .SiteLogo-description {
+    line-height: 1;
 
-		color: #fff;
-		&:hover { color: #fff; }
+    color: #fff;
+    &:hover { color: #fff; }
 
-		text-decoration: none;
-	}
+    text-decoration: none;
+  }
 
-		.SiteLogo-title {
-			font-weight: bold;
-			font-size: $SiteLogo-title--font-size;
-		}
+    .SiteLogo-title {
+      font-weight: bold;
+      font-size: $SiteLogo-title--font-size;
+    }
 
-		.SiteLogo-description {
-			margin-top: -1.2em;
-		}
+    .SiteLogo-description {
+      margin-top: -1.2em;
+    }

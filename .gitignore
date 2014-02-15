@@ -5,11 +5,10 @@
 # packages
 node_modules
 bower_components
-bundler_gems
 
 # build
 dist
-build
+.tmp
 
 # gh-page
 .grunt

@@ -27,7 +27,7 @@ $mx-Color-greenEmerald: #009776;
 $mx-Color-greenBlue: #00adae;
 
 $text-color: #eee;
-$highlight-color: $mx-Color-greenLeaf;// was #5da423;
+$highlight-color: $mx-Color-green;// was #5da423;
 $dark-color: #222;
 
 $mx-borderRadius: 4px;
@@ -66,7 +66,7 @@ $grid-gutter: 2em !default;
   }
 }
 
-@import "./icons";
+@import "icons";
 @import "./fonts";
 
 %mx-Text--light {
@@ -83,6 +83,7 @@ $mx-Link-color: darken($highlight-color, 5%);
 a {
   text-decoration: none;
   color: $mx-Link-color;
+  font-weight: 500;
   &:hover { color: darken($mx-Link-color, 4%); }
   &:focus { color: darken($mx-Link-color, 10%); }
   &:active { color: lighten($mx-Link-color, 5%); }
@@ -99,7 +100,7 @@ a {
 }
 
 @mixin html-background($background-image--portrait, $background-image--landscape) {
-  background: image-url($background-image--portrait) no-repeat center fixed;
+  background: image-url($background-image--portrait) no-repeat center 45%;
   @media (orientation: landscape) and (min-width: 50em) { background-image: image-url($background-image--landscape); }
   background-size: cover;
 }
@@ -114,28 +115,16 @@ html {
 
   font-family: $base-font-family;
   //font-weight: 300;
-
-  @extend %mx-Text--light;
-  // update twitter background when you update that & also colors :)
-  // https://twitter.com/settings/design
-  @include html-background('forest-ruins--portrait.jpg', 'forest-ruins--landscape.jpg');
-
+  background: #eee url('/assets/img/lightpaperfibers.png');
   &.error-404 { @include html-background('lost-woods--portrait.jpg', 'lost-woods--landscape.jpg'); }
 }
 
 
-body {
-
-}
-
-.body-wrapper {
+.mx-Body {
   position: relative;
 
   // hide grid negative padding on xs screen
   padding: 0 0.5 * $grid-gutter;
-
-  // add a tiny grid padding
-  @include crp-Media-s { padding: 0 $grid-gutter; }
 
   // add max-width for center layout
   @include crp-Media-m {
@@ -158,8 +147,14 @@ body {
 }
 
 
-@import "./layout/boxes";
 @import "./layout/nav";
+@import "./layout/header";
+.mx-Content {
+  position: relative;
+  padding: 2rem 1rem;
+}
+@import "./layout/footer";
+@import "./layout/boxes";
 
 // h1,
 // h2,
