@@ -5,13 +5,11 @@
 
     Maxime Thirouin (MoOx) -- Developer -- http://moox.io/ - https://twitter.com/MoOx - https://github.com/MoOx
 
-# THANKS
-
-    kud (kud.io) for HappyPlan
-
 # TECHNOLOGY COLOPHON
 
-    SublimeText 3
-    HTML5, CSS3
-    HappyPlan (Jekyll, Grunt, Bower, Sass)
+    HTML
+    CSS
+    Vanilla JavaScript
     Normalize.css
+
+    Made with SublimeText
