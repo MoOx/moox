@@ -1,7 +1,7 @@
-$Navbar-height: 4em;
+$Navbar-height: 4rem;
 $Navbar-background: rgba(#000, .65);
 $Navbar__section-background--hover: rgba(#000, .65);
-$Navbar__item--font-size: .8em;
+$Navbar__item--font-size: .9rem;
 
 $Navbar-separator: false;
 
@@ -15,7 +15,9 @@ $Navbar-separator: false;
 
   .Navbar--top {
     //padding-top: 1em;
-    //@include box-shadow(0 .2em .6em rgba(#000, .8));
+    //border-bottom: 0.1rem solid $mx-Color-greenEmerald;
+    box-shadow: 0 .2em .6em rgba(#000, .4);
+
     @include crp-Media-l { font-size: 1.1em;}
 
     .active {

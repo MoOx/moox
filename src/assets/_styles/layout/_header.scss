@@ -2,7 +2,22 @@
   @extend %mx-Text--light;
 
   padding-top: $Navbar-height;
-  border-bottom: 0.4em solid $mx-Color-green;
+
+  .mx-Body {
+    display: table;
+    height: 100%;
+  }
+
+    .mx-Body hgroup {
+      display: table-cell;
+      vertical-align: middle;
+      padding: 1rem;
+
+      @include crp-Media-m { padding: 4rem 1rem }
+      @media (min-height: 50rem) { padding: 6rem 1rem }
+    }
+
+  border-bottom: 0.4rem solid $mx-Color-green;
   box-shadow: 0 0 1rem rgba(#000, .3);
 
   // update twitter background when you update that & also colors :)
@@ -17,11 +32,7 @@
   }
 
   @include crp-Media-m {
-    padding: ($Navbar-height + 6em) 0 6em;
-
-    .grid__cell {
-      text-align: center;
-    }
+    .grid__cell { text-align: center }
 
     // quotes title
     .grid-title--quotes & {
