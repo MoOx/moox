@@ -1,22 +1,15 @@
 $icons--big-size: 4em;
 .icons--big {
   text-align: center;
-  margin: 1rem auto !important;
+  margin: 2rem auto !important;
   font-size: $icons--big-size;
   line-height: 1;
 
   a {
     position: relative;
     display: inline-block;
-    transition: all .2s;
-    //@include ceaser-transition($easeInOutBack, all, .3s);
 
-    @include accessibleHover {
-      .text {
-        transform: translateY($icons--big-size*1.1);
-        opacity: 1;
-      }
-    }
+    //@include ceaser-transition($easeInOutBack, all, .3s);
   }
 
     .icon {
@@ -34,8 +27,18 @@ $icons--big-size: 4em;
       width: 100%;
       opacity: 0;
       transform:  translateY(0%);
+      transition: all .2s;
       //@include ceaser-transition($easeInOutBack, all, .3s);
     }
+
+  a {
+    @include accessibleHover {
+      .text {
+        transform: translateY($icons--big-size*1.1);
+        opacity: 1;
+      }
+    }
+  }
 }
 
   .mx-StretchImg {

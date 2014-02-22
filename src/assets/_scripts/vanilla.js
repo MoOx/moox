@@ -6,7 +6,7 @@ document.documentElement.classList.toggle('no-js');
 
 // call me just before bottom, I'll be dom ready :p
 [].forEach.call(document.querySelectorAll('[href="#not-ready"]'), function(el){
-  el.setAttribute('data-hint', 'Not ready yet !');
+  el.setAttribute('data-tip', 'Not ready yet !');
 });
 
 [].forEach.call(document.querySelectorAll('.js-togglable'), function(el){
