@@ -1,27 +1,27 @@
 // just it case scripts below breack everything on a browser, just put the css like if there is no js
-document.documentElement.classList.toggle('js');
-document.documentElement.classList.toggle('no-js');
+document.documentElement.classList.toggle("js");
+document.documentElement.classList.toggle("no-js");
 
 // my website
 
-// call me just before bottom, I'll be dom ready :p
-[].forEach.call(document.querySelectorAll('[href="#not-ready"]'), function(el){
-  el.setAttribute('data-tip', 'Not ready yet !');
-});
+// call me just before bottom, I"ll be dom ready :p
+;[].forEach.call(document.querySelectorAll("[href=\"#not-ready\"]"), function(el) {
+  el.setAttribute("data-tip", "Not ready yet !");
+})
 
-[].forEach.call(document.querySelectorAll('.js-togglable'), function(el){
-  var toggler = el.querySelector('.js-togglable__toggler');
-  var items = [].slice.call(el.querySelectorAll('.js-togglable__item'));
+;[].forEach.call(document.getElementsByClassName("js-Togglable"), function(el) {
+  var toggler = el.querySelector(".js-Togglable-toggler");
+  var items = [].slice.call(el.getElementsByClassName("js-Togglable-item"));
 
   var toggle = function(event) {
-    el.classList.toggle('js-togglable--toggled');
+    el.classList.toggle("js-Togglable--toggled");
     items.forEach(function(item) {
-      item.classList.toggle('js-togglable__item--hide');
+      item.classList.toggle("js-Togglable-item--hide");
     });
   };
 
-  toggler.addEventListener('click', toggle);
-  toggler.addEventListener('keyup', toggle);
+  toggler.addEventListener("click", toggle);
+  toggler.addEventListener("keyup", toggle);
 });
 
 ;[].forEach.call(document.getElementsByClassName("js-MailTo"), function(el) {

@@ -1,6 +1,6 @@
 $Navbar-height: 4rem;
 $Navbar-background: rgba(#000, .65);
-$Navbar__section-background--hover: rgba(#000, .65);
+$Navbar-section-background--hover: rgba(#000, .65);
 $Navbar__item--font-size: .9rem;
 
 $Navbar-separator: false;
@@ -40,28 +40,28 @@ $Navbar-separator: false;
     }
   }
 
-  .Navbar__section {
+  .Navbar-section {
     a {
       font-size: $Navbar__item--font-size;
       padding: 0 1em;
     }
   }
 
-  .Navbar__toggler {
+  .Navbar-toggler {
     right: 1rem;
   }
 
   @include crp-Media-max($Navbar-screen-breakpoint) {
-    .js-togglable--toggled { background: rgba(#000, .9) }
+    .js-Togglable--toggled { background: rgba(#000, .9) }
   }
 
   .js {
     @include crp-Media-max($Navbar-screen-breakpoint) {
-      .js-togglable__toggler { display: inline-block; }
-      .js-togglable__item--hide { display: none; }
+      .js-Togglable-toggler { display: inline-block; }
+      .js-Togglable-item--hide { display: none; }
     }
     @include crp-Media-min($Navbar-screen-breakpoint) {
-      .js-togglable__toggler { display: none; }
+      .js-Togglable-toggler { display: none; }
     }
   }
 

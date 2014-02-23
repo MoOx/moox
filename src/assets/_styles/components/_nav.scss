@@ -2,7 +2,7 @@ $Navbar-height: 2.6em !default;
 $Navbar-background: #111 !default;
 $Navbar-link-color: #fff !default;
 $Navbar-link-color--hover: #fff !default;
-$Navbar__section-background--hover: rgba(#000, .4) !default;
+$Navbar-section-background--hover: rgba(#000, .4) !default;
 
 $Navbar-separator--color: rgba(#000, .8) !default;
 $Navbar-separator--color-alt: rgba(#fff, .1) !default;
@@ -23,7 +23,7 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
   .icon { font-size: 1.2em; }
 }
 
-  .Navbar__section {
+  .Navbar-section {
     list-style: none;
 
     &,
@@ -43,14 +43,14 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
 
       &:hover {
         color: $Navbar-link-color;
-        background: $Navbar__section-background--hover;
+        background: $Navbar-section-background--hover;
       }
     }
   }
 
   @include crp-Media-min($Navbar-screen-breakpoint) {
     // inline menu for larger screen
-    .Navbar__section {
+    .Navbar-section {
       &,
       li,
       a {
@@ -58,16 +58,16 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
       }
     }
 
-    .Navbar__section--left { float: left }
-    .Navbar__section--right { float: right }
+    .Navbar-section--left { float: left }
+    .Navbar-section--right { float: right }
   }
 
 // Button toggler
 
-  $Navbar__toggler: true !default;
-  $Navbar__toggler-ratio: .7 !default;
-  @if $Navbar__toggler {
-    .Navbar__toggler {
+  $Navbar-toggler: true !default;
+  $Navbar-toggler-ratio: .7 !default;
+  @if $Navbar-toggler {
+    .Navbar-toggler {
       position: absolute;
       top: 0;
       right: 0;
@@ -75,8 +75,8 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
       // by default hidden since it's a javascript button
       @include crp-Media-min($Navbar-screen-breakpoint) { display: none;  }
 
-        font-size: $Navbar-height*$Navbar__toggler-ratio;
-        line-height: 1*(1/$Navbar__toggler-ratio);
+        font-size: $Navbar-height*$Navbar-toggler-ratio;
+        line-height: 1*(1/$Navbar-toggler-ratio);
         padding: 0;
         border: 0;
 

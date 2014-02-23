@@ -1,13 +1,13 @@
-<nav class="Navbar Navbar--top js-togglable">
+<nav class="Navbar Navbar--top js-Togglable">
   <div class="mx-Body">
-    <a class="SiteLogo Navbar__section Navbar__section--left AttrTip AttrTip--bottom title" href="{{ happyplan.baseUrl }}" data-tip="Home">
+    <a class="SiteLogo Navbar-section Navbar-section--left AttrTip AttrTip--bottom title" href="{{ happyplan.baseUrl }}" data-tip="Home">
       <span class="SiteLogo-title">{{ happyplan.name }}</span>
       <br />
       <span class="SiteLogo-description">{{ happyplan.description }}</span>
     </a>
-    <button class="Navbar__toggler js-togglable__toggler">☰</button>
+    <button class="Navbar-toggler js-Togglable-toggler">☰</button>
 
-    <ul class="Navbar__section Navbar__section--right js-togglable__item js-togglable__item--hide">
+    <ul class="Navbar-section Navbar-section--right js-Togglable-item js-Togglable-item--hide">
       <li class="Navbar-separator--after"><a class="{{#is page.nav 'profile' }}active{{/is}}"  href="profile/"><i class="icon icon_user"></i> Profile</a>
       {{!-- </li><li class="Navbar-separator--after"><a class="{{#is page.nav 'portfolio' }}active{{/is}}"  href="#not-ready"><i class="icon icon_gears"></i> Portfolio</a> --}}
       </li><li class="Navbar-separator--after"><a class="{{#is page.nav 'code' }}active{{/is}}"  href="/code/"><i class="icon icon_gears"></i> Code</a>
