@@ -24,6 +24,10 @@ document.documentElement.classList.toggle('no-js');
   toggler.addEventListener('keyup', toggle);
 });
 
+;[].forEach.call(document.getElementsByClassName("js-MailTo"), function(el) {
+  el.setAttribute("href", "mailto:" + el.getAttribute("data-mailto-user") + "@" + (el.getAttribute("data-mailto-domain") || window.location.host))
+})
+
 // everything run fine, let's tell this to our stylesheets
 document.documentElement.classList.toggle('js');
 document.documentElement.classList.toggle('no-js');
