@@ -5,28 +5,27 @@
 
 	{{ happyplan.repository.url }}
 -->{{/if}}
-<html lang="en" class="no-js no-touch {{ page.class }}">
+<html lang="en" class="no-js no-touch {{ page.class }} mx--{{ page.nav }}">
 <head>
+<!--[if lt IE 9]><script>"header footer section aside nav article figure figcaption hgroup time main".replace(/\w+/g,function(a){document.createElement(a)})</script><![endif]-->
 <script>(function(docEl) {
 	docEl.className = docEl.className.replace(/\bno-js\b/, 'js');
 	if ('ontouchstart' in docEl) { docEl.className = docEl.className.replace(/\bno-touch\b/, 'touch'); }
 })(document.documentElement);</script>
 {{> head }}
+<!--[if lt IE 9]><script src="http://rawgithub.com/scottjehl/Respond/master/dest/respond.min.js"></script><![endif]-->
 </head>
 <body>
+<!--[if lt IE 9]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 {{ happyplan.html.hooks.body_open }}
-{{!
-<div class="annonce-box">
-	<small></small>
-</div>
-}}
-{{#if happyplan.repository.url }}
-<a class="source-code" href="{{ happyplan.repository.url }}">source code</a>
-{{/if}}
 {{> nav }}
 {{> body }}
 {{{ happyplan.html.hooks.body_close }}}
+{{#is happyplan.env 'dist' }}
 {{> google-analytics }}
+{{/is}}
 {{> disqus }}
 </body>
 </html>

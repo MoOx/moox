@@ -1,7 +1,7 @@
 $Box--background: rgba(#000, .65);
 
 .Box {
-  @extend %mx-Text--light;
+  @extend .mx-Text--light;
   background: $Box--background;
   border-radius: $mx-borderRadius;
   padding: $grid-gutter/2;

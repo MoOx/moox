@@ -1,36 +1,44 @@
 ---
 layout: default.hbs
 title: "About Maxime Thirouin, a freelance front-end web developer"
-class: grid-title--quotes
 nav: about
 ---
+
 <header class="mx-Header">
-  <div class="mx-Body grid grid--center">
-    <hgroup class="grid__cell unit-8-12--medium title--light">
-      <h1>About Maxime Thirouin</h1>
-      <h2>Front-End Web Developer</h2>
-    </hgroup>
+  <div class="mx-Header-body mx-Body grid grid--center">
+    <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
+        <div class="mx-Header-left">About Maxime Thirouin, </div>
+        <div class="mx-Header-right">a passionate front-end web developer</div>
+    </h1>
   </div>
 </header>
 
-<div class="mx-Content mx-Body grid">
-  <div class="grid__cell">
-    <h2>About me</h2>
 
-    <p>My name is <a href="#not-ready">Maxime Thirouin</a>, also known as <a href="https://github.com/MoOx">MoOx</a>, and I'm a french (front-end) web developer living in Toulouse, France.</p>
+<div class="mx-Content">
+  <div class="mx-Body grid">
+    <div class="grid__cell">
+      <h2>About me</h2>
 
-    <p>
-      I like to work on the client-side, designing interfaces with <strong>CSS</strong> (using pre|post-processor like Sass or Rework) and programming awesome experiences with <strong>JavaScript</strong>. But I also do some back-end when it's needed no matter what the language is.
-    </p>
-    <p>
-      I also like to share everything I learned: I enjoy giving some talks and I'm a <strong>teacher</strong> in my previous University.
-    </p>
-    <p>
-      Beside that, I like to enjoy time with the love of my live, create stuff with my hands, take a walk in the forest or play paintball with my friends.
-    </p>
+      <p>My name is <a href="#not-ready">Maxime Thirouin</a>, also known as <a href="https://github.com/MoOx">MoOx</a>, and I'm a french (front-end) web developer living in Toulouse, France.</p>
 
-    <!-- <h2>Behind the scene</h2> -->
-    <!-- TODO -->
+      <p>
+        I like to work on the client-side, designing interfaces with <strong>CSS</strong> (using pre|post-processor like Sass or Rework) and programming awesome experiences with <strong>JavaScript</strong>. But I also do some back-end when it's needed no matter what the language is.
+      </p>
+      <p>
+        I also like to share everything I learned: I enjoy giving some talks and I'm a <strong>teacher</strong> in my previous University.
+      </p>
+      <p>
+        Beside that, I like to enjoy time with the love of my live, create stuff with my hands, take a walk in the forest or play paintball with my friends.
+      </p>
+
+      <figure class="mx-Img">
+        <img src="{{ happyplan.baseUrls.media }}/me/Sub-Web-2013-2013-05-17T14-40-36-MADsGraphics-2013,large.jpg" />
+        <figcaption>SudWeb 2013 - Credits: <a href="http://madsgraphics.com/">Matthias Dugué</a>
+      </figure>
+
+      <!-- <h2>Behind the scene</h2> -->
+      <!-- TODO -->
+    </div>
   </div>
 </div>
 

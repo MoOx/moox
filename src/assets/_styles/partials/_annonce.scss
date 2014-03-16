@@ -16,34 +16,34 @@ $annonceBoxHeight: 2em;
   font-size: 1.1rem;
   line-height: 1.8;
 
-  background: darken($mx-Color-greenLeaf, 20%);
+  display: table;
+  width: 100%;
+  max-width: 35rem;
+  margin: 1em auto;
+  padding: 1rem;
 
-  display: block;
   color: #fff !important;
+  background: $mx-Color-green;
+  background: linear-gradient(to bottom, $mx-Color-green, $mx-Color-green--darker);
+  text-shadow: 0 1px 0 rgba(#000, .4);
+  border: .2rem solid $mx-Color-green;
+  border-radius: 2px;
+  // font-weight: 600;
 }
 
-    .AvailabilityStatus-body {
-      display: table;
-      width: 100%;
-      border-color: rgba(#000, .15);
+    .AvailabilityStatus-icon
+  , .AvailabilityStatus-txt
+    {
+      display: table-cell;
+      vertical-align: middle;
     }
 
-      a.AvailabilityStatus {
-        &:hover .AvailabilityStatus-body {
-          box-shadow: 0 0 .4rem rgba(#000, .2);
-        }
-      }
-
-        .AvailabilityStatus-icon
-      , .AvailabilityStatus-txt
+      .AvailabilityStatus-icon
       {
-        display: table-cell;
-        vertical-align: middle;
+        font-size: 3rem;
+        line-height: 1;
+        padding-right: 1rem;
       }
 
-        .AvailabilityStatus-icon
-        {
-          font-size: 4rem;
-          line-height: 1;
-          padding-right: 1rem;
-        }
+      .AvailabilityStatus-txt { border: 1px solid transparent }
+      a.AvailabilityStatus:hover .AvailabilityStatus-txt { border-bottom-color: rgba(#fff, .4) }

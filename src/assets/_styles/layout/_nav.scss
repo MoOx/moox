@@ -1,6 +1,4 @@
 $Navbar-height: 4rem;
-$Navbar-background: rgba(#000, .65);
-$Navbar-section-background--hover: rgba(#000, .65);
 $Navbar__item--font-size: .9rem;
 
 $Navbar-separator: false;
@@ -13,37 +11,42 @@ $Navbar-separator: false;
   [href="#not-ready"] { color: rgba(#fff, .3) !important; }
 }
 
+  .Navbar .icon { font-size: 1.2em; }
+
   .Navbar--top {
-    //padding-top: 1em;
     //border-bottom: 0.1rem solid $mx-Color-greenEmerald;
-    box-shadow: 0 .2em .6em rgba(#000, .4);
-
+    // background: $mx-Color-green;
+    // background: linear-gradient(to right, rgba($mx-Color-green, .8), rgba($mx-Color-blue, .8));
+    text-shadow: 0 1px 0 rgba(#000, .6);
+    // box-shadow: 0 .2em .6em rgba(#000, .4);
     @include crp-Media-l { font-size: 1.1em;}
+  }
 
-    .active {
-      position: relative;
-      overflow: hidden;
-
-      vertical-align: middle; // FIX Firefox alignment bug https://bugzilla.mozilla.org/show_bug.cgi?id=491549
-
-      &::after {
-        @include glowing-indicator-pseudo-element-requirements($highlight-color);
-        @include glowing-indicator-pseudo-element-position(left);
-        @include crp-Media-m {
-          // disable previous style
-          top: auto;
-          left: auto;
-          margin-top: 0;
-          @include glowing-indicator-pseudo-element-position(top);
-        }
-      }
-    }
+  .Navbar--top .mx-Body::after {
+    clear: both;
+    display: block;
+    content: "";
+    height: 1px;
+    margin: 0 1em;
+    background: $mx-Color-blue;
+    background: linear-gradient(to right, $mx-Color-blue, $mx-Color-green);
   }
 
   .Navbar-section {
     a {
       font-size: $Navbar__item--font-size;
       padding: 0 1em;
+      border: 0;
+      font-weight: 400;
+      border-bottom: 1px solid transparent;
+    }
+
+    a:hover {
+      border-bottom-color: #fff;
+    }
+
+    .active {
+      border-bottom-color: #ddd;
     }
   }
 
@@ -60,6 +63,7 @@ $Navbar-separator: false;
       .js-Togglable-toggler { display: inline-block; }
       .js-Togglable-item--hide { display: none; }
     }
+
     @include crp-Media-min($Navbar-screen-breakpoint) {
       .js-Togglable-toggler { display: none; }
     }
@@ -70,8 +74,10 @@ $Navbar-separator: false;
 $SiteLogo-title--font-size: 1.4em;
 .SiteLogo {
   line-height: 1;
-  padding: .6em 0;
+  padding: .9em 0;
   display: inline-block;
+
+  border-bottom: 0;
 }
 
   .SiteLogo-title,
@@ -80,15 +86,14 @@ $SiteLogo-title--font-size: 1.4em;
 
     color: #fff;
     &:hover { color: #fff; }
-
-    text-decoration: none;
   }
 
     .SiteLogo-title {
-      font-weight: bold;
+      font-weight: 200;
       font-size: $SiteLogo-title--font-size;
     }
 
     .SiteLogo-description {
+      font-weight: 400;
       margin-top: -1.2em;
     }

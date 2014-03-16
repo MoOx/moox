@@ -1,0 +1,26 @@
+.mx-Body {
+  position: relative;
+
+  // add max-width for center layout
+  // @include crp-Media-m {
+    margin: auto;
+    max-width: 1024px;
+  // }
+}
+
+.mx-Content {
+  position: relative;
+  padding: 1rem 1rem 2rem;
+  @include crp-Media-m { padding: 2rem 1em 4rem }
+}
+
+  .mx-Content--collapseFooter {
+    padding: 1rem 1rem 0;
+    @include crp-Media-m { padding: 2rem 1em 0 }
+  }
+
+.mx-Img,
+.mx-Img img {
+  display: block;
+  max-width: 100%
+}

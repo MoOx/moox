@@ -1,53 +1,157 @@
 ---
 layout: default.hbs
 title: "Freelance Front-end Web Developer (HTML5, CSS 3, Javascript, Responsive web design, front-end performance optimization)"
-class: mx--StretchImg grid-title--quotes
 nav: home
 ---
 <header class="mx-Header">
-  <div class="mx-Body grid grid--center">
-    <hgroup class="grid__cell unit-8-12--medium title--light">
-      <h1>Hi I'm Maxime Thirouin,</h1>
-      <h2>a professional front-end web developer</h2>
-    </hgroup>
+  <div class="mx-Header-body mx-Body">
+    <div class="grid grid--center">
+      <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
+          <div class="mx-Header-left mx-Header-left--quote">Hi I'm Maxime Thirouin,</div>
+          <div class="mx-Header-center">a freelance front-end web developer</div>
+          <div class="mx-Header-right mx-Header-right--quote"><small>working with HTML, CSS and JavaScript</small></div>
+      </h1>
+    </div>
+    <img class="mx-Header-picture" alt="Maxime Thirouin portrait" src="{{ happyplan.baseUrls.images }}/moox/serious-face.jpg">
   </div>
+<!--   <img class="mx-Header-picture" alt="Maxime Thirouin portrait" src="//gravatar.com/avatar/2f6c2dcd4ba8fc44f1e7f0b2ed3d587d?s=256"> -->
 </header>
 
-<div class="mx-Content mx-Body grid">
-  <div class="grid__cell unit-1-2--medium">
-    <h2>
-      <span class="text-less-visible">{" </span>Hello World !<span class="text-less-visible"> "}</span>
-    </h2>
+<div class="mx-Content">
+  <div class="mx-Body grid">
+    <div class="grid__cell unit-1-2--medium">
+      <h2>Passionate web developer</h2>
+      <p>
+        I'm <a href="/about/">Maxime Thirouin</a>,
+        also known as <a href="https://github.com/MoOx">MoOx</a>.
+        I am a french web developer living in Toulouse, France
+        who likes to focus on client-side programming (mostly with <strong>JavaScript</strong> &amp; <strong>CSS</strong>) on all devices.
+      </p>
+      <p>
+        <strong>I am available as Consultant Developer</strong> if you need a hand for some front-end architecture,
+        huge CSS to scale or even JavaScript application.
+        I like to work on <strong>front-end performance</strong> and <strong>responsive web design</strong>.
+      </p>
 
-    <p>
-      I'm <a href="/about/">Maxime Thirouin</a>,
-      also known as <a href="https://github.com/MoOx">MoOx</a>.
-      I am a french web developer living in Toulouse, France
-      who likes to focus on client-side programming (mostly with <strong>JavaScript</strong> &amp; <strong>CSS</strong>) on all devices.
-    </p>
-    <p>
-      <strong>I am available as Consultant Developer</strong> if you need a hand for some front-end architecture,
-      huge CSS to scale or even JavaScript application.
-      I like to work on <strong>front-end performance</strong> and <strong>responsive web design</strong>.
-    </p>
-    
-{{> availability-status }}
-    
+    </div>
 
-    <h3>Projects I'm working on</h3>
-    <ul class="Home-projects">
-      <li><a href="//putaindecode.fr/">Putain de Code!</a>, a french community to share some good coding practices,
-      <li><a href="https://github.com/css-recipes">CSS Recipes</a>, CSS &amp; Sass reusable components, mixins &amp; functions (<a href="//compass-recipes.moox.fr">Compass Recipes</a> ported as standalone components),
-      <li><a href="https://github.com/happyplan/happyplan">HappyPlan</a>, a static website generator based on Grunt,
-      <li><a href="//dame-bio.fr/">D'Âme Bio</a>, the website of my wife where she shares organic &amp; gluten free food recipes.
-    </ul>
+    <div class="grid__cell unit-1-2--medium">
+      <h2 class="mx-TextRight--m">Side projects I'm working on</h2>
+      {{> side-projects }}
+{{!
+      <h2 class="mx-TextRight--m">Featured project</h2>
+      <section class="Browser">
+        <header class="Browser-bar">
+          <nav class="Browser-bar-nav">
+            <button class="Browser-bar-button Browser-bar-button--prev">◀︎</button>
+          </nav>
+          <span class="Browser-bar-address">
+            dame-bio.fr
+          </span>
+        </header>
+        <div class="Browser-viewport">
+
+        </div>
+        <footer class="Browser-footer">
+        </footer>
+      </section>
+      <p class="mx-TextRight">
+        <small><a href="/portfolio/dame-bio/">More about D'Âme Bio project</a></small>
+      </p>
+
+      <h3>Portfolio</h3>
+      <ul class="Home-portfolio">
+        <li class="Home-portfolio-li">
+          <a href="/portfolio/#">
+            <img class="Home-portfolio-img" src="">
+          </a>
+        </li>
+      </ul>
+      <p class="mx-TextRight">
+        <small><a href="/portfolio/">See entire portfolio</a></small>
+      </p>
+}}
+    </div>
   </div>
-  
-  <div class="grid__cell unit-1-2--medium mx-StretchImg">
-    <span data-picture data-alt="MoOx photo">
-      <span data-src="{{ happyplan.baseUrls.images }}/moox/home-300x.png"></span>
-      <span data-src="{{ happyplan.baseUrls.images }}/moox/home-600x.png" data-media="(min-width: 55em)"></span>
-      <noscript><img class="mx-StretchImg-img" alt="MoOx photo" src="{{ happyplan.baseUrls.images }}/moox/home-600x.png" /></noscript>
-    </span>
+
+  <div class="mx-Body mx-TextCenter">
+  {{> availability-status }}
   </div>
+
+  <p class="mx-Text--lessVisible mx-TextCenter">Portfolio coming soon !</p>
+
+  <div class="mx-FeaturedLogos">
+    <h2 class="mx-Heading--small mx-TextCenter">Companies I have worked with</h2>
+    <div class="mx-Body grid grid--center">
+      <div class="grid__cell unit-1-2 unit-1-4--medium">
+        <a class="mx-FeaturedLogo" href="http://jirafe.com/"><img alt="Jirafe" src="{{ happyplan.baseUrls.media }}/portfolio/companies/jirafe--black.png"></a>
+      </div>
+      <div class="grid__cell unit-1-2 unit-1-4--medium">
+        <a class="mx-FeaturedLogo" href="http://mindie.co/"><img alt="mindie" src="{{ happyplan.baseUrls.media }}/portfolio/companies/mindie--black.png"></a>
+      </div>
+      <div class="grid__cell unit-1-2 unit-1-4--medium">
+        <a class="mx-FeaturedLogo" href="http://ensighten.com/"><img alt="Ensighten" src="{{ happyplan.baseUrls.media }}/portfolio/companies/ensighten--black.png"></a>
+      </div>
+      <div class="grid__cell unit-1-2 unit-1-4--medium">
+        <a class="mx-FeaturedLogo" href="http://youseemii.fr/"><img alt="Youseemii" src="{{ happyplan.baseUrls.media }}/portfolio/companies/youseemii--black.png"></a>
+      </div>
+  {{!
+      <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+        <filter id="SvgFilter--grayscale">
+          <feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0" />
+          <feComponentTransfer>
+            <feFuncR type="linear" slope="20" />
+            <feFuncG type="linear" slope="20" />
+            <feFuncB type="linear" slope="20" />
+          </feComponentTransfer>
+        </filter>
+      </svg>
+  }}
+    </div>
+  </div>
+
+  <div class="mx-Testimonials">
+    <h2 class="mx-Heading--small mx-TextCenter">A few kind words from the Internet</h2>
+    <div class="mx-Body grid grid--center">
+      <div class="mx-Testimonial grid__cell unit-1-3--medium">
+        <blockquote>
+          <p>
+            A passionate professional, ambitious for solutions he implements.
+            A good understanding of business needs related to applications he builds.
+            And a pleasant collegue, even remotely.</p>
+          <footer>
+            <cite>— <a href="http://www.linkedin.com/profile/view?id=21741025#endorsements">Nicolas Moussikian</a>, CTO at Shopbot Group</cite>
+          </footer>
+        </blockquote>
+      </div>
+      <div class="mx-Testimonial grid__cell unit-1-3--medium">
+        <blockquote>
+          <p>If you're looking for a top-notch Sass &amp; front end developer @MoOx is looking for a job</p>
+          <footer>
+            <cite>— <a href="https://twitter.com/chriseppstein/status/207944162857844737">Chris Eppstein</a>, Sass &amp; Compass maintainer</cite>
+          </footer>
+        </blockquote>
+        <p class="mx-Text--lessVisible mx-TextCenter">(said before I start as a freelance)</p>
+      </div>
+      <div class="mx-Testimonial grid__cell unit-1-3--medium">
+        <blockquote>
+          <p>
+            Maxime [...] was totally in charge for all the technical aspects of the E-commerce platform. Maxime is very reliable and with a great knowledge in development process [...].</p>
+          <footer>
+            <cite>— <a href="http://www.linkedin.com/profile/view?id=21741025#endorsements">Benoît Gaillat</a>, E-commerce consultant</cite>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+  <p class="mx-Text--lessVisible mx-TextCenter">
+    More about
+    <a href="http://www.linkedin.com/profile/view?id=21741025#background-skills">my skills &amp; endorsements</a>
+    or
+    <a href="http://www.linkedin.com/profile/view?id=21741025#endorsements">my recommendations</a>
+    on
+    <a href="http://www.linkedin.com/profile/view?id=21741025">my Linkedin profile</a>.
+  </p>
 </div>
+
+{{> footer}}

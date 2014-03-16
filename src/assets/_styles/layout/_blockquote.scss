@@ -1,13 +1,13 @@
-blockquote {
+.mx-Post blockquote {
   margin: 2em 2em;
   padding: 1em 2em;
   font-style: italic;
   opacity: .7;
   position: relative;
-
+}
   $quotes-font-size: 6rem;
-  &:before,
-  &:after {
+  .mx-Post blockquote::before,
+  .mx-Post blockquote::after {
     line-height: 1rem;
     z-index: 2;
     position: absolute;
@@ -15,12 +15,12 @@ blockquote {
     opacity: .3;
   }
 
-  &:before {
-    content: '\201C';
+  .mx-Post blockquote::before {
+    content: "\201C";
     left: -1.6rem;
   }
-  &:after {
-    content: '\201D';
+
+  .mx-Post blockquote::after {
+    content: "\201D";
     right: -1.6rem;
   }
-}

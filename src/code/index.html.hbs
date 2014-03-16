@@ -1,51 +1,48 @@
 ---
 layout: default.hbs
 title: "MoOx (Freelance Front-end Web Developer) code ressources"
-class: grid-title--quotes
 nav: code
 ---
 
 <header class="mx-Header">
-  <div class="mx-Body grid grid--center">
-    <hgroup class="grid__cell unit-8-12--medium title--light">
-      <h1>MoOx likes to code,</h1>
-      <h2> &amp; is an Open Source addict.</h2>
-    </hgroup>
+  <div class="mx-Header-body mx-Body grid grid--center">
+    <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
+        <div class="mx-Header-left mx-Header-left--quote">MoOx likes to code,</div>
+        <div class="mx-Header-right mx-Header-right--quote">&amp; is an Open Source addict.</div>
+    </h1>
   </div>
 </header>
 
-<div class="mx-Content mx-Body grid">
-  <div class="grid__cell">
-    <h2>Code</h2>
-    
-    <p>
-      Most of the code I do is Open Source, whenever it's possible. That's just
-      because I'm an Open Source addict. I love to share and not just code.
-    </p>
-    
-    <p>
-      Here you will find some stats and materials about the code I produce and
-      share with the world:
-    </p>
-    
-    <ul>
-      <li><a href="https://github.com/MoOx">My GitHub profile, you will see my Open Source
-      repositories &amp; my activity,</a></li>
-      <li><a href="http://osrc.dfm.io/MoOx">My Open Source report card, which include &amp; lot of stats</a>,</li>
-      <li><a href="https://sourcegraph.com/MoOx">My SourceGraph, to see relation between Open Source project and people I interact with</a>.</li>
-    </ul>
-    
-    <p>Note: <em>It's clear that GitHub is not my resume.</em><!--, so take a look to it: <a href="/resume/">see my resume</a>--></p>
-    
-    <h3>Open Source projects</h3>
-    
-    Here is a tiny list of the Open Source projects I'm working on: 
-    <ul class="Home-projects">
-      <li><a href="//putaindecode.fr">Putain de code!</a>, a french community to share some good coding practices,
-      <li><a href="https://github.com/css-recipes">CSS Recipes</a>, CSS &amp; Sass reusable components, mixins &amp; functions (<a href="//compass-recipes.moox.fr">Compass Recipes</a> ported as standalone components),
-      <li><a href="https://github.com/happyplan/happyplan">HappyPlan</a>, a static website generator based on Grunt,
-      <li><a href="//dame-bio.fr/">D'Âme Bio</a>, the website of my wife where she shares organic &amp; gluten free food recipes.
-    </ul>
+
+<div class="mx-Content">
+  <div class="mx-Body grid">
+    <div class="grid__cell">
+      <h2>Code</h2>
+
+      <p>
+        Most of the code I do is Open Source, whenever it's possible. That's just
+        because I'm an Open Source addict. I love to share and not just code.
+      </p>
+
+      <p>
+        Here you will find some stats and materials about the code I produce and
+        share with the world:
+      </p>
+
+      <ul>
+        <li><a href="https://github.com/MoOx">My GitHub profile, you will see my Open Source
+        repositories &amp; my activity,</a></li>
+        <li><a href="http://osrc.dfm.io/MoOx">My Open Source report card, which include &amp; lot of stats</a>,</li>
+        <li><a href="https://sourcegraph.com/MoOx">My SourceGraph, to see relation between Open Source project and people I interact with</a>.</li>
+      </ul>
+
+      <p>Note: <em>It's clear that GitHub is not my resume.</em><!--, so take a look to it: <a href="/resume/">see my resume</a>--></p>
+
+      <h3>Open Source projects</h3>
+
+      Here is a tiny list of the Open Source projects I'm working on:
+      {{> side-projects }}
+    </div>
   </div>
 </div>
 

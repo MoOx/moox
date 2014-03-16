@@ -1,61 +1,60 @@
 ---
 layout: default.hbs
-class: grid-title--quotes
 nav: blog
 ---
 <header class="mx-Header">
-  <div class="mx-Body grid grid--center">
-    <hgroup class="grid__cell unit-8-12--medium title--light">
-      <h1>MoOx' hut</h1>
-      <h2>... where he talks about web &amp; dev.</h2>
-    </hgroup>
+  <div class="mx-Header-body mx-Body grid grid--center">
+    <h1 class="mx-Header-body-title mx-Title--light grid__cell" lang="{{ page.lang }}">
+      <span class="mx-Text--lessVisible">[{{ page.lang }}]</span> {{ page.title }}
+    </h1>
   </div>
 </header>
 
-<div class="mx-Content mx-Body grid">
-  <div class="grid__cell">
-    <article class="" lang="{{ page.lang }}">
-      <header>
-        <h1><span class="text-less-visible">[{{ page.lang }}]</span> {{ page.title }}</h1>
-        <time class="text-less-visible" pubdate datetime="{{moment data.date format="YYYY-MM-DD" }}">{{moment page.data.date format="DD MMMM YYYY" }}</time>
-      </header>
-      <!-- {{#isnt page.tags empty }}
-      <div class="category">
-        <ul>
-          {{#each page.tags }}
-            <li><a href="#">{{ tag }}</a></li>
-          {{/each}}
-        </ul>
-      </div>
-      {{/isnt}} -->
-      <div class="content">
-        {{> body }}
-      </div>
-      <br /><br />
-      ---
-      <br /><br />
-      <footer>
-        <div class="report">
-          See something wrong here ? Please tell me <a href="https://github.com/MoOx/moox.io/issues">with an issue on Github</a>,
-          or just some words on twitter at <a href="https://twitter.com/MoOx/">@MoOx</a>.
+<div class="mx-Content">
+  <div class="mx-Body grid">
+    <div class="grid__cell">
+      <article class="mx-Post" lang="{{ page.lang }}">
+        <header>
+          <time class="mx-Text--lessVisible" pubdate datetime="{{moment data.date format="YYYY-MM-DD" }}">{{moment page.data.date format="DD MMMM YYYY" }}</time>
+        </header>
+        <!-- {{#isnt page.tags empty }}
+        <div class="category">
+          <ul>
+            {{#each page.tags }}
+              <li><a href="#">{{ tag }}</a></li>
+            {{/each}}
+          </ul>
         </div>
-      </footer>
-    </article>
+        {{/isnt}} -->
+        <div class="content">
+          {{> body }}
+        </div>
+        <br /><br />
+        ---
+        <br /><br />
+        <footer>
+          <div class="report">
+            See something wrong here ? Please tell me <a href="https://github.com/MoOx/moox.io/issues">with an issue on Github</a>,
+            or just some words on twitter at <a href="https://twitter.com/MoOx/">@MoOx</a>.
+          </div>
+        </footer>
+      </article>
 
-    {{#is page.lang 'en' }}
-      {{> author-en }}
-    {{ else }}
-      {{> author-fr }}
-    {{/is}}
+      {{#is page.lang 'en' }}
+        {{> author-en }}
+      {{ else }}
+        {{> author-fr }}
+      {{/is}}
 
-    {{#and happyplan.disqus_short_name page.comments }}
-    <section class="">
-      <h1>Comments</h1>
-      <div id="disqus_thread" aria-live="polite">
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-      </div>
-    </section>
-    {{/and}}
+      {{#and happyplan.disqus_short_name page.comments }}
+      <section class="">
+        <h1>Comments</h1>
+        <div id="disqus_thread" aria-live="polite">
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      {{/and}}
+    </div>
   </div>
 </div>
 

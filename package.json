@@ -2,7 +2,7 @@
   "name": "MoOx"
 , "description": "Front-end web developer"
 , "url": "http://moox.io"
-, "version": "8.1.0"
+, "version": "9.0.0"
 , "author": "Maxime Thirouin"
 , "license": "MIT"
 , "devDependencies": {

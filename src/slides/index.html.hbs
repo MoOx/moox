@@ -5,31 +5,33 @@ class: grid-title--quotes
 nav: slides
 ---
 <header class="mx-Header">
-  <div class="mx-Body grid grid--center">
-    <hgroup class="grid__cell unit-8-12--medium title--light">
-      <h1>MoOx slides...</h1>
-      <h2>...of his previous talks</h2>
-    </hgroup>
+  <div class="mx-Header-body mx-Body grid grid--center">
+    <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
+        <div class="mx-Header-left mx-Header-left--quote">MoOx slides...</div>
+        <div class="mx-Header-right mx-Header-right--quote">...of his previous talks</div>
+    </h1>
   </div>
 </header>
 
-<div class="mx-Content mx-Body grid">
-  <div class="grid__cell">
-    <h2>Slides</h2>
+<div class="mx-Content">
+  <div class="mx-Body grid">
+    <div class="grid__cell">
+      <h2>Slides</h2>
 
-    <ul class="Posts">
-    {{#each_dateSorted pages}}
-    {{#is this.data.layout "slide.hbs"}}
-      <li class="Posts-item">
-        <time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time>
-        <a href="{{url this.dest}}" class="title">
-          <span class="text-less-visible">[{{ data.lang }}]</span>
-          {{ data.title }}
-        </a>
-      </li>
-    {{/is}}
-    {{/each_dateSorted}}
-    </ul>
+      <ul class="Posts">
+      {{#each_dateSorted pages}}
+      {{#is this.data.layout "slide.hbs"}}
+        <li class="Posts-item">
+          <time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time>
+          <a href="{{url this.dest}}" class="title">
+            <span class="mx-Text--lessVisible">[{{ data.lang }}]</span>
+            {{ data.title }}
+          </a>
+        </li>
+      {{/is}}
+      {{/each_dateSorted}}
+      </ul>
+    </div>
   </div>
 </div>
 

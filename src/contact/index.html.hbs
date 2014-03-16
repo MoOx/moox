@@ -1,20 +1,19 @@
 ---
 layout: default.hbs
 title: "Contact Maxime Thirouin (MoOx), a freelance Front-end Web Developer"
-class: mx--StretchImg grid-title--quotes
 nav: contact
 ---
 
 <header class="mx-Header">
-  <div class="mx-Body grid grid--center">
-    <hgroup class="grid__cell unit-6-12--medium title--light">
-      <h1><i class="icon icon_speech-bubbles"></i> Get in touch</h1>
-      <h2>with a cool web developer</h1>
-    </hgroup>
+  <div class="mx-Header-body mx-Body grid grid--center">
+    <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
+        <div class="mx-Header-left"><i class="icon icon_speech-bubbles"></i> Get in touch</div>
+        <div class="mx-Header-right">with a cool web developer</div>
+    </h1>
   </div>
 </header>
 
-<div class="mx-Content mx-Body grid">
+<div class="mx-Content mx-Content--collapseFooter mx-Body grid">
   <div class="grid__cell unit-1-2--medium">
     <h2>Contact me</h2>
     <p>
@@ -22,13 +21,12 @@ nav: contact
       <br />
       But wait ! There is so many way to get in touch with me !
     </p>
-    
+
 {{> big-icons }}
 
     <p>
       You can ping me on <a href="https://twitter.com/MoOx">Twitter </a>
-      and <a href="http://www.linkedin.com/in/maxthirouin">Linkedin</a>,
-      or find a mail address on <a href="https://github.com/MoOx">my Github profile</a>.
+      or <a href="http://www.linkedin.com/in/maxthirouin">Linkedin</a>.
       <br />
       Maybe you would rather <a href="skype:maxime.thirouin?add">call me on Skype</a>
       or directly on my <a href="tel:+33678135439" class="AttrTip AttrTip--top" data-tip="+33 6 78 13 54 39">phone</a> ?
@@ -36,7 +34,7 @@ nav: contact
 
     <p>
       Anyway, you can also <a data-mailto-user="hello+from-website" class="js-MailTo">drop me a mail<a/>.
-      
+
       <div class="icons--big">
         <a data-mailto-user="hello+from-website" class="js-MailTo">
           <i class="icon icon_email"></i>
@@ -44,16 +42,18 @@ nav: contact
         </a>
       </div>
     </p>
-    
+
 {{> availability-status }}
-    
+
   </div>
-  
-  <div class="grid__cell unit-1-2--medium mx-StretchImg">
+
+  <div class="grid__cell unit-1-2--medium">
     <span data-picture data-alt="MoOx photo">
-      <span data-src="{{ happyplan.baseUrls.images }}/moox/contact-300x.png"></span>
-      <span data-src="{{ happyplan.baseUrls.images }}/moox/contact-600x.png" data-media="(min-width: 55em)"></span>
-      <noscript><img class="mx-StretchImg-img" alt="MoOx photo" src="{{ happyplan.baseUrls.images }}/moox/contact-600x.png" /></noscript>
+      <span class="mx-Img" data-src="{{ happyplan.baseUrls.images }}/moox/contact-300x.png"></span>
+      <span class="mx-Img" data-src="{{ happyplan.baseUrls.images }}/moox/contact-600x.png" data-media="(min-width: 55em)"></span>
+      <noscript><img class="mx-Img" alt="MoOx photo" src="{{ happyplan.baseUrls.images }}/moox/contact-600x.png" /></noscript>
     </span>
   </div>
 </div>
+
+{{> footer }}

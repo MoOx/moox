@@ -1,8 +1,6 @@
 $Navbar-height: 2.6em !default;
-$Navbar-background: #111 !default;
 $Navbar-link-color: #fff !default;
 $Navbar-link-color--hover: #fff !default;
-$Navbar-section-background--hover: rgba(#000, .4) !default;
 
 $Navbar-separator--color: rgba(#000, .8) !default;
 $Navbar-separator--color-alt: rgba(#fff, .1) !default;
@@ -17,50 +15,43 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
   width: 100%;
 
   line-height: $Navbar-height;
-  background: $Navbar-background;
-  text-shadow: 0 1px 0 #000;
-
-  .icon { font-size: 1.2em; }
 }
 
   .Navbar-section {
     list-style: none;
+  }
 
-    &,
-    li,
-    a {
+    .Navbar-section,
+    .Navbar-section li,
+    .Navbar-section a {
       margin: 0;
       padding: 0;
     }
 
-    a {
+    .Navbar-section a {
       display: block;
       font-weight: bold;
 
       text-decoration: none;
 
       color: $Navbar-link-color;
-
-      &:hover {
-        color: $Navbar-link-color;
-        background: $Navbar-section-background--hover;
-      }
     }
-  }
 
-  @include crp-Media-min($Navbar-screen-breakpoint) {
-    // inline menu for larger screen
-    .Navbar-section {
-      &,
-      li,
-      a {
+    .Navbar-section a:hover {
+      color: $Navbar-link-color;
+    }
+
+    @include crp-Media-min($Navbar-screen-breakpoint) {
+      .Navbar-section,
+      .Navbar-section li,
+      .Navbar-section a {
+        // inline menu for larger screen
         display: inline-block;
       }
-    }
 
-    .Navbar-section--left { float: left }
-    .Navbar-section--right { float: right }
-  }
+      .Navbar-section--left { float: left }
+      .Navbar-section--right { float: right }
+    }
 
 // Button toggler
 
@@ -72,17 +63,17 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
       top: 0;
       right: 0;
 
-      // by default hidden since it's a javascript button
-      @include crp-Media-min($Navbar-screen-breakpoint) { display: none;  }
+      font-size: $Navbar-height*$Navbar-toggler-ratio;
+      line-height: 1*(1/$Navbar-toggler-ratio);
+      padding: 0;
+      border: 0;
 
-        font-size: $Navbar-height*$Navbar-toggler-ratio;
-        line-height: 1*(1/$Navbar-toggler-ratio);
-        padding: 0;
-        border: 0;
+      color: $Navbar-link-color;
+      background: none;
+    }
 
-        color: $Navbar-link-color;
-        background: none;
-      }
+    // by default hidden since it's a javascript button
+    @include crp-Media-min($Navbar-screen-breakpoint) { .Navbar-toggler { display: none;  } }
   }
 
 // Separator
@@ -107,7 +98,10 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
 
     .Navbar-separator--before::before,
     .Navbar-separator--after::after {
-      @include pseudo-element(100%, 1px, $display: inline-block);
+      content: "";
+      width: 100%;
+      height: 1px;
+      display: inline-block;
       left: 0;
     }
 
@@ -131,7 +125,8 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
 
       .Navbar-separator--before::before,
       .Navbar-separator--after::after {
-        @include pseudo-element(1px, 100%, $display: inline-block);
+        width: 1px;
+        height: 100%;
         top: 0;
       }
     }

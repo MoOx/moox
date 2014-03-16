@@ -6,19 +6,23 @@ nav: home
 ---
 
 <header class="mx-Header">
-  <div class="mx-Body grid grid--center">
-  	<hgroup class="grid__cell unit-8-12--medium title--light">
-  		<h1>Are you lost...</h1>
-  		<h2>in the woods ?</h2>
-  	</hgroup>
+  <div class="mx-Header-body mx-Body grid grid--center">
+    <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
+        <div class="mx-Header-left mx-Header-left--quote">Are you lost..</div>
+        <div class="mx-Header-right mx-Header-right--quote">in the woods ?</div>
+    </h1>
   </div>
 </header>
 
-<div class="mx-Content grid grid--center">
-	<div class="grid__cell unit-1-2--medium Box">
-		<div class="Box-body">
-			<h2>Maybe this content is gone or url is incorrect.</h2>
-			<p>Try to use navigation to find content.</p>
+<div class="mx-Content">
+  <div class="mx-Body grid">
+    <div class="grid__cell Box">
+      <div class="Box-body">
+  			<h2>Maybe this content is gone or url is incorrect.</h2>
+  			<p>Try to use navigation to find content.</p>
+      </div>
 		</div>
 	</div>
 </div>
+
+{{> footer }}

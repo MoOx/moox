@@ -12,4 +12,4 @@
     Vanilla JavaScript
     Normalize.css
 
-    Made with SublimeText
+    Made with Atom.io editor

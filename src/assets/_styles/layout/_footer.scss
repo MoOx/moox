@@ -1,4 +1,34 @@
 .mx-Footer {
-  margin-top: 4rem;
-  padding: 2rem;
+  background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 100%; // fallback
+  background: #314217 image-url('forest-ruins--portrait.jpg') no-repeat 50% 100% / cover;
+  @media (orientation: landscape) and (min-width: 50em) { background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 100% / cover }
 }
+
+  .mx-Footer::before {
+    display: block;
+    content: "";
+    height: 4px; // IE8
+    height: .4rem;
+    background: $mx-Color-blue;
+    background: linear-gradient(to right, $mx-Color-blue, $mx-Color-green);
+  }
+
+  .error-404 .mx-Footer { background: transparent; box-shadow: none; border: 0 }
+  .error-404 .mx-Footer::before { content: none }
+
+  .mx-Footer a { color: #fff }
+  .mx-Footer a:hover,
+  .mx-Footer a:focus { color: $mx-Color-green }
+
+  .mx-Footer-body {
+    padding: 2rem 0;
+    line-height: 2em;
+  }
+
+  .mx-IconLink {
+    color: #fff;
+    font-size: 2em;
+    border: 0;
+  }
+
+    .mx-IconLink + .mx-IconLink { margin-left: 1em }

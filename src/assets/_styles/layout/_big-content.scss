@@ -9,6 +9,7 @@ $icons--big-size: 4em;
     position: relative;
     display: inline-block;
 
+    //color: $mx-Color-green;
     //@include ceaser-transition($easeInOutBack, all, .3s);
   }
 
@@ -40,46 +41,3 @@ $icons--big-size: 4em;
     }
   }
 }
-
-  .mx-StretchImg {
-    padding-top: 1em;
-    vertical-align: bottom;
-
-    $mooxSmallMaxWidth: 200px;
-    img {
-      display: block;
-      margin: auto;
-      max-width: $mooxSmallMaxWidth;
-      //@include crp-Media-min($mooxSmallMaxWidth) { max-width: 110%; }
-      @include crp-Media-m { max-width: 100%; }
-    }
-  }
-
-    // stretch layout on home for moox img
-    @media (min-height: 50em) and (min-width: $crp-Media-size-m) {
-      .mx--StretchImg,
-      body {
-        height: 100%;
-      }
-
-      .mx--StretchImg {
-        .mx-Header { height: 30% }
-        .mx-Header .mx-Body hgroup { padding: 0 1em }
-        .mx-Content { height: 70% }
-      }
-
-      .mx-StretchImg {
-        position: relative;
-        height: 100%;
-        padding-top: 0;
-
-        img {
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          height: 94%;
-          max-height: 94%;
-          max-width: none;
-        }
-      }
-    }

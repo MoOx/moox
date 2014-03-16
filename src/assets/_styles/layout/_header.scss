@@ -1,70 +1,96 @@
 .mx-Header {
-  @extend %mx-Text--light;
+  position: relative;
 
-  padding-top: $Navbar-height;
-
-  .mx-Body {
-    display: table;
-    height: 100%;
-  }
-
-    .mx-Body hgroup {
-      display: table-cell;
-      vertical-align: middle;
-      padding: 1rem;
-
-      @include crp-Media-m { padding: 4rem 1rem }
-      @media (min-height: 50rem) { padding: 6rem 1rem }
-    }
-
-  border-bottom: 0.4rem solid $mx-Color-green;
-  box-shadow: 0 0 1rem rgba(#000, .3);
+  padding: $Navbar-height 1em 0;
 
   // update twitter background when you update that & also colors :)
   // https://twitter.com/settings/design
+  // @include html-background('forest-ruins--portrait.jpg', 'forest-ruins--landscape.jpg');
+  background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 60%; // fallback
+  background: #314217 image-url('forest-ruins--portrait.jpg') no-repeat 50% 50% / cover;
+  @media (orientation: landscape) and (min-width: 50em) { background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 60% / cover; }
+  box-shadow: 0 0 1rem rgba(#000, .3);
+}
 
-  @include html-background('forest-ruins--portrait.jpg', 'forest-ruins--landscape.jpg');
-
-  .error-404 & {
-    background: transparent;
-    box-shadow: none;
-    border: 0;
+  .mx-Header::after {
+    display: block;
+    content: "";
+    height: 4px; // IE8
+    height: .4rem;
+    margin: 0 -1em;
+    background: $mx-Color-green;
+    background: linear-gradient(to right, $mx-Color-green, $mx-Color-blue);
   }
 
-  @include crp-Media-m {
-    .grid__cell { text-align: center }
+  .error-404 .mx-Header { background: transparent; box-shadow: none; border: 0 }
+  .error-404 .mx-Header::after { content: none }
 
-    // quotes title
-    .grid-title--quotes & {
+    .mx-Header-body {
+      display: table;
+      height: 100%;
+    }
 
-      h1 { text-align: left; }
-      h2 { text-align: right; }
+      .mx-Header-body-title {
+        display: table-cell;
+        vertical-align: middle;
+        padding: 1rem;
 
-      h1,
-      h1:before,
-      h2,
-      h2:after {
+        @include crp-Media-m { padding: 4em 1em }
+        @include crp-Media-m { padding: 4rem 1rem 6rem }
+      }
+
+    @include crp-Media-m {
+      .mx-Header-left { text-align: left; }
+      .mx-Header-center { text-align: center; }
+      .mx-Header-right { text-align: right; }
+
+      .mx-Header-left,
+      .mx-Header-left:before,
+      .mx-Header-center,
+      .mx-Header-right,
+      .mx-Header-right:after {
         //z-index: 2;
         position: relative;
       }
-      h1:before,
-      h2:after {
+
+      .mx-Header-left--quote:before,
+      .mx-Header-right--quote:after {
         position: absolute;
-        font-size: 6em;
         opacity: .6;
+        font-size: 4rem;
+        font-weight: normal;
       }
-      h1:before {
-        content: '\201C';
-        left: -.7em;
-        top: -.2em;
-        font-size: 1.4em;
+
+      .mx-Header-left--quote:before {
+        content: "\201C";
+        left: -3rem;
+        top: -1.2rem;
       }
-      h2:after {
-        content: '\201D';
-        right: -.7em;
-        top: 0em;
-        font-size: 2.2em; // restore h1 size
+
+      .mx-Header-right--quote:after {
+        content: "\201D";
+        right: -3rem;
+        top: -.8rem;
       }
     }
+
+  .mx-Header-picture {
+    display: block;
+    margin: 0 auto -3em;
+    width: 160px; //IE8
+    height: 160px; //IE8
+    width: 10rem;
+    height: 10rem;
+    border: .2rem solid #fff;
+
+    border-radius: 50%;
   }
-}
+
+  @include crp-Media-m { .mx-Header-picture {
+    position: absolute;
+    left: 50%;
+    bottom: -80px; //IE8
+    bottom: -5rem;
+    margin: 0 0 0 -80px; //IE8
+    margin: 0 0 0 -5rem;
+  }}
