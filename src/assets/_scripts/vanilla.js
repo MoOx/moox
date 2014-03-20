@@ -2,28 +2,42 @@
 document.documentElement.classList.toggle("js");
 document.documentElement.classList.toggle("no-js");
 
-// call me just before bottom, I"ll be dom ready :p
+// call me just before bottom, I’ll be dom ready :p
+//document.addEventListener('DOMContentReady', function() {
+
 if (document.querySelector && document.documentElement.classList) {
-  ;[].forEach.call(document.getElementsByClassName("js-Togglable"), function(el) {
-    var toggler = el.querySelector(".js-Togglable-toggler")
-    var items = [].slice.call(el.getElementsByClassName("js-Togglable-item"))
+  var forEach = Array.prototype.forEach
+    , whenDOMReady = function() {
+        new WOW({
+          boxClass: "Animate"
+        , animateClass: "Animated"
+        , offset: 100
+        , initAlreadyVisible: false
+        }).init()
 
-    var toggle = function(event) {
-      el.classList.toggle("js-Togglable--toggled")
-      items.forEach(function(item) {
-        item.classList.toggle("js-Togglable-item--hide")
-      })
-    }
+        forEach.call(document.getElementsByClassName("js-Togglable"), function(el) {
+          var toggler = el.querySelector(".js-Togglable-toggler")
+          var items = [].slice.call(el.getElementsByClassName("js-Togglable-item"))
 
-    toggler.addEventListener("click", toggle)
-    toggler.addEventListener("keyup", toggle)
-  })
+          var toggle = function(event) {
+            el.classList.toggle("js-Togglable--toggled")
+            items.forEach(function(item) {
+              item.classList.toggle("js-Togglable-item--hide")
+            })
+          }
 
-  ;[].forEach.call(document.getElementsByClassName("js-MailTo"), function(el) {
-    el.setAttribute("href", "mailto:" + el.getAttribute("data-mailto-user") + "@" + (el.getAttribute("data-mailto-domain") || window.location.host))
-  })
+          toggler.addEventListener("click", toggle)
+          toggler.addEventListener("keyup", toggle)
+        })
 
-  // everything run fine, let's tell this to our stylesheets
-  document.documentElement.classList.toggle('js');
-  document.documentElement.classList.toggle('no-js');
+        forEach.call(document.getElementsByClassName("js-MailTo"), function(el) {
+          el.setAttribute("href", "mailto:" + el.getAttribute("data-mailto-user") + "@" + (el.getAttribute("data-mailto-domain") || window.location.host))
+        })
+      }
+
+  whenDOMReady()
+
+  // everything run fine, let’s tell this to our stylesheets
+  document.documentElement.classList.toggle("js");
+  document.documentElement.classList.toggle("no-js");
 }
