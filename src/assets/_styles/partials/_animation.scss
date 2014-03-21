@@ -1,3 +1,7 @@
+:not(.Animated).Animate {
+  animation-name: none;
+}
+
 .Animated {
   animation-fill-mode: both;
   animation-duration: 1s;
