@@ -7,10 +7,12 @@
   animation-duration: 1s;
 }
 
-.Animated--xfast { animation-duration: .2s }
-.Animated--fast { animation-duration: .5s }
-.Animated--slow { animation-duration: 2s }
-.Animated--xslow { animation-duration: 4s }
+.Animated--reverse { animation-direction: reverse }
+
+.Animate--xfast { animation-duration: .2s }
+.Animate--fast { animation-duration: .5s }
+.Animate--slow { animation-duration: 2s }
+.Animate--xslow { animation-duration: 4s }
 
 // .Animated { animation-timing-function: cubic-bezier(0, 0.285, 0, 1) }
 
@@ -23,6 +25,7 @@
 .Animate--delay-xl { animation-delay: 1.8s;  }
 .Animate--delay-xxl { animation-delay: 2.2s;  }
 .Animate--delay-xxxl { animation-delay: 2.6s;  }
+.Animate--noDelay { animation-delay: 0s !important;  }
 
 .Transite--delay-xxxs { transition-delay: .2s;  }
 .Transite--delay-xxs { transition-delay: .4s;  }
@@ -73,6 +76,18 @@
   }
 }
 
+.Animate--slideInLeft { animation-name: Animation-slideInLeft }
+@keyframes Animation-slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100rem);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .Animate--fadeIn { animation-name: Animation-fadeIn }
 @keyframes Animation-fadeIn {
   0% { opacity: 0 }
@@ -95,7 +110,7 @@
 // @import "animate.css/source/bouncing_entrances/bounceInRight.scss";
 // @import "animate.css/source/bouncing_entrances/bounceInUp.scss";
 
-// @import "animate.css/source/bouncing_exits/bounceOut.scss";
+@import "animate.css/source/bouncing_exits/bounceOut.scss";
 // @import "animate.css/source/bouncing_exits/bounceOutDown.scss";
 // @import "animate.css/source/bouncing_exits/bounceOutLeft.scss";
 // @import "animate.css/source/bouncing_exits/bounceOutRight.scss";

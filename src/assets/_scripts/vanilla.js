@@ -1,6 +1,6 @@
 // just it case scripts below breack everything on a browser, just put the css like if there is no js
-document.documentElement.classList.toggle("js");
-document.documentElement.classList.toggle("no-js");
+var docEl = document.documentElement
+docEl.className = docEl.className.replace(/\bjs\b/, "no-js")
 
 // call me just before bottom, I’ll be dom ready :p
 //document.addEventListener('DOMContentReady', function() {
@@ -37,7 +37,35 @@ if (document.querySelector && document.documentElement.classList) {
 
   whenDOMReady()
 
+  var sideBySideOptions = {
+    classNames: {
+      remove: "Animated Animated--reverse Animate--fast Animate--noDelay"
+    , add: "Animated"
+    , backward: "Animate--slideInRight"
+    , forward: "Animate--slideInLeft"
+    }
+  , callbacks: {
+      removeElement: function(el) {
+        el.style.marginLeft = "-" + (el.getBoundingClientRect().width/2) + "px"
+      }
+    }
+  }
+
+  new Pjax({
+    selectors: ["title", ".Navbar", ".mx-Header", ".mx-Content", ".mx-Footer"]
+  , switches: {
+        ".mx-Header": Pjax.switches.sideBySide
+      , ".mx-Content": Pjax.switches.sideBySide
+    }
+  , switchesOptions: {
+      ".mx-Header": sideBySideOptions
+    , ".mx-Content": sideBySideOptions
+    }
+  , debug: window.location.hostname == "localhost"
+  })
+
+  document.addEventListener("pjax:success", whenDOMReady)
+
   // everything run fine, let’s tell this to our stylesheets
-  document.documentElement.classList.toggle("js");
-  document.documentElement.classList.toggle("no-js");
+  docEl.className = docEl.className.replace(/\bno-js\b/, "js")
 }

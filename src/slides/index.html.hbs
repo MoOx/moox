@@ -12,25 +12,28 @@ nav: slides
     </h1>
   </div>
 </header>
+<hr class="mx-Separator">
 
 <div class="mx-Content">
-  <div class="mx-Body grid">
-    <div class="grid__cell">
-      <h2>Slides</h2>
+  <div class="js-Pjax-child">
+    <div class="mx-Body grid">
+      <div class="grid__cell">
+        <h2>Slides</h2>
 
-      <ul class="Posts">
-      {{#each_dateSorted pages}}
-      {{#is this.data.layout "slide.hbs"}}
-        <li class="Posts-item">
-          <time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time>
-          <a href="{{url this.dest}}" class="title">
-            <span class="mx-Text--lessVisible">[{{ data.lang }}]</span>
-            {{ data.title }}
-          </a>
-        </li>
-      {{/is}}
-      {{/each_dateSorted}}
-      </ul>
+        <ul class="Posts">
+        {{#each_dateSorted pages}}
+        {{#is this.data.layout "slide.hbs"}}
+          <li class="Posts-item">
+            <time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time>
+            <a href="{{url this.dest}}" class="title">
+              <span class="mx-Text--lessVisible">[{{ data.lang }}]</span>
+              {{ data.title }}
+            </a>
+          </li>
+        {{/is}}
+        {{/each_dateSorted}}
+        </ul>
+      </div>
     </div>
   </div>
 </div>

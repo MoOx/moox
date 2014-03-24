@@ -2,6 +2,7 @@
   position: relative;
 
   padding: $Navbar-height 1em 0;
+  transition: .5s;
 
   // update twitter background when you update that & also colors :)
   // https://twitter.com/settings/design
@@ -9,25 +10,16 @@
   background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 60%; // fallback
   background: #314217 image-url('forest-ruins--portrait.jpg') no-repeat 50% 50% / cover;
   @media (orientation: landscape) and (min-width: 50em) { background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 60% / cover; }
-  box-shadow: 0 0 1rem rgba(#000, .3);
 }
 
-  .mx-Header::after {
-    display: block;
-    content: "";
-    height: 4px; // IE8
-    height: .4rem;
-    margin: 0 -1em;
-    background: $mx-Color-green;
-    background: linear-gradient(to right, $mx-Color-green, $mx-Color-blue);
-  }
+.mx-Header + .mx-Separator { box-shadow: 0 0 1rem rgba(#000, .3) }
 
   .error-404 .mx-Header { background: transparent; box-shadow: none; border: 0 }
   .error-404 .mx-Header::after { content: none }
 
     .mx-Header-body {
       display: table;
-      height: 100%;
+      // height: 100%;
     }
 
       .mx-Header-body-title {

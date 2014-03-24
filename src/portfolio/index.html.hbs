@@ -11,19 +11,22 @@ nav: blog
     </h1>
   </div>
 </header>
+<hr class="mx-Separator">
 
 
 <div class="mx-Content">
-  <div class="mx-Body grid">
-    <div class="grid__cell Box">
-      <div class="Box-body">
-        <h2>Portfolio</h2>
+  <div class="js-Pjax-child">
+    <div class="mx-Body grid">
+      <div class="grid__cell Box">
+        <div class="Box-body">
+          <h2>Portfolio</h2>
 
-        <ul class="posts">
-        {{#each happyplan.xps }}
-          <li><time datetime="{{ this.date }}" class="time">{{ this.date }}</time> <a href="{{ this.url }}" class="title"><span class="mx-Text--lessVisible">[{{ this.lang }}]</span> {{ this.title }}</a>
-        {{/each}}
-        </ul>
+          <ul class="posts">
+          {{#each happyplan.xps }}
+            <li><time datetime="{{ this.date }}" class="time">{{ this.date }}</time> <a href="{{ this.url }}" class="title"><span class="mx-Text--lessVisible">[{{ this.lang }}]</span> {{ this.title }}</a>
+          {{/each}}
+          </ul>
+        </div>
       </div>
     </div>
   </div>

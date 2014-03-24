@@ -1,17 +1,15 @@
 .mx-Footer {
+  @include crp-Media-m {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
   background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 100%; // fallback
   background: #314217 image-url('forest-ruins--portrait.jpg') no-repeat 50% 100% / cover;
   @media (orientation: landscape) and (min-width: 50em) { background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 100% / cover }
 }
-
-  .mx-Footer::before {
-    display: block;
-    content: "";
-    height: 4px; // IE8
-    height: .4rem;
-    background: $mx-Color-blue;
-    background: linear-gradient(to right, $mx-Color-blue, $mx-Color-green);
-  }
 
   .error-404 .mx-Footer { background: transparent; box-shadow: none; border: 0 }
   .error-404 .mx-Footer::before { content: none }

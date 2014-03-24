@@ -67,6 +67,18 @@ $mx-borderRadius: 4px;
 
 html {
   background: #fefefe;
+  height: 100%;
+}
+
+body {
+  // to make the footer at the bottom of the viewport
+  position: relative;
+  min-height: 100%;
+
+  @include crp-Media-m {
+    // footer is absolute, keep some place for it
+    padding-bottom: 6rem;
+  }
 }
 
 html.error-404 {

@@ -1,3 +1,17 @@
+.mx-Content {
+  position: relative;
+  padding: 1rem 1rem 2rem;
+  @include crp-Media-m { padding: 2rem 1em 4rem }
+
+  transition: .5s;
+  //overflow: hidden;
+}
+
+  .mx-Content--collapseFooter {
+    padding: 1rem 1rem 0;
+    @include crp-Media-m { padding: 2rem 1em 0 }
+  }
+
 .mx-Body {
   position: relative;
 
@@ -8,19 +22,32 @@
   // }
 }
 
-.mx-Content {
-  position: relative;
-  padding: 1rem 1rem 2rem;
-  @include crp-Media-m { padding: 2rem 1em 4rem }
-}
-
-  .mx-Content--collapseFooter {
-    padding: 1rem 1rem 0;
-    @include crp-Media-m { padding: 2rem 1em 0 }
-  }
-
 .mx-Img,
 .mx-Img img {
   display: block;
   max-width: 100%
+}
+
+.mx-Separator {
+  display: block;
+  border : 0;
+  height: 4px; // IE8
+  height: .4rem;
+  margin: 0;
+  background: $mx-Color-green;
+  background: linear-gradient(to right, $mx-Color-green, $mx-Color-blue);
+}
+
+  .mx-Separator--alt {
+    background: $mx-Color-blue;
+    background: linear-gradient(to right, $mx-Color-blue, $mx-Color-green);
+  }
+
+.js-Pjax-child { width: 100% }
+.js-Pjax-remove {
+  position: absolute;
+  left: 50%;
+  // can't be used since we translate for the remove effect
+  // transform: translateX(-50%)
+  // margin-left: -width/2; // made with js
 }

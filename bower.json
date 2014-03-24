@@ -11,6 +11,7 @@
     "css-recipe-corner-ribbon": "*",
     "picturefill": "git://github.com/scottjehl/picturefill.git",
     "animate.css": "~3.1.0",
-    "WOW": "git://github.com/MoOx/WOW.git#initWithSettings-options"
+    "WOW": "git://github.com/MoOx/WOW.git#initWithSettings-options",
+    "pjax": "https://github.com/MoOx/pjax.git"
   }
 }
