@@ -74,6 +74,7 @@ body {
   // to make the footer at the bottom of the viewport
   position: relative;
   min-height: 100%;
+  overflow-x: hidden; // prevent scrollbar during pjax animations
 
   @include crp-Media-m {
     // footer is absolute, keep some place for it
