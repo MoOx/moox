@@ -64,6 +64,9 @@ if (document.querySelector && document.documentElement.classList) {
   , debug: window.location.hostname == "localhost"
   })
 
+  document.addEventListener("pjax:send", function() {
+    document.querySelector(".mx-Content .js-Pjax-child").classList.add("js-Pjax-child--willChange")
+  })
   document.addEventListener("pjax:success", whenDOMReady)
 
   // everything run fine, let’s tell this to our stylesheets
