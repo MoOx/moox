@@ -8,10 +8,11 @@
 <html lang="en" class="no-js no-touch {{ page.class }} mx--{{ page.nav }}">
 <head>
 <!--[if lt IE 9]><script>"header footer section aside nav article figure figcaption hgroup time main".replace(/\w+/g,function(a){document.createElement(a)})</script><![endif]-->
-<script>(function(docEl) {
-	docEl.className = docEl.className.replace(/\bno-js\b/, 'js');
-	if ('ontouchstart' in docEl) { docEl.className = docEl.className.replace(/\bno-touch\b/, 'touch'); }
-})(document.documentElement);</script>
+<script>
+  var html = document.documentElement
+  html.className = html.className.replace(/\bno-js\b/, "js")
+  if ("ontouchstart" in html) { html.className = html.className.replace(/\bno-touch\b/, "touch") }
+</script>
 {{> head }}
 <!--[if lt IE 9]><script src="http://rawgithub.com/scottjehl/Respond/master/dest/respond.min.js"></script><![endif]-->
 </head>
