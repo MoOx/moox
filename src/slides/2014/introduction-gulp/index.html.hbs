@@ -1,0 +1,166 @@
+---
+lang: fr
+layout: slide.hbs
+title: Introduction à Gulp
+date: 2014-03-27
+---
+<section>
+  <h1>Introduction à Gulp</h1>
+  <div>
+    <img src="https://raw.github.com/gulpjs/artwork/master/gulp.png" alt="">
+  </div>
+
+  <small><a href="https://github.com/MoOx/moox.io/blob/master/{{ this.page.src }}">Slides Source</a></small>
+</section>
+
+<section>
+  <h2>Task runners</h2>
+  <h3>pour automatisation des tâches</h3>
+  <br />
+  <br />
+  <p class="fragment"><a href="http://www.24joursdeweb.fr/2013/automatisez-votre-workflow-front-end/">Vous commencez à connaitre</a></p>
+</section>
+
+<section>
+  <ul>
+    <li class="fragment">Make</li>
+    <li class="fragment">Rake</li>
+    <li class="fragment">Cake</li>
+    <li class="fragment">Jake</li>
+    <li class="fragment">Grunt</li>
+    <li class="fragment">Brunch</li>
+    <li class="fragment">...</li>
+  </li>
+</section>
+
+<section>
+  <h2>Pourquoi Gulp ?</h2>
+</section>
+
+<section>
+  <h1>Parce que les streams</h1>
+</section>
+
+<section>
+  <h2>C'est quoi un stream</h2>
+  <br />
+  <br />
+  <p>C'est un flux (de données)</p>
+</section>
+
+<section>
+  <h2>Et donc pourquoi un stream ?</h2>
+  <br />
+  <br />
+  <ul>
+    <li>C'est n'est pas un fichier</li>
+    <li>Donc on ne travaille pas sur des fichiers</li>
+    <li>Donc pas de lecture/écriture répété</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Un exemple pour comprendre ?</h2>
+</section>
+
+<section>
+  <h2>Sans stream</h2>
+  <br />
+  <br />
+  <p>
+    <a href="http://putaindecode.fr/posts/css/mise-en-place-autoprefixer/#autoprefixer-avec-grunt">exemple Grunt</a>
+  </p>
+
+  <small class="fragment">57 lignes de conf</small>
+</section>
+
+<section>
+  <h2>Avec stream</h2>
+  <br />
+  <br />
+  <p>
+    <a href="http://putaindecode.fr/posts/css/mise-en-place-autoprefixer/#autoprefixer-avec-gulp">Exemple Gulp</a>
+  </p>
+
+  <small class="fragment">22 lignes de code</small>
+</section>
+
+<section>
+  <h2>Sans stream</h2>
+  <img alt="" src="http://jaysoo.ca/images/grunt-flow-2.png">
+  <br /><br />
+  <h2>Avec stream</h2>
+  <img alt="" src="http://jaysoo.ca/images/gulp-flow.png">
+</section>
+
+<section>
+  <h2>Installation</h2>
+  <br />
+  <br />
+  <p>Pour avoir la commande globale</p>
+  <pre><code class="language-bash">$ npm i -g gulp</code></pre>
+
+  <p>Modules pour chaque projet</p>
+  <pre><code class="language-bash">$ npm i -D gulp gulp-util gulp-plumber gulp-WHATEVER</code></pre>
+</section>
+
+<section>
+  <h2>On veut des explications en détail</h2>
+  <br />
+  <br />
+  <a href="http://markgoodyear.com/2014/01/getting-started-with-gulp/">Introduction à Gulp</a>
+</section>
+
+<section>
+  <h2><a href="https://github.com/gulpjs/gulp/blob/master/docs/README.md">Documentation</a></h2>
+  <ul>
+    <li class="fragment"><a href="https://github.com/gulpjs/gulp/tree/master/docs/recipes">exemples "officiel" Gulp</a></li>
+    <li class="fragment"><a href="https://npmjs.org/search?q=gulpplugin">plugins "validés" Gulp</a></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Trop de task runners ?</h2>
+  <br />
+  <br />
+  <a href="http://www.pintjs.com/">Pint js</a>
+  <br />
+  <br />
+  <h2 class="fragment">BLURP !</h2>
+</section>
+
+<section>
+  <h2>Mais en a-t-on vraiment besoin ?</h2>
+  <br />
+  <br />
+  <a href="https://algorithms.rdio.com/post/make/">Rdio utilise make</a>
+</section>
+
+<section>
+  <h2>Un peu de lecture</h2>
+  <ul>
+    <li><a href="http://jaysoo.ca/2014/01/27/gruntjs-vs-gulpjs/">Grunt vs. Gulp</a></li>
+    <li><a href="http://www.insertafter.com/articles-gulp_vs_grunt.html">Gulp remplacera-t-il Grunt ?</a></li>
+    <li><a href="http://www.insertafter.com/articles-retour_experience_gulp.html">Gulp : Retour d'expérience</a></li>
+  </ul>
+</section>
+
+<section>
+  <a href="https://gist.github.com/MoOx/8420645">Mon gulpfile</a>
+</section>
+
+<section>
+  <h2>Des questions ?</h2>
+  <br />
+  <center>
+    <img src="https://raw.github.com/gulpjs/artwork/master/gulp.png" alt="">
+  </center>
+</section>
+<section>
+  <h2>Merci !</h2>
+  <br />
+  <br />
+  <h3><a href="http://moox.io/slides">moox.io/slides</a></h3>
+  <p>Maxime Thirouin</p>
+  <p>@MoOx sur <a href="https://twitter.com/MoOx">Twitter</a> &amp; <a href="https://github.com/MoOx">Github</a></p>
+</section>
