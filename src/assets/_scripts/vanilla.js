@@ -61,7 +61,7 @@ if (document.querySelector && document.documentElement.classList) {
       ".mx-Header": sideBySideOptions
     , ".mx-Content": sideBySideOptions
     }
-  , debug: window.location.hostname == "localhost"
+  // , debug: window.location.hostname == "localhost"
   })
 
   document.addEventListener("pjax:send", function() {
