@@ -43,8 +43,16 @@
     background: linear-gradient(to right, $mx-Color-blue, $mx-Color-green);
   }
 
-.js-Pjax-child { width: 100% }
-.js-Pjax-child--willChange { opacity: .6 }
+.js-Pjax-child {
+  width: 100%;
+  transition: .1s;
+  transform-origin: 50% 0;
+}
+
+.js-Pjax-child--willChange {
+  opacity: .6;
+  transform: scale(.9)
+}
 .js-Pjax-remove {
   position: absolute;
   left: 50%;
