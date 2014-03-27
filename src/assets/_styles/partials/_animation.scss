@@ -80,11 +80,11 @@
 @keyframes Animation-slideInLeft {
   0% {
     opacity: 0;
-    transform: translateX(-100rem) scale(.8);
+    transform: translateX(-100rem);
   }
 
   100% {
-    transform: translateX(0) scale(.9);
+    transform: translateX(0);
   }
 }
 
