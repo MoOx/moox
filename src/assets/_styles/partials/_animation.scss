@@ -94,7 +94,20 @@
   100% { opacity: 1 }
 }
 
+.Foreground {
+  position: relative;
+  z-index: 2;
+}
 
+.Middleground {
+  position: relative;
+  z-index: 1;
+}
+
+.Background {
+  position: relative;
+  z-index: 0;
+}
 // @import "animate.css/source/attention_seekers/bounce.scss";
 // @import "animate.css/source/attention_seekers/flash.scss";
 // @import "animate.css/source/attention_seekers/pulse.scss";
