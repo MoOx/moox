@@ -1,5 +1,8 @@
 {
-  "assets": {
+  "git": {
+    "branch": "master"
+  }
+, "assets": {
     "styles": [{
       "src": "<%= happyplan.path.assets.styles %>/moox.scss"
     , "dest": "<%= happyplan.path.dist.assets.styles %>/moox.css"
