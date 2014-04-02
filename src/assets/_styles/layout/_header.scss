@@ -2,14 +2,9 @@
   position: relative;
 
   padding: $Navbar-height 1em 0;
-  transition: .5s;
+  transition: height .5s;
 
-  // update twitter background when you update that & also colors :)
-  // https://twitter.com/settings/design
-  // @include html-background('forest-ruins--portrait.jpg', 'forest-ruins--landscape.jpg');
-  background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 60%; // fallback
-  background: #314217 image-url('forest-ruins--portrait.jpg') no-repeat 50% 50% / cover;
-  @media (orientation: landscape) and (min-width: 50em) { background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 60% / cover; }
+  background: #51794d linear-gradient(#51794d, #4c662e);
 }
 
 .mx-Header + .mx-Separator { box-shadow: 0 0 1rem rgba(#000, .3) }

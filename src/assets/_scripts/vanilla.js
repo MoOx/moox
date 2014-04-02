@@ -1,13 +1,11 @@
 // just it case scripts below breack everything on a browser, just put the css like if there is no js
-var docEl = document.documentElement
-docEl.className = docEl.className.replace(/\bjs\b/, "no-js")
+var html = document.documentElement
+html.className = html.className.replace(/\bjs\b/, "no-js")
 
-// call me just before bottom, I’ll be dom ready :p
-//document.addEventListener('DOMContentReady', function() {
-
-if (document.querySelector && document.documentElement.classList) {
+if (document.querySelector && html.classList) {
   var forEach = Array.prototype.forEach
-    , whenDOMReady = function() {
+    , parallax = {}
+    , whenDOMReady = function () {
         new WOW({
           boxClass: "Animate"
         , animateClass: "Animated"
@@ -52,7 +50,7 @@ if (document.querySelector && document.documentElement.classList) {
   }
 
   new Pjax({
-    selectors: ["title", ".Navbar", ".mx-Header", ".mx-Content", ".mx-Footer"]
+    selectors: ["title", ".Navbar", ".mx-Header-body", ".mx-Content", ".mx-Footer-body"]
   , switches: {
         ".mx-Header": Pjax.switches.sideBySide
       , ".mx-Content": Pjax.switches.sideBySide
@@ -69,6 +67,13 @@ if (document.querySelector && document.documentElement.classList) {
   })
   document.addEventListener("pjax:success", whenDOMReady)
 
-  // everything run fine, let’s tell this to our stylesheets
-  docEl.className = docEl.className.replace(/\bno-js\b/, "js")
+  // CSS .loaded class
+  window.addEventListener("load", function() {
+    html.classList.add("loaded")
+  })
+
+  new Parallaxify({elements: ".mx-BackgroundImg" }).registerUpdate()
+
+  // CSS js class
+  html.className = html.className.replace(/\bno-js\b/, "js")
 }

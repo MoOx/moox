@@ -1,18 +1,19 @@
 {
-  "name": "MoOx"
-, "description": "Front-end web developer"
-, "url": "http://moox.io"
-, "version": "9.0.0"
-, "author": "Maxime Thirouin"
-, "license": "MIT"
-, "devDependencies": {
-    "happyplan": "~0.4.0-beta.7"
-  }
-, "repository": {
-    "type": "git"
-  , "url": "https://github.com/MoOx/moox.github.io.git"
-  }
-, "scripts": {
+  "name": "MoOx",
+  "description": "Front-end web developer",
+  "url": "http://moox.io",
+  "version": "9.0.0",
+  "author": "Maxime Thirouin",
+  "license": "MIT",
+  "devDependencies": {
+    "happyplan": "~0.4.0-beta.7",
+    "handlebars-layouts": "^0.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MoOx/moox.github.io.git"
+  },
+  "scripts": {
     "test": "happyplan dist"
   }
 }

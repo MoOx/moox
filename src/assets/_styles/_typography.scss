@@ -88,12 +88,12 @@ h6, .h6 {
   text-shadow: 0 1px 0 rgba(#fff, .8);
 }
 
+.mx-Text--lessVisible {
+  font-size: .8em;
+  opacity: .8;
+}
+
 .mx-Title--light {
   color: #eee;
   text-shadow: 0 1px 0 #000;
-}
-
-.mx-Text--lessVisible {
-  font-size: .8em;
-  opacity: .6;
 }

@@ -13,6 +13,7 @@
       , "<%= happyplan.bower_components %>/picturefill/picturefill.js"
       , "<%= happyplan.bower_components %>/WOW/dist/wow.js"
       , "<%= happyplan.bower_components %>/pjax/pjax.js"
+      , "<%= happyplan.bower_components %>/parallaxify/src/parallaxify.js"
       , "<%= happyplan.path.assets.scripts %>/vanilla.js"
       ]
     , "dest": "<%= happyplan.path.dist.assets.scripts %>/vanilla.js"

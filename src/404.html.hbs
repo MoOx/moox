@@ -1,22 +1,17 @@
 ---
-layout: default.hbs
 title: Erreur 404
 class: error-404
 nav: home
 ---
 
-<header class="mx-Header">
-  <div class="mx-Header-body mx-Body grid grid--center">
+{{#extend "layout"}}
+  {{#append "header"}}
     <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
         <div class="mx-Header-left mx-Header-left--quote">Are you lost..</div>
         <div class="mx-Header-right mx-Header-right--quote">in the woods ?</div>
     </h1>
-  </div>
-</header>
-<hr class="mx-Separator">
-
-<div class="mx-Content">
-  <div class="js-Pjax-child">
+  {{/append}}
+  {{#append "body"}}
     <div class="mx-Body grid">
       <div class="grid__cell Box">
         <div class="Box-body">
@@ -25,7 +20,5 @@ nav: home
         </div>
   		</div>
   	</div>
-  </div>
-</div>
-
-{{> footer }}
+  {{/append}}
+{{/extend}}

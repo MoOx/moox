@@ -12,6 +12,7 @@
     "picturefill": "git://github.com/scottjehl/picturefill.git",
     "animate.css": "~3.1.0",
     "WOW": "git://github.com/MoOx/WOW.git#initWithSettings-options",
-    "pjax": "~0.1.0"
+    "pjax": "~0.1.1",
+    "parallaxify": "~0.1.1"
   }
 }

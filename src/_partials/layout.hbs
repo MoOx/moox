@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 {{#if happyplan.repository.url }}<!--
-	HEY YOU, STOP LOOKING AT MY SOURCE CODE
-	Just check it out directly on Github :
+  HEY YOU, STOP LOOKING AT MY SOURCE CODE
+  Just check it out directly on Github :
 
-	{{ happyplan.repository.url }}
+  {{ happyplan.repository.url }}
 -->{{/if}}
 <html lang="en" class="no-js no-touch {{ page.class }} mx--{{ page.nav }}">
 <head>
@@ -22,11 +22,21 @@
 <![endif]-->
 {{ happyplan.html.hooks.body_open }}
 {{> nav }}
-{{> body }}
+  <header class="mx-Header">
+    <div class="mx-BackgroundImg" data-parallaxify-y-min="40%" data-parallaxify-y-max="60%"></div>
+    <div class="mx-Header-body mx-Body">
+{{#block "header"}}{{/block}}
+    </div>
+  </header>
+  <hr class="mx-Separator">
+  <div class="mx-Content">
+    <div class="js-Pjax-child">
+{{#block "body"}}{{/block}}
+    </div>
+  </div>
+{{> footer}}
 {{{ happyplan.html.hooks.body_close }}}
-{{#is happyplan.env 'dist' }}
-{{> google-analytics }}
-{{/is}}
+{{#is happyplan.env 'dist' }}{{> google-analytics }}{{/is}}
 {{> disqus }}
 </body>
 </html>

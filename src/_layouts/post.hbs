@@ -1,63 +1,58 @@
 ---
-layout: default.hbs
 nav: blog
 ---
-<header class="mx-Header">
-  <div class="mx-Header-body mx-Body grid grid--center">
+{{#extend "layout"}}
+  {{#append "header"}}
     <h1 class="mx-Header-body-title mx-Title--light grid__cell" lang="{{ page.lang }}">
       <span class="mx-Text--lessVisible">[{{ page.lang }}]</span> {{ page.title }}
     </h1>
-  </div>
-</header>
-<hr class="mx-Separator">
-
-<div class="mx-Content">
-  <div class="mx-Body grid">
-    <div class="grid__cell">
-      <article class="mx-Post" lang="{{ page.lang }}">
-        <header>
-          <time class="mx-Text--lessVisible" pubdate datetime="{{moment data.date format="YYYY-MM-DD" }}">{{moment page.data.date format="DD MMMM YYYY" }}</time>
-        </header>
-<hr class="mx-Separator">
-        <!-- {{#isnt page.tags empty }}
-        <div class="category">
-          <ul>
-            {{#each page.tags }}
-              <li><a href="#">{{ tag }}</a></li>
-            {{/each}}
-          </ul>
-        </div>
-        {{/isnt}} -->
-        <div class="content">
-          {{> body }}
-        </div>
-        <br /><br />
-        ---
-        <br /><br />
-        <footer>
-          <div class="report">
-            See something wrong here ? Please tell me <a href="https://github.com/MoOx/moox.io/issues">with an issue on Github</a>,
-            or just some words on twitter at <a href="https://twitter.com/MoOx/">@MoOx</a>.
+  {{/append}}
+  {{#append "body"}}
+    <div class="mx-Body grid">
+      <div class="grid__cell">
+        <article class="mx-Post" lang="{{ page.lang }}">
+          <header>
+            <time class="mx-Text--lessVisible" pubdate datetime="{{moment data.date format="YYYY-MM-DD" }}">{{moment page.data.date format="DD MMMM YYYY" }}</time>
+          </header>
+          <hr class="mx-Separator mx-Separator--thin">
+          <!-- {{#isnt page.tags empty }}
+          <div class="category">
+            <ul>
+              {{#each page.tags }}
+                <li><a href="#">{{ tag }}</a></li>
+              {{/each}}
+            </ul>
           </div>
-        </footer>
-      </article>
+          {{/isnt}} -->
+          <div class="content">
+            {{> body }}
+          </div>
+          <br /><br />
+          ---
+          <br /><br />
+          <footer>
+            <div class="report">
+              See something wrong here ? Please tell me <a href="https://github.com/MoOx/moox.io/issues">with an issue on Github</a>,
+              or just some words on twitter at <a href="https://twitter.com/MoOx/">@MoOx</a>.
+            </div>
+          </footer>
+        </article>
 
-      {{#is page.lang 'en' }}
-        {{> author-en }}
-      {{ else }}
-        {{> author-fr }}
-      {{/is}}
+        {{#is page.lang 'en' }}
+          {{> author-en }}
+        {{ else }}
+          {{> author-fr }}
+        {{/is}}
 
-      {{#and happyplan.disqus_short_name page.comments }}
-      <section class="">
-        <h1>Comments</h1>
-        <div id="disqus_thread" aria-live="polite">
-          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        </div>
-      </section>
-      {{/and}}
+        {{#and happyplan.disqus_short_name page.comments }}
+        <section class="">
+          <h1>Comments</h1>
+          <div id="disqus_thread" aria-live="polite">
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+        </section>
+        {{/and}}
+      </div>
     </div>
-  </div>
-</div>
-
-{{> footer }}
+  {{/append}}
+{{/extend}}

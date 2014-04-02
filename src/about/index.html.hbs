@@ -1,21 +1,16 @@
 ---
-layout: default.hbs
 title: "About Maxime Thirouin, a freelance front-end web developer"
 nav: about
 ---
 
-<header class="mx-Header">
-  <div class="mx-Header-body mx-Body grid grid--center">
+{{#extend "layout"}}
+  {{#append "header"}}
     <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
         <div class="mx-Header-left">About Maxime Thirouin, </div>
         <div class="mx-Header-right">a passionate front-end web developer</div>
     </h1>
-  </div>
-</header>
-<hr class="mx-Separator">
-
-<div class="mx-Content">
-  <div class="js-Pjax-child">
+  {{/append}}
+  {{#append "body"}}
     <div class="mx-Body grid">
       <div class="grid__cell">
         <h2>About me</h2>
@@ -41,7 +36,5 @@ nav: about
         <!-- TODO -->
       </div>
     </div>
-  </div>
-</div>
-
-{{> footer }}
+  {{/append}}
+{{/extend}}

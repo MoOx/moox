@@ -1,21 +1,17 @@
 ---
-layout: default.hbs
 title: MoOx slides
 class: grid-title--quotes
 nav: slides
 ---
-<header class="mx-Header">
-  <div class="mx-Header-body mx-Body grid grid--center">
+
+{{#extend "layout"}}
+  {{#append "header"}}
     <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
         <div class="mx-Header-left mx-Header-left--quote">MoOx slides...</div>
         <div class="mx-Header-right mx-Header-right--quote">...of his previous talks</div>
     </h1>
-  </div>
-</header>
-<hr class="mx-Separator">
-
-<div class="mx-Content">
-  <div class="js-Pjax-child">
+  {{/append}}
+  {{#append "body"}}
     <div class="mx-Body grid">
       <div class="grid__cell">
         <h2>Slides</h2>
@@ -35,7 +31,5 @@ nav: slides
         </ul>
       </div>
     </div>
-  </div>
-</div>
-
-{{> footer }}
+  {{/append}}
+{{/extend}}

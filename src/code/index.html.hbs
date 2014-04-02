@@ -1,22 +1,16 @@
 ---
-layout: default.hbs
 title: "MoOx (Freelance Front-end Web Developer) code ressources"
 nav: code
 ---
 
-<header class="mx-Header">
-  <div class="mx-Header-body mx-Body grid grid--center">
+{{#extend "layout"}}
+  {{#append "header"}}
     <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
         <div class="mx-Header-left mx-Header-left--quote">MoOx likes to code,</div>
         <div class="mx-Header-right mx-Header-right--quote">&amp; is an Open Source addict.</div>
     </h1>
-  </div>
-</header>
-<hr class="mx-Separator">
-
-
-<div class="mx-Content">
-  <div class="js-Pjax-child">
+  {{/append}}
+  {{#append "body"}}
     <div class="mx-Body grid">
       <div class="grid__cell">
         <h2>Code</h2>
@@ -46,7 +40,5 @@ nav: code
         {{> side-projects }}
       </div>
     </div>
-  </div>
-</div>
-
-{{> footer }}
+  {{/append}}
+{{/extend}}

@@ -1,21 +1,16 @@
 ---
-layout: default.hbs
 title: "Contact Maxime Thirouin (MoOx), a freelance Front-end Web Developer"
 nav: contact
 ---
 
-<header class="mx-Header">
-  <div class="mx-Header-body mx-Body grid grid--center">
+{{#extend "layout"}}
+  {{#append "header"}}
     <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
         <div class="mx-Header-left"><i class="icon icon_speech-bubbles"></i> Get in touch</div>
         <div class="mx-Header-right">with a cool web developer</div>
     </h1>
-  </div>
-</header>
-<hr class="mx-Separator">
-
-<div class="mx-Content mx-Content--collapseFooter">
-  <div class="js-Pjax-child">
+  {{/append}}
+  {{#append "body"}}
     <div class="mx-Body">
       <div class="grid">
         <div class="grid__cell unit-1-2--medium">
@@ -59,7 +54,5 @@ nav: contact
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-{{> footer }}
+  {{/append}}
+{{/extend}}

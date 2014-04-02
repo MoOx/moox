@@ -1,22 +1,17 @@
 ---
-layout: default.hbs
 title: "Front-end Web Developer (HTML5, CSS 3, Javascript, Responsive web design, front-end performance optimization)"
 nav: profile
 ---
 
-<header class="mx-Header">
-  <div class="mx-Header-body mx-Body grid grid--center">
+{{#extend "layout"}}
+  {{#append "header"}}
     <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
         <div class="mx-Header-left mx-Header-left--quote">Maxime Thirouin,</div>
         <div class="mx-Header-center">a freelance front-end web developer</div>
         <div class="mx-Header-right mx-Header-right--quote">who loves his job</div>
     </h1>
-  </div>
-</header>
-<hr class="mx-Separator">
-
-<div class="mx-Content">
-  <div class="js-Pjax-child">
+  {{/append}}
+  {{#append "body"}}
     <div class="mx-Body grid">
       <div class="grid__cell">
         <h2 class="h1">Front-End</h2>
@@ -58,7 +53,5 @@ nav: profile
         </p>
       </div>
     </div>
-  </div>
-</div>
-
-{{> footer }}
+  {{/append}}
+{{/extend}}

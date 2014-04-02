@@ -6,13 +6,13 @@
     right: 0;
   }
 
-  background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 100%; // fallback
-  background: #314217 image-url('forest-ruins--portrait.jpg') no-repeat 50% 100% / cover;
-  @media (orientation: landscape) and (min-width: 50em) { background: #314217 image-url('forest-ruins--landscape.jpg') no-repeat 50% 100% / cover }
+  background: #314217;
 }
 
   .error-404 .mx-Footer { background: transparent; box-shadow: none; border: 0 }
   .error-404 .mx-Footer::before { content: none }
+
+  .mx-Footer .mx-Separator { position: relative }
 
   .mx-Footer a { color: #fff }
   .mx-Footer a:hover,

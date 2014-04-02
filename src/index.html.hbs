@@ -1,10 +1,10 @@
 ---
-layout: default.hbs
 title: "Freelance Front-end Web Developer (HTML5, CSS 3, Javascript, Responsive web design, front-end performance optimization)"
 nav: home
 ---
-<header class="mx-Header">
-  <div class="mx-Header-body mx-Body">
+
+{{#extend "layout"}}
+  {{#append "header"}}
     <div class="grid grid--center">
       <h1 class="mx-Header-body-title mx-Text--light mx-Text--thin mx-Title--light grid__cell unit-8-12--medium">
           <div class="mx-Header-left mx-Header-left--quote">Hi I'm Maxime Thirouin,</div>
@@ -13,12 +13,8 @@ nav: home
       </h1>
     </div>
     <img class="mx-Header-picture" alt="Maxime Thirouin portrait" src="{{ happyplan.baseUrls.images }}/moox/serious-face.jpg">
-  </div>
-<!--   <img class="mx-Header-picture" alt="Maxime Thirouin portrait" src="//gravatar.com/avatar/2f6c2dcd4ba8fc44f1e7f0b2ed3d587d?s=256"> -->
-</header>
-<hr class="mx-Separator">
-<div class="mx-Content">
-  <div class="js-Pjax-child">
+  {{/append}}
+  {{#append "body"}}
     <div class="mx-Body grid">
       <div class="grid__cell unit-1-2--medium Animate Animate--delay-xxxs Animate--fadeInUp">
         <h2>Passionate web developer</h2>
@@ -80,7 +76,7 @@ nav: home
     {{> availability-status }}
     </div>
 
-    <p class="mx-Text--lessVisible mx-TextCenter Background">Portfolio coming soon !</p>
+    <p class="mx-ComingSoon mx-TextCenter Animate Animate--delay-l Animate--fadeInUp Background">Portfolio coming soon !</p>
 
     <div class="mx-FeaturedLogos Foreground">
       <div class="Animate Animate--delay-l Animate--slideInRight" data-wow-delay=".2s">
@@ -114,7 +110,7 @@ nav: home
       </div>
     </div>
 
-    <div class="mx-Testimonials Animate Animate--delay-xxl Animated--slow Animate--fadeIn" data-wow-delay=".4s">
+    <div class=" mx-Testimonials Animate Animate--delay-xxl Animated--slow Animate--fadeIn" data-wow-delay=".4s">
       <h2 class="mx-Heading--small mx-TextCenter">A few kind words from the Internet</h2>
       <div class="mx-Body grid grid--center">
         <div class="mx-Testimonial grid__cell unit-1-3--medium">
@@ -156,6 +152,5 @@ nav: home
       on
       <a href="http://www.linkedin.com/profile/view?id=21741025">my Linkedin profile</a>.
     </p>
-  </div>
-</div>
-{{> footer}}
+  {{/append}}
+{{/extend}}
