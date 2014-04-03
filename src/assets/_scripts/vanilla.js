@@ -51,7 +51,7 @@ if (document.querySelector && html.classList) {
   , mxHtmlClassNameRegex = /mx--[a-z]+/;
 
   new Pjax({
-    selectors: ["title", ".Navbar", ".mx-Header-body", ".mx-Content", ".mx-Footer-body"]
+    selectors: ["title", ".Navbar", ".mx-Header-body", ".mx-Content", ".mx-Footer-body", ".js-Disqus"]
   , switches: {
       "title": function(oldEl, newEl, options, switchOptions) {
         // switch html class
