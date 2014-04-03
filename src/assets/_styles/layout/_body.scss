@@ -39,6 +39,8 @@
   background: linear-gradient(to right, $mx-Color-green, $mx-Color-blue);
 }
 
+  .mx-Separator--thin { height: 1px }
+
   .mx-Separator--alt {
     background: $mx-Color-blue;
     background: linear-gradient(to right, $mx-Color-blue, $mx-Color-green);
