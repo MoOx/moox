@@ -36,24 +36,33 @@ if (document.querySelector && html.classList) {
   whenDOMReady()
 
   var sideBySideOptions = {
-    classNames: {
-      remove: "Animated Animated--reverse Animate--fast Animate--noDelay"
-    , add: "Animated"
-    , backward: "Animate--slideInRight"
-    , forward: "Animate--slideInLeft"
-    }
-  , callbacks: {
-      removeElement: function(el) {
-        el.style.marginLeft = "-" + (el.getBoundingClientRect().width/2) + "px"
+      classNames: {
+        remove: "Animated Animated--reverse Animate--fast Animate--noDelay"
+      , add: "Animated"
+      , backward: "Animate--slideInRight"
+      , forward: "Animate--slideInLeft"
+      }
+    , callbacks: {
+        removeElement: function(el) {
+          el.style.marginLeft = "-" + (el.getBoundingClientRect().width/2) + "px"
+        }
       }
     }
-  }
+  , mxHtmlClassNameRegex = /mx--[a-z]+/;
 
   new Pjax({
     selectors: ["title", ".Navbar", ".mx-Header-body", ".mx-Content", ".mx-Footer-body"]
   , switches: {
-        ".mx-Header": Pjax.switches.sideBySide
-      , ".mx-Content": Pjax.switches.sideBySide
+      "title": function(oldEl, newEl, options, switchOptions) {
+        // switch html class
+        var htmlClassName = newEl.parentNode.parentNode.className.match(mxHtmlClassNameRegex)
+        if (htmlClassName && htmlClassName.length) {
+          oldEl.parentNode.parentNode.className = oldEl.parentNode.parentNode.className.replace(mxHtmlClassNameRegex, htmlClassName[0])
+        }
+        Pjax.switches.outerHTML.apply(this, arguments)
+      }
+    , ".mx-Header": Pjax.switches.sideBySide
+    , ".mx-Content": Pjax.switches.sideBySide
     }
   , switchesOptions: {
       ".mx-Header": sideBySideOptions
