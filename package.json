@@ -6,7 +6,7 @@
   "author": "Maxime Thirouin",
   "license": "MIT",
   "devDependencies": {
-    "happyplan": "~0.4.0-beta.7",
+    "happyplan": "^0.4.0-beta.7",
     "handlebars-layouts": "^0.2.0"
   },
   "repository": {
