@@ -26,10 +26,11 @@ $Navbar-separator: false;
   .Navbar-section {
     a {
       font-size: $Navbar__item--font-size;
-      padding: 0 1em;
       border: 0;
       font-weight: 400;
       border-bottom: 1px solid transparent;
+
+      @include crp-Media-min($Navbar-screen-breakpoint) { padding: 0 1em; }
     }
 
     a:hover {
