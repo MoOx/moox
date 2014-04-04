@@ -6,8 +6,8 @@
         <br />
         <span class="SiteLogo-description">{{ happyplan.description }}</span>
       </a>
-      <button class="Navbar-toggler js-Togglable-toggler">☰</button>
-
+      <button class="Navbar-toggler js-Togglable-toggler"><i class="icon icon_menu"></i></button>
+      <hr class="mx-Separator mx-Separator--thin js-Togglable-item js-Togglable-item--hide">
       <ul class="Navbar-section Navbar-section--right js-Togglable-item js-Togglable-item--hide">
         <li><a class="{{#is page.nav 'profile' }}active{{/is}}"  href="profile/"><i class="icon icon_user"></i> Profile</a>
         {{!-- </li><li><a class="{{#is page.nav 'portfolio' }}active{{/is}}"  href="#not-ready"><i class="icon icon_gears"></i> Portfolio</a> --}}
@@ -17,6 +17,7 @@
         </li><li><a class="{{#is page.nav 'about' }}active{{/is}}"  href="about/"><i class="icon icon_help"></i> About</a>
         </li><li><a class="{{#is page.nav 'contact' }}active{{/is}}"  href="contact/"><i class="icon icon_speech-bubbles"></i> Contact</a></li>
       </ul>
+      <hr class="mx-Separator mx-Separator--thin js-Togglable-item">
     </div>
   </div>
 </nav>

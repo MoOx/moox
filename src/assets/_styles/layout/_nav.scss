@@ -9,6 +9,7 @@ $Navbar-separator: false;
 .Navbar {
   position: absolute;
   [href="#not-ready"] { color: rgba(#fff, .3) !important; }
+  font-size: 1rem;
 }
 
   .Navbar .icon { font-size: 1.2em; }
@@ -20,16 +21,6 @@ $Navbar-separator: false;
     text-shadow: 0 1px 0 rgba(#000, .6);
     // box-shadow: 0 .2em .6em rgba(#000, .4);
     @include crp-Media-l { font-size: 1.1em;}
-  }
-
-  .Navbar--top .mx-Body::after {
-    clear: both;
-    display: block;
-    content: "";
-    height: 1px;
-    margin: 0 1em;
-    background: $mx-Color-blue;
-    background: linear-gradient(to right, $mx-Color-blue, $mx-Color-green);
   }
 
   .Navbar-section {
@@ -51,21 +42,40 @@ $Navbar-separator: false;
   }
 
   .Navbar-toggler {
+    top: .6rem;
     right: 1rem;
+
+    font-size: 2.6rem;
+    font-weight: 300;
+    text-shadow: 0 1px 0 rgba(#000, .6);
+
+    border: 0;
+    padding: 0;
+    // border: 1px solid #fff;
+    // border-radius: .2rem;
+    // padding: 0 0.4rem 0.2rem;
+    // box-shadow: 0 1px 0 rgba(#000, .2), inset 0 1px 0 rgba(#000, .2);
+
+    .icon { vertical-align: top }
   }
 
   @include crp-Media-max($Navbar-screen-breakpoint) {
-    .js-Togglable--toggled { background: rgba(#000, .9) }
+    .js-Togglable--toggled {
+      background: #51794d;
+      background: #51794d linear-gradient(#51794d, #4c662e);
+      box-shadow: 0 0 2rem rgba(#000, .4);
+    }
   }
 
   .js {
-    @include crp-Media-max($Navbar-screen-breakpoint) {
+    // @include crp-Media-max($Navbar-screen-breakpoint) {
       .js-Togglable-toggler { display: inline-block; }
       .js-Togglable-item--hide { display: none; }
-    }
+    // }
 
     @include crp-Media-min($Navbar-screen-breakpoint) {
       .js-Togglable-toggler { display: none; }
+      .js-Togglable-item--hide { display: inline-block; }
     }
   }
 
@@ -75,7 +85,7 @@ $SiteLogo-title--font-size: 1.4em;
 .SiteLogo {
   line-height: 1;
   padding: .9em 0;
-  display: inline-block;
+  display: block;
 
   border-bottom: 0;
 }
@@ -96,4 +106,6 @@ $SiteLogo-title--font-size: 1.4em;
     .SiteLogo-description {
       font-weight: 400;
       margin-top: -1.2em;
+
+      @media (max-width: 20rem) { visibility: hidden }
     }

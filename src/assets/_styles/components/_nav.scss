@@ -62,11 +62,11 @@ $Navbar-screen-breakpoint: $crp-Media-size-m !default;
       position: absolute;
       top: 0;
       right: 0;
-
-      font-size: $Navbar-height*$Navbar-toggler-ratio;
-      line-height: 1*(1/$Navbar-toggler-ratio);
-      padding: 0;
-      border: 0;
+      //
+      // font-size: $Navbar-height*$Navbar-toggler-ratio;
+      // line-height: 1*(1/$Navbar-toggler-ratio);
+      // padding: 0;
+      // border: 0;
 
       color: $Navbar-link-color;
       background: none;
