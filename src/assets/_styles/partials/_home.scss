@@ -21,6 +21,8 @@
   border: solid #e6e6e6;
   border-width: 1px 0;
   background: #f9f9f9;
+
+  overflow-x: hidden; // for .Animated child
 }
 
   .mx-FeaturedLogos .grid__cell {
