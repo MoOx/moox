@@ -60,8 +60,11 @@ $mx-borderRadius: 4px;
 
 @import "./partials/animation";
 @import "./partials/annonce";
-@import "./partials/posts";
+@import "./partials/background";
 @import "./partials/home";
+@import "./partials/pjax";
+@import "./partials/posts";
+@import "./partials/separator";
 
 @import "./highlight";
 
@@ -94,28 +97,3 @@ html.error-404 {}
 // body {
 //   background: #fefefe;
 // }
-
-.mx-BackgroundImg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 0;
-
-  opacity: 0;
-  transition: opacity 1s;
-  transform: translateZ(0);
-}
-// load background image on window load
-.loaded .mx-BackgroundImg {
-  opacity: 1;
-
-  // update twitter background when you update that & also colors :)
-  // https://twitter.com/settings/design
-  @media (max-width: 50.0000rem) { background-image: image-url('forest-ruins--portrait.jpg') }
-  @media (min-width: 50.0625rem) { background-image: image-url('forest-ruins--landscape.jpg') }
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
