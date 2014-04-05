@@ -20,7 +20,7 @@ if (document.querySelector && html.classList) {
           var toggle = function(event) {
             el.classList.toggle("js-Togglable--toggled")
             items.forEach(function(item) {
-              item.classList.toggle("js-Togglable-item--hide")
+              item.classList.toggle("js-Togglable-item--hidden")
             })
           }
 

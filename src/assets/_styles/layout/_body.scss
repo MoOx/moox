@@ -28,7 +28,10 @@
   max-width: 100%
 }
 
-.mx-Separator {
+.mx-Separator,
+.mx-SeparatorBefore::before,
+.mx-SeparatorAfter::after {
+  content: "";
   z-index: 1;
   display: block;
   clear: both;
@@ -40,9 +43,30 @@
   background: linear-gradient(to right, $mx-Color-green, $mx-Color-blue);
 }
 
-  .mx-Separator--thin { height: 1px }
+  .mx-Separator--animated,
+  .mx-SeparatorBefore--animated::before,
+  .mx-SeparatorAfter--animated::after {
+    background: $mx-Color-blue;
+    background: linear-gradient(to right, $mx-Color-green, $mx-Color-blue, $mx-Color-green);
+    background-size: 200% 100%;
+    animation: 2s linear 0s normal none infinite mx-Separator--animation
+  }
+  @keyframes mx-Separator--animation {
+    0% { background-position: 100% 100% }
 
-  .mx-Separator--alt {
+    50% { background-position: 0% 100% }
+
+    100% { background-position: -100% 100% }
+  }
+
+
+  .mx-Separator--thin,
+  .mx-SeparatorBefore--thin::before,
+  .mx-SeparatorAfter--thin::after { height: 1px}
+
+  .mx-Separator--alt,
+  .mx-SeparatorBefore--alt::before,
+  .mx-SeparatorAfter--alt::after {
     background: $mx-Color-blue;
     background: linear-gradient(to right, $mx-Color-blue, $mx-Color-green);
   }

@@ -69,15 +69,17 @@ $Navbar-separator: false;
   }
 
   .js {
-    @include crp-Media-max($Navbar-screen-breakpoint + .0625em) {
-      .js-Togglable-toggler { display: inline-block; }
-      .js-Togglable-item--hide { display: none; }
+    @include crp-Media-max($Navbar-screen-breakpoint) {
+      .js-Togglable-toggler { display: inline-block }
+      .js-Togglable-item--hidden { display: none }
     }
 
-    @include crp-Media-min($Navbar-screen-breakpoint) {
-      .js-Togglable-toggler { display: none; }
-      .js-Togglable-item--hide { display: inline-block; }
+    @include crp-Media-min($Navbar-screen-breakpoint + .0625em) {
+      .js-Togglable-toggler { display: none }
+      .js-Togglable-item--hidden { display: inline-block }
+      .js-Togglable-item--hidden.mx-SeparatorBefore::before { display: none }
     }
+
   }
 
 ////
