@@ -36,8 +36,7 @@
   display: block;
   clear: both;
   border : 0;
-  height: 4px; // IE8
-  height: .4rem;
+  height: 5px;
   margin: 0;
   background: $mx-Color-green;
   background: linear-gradient(to right, $mx-Color-green, $mx-Color-blue);
