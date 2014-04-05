@@ -17,3 +17,7 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+// load background image only when image is charged (only if js can check it ;)
+.js .mx-BackgroundImg.js-is-Loading { opacity: 0 }
+.js .mx-BackgroundImg.js-is-Loaded { opacity: 1 }

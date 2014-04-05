@@ -76,6 +76,26 @@ if (document.querySelector && html.classList) {
   })
   document.addEventListener("pjax:success", whenDOMReady)
 
+  var updateLoadStatus = function(el) { el.classList.add("js-is-Loaded") }
+  forEach.call(document.getElementsByClassName("js-is-Loading"), function(el) {
+    if (el.tagName.toLowerCase() === "img") {
+      el.addEventListener("load", updateLoadStatus)
+    }
+    // try background images
+    else {
+      var backgroundImages = window.getComputedStyle(el, null).getPropertyValue("background-image")
+        , backgroundUrlRegex = /url\((?:'|")?([^\)'"]+)(?:'|")?\),?\s?/g
+        , backgroundImagesUrl = backgroundUrlRegex.exec(backgroundImages)
+        , imgLoaded = function() { updateLoadStatus(el) }
+      while(backgroundImagesUrl && backgroundImagesUrl[1]) {
+        var img = new Image()
+        img.src = backgroundImagesUrl[1]
+        img.onload = imgLoaded
+        backgroundImagesUrl = backgroundUrlRegex.exec(backgroundImages)
+      }
+    }
+  })
+
   // CSS .loaded class
   window.addEventListener("load", function() {
     html.classList.add("loaded")
