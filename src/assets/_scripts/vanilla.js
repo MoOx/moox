@@ -6,6 +6,9 @@ if (document.querySelector && html.classList) {
   var forEach = Array.prototype.forEach
     , parallax = {}
     , whenDOMReady = function () {
+        ///
+        // Delay not visible CSS animations on load
+        ///
         new WOW({
           boxClass: "Animate"
         , animateClass: "Animated"
@@ -13,6 +16,9 @@ if (document.querySelector && html.classList) {
         , initAlreadyVisible: false
         }).init()
 
+        ///
+        // Responsive navigation menu
+        ///
         forEach.call(document.getElementsByClassName("js-Togglable"), function(el) {
           var toggler = el.querySelector(".js-Togglable-toggler")
           var items = [].slice.call(el.getElementsByClassName("js-Togglable-item"))
@@ -28,6 +34,9 @@ if (document.querySelector && html.classList) {
           toggler.addEventListener("keyup", toggle)
         })
 
+        ///
+        // Mailto
+        ///
         forEach.call(document.getElementsByClassName("js-MailTo"), function(el) {
           el.setAttribute("href", "mailto:" + el.getAttribute("data-mailto-user") + "@" + (el.getAttribute("data-mailto-domain") || window.location.host))
         })
@@ -35,6 +44,9 @@ if (document.querySelector && html.classList) {
 
   whenDOMReady()
 
+  ///
+  // Enable Ajax animation
+  ///
   var sideBySideOptions = {
       classNames: {
         remove: "Animated Animated--reverse Animate--fast Animate--noDelay"
@@ -109,6 +121,9 @@ if (document.querySelector && html.classList) {
     html.classList.add("loaded")
   })
 
+  ///
+  // Parallax effect for background image when scrolling
+  ///
   new Parallaxify({elements: ".mx-BackgroundImg" }).registerUpdate()
 
   // CSS js class
