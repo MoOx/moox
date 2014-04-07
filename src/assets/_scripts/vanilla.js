@@ -76,23 +76,31 @@ if (document.querySelector && html.classList) {
   })
   document.addEventListener("pjax:success", whenDOMReady)
 
-  var updateLoadStatus = function(el) { el.classList.add("js-is-Loaded") }
-  forEach.call(document.getElementsByClassName("js-is-Loading"), function(el) {
-    if (el.tagName.toLowerCase() === "img") {
-      el.addEventListener("load", updateLoadStatus)
+
+  ///
+  // Lazy display background image
+  ///
+  var updateLoadStatus = function() {
+    this.classList.remove("js-is-Loading")
+    this.classList.add("js-is-Loaded")
+  }
+  document.documentElement.addEventListener("load", function listenImgLoad(event) {
+    if (event.target.classList.contains("js-is-Loading")) {
+      updateLoadStatus.call(event.target)
     }
-    // try background images
-    else {
-      var backgroundImages = window.getComputedStyle(el, null).getPropertyValue("background-image")
-        , backgroundUrlRegex = /url\((?:'|")?([^\)'"]+)(?:'|")?\),?\s?/g
-        , backgroundImagesUrl = backgroundUrlRegex.exec(backgroundImages)
-        , imgLoaded = function() { updateLoadStatus(el) }
-      while(backgroundImagesUrl && backgroundImagesUrl[1]) {
-        var img = new Image()
-        img.src = backgroundImagesUrl[1]
-        img.onload = imgLoaded
-        backgroundImagesUrl = backgroundUrlRegex.exec(backgroundImages)
-      }
+  }, true)
+
+  // background images
+  forEach.call(document.getElementsByClassName("js-is-Loading"), function(el) {
+    var backgroundImages = window.getComputedStyle(el, null).getPropertyValue("background-image")
+      , backgroundUrlRegex = /url\((?:'|")?([^\)'"]+)(?:'|")?\),?\s?/g
+      , backgroundImagesUrl = backgroundUrlRegex.exec(backgroundImages)
+      , imgLoaded = updateLoadStatus.bind(el)
+    while(backgroundImagesUrl && backgroundImagesUrl[1]) {
+      var img = new Image()
+      img.src = backgroundImagesUrl[1]
+      img.onload = imgLoaded
+      backgroundImagesUrl = backgroundUrlRegex.exec(backgroundImages)
     }
   })
 
