@@ -1,4 +1,4 @@
-// just it case scripts below breack everything on a browser, just put the css like if there is no js
+// just in case scripts below breack everything on a browser, just put the css like if there is no js
 var html = document.documentElement
 html.className = html.className.replace(/\bjs\b/, "no-js")
 
@@ -126,6 +126,6 @@ if (document.querySelector && html.classList) {
   ///
   new Parallaxify({elements: ".mx-BackgroundImg" }).registerUpdate()
 
-  // CSS js class
+  // put js class back
   html.className = html.className.replace(/\bno-js\b/, "js")
 }
