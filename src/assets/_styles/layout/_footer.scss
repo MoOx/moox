@@ -19,7 +19,8 @@
 
   .mx-Footer a {
     color: #fff;
-    padding-bottom: 0
+    padding-bottom: 0;
+    vertical-align: bottom;
   }
   .mx-Footer a:hover,
   .mx-Footer a:focus { color: $mx-Color-green }
