@@ -2,6 +2,7 @@
 .mx-SeparatorBefore::before,
 .mx-SeparatorAfter::after {
   content: "";
+  position: relative;
   z-index: 1;
   display: block;
   clear: both;

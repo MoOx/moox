@@ -14,19 +14,18 @@ $annonceBoxHeight: 2em;
   position: relative;
   text-align: center;
   font-size: 1.1rem;
-  line-height: 1.8;
 
   display: table;
   width: 100%;
   max-width: 35rem;
-  margin: 1em auto;
-  padding: 1rem;
+  margin: $line-height auto;
+  padding: $line-height/2;
 
   color: #fff !important;
   background: $mx-Color-green;
   background: linear-gradient(to bottom, $mx-Color-green, $mx-Color-green--darker);
   text-shadow: 0 1px 0 rgba(#000, .4);
-  border: .2rem solid $mx-Color-green;
+  //border: .2rem solid $mx-Color-green;
   border-radius: 2px;
   // font-weight: 600;
 }

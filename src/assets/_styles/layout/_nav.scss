@@ -1,4 +1,4 @@
-$Navbar-height: 4rem;
+$Navbar-height: 3.8rem;
 $Navbar__item--font-size: .9rem;
 
 $Navbar-separator: false;
@@ -9,7 +9,6 @@ $Navbar-separator: false;
 .Navbar {
   position: absolute;
   [href="#not-ready"] { color: rgba(#fff, .3) !important; }
-  font-size: 1rem;
 }
 
   .Navbar .icon { font-size: 1.2em; }
@@ -20,7 +19,7 @@ $Navbar-separator: false;
     // background: linear-gradient(to right, rgba($mx-Color-green, .8), rgba($mx-Color-blue, .8));
     text-shadow: 0 1px 0 rgba(#000, .6);
     // box-shadow: 0 .2em .6em rgba(#000, .4);
-    @include crp-Media-l { font-size: 1.1em;}
+    //@include crp-Media-l { font-size: 1.1em;}
   }
 
   .Navbar-section {

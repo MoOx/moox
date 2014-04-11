@@ -8,6 +8,8 @@
     left: 0;
     right: 0;
   }
+
+  &:before { position: absolute }
 }
 
   .error-404 .mx-Footer { background: transparent; box-shadow: none; border: 0 }
@@ -15,19 +17,22 @@
 
   .mx-Footer .mx-Separator { position: relative }
 
-  .mx-Footer a { color: #fff }
+  .mx-Footer a {
+    color: #fff;
+    padding-bottom: 0
+  }
   .mx-Footer a:hover,
   .mx-Footer a:focus { color: $mx-Color-green }
 
   .mx-Footer-body {
-    padding: 2rem 0;
-    line-height: 2em;
+    padding: $line-height 0;
+    line-height: $line-height*2;
     overflow-x: hidden;
   }
 
   .mx-IconLink {
     color: #fff;
-    font-size: 2em;
+    font-size: 2rem;
     border: 0;
   }
 

@@ -1,9 +1,39 @@
+/**
+ * Vertical rhythm
+ *
+ * http://type-scale.com/?size=20&scale=1.200&text=A%20Visual%20Type%20Scale&webfont=&font-family=sans-serif&font-weight=400&font-family-headers=&font-weight-headers=inherit&background-color=white&font-color=#333
+ */
+$line-height: 1.5625rem;
+body {
+  font-size: 0.833em;
+  line-height: $line-height;
+}
+
+p { margin: $line-height 0 }
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4 {
+  margin: 0 0 $line-height;
+  line-height: $line-height*2;
+}
+
+h1, .h1 {
+  font-size: 2.074rem;
+}
+
+h2, .h2 { font-size: 1.728rem }
+h3, .h3 { font-size: 1.44rem }
+h4, .h4 { font-size: 1.2rem}
+
+small, .small { font-size: 0.833em }
+
+/* global styles */
+
 body {
   //@extend %crp-FontSmoothing; //libsass bug
   @include crp-FontSmoothing();
-
-  font-size: .9rem;
-  line-height: 1.8;
 
   color: $text-color--dark;
   text-shadow: 0 1px 0 rgba(#fff, .8);
@@ -32,20 +62,6 @@ a {
   //&:visited { color: lighten($highlight-color, 2%); }
 }
 
-.h1 { @extend h1; }
-.h2 { @extend h2; }
-.h3 { @extend h3; }
-.h4 { @extend h4; }
-.h5 { @extend h5; }
-.h6 { @extend h6; }
-
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 { font-weight: bold; }
-
 h1, .h1,
 h2, .h2,
 h3, .h3,
@@ -55,9 +71,11 @@ h6, .h6 {
   font-weight: 400;
 }
 
+/* custom helpers */
 .mx-Heading--small {
   font-size: 1rem;
   color: #c1c1c1;
+  line-height: inherit;
 }
 
 .mx-TextLeft { text-align: left }
@@ -89,7 +107,7 @@ h6, .h6 {
 }
 
 .mx-Text--lessVisible {
-  font-size: .8em;
+  font-size: .833em;
   opacity: .8;
 }
 

@@ -1,7 +1,7 @@
 .mx-Content {
   position: relative;
-  padding: 1rem 1rem 2rem;
-  @include crp-Media-m { padding: 2rem 1em 4rem }
+  padding: $line-height 1rem $line-height*2;
+  @include crp-Media-m { padding: $line-height*2 1em $line-height*2 }
 
   transition: .5s;
   //overflow: hidden;

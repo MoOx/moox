@@ -45,6 +45,8 @@ $mx-borderRadius: 4px;
 //@import "pygments-theme-freshcut";
 @import "./components/flex-media"; $flex-media-ratios: "3-1" 3, "16-9" 1.77777, "4-3" 1.33333, "1-1" 1; @include flex-medias();
 @import "./components/tooltip";
+// @import "./components/browser";
+// @import "./components/smartphone";
 
 @import "./typography";
 @import "icons";
@@ -81,7 +83,7 @@ body {
 
   @include crp-Media-m {
     // footer is absolute, keep some place for it
-    padding-bottom: 6rem;
+    padding-bottom: $line-height*4;
   }
 }
 

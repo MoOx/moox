@@ -2,6 +2,8 @@
   position: relative;
 
   padding: $Navbar-height 1em 0;
+  height: 23.125rem;
+
   transition: height .5s;
 
   background: #51794d;
@@ -76,6 +78,7 @@
 
   @include crp-Media-m { .mx-Header-picture {
     position: absolute;
+    z-index: 2;
     left: 50%;
     bottom: -80px; //IE8
     bottom: -5rem;
