@@ -8,8 +8,8 @@
 }
 
   .mx--contact .mx-Content {
-    padding: 1rem 1rem 0;
-    @include crp-Media-m { padding: 2rem 1em 0 }
+    padding: $line-height 1rem 0;
+    @include crp-Media-m { padding: $line-height*2 1em 0 }
   }
 
 .mx-Body {
