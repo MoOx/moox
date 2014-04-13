@@ -29,14 +29,20 @@
     100% { background-position: -100% 100% }
   }
 
-
+  hr.mx-Separator,
   .mx-Separator--thin,
   .mx-SeparatorBefore--thin::before,
-  .mx-SeparatorAfter--thin::after { height: 1px}
+  .mx-SeparatorAfter--thin::after { height: 1px }
 
   .mx-Separator--alt,
   .mx-SeparatorBefore--alt::before,
   .mx-SeparatorAfter--alt::after {
     background: $mx-Color-blue;
     background: linear-gradient(to right, $mx-Color-blue, $mx-Color-green);
+  }
+
+  hr.mx-Separator {
+    margin: $line-height 0;
+    margin: calc(#{$line-height} - .5px) 0;
+    overflow: hidden; /* avoid margin collapse */
   }

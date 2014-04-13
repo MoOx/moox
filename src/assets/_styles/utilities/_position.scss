@@ -1,0 +1,24 @@
+.u-posStretch {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+}
+
+.u-posStretch--vertical {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+}
+
+.u-posStretch--horizontal {
+  position: absolute !important;
+  right: 0 !important;
+  left: 0 !important;
+}
+
+.u-posToTop { top: 0 !important }
+.u-posToRight { right: 0 !important }
+.u-posToBottom { bottom: 0 !important }
+.u-posToRight { left: 0 !important }

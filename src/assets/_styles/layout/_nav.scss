@@ -1,4 +1,4 @@
-$Navbar-height: 3.8rem;
+$Navbar-height: $line-height*2.5;
 $Navbar__item--font-size: .9rem;
 
 $Navbar-separator: false;
@@ -8,6 +8,7 @@ $Navbar-separator: false;
 
 .Navbar {
   position: absolute;
+  z-index: 3;
   [href="#not-ready"] { color: rgba(#fff, .3) !important; }
 }
 
@@ -30,6 +31,10 @@ $Navbar-separator: false;
       border-bottom: 1px solid transparent;
 
       @include crp-Media-min($Navbar-screen-breakpoint) { padding: 0 1em; }
+    }
+
+    li:last-child a {
+      @include crp-Media-min($Navbar-screen-breakpoint) { padding: 0 0 0 1em; }
     }
 
     a:hover {
@@ -85,8 +90,8 @@ $Navbar-separator: false;
 
 $SiteLogo-title--font-size: 1.4em;
 .SiteLogo {
-  line-height: 1;
-  padding: .9em 0;
+  line-height: $line-height/2;
+  padding: 1rem 0;
   display: block;
 
   border-bottom: 0;

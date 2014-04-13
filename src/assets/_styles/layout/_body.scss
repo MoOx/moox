@@ -1,7 +1,6 @@
 .mx-Content {
   position: relative;
   padding: $line-height 1rem $line-height*2;
-  @include crp-Media-m { padding: $line-height*2 1em $line-height*2 }
 
   transition: .5s;
   //overflow: hidden;
@@ -9,7 +8,6 @@
 
   .mx--contact .mx-Content {
     padding: $line-height 1rem 0;
-    @include crp-Media-m { padding: $line-height*2 1em 0 }
   }
 
 .mx-Body {
@@ -17,7 +15,8 @@
 
   // add max-width for center layout
   // @include crp-Media-m {
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 1024px;
   // }
 }

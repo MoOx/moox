@@ -2,6 +2,10 @@
 
 }
 
+  @include crp-Media-m {
+    .mx--home .mx-Header-body-title { padding-bottom: $line-height*2 }
+  }
+
   .mx--home .Browser { font-size: 1rem }
     .mx--home .Browser-viewport { height: 15rem }
 

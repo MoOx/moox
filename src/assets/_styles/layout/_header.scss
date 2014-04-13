@@ -1,32 +1,45 @@
 .mx-Header {
   position: relative;
 
-  padding: $Navbar-height 1em 0;
-  height: 23.125rem;
+  padding: $line-height*3 0 0;
 
   transition: height .5s;
 
   background: #51794d;
   background: #51794d linear-gradient(#51794d, #4c662e);
+
+  @include crp-Media-m {
+    padding: $Navbar-height 0 0;
+    height: $line-height*15
+  }
 }
 
-.mx-Header + .mx-Separator { box-shadow: 0 0 1rem rgba(#000, .3) }
+.mx-Header >:last-child.mx-Separator { box-shadow: 0 0 1rem rgba(#000, .3) }
 
   .error-404 .mx-Header { background: transparent; box-shadow: none; border: 0 }
   .error-404 .mx-Header::after { content: none }
 
     .mx-Header-body {
       display: table;
-      // height: 100%;
+      height: 100%;
     }
+
+    .mx-Header-body > .grid {
+      display: table-row;
+      height: 100%;
+    }
+
+      @include crp-Media-m {
+        .mx-Header-body > .grid > .grid__cell { padding: 0 4rem }
+      }
 
       .mx-Header-body-title {
         display: table-cell;
         vertical-align: middle;
-        padding: 1rem;
-
-        @include crp-Media-m { padding: 4em 1em }
-        @include crp-Media-m { padding: 4rem 1rem 6rem }
+        // padding: 1rem;
+        //
+        // @include crp-Media-m { padding: $line-height*2 0 }
+        // @include crp-Media-m { padding: $line-height*2 0 $line-height*4 }
       }
 
     @include crp-Media-m {
@@ -65,6 +78,8 @@
     }
 
   .mx-Header-picture {
+    position: relative;
+    z-index: 2;
     display: block;
     margin: 0 auto -3em;
     width: 160px; //IE8
@@ -78,7 +93,6 @@
 
   @include crp-Media-m { .mx-Header-picture {
     position: absolute;
-    z-index: 2;
     left: 50%;
     bottom: -80px; //IE8
     bottom: -5rem;

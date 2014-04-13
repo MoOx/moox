@@ -9,7 +9,7 @@ body {
   line-height: $line-height;
 }
 
-p { margin: $line-height 0 }
+p, ul { margin: $line-height 0 }
 
 h1, .h1,
 h2, .h2,
