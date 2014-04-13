@@ -30,7 +30,10 @@
     }
 
       @include crp-Media-m {
-        .mx-Header-body > .grid > .grid__cell { padding: 0 4rem }
+        .mx-Header-body > .grid > .grid__cell {
+          padding-left: 4rem;
+          padding-right: 4rem;
+        }
       }
 
       .mx-Header-body-title {
