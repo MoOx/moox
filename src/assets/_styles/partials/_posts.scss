@@ -18,6 +18,8 @@
 
   .AboutAuthor-avatar {
     float: left;
-    margin-right: 1em;
-    border-radius: $mx-borderRadius;
+    margin: $line-height/2 1em $line-height/2 0;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, .2) inset, 0px -1px 0px rgba(0, 0, 0, .6);
   }

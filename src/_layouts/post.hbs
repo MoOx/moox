@@ -11,10 +11,9 @@ nav: blog
     <div class="mx-Body grid">
       <div class="grid__cell">
         <article class="mx-Post" lang="{{ page.lang }}">
-          <header>
+          <header class="mx-SeparatorAfter mx-SeparatorAfter--thin mx-SeparatorAfter--alt">
             <time class="mx-Text--lessVisible" pubdate datetime="{{moment data.date format="YYYY-MM-DD" }}">{{moment page.data.date format="DD MMMM YYYY" }}</time>
           </header>
-          <hr class="mx-Separator mx-Separator--thin">
           <!-- {{#isnt page.tags empty }}
           <div class="category">
             <ul>
@@ -27,22 +26,24 @@ nav: blog
           <div class="content">
             {{> body }}
           </div>
-          <br /><br />
-          ---
-          <br /><br />
+
           <footer>
-            <div class="report">
+            <small>
               See something wrong here ? Please tell me <a href="https://github.com/MoOx/moox.io/issues">with an issue on Github</a>,
               or just some words on twitter at <a href="https://twitter.com/MoOx/">@MoOx</a>.
-            </div>
+            </small>
+
+            <hr class="mx-Separator">
+
+            {{#is page.lang 'en' }}
+              {{> author-en }}
+            {{ else }}
+              {{> author-fr }}
+            {{/is}}
           </footer>
         </article>
 
-        {{#is page.lang 'en' }}
-          {{> author-en }}
-        {{ else }}
-          {{> author-fr }}
-        {{/is}}
+        <hr class="mx-Separator mx-Separator--alt">
 
         {{#and happyplan.disqus_short_name page.comments }}
         <section class="">
