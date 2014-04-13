@@ -29,7 +29,12 @@ h4, .h4 { font-size: 1.2rem}
 
 small, .small { font-size: 0.833em }
 
-/* global styles */
+/* and now just use $line-height when you need some vertical spacing ! */
+
+
+/**
+ * Global typography styles
+ */
 
 body {
   //@extend %crp-FontSmoothing; //libsass bug
