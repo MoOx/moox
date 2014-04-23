@@ -3,9 +3,12 @@
  *
  * http://type-scale.com/?size=20&scale=1.200&text=A%20Visual%20Type%20Scale&webfont=&font-family=sans-serif&font-weight=400&font-family-headers=&font-weight-headers=inherit&background-color=white&font-color=#333
  */
+$font-size: 0.833rem;
 $line-height: 1.5625rem;
+
+
 body {
-  font-size: 0.833em;
+  font-size: $font-size;
   line-height: $line-height;
 }
 
@@ -19,17 +22,14 @@ h4, .h4 {
   line-height: $line-height*2;
 }
 
-h1, .h1 {
-  font-size: 2.074rem;
-}
-
+/* scale: 1.200 (minor third) */
+h1, .h1 { font-size: 2.074rem }
 h2, .h2 { font-size: 1.728rem }
 h3, .h3 { font-size: 1.44rem }
-h4, .h4 { font-size: 1.2rem}
+h4, .h4 { font-size: 1.2rem }
+small, .small { font-size: 0.833em } /* not rem so you can use .small in .small */
 
-small, .small { font-size: 0.833em }
-
-/* and now just use $line-height when you need some vertical spacing ! */
+/* ... and now just use $line-height when you need some vertical spacing ! */
 
 
 /**
