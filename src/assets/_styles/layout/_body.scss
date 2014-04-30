@@ -10,6 +10,22 @@
     padding: $line-height 1rem 0;
   }
 
+
+  .mx-Content p a,
+  .mx-Content ol a,
+  .mx-Content ul a  {
+    // padding-bottom: 2px;
+    // border-bottom: 1px solid #e8e8e8;
+    // border-bottom: 1px solid rgba(200, 200, 200, .4);
+
+    // https://medium.com/designing-medium/7c03a9274f9s
+    background-image: linear-gradient(to bottom, #fff 50%, rgba(#c8c8c8, .4) 50%);
+    background-repeat: repeat-x;
+    background-size: 2px 2px;
+    background-position: 0px 100%;
+    text-shadow: 1px 1px 0 #fff, -1px 1px 0 #fff,  0 1px 0 #fff;
+  }
+
 .mx-Body {
   position: relative;
 

@@ -55,12 +55,7 @@ $mx-Link-color: darken($highlight-color, 5%);
 a {
   text-decoration: none;
 
-  padding-bottom: 2px;
-  border-bottom: 1px solid #e8e8e8;
-  border-bottom: 1px solid rgba(200, 200, 200, .4);
-
   color: $mx-Link-color;
-
   &:hover { color: darken($mx-Link-color, 10%); }
   &:focus { color: darken($mx-Link-color, 10%); }
   &:active { color: lighten($mx-Link-color, 5%); }
