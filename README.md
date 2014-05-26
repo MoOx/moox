@@ -1,5 +1,10 @@
-# MoOx personal website
+# [MoOx.io](http://moox.io)
 
-This website is powered bye [HappyPlan](https://github.com/happyplan/happyplan), a static website generator based on Grunt.js & lots of others awesome tools.
+This website is powered by [HappyPlan](https://github.com/happyplan/happyplan).
 
-To build, install HappyPlan, then run `happyplan` for development.
+## Installation
+
+    make init
+    [make init-osx]
+    make install
+    happyplan
