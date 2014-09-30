@@ -1,0 +1,70 @@
+==================================================================
+https://keybase.io/moox
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://moox.io
+  * I am moox (https://keybase.io/moox) on keybase.
+  * I have a public key with fingerprint 9AB7 B020 7796 868F 8754  5C91 59CB 5F52 988F 2A32
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "9ab7b0207796868f87545c9159cb5f52988f2a32",
+            "host": "keybase.io",
+            "key_id": "59cb5f52988f2a32",
+            "uid": "75b1f1db849759e51b6ea773b014ad00",
+            "username": "moox"
+        },
+        "service": {
+            "hostname": "moox.io",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1412050140,
+    "expire_in": 157680000,
+    "prev": "ab1bc72db144b8d825bfb723493628aac20f033c38ca1ce1bb891ea7f5a71a6d",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v1.0.5
+Comment: https://keybase.io/crypto
+
+yMLrAnicO8LLzMDFGHk6PmhGv5YR4+kDL0oZQrR07lQrJeWnVCpZVStlp4KptMy8
+9NSigqLMvBIlKyXLxCTzJAMjA3NzSzMLM4s0C3NTE9NkS0NTy+Qk0zRTI0sLizSj
+RGMjJR2ljPxikA6gMUmJxal6mflAMSAnPjMFKIpFfSlYwtw0yTDNMCXJwsTS3NQy
+1dQwySw10dzcOMnA0CQxxcAApLA4tSgvMTcVqDo3P79CqVZHCShSlpmcCnIvyFok
+WYi9BUX5JfnJ+TlAwYySkgIrkJ6SygKQovLUpHio9vikzLwUoHeBGspSi4oz8/OU
+rAyBKpNLMkHmGZoYGhmYAt1hoKOUWlGQWZQanwlSYWpuZmEABCBrUsuARiYmGSYl
+mxulJBmamCRZpFgYmSalJZkbGZtYGpsZWSQmJhsZpBkYGycbWyQnGianGiYlWVga
+An2ZZppobpholqIE8lBhXr6SlQnQmYnpQCOLM9PzEktKi1KVag8djGFhYORiYGNl
+AkUYAxenACwa/Sby/48UmcvhP0XA9IRKc9/bUwV2kgEpfxJ6WQvmfUg/6dsQcGXd
+rKa9Xx3Pt9TbaJz2VV61RiN6xmx9RoGyR1azPrZl+e79mVoxdV1wWmnptrO+TtVN
+l9Y/5xAv2Z4rtj4o6cJRfZHmroQrimv5Qk8eeit/4e4HHnWHfb8fTLb4yW2mUudj
+7sJT8G05e0rPjbBN+y+9Wf/rza7dh7k+dPRHtPzT23TaieeI9fP1R1OiOkSct/U3
+vVDlOFqwqv4+c32b79/fMsyJi62Utstf0JqarleyIeo412HupaJbilZ5rJbL53Df
+Z9fhFahteepizOqmrDn3TN04f2+0MlSw8q1ZNCNIMl7t6uzz6gsObZkaFdV75nTE
+dO3zK1yN3BfXPzN7Z7pszswrn/a31F9V0LPdfKLqvNLPhx57E28fi7DYmdLwT+qE
+nuvNl7+qjsTVhC+3vLxiakT53Yk5oV/P+ic8m9Z+/lDkvumOdwWDX6y68NLFJvju
+8senV9jrKTiVHVN5zGJRkzbn9U4NE74bWT8K33wyiOwPvBOlLruNw+XEefaTBxI5
+G74USnK94zdMk4hwWJpx+mXyl6tH5I9uea4qabRb8/tCzWyZpoytPWllfDN/pzNd
++2dpwTg1sl69TcBLptNKcPOJYx8qg2rvbAkXT9iccVA473Pk0ZDTS4Lu3VdKLGFt
+WecQnLdXp2fCe8ufQbXM8soek/bwSWspAwBTeYtT
+=9BA6
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/moox
+
+==================================================================
