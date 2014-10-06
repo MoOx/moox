@@ -1,13 +1,10 @@
 .mx-Footer {
-  position: relative;
-  background: #314217;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-  @include crp-Media-m {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
+  background: #314217;
 }
 
   .error-404 .mx-Footer { background: transparent; box-shadow: none; border: 0 }

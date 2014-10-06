@@ -83,10 +83,8 @@ body {
   min-height: 100%;
   overflow-x: hidden; // prevent scrollbar during pjax animations
 
-  @include crp-Media-m {
-    // footer is absolute, keep some place for it
-    padding-bottom: $line-height*4;
-  }
+  // footer is absolute, keep some place for it
+  padding-bottom: $line-height*4;
 }
 
 html.error-404 {
