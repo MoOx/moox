@@ -39,10 +39,7 @@
       .mx-Header-body-title {
         display: table-cell;
         vertical-align: middle;
-        // padding: 1rem;
-        //
-        // @include crp-Media-m { padding: $line-height*2 0 }
-        // @include crp-Media-m { padding: $line-height*2 0 $line-height*4 }
+        padding: 0 0 $line-height;
       }
 
     @include crp-Media-m {
