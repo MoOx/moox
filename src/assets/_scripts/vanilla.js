@@ -1,7 +1,3 @@
-// just in case scripts below breack everything on a browser, just put the css like if there is no js
-var html = document.documentElement
-html.className = html.className.replace(/\bjs\b/, "no-js")
-
 if (document.querySelector && html.classList) {
   var forEach = Array.prototype.forEach
     , parallax = {}
@@ -62,32 +58,33 @@ if (document.querySelector && html.classList) {
     }
   , mxHtmlClassNameRegex = /mx--[a-z]+/;
 
-  new Pjax({
-    selectors: ["title", ".Navbar", ".mx-Header-body", ".mx-Content", ".mx-Footer-body", ".js-Disqus"]
-  , switches: {
-      "title": function(oldEl, newEl, options, switchOptions) {
-        // switch html class
-        var htmlClassName = newEl.parentNode.parentNode.className.match(mxHtmlClassNameRegex)
-        if (htmlClassName && htmlClassName.length) {
-          oldEl.parentNode.parentNode.className = oldEl.parentNode.parentNode.className.replace(mxHtmlClassNameRegex, htmlClassName[0])
+  if (Pjax.isSupported) {
+    new Pjax({
+      selectors: ["title", ".Navbar", ".mx-Header-body", ".mx-Content", ".mx-Footer-body", ".js-Disqus"]
+    , switches: {
+        "title": function(oldEl, newEl, options, switchOptions) {
+          // switch html class
+          var htmlClassName = newEl.parentNode.parentNode.className.match(mxHtmlClassNameRegex)
+          if (htmlClassName && htmlClassName.length) {
+            oldEl.parentNode.parentNode.className = oldEl.parentNode.parentNode.className.replace(mxHtmlClassNameRegex, htmlClassName[0])
+          }
+          Pjax.switches.outerHTML.apply(this, arguments)
         }
-        Pjax.switches.outerHTML.apply(this, arguments)
+      , ".mx-Header": Pjax.switches.sideBySide
+      , ".mx-Content": Pjax.switches.sideBySide
       }
-    , ".mx-Header": Pjax.switches.sideBySide
-    , ".mx-Content": Pjax.switches.sideBySide
-    }
-  , switchesOptions: {
-      ".mx-Header": sideBySideOptions
-    , ".mx-Content": sideBySideOptions
-    }
-  // , debug: window.location.hostname == "localhost"
-  })
+    , switchesOptions: {
+        ".mx-Header": sideBySideOptions
+      , ".mx-Content": sideBySideOptions
+      }
+    // , debug: window.location.hostname == "localhost"
+    })
 
-  document.addEventListener("pjax:send", function() {
-    document.querySelector(".mx-Content .js-Pjax-child").classList.add("js-Pjax-child--willChange")
-  })
-  document.addEventListener("pjax:success", whenDOMReady)
-
+    document.addEventListener("pjax:send", function() {
+      document.querySelector(".mx-Content .js-Pjax-child").classList.add("js-Pjax-child--willChange")
+    })
+    document.addEventListener("pjax:success", whenDOMReady)
+  }
 
   ///
   // Lazy display background image
@@ -125,7 +122,4 @@ if (document.querySelector && html.classList) {
   // Parallax effect for background image when scrolling
   ///
   new Parallaxify({elements: ".mx-BackgroundImg" }).registerUpdate()
-
-  // put js class back
-  html.className = html.className.replace(/\bno-js\b/, "js")
 }
