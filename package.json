@@ -6,14 +6,17 @@
   "author": "Maxime Thirouin",
   "license": "MIT",
   "devDependencies": {
+    "grunt-cli": "^0.1.13",
+    "handlebars-layouts": "^0.2.0",
     "happyplan": "^0.4.0-beta.7",
-    "handlebars-layouts": "^0.2.0"
+    "happyplan-cli": "^0.2.5"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/MoOx/moox.github.io.git"
   },
   "scripts": {
+    "start": "happyplan",
     "test": "happyplan dist"
   }
 }
