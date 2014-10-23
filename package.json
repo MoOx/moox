@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "happyplan",
+    "deploy": "happyplan publish",
     "test": "happyplan dist"
   }
 }
