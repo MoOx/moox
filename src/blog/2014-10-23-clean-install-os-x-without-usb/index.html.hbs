@@ -25,8 +25,8 @@ In _Terminal.app_ (in `/Applications/Utilities`), run the commands below (one by
 _Tip: For the first line below, you can copy the app in the Finder and paste in Terminal, this will paste the path if you are getting the Install app somewhere else._
 
 ```bash
-$ OSX_INSTALL_APP=/Applications/Install OS X Yosemite.app
-$ OSX_INSTALL_DISK=/Volumes/Untitled
+$ OSX_INSTALL_APP="/Applications/Install OS X Yosemite.app"
+$ OSX_INSTALL_DISK="/Volumes/Untitled"
 $ sudo $OSX_INSTALL_APP/Contents/Resources/createinstallmedia --volume $OSX_INSTALL_DISK --applicationpath $OSX_INSTALL_APP --nointeraction
 ```
 
