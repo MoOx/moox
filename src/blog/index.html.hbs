@@ -13,8 +13,20 @@ nav: blog
   {{#append "body"}}
     <div class="mx-Body grid">
       <div class="grid__cell">
-        <h2>Posts written elsewhere</h2>
+        <h2>Posts</h2>
+        <ul class="Posts">
+        {{#posts pages}}
+          <li class="Posts-item">
+            <time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time>
+            <a href="{{url this.dest}}" class="title">
+              <span class="mx-Text--lessVisible">[{{ data.lang }}]</span>
+              {{ data.title }}
+            </a>
+          </li>
+        {{/posts}}
+        </ul>
 
+        <h2>Posts written elsewhere</h2>
         <ul class="Posts">
           <li class="Posts-item">
             <time datetime="Thu, 20 May 2014 00:00:00 +0100" class="time">29 May 2014</time>
@@ -79,27 +91,6 @@ nav: blog
             </a>
             sur <em>Putain de Code !</em>
           </li>
-        </ul>
-
-        <h2>Posts</h2>
-
-    {{!--
-        <blockquote>
-          Why I don't blog that much ? Because I mostly write tech posts on <a href="http://putaindecode.fr">putaindecode.fr</a>.
-          And to be honnest, most of the time I don't write. <strong style="white-space: nowrap">I code</strong>. And I share that on <a href="https://github.com/MoOx">GitHub</a>.
-        </blockquote>
-    --}}
-
-        <ul class="Posts">
-        {{#posts pages}}
-          <li class="Posts-item">
-            <time datetime="{{moment data.date format="ddd, DD MMMM YYYY HH:mm:ss ZZ" }}" class="time">{{moment data.date format="DD MMM YYYY" }}</time>
-            <a href="{{url this.dest}}" class="title">
-              <span class="mx-Text--lessVisible">[{{ data.lang }}]</span>
-              {{ data.title }}
-            </a>
-          </li>
-        {{/posts}}
         </ul>
       </div>
     </div>
