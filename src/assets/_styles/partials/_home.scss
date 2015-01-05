@@ -21,7 +21,7 @@
 
 .mx-FeaturedLogos {
   margin: $line-height -1rem 0;
-  padding: $line-height 0 $line-height*2;
+  padding: $line-height 0;
   box-shadow: inset 0 0 0 1px #e6e6e6;
   background: #f9f9f9;
 
@@ -45,11 +45,10 @@
       .mx-FeaturedLogo img {
         display: inline-block;
         vertical-align: middle;
-        max-width: 80%;
-        max-height: $line-height*3;
-
+        max-width: 90%;
+        max-height: $line-height*4;
         opacity: .1;
-        // filter: url("#SvgFilter--grayscale");
+        // filter: grey;
       }
 
       .mx-FeaturedLogo:hover img {
