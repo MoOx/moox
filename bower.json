@@ -9,7 +9,7 @@
     "css-recipe-clearfix": "~0.1.0",
     "css-recipe-math": "~0.1.0",
     "css-recipe-corner-ribbon": "*",
-    "picturefill": "git://github.com/scottjehl/picturefill.git",
+    "picturefill": "git://github.com/scottjehl/picturefill.git#1.2.1",
     "animate.css": "~3.1.0",
     "WOW": "git://github.com/MoOx/WOW.git#initWithSettings-options",
     "pjax": "~0.1.2",
