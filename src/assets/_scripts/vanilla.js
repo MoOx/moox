@@ -122,4 +122,17 @@ if (document.querySelector && html.classList) {
   // Parallax effect for background image when scrolling
   ///
   new Parallaxify({elements: ".mx-BackgroundImg" }).registerUpdate()
+
+  // never show an old availability date
+  var now = new Date()
+  var future = new Date(now.getFullYear(), now.getMonth() + 1)
+  forEach.call(document.getElementsByClassName("js-Availability-date"), function(el) {
+    var date = el.getAttribute("data-date")
+    if (date) {
+      date = new Date(date)
+      if (date.getTime() < now.getTime()) {
+        el.innerHTML = future.toLocaleFormat("%B %Y")
+      }
+    }
+  })
 }
