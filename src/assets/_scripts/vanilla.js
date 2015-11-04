@@ -125,7 +125,7 @@ if (document.querySelector && html.classList) {
 
   // never show an old availability date
   var now = new Date()
-  var future = new Date(now.getFullYear(), now.getMonth() + 1)
+  var future = new Date(now.getFullYear(), now.getMonth())
   forEach.call(document.getElementsByClassName("js-Availability-date"), function(el) {
     var date = el.getAttribute("data-date")
     if (date) {
