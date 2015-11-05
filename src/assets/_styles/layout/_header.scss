@@ -1,12 +1,12 @@
 .mx-Header {
   position: relative;
 
-  padding: $line-height*3 0 0;
+  padding: $line-height*3 1rem 0;
 
   transition: height .5s;
 
-  background: #51794d;
-  background: #51794d linear-gradient(#51794d, #4c662e);
+  background: #318edf;
+  background: #318edf linear-gradient(#318edf, #28234C);
 
   @include crp-Media-m {
     padding: $Navbar-height 0 0;
