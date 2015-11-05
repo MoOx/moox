@@ -5,11 +5,8 @@
   padding: 0.2em 1em;
 }
 
-//@import "./variables";
 $images-path: '/assets/img';
-@function image-url($path) { @return unquote('url("#{$images-path/$path}")') }
-$font-path: '/assets/fonts';
-@function font-url($path) { @return unquote('url("#{$font-path/$path}")') }
+@function image-url($path) { @return unquote('url("#{$images-path/unquote($path)}")') }
 
 $unit: 1em; // used for grid/font ratio maths with em
 $base-font-family: system, -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;

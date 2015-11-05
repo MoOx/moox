@@ -1,9 +1,0 @@
-$images-path: '{{ happyplan.baseUrls.images }}';
-$font-path: '{{ happyplan.baseUrls.font }}';
-
-@function image-url($path) {
-  @return unquote('url("#{$images-path/$path}")');
-}
-@function font-url($path) {
-  @return unquote('url("#{$font-path/$path}")');
-}
