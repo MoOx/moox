@@ -42,11 +42,20 @@
         padding: 0 0 $line-height;
       }
 
-    @include crp-Media-m {
-      .mx-Header-left { text-align: left; }
-      .mx-Header-center { text-align: center; }
-      .mx-Header-right { text-align: right; }
+    .mx-Header-left {
+      text-align: left;
+      font-weight: 100;
+    }
+    .mx-Header-center {
+      text-align: center;
+      font-weight: 600;
+    }
+    .mx-Header-right {
+      text-align: right;
+      font-weight: 100;
+    }
 
+    @include crp-Media-m {
       .mx-Header-left,
       .mx-Header-left:before,
       .mx-Header-center,
