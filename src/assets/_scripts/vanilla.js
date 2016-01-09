@@ -1,42 +1,41 @@
 if (document.querySelector && html.classList) {
   var forEach = Array.prototype.forEach
-    , parallax = {}
-    , whenDOMReady = function () {
-        ///
-        // Delay not visible CSS animations on load
-        ///
-        new WOW({
-          boxClass: "Animate"
-        , animateClass: "Animated"
-        , offset: 100
-        , initAlreadyVisible: false
-        }).init()
+  var parallax = {}
+  var whenDOMReady = function () {
+    ///
+    // Delay not visible CSS animations on load
+    ///
+    new WOW({
+      boxClass: "Animate",
+      animateClass: "Animated",
+      initAlreadyVisible: false
+    }).init()
 
-        ///
-        // Responsive navigation menu
-        ///
-        forEach.call(document.getElementsByClassName("js-Togglable"), function(el) {
-          var toggler = el.querySelector(".js-Togglable-toggler")
-          var items = [].slice.call(el.getElementsByClassName("js-Togglable-item"))
+    ///
+    // Responsive navigation menu
+    ///
+    forEach.call(document.getElementsByClassName("js-Togglable"), function(el) {
+      var toggler = el.querySelector(".js-Togglable-toggler")
+      var items = [].slice.call(el.getElementsByClassName("js-Togglable-item"))
 
-          var toggle = function(event) {
-            el.classList.toggle("js-Togglable--toggled")
-            items.forEach(function(item) {
-              item.classList.toggle("js-Togglable-item--hidden")
-            })
-          }
-
-          toggler.addEventListener("click", toggle)
-          toggler.addEventListener("keyup", toggle)
-        })
-
-        ///
-        // Mailto
-        ///
-        forEach.call(document.getElementsByClassName("js-MailTo"), function(el) {
-          el.setAttribute("href", "mailto:" + el.getAttribute("data-mailto-user") + "@" + (el.getAttribute("data-mailto-domain") || window.location.host))
+      var toggle = function(event) {
+        el.classList.toggle("js-Togglable--toggled")
+        items.forEach(function(item) {
+          item.classList.toggle("js-Togglable-item--hidden")
         })
       }
+
+      toggler.addEventListener("click", toggle)
+      toggler.addEventListener("keyup", toggle)
+    })
+
+    ///
+    // Mailto
+    ///
+    forEach.call(document.getElementsByClassName("js-MailTo"), function(el) {
+      el.setAttribute("href", "mailto:" + el.getAttribute("data-mailto-user") + "@" + (el.getAttribute("data-mailto-domain") || window.location.host))
+    })
+  }
 
   whenDOMReady()
 
@@ -45,23 +44,31 @@ if (document.querySelector && html.classList) {
   ///
   var sideBySideOptions = {
       classNames: {
-        remove: "Animated Animated--reverse Animate--fast Animate--noDelay"
-      , add: "Animated"
-      , backward: "Animate--slideInRight"
-      , forward: "Animate--slideInLeft"
-      }
-    , callbacks: {
+        remove: "Animated Animated--reverse Animate--fast Animate--noDelay",
+        add: "Animated",
+        backward: "Animate--slideInRight",
+        forward: "Animate--slideInLeft"
+      },
+      callbacks: {
         removeElement: function(el) {
-          el.style.marginLeft = "-" + (el.getBoundingClientRect().width/2) + "px"
+          el.style.marginLeft = "-" + (el.getBoundingClientRect().width / 2) + "px"
         }
       }
-    }
-  , mxHtmlClassNameRegex = /mx--[a-z]+/;
+    },
+    mxHtmlClassNameRegex = /mx--[a-z]+/;
 
   if (Pjax.isSupported) {
     new Pjax({
-      selectors: ["title", ".Navbar", ".mx-Header-body", ".mx-Content", ".mx-Footer-body", ".js-Disqus"]
-    , switches: {
+      selectors: [
+        "title",
+        ".Navbar",
+        ".mx-Header-body",
+        ".mx-HeaderSeparator",
+        ".mx-Content",
+        ".mx-Footer-body",
+        ".js-Disqus"
+      ],
+      switches: {
         "title": function(oldEl, newEl, options, switchOptions) {
           // switch html class
           var htmlClassName = newEl.parentNode.parentNode.className.match(mxHtmlClassNameRegex)
@@ -69,19 +76,20 @@ if (document.querySelector && html.classList) {
             oldEl.parentNode.parentNode.className = oldEl.parentNode.parentNode.className.replace(mxHtmlClassNameRegex, htmlClassName[0])
           }
           Pjax.switches.outerHTML.apply(this, arguments)
-        }
-      , ".mx-Header": Pjax.switches.sideBySide
-      , ".mx-Content": Pjax.switches.sideBySide
+        },
+        ".mx-Header": Pjax.switches.sideBySide,
+        ".mx-Content": Pjax.switches.sideBySide
+      },
+      switchesOptions: {
+        ".mx-Header": sideBySideOptions,
+        ".mx-Content": sideBySideOptions
       }
-    , switchesOptions: {
-        ".mx-Header": sideBySideOptions
-      , ".mx-Content": sideBySideOptions
-      }
-    // , debug: window.location.hostname == "localhost"
+      // , debug: window.location.hostname == "localhost"
     })
 
     document.addEventListener("pjax:send", function() {
-      document.querySelector(".mx-Content .js-Pjax-child").classList.add("js-Pjax-child--willChange")
+      document.querySelector(".mx-Content .js-Pjax-child")
+        .classList.add("js-Pjax-child--willChange")
     })
     document.addEventListener("pjax:success", whenDOMReady)
   }
@@ -102,10 +110,10 @@ if (document.querySelector && html.classList) {
   // background images
   forEach.call(document.getElementsByClassName("js-is-Loading"), function(el) {
     var backgroundImages = window.getComputedStyle(el, null).getPropertyValue("background-image")
-      , backgroundUrlRegex = /url\((?:'|")?([^\)'"]+)(?:'|")?\),?\s?/g
-      , backgroundImagesUrl = backgroundUrlRegex.exec(backgroundImages)
-      , imgLoaded = updateLoadStatus.bind(el)
-    while(backgroundImagesUrl && backgroundImagesUrl[1]) {
+    var backgroundUrlRegex = /url\((?:'|")?([^\)'"]+)(?:'|")?\),?\s?/g
+    var backgroundImagesUrl = backgroundUrlRegex.exec(backgroundImages)
+    var imgLoaded = updateLoadStatus.bind(el)
+    while (backgroundImagesUrl && backgroundImagesUrl[1]) {
       var img = new Image()
       img.src = backgroundImagesUrl[1]
       img.onload = imgLoaded
@@ -121,7 +129,10 @@ if (document.querySelector && html.classList) {
   ///
   // Parallax effect for background image when scrolling
   ///
-  new Parallaxify({elements: ".mx-BackgroundImg" }).registerUpdate()
+  new Parallaxify({
+    elements: ".mx-BackgroundImg"
+  })
+  .registerUpdate()
 
   // never show an old availability date
   var now = new Date()
