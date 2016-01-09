@@ -9,7 +9,6 @@ $images-path: '/assets/img';
 @function image-url($path) { @return unquote('url("#{$images-path/unquote($path)}")') }
 
 $unit: 1em; // used for grid/font ratio maths with em
-$base-font-family: system, -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $mx-Color-green: #46c340;
 $mx-Color-green--darker: #42a837;
 $mx-Color-blue: #5295F0;
