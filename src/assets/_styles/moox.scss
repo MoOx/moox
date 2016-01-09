@@ -31,11 +31,11 @@ $mx-borderRadius: 4px;
   }
 }
 
-@import "normalize-css/normalize";
+@import "normalize-css/normalize.scss";
 
-@import "css-recipe-clearfix/index";
-@import "css-recipe-font-smoothing/index";
-@import "css-recipe-media/index";
+@import "css-recipe-clearfix/_index.scss";
+@import "css-recipe-font-smoothing/_index.scss";
+@import "css-recipe-media/_index.scss";
 
 @import "./utilities/position";
 
