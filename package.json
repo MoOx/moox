@@ -17,7 +17,8 @@
     "url": "https://github.com/MoOx/moox.github.io.git"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "bower install && npm run fixWOW",
+    "fixWOW": "cd bower_components/WOW && npm install && grunt coffee",
     "start": "happyplan",
     "deploy": "happyplan publish",
     "test": "happyplan dist"
