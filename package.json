@@ -10,7 +10,8 @@
     "grunt-cli": "^0.1.13",
     "handlebars-layouts": "^0.2.0",
     "happyplan": "^0.4.0",
-    "happyplan-cli": "^0.2.5"
+    "happyplan-cli": "^0.2.5",
+    "open": "0.0.5"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
     "postinstall": "bower install && npm run fixWOW",
     "fixWOW": "cd bower_components/WOW && npm install && grunt coffee",
     "start": "happyplan",
-    "deploy": "happyplan publish",
+    "deploy": "happyplan publish && open https://www.cloudflare.com/a/caching/moox.io",
     "test": "happyplan dist"
   }
 }
