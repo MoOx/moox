@@ -2,8 +2,8 @@
 <html lang="en">
 
   <head>
-    <base href="{{#is happyplan.env 'dist' }}{{ happyplan.url }}{{ else }}http://{{ happyplan.server.hostname }}:{{ happyplan.server.port }}{{/is}}{{ happyplan.baseUrl }}slides/reveal.js/">
-    
+    <base href="{{#is happyplan.env 'dist' }}{{ happyplan.url }}{{ else }}https://{{ happyplan.server.hostname }}:{{ happyplan.server.port }}{{/is}}{{ happyplan.baseUrl }}slides/reveal.js/">
+
     <meta charset="utf-8">
 
     {{#if page.title }}<title>{{ page.title }}</title>{{/if}}

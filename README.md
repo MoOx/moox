@@ -1,4 +1,4 @@
-# [MoOx.io](http://moox.io)
+# [MoOx.io](https://moox.io)
 
 This website is powered by [HappyPlan](https://github.com/happyplan/happyplan).
 
