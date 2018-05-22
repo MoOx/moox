@@ -7,6 +7,16 @@ module.exports = (config: PhenomicConfig) => {
   return Object.assign({}, webpackConfig, {
     module: {
       rules: [
+        // matomo lib use arrow function...
+        {
+          test: /\.js$/,
+          include: /node_modules\/matomo/,
+          loader: require.resolve("babel-loader"),
+          options: {
+            babelrc: false,
+            presets: [require.resolve("@phenomic/babel-preset")]
+          }
+        },
         // react-native-web
         {
           test: /\.js$/,
