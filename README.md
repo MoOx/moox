@@ -1,10 +1,23 @@
 # [MoOx.io](https://moox.io)
 
-This website is powered by [HappyPlan](https://github.com/happyplan/happyplan).
+MoOx personal website, powered by [Phenomic](https://phenomic.io/).
 
 ## Installation
 
-    make init
-    [make init-osx]
-    make install
-    happyplan
+```console
+git clone https://github.com/MoOx/moox.github.io moox.io
+cd moox.io
+yarn install
+```
+
+## Development
+
+```console
+yarn start
+```
+
+## Static build
+
+```console
+yarn build
+```
