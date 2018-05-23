@@ -88,10 +88,11 @@ let queries = props => {
   let talks =
     PhenomicPresetReactApp.query(
       PaginatedList({
-        path: "talks",
+        path: "content/talks",
         by: Some("default"),
         value: None,
         order: None,
+        sort: None,
         limit: Some(10),
         after: Some(props##params##after)
       })

@@ -8,6 +8,34 @@ let make = (_) => {
   ...component,
   render: _self =>
     <Head>
+      <meta charSet="utf-8" />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        _type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        _type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+      />
+      <link rel="manifest" href="manifest.json" />
+      /* <link rel="mask-icon" href="safari-pinned-tab.svg" color="#0C0F1E" /> */
+      <meta name="theme-color" content="#0C0F1E" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover"
+      />
+      <style>
+        ("@-ms-viewport { width: device-width } @viewport { width: device-width }" |> text)
+      </style>
       <style>
         (
           {j|

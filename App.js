@@ -1,5 +1,6 @@
 import "./rnw-art-fix.js";
 import * as React from "react";
+import { AppRegistry } from "react-native-web";
 import { Router, Route, browserHistory } from "react-router";
 import { createApp, renderApp } from "@phenomic/preset-react-app/lib/client";
 import { withPhenomicApi } from "@phenomic/preset-react-app/lib/es6/src/phenomicPresetReactApp.js";
@@ -50,8 +51,13 @@ const routes = () => (
   </Router>
 );
 
-export default createApp(routes);
+const render = (rootComponent, rootTag) => {
+  AppRegistry.registerComponent("App", () => () => rootComponent);
+  AppRegistry.runApplication("App", { rootTag });
+};
+
+export default createApp(routes, render);
 
 if (module.hot) {
-  module.hot.accept(() => renderApp(routes));
+  module.hot.accept(() => renderApp(routes, render));
 }

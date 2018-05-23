@@ -91,7 +91,7 @@ let jsComponent =
 let queries = props => {
   let contentItem = 
     PhenomicPresetReactApp.query(
-      Item({path: "blog", id: props##params##splat})
+      Item({path: "content/blog", id: props##params##splat})
     );
   {"contentItem": contentItem};
 };
