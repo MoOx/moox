@@ -37,8 +37,7 @@ let styles =
           style([
             fontSize(Float(28.)),
             color("#030303"),
-            fontFamily("inherit"),
-            fontWeight(`_100)
+            fontWeight(`_300)
           ])
       }
     )

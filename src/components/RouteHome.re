@@ -33,7 +33,7 @@ let make = (~posts) => {
       <CommonThings />
       <Head title={j|MoOx, Frontend UI Web & Mobile Developer.|j} />
       <Header />
-      <SuperHero />
+      <Jumbotron />
       <Spacer />
       <Spacer />
       <Spacer />
