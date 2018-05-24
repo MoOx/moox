@@ -1,4 +1,3 @@
-import "./rnw-art-fix.js";
 import * as React from "react";
 import { AppRegistry } from "react-native-web";
 import { Router, Route, browserHistory } from "react-router";
