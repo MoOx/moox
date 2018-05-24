@@ -21,10 +21,10 @@ let make =
   ReasonReact.wrapJsForReason(
     ~reactClass,
     ~props={
-      "title": Js.Nullable.from_opt(title),
-      "titleTemplate": Js.Nullable.from_opt(titleTemplate),
-      "defaultTitle": Js.Nullable.from_opt(defaultTitle),
-      "meta": Js.Nullable.from_opt(meta),
+      "title": Js.Nullable.fromOption(title),
+      "titleTemplate": Js.Nullable.fromOption(titleTemplate),
+      "defaultTitle": Js.Nullable.fromOption(defaultTitle),
+      "meta": Js.Nullable.fromOption(meta),
     },
     children,
   );

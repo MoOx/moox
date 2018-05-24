@@ -14,10 +14,10 @@ let make =
     ~reactClass=disqusComments,
     ~props={
       "shortname": shortname,
-      "identifier": Js.Nullable.from_opt(identifier),
-      "title": Js.Nullable.from_opt(title),
-      "url": Js.Nullable.from_opt(url),
-      "category_id": Js.Nullable.from_opt(category_id),
+      "identifier": Js.Nullable.fromOption(identifier),
+      "title": Js.Nullable.fromOption(title),
+      "url": Js.Nullable.fromOption(url),
+      "category_id": Js.Nullable.fromOption(category_id),
     },
     [||],
   );

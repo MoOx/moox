@@ -70,7 +70,7 @@ let make = (~contentItem) => {
               <Background>
                 <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
                   (
-                    switch (Js.Undefined.to_opt(contentItem##videoEmbed)) {
+                    switch (Js.Undefined.toOption(contentItem##videoEmbed)) {
                     | None => nothing
                     | Some(videoEmbed) =>
                       <View>
@@ -84,7 +84,7 @@ let make = (~contentItem) => {
                             )
                           )>
                           <iframe
-                            allowFullScreen=Js.true_
+                            allowFullScreen=true
                             style=(
                               ReactDOMRe.Style.make(
                                 ~position="absolute",
@@ -103,7 +103,7 @@ let make = (~contentItem) => {
                     }
                   )
                   (
-                    switch (Js.Undefined.to_opt(contentItem##slidesEmbed)) {
+                    switch (Js.Undefined.toOption(contentItem##slidesEmbed)) {
                     | None => nothing
                     | Some(slidesEmbed) =>
                       <View>
@@ -117,7 +117,7 @@ let make = (~contentItem) => {
                             )
                           )>
                           <iframe
-                            allowFullScreen=Js.true_
+                            allowFullScreen=true
                             style=(
                               ReactDOMRe.Style.make(
                                 ~position="absolute",
@@ -136,7 +136,7 @@ let make = (~contentItem) => {
                     }
                   )
                   (
-                    switch (Js.Undefined.to_opt(contentItem##slides)) {
+                    switch (Js.Undefined.toOption(contentItem##slides)) {
                     | None => nothing
                     | Some(slides) =>
                       <Spacer> <a href=slides> (slides |> text) </a> </Spacer>

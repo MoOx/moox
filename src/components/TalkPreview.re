@@ -46,7 +46,7 @@ let make = (~item: Types.partialContentItem, _) => {
           (item##title |> text)
           <small>
             (
-              switch (Js.Undefined.to_opt(item##conference)) {
+              switch (Js.Undefined.toOption(item##conference)) {
               | None => nothing
               | Some(conference) =>
                 <Text> (" @ " ++ conference |> text) </Text>
@@ -56,7 +56,7 @@ let make = (~item: Types.partialContentItem, _) => {
         </UnderlinedTextLink>
         <Spacer small=true />
         (
-          switch (Js.Undefined.to_opt(item##lang)) {
+          switch (Js.Undefined.toOption(item##lang)) {
           | None => nothing
           | Some(lang) => <Text> ("[" ++ lang ++ "] " |> text) </Text>
           }

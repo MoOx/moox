@@ -31,7 +31,7 @@ let rec jsTreeToReason = (jsChild: jsBody) =>
     let tag = Js.String.make(jsChild##t);
     let props = jsChild##p;
     let children =
-      switch (Js.Undefined.to_opt(jsChild##c)) {
+      switch (Js.Undefined.toOption(jsChild##c)) {
       | Some(c) => List.map(jsTreeToReason, Array.to_list(c))
       | None => []
       };

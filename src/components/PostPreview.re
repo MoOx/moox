@@ -47,7 +47,7 @@ let make = (~item: Types.partialContentItem, _) => {
         </UnderlinedTextLink>
         <Spacer small=true />
         (
-          switch (Js.Undefined.to_opt(item##lang)) {
+          switch (Js.Undefined.toOption(item##lang)) {
           | None => nothing
           | Some(lang) => <Text> ("[" ++ lang ++ "] " |> text) </Text>
           }
