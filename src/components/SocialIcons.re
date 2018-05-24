@@ -44,13 +44,13 @@ let make =
       (
         List.map(
           item =>
-            <MyLink key=item.link style=iconStyle href=item.link>
+            <TextLink key=item.link style=iconStyle href=item.link>
               (
                 iconWrapperFunc(
                   ~children=[|item.componentFunc(~iconColor, ~iconSize)|]
                 )
               )
-            </MyLink>,
+            </TextLink>,
           links
         )
         |> list

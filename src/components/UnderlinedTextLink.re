@@ -15,7 +15,7 @@ let styles =
 let make = (~href, ~style=?, children) => {
   ...component,
   render: _self =>
-    <MyLink
+    <TextLink
       href
       style=(
         switch style {
@@ -24,5 +24,5 @@ let make = (~href, ~style=?, children) => {
         }
       )>
       ...children
-    </MyLink>
+    </TextLink>
 };

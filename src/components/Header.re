@@ -45,10 +45,10 @@ let make = _children => {
           (
             List.map(
               item =>
-                <MyLink
+                <TextLink
                   key=item.link style=styles##topbarLink href=item.link>
                   (item.text |> text)
-                </MyLink>,
+                </TextLink>,
               links
             )
             |> list
