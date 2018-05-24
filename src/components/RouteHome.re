@@ -12,7 +12,7 @@ let styles =
             fontWeight(`Bold),
             textAlign(Center),
             marginVertical(Pt(20.)),
-            color("#030303"),
+            color(String("#030303")),
           ]),
         "links":
           style([

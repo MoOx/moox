@@ -16,7 +16,7 @@ let make = (~contentItem, ~id) => {
               style([
                 padding(Pt(20.)),
                 textAlign(Center),
-                color("#030303"),
+                color(String("#030303")),
               ]),
             "viewSmall": style([flexGrow(1.), padding(Pt(20.))]),
             "viewLarge": style([flexGrow(1.), padding(Pt(60.))]),

@@ -44,7 +44,7 @@ let styles =
             paddingTop(Pt(29.)),
             paddingHorizontal(Pt(20.)),
             marginBottom(Pt(29.)),
-            borderLeftColor("#9ca0a3"),
+            borderLeftColor(String("#9ca0a3")),
             borderLeftWidth(3.),
           ]),
         "blockQuoteText":
@@ -52,14 +52,14 @@ let styles =
             fontSize(Float(24.)),
             lineHeight(32.),
             fontWeight(`_300),
-            color("#515355"),
+            color(String("#515355")),
           ]),
         "hr":
           style([
             marginBottom(Pt(29.)),
             marginHorizontal(Pt(29.)),
             height(Pt(3.)),
-            backgroundColor("#ddd"),
+            backgroundColor(String("#ddd")),
           ]),
       }
     ),
