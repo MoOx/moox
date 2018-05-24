@@ -50,7 +50,7 @@ let make = (~talks) => {
                     | Some(previous) =>
                       <TextLink
                         href=(
-                          Js.to_bool(talks##previousPageIsFirst) ?
+                          talks##previousPageIsFirst ?
                             "/talks/" : "/talks/after/" ++ previous ++ "/"
                         )>
                         ("Fresh talks" |> text)

@@ -54,7 +54,7 @@ let make = (~posts) => {
                     | Some(previous) =>
                       <TextLink
                         href=(
-                          Js.to_bool(posts##previousPageIsFirst) ?
+                          posts##previousPageIsFirst ?
                             "/" : "/after/" ++ previous ++ "/"
                         )>
                         ("Fresh posts" |> text)

@@ -2047,9 +2047,9 @@ bs-json@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/bs-json/-/bs-json-1.0.1.tgz#0e25ed5ba7164ab131e494669b755da9844cc37e"
 
-bs-platform@^2.1.0:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-2.2.3.tgz#d905ae10a5f3621e6a739041dfa0b58483a2174f"
+bs-platform@^3.1.0:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-3.1.4.tgz#fe8495443b35aff73dfb61cba1e6d7b88311910b"
 
 bs-react-helmet@^0.2.1:
   version "0.2.1"
