@@ -15,22 +15,22 @@ let styles =
   StyleSheet.create(
     Style.(
       {
-        "header":
+        "menu":
           style([
             justifyContent(Center),
             alignItems(Center),
             marginBottom(Pt(60.))
           ]),
-        "topbar":
+        "bar":
           style([
             flexDirection(Row),
             flexWrap(Wrap),
             justifyContent(SpaceBetween)
           ]),
-        "topbarWrapper": style([backgroundColor("#030303")]),
+        "barWrapper": style([backgroundColor("#030303")]),
         "icons": style([flexDirection(Row)]),
-        "topbarLinks": style([flexDirection(Row)]),
-        "topbarLink":
+        "barLinks": style([flexDirection(Row)]),
+        "barLink":
           style([padding(Pt(10.)), fontSize(Float(22.)), lineHeight(44.),color("#FBFCF8")])
       }
     )
@@ -39,14 +39,14 @@ let styles =
 let make = _children => {
   ...component,
   render: _self =>
-    <View style=styles##header>
-      <Container style=styles##topbar wrapperStyle=styles##topbarWrapper>
-        <View style=styles##topbarLinks>
+    <View style=styles##menu>
+      <Container style=styles##bar wrapperStyle=styles##barWrapper>
+        <View style=styles##barLinks>
           (
             List.map(
               item =>
                 <TextLink
-                  key=item.link style=styles##topbarLink href=item.link>
+                  key=item.link style=styles##barLink href=item.link>
                   (item.text |> text)
                 </TextLink>,
               links
@@ -54,7 +54,7 @@ let make = _children => {
             |> list
           )
         </View>
-        <SocialIcons wrapperStyle=styles##icons iconStyle=styles##topbarLink iconSize=22./>
+        <SocialIcons wrapperStyle=styles##icons iconStyle=styles##barLink iconSize=22./>
       </Container>
     </View>
 };
