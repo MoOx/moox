@@ -6,10 +6,14 @@ let component = ReasonReact.statelessComponent("Header");
 
 type link = {
   link: string,
-  text: string
+  text: string,
 };
 
-let links = [{link: "/", text: {j|Home|j}}, {link: "/talks/", text: {j|Talks|j}}, {link: "/contact/", text: {j|Contact|j}}];
+let links = [
+  {link: "/", text: {j|Home|j}},
+  {link: "/talks/", text: {j|Talks|j}},
+  {link: "/contact/", text: {j|Contact|j}},
+];
 
 let styles =
   StyleSheet.create(
@@ -19,21 +23,26 @@ let styles =
           style([
             justifyContent(Center),
             alignItems(Center),
-            marginBottom(Pt(60.))
+            marginBottom(Pt(60.)),
           ]),
         "bar":
           style([
             flexDirection(Row),
             flexWrap(Wrap),
-            justifyContent(SpaceBetween)
+            justifyContent(SpaceBetween),
           ]),
         "barWrapper": style([backgroundColor("#030303")]),
         "icons": style([flexDirection(Row)]),
         "barLinks": style([flexDirection(Row)]),
         "barLink":
-          style([padding(Pt(10.)), fontSize(Float(22.)), lineHeight(44.),color("#FBFCF8")])
+          style([
+            padding(Pt(10.)),
+            fontSize(Float(22.)),
+            lineHeight(44.),
+            color("#FBFCF8"),
+          ]),
       }
-    )
+    ),
   );
 
 let make = _children => {
@@ -45,16 +54,19 @@ let make = _children => {
           (
             List.map(
               item =>
-                <TextLink
-                  key=item.link style=styles##barLink href=item.link>
+                <TextLink key=item.link style=styles##barLink href=item.link>
                   (item.text |> text)
                 </TextLink>,
-              links
+              links,
             )
             |> list
           )
         </View>
-        <SocialIcons wrapperStyle=styles##icons iconStyle=styles##barLink iconSize=22./>
+        <SocialIcons
+          wrapperStyle=styles##icons
+          iconStyle=styles##barLink
+          iconSize=22.
+        />
       </Container>
-    </View>
+    </View>,
 };

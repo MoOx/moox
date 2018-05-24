@@ -12,11 +12,11 @@ let make =
              {
                .
                "name": string,
-               "content": string
-             }
-           )
+               "content": string,
+             },
+           ),
          )=?,
-      children
+      children,
     ) =>
   ReasonReact.wrapJsForReason(
     ~reactClass,
@@ -24,7 +24,7 @@ let make =
       "title": Js.Nullable.from_opt(title),
       "titleTemplate": Js.Nullable.from_opt(titleTemplate),
       "defaultTitle": Js.Nullable.from_opt(defaultTitle),
-      "meta": Js.Nullable.from_opt(meta)
+      "meta": Js.Nullable.from_opt(meta),
     },
-    children
+    children,
   );

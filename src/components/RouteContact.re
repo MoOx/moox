@@ -14,13 +14,9 @@ let styles =
             marginVertical(Pt(20.)),
             color("#030303"),
           ]),
-        "text": 
-          style([
-            justifyContent(Center),
-            alignItems(Center)
-          ])
+        "text": style([justifyContent(Center), alignItems(Center)]),
       }
-    )
+    ),
   );
 
 let component = ReasonReact.statelessComponent("Home");
@@ -47,15 +43,16 @@ let make = _children => {
             <Text> ("+33 6 78 13 54 39" |> text) </Text>
             <br />
             <Text>
-              <a href="https://twitter.com/MoOx"> ("twitter.com/MoOx" |> text) </a>
+              <a href="https://twitter.com/MoOx">
+                ("twitter.com/MoOx" |> text)
+              </a>
               <Text> (" (DM open)" |> text) </Text>
             </Text>
           </View>
         </Background>
       </Container>
       <Footer />
-    </ScrollView>
+    </ScrollView>,
 };
 
-let default =
-  ReasonReact.wrapReasonForJs(~component, make);
+let default = ReasonReact.wrapReasonForJs(~component, make);

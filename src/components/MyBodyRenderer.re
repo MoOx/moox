@@ -8,7 +8,7 @@ type htmlProps = {
   "name": string,
   "for": string,
   "class": string,
-  "href": string
+  "href": string,
 };
 
 type reasonChildren = list(reasonChild)
@@ -21,11 +21,11 @@ type jsBody = {
   .
   "t": string,
   "p": htmlProps,
-  "c": Js.Undefined.t(array(jsBody))
+  "c": Js.Undefined.t(array(jsBody)),
 };
 
 let rec jsTreeToReason = (jsChild: jsBody) =>
-  switch [%bs.raw {| Object.prototype.toString.call(jsChild) |}] {
+  switch ([%bs.raw {| Object.prototype.toString.call(jsChild) |}]) {
   | "[object String]" => String(Js.String.make(jsChild))
   | "[object Object]" =>
     let tag = Js.String.make(jsChild##t);
@@ -59,18 +59,17 @@ let rec renderChild = (parentTag, index: int, child) => {
   lastSiblingHasLineBreaking := false;
   let renderChildren = (parentTag, children) =>
     if (List.length(children) == 0) {
-      ReasonReact.nullElement
-    }
-    else {
-      ReasonReact.arrayToElement(
-        Array.of_list(List.mapi(renderChild(parentTag), children))
-      )
+      ReasonReact.null;
+    } else {
+      ReasonReact.array(
+        Array.of_list(List.mapi(renderChild(parentTag), children)),
+      );
     };
-  switch child {
+  switch (child) {
   | String(string) =>
-    switch parentTag {
-    | "ul" => ReasonReact.nullElement
-    | "ol" => ReasonReact.nullElement
+    switch (parentTag) {
+    | "ul" => ReasonReact.null
+    | "ol" => ReasonReact.null
     | _ =>
       let newString =
         string_map_partial(
@@ -80,12 +79,12 @@ let rec renderChild = (parentTag, index: int, child) => {
             } else {
               Some(char === '\n' ? ' ' : char);
             },
-          string
+          string,
         );
-      ReasonReact.stringToElement(newString);
+      ReasonReact.string(newString);
     }
   | Element(tag, props, children) =>
-    switch tag {
+    switch (tag) {
     | "a" =>
       <UnderlinedTextLink key href=props##href>
         (renderChildren(tag, children))
@@ -109,10 +108,10 @@ let rec renderChild = (parentTag, index: int, child) => {
       ReactDOMRe.createElement(
         tag,
         ~props=ReactDOMRe.objToDOMProps(props),
-        [|renderChildren(tag, children)|]
+        [|renderChildren(tag, children)|],
       )
     }
-  | Empty => ReasonReact.nullElement
+  | Empty => ReasonReact.null
   };
 };
 
@@ -121,5 +120,5 @@ let make = (~body: jsBody, ~renderChild=renderChild, _children) => {
   render: _self => {
     let tree = jsTreeToReason(body);
     <View> (renderChild("", 0, tree)) </View>;
-  }
+  },
 };

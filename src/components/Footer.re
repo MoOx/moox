@@ -6,10 +6,14 @@ let component = ReasonReact.statelessComponent("Footer");
 
 type link = {
   link: string,
-  text: string
+  text: string,
 };
 
-let links = [{link: "/", text: {j|Home|j}}, {link: "/talks/", text: {j|Talks|j}}, {link: "/contact/", text: {j|Contact|j}}];
+let links = [
+  {link: "/", text: {j|Home|j}},
+  {link: "/talks/", text: {j|Talks|j}},
+  {link: "/contact/", text: {j|Contact|j}},
+];
 
 let styles =
   StyleSheet.create(
@@ -19,27 +23,35 @@ let styles =
           style([
             justifyContent(Center),
             alignItems(Center),
-            marginTop(Pt(80.))
+            marginTop(Pt(80.)),
           ]),
         "bar":
           style([
             flexDirection(Row),
             flexWrap(Wrap),
-            justifyContent(SpaceBetween)
+            justifyContent(SpaceBetween),
           ]),
         "barWrapper": style([backgroundColor("#030303")]),
         "icons": style([flexDirection(Row)]),
         "barLinks": style([flexDirection(Row)]),
         "barLink":
-          style([padding(Pt(10.)), fontSize(Float(14.)), lineHeight(44.),color("#FBFCF8")]),
+          style([
+            padding(Pt(10.)),
+            fontSize(Float(14.)),
+            lineHeight(44.),
+            color("#FBFCF8"),
+          ]),
         "barText":
-          style([fontSize(Float(12.)),lineHeight(24.),color("#FBFCF8")]),
+          style([
+            fontSize(Float(12.)),
+            lineHeight(24.),
+            color("#FBFCF8"),
+          ]),
         "row":
           style([flexDirection(Row), flexWrap(Wrap), alignItems(Center)]),
-        "column":
-          style([alignItems(Center),justifyContent(Center)])
+        "column": style([alignItems(Center), justifyContent(Center)]),
       }
-    )
+    ),
   );
 
 let make = _children => {
@@ -51,29 +63,22 @@ let make = _children => {
           (
             List.map(
               item =>
-                <TextLink
-                  key=item.link style=styles##barLink href=item.link>
+                <TextLink key=item.link style=styles##barLink href=item.link>
                   (item.text |> text)
                 </TextLink>,
-              links
+              links,
             )
             |> list
           )
         </View>
         <View style=styles##column>
           <View style=styles##row>
-            <Text style=styles##barText>
-              ( "Made with " |> text)
-            </Text>
-            <TextLink
-              style=styles##barText href="https://phenomic.io">
+            <Text style=styles##barText> ("Made with " |> text) </Text>
+            <TextLink style=styles##barText href="https://phenomic.io">
               ("Phenomic" |> text)
             </TextLink>
-            <Text style=styles##barText>
-              ( " and " |> text)
-            </Text>
-            <TextLink
-              style=styles##barText href="https://reasonml.github.io/">
+            <Text style=styles##barText> (" and " |> text) </Text>
+            <TextLink style=styles##barText href="https://reasonml.github.io/">
               ("Reason" |> text)
             </TextLink>
           </View>
@@ -82,7 +87,11 @@ let make = _children => {
             ("Source available on GitHub" |> text)
           </TextLink>
         </View>
-        <SocialIcons wrapperStyle=styles##icons iconStyle=styles##barLink iconSize=22./>
+        <SocialIcons
+          wrapperStyle=styles##icons
+          iconStyle=styles##barLink
+          iconSize=22.
+        />
       </Container>
-    </View>
+    </View>,
 };

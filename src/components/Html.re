@@ -20,15 +20,24 @@ let styles =
         "h6Text": style([fontSize(Float(22.)), fontWeight(`Bold)]),
         "p": style([marginBottom(Pt(29.))]),
         "pText":
-          style([fontSize(Float(21.)), lineHeight(32.), fontWeight(`_300)]),
+          style([
+            fontSize(Float(21.)),
+            lineHeight(32.),
+            fontWeight(`_300),
+          ]),
         "ul": style([marginBottom(Pt(29.))]),
-        "li": style([fontSize(Float(21.)), lineHeight(32.), fontWeight(`_300)]),
+        "li":
+          style([
+            fontSize(Float(21.)),
+            lineHeight(32.),
+            fontWeight(`_300),
+          ]),
         "liWrapper": style([flexDirection(Row)]),
         "liBullet":
           style([
             lineHeight(32.),
             paddingHorizontal(Pt(10.)),
-            alignSelf(FlexStart)
+            alignSelf(FlexStart),
           ]),
         "blockQuote":
           style([
@@ -36,24 +45,24 @@ let styles =
             paddingHorizontal(Pt(20.)),
             marginBottom(Pt(29.)),
             borderLeftColor("#9ca0a3"),
-            borderLeftWidth(3.)
+            borderLeftWidth(3.),
           ]),
         "blockQuoteText":
           style([
             fontSize(Float(24.)),
             lineHeight(32.),
             fontWeight(`_300),
-            color("#515355")
+            color("#515355"),
           ]),
         "hr":
           style([
             marginBottom(Pt(29.)),
             marginHorizontal(Pt(29.)),
             height(Pt(3.)),
-            backgroundColor("#ddd")
-          ])
+            backgroundColor("#ddd"),
+          ]),
       }
-    )
+    ),
   );
 
 module H1 = {
@@ -63,21 +72,21 @@ module H1 = {
     render: _self =>
       <View
         style=(
-          switch style {
+          switch (style) {
           | None => styles##h1
           | Some(style) => Style.concat([styles##h1, style])
           }
         )>
         <Text
           style=(
-            switch textStyle {
+            switch (textStyle) {
             | None => styles##h1Text
             | Some(textStyle) => Style.concat([styles##h1Text, textStyle])
             }
           )>
           ...children
         </Text>
-      </View>
+      </View>,
   };
 };
 
@@ -88,21 +97,21 @@ module H2 = {
     render: _self =>
       <View
         style=(
-          switch style {
+          switch (style) {
           | None => styles##h2
           | Some(style) => Style.concat([styles##h2, style])
           }
         )>
         <Text
           style=(
-            switch textStyle {
+            switch (textStyle) {
             | None => styles##h2Text
             | Some(textStyle) => Style.concat([styles##h2Text, textStyle])
             }
           )>
           ...children
         </Text>
-      </View>
+      </View>,
   };
 };
 
@@ -113,21 +122,21 @@ module H3 = {
     render: _self =>
       <View
         style=(
-          switch style {
+          switch (style) {
           | None => styles##h3
           | Some(style) => Style.concat([styles##h3, style])
           }
         )>
         <Text
           style=(
-            switch textStyle {
+            switch (textStyle) {
             | None => styles##h3Text
             | Some(textStyle) => Style.concat([styles##h3Text, textStyle])
             }
           )>
           ...children
         </Text>
-      </View>
+      </View>,
   };
 };
 
@@ -138,21 +147,21 @@ module H4 = {
     render: _self =>
       <View
         style=(
-          switch style {
+          switch (style) {
           | None => styles##h4
           | Some(style) => Style.concat([styles##h4, style])
           }
         )>
         <Text
           style=(
-            switch textStyle {
+            switch (textStyle) {
             | None => styles##h4Text
             | Some(textStyle) => Style.concat([styles##h4Text, textStyle])
             }
           )>
           ...children
         </Text>
-      </View>
+      </View>,
   };
 };
 
@@ -163,21 +172,21 @@ module H5 = {
     render: _self =>
       <View
         style=(
-          switch style {
+          switch (style) {
           | None => styles##h5
           | Some(style) => Style.concat([styles##h5, style])
           }
         )>
         <Text
           style=(
-            switch textStyle {
+            switch (textStyle) {
             | None => styles##h5Text
             | Some(textStyle) => Style.concat([styles##h5Text, textStyle])
             }
           )>
           ...children
         </Text>
-      </View>
+      </View>,
   };
 };
 
@@ -188,21 +197,21 @@ module H6 = {
     render: _self =>
       <View
         style=(
-          switch style {
+          switch (style) {
           | None => styles##h6
           | Some(style) => Style.concat([styles##h6, style])
           }
         )>
         <Text
           style=(
-            switch textStyle {
+            switch (textStyle) {
             | None => styles##h6Text
             | Some(textStyle) => Style.concat([styles##h6Text, textStyle])
             }
           )>
           ...children
         </Text>
-      </View>
+      </View>,
   };
 };
 
@@ -213,21 +222,21 @@ module P = {
     render: _self =>
       <View
         style=(
-          switch style {
+          switch (style) {
           | None => styles##p
           | Some(style) => Style.concat([styles##p, style])
           }
         )>
         <Text
           style=(
-            switch textStyle {
+            switch (textStyle) {
             | None => styles##pText
             | Some(textStyle) => Style.concat([styles##pText, textStyle])
             }
           )>
           ...children
         </Text>
-      </View>
+      </View>,
   };
 };
 
@@ -238,13 +247,13 @@ module Ul = {
     render: _self =>
       <View
         style=(
-          switch style {
+          switch (style) {
           | None => styles##ul
           | Some(style) => Style.concat([styles##ul, style])
           }
         )>
-        (ReasonReact.arrayToElement(children))
-      </View>
+        (ReasonReact.array(children))
+      </View>,
   };
 };
 
@@ -257,14 +266,14 @@ module Li = {
         <Text style=styles##liBullet> ({j|•|j} |> text) </Text>
         <Text
           style=(
-            switch style {
+            switch (style) {
             | None => styles##li
             | Some(style) => Style.concat([styles##li, style])
             }
           )>
           ...children
         </Text>
-      </View>
+      </View>,
   };
 };
 
@@ -274,7 +283,7 @@ module Br = {
   /* let make = _children => {...component, render: _self => <View />}; */
   let make = _children => {
     ...component,
-    render: _self => <Text> ("\n" |> text) </Text>
+    render: _self => <Text> ("\n" |> text) </Text>,
   };
 };
 
@@ -282,7 +291,7 @@ module Hr = {
   let component = ReasonReact.statelessComponent("Html.Hr");
   let make = _children => {
     ...component,
-    render: _self => <View style=styles##hr />
+    render: _self => <View style=styles##hr />,
   };
 };
 
@@ -293,14 +302,14 @@ module BlockQuote = {
     render: _self =>
       <View
         style=(
-          switch style {
+          switch (style) {
           | None => styles##blockQuote
           | Some(style) => Style.concat([styles##blockQuote, style])
           }
         )>
         <Text
           style=(
-            switch textStyle {
+            switch (textStyle) {
             | None => styles##blockQuoteText
             | Some(textStyle) =>
               Style.concat([styles##blockQuoteText, textStyle])
@@ -308,6 +317,6 @@ module BlockQuote = {
           )>
           ...children
         </Text>
-      </View>
+      </View>,
   };
 };

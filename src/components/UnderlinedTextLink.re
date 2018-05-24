@@ -7,9 +7,12 @@ let styles =
     Style.(
       {
         "link":
-          style([textDecorationLine(Underline), textDecorationStyle(Solid)])
+          style([
+            textDecorationLine(Underline),
+            textDecorationStyle(Solid),
+          ]),
       }
-    )
+    ),
   );
 
 let make = (~href, ~style=?, children) => {
@@ -18,11 +21,11 @@ let make = (~href, ~style=?, children) => {
     <TextLink
       href
       style=(
-        switch style {
+        switch (style) {
         | None => styles##link
         | Some(style) => Style.concat([styles##link, style])
         }
       )>
       ...children
-    </TextLink>
+    </TextLink>,
 };

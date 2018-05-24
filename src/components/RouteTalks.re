@@ -14,14 +14,14 @@ let styles =
             marginVertical(Pt(20.)),
             color("#030303"),
           ]),
-        "links": 
+        "links":
           style([
             flexDirection(Row),
             justifyContent(Center),
-            alignItems(Center)
-          ])
+            alignItems(Center),
+          ]),
       }
-    )
+    ),
   );
 
 let component = ReasonReact.statelessComponent("Home");
@@ -37,7 +37,7 @@ let make = (~talks) => {
         <Text style=styles##title> ("Latest Talks" |> text) </Text>
         <Background>
           (
-            switch (talks: Types.contentList) {
+            switch ((talks: Types.contentList)) {
             | Inactive
             | Loading => <Text> ("Loading ..." |> text) </Text>
             | Errored => <Text> ("Oops" |> text) </Text>
@@ -58,12 +58,11 @@ let make = (~talks) => {
                     | None => nothing
                     }
                   )
-                  <Text>(" " |> text)</Text>
+                  <Text> (" " |> text) </Text>
                   (
                     switch (talks##next |> Js.toOption) {
                     | Some(next) =>
-                      <TextLink
-                        href=("/talks/after/" ++ next ++ "/")>
+                      <TextLink href=("/talks/after/" ++ next ++ "/")>
                         ("Older talks" |> text)
                       </TextLink>
                     | None => nothing
@@ -76,7 +75,7 @@ let make = (~talks) => {
         </Background>
       </Container>
       <Footer />
-    </ScrollView>
+    </ScrollView>,
 };
 
 let jsComponent =
@@ -94,8 +93,8 @@ let queries = props => {
         order: None,
         sort: None,
         limit: Some(10),
-        after: Some(props##params##after)
-      })
+        after: Some(props##params##after),
+      }),
     );
   {"talks": talks};
 };

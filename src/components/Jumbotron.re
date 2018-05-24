@@ -20,7 +20,7 @@ let styles =
             flexDirection(Row),
             justifyContent(Center),
             alignItems(Center),
-            marginBottom(Pt(20.))
+            marginBottom(Pt(20.)),
           ]),
         "title":
           style([
@@ -28,7 +28,7 @@ let styles =
             fontSize(Float(36.)),
             fontWeight(`Bold),
             padding(Pt(20.)),
-            color("#030303")
+            color("#030303"),
           ]),
         "icons": style([textAlign(Center), lineHeight(60.)]),
         "icon": style([paddingHorizontal(Pt(26.))]),
@@ -37,10 +37,10 @@ let styles =
           style([
             fontSize(Float(28.)),
             color("#030303"),
-            fontWeight(`_300)
-          ])
+            fontWeight(`_300),
+          ]),
       }
-    )
+    ),
   );
 
 let make = _children => {
@@ -59,5 +59,5 @@ let make = _children => {
           ({j|Freelancer. Open Sourcer. Trainer.|j} |> text)
         </Text>
       </View>
-    </Container>
+    </Container>,
 };

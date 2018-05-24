@@ -14,14 +14,14 @@ let styles =
             marginVertical(Pt(20.)),
             color("#030303"),
           ]),
-        "links": 
+        "links":
           style([
             flexDirection(Row),
             justifyContent(Center),
-            alignItems(Center)
-          ])
+            alignItems(Center),
+          ]),
       }
-    )
+    ),
   );
 
 let component = ReasonReact.statelessComponent("Home");
@@ -41,7 +41,7 @@ let make = (~posts) => {
         <Text style=styles##title> ("Latest Posts" |> text) </Text>
         <Background>
           (
-            switch (posts: Types.contentList) {
+            switch ((posts: Types.contentList)) {
             | Inactive
             | Loading => <Text> ("Loading ..." |> text) </Text>
             | Errored => <Text> ("Oops" |> text) </Text>
@@ -62,12 +62,11 @@ let make = (~posts) => {
                     | None => nothing
                     }
                   )
-                  <Text>(" " |> text)</Text>
+                  <Text> (" " |> text) </Text>
                   (
                     switch (posts##next |> Js.toOption) {
                     | Some(next) =>
-                      <TextLink
-                        href=("/after/" ++ next ++ "/")>
+                      <TextLink href=("/after/" ++ next ++ "/")>
                         ("Older posts" |> text)
                       </TextLink>
                     | None => nothing
@@ -80,7 +79,7 @@ let make = (~posts) => {
         </Background>
       </Container>
       <Footer />
-    </ScrollView>
+    </ScrollView>,
 };
 
 let jsComponent =
@@ -98,8 +97,8 @@ let queries = props => {
         order: None,
         sort: None,
         limit: Some(10),
-        after: Some(props##params##after)
-      })
+        after: Some(props##params##after),
+      }),
     );
   {"posts": posts};
 };

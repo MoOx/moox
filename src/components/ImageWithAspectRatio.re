@@ -13,10 +13,10 @@ let styles =
             top(Pt(0.)),
             bottom(Pt(0.)),
             right(Pt(0.)),
-            left(Pt(0.))
-          ])
+            left(Pt(0.)),
+          ]),
       }
-    )
+    ),
   );
 
 let component = ReasonReact.statelessComponent("ImageWithAspectRatio");
@@ -29,7 +29,7 @@ let make = (~uri, _) => {
         style=Style.(
                 style([
                   width(Pct(100.)),
-                  paddingBottom(Pct(100. *. imageRatio))
+                  paddingBottom(Pct(100. *. imageRatio)),
                 ])
               )>
         <Image
@@ -37,5 +37,5 @@ let make = (~uri, _) => {
           source=(URI(Image.(imageURISource(~uri, ()))))
         />
       </View>
-    </View>
+    </View>,
 };

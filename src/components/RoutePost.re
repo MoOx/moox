@@ -21,16 +21,20 @@ let make = (~contentItem, ~id) => {
             "viewSmall": style([flexGrow(1.), padding(Pt(20.))]),
             "viewLarge": style([flexGrow(1.), padding(Pt(60.))]),
             "text":
-              style([fontSize(Float(21.)), lineHeight(33.), fontWeight(`_400)])
+              style([
+                fontSize(Float(21.)),
+                lineHeight(33.),
+                fontWeight(`_400),
+              ]),
           }
-        )
+        ),
       );
     let isLarge = dimensions##width > 500;
     <ScrollView>
       <CommonThings />
       <Header />
       (
-        switch (contentItem: Types.contentItemNode) {
+        switch ((contentItem: Types.contentItemNode)) {
         | Inactive
         | Loading =>
           <View>
@@ -77,21 +81,21 @@ let make = (~contentItem, ~id) => {
       )
       <Footer />
     </ScrollView>;
-  }
+  },
 };
 
 let jsComponent =
   ReasonReact.wrapReasonForJs(~component, jsProps =>
     make(
       ~contentItem=PhenomicPresetReactApp.jsEdge(jsProps##contentItem),
-      ~id=jsProps##params##splat
+      ~id=jsProps##params##splat,
     )
   );
 
 let queries = props => {
-  let contentItem = 
+  let contentItem =
     PhenomicPresetReactApp.query(
-      Item({path: "content/blog", id: props##params##splat})
+      Item({path: "content/blog", id: props##params##splat}),
     );
   {"contentItem": contentItem};
 };

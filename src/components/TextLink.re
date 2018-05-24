@@ -8,7 +8,7 @@ let make =
       ~activeStyle: option(BsReactNative.Style.t)=?,
       ~className: option(string)=?,
       ~activeClassName: option(string)=?,
-      children
+      children,
     ) =>
   ReasonReact.wrapJsForReason(
     ~reactClass=link,
@@ -17,7 +17,7 @@ let make =
       "style": Js.Nullable.from_opt(style),
       "activeStyle": Js.Nullable.from_opt(activeStyle),
       "className": Js.Nullable.from_opt(className),
-      "activeClassName": Js.Nullable.from_opt(activeClassName)
+      "activeClassName": Js.Nullable.from_opt(activeClassName),
     },
-    children
+    children,
   );
