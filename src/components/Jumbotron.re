@@ -28,7 +28,7 @@ let styles =
             fontSize(Float(36.)),
             fontWeight(`Bold),
             padding(Pt(20.)),
-            color("#030303"),
+            color(String("#030303")),
           ]),
         "icons": style([textAlign(Center), lineHeight(60.)]),
         "icon": style([paddingHorizontal(Pt(26.))]),
@@ -36,7 +36,7 @@ let styles =
         "textNode":
           style([
             fontSize(Float(28.)),
-            color("#030303"),
+            color(String("#030303")),
             fontWeight(`_300),
           ]),
       }

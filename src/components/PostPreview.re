@@ -24,7 +24,7 @@ let styles =
             padding(Pt(20.)),
             alignItems(FlexStart),
             lineHeight(28.),
-            color("#030303"),
+            color(String("#030303")),
           ]),
         "bullet": style([]),
         "title": style([fontSize(Float(22.))]),
@@ -34,7 +34,7 @@ let styles =
 
 let component = ReasonReact.statelessComponent("PostPreview");
 
-let make = (~item: Types.partialContentItem, _) => {
+let make = (~item: T.partialContentItem, _) => {
   ...component,
   render: _self => {
     let href = "/blog/" ++ item##id ++ "/";

@@ -31,7 +31,7 @@ let styles =
             flexWrap(Wrap),
             justifyContent(SpaceBetween),
           ]),
-        "barWrapper": style([backgroundColor("#030303")]),
+        "barWrapper": style([backgroundColor(String("#030303"))]),
         "icons": style([flexDirection(Row)]),
         "barLinks": style([flexDirection(Row)]),
         "barLink":
@@ -39,13 +39,13 @@ let styles =
             padding(Pt(10.)),
             fontSize(Float(14.)),
             lineHeight(44.),
-            color("#FBFCF8"),
+            color(String("#FBFCF8")),
           ]),
         "barText":
           style([
             fontSize(Float(12.)),
             lineHeight(24.),
-            color("#FBFCF8"),
+            color(String("#FBFCF8")),
           ]),
         "row":
           style([flexDirection(Row), flexWrap(Wrap), alignItems(Center)]),

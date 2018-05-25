@@ -12,7 +12,7 @@ let styles =
             fontWeight(`Bold),
             textAlign(Center),
             marginVertical(Pt(20.)),
-            color("#030303"),
+            color(String("#030303")),
           ]),
         "links":
           style([
@@ -37,7 +37,7 @@ let make = (~talks) => {
         <Text style=styles##title> ("Latest Talks" |> text) </Text>
         <Background>
           (
-            switch ((talks: Types.contentList)) {
+            switch ((talks: T.contentList)) {
             | Inactive
             | Loading => <Text> ("Loading ..." |> text) </Text>
             | Errored => <Text> ("Oops" |> text) </Text>

@@ -12,7 +12,9 @@ type partialContentItem = {
 };
 
 type contentList =
-  PhenomicPresetReactApp.edge(PhenomicPresetReactApp.jsNodeList(partialContentItem));
+  PhenomicPresetReactApp.edge(
+    PhenomicPresetReactApp.jsNodeList(partialContentItem),
+  );
 
 type contentItem = {
   .
@@ -25,7 +27,7 @@ type contentItem = {
   "slidesEmbed": Js.Undefined.t(string),
   "video": Js.Undefined.t(string),
   "videoEmbed": Js.Undefined.t(string),
-  "body": MyBodyRenderer.jsBody
+  "body": MyBodyRenderer.jsBody,
   /* "body": PhenomicPresetReactApp.BodyRenderer.jsBody */
 };
 

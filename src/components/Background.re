@@ -5,7 +5,10 @@ let component = ReasonReact.statelessComponent("Background");
 let styles =
   StyleSheet.create(
     Style.(
-      {"background": style([borderRadius(6.), backgroundColor("#FBFCF8")])}
+      {
+        "background":
+          style([borderRadius(6.), backgroundColor(String("#FBFCF8"))]),
+      }
     ),
   );
 

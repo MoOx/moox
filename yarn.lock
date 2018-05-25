@@ -2060,9 +2060,9 @@ bs-react-helmet@^0.2.1:
     react-helmet "^5.2.0"
     reason-react "^0.2.4"
 
-bs-react-native@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/bs-react-native/-/bs-react-native-0.5.0.tgz#f3b147905009fe45edb302cd13d969bb3f52d9aa"
+bs-react-native@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/bs-react-native/-/bs-react-native-0.8.0.tgz#1e68b75ed78aad858548456fd985632b8642acfe"
 
 bser@^2.0.0:
   version "2.0.0"

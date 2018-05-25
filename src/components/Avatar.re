@@ -11,7 +11,7 @@ let styles =
             borderRadius(96.),
             width(Pt(96.)),
             height(Pt(96.)),
-            borderColor("#030303"),
+            borderColor(String("#030303")),
             borderWidth(2.),
           ]),
       }

@@ -14,7 +14,7 @@
     "bs-json": "^1.0.1",
     "bs-platform": "^3.1.0",
     "bs-react-helmet": "^0.2.1",
-    "bs-react-native": "^0.5.0",
+    "bs-react-native": "^0.8.0",
     "classnames": "^2.2.5",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
