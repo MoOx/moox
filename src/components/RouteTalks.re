@@ -1,7 +1,5 @@
 open BsReactNative;
 
-open Helpers;
-
 let styles =
   StyleSheet.create(
     Style.(
@@ -34,13 +32,13 @@ let make = (~talks) => {
       <Head title={j|MoOx Talks, Frontend UI Web & Mobile Developer.|j} />
       <Header />
       <Container>
-        <Text style=styles##title> ("Latest Talks" |> text) </Text>
+        <Text style=styles##title> ("Latest Talks" |> R.string) </Text>
         <Background>
           (
             switch ((talks: T.contentList)) {
             | Inactive
-            | Loading => <Text> ("Loading ..." |> text) </Text>
-            | Errored => <Text> ("Oops" |> text) </Text>
+            | Loading => <Text> ("Loading ..." |> R.string) </Text>
+            | Errored => <Text> ("Oops" |> R.string) </Text>
             | Idle(talks) =>
               <View>
                 <TalkList talks=talks##list />
@@ -53,19 +51,19 @@ let make = (~talks) => {
                           talks##previousPageIsFirst ?
                             "/talks/" : "/talks/after/" ++ previous ++ "/"
                         )>
-                        ("Fresh talks" |> text)
+                        ("Fresh talks" |> R.string)
                       </TextLink>
-                    | None => nothing
+                    | None => R.null
                     }
                   )
-                  <Text> (" " |> text) </Text>
+                  <Text> (" " |> R.string) </Text>
                   (
                     switch (talks##next |> Js.toOption) {
                     | Some(next) =>
                       <TextLink href=("/talks/after/" ++ next ++ "/")>
-                        ("Older talks" |> text)
+                        ("Older talks" |> R.string)
                       </TextLink>
-                    | None => nothing
+                    | None => R.null
                     }
                   )
                 </View>

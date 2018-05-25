@@ -1,5 +1,3 @@
-open Helpers;
-
 open BsReactNative;
 
 let component = ReasonReact.statelessComponent("Header");
@@ -55,11 +53,11 @@ let make = _children => {
             List.map(
               item =>
                 <TextLink key=item.link style=styles##barLink href=item.link>
-                  (item.text |> text)
+                  (item.text |> R.string)
                 </TextLink>,
               links,
             )
-            |> list
+            |> R.list
           )
         </View>
         <SocialIcons

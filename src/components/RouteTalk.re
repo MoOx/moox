@@ -1,5 +1,3 @@
-open Helpers;
-
 open BsReactNative;
 
 let component = ReasonReact.statelessComponent("Talk");
@@ -39,7 +37,7 @@ let make = (~contentItem) => {
         | Loading =>
           <View>
             <Head title="Loading..." />
-            <Html.H1 textStyle=styles##title> ("..." |> text) </Html.H1>
+            <Html.H1 textStyle=styles##title> ("..." |> R.string) </Html.H1>
             <Container>
               <Background>
                 <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
@@ -51,11 +49,13 @@ let make = (~contentItem) => {
         | Errored =>
           <View>
             <Head title="Oupssss" />
-            <Html.H1 textStyle=styles##title> ("Oupssss" |> text) </Html.H1>
+            <Html.H1 textStyle=styles##title>
+              ("Oupssss" |> R.string)
+            </Html.H1>
             <Container>
               <Background>
                 <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
-                  <Text> ("Oops" |> text) </Text>
+                  <Text> ("Oops" |> R.string) </Text>
                 </View>
               </Background>
             </Container>
@@ -64,14 +64,14 @@ let make = (~contentItem) => {
           <View>
             <Head title=contentItem##title />
             <Html.H1 textStyle=styles##title>
-              (contentItem##title |> text)
+              (contentItem##title |> R.string)
             </Html.H1>
             <Container>
               <Background>
                 <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
                   (
                     switch (Js.Undefined.toOption(contentItem##videoEmbed)) {
-                    | None => nothing
+                    | None => R.null
                     | Some(videoEmbed) =>
                       <View>
                         <div
@@ -104,7 +104,7 @@ let make = (~contentItem) => {
                   )
                   (
                     switch (Js.Undefined.toOption(contentItem##slidesEmbed)) {
-                    | None => nothing
+                    | None => R.null
                     | Some(slidesEmbed) =>
                       <View>
                         <div
@@ -137,9 +137,11 @@ let make = (~contentItem) => {
                   )
                   (
                     switch (Js.Undefined.toOption(contentItem##slides)) {
-                    | None => nothing
+                    | None => R.null
                     | Some(slides) =>
-                      <Spacer> <a href=slides> (slides |> text) </a> </Spacer>
+                      <Spacer>
+                        <a href=slides> (slides |> R.string) </a>
+                      </Spacer>
                     }
                   )
                   <MyBodyRenderer body=contentItem##body />

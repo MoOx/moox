@@ -1,5 +1,3 @@
-open Helpers;
-
 open BsReactNative;
 
 let component = ReasonReact.statelessComponent("Footer");
@@ -64,27 +62,27 @@ let make = _children => {
             List.map(
               item =>
                 <TextLink key=item.link style=styles##barLink href=item.link>
-                  (item.text |> text)
+                  (item.text |> R.string)
                 </TextLink>,
               links,
             )
-            |> list
+            |> R.list
           )
         </View>
         <View style=styles##column>
           <View style=styles##row>
-            <Text style=styles##barText> ("Made with " |> text) </Text>
+            <Text style=styles##barText> ("Made with " |> R.string) </Text>
             <TextLink style=styles##barText href="https://phenomic.io">
-              ("Phenomic" |> text)
+              ("Phenomic" |> R.string)
             </TextLink>
-            <Text style=styles##barText> (" and " |> text) </Text>
+            <Text style=styles##barText> (" and " |> R.string) </Text>
             <TextLink style=styles##barText href="https://reasonml.github.io/">
-              ("Reason" |> text)
+              ("Reason" |> R.string)
             </TextLink>
           </View>
           <TextLink
             style=styles##barText href="https://github.com/MoOx/moox.io">
-            ("Source available on GitHub" |> text)
+            ("Source available on GitHub" |> R.string)
           </TextLink>
         </View>
         <SocialIcons

@@ -1,5 +1,3 @@
-open Helpers;
-
 open BsReactNative;
 
 let imageRatio = 240. /. 350.;
@@ -38,8 +36,8 @@ let make = (~posts, _) => {
              <View key=item##id style=styles##flex>
                (
                  newYear ?
-                   <Text style=styles##yearText> (year |> text) </Text> :
-                   nothing
+                   <Text style=styles##yearText> (year |> R.string) </Text> :
+                   R.null
                )
                <PostPreview item />
              </View>;

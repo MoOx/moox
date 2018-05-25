@@ -1,5 +1,3 @@
-open Helpers;
-
 open BsReactNative;
 
 let component = ReasonReact.statelessComponent("Background");
@@ -49,14 +47,14 @@ let make = _children => {
     <Container style=styles##background>
       <View style=styles##head>
         <Avatar />
-        <Text style=styles##title> ("MoOx" |> text) </Text>
+        <Text style=styles##title> ("MoOx" |> R.string) </Text>
       </View>
       <View style=styles##text>
         <Text style=styles##textNode>
-          ({j|I make apps with React.|j} |> text)
+          ({j|I make apps with React.|j} |> R.string)
         </Text>
         <Text style=styles##textNode>
-          ({j|Freelancer. Open Sourcer. Trainer.|j} |> text)
+          ({j|Freelancer. Open Sourcer. Trainer.|j} |> R.string)
         </Text>
       </View>
     </Container>,

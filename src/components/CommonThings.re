@@ -1,5 +1,3 @@
-open Helpers;
-
 let component = ReasonReact.statelessComponent("CommonThings");
 
 /* [@bs.module] external coverBlur : string = "../../../cover.blur.js"; */
@@ -34,7 +32,7 @@ let make = (_) => {
       <style>
         (
           "@-ms-viewport { width: device-width } @viewport { width: device-width }"
-          |> text
+          |> R.string
         )
       </style>
       <style>
@@ -59,7 +57,7 @@ body {
   }
 }
   |j}
-          |> text
+          |> R.string
         )
       </style>
     </Head>,

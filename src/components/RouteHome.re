@@ -1,7 +1,5 @@
 open BsReactNative;
 
-open Helpers;
-
 let styles =
   StyleSheet.create(
     Style.(
@@ -38,13 +36,13 @@ let make = (~posts) => {
       <Spacer />
       <Spacer />
       <Container>
-        <Text style=styles##title> ("Latest Posts" |> text) </Text>
+        <Text style=styles##title> ("Latest Posts" |> R.string) </Text>
         <Background>
           (
             switch ((posts: T.contentList)) {
             | Inactive
-            | Loading => <Text> ("Loading ..." |> text) </Text>
-            | Errored => <Text> ("Oops" |> text) </Text>
+            | Loading => <Text> ("Loading ..." |> R.string) </Text>
+            | Errored => <Text> ("Oops" |> R.string) </Text>
             | Idle(posts) =>
               <View>
                 <PostList posts=posts##list />
@@ -57,19 +55,19 @@ let make = (~posts) => {
                           posts##previousPageIsFirst ?
                             "/" : "/after/" ++ previous ++ "/"
                         )>
-                        ("Fresh posts" |> text)
+                        ("Fresh posts" |> R.string)
                       </TextLink>
-                    | None => nothing
+                    | None => R.null
                     }
                   )
-                  <Text> (" " |> text) </Text>
+                  <Text> (" " |> R.string) </Text>
                   (
                     switch (posts##next |> Js.toOption) {
                     | Some(next) =>
                       <TextLink href=("/after/" ++ next ++ "/")>
-                        ("Older posts" |> text)
+                        ("Older posts" |> R.string)
                       </TextLink>
-                    | None => nothing
+                    | None => R.null
                     }
                   )
                 </View>

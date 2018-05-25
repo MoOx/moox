@@ -1,5 +1,3 @@
-open Helpers;
-
 open BsReactNative;
 
 let component = ReasonReact.statelessComponent("Post");
@@ -39,7 +37,7 @@ let make = (~contentItem, ~id) => {
         | Loading =>
           <View>
             <Head title="Loading..." />
-            <Html.H1 textStyle=styles##title> ("..." |> text) </Html.H1>
+            <Html.H1 textStyle=styles##title> ("..." |> R.string) </Html.H1>
             <Container>
               <Background>
                 <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
@@ -51,11 +49,13 @@ let make = (~contentItem, ~id) => {
         | Errored =>
           <View>
             <Head title="Oupssss" />
-            <Html.H1 textStyle=styles##title> ("Oupssss" |> text) </Html.H1>
+            <Html.H1 textStyle=styles##title>
+              ("Oupssss" |> R.string)
+            </Html.H1>
             <Container>
               <Background>
                 <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
-                  <Text> ("Oops" |> text) </Text>
+                  <Text> ("Oops" |> R.string) </Text>
                 </View>
               </Background>
             </Container>
@@ -63,7 +63,9 @@ let make = (~contentItem, ~id) => {
         | Idle(item) =>
           <View>
             <Head title=item##title />
-            <Html.H1 textStyle=styles##title> (item##title |> text) </Html.H1>
+            <Html.H1 textStyle=styles##title>
+              (item##title |> R.string)
+            </Html.H1>
             <Container>
               <Background>
                 <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>

@@ -1,5 +1,3 @@
-open Helpers;
-
 open BsReactNative;
 
 let component = ReasonReact.statelessComponent("SocialIcons");
@@ -53,7 +51,7 @@ let make =
             </TextLink>,
           links,
         )
-        |> list
+        |> R.list
       )
     </View>,
 };

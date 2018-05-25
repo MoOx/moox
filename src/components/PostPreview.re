@@ -1,5 +1,3 @@
-open Helpers;
-
 open BsReactNative;
 
 let styles =
@@ -40,16 +38,16 @@ let make = (~item: T.partialContentItem, _) => {
     let href = "/blog/" ++ item##id ++ "/";
     <View key=item##id style=styles##block>
       <Text style=styles##text>
-        <Text style=styles##bullet> ({j|•|j} |> text) </Text>
+        <Text style=styles##bullet> ({j|•|j} |> R.string) </Text>
         <Spacer small=true />
         <UnderlinedTextLink style=styles##title href>
-          (item##title |> text)
+          (item##title |> R.string)
         </UnderlinedTextLink>
         <Spacer small=true />
         (
           switch (Js.Undefined.toOption(item##lang)) {
-          | None => nothing
-          | Some(lang) => <Text> ("[" ++ lang ++ "] " |> text) </Text>
+          | None => R.null
+          | Some(lang) => <Text> ("[" ++ lang ++ "] " |> R.string) </Text>
           }
         )
       </Text>

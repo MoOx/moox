@@ -1,7 +1,5 @@
 open BsReactNative;
 
-open Helpers;
-
 let styles =
   StyleSheet.create(
     Style.(
@@ -33,20 +31,20 @@ let make = _children => {
       <Spacer />
       <Spacer />
       <Container>
-        <Text style=styles##title> ("Contact" |> text) </Text>
+        <Text style=styles##title> ("Contact" |> R.string) </Text>
         <Background>
           <View style=styles##text>
-            <Text> ("Want to get in touch with me?" |> text) </Text>
+            <Text> ("Want to get in touch with me?" |> R.string) </Text>
             <br />
-            <Text> ("hello (at) moox.io" |> text) </Text>
+            <Text> ("hello (at) moox.io" |> R.string) </Text>
             <br />
-            <Text> ("+33 6 78 13 54 39" |> text) </Text>
+            <Text> ("+33 6 78 13 54 39" |> R.string) </Text>
             <br />
             <Text>
               <a href="https://twitter.com/MoOx">
-                ("twitter.com/MoOx" |> text)
+                ("twitter.com/MoOx" |> R.string)
               </a>
-              <Text> (" (DM open)" |> text) </Text>
+              <Text> (" (DM open)" |> R.string) </Text>
             </Text>
           </View>
         </Background>

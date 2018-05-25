@@ -1,5 +1,3 @@
-open Helpers;
-
 open BsReactNative;
 
 let styles =
@@ -263,7 +261,7 @@ module Li = {
     ...component,
     render: _self =>
       <View style=styles##liWrapper>
-        <Text style=styles##liBullet> ({j|•|j} |> text) </Text>
+        <Text style=styles##liBullet> ({j|•|j} |> R.string) </Text>
         <Text
           style=(
             switch (style) {
@@ -283,7 +281,7 @@ module Br = {
   /* let make = _children => {...component, render: _self => <View />}; */
   let make = _children => {
     ...component,
-    render: _self => <Text> ("\n" |> text) </Text>,
+    render: _self => <Text> ("\n" |> R.string) </Text>,
   };
 };
 
