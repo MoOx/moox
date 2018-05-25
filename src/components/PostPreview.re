@@ -34,7 +34,7 @@ let styles =
 
 let component = ReasonReact.statelessComponent("PostPreview");
 
-let make = (~item: Types.partialContentItem, _) => {
+let make = (~item: T.partialContentItem, _) => {
   ...component,
   render: _self => {
     let href = "/blog/" ++ item##id ++ "/";

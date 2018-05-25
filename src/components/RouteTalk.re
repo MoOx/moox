@@ -34,7 +34,7 @@ let make = (~contentItem) => {
       <CommonThings />
       <Header />
       (
-        switch ((contentItem: Types.contentItemNode)) {
+        switch ((contentItem: T.contentItemNode)) {
         | Inactive
         | Loading =>
           <View>

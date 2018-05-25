@@ -41,7 +41,7 @@ let make = (~posts) => {
         <Text style=styles##title> ("Latest Posts" |> text) </Text>
         <Background>
           (
-            switch ((posts: Types.contentList)) {
+            switch ((posts: T.contentList)) {
             | Inactive
             | Loading => <Text> ("Loading ..." |> text) </Text>
             | Errored => <Text> ("Oops" |> text) </Text>

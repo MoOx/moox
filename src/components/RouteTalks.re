@@ -37,7 +37,7 @@ let make = (~talks) => {
         <Text style=styles##title> ("Latest Talks" |> text) </Text>
         <Background>
           (
-            switch ((talks: Types.contentList)) {
+            switch ((talks: T.contentList)) {
             | Inactive
             | Loading => <Text> ("Loading ..." |> text) </Text>
             | Errored => <Text> ("Oops" |> text) </Text>
