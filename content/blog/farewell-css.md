@@ -92,3 +92,24 @@ compilation, and nothing more in the near future. And for a far future, it may
 even become obsolete and not used.
 
 This is why I am [deprecating cssnext](../deprecating-cssnext/) as of today.
+
+## What's next?
+
+I am already happy this days with
+[React Native StyleSheet](http://facebook.github.io/react-native/docs/stylesheet.html)
+API (that works on [the web](https://github.com/necolas/react-native-web) too).
+
+What about media queries and pseudo elements? I don't need those. See
+[react-native-web Style FAQ](https://github.com/necolas/react-native-web/blob/master/website/guides/style.md#faqs).
+
+Currently I am even using RN StyleSheet API via
+[Reason](https://reasonml.github.io/) and
+[bs-react-native](https://github.com/reasonml-community/bs-react-native) that
+brings me static typed validation.
+
+I also look forward to
+[react-native-dom](https://github.com/vincentriemer/react-native-dom).
+
+https://twitter.com/MoOx/status/997119336400777217
+
+![yoga-in-webassembly](/media/yoga-in-webassembly.jpg)
