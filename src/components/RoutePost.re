@@ -70,6 +70,8 @@ let make = (~contentItem, ~id) => {
               <Background>
                 <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
                   <MyBodyRenderer body=item##body />
+                  <Spacer large=true />
+                  <Spacer large=true />
                   <DisqusComments
                     shortname="moox"
                     identifier=("http://moox.io/blog/" ++ id ++ "/")

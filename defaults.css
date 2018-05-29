@@ -70,3 +70,25 @@
 .flex-media--1-1 img.flex-media__item {
   height: auto;
 }
+
+/* because I am lazy */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+figure {
+  border: 1px solid #eee;
+}
+
+figcaption {
+  font-style: italic;
+  text-align: center;
+  margin: 0;
+  display: block;
+  background: #fafafa;
+  line-height: 44px;
+  border-top: 1px solid #eee;
+}
