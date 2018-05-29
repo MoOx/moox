@@ -58,7 +58,6 @@ If you want a sort of changelog, here is what you can expect
 
 ### Removed
 
-* autoprefixer
 * pixrem (generates pixel fallbacks for rem units)
 * postcss-calc (reduces calc, not really a polyfill)
 * postcss-color-function (color() is now color-mod())
