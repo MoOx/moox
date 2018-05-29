@@ -97,7 +97,7 @@ This is why I am [deprecating cssnext](../deprecating-cssnext/) as of today.
 
 ## What's next for me?
 
-I work with the React ecosystem this days and I am already happy with
+I work with the React ecosystem these days and I am already happy with
 [React Native StyleSheet](http://facebook.github.io/react-native/docs/stylesheet.html)
 API (that works on [the web](https://github.com/necolas/react-native-web) too).
 
@@ -107,7 +107,7 @@ thing I would use tho) and pseudo elements are clearly oriented for document
 styling. See also
 [react-native-web Style FAQ](https://github.com/necolas/react-native-web/blob/master/website/guides/style.md#faqs).
 
-Currently I am even using RN StyleSheet API via
+Currently, I am even using RN StyleSheet API via
 [Reason](https://reasonml.github.io/) and
 [bs-react-native](https://github.com/reasonml-community/bs-react-native) that
 brings me strong static typed validation. No more debugging for a stupid typo.
