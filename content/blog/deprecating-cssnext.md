@@ -35,7 +35,7 @@ wasn’t enough to ensure the project would be sufficiently maintained.
 
 I also tried to ask for help via Twitter, but no response.
 
-Then on active member of PostCSS organization made
+Then one active member of PostCSS organization made
 [a fork (kind of)](http://preset-env.cssdb.org/) and it's probably better
 already than cssnext ever was. If you still want to use CSS, you should take a
 look at it.
