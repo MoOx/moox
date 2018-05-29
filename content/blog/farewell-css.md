@@ -7,7 +7,7 @@ tags:
 
 I've been fighting with CSS long enough in production now that I don’t enjoy
 working with it anymore unfortunately, so at least for now this my formal
-farewell! [\*](#https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b)
+farewell! [\*](https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b)
 
 CSS has been designed to style documents, not applications. Anyone that has
 tried to use CSS at scale knows how it requires too many restrictions and rules
