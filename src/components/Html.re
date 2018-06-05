@@ -4,19 +4,19 @@ let styles =
   StyleSheet.create(
     Style.(
       {
-        "h1": style([marginBottom(Pt(46.))]),
+        "h1": style([marginTop(Pt(42.)), marginBottom(Pt(24.))]),
         "h1Text": style([fontSize(Float(42.)), fontWeight(`Bold)]),
-        "h2": style([marginBottom(Pt(44.))]),
+        "h2": style([marginTop(Pt(34.)), marginBottom(Pt(18.))]),
         "h2Text": style([fontSize(Float(34.)), fontWeight(`Bold)]),
-        "h3": style([marginBottom(Pt(44.))]),
+        "h3": style([marginTop(Pt(26.)), marginBottom(Pt(13.))]),
         "h3Text": style([fontSize(Float(26.)), fontWeight(`Bold)]),
-        "h4": style([marginBottom(Pt(40.))]),
+        "h4": style([marginTop(Pt(24.)), marginBottom(Pt(12.))]),
         "h4Text": style([fontSize(Float(24.)), fontWeight(`Bold)]),
-        "h5": style([marginBottom(Pt(40.))]),
+        "h5": style([marginTop(Pt(22.)), marginBottom(Pt(11.))]),
         "h5Text": style([fontSize(Float(22.)), fontWeight(`Bold)]),
-        "h6": style([marginBottom(Pt(40.))]),
+        "h6": style([marginTop(Pt(22.)), marginBottom(Pt(11.))]),
         "h6Text": style([fontSize(Float(22.)), fontWeight(`Bold)]),
-        "p": style([marginBottom(Pt(29.))]),
+        "p": style([marginTop(Pt(29.)), marginBottom(Pt(29.))]),
         "pText":
           style([
             fontSize(Float(21.)),
