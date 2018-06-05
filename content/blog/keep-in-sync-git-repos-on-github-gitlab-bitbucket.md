@@ -8,7 +8,7 @@ tags:
 date: 2018-06-04
 ---
 
-Sharing code online is pretty easy this days. But keeping in sync your repos on
+Sharing code online is pretty easy these days. But keeping in sync your repos on
 multiples places is a bit harder. You will easily find scripts and commands to
 import/export stuff somewhere. Same thing for read-only mirrors, pretty easy.
 But having a transparent workflow to be able to push your code on multiple
