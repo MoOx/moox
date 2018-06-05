@@ -21,12 +21,12 @@ and you are afraid of the Skype syndrome), you may want to have _not-read-only
 mirrors_ of your repos somewhere else.
 
 **Here is a nice trick to keep in sync real git repos on multiple places** like
-GitLab and BitBuckets, that you can pull and push to, without any efforts after
-a quick initial setup. Not read-only mirrors. Real repos. And this **just be
+GitLab and BitBucket, that you can pull and push to, without any efforts after a
+quick initial setup. Not read-only mirrors. Real repos. And this **just be
 relying on git pull and push features**.
 
 _Reminder: to be safe setup SSH and Two factor Auth (2FA) for all places (except
-for BitBuckets, cause it’s not compatible with the CLI tool)._
+for BitBucket, cause it’s not compatible with the CLI tool)._
 
 <!--([Looking for the tl;dr?](#tldr))-->
 
