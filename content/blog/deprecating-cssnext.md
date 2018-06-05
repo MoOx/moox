@@ -81,6 +81,9 @@ If you want a sort of changelog, here is what you can expect
 * postcss-nesting (Stage 1)
 * postcss-apply (Rejected as a standard)
 
+You will find more accurate and up to date informations on this
+[notice to cssnext users on postcss-preset-env repo](https://github.com/csstools/postcss-preset-env/issues/32)
+
 ---
 
 Hope this way you don't feel abandonned. This is better for you to upgrade and
