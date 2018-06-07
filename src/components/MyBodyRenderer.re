@@ -85,6 +85,9 @@ let rec renderChild = (parentTag, index: int, child) => {
     }
   | Element(tag, props, children) =>
     switch (tag) {
+    /* custom tag */
+    | "huge" => <Huge key> (renderChildren(tag, children)) </Huge>
+    /* html tags */
     | "a" =>
       <UnderlinedTextLink key href=props##href>
         (renderChildren(tag, children))
