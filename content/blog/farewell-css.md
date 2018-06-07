@@ -116,6 +116,6 @@ I also look forward to
 [react-native-dom](https://github.com/vincentriemer/react-native-dom).
 
 <figure class="flex-media--unknown">
-  <img src="/media/yoga-in-webassembly.jpg" />
+  <img class="flex-media__item" src="/media/yoga-in-webassembly.jpg" />
   <figcaption><a href="https://twitter.com/MoOx/status/997119336400777217">twitter.com/MoOx/status/997119336400777217</a></figcaption>
 </figure>

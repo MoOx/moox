@@ -1,5 +1,5 @@
 ---
-title: How to keep in sync your Git repos on GitHub, GitLab & Bitbucket without efforts
+title: Keep in sync your Git repos on GitHub, GitLab & Bitbucket
 tags:
   - git
   - github
