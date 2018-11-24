@@ -134,6 +134,7 @@ Adjust variables if the snippet above is not matching your setup.
 ### You don't have a git repo yet
 
 ```console
+export GIT_USER_NAME=$USER
 export GIT_REPO_NAME="your-repo"
 mkdir $GIT_REPO_NAME && cd $GIT_REPO_NAME
 git init
