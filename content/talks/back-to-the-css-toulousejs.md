@@ -3,7 +3,7 @@ date: 2014-11-14
 title: "Back to the CSS"
 conference: "Toulouse JS #6 / Apéro web #26"
 slides: https://speakerdeck.com/moox/back-to-the-css-at-toulousejs
-slidesEmbed: https://speakerdeck.com/player/4c5ff2c042f40132aca456294df362d1
+slidesEmbed: https://speakerdeck.com/player/4c5ff2c042f40132aca456294df362d1?title=false
 ---
 
 Remember CSS without variables, math & friends ? Ouch. Preprocessors saved us,

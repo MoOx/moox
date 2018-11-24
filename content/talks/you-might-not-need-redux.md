@@ -1,9 +1,10 @@
 ---
 date: 2018-05-22
+lang: fr
 title: You might not need redux
 conference: "React Toulouse #2"
 slides: https://speakerdeck.com/moox/you-might-not-need-redux
-slidesEmbed: https://speakerdeck.com/player/c459ed9c709744938c632aea4777b560
+slidesEmbed: https://speakerdeck.com/player/c459ed9c709744938c632aea4777b560?title=false
 video: https://www.youtube.com/watch?v=jCm4Gypd0Tc
 videoEmbed: https://www.youtube.com/embed/jCm4Gypd0Tc
 ---

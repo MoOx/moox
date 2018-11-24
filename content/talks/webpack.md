@@ -4,7 +4,7 @@ lang: fr
 title: "Introduction to Webpack"
 conference: "Toulouse JS #7"
 slides: https://speakerdeck.com/moox/webpack
-slidesEmbed: https://speakerdeck.com/player/50a8658326cf4e6f8d2ade3b8b37c623
+slidesEmbed: https://speakerdeck.com/player/50a8658326cf4e6f8d2ade3b8b37c623?title=false
 ---
 
 What is webpack ?

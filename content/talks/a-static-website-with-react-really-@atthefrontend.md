@@ -3,7 +3,7 @@ date: 2016-12-04
 title: "A static website with React? Really?"
 conference: "At The Frontend 2016"
 slides: https://speakerdeck.com/moox/a-static-website-with-react-really
-slidesEmbed: https://speakerdeck.com/player/c144ce78ca2440a7ab984f260622c7b1
+slidesEmbed: https://speakerdeck.com/player/c144ce78ca2440a7ab984f260622c7b1?title=false
 video: https://vimeo.com/168480208
 videoEmbed: https://player.vimeo.com/video/168480208
 ---

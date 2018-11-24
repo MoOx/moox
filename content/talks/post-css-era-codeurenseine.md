@@ -4,7 +4,7 @@ lang: fr
 title: "L'ère Post CSS"
 conference: "Codeurs en Seine 2016"
 slides: https://speakerdeck.com/moox/fr-post-css-era-des-feuilles-de-styles-preprocesses-aux-css-modules
-slidesEmbed: https://speakerdeck.com/player/afd3aba38b294f9ca2930fa8199991da
+slidesEmbed: https://speakerdeck.com/player/afd3aba38b294f9ca2930fa8199991da?title=false
 video: https://www.youtube.com/watch?v=l4VDy4d0tmA&t=76s
 videoEmbed: https://www.youtube.com/embed/l4VDy4d0tmA?start=76
 ---

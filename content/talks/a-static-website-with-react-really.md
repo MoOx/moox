@@ -3,7 +3,7 @@ date: 2016-12-04
 title: "A static website with React? Really?"
 conference: "dotJS 2016"
 slides: https://speakerdeck.com/moox/a-static-website-with-react-really-at-dotjs-2016
-slidesEmbed: https://speakerdeck.com/player/b9faea2ddaf64e23a36ce9fede6732cd
+slidesEmbed: https://speakerdeck.com/player/b9faea2ddaf64e23a36ce9fede6732cd?title=false
 video: https://www.youtube.com/watch?v=WpPc8MyYC5k
 videoEmbed: https://www.youtube.com/embed/WpPc8MyYC5k
 ---

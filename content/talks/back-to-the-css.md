@@ -3,7 +3,7 @@ date: 2014-11-14
 title: "Back to the CSS"
 conference: "dotCSS 2014"
 slides: https://speakerdeck.com/moox/back-to-the-css-at-dotcss
-slidesEmbed: https://speakerdeck.com/player/a8b246004ec9013264a712c8f4a94aec
+slidesEmbed: https://speakerdeck.com/player/a8b246004ec9013264a712c8f4a94aec?title=false
 video: https://www.youtube.com/watch?v=bUDcGfuHzJI
 videoEmbed: https://www.youtube.com/embed/bUDcGfuHzJI
 ---

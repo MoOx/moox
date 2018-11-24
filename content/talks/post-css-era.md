@@ -4,7 +4,7 @@ lang: fr
 title: "Post CSS era"
 conference: "At The Frontend 2016"
 slides: https://speakerdeck.com/moox/post-css-era-from-preprocessed-stylesheets-to-css-modules-and-inline-styles
-slidesEmbed: https://speakerdeck.com/player/9d0aa54cdfff4c7ea0638dbcb23ad3cf
+slidesEmbed: https://speakerdeck.com/player/9d0aa54cdfff4c7ea0638dbcb23ad3cf?title=false
 video: https://vimeo.com/168522852
 videoEmbed: https://player.vimeo.com/video/168522852
 ---
