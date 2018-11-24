@@ -27,7 +27,7 @@ Pour vous donner l’eau à la bouche, voici une petite vidéo que j’ai trouv�
 le site de Compass.
 
 <figure class="flex-media--4-3">
-  <iframe class="flex-media__item" src="http://player.vimeo.com/video/11671458" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></figure>
+  <iframe class="flex-media__item" src="https://player.vimeo.com/video/11671458" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></figure>
 [An introduction to Compass][3] from [Lorin Tackett][4] on [Vimeo][5].
 
 ## Pourquoi j’ai choisi **Sass**

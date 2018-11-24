@@ -59,7 +59,7 @@ Checkout the following video to see how to switch the keys on your Macbook
 Keyboard.
 
 <figure class="flex-media--16-9">
-<iframe class="flex-media__item" src="http://www.youtube.com/embed/kh88cn_rtLo" frameborder="0" allowfullscreen></iframe></figure>
+<iframe class="flex-media__item" src="https://www.youtube.com/embed/kh88cn_rtLo" frameborder="0" allowfullscreen></iframe></figure>
 
 Now you can use your <kbd>ctrl</kbd> as your <kbd>fn</kbd> and your
 <kbd>fn</kbd> as <kbd>ctrl</kbd> !
