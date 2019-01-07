@@ -2,7 +2,7 @@ import * as React from "react";
 import { AppRegistry } from "react-native-web";
 import { Router, Route, browserHistory } from "react-router";
 import { createApp, renderApp } from "@phenomic/preset-react-app/lib/client";
-import { withPhenomicApi } from "@phenomic/preset-react-app/lib/es6/src/phenomicPresetReactApp.js";
+import { withPhenomicApi } from "@phenomic/preset-react-app/lib/es6/src/phenomicPresetReactApp.bs.js";
 import MatomoTracker from "matomo-tracker";
 
 import * as RouteHome from "./lib/es6/src/components/RouteHome";
@@ -59,4 +59,14 @@ export default createApp(routes, render);
 
 if (module.hot) {
   module.hot.accept(() => renderApp(routes, render));
+}
+
+// it's that easy to have for initial loading ?
+// will have to double check in prod (static)
+if (typeof window !== "undefined") {
+  window.addEventListener("load", () => {
+    require("@phenomic/plugin-renderer-react/lib/components/Link.hash.js").default(
+      window.location.hash,
+    );
+  });
 }

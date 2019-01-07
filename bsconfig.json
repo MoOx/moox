@@ -19,10 +19,10 @@
   "bsc-flags": ["-bs-super-errors"],
   "bs-dependencies": [
     "bs-fetch",
-    "bs-json",
+    "@glennsl/bs-json",
     "reason-react",
     "bs-react-native",
-    "bs-react-helmet",
+    "@moox/bs-react-helmet",
     "@phenomic/preset-react-app",
     "@phenomic/plugin-renderer-react",
     "@phenomic/api-client"

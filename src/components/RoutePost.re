@@ -8,81 +8,81 @@ let make = (~contentItem, ~id) => {
     let dimensions = Dimensions.get(`window);
     let styles =
       StyleSheet.create(
-        Style.(
-          {
-            "title":
-              style([
-                padding(Pt(20.)),
-                textAlign(Center),
-                color(String("#030303")),
-              ]),
-            "viewSmall": style([flexGrow(1.), padding(Pt(20.))]),
-            "viewLarge": style([flexGrow(1.), padding(Pt(60.))]),
-            "text":
-              style([
-                fontSize(Float(21.)),
-                lineHeight(33.),
-                fontWeight(`_400),
-              ]),
-          }
-        ),
+        Style.{
+          "title":
+            style([
+              padding(Pt(20.)),
+              textAlign(Center),
+              color(String("#030303")),
+            ]),
+          "viewSmall": style([flexGrow(1.), padding(Pt(20.))]),
+          "viewLarge": style([flexGrow(1.), padding(Pt(60.))]),
+          "text":
+            style([
+              fontSize(Float(21.)),
+              lineHeight(33.),
+              fontWeight(`_400),
+            ]),
+        },
       );
     let isLarge = dimensions##width > 500;
     <ScrollView>
       <CommonThings />
       <Header />
-      (
-        switch ((contentItem: T.contentItemNode)) {
-        | Inactive
-        | Loading =>
-          <View>
-            <Head title="Loading..." />
-            <Html.H1 textStyle=styles##title> ("..." |> R.string) </Html.H1>
-            <Container>
-              <Background>
-                <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
-                  <ActivityIndicator size=`large />
-                </View>
-              </Background>
-            </Container>
-          </View>
-        | Errored =>
-          <View>
-            <Head title="Oupssss" />
-            <Html.H1 textStyle=styles##title>
-              ("Oupssss" |> R.string)
-            </Html.H1>
-            <Container>
-              <Background>
-                <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
-                  <Text> ("Oops" |> R.string) </Text>
-                </View>
-              </Background>
-            </Container>
-          </View>
-        | Idle(item) =>
-          <View>
-            <Head title=item##title />
-            <Html.H1 textStyle=styles##title>
-              (item##title |> R.string)
-            </Html.H1>
-            <Container>
-              <Background>
-                <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
-                  <MyBodyRenderer body=item##body />
-                  <Spacer large=true />
-                  <Spacer large=true />
-                  <DisqusComments
-                    shortname="moox"
-                    identifier=("http://moox.io/blog/" ++ id ++ "/")
-                    url=("http://moox.io/blog/" ++ id ++ "/")
-                  />
-                </View>
-              </Background>
-            </Container>
-          </View>
-        }
-      )
+      {switch ((contentItem: T.contentItemNode)) {
+       | Inactive
+       | Loading =>
+         <View>
+           <BsReactHelmet>
+             <title> "Loading..."->ReasonReact.string </title>
+           </BsReactHelmet>
+           <Html.H1 textStyle=styles##title> {"..." |> R.string} </Html.H1>
+           <Container>
+             <Background>
+               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+                 <ActivityIndicator size=`large />
+               </View>
+             </Background>
+           </Container>
+         </View>
+       | Errored =>
+         <View>
+           <BsReactHelmet>
+             <title> "Ooops..."->ReasonReact.string </title>
+           </BsReactHelmet>
+           <Html.H1 textStyle=styles##title> {"Ooops" |> R.string} </Html.H1>
+           <Container>
+             <Background>
+               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+                 <Text> {"Ooops" |> R.string} </Text>
+               </View>
+             </Background>
+           </Container>
+         </View>
+       | Idle(item) =>
+         <View>
+           <BsReactHelmet>
+             <title> {item##title->ReasonReact.string} </title>
+           </BsReactHelmet>
+           <Html.H1 textStyle=styles##title>
+             {item##title |> R.string}
+           </Html.H1>
+           <Container>
+             <Background>
+               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+                 <MyBodyRenderer body=item##body />
+                 <Spacer large=true />
+                 <Spacer large=true />
+                 <DisqusComments
+                   shortname="moox"
+                   identifier={"http://moox.io/blog/" ++ id ++ "/"}
+                   url={"http://moox.io/blog/" ++ id ++ "/"}
+                 />
+               </View>
+             </Background>
+           </Container>
+         </View>
+       }}
       <Footer />
     </ScrollView>;
   },

@@ -2,24 +2,22 @@ open BsReactNative;
 
 let styles =
   StyleSheet.create(
-    Style.(
-      {
-        "title":
-          style([
-            fontSize(Float(36.)),
-            fontWeight(`Bold),
-            textAlign(Center),
-            marginVertical(Pt(20.)),
-            color(String("#030303")),
-          ]),
-        "links":
-          style([
-            flexDirection(Row),
-            justifyContent(Center),
-            alignItems(Center),
-          ]),
-      }
-    ),
+    Style.{
+      "title":
+        style([
+          fontSize(Float(36.)),
+          fontWeight(`Bold),
+          textAlign(Center),
+          marginVertical(Pt(20.)),
+          color(String("#030303")),
+        ]),
+      "links":
+        style([
+          flexDirection(Row),
+          justifyContent(Center),
+          alignItems(Center),
+        ]),
+    },
   );
 
 let component = ReasonReact.statelessComponent("Home");
@@ -29,51 +27,49 @@ let make = (~posts) => {
   render: _self =>
     <ScrollView>
       <CommonThings />
-      <Head title={j|MoOx, Frontend UI Web & Mobile Developer.|j} />
+      <BsReactHelmet>
+        <title>
+          {j|MoOx, Frontend UI Web & Mobile Developer.|j}->ReasonReact.string
+        </title>
+      </BsReactHelmet>
       <Header />
       <Jumbotron />
       <Spacer />
       <Spacer />
       <Spacer />
       <Container>
-        <Text style=styles##title> ("Latest Posts" |> R.string) </Text>
+        <Text style=styles##title> {"Latest Posts" |> R.string} </Text>
         <Background>
-          (
-            switch ((posts: T.contentList)) {
-            | Inactive
-            | Loading => <Text> ("Loading ..." |> R.string) </Text>
-            | Errored => <Text> ("Oops" |> R.string) </Text>
-            | Idle(posts) =>
-              <View>
-                <PostList posts=posts##list />
-                <View style=styles##links>
-                  (
-                    switch (posts##previous |> Js.toOption) {
-                    | Some(previous) =>
-                      <TextLink
-                        href=(
-                          posts##previousPageIsFirst ?
-                            "/" : "/after/" ++ previous ++ "/"
-                        )>
-                        ("Fresh posts" |> R.string)
-                      </TextLink>
-                    | None => R.null
-                    }
-                  )
-                  <Text> (" " |> R.string) </Text>
-                  (
-                    switch (posts##next |> Js.toOption) {
-                    | Some(next) =>
-                      <TextLink href=("/after/" ++ next ++ "/")>
-                        ("Older posts" |> R.string)
-                      </TextLink>
-                    | None => R.null
-                    }
-                  )
-                </View>
-              </View>
-            }
-          )
+          {switch ((posts: T.contentList)) {
+           | Inactive
+           | Loading => <Text> {"Loading ..." |> R.string} </Text>
+           | Errored => <Text> {"Oops" |> R.string} </Text>
+           | Idle(posts) =>
+             <View>
+               <PostList posts=posts##list />
+               <View style=styles##links>
+                 {switch (posts##previous |> Js.toOption) {
+                  | Some(previous) =>
+                    <TextLink
+                      href={
+                        posts##previousPageIsFirst ?
+                          "/" : "/after/" ++ previous ++ "/"
+                      }>
+                      {"Fresh posts" |> R.string}
+                    </TextLink>
+                  | None => R.null
+                  }}
+                 <Text> {" " |> R.string} </Text>
+                 {switch (posts##next |> Js.toOption) {
+                  | Some(next) =>
+                    <TextLink href={"/after/" ++ next ++ "/"}>
+                      {"Older posts" |> R.string}
+                    </TextLink>
+                  | None => R.null
+                  }}
+               </View>
+             </View>
+           }}
         </Background>
       </Container>
       <Footer />

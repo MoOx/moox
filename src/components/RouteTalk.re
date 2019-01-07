@@ -8,149 +8,135 @@ let make = (~contentItem) => {
     let dimensions = Dimensions.get(`window);
     let styles =
       StyleSheet.create(
-        Style.(
-          {
-            "title":
-              style([
-                padding(Pt(20.)),
-                textAlign(Center),
-                color(String("#030303")),
-              ]),
-            "viewSmall": style([flexGrow(1.), padding(Pt(20.))]),
-            "viewLarge": style([flexGrow(1.), padding(Pt(60.))]),
-            "text":
-              style([
-                fontSize(Float(21.)),
-                lineHeight(33.),
-                fontWeight(`_400),
-              ]),
-          }
-        ),
+        Style.{
+          "title":
+            style([
+              padding(Pt(20.)),
+              textAlign(Center),
+              color(String("#030303")),
+            ]),
+          "viewSmall": style([flexGrow(1.), padding(Pt(20.))]),
+          "viewLarge": style([flexGrow(1.), padding(Pt(60.))]),
+          "text":
+            style([
+              fontSize(Float(21.)),
+              lineHeight(33.),
+              fontWeight(`_400),
+            ]),
+        },
       );
     let isLarge = dimensions##width > 500;
     <ScrollView>
       <CommonThings />
       <Header />
-      (
-        switch ((contentItem: T.contentItemNode)) {
-        | Inactive
-        | Loading =>
-          <View>
-            <Head title="Loading..." />
-            <Html.H1 textStyle=styles##title> ("..." |> R.string) </Html.H1>
-            <Container>
-              <Background>
-                <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
-                  <ActivityIndicator size=`large />
-                </View>
-              </Background>
-            </Container>
-          </View>
-        | Errored =>
-          <View>
-            <Head title="Oupssss" />
-            <Html.H1 textStyle=styles##title>
-              ("Oupssss" |> R.string)
-            </Html.H1>
-            <Container>
-              <Background>
-                <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
-                  <Text> ("Oops" |> R.string) </Text>
-                </View>
-              </Background>
-            </Container>
-          </View>
-        | Idle(contentItem) =>
-          <View>
-            <Head title=contentItem##title />
-            <Html.H1 textStyle=styles##title>
-              (contentItem##title |> R.string)
-            </Html.H1>
-            <Container>
-              <Background>
-                <View style=(isLarge ? styles##viewLarge : styles##viewSmall)>
-                  (
-                    switch (Js.Undefined.toOption(contentItem##videoEmbed)) {
-                    | None => R.null
-                    | Some(videoEmbed) =>
-                      <View>
-                        <div
-                          style=(
-                            ReactDOMRe.Style.make(
-                              ~position="relative",
-                              ~overflow="hidden",
-                              ~paddingBottom="56.2502460948%",
-                              (),
-                            )
-                          )>
-                          <iframe
-                            allowFullScreen=true
-                            style=(
-                              ReactDOMRe.Style.make(
-                                ~position="absolute",
-                                ~top="0",
-                                ~left="0",
-                                ~width="100%",
-                                ~height="100%",
-                                (),
-                              )
-                            )
-                            src=videoEmbed
-                          />
-                        </div>
-                        <Spacer />
-                      </View>
-                    }
-                  )
-                  (
-                    switch (Js.Undefined.toOption(contentItem##slidesEmbed)) {
-                    | None => R.null
-                    | Some(slidesEmbed) =>
-                      <View>
-                        <div
-                          style=(
-                            ReactDOMRe.Style.make(
-                              ~position="relative",
-                              ~overflow="hidden",
-                              ~paddingBottom="56.2502460948%",
-                              (),
-                            )
-                          )>
-                          <iframe
-                            allowFullScreen=true
-                            style=(
-                              ReactDOMRe.Style.make(
-                                ~position="absolute",
-                                ~top="0",
-                                ~left="0",
-                                ~width="100%",
-                                ~height="100%",
-                                (),
-                              )
-                            )
-                            src=slidesEmbed
-                          />
-                        </div>
-                        <Spacer />
-                      </View>
-                    }
-                  )
-                  (
-                    switch (Js.Undefined.toOption(contentItem##slides)) {
-                    | None => R.null
-                    | Some(slides) =>
-                      <Spacer>
-                        <a href=slides> (slides |> R.string) </a>
-                      </Spacer>
-                    }
-                  )
-                  <MyBodyRenderer body=contentItem##body />
-                </View>
-              </Background>
-            </Container>
-          </View>
-        }
-      )
+      {switch ((contentItem: T.contentItemNode)) {
+       | Inactive
+       | Loading =>
+         <View>
+           <BsReactHelmet>
+             <title> "Loading..."->ReasonReact.string </title>
+           </BsReactHelmet>
+           <Html.H1 textStyle=styles##title> {"..." |> R.string} </Html.H1>
+           <Container>
+             <Background>
+               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+                 <ActivityIndicator size=`large />
+               </View>
+             </Background>
+           </Container>
+         </View>
+       | Errored =>
+         <View>
+           <BsReactHelmet>
+             <title> "Ooops..."->ReasonReact.string </title>
+           </BsReactHelmet>
+           <Html.H1 textStyle=styles##title> {"Oupssss" |> R.string} </Html.H1>
+           <Container>
+             <Background>
+               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+                 <Text> {"Oops" |> R.string} </Text>
+               </View>
+             </Background>
+           </Container>
+         </View>
+       | Idle(contentItem) =>
+         <View>
+           <BsReactHelmet>
+             <title> {contentItem##title->ReasonReact.string} </title>
+           </BsReactHelmet>
+           <Html.H1 textStyle=styles##title>
+             {contentItem##title |> R.string}
+           </Html.H1>
+           <Container>
+             <Background>
+               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+                 {switch (Js.Undefined.toOption(contentItem##videoEmbed)) {
+                  | None => R.null
+                  | Some(videoEmbed) =>
+                    <View>
+                      <div
+                        style={ReactDOMRe.Style.make(
+                          ~position="relative",
+                          ~overflow="hidden",
+                          ~paddingBottom="56.2502460948%",
+                          (),
+                        )}>
+                        <iframe
+                          allowFullScreen=true
+                          style={ReactDOMRe.Style.make(
+                            ~position="absolute",
+                            ~top="0",
+                            ~left="0",
+                            ~width="100%",
+                            ~height="100%",
+                            (),
+                          )}
+                          src=videoEmbed
+                        />
+                      </div>
+                      <Spacer />
+                    </View>
+                  }}
+                 {switch (Js.Undefined.toOption(contentItem##slidesEmbed)) {
+                  | None => R.null
+                  | Some(slidesEmbed) =>
+                    <View>
+                      <div
+                        style={ReactDOMRe.Style.make(
+                          ~position="relative",
+                          ~overflow="hidden",
+                          ~paddingBottom="56.2502460948%",
+                          (),
+                        )}>
+                        <iframe
+                          allowFullScreen=true
+                          style={ReactDOMRe.Style.make(
+                            ~position="absolute",
+                            ~top="0",
+                            ~left="0",
+                            ~width="100%",
+                            ~height="100%",
+                            (),
+                          )}
+                          src=slidesEmbed
+                        />
+                      </div>
+                      <Spacer />
+                    </View>
+                  }}
+                 {switch (Js.Undefined.toOption(contentItem##slides)) {
+                  | None => R.null
+                  | Some(slides) =>
+                    <Spacer>
+                      <a href=slides> {slides |> R.string} </a>
+                    </Spacer>
+                  }}
+                 <MyBodyRenderer body=contentItem##body />
+               </View>
+             </Background>
+           </Container>
+         </View>
+       }}
       <Footer />
     </ScrollView>;
   },

@@ -3,55 +3,54 @@
   "name": "moox.io",
   "version": "0.0.0",
   "devDependencies": {
-    "@phenomic/cli": "^1.0.0-beta.3",
-    "@phenomic/core": "^1.0.0-beta.3",
-    "@phenomic/preset-react-app": "^1.0.0-beta.3",
+    "@glennsl/bs-json": "^3.0.0",
+    "@moox/bs-react-helmet": "^1.1.3",
+    "@phenomic/cli": "^1.0.0-beta.8",
+    "@phenomic/core": "^1.0.0-beta.8",
+    "@phenomic/preset-react-app": "^1.0.0-beta.8",
+    "@svgr/cli": "^3.1.0",
     "b64-image": "^0.0.1",
     "babel-jest": "^21.2.0",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-react-native-web": "^0.3.3",
     "babel-preset-react-native": "^4.0.0",
-    "bs-fetch": "^0.2.0",
+    "bs-fetch": "^0.3.0",
     "bs-json": "^1.0.1",
-    "bs-platform": "^3.1.0",
-    "bs-react-helmet": "^0.2.1",
-    "bs-react-native": "^0.8.0",
-    "classnames": "^2.2.5",
-    "husky": "^0.14.3",
+    "bs-platform": "^4.0.8",
+    "bs-react-native": "^0.10.0",
+    "husky": "^1.1.4",
     "jest": "^21.2.1",
+    "lint-staged": "^8.0.5",
     "matomo-tracker": "^2.1.0",
     "mkdirp": "^0.5.1",
     "npm-run-all": "^4.0.2",
-    "prettier": "^1.10.2",
-    "pretty-quick": "^1.2.2",
-    "react": "^16.4.0",
+    "prettier": "^1.14.3",
+    "react": "^16.6.0",
     "react-disqus-comments": "^1.2.0",
-    "react-dom": "^16.4.0",
+    "react-art": "^16.6.0",
+    "react-dom": "^16.6.0",
     "react-helmet": "^5.2.0",
-    "react-native-web": "^0.5.0",
+    "react-native-web": "^0.9.8",
     "react-router": "^3.2.0",
     "react-test-renderer": "^16.4.0",
-    "reason-react": "^0.4.1",
-    "svgr": "^1.5.0",
+    "reason-react": "^0.5.0",
     "trash-cli": "^1.4.0"
   },
   "scripts": {
-    "precommit": "pretty-quick --staged",
+    "format": "yarn format:most && yarn format:re",
+    "format:most": "prettier --write \"**/*.{js,json,css,md}\" \"!package.json\"",
+    "format:re": "find . -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
     "cleanup": "yarn reason:cleanup && yarn svg:cleanup",
     "reason:cleanup": "bsb -clean-world",
     "reason:compile": "bsb -make-world",
     "svg:convert:web": "svgr -d assets/SVGs/components assets/SVGs",
-    "postsvg:convert:web":
-      "cd assets/SVGs/components && find ./ -name \"*.js\" | xargs -I '{}' basename '{}' | sed 's/\\.js//' | xargs -I '{}' mv '{}.js'  '{}.web.js'",
+    "postsvg:convert:web": "cd assets/SVGs/components && find ./ -name \"*.js\" | xargs -I '{}' basename '{}' | sed 's/\\.js//' | xargs -I '{}' mv '{}.js'  '{}.web.js'",
     "svg:cleanup": "trash assets/SVGs/components",
     "svg:convert:native": "svgr --native -d assets/SVGs/components assets/SVGs",
-    "svg:convert:re":
-      "node scripts/generate-svg-reason.js assets/SVGs/components",
-    "svg:convert":
-      "trash assets/SVGs/components && yarn svg:convert:web && yarn svg:convert:native && yarn svg:convert:re",
-    "cover-blur-base64":
-      "mkdirp lib && convert -resize 32x32 public/cover.jpg public/cover.blur.jpg && echo \"module.exports = \\\"$(b64-image public/cover.blur.jpg)\\\"\" > lib/cover.blur.js",
-    "#prepare":
-      "yarn cleanup && yarn cover-blur-base64 && yarn svg:convert && yarn reason:compile",
+    "svg:convert:re": "node scripts/generate-svg-reason.js assets/SVGs/components",
+    "svg:convert": "trash assets/SVGs/components && yarn svg:convert:web && yarn svg:convert:native && yarn svg:convert:re",
+    "cover-blur-base64": "mkdirp lib && convert -resize 32x32 public/cover.jpg public/cover.blur.jpg && echo \"module.exports = \\\"$(b64-image public/cover.blur.jpg)\\\"\" > lib/cover.blur.js",
+    "#prepare": "yarn cleanup && yarn cover-blur-base64 && yarn svg:convert && yarn reason:compile",
     "prepare": "yarn cleanup && yarn svg:convert && yarn reason:compile",
     "start": "echo Choose start:web or start:native",
     "start:reason": "yarn reason:compile -w",
@@ -61,13 +60,31 @@
     "build:web": "yarn reason:compile && phenomic build",
     "test": "jest"
   },
+  "prettier": {
+    "trailingComma": "all",
+    "proseWrap": "always"
+  },
+  "lint-staged": {
+    "*.re": [
+      "bsrefmt --in-place",
+      "git add"
+    ],
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "phenomic": {
-    "presets": ["@phenomic/preset-react-app"]
+    "presets": [
+      "@phenomic/preset-react-app"
+    ]
   },
   "jest": {
     "preset": "react-native"
-  },
-  "prettier": {
-    "proseWrap": "always"
   }
 }
