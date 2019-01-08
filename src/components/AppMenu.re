@@ -20,8 +20,7 @@ let styles =
           minHeight(Pt(50.)),
           alignItems(Center),
         ]),
-      "itemWrapper":
-        style([display(Flex), flex(1.), justifyContent(Center)]),
+      "itemWrapper": style([flex(1.), justifyContent(Center)]),
       "item": style([justifyContent(Center), alignItems(Center)]),
       "itemText":
         style([
@@ -40,30 +39,30 @@ let make = (~currentLocation, _children) => {
     <SafeAreaView style=styles##wrapper>
       <View style=styles##container>
         {Consts.menuLinks
-         ->Belt.List.map(item =>
-             <ViewLink style=styles##itemWrapper href={item.link}>
+         ->Belt.List.map(item => {
+             let isActive =
+               item.isActive(currentLocation##pathname, item.link);
+             <ViewLink
+               key={item.link} style=styles##itemWrapper href={item.link}>
                <View style=styles##item>
                  {item.icon(
                     ~width=24.,
                     ~height=24.,
-                    ~fill=
-                      {currentLocation##pathname == item.link ?
-                         colorActive : colorInActive},
+                    ~fill={isActive ? colorActive : colorInActive},
                     (),
                   )}
                  <Text
                    style=Style.(
                      concat([
                        styles##itemText,
-                       currentLocation##pathname == item.link ?
-                         styles##itemTextActive : style([]),
+                       isActive ? styles##itemTextActive : style([]),
                      ])
                    )>
                    item.text->ReasonReact.string
                  </Text>
                </View>
-             </ViewLink>
-           )
+             </ViewLink>;
+           })
          ->R.list}
       </View>
     </SafeAreaView>;

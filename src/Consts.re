@@ -8,6 +8,7 @@ type menuLink = {
   icon:
     (~width: float, ~height: float, ~fill: string, unit) =>
     ReasonReact.reactElement,
+  isActive: (string, string) => bool,
 };
 
 let menuLinks = [
@@ -15,16 +16,21 @@ let menuLinks = [
     link: "/",
     text: {j|Home|j},
     icon: (~width, ~height, ~fill, _) => <SVGMenuHome width height fill />,
+    isActive: (current, link) => current == link,
   },
   {
     link: "/talks/",
     text: {j|Talks|j},
     icon: (~width, ~height, ~fill, _) => <SVGMenuTalk width height fill />,
+    isActive: (current, _link) =>
+      Js.String.startsWith("/talks/", current)
+      || Js.String.startsWith("/talk/", current),
   },
   {
     link: "/contact/",
     text: {j|Contact|j},
     icon: (~width, ~height, ~fill, _) => <SVGMenuContact width height fill />,
+    isActive: (current, link) => current == link,
   },
 ];
 

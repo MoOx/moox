@@ -6,7 +6,7 @@ let make = children => {
     <>
       <AppMeta />
       <div className="device-small"> <HeaderSmall /> </div>
-      <div className="device-large"> <HeaderLarge /> </div>
+      <div className="device-large"> <HeaderLargeWithRouter /> </div>
       <Container> ...children </Container>
       <div className="device-large"> <Footer /> </div>
       <div className="device-small">

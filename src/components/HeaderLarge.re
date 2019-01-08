@@ -27,22 +27,33 @@ let styles =
           lineHeight(44.),
           color(String("#FBFCF8")),
         ]),
+      "barLinkActive":
+        style([textDecorationLine(Underline), textDecorationStyle(Solid)]),
     },
   );
 
-let make = _children => {
+let make = (~currentLocation, _children) => {
   ...component,
   render: _self =>
     <View style=styles##menu>
       <Container style=styles##bar wrapperStyle=styles##barWrapper>
         <View style=styles##barLinks>
           {Consts.menuLinks
-           ->Belt.List.map(item =>
+           ->Belt.List.map(item => {
+               let isActive =
+                 item.isActive(currentLocation##pathname, item.link);
                <TextLink
-                 key={item.link} style=styles##barLink href={item.link}>
+                 key={item.link}
+                 href={item.link}
+                 style=Style.(
+                   concat([
+                     styles##barLink,
+                     isActive ? styles##barLinkActive : style([]),
+                   ])
+                 )>
                  {item.text |> R.string}
-               </TextLink>
-             )
+               </TextLink>;
+             })
            ->R.list}
         </View>
         <SocialIcons
@@ -53,3 +64,11 @@ let make = _children => {
       </Container>
     </View>,
 };
+
+[@bs.deriving abstract]
+type jsProps = {currentLocation: {. "pathname": string}};
+
+let default =
+  ReasonReact.wrapReasonForJs(~component, jsProps =>
+    make(~currentLocation=jsProps->currentLocationGet, [||])
+  );

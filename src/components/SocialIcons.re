@@ -15,13 +15,14 @@ let make =
   ...component,
   render: _self =>
     <View style=wrapperStyle>
-      {Consts.socialLinks->Belt.List.map(item =>
-         <TextLink key={item.link} style=iconStyle href={item.link}>
-           {iconWrapperFunc(
-              ~children=[|item.componentFunc(~iconColor, ~iconSize)|],
-            )}
-         </TextLink>
-       )
-       |> R.list}
+      {Consts.socialLinks
+       ->Belt.List.map(item =>
+           <TextLink key={item.link} style=iconStyle href={item.link}>
+             {iconWrapperFunc(
+                ~children=[|item.componentFunc(~iconColor, ~iconSize)|],
+              )}
+           </TextLink>
+         )
+       ->R.list}
     </View>,
 };
