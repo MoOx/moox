@@ -1,4 +1,4 @@
-[@bs.module "./ViewLink"]
+[@bs.module "./TextLink"]
 external reactClass: ReasonReact.reactClass = "default";
 
 [@bs.deriving abstract]
