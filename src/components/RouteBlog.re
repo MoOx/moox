@@ -26,8 +26,6 @@ let make = (~posts) => {
   ...component,
   render: _self =>
     <AppWrapper>
-      <Jumbotron />
-      <Spacer />
       <Text style=styles##title> {"Latest Posts" |> R.string} </Text>
       <Background>
         {switch ((posts: T.contentList)) {
@@ -38,7 +36,25 @@ let make = (~posts) => {
            <View>
              <PostList posts=posts##list />
              <View style=styles##links>
-               <TextLink href="/blog/"> {"More posts" |> R.string} </TextLink>
+               {switch (posts##previous |> Js.toOption) {
+                | Some(previous) =>
+                  <TextLink
+                    href={
+                      posts##previousPageIsFirst ?
+                        "/" : "/after/" ++ previous ++ "/"
+                    }>
+                    {"Fresh posts" |> R.string}
+                  </TextLink>
+                | None => R.null
+                }}
+               <Text> {" " |> R.string} </Text>
+               {switch (posts##next |> Js.toOption) {
+                | Some(next) =>
+                  <TextLink href={"/after/" ++ next ++ "/"}>
+                    {"Older posts" |> R.string}
+                  </TextLink>
+                | None => R.null
+                }}
              </View>
            </View>
          }}
@@ -51,7 +67,7 @@ let jsComponent =
     make(~posts=PhenomicPresetReactApp.jsEdge(jsProps##posts))
   );
 
-let queries = _ => {
+let queries = props => {
   let posts =
     PhenomicPresetReactApp.query(
       PaginatedList({
@@ -60,8 +76,8 @@ let queries = _ => {
         value: None,
         order: None,
         sort: None,
-        limit: Some(5),
-        after: None,
+        limit: Some(10),
+        after: Some(props##params##after),
       }),
     );
   {"posts": posts};

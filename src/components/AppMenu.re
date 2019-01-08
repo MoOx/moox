@@ -43,7 +43,7 @@ let make = (~currentLocation, _children) => {
              let isActive =
                item.isActive(currentLocation##pathname, item.link);
              <ViewLink
-               key={item.link} style=styles##itemWrapper href={item.link}>
+               key={item.link} href={item.link} style=styles##itemWrapper>
                <View style=styles##item>
                  {item.icon(
                     ~width=24.,

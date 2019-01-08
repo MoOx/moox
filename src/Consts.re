@@ -27,6 +27,12 @@ let menuLinks = [
       || Js.String.startsWith("/talk/", current),
   },
   {
+    link: "/blog/",
+    text: {j|Blog|j},
+    icon: (~width, ~height, ~fill, _) => <SVGMenuBlog width height fill />,
+    isActive: (current, _link) => Js.String.startsWith("/blog/", current),
+  },
+  {
     link: "/contact/",
     text: {j|Contact|j},
     icon: (~width, ~height, ~fill, _) => <SVGMenuContact width height fill />,
