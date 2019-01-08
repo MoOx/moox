@@ -5,12 +5,7 @@ let component = ReasonReact.statelessComponent("Footer");
 let styles =
   StyleSheet.create(
     Style.{
-      "menu":
-        style([
-          justifyContent(Center),
-          alignItems(Center),
-          marginTop(Pt(80.)),
-        ]),
+      "menu": style([justifyContent(Center), alignItems(Center)]),
       "bar":
         style([
           flexDirection(Row),

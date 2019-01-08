@@ -21,8 +21,10 @@ let make = _children => {
   ...component,
   render: _self =>
     <AppWrapper>
-      <Text style=styles##title> {"Contact" |> R.string} </Text>
-      <Background>
+      <Container>
+        <Spacer />
+        <Text style=styles##title> {"Contact" |> R.string} </Text>
+        <Spacer />
         <View style=styles##text>
           <Text> {"Want to get in touch with me?" |> R.string} </Text>
           <br />
@@ -37,7 +39,8 @@ let make = _children => {
             <Text> {" (DM open)" |> R.string} </Text>
           </Text>
         </View>
-      </Background>
+        <Spacer size=XXL />
+      </Container>
     </AppWrapper>,
 };
 

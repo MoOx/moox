@@ -26,12 +26,13 @@ let make = (~talks) => {
   ...component,
   render: _self =>
     <AppWrapper>
-      <Text style=styles##title> {"Latest Talks" |> R.string} </Text>
-      <Background>
+      <Container>
+        <Spacer />
+        <Text style=styles##title> {"Latest Talks" |> R.string} </Text>
         {switch ((talks: T.contentList)) {
          | Inactive
-         | Loading => <Text> {"Loading ..." |> R.string} </Text>
-         | Errored => <Text> {"Oops" |> R.string} </Text>
+         | Loading => <LoadingIndicator />
+         | Errored => <Error />
          | Idle(talks) =>
            <View>
              <TalkList talks=talks##list />
@@ -58,7 +59,8 @@ let make = (~talks) => {
              </View>
            </View>
          }}
-      </Background>
+        <Spacer size=XL />
+      </Container>
     </AppWrapper>,
 };
 

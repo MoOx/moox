@@ -5,7 +5,7 @@ let styles =
     Style.{
       "title":
         style([
-          fontSize(Float(36.)),
+          fontSize(Float(28.)),
           fontWeight(`Bold),
           textAlign(Center),
           marginVertical(Pt(20.)),
@@ -27,13 +27,16 @@ let make = (~posts) => {
   render: _self =>
     <AppWrapper>
       <Jumbotron />
-      <Spacer />
-      <Text style=styles##title> {"Latest Posts" |> R.string} </Text>
-      <Background>
+      <Skills />
+      <Container>
+        <Spacer size=XL />
+        <Text style=styles##title>
+          {"Latest Posts on the blog" |> R.string}
+        </Text>
         {switch ((posts: T.contentList)) {
          | Inactive
-         | Loading => <Text> {"Loading ..." |> R.string} </Text>
-         | Errored => <Text> {"Oops" |> R.string} </Text>
+         | Loading => <LoadingIndicator />
+         | Errored => <Error />
          | Idle(posts) =>
            <View>
              <PostList posts=posts##list />
@@ -42,7 +45,8 @@ let make = (~posts) => {
              </View>
            </View>
          }}
-      </Background>
+        <Spacer size=XL />
+      </Container>
     </AppWrapper>,
 };
 

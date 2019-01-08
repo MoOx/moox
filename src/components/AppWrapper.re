@@ -1,3 +1,5 @@
+open BsReactNative;
+
 let component = ReasonReact.statelessComponent("AppWrapper");
 
 let make = children => {
@@ -7,10 +9,10 @@ let make = children => {
       <AppMeta />
       <div className="device-small"> <HeaderSmall /> </div>
       <div className="device-large"> <HeaderLargeWithRouter /> </div>
-      <Container> ...children </Container>
+      <View> ...children </View>
       <div className="device-large"> <Footer /> </div>
       <div className="device-small">
-        <div style={ReactDOMRe.Style.make(~height="80px", ())} />
+        <div style={ReactDOMRe.Style.make(~height="60px", ())} />
       </div>
       <div
         className="device-small menu-backdrop"

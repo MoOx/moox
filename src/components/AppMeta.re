@@ -34,10 +34,10 @@ let make = _ => {
          |> R.string}
       </style>
       <style>
-        {{j|
+        {j|
 html {
   height: 100%;
-  background: #FBFCF8;
+  background: #000;
 }
 body {
   min-height:100%;
@@ -76,7 +76,7 @@ body {
   }
 }
   |j}
-         |> R.string}
+        ->R.string
       </style>
     </BsReactHelmet>,
   /* <link rel="mask-icon" href="safari-pinned-tab.svg" color="#0C0F1E" /> */

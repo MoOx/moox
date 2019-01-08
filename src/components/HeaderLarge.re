@@ -5,12 +5,7 @@ let component = ReasonReact.statelessComponent("HeaderLarge");
 let styles =
   StyleSheet.create(
     Style.{
-      "menu":
-        style([
-          justifyContent(Center),
-          alignItems(Center),
-          marginBottom(Pt(60.)),
-        ]),
+      "menu": style([justifyContent(Center), alignItems(Center)]),
       "bar":
         style([
           flexDirection(Row),
@@ -23,8 +18,8 @@ let styles =
       "barLink":
         style([
           padding(Pt(10.)),
-          fontSize(Float(22.)),
-          lineHeight(44.),
+          fontSize(Float(18.)),
+          lineHeight(18. *. 1.7),
           color(String("#FBFCF8")),
         ]),
       "barLinkActive":

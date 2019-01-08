@@ -30,110 +30,96 @@ let make = (~contentItem) => {
       {switch ((contentItem: T.contentItemNode)) {
        | Inactive
        | Loading =>
-         <View>
+         <Container>
            <BsReactHelmet>
              <title> "Loading..."->ReasonReact.string </title>
            </BsReactHelmet>
            <Html.H1 textStyle=styles##title> {"..." |> R.string} </Html.H1>
-           <Container>
-             <Background>
-               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
-                 <ActivityIndicator size=`large />
-               </View>
-             </Background>
-           </Container>
-         </View>
+           <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+             <ActivityIndicator size=`large />
+           </View>
+         </Container>
        | Errored =>
-         <View>
+         <Container>
            <BsReactHelmet>
              <title> "Ooops..."->ReasonReact.string </title>
            </BsReactHelmet>
            <Html.H1 textStyle=styles##title> {"Oupssss" |> R.string} </Html.H1>
-           <Container>
-             <Background>
-               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
-                 <Text> {"Oops" |> R.string} </Text>
-               </View>
-             </Background>
-           </Container>
-         </View>
+           <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+             <Error />
+           </View>
+         </Container>
        | Idle(contentItem) =>
-         <View>
+         <Container>
            <BsReactHelmet>
              <title> {contentItem##title->ReasonReact.string} </title>
            </BsReactHelmet>
            <Html.H1 textStyle=styles##title>
              {contentItem##title |> R.string}
            </Html.H1>
-           <Container>
-             <Background>
-               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
-                 {switch (Js.Undefined.toOption(contentItem##videoEmbed)) {
-                  | None => R.null
-                  | Some(videoEmbed) =>
-                    <View>
-                      <div
-                        style={ReactDOMRe.Style.make(
-                          ~position="relative",
-                          ~overflow="hidden",
-                          ~paddingBottom="56.2502460948%",
-                          (),
-                        )}>
-                        <iframe
-                          allowFullScreen=true
-                          style={ReactDOMRe.Style.make(
-                            ~position="absolute",
-                            ~top="0",
-                            ~left="0",
-                            ~width="100%",
-                            ~height="100%",
-                            (),
-                          )}
-                          src=videoEmbed
-                        />
-                      </div>
-                      <Spacer />
-                    </View>
-                  }}
-                 {switch (Js.Undefined.toOption(contentItem##slidesEmbed)) {
-                  | None => R.null
-                  | Some(slidesEmbed) =>
-                    <View>
-                      <div
-                        style={ReactDOMRe.Style.make(
-                          ~position="relative",
-                          ~overflow="hidden",
-                          ~paddingBottom="56.2502460948%",
-                          (),
-                        )}>
-                        <iframe
-                          allowFullScreen=true
-                          style={ReactDOMRe.Style.make(
-                            ~position="absolute",
-                            ~top="0",
-                            ~left="0",
-                            ~width="100%",
-                            ~height="100%",
-                            (),
-                          )}
-                          src=slidesEmbed
-                        />
-                      </div>
-                      <Spacer />
-                    </View>
-                  }}
-                 {switch (Js.Undefined.toOption(contentItem##slides)) {
-                  | None => R.null
-                  | Some(slides) =>
-                    <Spacer>
-                      <a href=slides> {slides |> R.string} </a>
-                    </Spacer>
-                  }}
-                 <MyBodyRenderer body=contentItem##body />
-               </View>
-             </Background>
-           </Container>
-         </View>
+           <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+             {switch (Js.Undefined.toOption(contentItem##videoEmbed)) {
+              | None => R.null
+              | Some(videoEmbed) =>
+                <View>
+                  <div
+                    style={ReactDOMRe.Style.make(
+                      ~position="relative",
+                      ~overflow="hidden",
+                      ~paddingBottom="56.2502460948%",
+                      (),
+                    )}>
+                    <iframe
+                      allowFullScreen=true
+                      style={ReactDOMRe.Style.make(
+                        ~position="absolute",
+                        ~top="0",
+                        ~left="0",
+                        ~width="100%",
+                        ~height="100%",
+                        (),
+                      )}
+                      src=videoEmbed
+                    />
+                  </div>
+                  <Spacer />
+                </View>
+              }}
+             {switch (Js.Undefined.toOption(contentItem##slidesEmbed)) {
+              | None => R.null
+              | Some(slidesEmbed) =>
+                <View>
+                  <div
+                    style={ReactDOMRe.Style.make(
+                      ~position="relative",
+                      ~overflow="hidden",
+                      ~paddingBottom="56.2502460948%",
+                      (),
+                    )}>
+                    <iframe
+                      allowFullScreen=true
+                      style={ReactDOMRe.Style.make(
+                        ~position="absolute",
+                        ~top="0",
+                        ~left="0",
+                        ~width="100%",
+                        ~height="100%",
+                        (),
+                      )}
+                      src=slidesEmbed
+                    />
+                  </div>
+                  <Spacer />
+                </View>
+              }}
+             {switch (Js.Undefined.toOption(contentItem##slides)) {
+              | None => R.null
+              | Some(slides) =>
+                <Spacer> <a href=slides> {slides |> R.string} </a> </Spacer>
+              }}
+             <MyBodyRenderer body=contentItem##body />
+           </View>
+         </Container>
        }}
     </AppWrapper>;
   },

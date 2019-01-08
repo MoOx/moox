@@ -30,55 +30,43 @@ let make = (~contentItem, ~id) => {
       {switch ((contentItem: T.contentItemNode)) {
        | Inactive
        | Loading =>
-         <View>
+         <Container>
            <BsReactHelmet>
              <title> "Loading..."->ReasonReact.string </title>
            </BsReactHelmet>
            <Html.H1 textStyle=styles##title> {"..." |> R.string} </Html.H1>
-           <Container>
-             <Background>
-               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
-                 <ActivityIndicator size=`large />
-               </View>
-             </Background>
-           </Container>
-         </View>
+           <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+             <ActivityIndicator size=`large />
+           </View>
+         </Container>
        | Errored =>
-         <View>
+         <Container>
            <BsReactHelmet>
              <title> "Ooops..."->ReasonReact.string </title>
            </BsReactHelmet>
            <Html.H1 textStyle=styles##title> {"Ooops" |> R.string} </Html.H1>
-           <Container>
-             <Background>
-               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
-                 <Text> {"Ooops" |> R.string} </Text>
-               </View>
-             </Background>
-           </Container>
-         </View>
+           <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+             <Text> {"Ooops" |> R.string} </Text>
+           </View>
+         </Container>
        | Idle(item) =>
-         <View>
+         <Container>
            <BsReactHelmet>
              <title> {item##title->ReasonReact.string} </title>
            </BsReactHelmet>
            <Html.H1 textStyle=styles##title>
              {item##title |> R.string}
            </Html.H1>
-           <Container>
-             <Background>
-               <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
-                 <MyBodyRenderer body=item##body />
-                 <Spacer size=XXL />
-                 <DisqusComments
-                   shortname="moox"
-                   identifier={"http://moox.io/blog/" ++ id ++ "/"}
-                   url={"http://moox.io/blog/" ++ id ++ "/"}
-                 />
-               </View>
-             </Background>
-           </Container>
-         </View>
+           <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+             <MyBodyRenderer body=item##body />
+             <Spacer size=XXL />
+             <DisqusComments
+               shortname="moox"
+               identifier={"http://moox.io/blog/" ++ id ++ "/"}
+               url={"http://moox.io/blog/" ++ id ++ "/"}
+             />
+           </View>
+         </Container>
        }}
     </AppWrapper>;
   },

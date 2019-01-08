@@ -26,12 +26,13 @@ let make = (~posts) => {
   ...component,
   render: _self =>
     <AppWrapper>
-      <Text style=styles##title> {"Latest Posts" |> R.string} </Text>
-      <Background>
+      <Container>
+        <Spacer />
+        <Text style=styles##title> {"Latest Posts" |> R.string} </Text>
         {switch ((posts: T.contentList)) {
          | Inactive
-         | Loading => <Text> {"Loading ..." |> R.string} </Text>
-         | Errored => <Text> {"Oops" |> R.string} </Text>
+         | Loading => <LoadingIndicator />
+         | Errored => <Error />
          | Idle(posts) =>
            <View>
              <PostList posts=posts##list />
@@ -58,7 +59,8 @@ let make = (~posts) => {
              </View>
            </View>
          }}
-      </Background>
+        <Spacer size=XL />
+      </Container>
     </AppWrapper>,
 };
 

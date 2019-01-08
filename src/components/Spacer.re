@@ -39,11 +39,11 @@ let styles =
     },
   );
 
-let make = (~size=M, _) => {
+let make = (~size=M, ~style=Style.style([]), _) => {
   ...component,
   render: _self =>
     <View
-      style={
+      style={Style.concat([
         switch (size) {
         | XXL => styles##xxl
         | XL => styles##xl
@@ -53,8 +53,9 @@ let make = (~size=M, _) => {
         | XS => styles##xs
         | XXS => styles##xxs
         | Custom(value) =>
-          Style.(style([width(Pt(value)), height(Pt(value))]))
-        }
-      }
+          Style.style([Style.width(Pt(value)), Style.height(Pt(value))])
+        },
+        style,
+      ])}
     />,
 };
