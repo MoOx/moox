@@ -2,14 +2,14 @@ import * as React from "react";
 import { AppRegistry } from "react-native-web";
 import { Router, Route, browserHistory } from "react-router";
 import { createApp, renderApp } from "@phenomic/preset-react-app/lib/client";
-import { withPhenomicApi } from "@phenomic/preset-react-app/lib/es6/src/phenomicPresetReactApp.bs.js";
+import { withPhenomicApi } from "@phenomic/preset-react-app/src/phenomicPresetReactApp.bs.js";
 import MatomoTracker from "matomo-tracker";
 
-import * as RouteHome from "./lib/es6/src/components/RouteHome";
-import * as RoutePost from "./lib/es6/src/components/RoutePost";
-import * as RouteTalks from "./lib/es6/src/components/RouteTalks";
-import * as RouteTalk from "./lib/es6/src/components/RouteTalk";
-import RouteContact from "./lib/es6/src/components/RouteContact";
+import * as RouteHome from "./src/components/RouteHome.bs.js";
+import * as RoutePost from "./src/components/RoutePost.bs.js";
+import * as RouteTalks from "./src/components/RouteTalks.bs.js";
+import * as RouteTalk from "./src/components/RouteTalk.bs.js";
+import RouteContact from "./src/components/RouteContact.bs.js";
 
 import "./defaults.css";
 import "./highlights-theme.css";

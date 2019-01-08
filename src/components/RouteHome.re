@@ -25,55 +25,43 @@ let component = ReasonReact.statelessComponent("Home");
 let make = (~posts) => {
   ...component,
   render: _self =>
-    <ScrollView>
-      <CommonThings />
-      <BsReactHelmet>
-        <title>
-          {j|MoOx, Frontend UI Web & Mobile Developer.|j}->ReasonReact.string
-        </title>
-      </BsReactHelmet>
-      <Header />
+    <AppWrapper>
       <Jumbotron />
       <Spacer />
-      <Spacer />
-      <Spacer />
-      <Container>
-        <Text style=styles##title> {"Latest Posts" |> R.string} </Text>
-        <Background>
-          {switch ((posts: T.contentList)) {
-           | Inactive
-           | Loading => <Text> {"Loading ..." |> R.string} </Text>
-           | Errored => <Text> {"Oops" |> R.string} </Text>
-           | Idle(posts) =>
-             <View>
-               <PostList posts=posts##list />
-               <View style=styles##links>
-                 {switch (posts##previous |> Js.toOption) {
-                  | Some(previous) =>
-                    <TextLink
-                      href={
-                        posts##previousPageIsFirst ?
-                          "/" : "/after/" ++ previous ++ "/"
-                      }>
-                      {"Fresh posts" |> R.string}
-                    </TextLink>
-                  | None => R.null
-                  }}
-                 <Text> {" " |> R.string} </Text>
-                 {switch (posts##next |> Js.toOption) {
-                  | Some(next) =>
-                    <TextLink href={"/after/" ++ next ++ "/"}>
-                      {"Older posts" |> R.string}
-                    </TextLink>
-                  | None => R.null
-                  }}
-               </View>
+      <Text style=styles##title> {"Latest Posts" |> R.string} </Text>
+      <Background>
+        {switch ((posts: T.contentList)) {
+         | Inactive
+         | Loading => <Text> {"Loading ..." |> R.string} </Text>
+         | Errored => <Text> {"Oops" |> R.string} </Text>
+         | Idle(posts) =>
+           <View>
+             <PostList posts=posts##list />
+             <View style=styles##links>
+               {switch (posts##previous |> Js.toOption) {
+                | Some(previous) =>
+                  <TextLink
+                    href={
+                      posts##previousPageIsFirst ?
+                        "/" : "/after/" ++ previous ++ "/"
+                    }>
+                    {"Fresh posts" |> R.string}
+                  </TextLink>
+                | None => R.null
+                }}
+               <Text> {" " |> R.string} </Text>
+               {switch (posts##next |> Js.toOption) {
+                | Some(next) =>
+                  <TextLink href={"/after/" ++ next ++ "/"}>
+                    {"Older posts" |> R.string}
+                  </TextLink>
+                | None => R.null
+                }}
              </View>
-           }}
-        </Background>
-      </Container>
-      <Footer />
-    </ScrollView>,
+           </View>
+         }}
+      </Background>
+    </AppWrapper>,
 };
 
 let jsComponent =

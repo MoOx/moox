@@ -2,30 +2,6 @@ open BsReactNative;
 
 let component = ReasonReact.statelessComponent("SocialIcons");
 
-type link = {
-  link: string,
-  componentFunc:
-    (~iconColor: string, ~iconSize: float) => ReasonReact.reactElement,
-};
-
-let links = [
-  {
-    link: "https://github.com/MoOx",
-    componentFunc: (~iconColor, ~iconSize) =>
-      <SVGSocialGithub fill=iconColor width=iconSize height=iconSize />,
-  },
-  {
-    link: "https://www.linkedin.com/in/maxthirouin/",
-    componentFunc: (~iconColor, ~iconSize) =>
-      <SVGSocialLinkedin fill=iconColor width=iconSize height=iconSize />,
-  },
-  {
-    link: "https://twitter.com/MoOx",
-    componentFunc: (~iconColor, ~iconSize) =>
-      <SVGSocialTwitter fill=iconColor width=iconSize height=iconSize />,
-  },
-];
-
 let make =
     (
       ~wrapperStyle,
@@ -39,19 +15,13 @@ let make =
   ...component,
   render: _self =>
     <View style=wrapperStyle>
-      (
-        List.map(
-          item =>
-            <TextLink key=item.link style=iconStyle href=item.link>
-              (
-                iconWrapperFunc(
-                  ~children=[|item.componentFunc(~iconColor, ~iconSize)|],
-                )
-              )
-            </TextLink>,
-          links,
-        )
-        |> R.list
-      )
+      {Consts.socialLinks->Belt.List.map(item =>
+         <TextLink key={item.link} style=iconStyle href={item.link}>
+           {iconWrapperFunc(
+              ~children=[|item.componentFunc(~iconColor, ~iconSize)|],
+            )}
+         </TextLink>
+       )
+       |> R.list}
     </View>,
 };

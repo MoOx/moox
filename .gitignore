@@ -59,3 +59,4 @@ lib
 .bsb.lock
 assets/SVGs/components
 tmp
+*.bs.js

@@ -26,9 +26,7 @@ let make = (~contentItem, ~id) => {
         },
       );
     let isLarge = dimensions##width > 500;
-    <ScrollView>
-      <CommonThings />
-      <Header />
+    <AppWrapper>
       {switch ((contentItem: T.contentItemNode)) {
        | Inactive
        | Loading =>
@@ -71,8 +69,7 @@ let make = (~contentItem, ~id) => {
              <Background>
                <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
                  <MyBodyRenderer body=item##body />
-                 <Spacer large=true />
-                 <Spacer large=true />
+                 <Spacer size=XXL />
                  <DisqusComments
                    shortname="moox"
                    identifier={"http://moox.io/blog/" ++ id ++ "/"}
@@ -83,8 +80,7 @@ let make = (~contentItem, ~id) => {
            </Container>
          </View>
        }}
-      <Footer />
-    </ScrollView>;
+    </AppWrapper>;
   },
 };
 

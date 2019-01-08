@@ -26,9 +26,7 @@ let make = (~contentItem) => {
         },
       );
     let isLarge = dimensions##width > 500;
-    <ScrollView>
-      <CommonThings />
-      <Header />
+    <AppWrapper>
       {switch ((contentItem: T.contentItemNode)) {
        | Inactive
        | Loading =>
@@ -137,8 +135,7 @@ let make = (~contentItem) => {
            </Container>
          </View>
        }}
-      <Footer />
-    </ScrollView>;
+    </AppWrapper>;
   },
 };
 

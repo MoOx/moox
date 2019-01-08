@@ -25,51 +25,41 @@ let component = ReasonReact.statelessComponent("Home");
 let make = (~talks) => {
   ...component,
   render: _self =>
-    <ScrollView>
-      <CommonThings />
-      <BsReactHelmet>
-        <title>
-          {j|MoOx, Frontend UI Web & Mobile Developer.|j}->ReasonReact.string
-        </title>
-      </BsReactHelmet>
-      <Header />
-      <Container>
-        <Text style=styles##title> {"Latest Talks" |> R.string} </Text>
-        <Background>
-          {switch ((talks: T.contentList)) {
-           | Inactive
-           | Loading => <Text> {"Loading ..." |> R.string} </Text>
-           | Errored => <Text> {"Oops" |> R.string} </Text>
-           | Idle(talks) =>
-             <View>
-               <TalkList talks=talks##list />
-               <View style=styles##links>
-                 {switch (talks##previous |> Js.toOption) {
-                  | Some(previous) =>
-                    <TextLink
-                      href={
-                        talks##previousPageIsFirst ?
-                          "/talks/" : "/talks/after/" ++ previous ++ "/"
-                      }>
-                      {"Fresh talks" |> R.string}
-                    </TextLink>
-                  | None => R.null
-                  }}
-                 <Text> {" " |> R.string} </Text>
-                 {switch (talks##next |> Js.toOption) {
-                  | Some(next) =>
-                    <TextLink href={"/talks/after/" ++ next ++ "/"}>
-                      {"Older talks" |> R.string}
-                    </TextLink>
-                  | None => R.null
-                  }}
-               </View>
+    <AppWrapper>
+      <Text style=styles##title> {"Latest Talks" |> R.string} </Text>
+      <Background>
+        {switch ((talks: T.contentList)) {
+         | Inactive
+         | Loading => <Text> {"Loading ..." |> R.string} </Text>
+         | Errored => <Text> {"Oops" |> R.string} </Text>
+         | Idle(talks) =>
+           <View>
+             <TalkList talks=talks##list />
+             <View style=styles##links>
+               {switch (talks##previous |> Js.toOption) {
+                | Some(previous) =>
+                  <TextLink
+                    href={
+                      talks##previousPageIsFirst ?
+                        "/talks/" : "/talks/after/" ++ previous ++ "/"
+                    }>
+                    {"Fresh talks" |> R.string}
+                  </TextLink>
+                | None => R.null
+                }}
+               <Text> {" " |> R.string} </Text>
+               {switch (talks##next |> Js.toOption) {
+                | Some(next) =>
+                  <TextLink href={"/talks/after/" ++ next ++ "/"}>
+                    {"Older talks" |> R.string}
+                  </TextLink>
+                | None => R.null
+                }}
              </View>
-           }}
-        </Background>
-      </Container>
-      <Footer />
-    </ScrollView>,
+           </View>
+         }}
+      </Background>
+    </AppWrapper>,
 };
 
 let jsComponent =

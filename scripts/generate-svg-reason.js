@@ -5,7 +5,7 @@ const template = ({ name }) =>
   `
 [@bs.scope "Platform"] [@bs.module "react-native"] external _os : string = "OS";
 
-[@bs.module "../../../../../assets/SVGs/components/${name}"] external js${name} : ReasonReact.reactClass = "default";
+[@bs.module "./${name}"] external js${name} : ReasonReact.reactClass = "default";
 
 let defaultSize = 16.;
 

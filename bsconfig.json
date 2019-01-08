@@ -5,8 +5,10 @@
     "react-jsx": 2
   },
   "package-specs": {
-    "module": "es6"
+    "module": "es6",
+    "in-source": true
   },
+  "suffix": ".bs.js",
   "sources": [
     {
       "dir": "src",

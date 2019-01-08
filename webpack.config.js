@@ -35,10 +35,7 @@ module.exports = (config /*: PhenomicConfig*/) => {
         {
           ...webpackConfig.module.rules[0], // ≈ babel-loader
           exclude: undefined,
-          include: [
-            /node_modules\/bs-react-native\/lib/,
-            /\/lib\/es6\/.*\.bs\.js$/,
-          ],
+          include: [/node_modules\/bs-react-native/, /.*\.bs\.js$/],
           use: [
             {
               ...webpackConfig.module.rules[0].use[0],

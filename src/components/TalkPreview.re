@@ -2,32 +2,30 @@ open BsReactNative;
 
 let styles =
   StyleSheet.create(
-    Style.(
-      {
-        "block": style([flex(1.), flexDirection(Row)]),
-        "imageContainer": style([overflow(Hidden)]),
-        "image":
-          style([
-            position(Absolute),
-            top(Pt(0.)),
-            bottom(Pt(0.)),
-            right(Pt(0.)),
-            left(Pt(0.)),
-          ]),
-        "row": style([flexDirection(Row), justifyContent(SpaceBetween)]),
-        "text":
-          style([
-            flexDirection(Row),
-            flex(1.),
-            padding(Pt(20.)),
-            alignItems(FlexStart),
-            lineHeight(28.),
-            color(String("#030303")),
-          ]),
-        "bullet": style([]),
-        "title": style([fontSize(Float(22.))]),
-      }
-    ),
+    Style.{
+      "block": style([flex(1.), flexDirection(Row)]),
+      "imageContainer": style([overflow(Hidden)]),
+      "image":
+        style([
+          position(Absolute),
+          top(Pt(0.)),
+          bottom(Pt(0.)),
+          right(Pt(0.)),
+          left(Pt(0.)),
+        ]),
+      "row": style([flexDirection(Row), justifyContent(SpaceBetween)]),
+      "text":
+        style([
+          flexDirection(Row),
+          flex(1.),
+          padding(Pt(20.)),
+          alignItems(FlexStart),
+          lineHeight(28.),
+          color(String("#030303")),
+        ]),
+      "bullet": style([]),
+      "title": style([fontSize(Float(22.))]),
+    },
   );
 
 let component = ReasonReact.statelessComponent("TalkPreview");
@@ -38,27 +36,23 @@ let make = (~item: T.partialContentItem, _) => {
     let href = "/talk/" ++ item##id ++ "/";
     <View key=item##id style=styles##block>
       <Text style=styles##text>
-        <Text style=styles##bullet> ({j|•|j} |> R.string) </Text>
-        <Spacer small=true />
+        <Text style=styles##bullet> {{j|•|j} |> R.string} </Text>
+        <Spacer size=S />
         <UnderlinedTextLink style=styles##title href>
-          (item##title |> R.string)
+          {item##title |> R.string}
           <small>
-            (
-              switch (Js.Undefined.toOption(item##conference)) {
-              | None => R.null
-              | Some(conference) =>
-                <Text> (" @ " ++ conference |> R.string) </Text>
-              }
-            )
+            {switch (Js.Undefined.toOption(item##conference)) {
+             | None => R.null
+             | Some(conference) =>
+               <Text> {" @ " ++ conference |> R.string} </Text>
+             }}
           </small>
         </UnderlinedTextLink>
-        <Spacer small=true />
-        (
-          switch (Js.Undefined.toOption(item##lang)) {
-          | None => R.null
-          | Some(lang) => <Text> ("[" ++ lang ++ "] " |> R.string) </Text>
-          }
-        )
+        <Spacer size=S />
+        {switch (Js.Undefined.toOption(item##lang)) {
+         | None => R.null
+         | Some(lang) => <Text> {"[" ++ lang ++ "] " |> R.string} </Text>
+         }}
       </Text>
     </View>;
   },
