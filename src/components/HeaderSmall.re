@@ -11,7 +11,12 @@ let styles =
           justifyContent(SpaceBetween),
           backgroundColor(String("#fff")),
           borderTopWidth(10.),
-          borderColor(String("#000")),
+          borderColor(String("#030303")),
+          shadowColor(String("#000")),
+          shadowOffset(~width=0., ~height=5.),
+          shadowOpacity(0.1),
+          shadowRadius(20.),
+          zIndex(1),
         ]),
       "logo":
         style([
@@ -47,7 +52,7 @@ let make = _children => {
   render: _self =>
     <SpacedView vertical=M horizontal=XS style=styles##wrapper>
       <ViewLink style=styles##logo href="/">
-        <SVGLogoInverted width=24. height=24. fill="#000" />
+        <SVGLogoInverted width=24. height=24. fill="#030303" />
         <Text style=styles##logoText>
           {("  " ++ Consts.title)->ReasonReact.string}
         </Text>
@@ -56,7 +61,7 @@ let make = _children => {
       <SocialIcons
         wrapperStyle=styles##icons
         iconStyle=styles##icon
-        iconColor="#000"
+        iconColor="#030303"
         iconSize=20.
       />
     </SpacedView>,

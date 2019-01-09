@@ -5,14 +5,25 @@ let component = ReasonReact.statelessComponent("HeaderLarge");
 let styles =
   StyleSheet.create(
     Style.{
-      "menu": style([justifyContent(Center), alignItems(Center)]),
+      "menu":
+        style([
+          justifyContent(Center),
+          alignItems(Center),
+          borderTopWidth(10.),
+          borderColor(String("#030303")),
+          shadowColor(String("#000")),
+          shadowOffset(~width=0., ~height=5.),
+          shadowOpacity(0.15),
+          shadowRadius(20.),
+          zIndex(1),
+        ]),
       "bar":
         style([
           flexDirection(Row),
           flexWrap(Wrap),
           justifyContent(SpaceBetween),
         ]),
-      "barWrapper": style([backgroundColor(String("#030303"))]),
+      "barWrapper": style([backgroundColor(String("#fff"))]),
       "logo":
         style([
           flexDirection(Row),
@@ -25,19 +36,29 @@ let styles =
         style([
           fontSize(Float(18.)),
           fontWeight(`_700),
-          color(String("#fff")),
+          color(String("#030303")),
         ]),
-      "icons": style([flexDirection(Row)]),
       "barLinks": style([flexDirection(Row)]),
       "barLink":
         style([
           padding(Pt(10.)),
           fontSize(Float(16.)),
           lineHeight(18. *. 1.7),
-          color(String("#FBFCF8")),
+          color(String("#030303")),
         ]),
       "barLinkActive":
         style([textDecorationLine(Underline), textDecorationStyle(Solid)]),
+      "icons": style([flexDirection(Row)]),
+      "icon":
+        style([
+          flexGrow(1.),
+          flexShrink(0.),
+          display(Flex),
+          alignItems(Center),
+          paddingHorizontal(Pt(12.)),
+          paddingVertical(Pt(6.)),
+          fontSize(Float(12.)),
+        ]),
     },
   );
 
@@ -47,7 +68,7 @@ let make = (~currentLocation, _children) => {
     <View style=styles##menu>
       <Container style=styles##bar wrapperStyle=styles##barWrapper>
         <ViewLink style=styles##logo href="/">
-          <SVGLogoInverted width=20. height=20. fill="#fff" />
+          <SVGLogoInverted width=20. height=20. fill="#030303" />
           <Text style=styles##logoText>
             {("  " ++ Consts.title)->ReasonReact.string}
           </Text>
@@ -74,8 +95,9 @@ let make = (~currentLocation, _children) => {
         </View>
         <SocialIcons
           wrapperStyle=styles##icons
-          iconStyle=styles##barLink
+          iconStyle=styles##icon
           iconSize=22.
+          iconColor="#030303"
         />
       </Container>
     </View>,
