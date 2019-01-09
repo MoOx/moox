@@ -1,6 +1,6 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Talk");
+let component = ReasonReact.statelessComponent("RouteTalk");
 
 let make = (~contentItem) => {
   ...component,

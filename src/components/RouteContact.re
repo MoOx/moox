@@ -15,7 +15,7 @@ let styles =
     },
   );
 
-let component = ReasonReact.statelessComponent("Home");
+let component = ReasonReact.statelessComponent("RouteContact");
 
 let make = _children => {
   ...component,

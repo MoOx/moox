@@ -20,7 +20,7 @@ let styles =
     },
   );
 
-let component = ReasonReact.statelessComponent("Home");
+let component = ReasonReact.statelessComponent("RouteHome");
 
 let make = (~posts) => {
   ...component,

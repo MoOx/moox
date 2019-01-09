@@ -1,6 +1,6 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Post");
+let component = ReasonReact.statelessComponent("RoutePost");
 
 let make = (~contentItem, ~id) => {
   ...component,
