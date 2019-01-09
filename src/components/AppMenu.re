@@ -39,7 +39,7 @@ let make = (~currentLocation, _children) => {
     <SafeAreaView style=styles##wrapper>
       <View style=styles##container>
         {Consts.menuLinks
-         ->Belt.List.map(item => {
+         ->Belt.Array.map(item => {
              let isActive =
                item.isActive(currentLocation##pathname, item.link);
              <ViewLink
@@ -63,7 +63,7 @@ let make = (~currentLocation, _children) => {
                </View>
              </ViewLink>;
            })
-         ->R.list}
+         ->ReasonReact.array}
       </View>
     </SafeAreaView>;
   },

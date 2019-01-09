@@ -22,7 +22,7 @@ let styles =
           flex(1.),
           alignItems(Center),
         ]),
-      "logoText": style([fontSize(Float(18.))]),
+      "logoText": style([fontSize(Float(18.)), fontWeight(`_700)]),
       "icons":
         style([
           flex(1.),
@@ -49,7 +49,7 @@ let make = _children => {
       <ViewLink style=styles##logo href="/">
         <SVGLogoInverted width=24. height=24. fill="#000" />
         <Text style=styles##logoText>
-          {(" " ++ Consts.title)->ReasonReact.string}
+          {("  " ++ Consts.title)->ReasonReact.string}
         </Text>
       </ViewLink>
       <Spacer />

@@ -11,7 +11,7 @@ type menuLink = {
   isActive: (string, string) => bool,
 };
 
-let menuLinks = [
+let menuLinks = [|
   {
     link: "/",
     text: {j|Home|j},
@@ -20,7 +20,7 @@ let menuLinks = [
   },
   {
     link: "/resume/",
-    text: {j|Résumé|j},
+    text: {j|Resume|j},
     icon: (~width, ~height, ~fill, _) => <SVGMenuResume width height fill />,
     isActive: (current, _link) => Js.String.startsWith("/resume/", current),
   },
@@ -44,7 +44,7 @@ let menuLinks = [
     icon: (~width, ~height, ~fill, _) => <SVGMenuContact width height fill />,
     isActive: (current, link) => current == link,
   },
-];
+|];
 
 type socialLink = {
   link: string,

@@ -41,13 +41,13 @@ let make = _children => {
       <Container style=styles##bar wrapperStyle=styles##barWrapper>
         <View style=styles##barLinks>
           {Consts.menuLinks
-           ->Belt.List.map(item =>
+           ->Belt.Array.map(item =>
                <TextLink
                  key={item.link} style=styles##barLink href={item.link}>
                  {item.text |> R.string}
                </TextLink>
              )
-           ->R.list}
+           ->ReasonReact.array}
         </View>
         <View style=styles##column>
           <View style=styles##row>

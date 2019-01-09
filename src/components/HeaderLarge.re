@@ -13,12 +13,26 @@ let styles =
           justifyContent(SpaceBetween),
         ]),
       "barWrapper": style([backgroundColor(String("#030303"))]),
+      "logo":
+        style([
+          flexDirection(Row),
+          position(Relative),
+          zIndex(1),
+          paddingHorizontal(Pt(10.)),
+          alignItems(Center),
+        ]),
+      "logoText":
+        style([
+          fontSize(Float(18.)),
+          fontWeight(`_700),
+          color(String("#fff")),
+        ]),
       "icons": style([flexDirection(Row)]),
       "barLinks": style([flexDirection(Row)]),
       "barLink":
         style([
           padding(Pt(10.)),
-          fontSize(Float(18.)),
+          fontSize(Float(16.)),
           lineHeight(18. *. 1.7),
           color(String("#FBFCF8")),
         ]),
@@ -32,9 +46,16 @@ let make = (~currentLocation, _children) => {
   render: _self =>
     <View style=styles##menu>
       <Container style=styles##bar wrapperStyle=styles##barWrapper>
+        <ViewLink style=styles##logo href="/">
+          <SVGLogoInverted width=20. height=20. fill="#fff" />
+          <Text style=styles##logoText>
+            {("  " ++ Consts.title)->ReasonReact.string}
+          </Text>
+        </ViewLink>
         <View style=styles##barLinks>
           {Consts.menuLinks
-           ->Belt.List.map(item => {
+           /* ->Belt.Array.sliceToEnd(1) */
+           ->Belt.Array.map(item => {
                let isActive =
                  item.isActive(currentLocation##pathname, item.link);
                <TextLink
@@ -49,7 +70,7 @@ let make = (~currentLocation, _children) => {
                  {item.text |> R.string}
                </TextLink>;
              })
-           ->R.list}
+           ->ReasonReact.array}
         </View>
         <SocialIcons
           wrapperStyle=styles##icons
