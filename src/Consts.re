@@ -19,6 +19,12 @@ let menuLinks = [
     isActive: (current, link) => current == link,
   },
   {
+    link: "/resume/",
+    text: {j|Résumé|j},
+    icon: (~width, ~height, ~fill, _) => <SVGMenuResume width height fill />,
+    isActive: (current, _link) => Js.String.startsWith("/resume/", current),
+  },
+  {
     link: "/talks/",
     text: {j|Talks|j},
     icon: (~width, ~height, ~fill, _) => <SVGMenuTalk width height fill />,

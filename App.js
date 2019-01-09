@@ -6,6 +6,7 @@ import { withPhenomicApi } from "@phenomic/preset-react-app/src/phenomicPresetRe
 import MatomoTracker from "matomo-tracker";
 
 import * as RouteHome from "./src/components/RouteHome.bs.js";
+import * as RouteResume from "./src/components/RouteResume.bs.js";
 import * as RouteBlog from "./src/components/RouteBlog.bs.js";
 import * as RoutePost from "./src/components/RoutePost.bs.js";
 import * as RouteTalks from "./src/components/RouteTalks.bs.js";
@@ -27,6 +28,10 @@ const routes = () => (
     <Route
       path="/"
       component={withPhenomicApi(RouteHome.jsComponent, RouteHome.queries)}
+    />
+    <Route
+      path="/resume/"
+      component={withPhenomicApi(RouteResume.jsComponent, RouteResume.queries)}
     />
     <Route
       path="/blog/"

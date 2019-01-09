@@ -32,3 +32,36 @@ type contentItem = {
 };
 
 type contentItemNode = PhenomicPresetReactApp.edge(contentItem);
+
+type resumeItemLink = {
+  .
+  "title": string,
+  "url": string,
+};
+
+type partialResumeItem = {
+  .
+  "id": string,
+  "company": Js.Undefined.t(string),
+  "url": Js.Undefined.t(string),
+  "title": string,
+  "dateStart": string,
+  "dateEnd": string,
+  "hashtags": array(string),
+  "description": string,
+  "links": Js.Undefined.t(array(resumeItemLink)),
+};
+
+type resumeList =
+  PhenomicPresetReactApp.edge(
+    PhenomicPresetReactApp.jsNodeList(partialResumeItem),
+  );
+
+/* type resumeItem = {
+     .
+     "id": string,
+     "title": string,
+     "body": MyBodyRenderer.jsBody,
+   };
+
+   type resumeItemNode = PhenomicPresetReactApp.edge(resumeItem); */
