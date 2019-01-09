@@ -1,9 +1,9 @@
 ---
 company: ViaReport
-url: "
+url: "https://www.viareport.com"
 title: "Accounting app"
-description:
-  "Modernize a legacy bulky UI into a accessible one with modern techs"
+description: >
+  Modernize a legacy bulky UI into a accessible one with modern techs
 dateStart: 2014-07-01
 dateEnd: 2015-03-01
 hashtags:

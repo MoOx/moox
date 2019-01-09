@@ -2,7 +2,8 @@
 company: "Kisio Digital"
 url: "http://www.kisiodigital.com"
 title: "Transport Mobile App"
-description: "iOS / Android app built for cities and transport networks"
+description: >
+  iOS / Android app built for cities and transport networks
 dateStart: 2017-03-01
 dateEnd: 2018-06-01
 hashtags:
