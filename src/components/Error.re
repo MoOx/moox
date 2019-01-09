@@ -6,6 +6,7 @@ let styles =
       "container": style([justifyContent(Center), alignItems(Center)]),
       "oops":
         style([
+          textAlign(Center),
           fontSize(Float(64.)),
           lineHeight(64.),
           color(String("#ddd")),

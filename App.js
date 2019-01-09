@@ -11,6 +11,7 @@ import * as RoutePost from "./src/components/RoutePost.bs.js";
 import * as RouteTalks from "./src/components/RouteTalks.bs.js";
 import * as RouteTalk from "./src/components/RouteTalk.bs.js";
 import RouteContact from "./src/components/RouteContact.bs.js";
+import * as RouteError from "./src/components/RouteError.bs.js";
 
 import "./defaults.css";
 import "./highlights-theme.css";
@@ -52,6 +53,14 @@ const routes = () => (
       component={withPhenomicApi(RouteTalk.jsComponent, RouteTalk.queries)}
     />
     <Route path="/contact/" component={RouteContact} />
+    <Route
+      path="404.html"
+      component={withPhenomicApi(RouteError.jsComponent, RouteError.queries)}
+    />
+    <Route
+      path="*"
+      component={withPhenomicApi(RouteError.jsComponent, RouteError.queries)}
+    />
   </Router>
 );
 
