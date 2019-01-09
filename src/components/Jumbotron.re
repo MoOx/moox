@@ -28,7 +28,7 @@ let styles =
         style([
           textAlign(Center),
           fontSize(Float(16.)),
-          fontWeight(`_300),
+          fontWeight(`_200),
           color(String("#fff")),
         ]),
       "trickLeft":
@@ -80,7 +80,7 @@ let styles =
         style([
           fontSize(Float(28.)),
           color(String("#030303")),
-          fontWeight(`_300),
+          fontWeight(`_200),
         ]),
     },
   );
@@ -93,7 +93,7 @@ let make = _children => {
         ~display="flex",
         ~flexDirection="column",
         ~flex="1 1 auto",
-        ~background="linear-gradient(to bottom, #000, #333)",
+        ~background="linear-gradient(179deg, #111, #061748)",
         (),
       )}>
       <View style=styles##container>
