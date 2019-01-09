@@ -4,7 +4,7 @@ let component = ReasonReact.statelessComponent("AppMeta");
 let make = _ => {
   ...component,
   render: _self =>
-    <BsReactHelmet>
+    <BsReactHelmet defaultTitle=Consts.defaultTitle>
       <meta charSet="utf-8" />
       <link
         rel="apple-touch-icon"
@@ -30,8 +30,8 @@ let make = _ => {
         content="width=device-width, initial-scale=1, viewport-fit=cover"
       />
       <style>
-        {"@-ms-viewport { width: device-width } @viewport { width: device-width }"
-         |> R.string}
+        {j|@-ms-viewport { width: device-width } @viewport { width: device-width }|j}
+        ->ReasonReact.string
       </style>
       <style>
         {j|
@@ -76,7 +76,7 @@ body {
   }
 }
   |j}
-        ->R.string
+        ->ReasonReact.string
       </style>
     </BsReactHelmet>,
   /* <link rel="mask-icon" href="safari-pinned-tab.svg" color="#0C0F1E" /> */
