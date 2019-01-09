@@ -29,6 +29,12 @@ let styles =
           fontWeight(`_100),
         ]),
       "description": style([fontSize(Float(24.)), fontWeight(`_700)]),
+      "duration":
+        style([
+          fontSize(Float(14.)),
+          color(String("#666")),
+          fontWeight(`_300),
+        ]),
       "links":
         style([
           flex(1.),
@@ -68,6 +74,14 @@ let make = (~item: T.partialResumeItem, _) => {
   render: _self => {
     let links =
       item##links->Js.undefinedToOption->Belt.Option.getWithDefault([||]);
+    let durationInMonths =
+      DateFns.differenceInCalendarMonths(
+        Js.Date.parse(item##dateEnd),
+        Js.Date.parse(item##dateStart),
+      )
+      ->int_of_float;
+    let durationYears = durationInMonths / 12;
+    let durationMonths = durationInMonths mod 12;
     <SpacedView key=item##id vertical=M style=styles##wrapper>
       <SpacedView style=styles##block vertical=M horizontal=M>
         <View style=styles##head>
@@ -89,6 +103,26 @@ let make = (~item: T.partialResumeItem, _) => {
         <Spacer size=XS />
         <Text style=styles##description>
           {item##description->ReasonReact.string}
+        </Text>
+        <Spacer size=XS />
+        <Text style=styles##duration>
+          {(
+             (
+               switch (durationYears) {
+               | 0 => ""
+               | 1 => "1 year "
+               | y => string_of_int(y) ++ " years "
+               }
+             )
+             ++ (
+               switch (durationMonths) {
+               | 0 => ""
+               | 1 => "1 month "
+               | y => string_of_int(y) ++ " months "
+               }
+             )
+           )
+           ->ReasonReact.string}
         </Text>
         <Spacer size=XL />
         <View style=styles##tags>

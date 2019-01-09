@@ -20,6 +20,7 @@
   ],
   "bsc-flags": ["-bs-super-errors"],
   "bs-dependencies": [
+    "bs-date-fns",
     "bs-fetch",
     "@glennsl/bs-json",
     "reason-react",
