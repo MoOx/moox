@@ -15,8 +15,16 @@ let styles =
           alignItems(Center),
           backgroundColor(String("#fff")),
         ]),
-      "textWrapper": style([flex(1.), flexBasis(Pt(250.))]),
-      "text": style([padding(Pt(20.)), flexBasis(Pt(200.))]),
+      "skillWrapper": style([flex(1.), flexBasis(Pt(250.))]),
+      "skill":
+        style([
+          padding(Pt(20.)),
+          flexBasis(Pt(200.)),
+          shadowColor(String("#000")),
+          shadowOffset(~width=0., ~height=5.),
+          shadowOpacity(0.2),
+          shadowRadius(10.),
+        ]),
       "textNodeStrong":
         style([
           fontSize(Float(32.)),
@@ -80,7 +88,7 @@ let make = _children => {
              title: {j|Best Practices|j},
              text: {j|Git, Reviews, Tests...|j},
              color: "#fff",
-             bg: "#333",
+             bg: "#0A0A40",
              bg2: "#000",
            },
            {
@@ -96,7 +104,7 @@ let make = _children => {
                key={skill.title}
                horizontal=M
                vertical=M
-               style=styles##textWrapper>
+               style=styles##skillWrapper>
                <div
                  style={ReactDOMRe.Style.make(
                    ~display="flex",
@@ -111,7 +119,7 @@ let make = _children => {
                      ++ " 110%)",
                    (),
                  )}>
-                 <View style=styles##text>
+                 <View style=styles##skill>
                    <Text
                      style=Style.(
                        concat([
