@@ -93,7 +93,8 @@ let make = _children => {
         ~display="flex",
         ~flexDirection="column",
         ~flex="1 1 auto",
-        ~background="linear-gradient(179deg, #111, #061748)",
+        ~background=
+          "radial-gradient(circle at 52% 60%, #36E9BE 10%, #13D0BF 20%, #0CA5AE 25%, #096F97 35%, transparent 70%), linear-gradient(179deg, #111, #08274F, #002770)",
         (),
       )}>
       <View style=styles##container>
