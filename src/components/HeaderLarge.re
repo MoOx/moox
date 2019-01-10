@@ -68,7 +68,7 @@ let make = (~currentLocation, _children) => {
     <View style=styles##menu>
       <Container style=styles##bar wrapperStyle=styles##barWrapper>
         <ViewLink style=styles##logo href="/">
-          <SVGLogoInverted width=20. height=20. fill="#000F2B" />
+          <SVGLogo width=20. height=20. fill="#000F2B" />
           <Text style=styles##logoText>
             {("  " ++ Consts.title)->ReasonReact.string}
           </Text>

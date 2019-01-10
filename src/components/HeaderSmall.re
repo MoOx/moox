@@ -52,7 +52,7 @@ let make = _children => {
   render: _self =>
     <SpacedView vertical=M horizontal=XS style=styles##wrapper>
       <ViewLink style=styles##logo href="/">
-        <SVGLogoInverted width=24. height=24. fill="#000F2B" />
+        <SVGLogo width=24. height=24. fill="#000F2B" />
         <Text style=styles##logoText>
           {("  " ++ Consts.title)->ReasonReact.string}
         </Text>
