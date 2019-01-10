@@ -25,6 +25,14 @@ let styles =
           shadowOpacity(0.2),
           shadowRadius(10.),
         ]),
+      "icon":
+        style([
+          position(Absolute),
+          right(Pt(-20.)),
+          bottom(Pt(-20.)),
+          opacity(Float(0.1)),
+          Transform.make(~perspective=800., ~rotate="6deg", ()),
+        ]),
       "textNodeStrong":
         style([
           fontSize(Float(32.)),
@@ -48,6 +56,7 @@ type skill = {
   color: string,
   bg: string,
   bg2: string,
+  icon: ReasonReact.reactElement,
 };
 
 let make = _children => {
@@ -60,43 +69,85 @@ let make = _children => {
              title: {j|JavaScript|j},
              text: {j|ES20** + Flow / TypeScript|j},
              color: "#fff",
-             bg: "#F0DA4E",
-             bg2: "#000",
+             bg: "#000B28",
+             bg2: "#000F2B",
+             icon:
+               <View style=Style.(concat([styles##icon, style([])]))>
+                 <SVGJavaScriptMini width=170. height=170. fill="#ffffff" />
+               </View>,
            },
            {
              title: {j|React|j},
              text: {j|Web or Native... or both!|j},
              color: "#fff",
-             bg: "#48AADC",
-             bg2: "#000",
+             bg: "#09274F",
+             bg2: "#000F2B",
+             icon:
+               <View
+                 style=Style.(
+                   concat([
+                     styles##icon,
+                     style([right(Pt(-40.)), bottom(Pt(-40.))]),
+                   ])
+                 )>
+                 <SVGReact width=200. height=200. fill="#ffffff" />
+               </View>,
            },
            {
              title: {j|Reason|j},
              text: {j|Ocaml + BuckleScript = ♥|j},
              color: "#fff",
-             bg: "#DD4B39",
-             bg2: "#000",
+             bg: "#035A93",
+             bg2: "#000F2B",
+             icon:
+               <View
+                 style=Style.(
+                   concat([
+                     styles##icon,
+                     style([right(Pt(-40.)), bottom(Pt(-40.))]),
+                   ])
+                 )>
+                 <SVGReasonMini width=200. height=200. fill="#ffffff" />
+               </View>,
            },
            {
              title: {j|Front-End|j},
              text: {j|I care about UI and UX|j},
              color: "#fff",
-             bg: "#333",
-             bg2: "#000",
+             bg: "#28416A",
+             bg2: "#000F2B",
+             icon:
+               <View
+                 style=Style.(
+                   concat([
+                     styles##icon,
+                     style([right(Pt(-30.)), bottom(Pt(-30.))]),
+                   ])
+                 )>
+                 <SVGTouch width=200. height=200. fill="#ffffff" />
+               </View>,
            },
            {
              title: {j|Best Practices|j},
              text: {j|Git, Reviews, Tests...|j},
              color: "#fff",
-             bg: "#0A0A40",
-             bg2: "#000",
+             bg: "#0FA5AE",
+             bg2: "#000F2B",
+             icon:
+               <View style=Style.(concat([styles##icon, style([])]))>
+                 <SVGUi width=180. height=180. fill="#ffffff" />
+               </View>,
            },
            {
              title: {j|Open Source|j},
              text: {j|Sharing is caring|j},
              color: "#fff",
-             bg: "#24292F",
-             bg2: "#000",
+             bg: "#36E9BE",
+             bg2: "#000F2B",
+             icon:
+               <View style=Style.(concat([styles##icon, style([])]))>
+                 <SVGSocialGithub width=200. height=200. fill="#ffffff" />
+               </View>,
            },
          |]
          ->Belt.Array.map(skill =>
@@ -117,9 +168,11 @@ let make = _children => {
                      ++ " 10%, "
                      ++ skill.bg2
                      ++ " 110%)",
+                   ~overflow="hidden",
                    (),
                  )}>
                  <View style=styles##skill>
+                   {skill.icon}
                    <Text
                      style=Style.(
                        concat([
