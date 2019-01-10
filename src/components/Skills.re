@@ -62,133 +62,131 @@ type skill = {
 let make = _children => {
   ...component,
   render: _self =>
-    <Container>
-      <View style=styles##container>
-        {[|
-           {
-             title: {j|JavaScript|j},
-             text: {j|ES20** + Flow / TypeScript|j},
-             color: "#fff",
-             bg: "#000B28",
-             bg2: "#000F2B",
-             icon:
-               <View style=Style.(concat([styles##icon, style([])]))>
-                 <SVGJavaScriptMini width=170. height=170. fill="#ffffff" />
-               </View>,
-           },
-           {
-             title: {j|React|j},
-             text: {j|Web or Native... or both!|j},
-             color: "#fff",
-             bg: "#09274F",
-             bg2: "#000F2B",
-             icon:
-               <View
-                 style=Style.(
-                   concat([
-                     styles##icon,
-                     style([right(Pt(-40.)), bottom(Pt(-40.))]),
-                   ])
-                 )>
-                 <SVGReact width=200. height=200. fill="#ffffff" />
-               </View>,
-           },
-           {
-             title: {j|Reason|j},
-             text: {j|Ocaml + BuckleScript = ♥|j},
-             color: "#fff",
-             bg: "#035A93",
-             bg2: "#000F2B",
-             icon:
-               <View
-                 style=Style.(
-                   concat([
-                     styles##icon,
-                     style([right(Pt(-40.)), bottom(Pt(-40.))]),
-                   ])
-                 )>
-                 <SVGReasonMini width=200. height=200. fill="#ffffff" />
-               </View>,
-           },
-           {
-             title: {j|Front-End|j},
-             text: {j|I care about UI and UX|j},
-             color: "#fff",
-             bg: "#28416A",
-             bg2: "#000F2B",
-             icon:
-               <View
-                 style=Style.(
-                   concat([
-                     styles##icon,
-                     style([right(Pt(-30.)), bottom(Pt(-30.))]),
-                   ])
-                 )>
-                 <SVGTouch width=200. height=200. fill="#ffffff" />
-               </View>,
-           },
-           {
-             title: {j|Best Practices|j},
-             text: {j|Git, Reviews, Tests...|j},
-             color: "#fff",
-             bg: "#0FA5AE",
-             bg2: "#000F2B",
-             icon:
-               <View style=Style.(concat([styles##icon, style([])]))>
-                 <SVGUi width=180. height=180. fill="#ffffff" />
-               </View>,
-           },
-           {
-             title: {j|Open Source|j},
-             text: {j|Sharing is caring|j},
-             color: "#fff",
-             bg: "#36E9BE",
-             bg2: "#000F2B",
-             icon:
-               <View style=Style.(concat([styles##icon, style([])]))>
-                 <SVGSocialGithub width=200. height=200. fill="#ffffff" />
-               </View>,
-           },
-         |]
-         ->Belt.Array.map(skill =>
-             <SpacedView
-               key={skill.title}
-               horizontal=M
-               vertical=M
-               style=styles##skillWrapper>
-               <div
-                 style={ReactDOMRe.Style.make(
-                   ~display="flex",
-                   ~flexDirection="column",
-                   ~flex="1 1 auto",
-                   ~borderRadius="4px",
-                   ~background=
-                     "linear-gradient(0.45turn, "
-                     ++ skill.bg
-                     ++ " 10%, "
-                     ++ skill.bg2
-                     ++ " 110%)",
-                   ~overflow="hidden",
-                   (),
-                 )}>
-                 <View style=styles##skill>
-                   {skill.icon}
-                   <Text
-                     style=Style.(
-                       concat([
-                         styles##textNodeStrong,
-                         style([color(String(skill.color))]),
-                       ])
-                     )>
-                     skill.title->R.string
-                   </Text>
-                   <Spacer style=styles##textSpace />
-                   <Text style=styles##textNode> skill.text->R.string </Text>
-                 </View>
-               </div>
-             </SpacedView>
-           )
-         ->ReasonReact.array}
-      </View>
-    </Container>,
+    <View style=styles##container>
+      {[|
+         {
+           title: {j|JavaScript|j},
+           text: {j|ES20** + Flow / TypeScript|j},
+           color: "#fff",
+           bg: "#000B28",
+           bg2: "#000F2B",
+           icon:
+             <View style=Style.(concat([styles##icon, style([])]))>
+               <SVGJavaScriptMini width=170. height=170. fill="#ffffff" />
+             </View>,
+         },
+         {
+           title: {j|React|j},
+           text: {j|Web or Native... or both!|j},
+           color: "#fff",
+           bg: "#09274F",
+           bg2: "#000F2B",
+           icon:
+             <View
+               style=Style.(
+                 concat([
+                   styles##icon,
+                   style([right(Pt(-40.)), bottom(Pt(-40.))]),
+                 ])
+               )>
+               <SVGReact width=200. height=200. fill="#ffffff" />
+             </View>,
+         },
+         {
+           title: {j|Reason|j},
+           text: {j|Ocaml + BuckleScript = ♥|j},
+           color: "#fff",
+           bg: "#035A93",
+           bg2: "#000F2B",
+           icon:
+             <View
+               style=Style.(
+                 concat([
+                   styles##icon,
+                   style([right(Pt(-40.)), bottom(Pt(-40.))]),
+                 ])
+               )>
+               <SVGReasonMini width=200. height=200. fill="#ffffff" />
+             </View>,
+         },
+         {
+           title: {j|Front-End|j},
+           text: {j|I care about UI and UX|j},
+           color: "#fff",
+           bg: "#28416A",
+           bg2: "#000F2B",
+           icon:
+             <View
+               style=Style.(
+                 concat([
+                   styles##icon,
+                   style([right(Pt(-30.)), bottom(Pt(-30.))]),
+                 ])
+               )>
+               <SVGTouch width=200. height=200. fill="#ffffff" />
+             </View>,
+         },
+         {
+           title: {j|Best Practices|j},
+           text: {j|Git, Reviews, Tests...|j},
+           color: "#fff",
+           bg: "#0FA5AE",
+           bg2: "#000F2B",
+           icon:
+             <View style=Style.(concat([styles##icon, style([])]))>
+               <SVGUi width=180. height=180. fill="#ffffff" />
+             </View>,
+         },
+         {
+           title: {j|Open Source|j},
+           text: {j|Sharing is caring|j},
+           color: "#fff",
+           bg: "#36E9BE",
+           bg2: "#000F2B",
+           icon:
+             <View style=Style.(concat([styles##icon, style([])]))>
+               <SVGSocialGithub width=200. height=200. fill="#ffffff" />
+             </View>,
+         },
+       |]
+       ->Belt.Array.map(skill =>
+           <SpacedView
+             key={skill.title}
+             horizontal=M
+             vertical=M
+             style=styles##skillWrapper>
+             <div
+               style={ReactDOMRe.Style.make(
+                 ~display="flex",
+                 ~flexDirection="column",
+                 ~flex="1 1 auto",
+                 ~borderRadius="4px",
+                 ~background=
+                   "linear-gradient(0.45turn, "
+                   ++ skill.bg
+                   ++ " 10%, "
+                   ++ skill.bg2
+                   ++ " 110%)",
+                 ~overflow="hidden",
+                 (),
+               )}>
+               <View style=styles##skill>
+                 {skill.icon}
+                 <Text
+                   style=Style.(
+                     concat([
+                       styles##textNodeStrong,
+                       style([color(String(skill.color))]),
+                     ])
+                   )>
+                   skill.title->R.string
+                 </Text>
+                 <Spacer style=styles##textSpace />
+                 <Text style=styles##textNode> skill.text->R.string </Text>
+               </View>
+             </div>
+           </SpacedView>
+         )
+       ->ReasonReact.array}
+    </View>,
 };

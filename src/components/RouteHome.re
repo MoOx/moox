@@ -3,6 +3,33 @@ open BsReactNative;
 let styles =
   StyleSheet.create(
     Style.{
+      "center": style([alignItems(Center), justifyContent(Center)]),
+      "blahblah": style([alignItems(Center)]),
+      "row":
+        style([
+          flexDirection(Row),
+          flexWrap(Wrap),
+          justifyContent(Center),
+        ]),
+      "textLight":
+        style([
+          fontSize(Float(28.)),
+          color(String("#000F2B")),
+          fontWeight(`_200),
+        ]),
+      "blahblahText":
+        style([
+          fontSize(Float(16.)),
+          lineHeight(24.),
+          color(String("#000F2B")),
+        ]),
+      "nanoTitle":
+        style([
+          fontSize(Float(14.)),
+          fontWeight(`_600),
+          textAlign(Center),
+          color(String("#bbc")),
+        ]),
       "title":
         style([
           fontSize(Float(28.)),
@@ -26,10 +53,74 @@ let make = (~posts) => {
   ...component,
   render: _self =>
     <AppWrapper>
-      <Jumbotron />
-      <Skills />
-      <Container>
-        <Spacer size=XL />
+      <HomeJumbotron />
+      <Container style=styles##center>
+        <SpacedView horizontal=M vertical=M style=styles##blahblah>
+          <Spacer />
+          <Text style=styles##textLight>
+            {j|I build apps using React, JavaScript & Reason.  |j}
+            ->ReasonReact.string
+            <ButtonLink href="/contact/"> "Hire me"->R.string </ButtonLink>
+          </Text>
+          <Spacer size=L />
+          <Text style=styles##blahblahText>
+            {j|Since I made my first website in 1995, I never stopped to learn things. I love to build useful UIs that offer the best UX possible. I like to produce durable things when working on products or long-running projects by focusing on maintainability, scalability and performance.
+Over the years, I refined my way to approach development, mostly by cultivating my empathy.
+Leading team to get started with latest & proven technologies is my jam. I like to teach people to work better on large codebase that must scale.|j}
+            ->ReasonReact.string
+          </Text>
+        </SpacedView>
+        <Spacer />
+        <Text style=styles##nanoTitle>
+          {"THINGS I LIKE TO WORK WITH" |> R.string}
+        </Text>
+        <Skills />
+        <Spacer size=L />
+      </Container>
+      <SpacedView style=styles##center horizontal=M>
+        <Spacer size=L />
+        <Text style=styles##nanoTitle>
+          {"COMPANIES THAT TRUSTED ME" |> R.string}
+        </Text>
+        <View style=styles##row>
+          <SVGCompanyKisioDigital
+            width=200.
+            height=200.
+            fill="rgba(255,255,255,0.75)"
+          />
+          <SVGCompanyMolotovTv
+            width=200.
+            height=200.
+            fill="rgba(255,255,255,0.75)"
+          />
+          <SVGCompanyAirbus
+            width=200.
+            height=200.
+            fill="rgba(255,255,255,0.75)"
+          />
+          <SVGCompanyViareport
+            width=200.
+            height=200.
+            fill="rgba(255,255,255,0.75)"
+          />
+          <SVGCompanyJirafe
+            width=200.
+            height=200.
+            fill="rgba(255,255,255,0.75)"
+          />
+        </View>
+      </SpacedView>
+      <Spacer size=L />
+      <Container style=styles##center>
+        <Spacer size=L />
+        <Text style=styles##textLight>
+          {"Interested with my profile ?" |> R.string}
+        </Text>
+        <Spacer size=L />
+        <View style=styles##center>
+          <ButtonLink href="/contact/"> "Hire me"->R.string </ButtonLink>
+        </View>
+        <Spacer size=XXL />
         <Text style=styles##title>
           {"Latest Posts on the blog" |> R.string}
         </Text>

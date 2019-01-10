@@ -11,35 +11,38 @@ let styles =
           width(Pct(100.)),
           overflow(Hidden),
           alignItems(Center),
-          backgroundColor(String("#fefefe")),
         ]),
       "container":
-        style([
-          justifyContent(Center),
-          flex(1.),
-          width(Pct(100.)),
-          maxWidth(Pt(840.)),
-        ]),
+        style([justifyContent(Center), flex(1.), width(Pct(100.))]),
     },
   );
 
-let make = (~wrapperStyle=?, ~style=?, children) => {
+let noStyle = Style.style([]);
+
+let make =
+    (
+      ~wrapperStyle=?,
+      ~style=?,
+      ~backgroundColor=Some("#fefefe"),
+      ~maxWidth=840.,
+      children,
+    ) => {
   ...component,
   render: _self =>
     <View
-      style={
-        switch (wrapperStyle) {
-        | None => styles##wrapper
-        | Some(wrapperStyle) => Style.concat([styles##wrapper, wrapperStyle])
-        }
-      }>
+      style={Style.concat([
+        styles##wrapper,
+        backgroundColor->Belt.Option.mapWithDefault(noStyle, bg =>
+          Style.style([Style.backgroundColor(Style.String(bg))])
+        ),
+        wrapperStyle->Belt.Option.getWithDefault(noStyle),
+      ])}>
       <View
-        style={
-          switch (style) {
-          | None => styles##container
-          | Some(style) => Style.concat([styles##container, style])
-          }
-        }>
+        style={Style.concat([
+          styles##container,
+          Style.style([Style.maxWidth(Pt(maxWidth))]),
+          style->Belt.Option.getWithDefault(noStyle),
+        ])}>
         ...children
       </View>
     </View>,
