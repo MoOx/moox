@@ -125,7 +125,7 @@ let make = _children => {
             {{j|I make front-ends using React, JavaScript & Reason.|j}
              |> R.string}
           </Text>
-          <Spacer size=XL />
+          <Spacer />
         </View>
       </View>
     </div>,
