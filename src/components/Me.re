@@ -18,11 +18,11 @@ let make = _children => {
         ~flex="1 1 auto",
         ~filter=
           [|
-            "brightness(0.75)",
-            "contrast(1.6)",
+            "brightness(0.8)",
+            "contrast(1.1)",
             "saturate(1.15)",
-            "hue-rotate(2deg)",
-            "drop-shadow(0 0 20px rgba(255,255,255,0.05))",
+            "hue-rotate(-1deg)",
+            "drop-shadow(0 0 20px rgba(0,0,0,0.2))",
           |]
           |> Js.Array.joinWith(" "),
         (),
