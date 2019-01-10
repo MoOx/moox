@@ -37,7 +37,7 @@ let make = _ => {
         {j|
 html {
   height: 100%;
-  background: #000;
+  background: #000F2B;
 }
 body {
   min-height:100%;

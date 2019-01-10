@@ -10,7 +10,7 @@ let styles =
           justifyContent(Center),
           alignItems(Center),
           borderTopWidth(10.),
-          borderColor(String("#030303")),
+          borderColor(String("#000F2B")),
           shadowColor(String("#000")),
           shadowOffset(~width=0., ~height=5.),
           shadowOpacity(0.15),
@@ -36,7 +36,7 @@ let styles =
         style([
           fontSize(Float(18.)),
           fontWeight(`_700),
-          color(String("#030303")),
+          color(String("#000F2B")),
         ]),
       "barLinks": style([flexDirection(Row)]),
       "barLink":
@@ -44,7 +44,7 @@ let styles =
           padding(Pt(10.)),
           fontSize(Float(16.)),
           lineHeight(18. *. 1.7),
-          color(String("#030303")),
+          color(String("#000F2B")),
         ]),
       "barLinkActive":
         style([textDecorationLine(Underline), textDecorationStyle(Solid)]),
@@ -68,7 +68,7 @@ let make = (~currentLocation, _children) => {
     <View style=styles##menu>
       <Container style=styles##bar wrapperStyle=styles##barWrapper>
         <ViewLink style=styles##logo href="/">
-          <SVGLogoInverted width=20. height=20. fill="#030303" />
+          <SVGLogoInverted width=20. height=20. fill="#000F2B" />
           <Text style=styles##logoText>
             {("  " ++ Consts.title)->ReasonReact.string}
           </Text>
@@ -97,7 +97,7 @@ let make = (~currentLocation, _children) => {
           wrapperStyle=styles##icons
           iconStyle=styles##icon
           iconSize=22.
-          iconColor="#030303"
+          iconColor="#000F2B"
         />
       </Container>
     </View>,

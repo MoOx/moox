@@ -13,7 +13,7 @@ let make = (~contentItem) => {
             style([
               padding(Pt(20.)),
               textAlign(Center),
-              color(String("#030303")),
+              color(String("#000F2B")),
             ]),
           "viewSmall": style([flexGrow(1.), padding(Pt(20.))]),
           "viewLarge": style([flexGrow(1.), padding(Pt(60.))]),

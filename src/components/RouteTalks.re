@@ -9,7 +9,7 @@ let styles =
           fontWeight(`Bold),
           textAlign(Center),
           marginVertical(Pt(20.)),
-          color(String("#030303")),
+          color(String("#000F2B")),
         ]),
       "links":
         style([

@@ -73,13 +73,13 @@ let styles =
       "textNodeStrong":
         style([
           fontSize(Float(32.)),
-          color(String("#030303")),
+          color(String("#000F2B")),
           fontWeight(`_800),
         ]),
       "textNode":
         style([
           fontSize(Float(28.)),
-          color(String("#030303")),
+          color(String("#000F2B")),
           fontWeight(`_200),
         ]),
     },
