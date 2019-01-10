@@ -76,8 +76,8 @@ let make = (~item: T.partialResumeItem, _) => {
       item##links->Js.undefinedToOption->Belt.Option.getWithDefault([||]);
     let durationInMonths =
       DateFns.differenceInCalendarMonths(
-        Js.Date.parse(item##dateEnd),
-        Js.Date.parse(item##dateStart),
+        Js.Date.fromString(item##dateEnd),
+        Js.Date.fromString(item##dateStart),
       )
       ->int_of_float;
     let durationYears = durationInMonths / 12;
