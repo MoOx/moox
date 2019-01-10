@@ -15,4 +15,5 @@ hashtags:
   - ReactNativeWeb
   - Mobile
   - Web
+image: /resume/damebio.jpg
 ---

@@ -50,6 +50,7 @@ type partialResumeItem = {
   "hashtags": array(string),
   "description": string,
   "links": Js.Undefined.t(array(resumeItemLink)),
+  "image": Js.Undefined.t(string),
 };
 
 type resumeList =

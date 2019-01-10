@@ -10,4 +10,5 @@ hashtags:
   - JavaScript
   - Backbone
   - jQuery
+image: /resume/jirafe.jpg
 ---

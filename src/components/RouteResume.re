@@ -22,7 +22,7 @@ let make = (~items) => {
     <AppWrapper>
       <Container>
         <Spacer />
-        <Text style=styles##title> {{j|Résumé|j} |> R.string} </Text>
+        <Text style=styles##title> {{j|Past Experiences|j} |> R.string} </Text>
         {switch ((items: T.resumeList)) {
          | Inactive
          | Loading => <LoadingIndicator />

@@ -31,4 +31,5 @@ links:
     url: https://itunes.apple.com/fr/app/tao-orléans/id1029503452
   - title: Tao Orléans Android
     url: https://play.google.com/store/apps/details?id=fr.tao.adm
+image: /resume/adm.jpg
 ---
