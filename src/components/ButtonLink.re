@@ -6,12 +6,7 @@ let styles =
   StyleSheet.create(
     Style.{
       "btnWrapper":
-        style([
-          flexGrow(0.),
-          borderWidth(3.),
-          borderColor(String("rgb(0, 112, 201)")),
-          borderRadius(10.),
-        ]),
+        style([flexGrow(0.), borderWidth(2.), borderRadius(10.)]),
       "btn":
         style([
           flexGrow(0.),
@@ -19,7 +14,6 @@ let styles =
           fontWeight(`_300),
           paddingVertical(Pt(Spacer.space)),
           paddingHorizontal(Pt(Spacer.space *. 1.5)),
-          color(String("rgb(0, 112, 201)")),
         ]),
     },
   );
@@ -27,6 +21,7 @@ let styles =
 let make =
     (
       ~href,
+      ~color="#efefff",
       ~style=?,
       ~activeStyle=?,
       ~onMouseEnter=?,
@@ -35,11 +30,16 @@ let make =
     ) => {
   ...component,
   render: _self =>
-    <View style=styles##btnWrapper>
+    <View
+      style={Style.concat([
+        styles##btnWrapper,
+        Style.style([Style.borderColor(Style.String(color))]),
+      ])}>
       <ViewLink
         href
         style={Style.concat([
           styles##btn,
+          Style.style([Style.color(Style.String(color))]),
           style->Belt.Option.getWithDefault(Style.style([])),
         ])}
         ?activeStyle

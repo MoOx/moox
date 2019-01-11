@@ -60,7 +60,9 @@ let make = (~posts) => {
           <Text style=styles##textLight>
             {j|I build apps using React, JavaScript & Reason.  |j}
             ->ReasonReact.string
-            <ButtonLink href="/contact/"> "Hire me"->R.string </ButtonLink>
+            <ButtonLink href="/contact/" color="rgb(0, 112, 201)">
+              "Hire me"->R.string
+            </ButtonLink>
           </Text>
           <Spacer size=L />
           <Text style=styles##blahblahText>
@@ -77,50 +79,32 @@ Leading team to get started with latest & proven technologies is my jam. I like 
         <Skills />
         <Spacer size=L />
       </Container>
-      <SpacedView style=styles##center horizontal=M>
+      <Container maxWidth=1600.>
         <Spacer size=L />
         <Text style=styles##nanoTitle>
           {"COMPANIES THAT TRUSTED ME" |> R.string}
         </Text>
         <View style=styles##row>
-          <SVGCompanyKisioDigital
-            width=200.
-            height=200.
-            fill="rgba(255,255,255,0.75)"
-          />
-          <SVGCompanyMolotovTv
-            width=200.
-            height=200.
-            fill="rgba(255,255,255,0.75)"
-          />
-          <SVGCompanyAirbus
-            width=200.
-            height=200.
-            fill="rgba(255,255,255,0.75)"
-          />
-          <SVGCompanyViareport
-            width=200.
-            height=200.
-            fill="rgba(255,255,255,0.75)"
-          />
-          <SVGCompanyJirafe
-            width=200.
-            height=200.
-            fill="rgba(255,255,255,0.75)"
-          />
+          <SVGCompanyKisioDigital width=200. height=200. fill="#bbb" />
+          <SVGCompanyMolotovTv width=200. height=200. fill="#bbb" />
+          <SVGCompanyAirbus width=200. height=200. fill="#bbb" />
+          <SVGCompanyViareport width=200. height=200. fill="#bbb" />
+          <SVGCompanyJirafe width=200. height=200. fill="#bbb" />
         </View>
-      </SpacedView>
+      </Container>
       <Spacer size=L />
-      <Container style=styles##center>
-        <Spacer size=L />
-        <Text style=styles##textLight>
+      <View style=styles##center>
+        <Text style=styles##nanoTitle>
           {"Interested with my profile ?" |> R.string}
         </Text>
         <Spacer size=L />
         <View style=styles##center>
           <ButtonLink href="/contact/"> "Hire me"->R.string </ButtonLink>
         </View>
-        <Spacer size=XXL />
+        <Spacer size=XL />
+      </View>
+      <Container style=styles##center>
+        <Spacer size=XL />
         <Text style=styles##title>
           {"Latest Posts on the blog" |> R.string}
         </Text>
