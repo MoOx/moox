@@ -6,7 +6,7 @@ let styles =
   StyleSheet.create(
     Style.{
       "btnWrapper": style([borderWidth(2.), borderRadius(10.)]),
-      "btn": style([fontSize(Float(24.)), fontWeight(`_300)]),
+      "btn": style([fontSize(Float(18.)), fontWeight(`_300)]),
     },
   );
 
@@ -37,7 +37,7 @@ let make =
         ?activeStyle
         ?onMouseEnter
         ?onMouseLeave>
-        <SpacedView horizontal=L vertical=M> ...children </SpacedView>
+        <SpacedView horizontal=M vertical=S> ...children </SpacedView>
       </ViewLink>
     </View>,
 };

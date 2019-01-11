@@ -15,7 +15,12 @@ let styles =
           alignItems(Center),
         ]),
       "container":
-        style([justifyContent(Center), flex(1.), width(Pct(100.))]),
+        style([
+          justifyContent(Center),
+          flex(1.),
+          width(Pct(100.)),
+          paddingHorizontal(Pt(Spacer.space /. 4.)),
+        ]),
     },
   );
 

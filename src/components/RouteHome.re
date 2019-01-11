@@ -10,7 +10,9 @@ let styles =
           flexDirection(Row),
           flexWrap(Wrap),
           justifyContent(Center),
+          alignItems(Center),
         ]),
+      "flex": style([flexShrink(1.)]),
       "textLight":
         style([
           fontSize(Float(28.)),
@@ -56,15 +58,20 @@ let make = (~posts) => {
       <HomeJumbotron />
       <Container style=styles##center>
         <SpacedView horizontal=M vertical=M style=styles##blahblah>
-          <Spacer />
-          <Text style=styles##textLight>
-            {j|I build apps using React, JavaScript & Reason.  |j}
-            ->ReasonReact.string
-            <ButtonLink href="/contact/" color="rgb(0, 112, 201)">
-              "Hire me"->R.string
-            </ButtonLink>
-          </Text>
-          <Spacer size=L />
+          <View style=styles##row>
+            <SpacedView vertical=M horizontal=XS style=styles##flex>
+              <Text style=styles##textLight>
+                {j|I build apps using React, JavaScript & Reason.|j}
+                ->ReasonReact.string
+              </Text>
+            </SpacedView>
+            <SpacedView vertical=M horizontal=XS>
+              <ButtonSmallLink href="/contact/" color="rgb(0, 112, 201)">
+                <Text> "Hire me"->R.string </Text>
+              </ButtonSmallLink>
+            </SpacedView>
+          </View>
+          <Spacer size=M />
           <Text style=styles##blahblahText>
             {j|Since I made my first website in 1995, I never stopped to learn things. I love to build useful UIs that offer the best UX possible. I like to produce durable things when working on products or long-running projects by focusing on maintainability, scalability and performance.
 Over the years, I refined my way to approach development, mostly by cultivating my empathy.
@@ -99,7 +106,16 @@ Leading team to get started with latest & proven technologies is my jam. I like 
         </Text>
         <Spacer size=L />
         <View style=styles##center>
-          <ButtonLink href="/contact/"> "Hire me"->R.string </ButtonLink>
+          <ButtonLink href="/contact/">
+            <Text> "Hire me"->R.string </Text>
+          </ButtonLink>
+          <Spacer size=L />
+          <Text style=styles##nanoTitle>
+            "Or you can "->R.string
+            <UnderlinedTextLink href="/resume/">
+              "learn more about my experiences"->R.string
+            </UnderlinedTextLink>
+          </Text>
         </View>
         <Spacer size=XL />
       </View>
