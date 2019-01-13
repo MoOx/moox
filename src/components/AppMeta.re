@@ -66,16 +66,8 @@ body {
   }
 }
 
-@media (min-width: 500px) {
-  .device-small {
-    display: none;
-  }
-}
-@media (max-width: 501px) {
-  .device-large {
-    display: none;
-  }
-}
+@media (min-width: 500px) { .WindowSizeFilterSMax { display: none } }
+@media (max-width: 501px) { .WindowSizeFilterMMin { display: none } }
   |j}
         ->ReasonReact.string
       </style>

@@ -7,23 +7,25 @@ let make = children => {
   render: _ =>
     <>
       <AppMeta />
-      <div className="device-small"> <HeaderSmall /> </div>
-      <div className="device-large"> <HeaderLargeWithRouter /> </div>
+      <WindowSizeFilter.SMax> <HeaderSmall /> </WindowSizeFilter.SMax>
+      <WindowSizeFilter.MMin>
+        <HeaderLargeWithRouter />
+      </WindowSizeFilter.MMin>
       <View> ...children </View>
-      <div className="device-large"> <Footer /> </div>
-      <div className="device-small">
+      <WindowSizeFilter.MMin> <Footer /> </WindowSizeFilter.MMin>
+      <WindowSizeFilter.SMax>
         <div style={ReactDOMRe.Style.make(~height="60px", ())} />
-      </div>
-      <div
-        className="device-small menu-backdrop"
-        style={ReactDOMRe.Style.make(
-          ~position="fixed",
-          ~bottom="0",
-          ~left="0",
-          ~right="0",
-          (),
-        )}>
-        <AppMenuWithRouter />
-      </div>
+        <div
+          className="menu-backdrop"
+          style={ReactDOMRe.Style.make(
+            ~position="fixed",
+            ~bottom="0",
+            ~left="0",
+            ~right="0",
+            (),
+          )}>
+          <AppMenuWithRouter />
+        </div>
+      </WindowSizeFilter.SMax>
     </>,
 };

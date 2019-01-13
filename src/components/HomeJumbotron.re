@@ -66,9 +66,8 @@ let make = _children => {
     <View style=styles##container>
       <MeBackground style=styles##bg />
       <View style=styles##contentWrapper>
-        <div
-          className="device-large"
-          style={ReactDOMRe.Style.make(~width="20%", ~height="1px", ())}
+        <WindowSizeFilter.MMin
+          style=Style.(style([width(Pct(20.)), height(Pt(1.))]))
         />
         <View style=styles##content>
           <Text style=styles##title> {"MoOx" |> R.string} </Text>

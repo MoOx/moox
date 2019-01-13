@@ -34,6 +34,7 @@ let serialize =
 
 let extendView =
     (
+      ~className=?,
       ~accessibilityRole=?,
       ~accessibilityLabel=?,
       ~accessible=?,
@@ -59,6 +60,7 @@ let extendView =
     ) =>
   UtilsRN.objAssign2(
     {
+      "className": className,
       "accessibilityRole": accessibilityRole,
       "accessibilityLabel": accessibilityLabel,
       "accessible": accessible,

@@ -6,6 +6,7 @@
 module type ViewComponent = {
   let make:
     (
+      ~className: string=?,
       ~accessibilityRole: string=?,
       ~accessibilityLabel: string=?,
       ~accessible: bool=?,
@@ -69,6 +70,7 @@ module type Impl = {let view: ReasonReact.reactClass;};
 module CreateComponent = (Impl: Impl) : ViewComponent => {
   let make =
       (
+        ~className=?,
         ~accessibilityRole=?,
         ~accessibilityLabel=?,
         ~accessible=?,
@@ -95,6 +97,7 @@ module CreateComponent = (Impl: Impl) : ViewComponent => {
       ~reactClass=Impl.view,
       ~props=
         Props.extendView(
+          ~className?,
           ~accessibilityRole?,
           ~accessibilityLabel?,
           ~accessible?,
