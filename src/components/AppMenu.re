@@ -1,7 +1,7 @@
 open BsReactNative;
 
 let colorInActive = "#909192";
-let colorActive = "#000F2B";
+let colorActive = Consts.Colors.dark;
 
 let component = ReasonReact.statelessComponent("AppMenu");
 

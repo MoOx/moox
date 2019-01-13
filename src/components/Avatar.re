@@ -10,7 +10,7 @@ let styles =
           borderRadius(96.),
           width(Pt(96.)),
           height(Pt(96.)),
-          borderColor(String("#000F2B")),
+          borderColor(String(Consts.Colors.dark)),
           borderWidth(2.),
         ]),
     },

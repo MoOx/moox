@@ -13,7 +13,7 @@ let styles =
           flexWrap(Wrap),
           justifyContent(Center),
           alignItems(Center),
-          backgroundColor(String("#fff")),
+          backgroundColor(String(Consts.Colors.light)),
         ]),
       "skillWrapper": style([flex(1.), flexBasis(Pt(250.))]),
       "skill":
@@ -36,7 +36,7 @@ let styles =
       "textNodeStrong":
         style([
           fontSize(Float(32.)),
-          color(String("#fff")),
+          color(String(Consts.Colors.light)),
           fontWeight(`_800),
         ]),
       "textSpace": style([flex(1.)]),
@@ -44,7 +44,7 @@ let styles =
         style([
           textAlign(Right),
           fontSize(Float(16.)),
-          color(String("#fff")),
+          color(String(Consts.Colors.light)),
           fontWeight(`_300),
         ]),
     },
@@ -67,20 +67,24 @@ let make = _children => {
          {
            title: {j|JavaScript|j},
            text: {j|ES20** + Flow / TypeScript|j},
-           color: "#fff",
+           color: Consts.Colors.light,
            bg: "#000B28",
-           bg2: "#000F2B",
+           bg2: Consts.Colors.dark,
            icon:
              <View style=Style.(concat([styles##icon, style([])]))>
-               <SVGJavaScriptMini width=170. height=170. fill="#ffffff" />
+               <SVGJavaScriptMini
+                 width=170.
+                 height=170.
+                 fill=Consts.Colors.light
+               />
              </View>,
          },
          {
            title: {j|React|j},
            text: {j|Web or Native... or both!|j},
-           color: "#fff",
+           color: Consts.Colors.light,
            bg: "#09274F",
-           bg2: "#000F2B",
+           bg2: Consts.Colors.dark,
            icon:
              <View
                style=Style.(
@@ -89,15 +93,15 @@ let make = _children => {
                    style([right(Pt(-40.)), bottom(Pt(-40.))]),
                  ])
                )>
-               <SVGReact width=200. height=200. fill="#ffffff" />
+               <SVGReact width=200. height=200. fill=Consts.Colors.light />
              </View>,
          },
          {
            title: {j|Reason|j},
            text: {j|Ocaml + BuckleScript = ♥|j},
-           color: "#fff",
+           color: Consts.Colors.light,
            bg: "#035A93",
-           bg2: "#000F2B",
+           bg2: Consts.Colors.dark,
            icon:
              <View
                style=Style.(
@@ -106,15 +110,19 @@ let make = _children => {
                    style([right(Pt(-40.)), bottom(Pt(-40.))]),
                  ])
                )>
-               <SVGReasonMini width=200. height=200. fill="#ffffff" />
+               <SVGReasonMini
+                 width=200.
+                 height=200.
+                 fill=Consts.Colors.light
+               />
              </View>,
          },
          {
            title: {j|Front-End|j},
            text: {j|I care about UI and UX|j},
-           color: "#fff",
+           color: Consts.Colors.light,
            bg: "#28416A",
-           bg2: "#000F2B",
+           bg2: Consts.Colors.dark,
            icon:
              <View
                style=Style.(
@@ -123,29 +131,33 @@ let make = _children => {
                    style([right(Pt(-30.)), bottom(Pt(-30.))]),
                  ])
                )>
-               <SVGTouch width=200. height=200. fill="#ffffff" />
+               <SVGTouch width=200. height=200. fill=Consts.Colors.light />
              </View>,
          },
          {
            title: {j|Best Practices|j},
            text: {j|Git, Reviews, Tests...|j},
-           color: "#fff",
+           color: Consts.Colors.light,
            bg: "#0FA5AE",
-           bg2: "#000F2B",
+           bg2: Consts.Colors.dark,
            icon:
              <View style=Style.(concat([styles##icon, style([])]))>
-               <SVGUi width=180. height=180. fill="#ffffff" />
+               <SVGUi width=180. height=180. fill=Consts.Colors.light />
              </View>,
          },
          {
            title: {j|Open Source|j},
            text: {j|Sharing is caring|j},
-           color: "#fff",
+           color: Consts.Colors.light,
            bg: "#36E9BE",
-           bg2: "#000F2B",
+           bg2: Consts.Colors.dark,
            icon:
              <View style=Style.(concat([styles##icon, style([])]))>
-               <SVGSocialGithub width=200. height=200. fill="#ffffff" />
+               <SVGSocialGithub
+                 width=200.
+                 height=200.
+                 fill=Consts.Colors.light
+               />
              </View>,
          },
        |]

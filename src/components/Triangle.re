@@ -4,7 +4,13 @@ let component = ReasonReact.statelessComponent("Triangle");
 
 let coef = 2. *. 0.8660254;
 
-let make = (~height=50., ~color="#fff", ~style=Style.style([]), _children) => {
+let make =
+    (
+      ~height=50.,
+      ~color=Consts.Colors.light,
+      ~style=Style.style([]),
+      _children,
+    ) => {
   ...component,
   render: _self =>
     <View

@@ -36,25 +36,25 @@ let styles =
         style([
           fontSize(Float(44.)),
           fontWeight(`Bold),
-          color(String("#fff")),
+          color(String(Consts.Colors.light)),
         ]),
       "subtitle":
         style([
           fontSize(Float(16.)),
           fontWeight(`_200),
-          color(String("#fff")),
+          color(String(Consts.Colors.light)),
         ]),
-      "textWrapper": style([backgroundColor(String("#fff"))]),
+      "textWrapper": style([backgroundColor(String(Consts.Colors.light))]),
       "textStrong":
         style([
           fontSize(Float(30.)),
-          color(String("#000F2B")),
+          color(String(Consts.Colors.dark)),
           fontWeight(`_800),
         ]),
       "textLight":
         style([
           fontSize(Float(26.)),
-          color(String("#000F2B")),
+          color(String(Consts.Colors.dark)),
           fontWeight(`_200),
         ]),
     },

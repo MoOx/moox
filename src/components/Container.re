@@ -2,8 +2,6 @@ open BsReactNative;
 
 let component = ReasonReact.statelessComponent("Container");
 
-let backgroundColor = "#fefefe";
-
 let styles =
   StyleSheet.create(
     Style.{
@@ -30,7 +28,7 @@ let make =
     (
       ~wrapperStyle=?,
       ~style=?,
-      ~backgroundColor=Some(backgroundColor),
+      ~backgroundColor=Some(Consts.Colors.light),
       ~maxWidth=840.,
       children,
     ) => {

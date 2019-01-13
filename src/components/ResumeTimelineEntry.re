@@ -6,6 +6,7 @@ let styles =
       "wrapper": style([flex(1.)]),
       "container":
         style([
+          backgroundColor(String(Consts.Colors.lightest)),
           shadowColor(String("#000")),
           shadowOffset(~width=0., ~height=5.),
           shadowOpacity(0.15),
@@ -17,7 +18,7 @@ let styles =
           borderTopRightRadius(6.),
           overflow(Hidden),
         ]),
-      "image": style([backgroundColor(String("#035A93"))]),
+      "image": style([]),
       "block": style([flex(1.)]),
       "head": style([flexDirection(Row), justifyContent(SpaceBetween)]),
       "title":
@@ -52,7 +53,7 @@ let styles =
           justifyContent(Center),
           alignItems(FlexEnd),
           fontSize(Float(14.)),
-          color(String("#111")),
+          color(String(Consts.Colors.dark)),
           fontWeight(`_200),
         ]),
       "tags":
@@ -65,7 +66,7 @@ let styles =
       "tag":
         style([
           fontSize(Float(14.)),
-          color(String("#111")),
+          color(String(Consts.Colors.dark)),
           fontWeight(`_300),
         ]),
     },

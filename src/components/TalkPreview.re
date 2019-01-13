@@ -21,7 +21,7 @@ let styles =
           padding(Pt(20.)),
           alignItems(FlexStart),
           lineHeight(28.),
-          color(String("#000F2B")),
+          color(String(Consts.Colors.dark)),
         ]),
       "bullet": style([]),
       "title": style([fontSize(Float(22.))]),

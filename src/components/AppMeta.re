@@ -25,6 +25,7 @@ let make = _ => {
       />
       <link rel="manifest" href="manifest.json" />
       <meta name="theme-color" content="#0C0F1E" />
+      /* <link rel="mask-icon" href="safari-pinned-tab.svg" color="#0C0F1E" /> */
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, viewport-fit=cover"
@@ -79,5 +80,4 @@ body {
         ->ReasonReact.string
       </style>
     </BsReactHelmet>,
-  /* <link rel="mask-icon" href="safari-pinned-tab.svg" color="#0C0F1E" /> */
 };

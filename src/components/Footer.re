@@ -12,7 +12,7 @@ let styles =
           flexWrap(Wrap),
           justifyContent(SpaceBetween),
         ]),
-      "barWrapper": style([backgroundColor(String("#000F2B"))]),
+      "barWrapper": style([backgroundColor(String(Consts.Colors.dark))]),
       "icons": style([flexDirection(Row)]),
       "barLinks": style([flexDirection(Row)]),
       "barLink":

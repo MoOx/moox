@@ -9,9 +9,9 @@ let styles =
         style([
           flexDirection(Row),
           justifyContent(SpaceBetween),
-          backgroundColor(String("#fff")),
+          backgroundColor(String(Consts.Colors.light)),
           borderTopWidth(10.),
-          borderColor(String("#000F2B")),
+          borderColor(String(Consts.Colors.dark)),
           shadowColor(String("#000")),
           shadowOffset(~width=0., ~height=5.),
           shadowOpacity(0.1),
@@ -52,7 +52,7 @@ let make = _children => {
   render: _self =>
     <SpacedView vertical=M horizontal=XS style=styles##wrapper>
       <ViewLink style=styles##logo href="/">
-        <SVGLogo width=24. height=24. fill="#000F2B" />
+        <SVGLogo width=24. height=24. fill=Consts.Colors.dark />
         <Text style=styles##logoText>
           {("  " ++ Consts.title)->ReasonReact.string}
         </Text>
@@ -61,7 +61,7 @@ let make = _children => {
       <SocialIcons
         wrapperStyle=styles##icons
         iconStyle=styles##icon
-        iconColor="#000F2B"
+        iconColor=Consts.Colors.dark
         iconSize=20.
       />
     </SpacedView>,
