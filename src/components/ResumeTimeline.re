@@ -23,7 +23,7 @@ let component = ReasonReact.statelessComponent("ResumeTimeline");
 let tlSpacer =
   <>
     <Spacer size=L />
-    <div className="device-large"> <Spacer size=XXL /> </div>
+    <WindowSizeFilter.MMin> <Spacer size=XXL /> </WindowSizeFilter.MMin>
   </>;
 
 let make = (~items, _) => {
