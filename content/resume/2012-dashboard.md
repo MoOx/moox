@@ -12,3 +12,8 @@ hashtags:
   - jQuery
 image: /resume/jirafe.jpg
 ---
+
+Working on the webapp v2, using Backbone.js & the less jQuery possible to avoid
+it in the near futur & a secured API on the back-end. The entire front-end
+process use a specific Gruntfile to handle our JavaScript, templates, icons as
+webfonts, Sass stylesheets, generated styleguide & more.
