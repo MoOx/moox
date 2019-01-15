@@ -11,7 +11,7 @@ let styles =
           marginVertical(Pt(20.)),
           color(String(Consts.Colors.dark)),
         ]),
-      "text": style([justifyContent(Center), alignItems(Center)]),
+      "text": style([justifyContent(Center)]),
     },
   );
 
@@ -26,25 +26,38 @@ let make = _children => {
           {("Contact - " ++ Consts.defaultTitle)->ReasonReact.string}
         </title>
       </BsReactHelmet>
-      <Container>
-        <Spacer />
-        <Text style=styles##title> {"Contact" |> R.string} </Text>
-        <Spacer />
-        <View style=styles##text>
-          <Text> {"Want to get in touch with me?" |> R.string} </Text>
-          <br />
-          <Text> {"hello (at) moox.io" |> R.string} </Text>
-          <br />
-          <Text> {"+33 6 78 13 54 39" |> R.string} </Text>
-          <br />
-          <Text>
-            <a href="https://twitter.com/MoOx">
-              {"twitter.com/MoOx" |> R.string}
-            </a>
-            <Text> {" (DM open)" |> R.string} </Text>
-          </Text>
-        </View>
-        <Spacer size=XXL />
+      <Container maxWidth=300.>
+        <WindowSizeFilter.MMin> <Spacer size=L /> </WindowSizeFilter.MMin>
+        <SpacedView horizontal=M vertical=L>
+          <Text style=styles##title> "Contact"->ReasonReact.string </Text>
+          <Spacer size=L />
+          <View style=styles##text>
+            <Text style=Style.(style([textAlign(Center)]))>
+              "Want to get in touch with me?\nIt's easy."->ReasonReact.string
+            </Text>
+            <Spacer size=XL />
+            <Text>
+              <Text> "Email: "->ReasonReact.string </Text>
+              <Text> "hello (at) moox.io"->ReasonReact.string </Text>
+            </Text>
+            <br />
+            <Text>
+              <Text> "Phone: "->ReasonReact.string </Text>
+              <UnderlinedTextLink href="tel:+33678135439">
+                "+33 6 78 13 54 39"->ReasonReact.string
+              </UnderlinedTextLink>
+            </Text>
+            <br />
+            <Text>
+              <Text> "Twitter DM: "->ReasonReact.string </Text>
+              <UnderlinedTextLink href="https://twitter.com/MoOx">
+                "https://twitter.com/MoOx"->ReasonReact.string
+              </UnderlinedTextLink>
+            </Text>
+          </View>
+        </SpacedView>
+        <Spacer size=XL />
+        <WindowSizeFilter.MMin> <Spacer size=L /> </WindowSizeFilter.MMin>
       </Container>
     </AppWrapper>,
 };
