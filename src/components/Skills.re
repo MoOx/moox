@@ -98,7 +98,7 @@ let make = _children => {
          },
          {
            title: {j|ReasonML|j},
-           text: {j|Ocaml + BuckleScript = ♥|j},
+           text: {j|OCaml + BuckleScript = ♥|j},
            color: Consts.Colors.light,
            bg: "#035A93",
            bg2: Consts.Colors.dark,
