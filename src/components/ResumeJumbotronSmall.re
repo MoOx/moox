@@ -52,8 +52,7 @@ let make = _children => {
         style=Style.(
           style([
             width(Pct(100.)),
-            /* minHeight(Pt(390.)), */
-            /* overflow(Hidden), */
+            overflow(Hidden),
             alignItems(FlexStart),
           ])
         )>
