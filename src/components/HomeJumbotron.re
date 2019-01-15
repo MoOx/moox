@@ -44,7 +44,11 @@ let styles =
           fontWeight(`_200),
           color(String(Consts.Colors.light)),
         ]),
-      "textWrapper": style([backgroundColor(String(Consts.Colors.light))]),
+      "textWrapper":
+        style([
+          backgroundColor(String(Consts.Colors.lightest)),
+          opacity(Float(0.95)),
+        ]),
       "textStrong":
         style([
           fontSize(Float(30.)),
@@ -62,10 +66,26 @@ let styles =
 
 let make = _children => {
   ...component,
-  render: _self =>
+  render: _self => {
     <View style=styles##container>
       <MeBackground style=styles##bg />
       <View style=styles##contentWrapper>
+        <WindowSizeFilter.MMin
+          style=Style.(
+            style([
+              position(Absolute),
+              right(Pt(-20.)),
+              bottom(Pt(-80.)),
+              Transform.make(~rotate="6deg", ()),
+            ])
+          )>
+          <SVGLogo
+            width=360.
+            height=360.
+            fill=Consts.Colors.lightest
+            style=Style.(style([opacity(Float(0.06))]))
+          />
+        </WindowSizeFilter.MMin>
         <WindowSizeFilter.MMin
           style=Style.(style([width(Pct(20.)), height(Pt(1.))]))
         />
@@ -83,5 +103,6 @@ let make = _children => {
           </SpacedView>
         </View>
       </View>
-    </View>,
+    </View>;
+  },
 };

@@ -213,6 +213,22 @@ let make = _children => {
           "linear-gradient(hsl(219.1, 100%, 8.5%), hsl(219.1, 40%, 8.5%))",
         (),
       )}>
+      <View
+        style=Style.(
+          style([
+            position(Absolute),
+            right(Pt(-20.)),
+            bottom(Pt(20.)),
+            Transform.make(~rotate="6deg", ()),
+          ])
+        )>
+        <SVGLogo
+          width=320.
+          height=320.
+          fill=Consts.Colors.light
+          style=Style.(style([opacity(Float(0.02))]))
+        />
+      </View>
       <View style=Style.(style([justifyContent(FlexEnd), flex(1.)]))>
         <View
           style=Style.(

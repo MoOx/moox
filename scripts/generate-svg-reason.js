@@ -9,14 +9,16 @@ const template = ({ name }) =>
 
 let defaultSize = 16.;
 
-let make = (~width=defaultSize, ~height=defaultSize, ~fill="#000") =>
+let make = (~width=defaultSize, ~height=defaultSize, ~fill="#000", ~style=?, children) =>
   ReasonReact.wrapJsForReason(
     ~reactClass=js${name},
     ~props={
       "width": string_of_float(width) ++ (_os === "web" ? "0px" : "0"),
       "height": string_of_float(height) ++ (_os === "web" ? "0px" : "0"),
-      "fill": fill
-    }
+      "fill": fill,
+      "style": style
+    },
+    children
   );
 `;
 
