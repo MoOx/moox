@@ -5,8 +5,8 @@ let component = ReasonReact.statelessComponent("Background");
 let styles = StyleSheet.create(Style.{"img": style([])});
 
 let uri = "/me.png";
-let width: Style.pt_only = Style.Pt(780. /. 2.8);
-let height: Style.pt_only = Style.Pt(1000. /. 2.8);
+let width: Style.pt_only = Style.Pt(390. /. 1.4);
+let height: Style.pt_only = Style.Pt(500. /. 1.4);
 
 let make = _children => {
   ...component,
