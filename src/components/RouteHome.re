@@ -61,7 +61,7 @@ let make = (~posts) => {
           <View style=styles##row>
             <SpacedView vertical=M horizontal=XS style=styles##flex>
               <Text style=styles##textLight>
-                {j|I build apps using React, JavaScript & Reason.|j}
+                {j|I build apps using React, JavaScript & ReasonML.|j}
                 ->ReasonReact.string
               </Text>
             </SpacedView>

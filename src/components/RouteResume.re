@@ -75,7 +75,7 @@ let make = (~items) => {
             </Text>
             <Spacer />
             <Text style=styles##textLight>
-              {j|I make front-ends using React, JavaScript & Reason.|j}
+              {j|I make front-ends using React, JavaScript & ReasonML.|j}
               ->R.string
             </Text>
           </View>
@@ -126,7 +126,7 @@ let make = (~items) => {
                   <SVGReason fill="#bbb" width=48. height=48. />
                 </div>
                 <Text style=styles##iconText>
-                  "Reason"->ReasonReact.string
+                  "ReasonML"->ReasonReact.string
                 </Text>
               </SpacedView>
               <SpacedView horizontal=XS vertical=XS>

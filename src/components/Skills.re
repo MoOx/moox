@@ -97,7 +97,7 @@ let make = _children => {
              </View>,
          },
          {
-           title: {j|Reason|j},
+           title: {j|ReasonML|j},
            text: {j|Ocaml + BuckleScript = ♥|j},
            color: Consts.Colors.light,
            bg: "#035A93",
