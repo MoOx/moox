@@ -13,6 +13,6 @@ hashtags:
   - Git
   - Legacy
 links:
-  - title: ViaReport Statutory Consolidation app
+  - title: Statutory Consolidation app
     url: https://www.viareport.com/en/statutory_consolidation/
 ---
