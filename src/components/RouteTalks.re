@@ -26,6 +26,11 @@ let make = (~talks) => {
   ...component,
   render: _self =>
     <AppWrapper>
+      <BsReactHelmet>
+        <title>
+          {("Talks - " ++ Consts.defaultTitle)->ReasonReact.string}
+        </title>
+      </BsReactHelmet>
       <Container>
         <Spacer />
         <Text style=styles##title> {"Latest Talks" |> R.string} </Text>

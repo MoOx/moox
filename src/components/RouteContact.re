@@ -21,6 +21,11 @@ let make = _children => {
   ...component,
   render: _self =>
     <AppWrapper>
+      <BsReactHelmet>
+        <title>
+          {("Contact - " ++ Consts.defaultTitle)->ReasonReact.string}
+        </title>
+      </BsReactHelmet>
       <Container>
         <Spacer />
         <Text style=styles##title> {"Contact" |> R.string} </Text>

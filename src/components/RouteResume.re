@@ -65,6 +65,11 @@ let make = (~items) => {
   ...component,
   render: _self =>
     <AppWrapper>
+      <BsReactHelmet>
+        <title>
+          {("Resume - " ++ Consts.defaultTitle)->ReasonReact.string}
+        </title>
+      </BsReactHelmet>
       <WindowSizeFilter.SMax> <ResumeJumbotronSmall /> </WindowSizeFilter.SMax>
       <WindowSizeFilter.MMin> <ResumeJumbotronLarge /> </WindowSizeFilter.MMin>
       <Container>
@@ -295,7 +300,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                   <SVGTraining fill="#bbb" width=48. height=48. />
                 </div>
                 <Text style=styles##iconText>
-                  "Teach"->ReasonReact.string
+                  "Teaching"->ReasonReact.string
                 </Text>
               </SpacedView>
             </View>
