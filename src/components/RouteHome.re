@@ -81,15 +81,27 @@ Leading team to get started with latest & proven technologies is my jam. I like 
         </SpacedView>
         <Spacer />
         <Text style=styles##nanoTitle>
-          {"THINGS I LIKE TO WORK WITH" |> R.string}
+          "THINGS I LIKE TO WORK WITH"->ReasonReact.string
         </Text>
         <Skills />
+        <UnderlinedTextLink
+          href="/resume/"
+          style=Style.(
+            style([
+              fontSize(Float(14.)),
+              fontWeight(`_200),
+              textAlign(Center),
+              color(String("#bbc")),
+            ])
+          )>
+          "And more"->ReasonReact.string
+        </UnderlinedTextLink>
         <Spacer size=L />
       </Container>
       <Container maxWidth=1600.>
         <Spacer size=L />
         <Text style=styles##nanoTitle>
-          {"COMPANIES THAT TRUSTED ME" |> R.string}
+          "COMPANIES THAT TRUSTED ME"->ReasonReact.string
         </Text>
         <View style=styles##row>
           <SVGCompanyKisioDigital width=200. height=200. fill="#bbb" />
@@ -102,7 +114,7 @@ Leading team to get started with latest & proven technologies is my jam. I like 
       <Spacer size=L />
       <View style=styles##center>
         <Text style=styles##nanoTitle>
-          {"Interested with my profile ?" |> R.string}
+          "Interested with my profile ?"->ReasonReact.string
         </Text>
         <Spacer size=L />
         <View style=styles##center>
@@ -122,7 +134,7 @@ Leading team to get started with latest & proven technologies is my jam. I like 
       <Container style=styles##center>
         <Spacer size=XL />
         <Text style=styles##title>
-          {"Latest Posts on the blog" |> R.string}
+          "Latest Posts on the blog"->ReasonReact.string
         </Text>
         {switch ((posts: T.contentList)) {
          | Inactive
@@ -132,7 +144,9 @@ Leading team to get started with latest & proven technologies is my jam. I like 
            <View>
              <PostList posts=posts##list />
              <View style=styles##links>
-               <TextLink href="/blog/"> {"More posts" |> R.string} </TextLink>
+               <TextLink href="/blog/">
+                 "More posts"->ReasonReact.string
+               </TextLink>
              </View>
            </View>
          }}
