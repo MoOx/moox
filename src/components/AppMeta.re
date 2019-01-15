@@ -5,6 +5,7 @@ let make = _ => {
   ...component,
   render: _self =>
     <BsReactHelmet defaultTitle=Consts.defaultTitle>
+      <html lang="en" dir="ltr" />
       <meta charSet="utf-8" />
       <link
         rel="apple-touch-icon"
