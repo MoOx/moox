@@ -1,5 +1,5 @@
 let title = {j|MoOx|j};
-let defaultTitle = title ++ {j|, Front-End Web & Mobile Developer|j};
+let defaultTitle = title ++ {j|, Freelance Front-End Web & Mobile Developer|j};
 let titleTemplate = {j|%s - |j} ++ title;
 
 type menuLink = {
