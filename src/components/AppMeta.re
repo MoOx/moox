@@ -7,6 +7,9 @@ let make = _ => {
     <BsReactHelmet defaultTitle=Consts.defaultTitle>
       <html lang="en" dir="ltr" />
       <meta charSet="utf-8" />
+      /* analytics */
+      <link rel="dns-prefetch" href="https://a.moox.fr" />
+      <link rel="preconnect" href="https://a.moox.fr" />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
