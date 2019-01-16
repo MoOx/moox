@@ -73,6 +73,6 @@ let socialLinks = [
 module Colors = {
   let darkest = "hsl(219.1, 100%, 2%)";
   let dark = "hsl(219.1, 100%, 8.5%)";
-  let light = "hsl(219.1, 100%, 98.5%)";
+  let light = "hsl(219.1, 100%, 99%)";
   let lightest = "hsl(219.1, 100%, 99.5%)";
 };

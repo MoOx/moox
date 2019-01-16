@@ -24,9 +24,10 @@ let make = _ => {
         sizes="16x16"
         href="/favicon-16x16.png"
       />
-      <link rel="manifest" href="manifest.json" />
-      <meta name="theme-color" content="#0C0F1E" />
-      /* <link rel="mask-icon" href="safari-pinned-tab.svg" color="#0C0F1E" /> */
+      <link rel="manifest" href="/site.webmanifest" />
+      /* <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000f2b" /> */
+      <meta name="msapplication-TileColor" content="#fafcff" />
+      <meta name="theme-color" content="#fafcff" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, viewport-fit=cover"
