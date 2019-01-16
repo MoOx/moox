@@ -75,9 +75,9 @@ let make = (~items) => {
       <Container>
         <SpacedView horizontal=M vertical=L>
           <View style=Style.(style([alignItems(Center)]))>
-            <Text style=styles##textStrong>
+            <TextWeb style=styles##textStrong accessibilityRole="heading">
               {j|Freelance Mobile & Web Developer|j}->R.string
-            </Text>
+            </TextWeb>
             <Spacer />
             <Text style=styles##textLight>
               {j|I make front-ends using React, JavaScript & ReasonML.|j}

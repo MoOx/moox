@@ -89,7 +89,7 @@ let make = _children => {
         <WindowSizeFilter.MMin
           style=Style.(style([width(Pct(20.)), height(Pt(1.))]))
         />
-        <View style=styles##content>
+        <ViewWeb style=styles##content accessibilityRole="heading">
           <Text style=styles##title> {"MoOx" |> R.string} </Text>
           <Text style=styles##subtitle> {"Maxime Thirouin" |> R.string} </Text>
           <Spacer />
@@ -101,7 +101,7 @@ let make = _children => {
               {{j|Mobile & Web|j} |> R.string}
             </Text>
           </SpacedView>
-        </View>
+        </ViewWeb>
       </View>
     </View>;
   },

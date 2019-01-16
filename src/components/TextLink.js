@@ -12,6 +12,7 @@ export default function TextLink(props, context) {
   return (
     <Text
       {...otherProps}
+      accessibilityLabel={props.accessibilityLabel}
       accessibilityRole="link"
       href={hrefify(href)}
       onPress={handlePress(props, context.router)}

@@ -3,6 +3,8 @@ external reactClass: ReasonReact.reactClass = "default";
 
 [@bs.deriving abstract]
 type jsProps = {
+  [@bs.optional]
+  accessibilityLabel: string,
   href: string,
   [@bs.optional]
   style: BsReactNative.Style.t,
@@ -16,6 +18,7 @@ type jsProps = {
 
 let make =
     (
+      ~accessibilityLabel=?,
       ~href,
       ~style=?,
       ~activeStyle=?,
@@ -27,6 +30,7 @@ let make =
     ~reactClass,
     ~props=
       jsProps(
+        ~accessibilityLabel?,
         ~href,
         ~style?,
         ~activeStyle?,

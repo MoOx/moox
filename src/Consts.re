@@ -47,6 +47,7 @@ let menuLinks = [|
 |];
 
 type socialLink = {
+  text: string,
   link: string,
   componentFunc:
     (~iconColor: string, ~iconSize: float) => ReasonReact.reactElement,
@@ -54,16 +55,19 @@ type socialLink = {
 
 let socialLinks = [
   {
+    text: "@MoOx on GitHub",
     link: "https://github.com/MoOx",
     componentFunc: (~iconColor, ~iconSize) =>
       <SVGSocialGithub fill=iconColor width=iconSize height=iconSize />,
   },
   {
+    text: "@MoOx on LinkedIn",
     link: "https://www.linkedin.com/in/maxthirouin/",
     componentFunc: (~iconColor, ~iconSize) =>
       <SVGSocialLinkedin fill=iconColor width=iconSize height=iconSize />,
   },
   {
+    text: "@MoOx on Twitter",
     link: "https://twitter.com/MoOx",
     componentFunc: (~iconColor, ~iconSize) =>
       <SVGSocialTwitter fill=iconColor width=iconSize height=iconSize />,
