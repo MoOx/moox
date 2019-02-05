@@ -11,6 +11,6 @@ hashtags:
   - JavaScript
   - React
   - Redux
-  - BestPractises
+  - BestPractices
 image: /resume/molotov.tv.jpg
 ---
