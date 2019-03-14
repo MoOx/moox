@@ -73,7 +73,7 @@ let make = (~posts) => {
           </View>
           <Spacer size=M />
           <Text style=styles##blahblahText>
-            {j|Since I made my first website in 1995, I never stopped to learn things. I love to build useful UIs that offer the best UX possible. I like to produce durable things when working on products or long-running projects by focusing on maintainability, scalability and performance.
+            {j|Since I made my first website in 1998, I never stopped to learn things. I love to build useful UIs that offer the best UX possible. I like to produce durable things when working on products or long-running projects by focusing on maintainability, scalability and performance.
 Over the years, I refined my way to approach development, mostly by cultivating my empathy.
 Leading team to get started with latest & proven technologies is my jam. I like to teach people to work better on large codebase that must scale.|j}
             ->ReasonReact.string
