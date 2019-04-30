@@ -24,10 +24,13 @@
     "bs-fetch",
     "@glennsl/bs-json",
     "reason-react",
-    "bs-react-native",
+    "bs-react-native-monorepo/bs-react-native",
     "@moox/bs-react-helmet",
     "@phenomic/preset-react-app",
     "@phenomic/plugin-renderer-react",
     "@phenomic/api-client"
-  ]
+  ],
+  "js-post-build": {
+    "cmd": "./node_modules/bs-react-native-monorepo/git-monorepo-usage-trick"
+  }
 }

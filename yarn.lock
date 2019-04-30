@@ -2400,10 +2400,9 @@ bs-platform@^4.0.8:
   resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-4.0.17.tgz#41458e74c101f7ac97eba723660971a42f0c5e65"
   integrity sha512-ypn2VEAmuVgX+ezKF9HXXzZ9Fe47UMPyt0x9MBBAF/C0Fus9wEIOdRD0gB4p3J9uLabB/MRWWuw7ORnP8w086g==
 
-bs-react-native@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/bs-react-native/-/bs-react-native-0.10.0.tgz#4a9167cbe4c858008a9e56a0f745ba723c74101c"
-  integrity sha512-QpSbKwuYbDU1qBrxplmKvO8TZOtK2DpevoOUxDm0NfMNAdF6oacSbJfqMx89n2eGzMm8imZ3JsUeZPl6OT2N4A==
+"bs-react-native-monorepo@https://github.com/reasonml-community/bs-react-native.git#jsx3-migration":
+  version "0.0.0"
+  resolved "https://github.com/reasonml-community/bs-react-native.git#1de41af6c4c031945eb0d5a4a59c6f6a9ea4f69c"
 
 bser@^2.0.0:
   version "2.0.0"
