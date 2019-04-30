@@ -1,5 +1,2 @@
-[@bs.module "./HeaderLargeWithRouter"]
-external reactClass: ReasonReact.reactClass = "default";
-
-let make = children =>
-  ReasonReact.wrapJsForReason(~reactClass, ~props=Js.Obj.empty(), children);
+[@bs.module "./HeaderLargeWithRouter.js"] [@react.component]
+external make: (~children: React.element=?) => React.element = "default";

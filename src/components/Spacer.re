@@ -15,8 +15,8 @@ type size =
   | Custom(float);
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "xxl": style([width(Pt(space *. 4.)), height(Pt(space *. 4.))]),
       "xl": style([width(Pt(space *. 3.)), height(Pt(space *. 3.))]),
       "l": style([width(Pt(space *. 2.)), height(Pt(space *. 2.))]),
@@ -36,26 +36,28 @@ let styles =
           width(Pt(space *. 1. /. 4.)),
           height(Pt(space *. 1. /. 4.)),
         ]),
-    },
+    })
   );
 
-let make = (~size=M, ~style=Style.style([]), _) => {
-  ...component,
-  render: _self =>
-    <View
-      style={Style.concat([
-        switch (size) {
-        | XXL => styles##xxl
-        | XL => styles##xl
-        | L => styles##l
-        | M => styles##m
-        | S => styles##s
-        | XS => styles##xs
-        | XXS => styles##xxs
-        | Custom(value) =>
-          Style.style([Style.width(Pt(value)), Style.height(Pt(value))])
-        },
-        style,
-      ])}
-    />,
-};
+[@react.component]
+let make = (~size: size=M, ~style=Style.style([]), ()) =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <View
+        style={Style.concat([
+          switch (size) {
+          | XXL => styles##xxl
+          | XL => styles##xl
+          | L => styles##l
+          | M => styles##m
+          | S => styles##s
+          | XS => styles##xs
+          | XXS => styles##xxs
+          | Custom(value) =>
+            Style.style([Style.width(Pt(value)), Style.height(Pt(value))])
+          },
+          style,
+        ])}
+      />,
+  });

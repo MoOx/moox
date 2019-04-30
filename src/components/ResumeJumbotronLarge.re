@@ -200,103 +200,105 @@ let firstWebsite =
     </Text>
   </View>;
 
-let make = _children => {
-  ...component,
-  render: _self =>
-    <div
-      style={ReactDOMRe.Style.make(
-        ~display="flex",
-        ~flexDirection="row",
-        ~justifyContent="space-between",
-        ~flex="1 1 auto",
-        ~background=
-          "linear-gradient(hsl(219.1, 100%, 8.5%), hsl(219.1, 40%, 8.5%))",
-        (),
-      )}>
-      <View
-        style=Style.(
-          style([
-            position(Absolute),
-            right(Pt(-20.)),
-            bottom(Pt(20.)),
-            Transform.make(~rotate="6deg", ()),
-          ])
-        )>
-        <SVGLogo
-          width=320.
-          height=320.
-          fill=Consts.Colors.light
-          style=Style.(style([opacity(Float(0.02))]))
-        />
-      </View>
-      <View style=Style.(style([justifyContent(FlexEnd), flex(1.)]))>
+[@react.component]
+let make = () =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <div
+        style={ReactDOMRe.Style.make(
+          ~display="flex",
+          ~flexDirection="row",
+          ~justifyContent="space-between",
+          ~flex="1 1 auto",
+          ~background=
+            "linear-gradient(hsl(219.1, 100%, 8.5%), hsl(219.1, 40%, 8.5%))",
+          (),
+        )}>
         <View
           style=Style.(
             style([
-              /* width(Pct(100.)), */
-              backgroundColor(String(Consts.Colors.light)),
-              height(Pt(triangleHeight)),
+              position(Absolute),
+              right(Pt(-20.)),
+              bottom(Pt(20.)),
+              Transform.make(~rotate="6deg", ()),
             ])
           )>
-          leftTriangle
-          <Spacer size=L />
+          <SVGLogo
+            width=320.
+            height=320.
+            fill=Consts.Colors.light
+            style=Style.(style([opacity(Float(0.02))]))
+          />
         </View>
-      </View>
-      <View style=Style.(style([flexGrow(1.)]))>
-        <View
-          style=Style.(
-            style([position(Absolute), bottom(Pt(0.)), left(Pct(51.))])
-          )>
-          <View style=Style.(style([left(Pct(-50.))]))> <Me /> </View>
-        </View>
-        <View
-          style=Style.(
-            style([
-              flexGrow(1.),
-              zIndex(1),
-              width(Pct(100.)),
-              /* minHeight(Pt(390.)), */
-              /* overflow(Hidden), */
-              alignItems(Center),
-            ])
-          )>
-          <Spacer size=L />
-          <View style=Style.(style([flexDirection(Row), flexGrow(1.)]))>
-            <View style=Style.(style([justifyContent(SpaceBetween)]))>
-              moox
-              proForXyears
-            </View>
-            <Spacer size=XXL />
-            <View
-              style=Style.(
-                style([
-                  flex(1.),
-                  justifyContent(FlexEnd),
-                  alignItems(Center),
-                ])
-              )>
-              meta
-            </View>
-            <Spacer size=XXL />
-            <View style=Style.(style([justifyContent(SpaceBetween)]))>
-              firstMobileApp
-              <Spacer size=L />
-              firstWebsite
-            </View>
+        <View style=Style.(style([justifyContent(FlexEnd), flex(1.)]))>
+          <View
+            style=Style.(
+              style([
+                /* width(Pct(100.)), */
+                backgroundColor(String(Consts.Colors.light)),
+                height(Pt(triangleHeight)),
+              ])
+            )>
+            leftTriangle
+            <Spacer size=L />
           </View>
-          <Spacer size=L />
         </View>
-      </View>
-      <View style=Style.(style([justifyContent(FlexEnd), flex(1.)]))>
-        <View
-          style=Style.(
-            style([
-              backgroundColor(String(Consts.Colors.light)),
-              height(Pt(triangleHeight)),
-            ])
-          )>
-          rightTriangle
+        <View style=Style.(style([flexGrow(1.)]))>
+          <View
+            style=Style.(
+              style([position(Absolute), bottom(Pt(0.)), left(Pct(51.))])
+            )>
+            <View style=Style.(style([left(Pct(-50.))]))> <Me /> </View>
+          </View>
+          <View
+            style=Style.(
+              style([
+                flexGrow(1.),
+                zIndex(1),
+                width(Pct(100.)),
+                /* minHeight(Pt(390.)), */
+                /* overflow(Hidden), */
+                alignItems(Center),
+              ])
+            )>
+            <Spacer size=L />
+            <View style=Style.(style([flexDirection(Row), flexGrow(1.)]))>
+              <View style=Style.(style([justifyContent(SpaceBetween)]))>
+                moox
+                proForXyears
+              </View>
+              <Spacer size=XXL />
+              <View
+                style=Style.(
+                  style([
+                    flex(1.),
+                    justifyContent(FlexEnd),
+                    alignItems(Center),
+                  ])
+                )>
+                meta
+              </View>
+              <Spacer size=XXL />
+              <View style=Style.(style([justifyContent(SpaceBetween)]))>
+                firstMobileApp
+                <Spacer size=L />
+                firstWebsite
+              </View>
+            </View>
+            <Spacer size=L />
+          </View>
         </View>
-      </View>
-    </div>,
-};
+        <View style=Style.(style([justifyContent(FlexEnd), flex(1.)]))>
+          <View
+            style=Style.(
+              style([
+                backgroundColor(String(Consts.Colors.light)),
+                height(Pt(triangleHeight)),
+              ])
+            )>
+            rightTriangle
+          </View>
+        </View>
+      </div>,
+  });

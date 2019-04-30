@@ -86,23 +86,23 @@ let rec renderChild = (parentTag, index: int, child) => {
   | Element(tag, props, children) =>
     switch (tag) {
     /* custom tag */
-    | "huge" => <Huge key> (renderChildren(tag, children)) </Huge>
+    | "huge" => <Huge key> {renderChildren(tag, children)} </Huge>
     /* html tags */
     | "a" =>
       <UnderlinedTextLink key href=props##href>
-        (renderChildren(tag, children))
+        {renderChildren(tag, children)}
       </UnderlinedTextLink>
-    | "h1" => <Html.H1 key> (renderChildren(tag, children)) </Html.H1>
-    | "h2" => <Html.H2 key> (renderChildren(tag, children)) </Html.H2>
-    | "h3" => <Html.H3 key> (renderChildren(tag, children)) </Html.H3>
-    | "h4" => <Html.H4 key> (renderChildren(tag, children)) </Html.H4>
-    | "h5" => <Html.H5 key> (renderChildren(tag, children)) </Html.H5>
-    | "h6" => <Html.H6 key> (renderChildren(tag, children)) </Html.H6>
-    | "p" => <Html.P key> (renderChildren(tag, children)) </Html.P>
-    | "ul" => <Html.Ul key> (renderChildren(tag, children)) </Html.Ul>
-    | "li" => <Html.Li key> (renderChildren(tag, children)) </Html.Li>
+    | "h1" => <Html.H1 key> {renderChildren(tag, children)} </Html.H1>
+    | "h2" => <Html.H2 key> {renderChildren(tag, children)} </Html.H2>
+    | "h3" => <Html.H3 key> {renderChildren(tag, children)} </Html.H3>
+    | "h4" => <Html.H4 key> {renderChildren(tag, children)} </Html.H4>
+    | "h5" => <Html.H5 key> {renderChildren(tag, children)} </Html.H5>
+    | "h6" => <Html.H6 key> {renderChildren(tag, children)} </Html.H6>
+    | "p" => <Html.P key> {renderChildren(tag, children)} </Html.P>
+    | "ul" => <Html.Ul key> {renderChildren(tag, children)} </Html.Ul>
+    | "li" => <Html.Li key> {renderChildren(tag, children)} </Html.Li>
     | "blockquote" =>
-      <Html.BlockQuote key> (renderChildren(tag, children)) </Html.BlockQuote>
+      <Html.BlockQuote key> {renderChildren(tag, children)} </Html.BlockQuote>
     | "br" =>
       lastSiblingHasLineBreaking := true;
       <Html.Br key />;
@@ -118,10 +118,12 @@ let rec renderChild = (parentTag, index: int, child) => {
   };
 };
 
-let make = (~body: jsBody, ~renderChild=renderChild, _children) => {
-  ...component,
-  render: _self => {
-    let tree = jsTreeToReason(body);
-    <View> (renderChild("", 0, tree)) </View>;
-  },
-};
+[@react.component]
+let make = (~body: jsBody, ~renderChild=renderChild, ()) =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self => {
+      let tree = jsTreeToReason(body);
+      <View> {renderChild("", 0, tree)} </View>;
+    },
+  });

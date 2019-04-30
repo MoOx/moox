@@ -739,24 +739,24 @@
     log-update "^2.3.0"
     strip-ansi "^3.0.1"
 
-"@moox/bs-react-helmet@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@moox/bs-react-helmet/-/bs-react-helmet-1.1.3.tgz#6202d1b5ae028809a80e03a1fddb75be679614ea"
-  integrity sha512-wMT6eS7XpA19lC4wmwCJg7rfERQ+ZZPIYgewA8ddjE/PuNyBiRte1Rksdfbn5xkZWqipIv1WJcwhO33F0bJRNw==
+"@moox/bs-react-helmet@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@moox/bs-react-helmet/-/bs-react-helmet-2.0.0.tgz#d1bca09ff1d2c31d0a76a93a0660ef81cb74353d"
+  integrity sha512-2Pjd46s8VR8E9xWztCw7t2JoM9A7y7wm4kwybU7SYHDJY1INQtyvpQUbpBcbBe5Vpq0UOM4UnQFkuAzkWNb+WQ==
 
-"@phenomic/api-client@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/api-client/-/api-client-1.0.0-beta.8.tgz#560fdda00e13a2144c286b5ca1de59c80e92d1df"
-  integrity sha512-Hv3LU3xgyl0mIVxzwidaPsI6x9KJASL8tLKk/RKFD3+Neu9qOq+OTb6GsdAYllC+M5mgWCooGbF6YQqnQAtgoA==
+"@phenomic/api-client@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/api-client/-/api-client-1.0.0-beta.11.tgz#57d92253abff2fd9383d707b92eba5b47cb31caa"
+  integrity sha512-ZJBI6wkXoPWwpn2Sf+xoQMl73RwpzymZnPhmGVDHlULAwPtcVExP6HUMF0HWlfTEkf/dNeE7ktplNaBHl1KvFg==
   dependencies:
     cross-fetch "^2.2.3"
     debug "^2.6.0"
     simple-json-fetch "^1.0.1"
 
-"@phenomic/babel-preset@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/babel-preset/-/babel-preset-1.0.0-beta.8.tgz#1f9d902673cef4e4ecf8d71956b0133496536390"
-  integrity sha512-RrmYT2XO2yKdI+eRnQoClFk+uBHVT/M2q5kk0qvg8YJoKgTB0nPnYYE8Fyho9819zW3bYgsno+9sXIBkVlhSfA==
+"@phenomic/babel-preset@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/babel-preset/-/babel-preset-1.0.0-beta.11.tgz#544636149f5ac4cb7e53f4b78c7f9fe32d965572"
+  integrity sha512-cvvpq9fQFdsoteE76v6/j/E+VOvfMh2g9yyqHSPnDcidfEoJlfZY8xrJ8EfwqPlF5Lr0xoQWaDlXt7m3Y4E7yg==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.0.0"
     "@babel/plugin-proposal-object-rest-spread" "^7.0.0"
@@ -769,15 +769,15 @@
     babel-plugin-dynamic-import-node "^2.2.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.21"
 
-"@phenomic/bs-platform@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/bs-platform/-/bs-platform-1.0.0-beta.8.tgz#0a8f96b018466aac5944e310d0186f6ff86082dc"
-  integrity sha512-zBY8CoQFJYtgajVFDMd7Y2ETo5EwvPL+Km2mznk7h2A8xUGpYpZ50sFCVZLqbfsebWLzAgBu6hnSqAC2uh0r+g==
+"@phenomic/bs-platform@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/bs-platform/-/bs-platform-1.0.0-beta.11.tgz#7cae34f702cfd611047866ddbfad9f59b8c20485"
+  integrity sha512-eVTg8OwCqB1KbgZS5w3GfaKexOgpSE+i1/Kw+TflOCq9G0mnTR9y5/agAa6/4VJv9aDDdWlDPjnk4FZkZQNcfw==
 
-"@phenomic/cli@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/cli/-/cli-1.0.0-beta.8.tgz#790c864169523631fc7cae6fef6c461e4a70a5f9"
-  integrity sha512-YTlfWxDOGvAnFWIxvWC+9fq1rQO5Mv4fK9J0WXZBbqsdO4q/fNRk+EZcplehec79I3uGZZybjXHi0+WAP1qYsg==
+"@phenomic/cli@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/cli/-/cli-1.0.0-beta.11.tgz#1a4e4b6a7e82bac8a659d231dd153cada1e0a63c"
+  integrity sha512-RfhlhtuXe97zwb74Gc+kfwaEDxTxr37eewNj8UdIBCrzvW4sMhxiH2QGbErEmUMxibvhd07WWAaBqUhl30oYPA==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.0.0"
     "@babel/plugin-proposal-object-rest-spread" "^7.0.0"
@@ -785,20 +785,20 @@
     "@babel/preset-flow" "^7.0.0"
     "@babel/preset-react" "^7.0.0"
     "@babel/register" "^7.0.0"
-    "@phenomic/core" "^1.0.0-beta.8"
+    "@phenomic/core" "^1.0.0-beta.11"
     chalk "^1.1.3"
     debug "^2.6.0"
     semver "^5.3.0"
     yargs "^7.0.2"
 
-"@phenomic/core@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/core/-/core-1.0.0-beta.8.tgz#2dbf4685a7c3c637a4d2599327f8a3bbf786d901"
-  integrity sha512-RHhi82pTltLiWxIe1p8MUlxSRMOXZi5fEZTMP4sdCxZrh6tBRp22KTU5qcFczo6nZ6iK1GCfDmqmSfLp8r6i8g==
+"@phenomic/core@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/core/-/core-1.0.0-beta.11.tgz#a4d409b57d508a25e2b06f6eadb575717f6c796a"
+  integrity sha512-UQfQuQwOwU/yo5k0xskGxSQ6b/upSU35kBF7rGQ9INfKNrrfaFNq+i65gsUyZe5YE6/NKh2IuUlu998MSWV1JA==
   dependencies:
     "@babel/runtime" "^7.0.0"
-    "@phenomic/api-client" "^1.0.0-beta.8"
-    "@phenomic/bs-platform" "^1.0.0-beta.8"
+    "@phenomic/api-client" "^1.0.0-beta.11"
+    "@phenomic/bs-platform" "^1.0.0-beta.11"
     chalk "^1.1.3"
     cosmiconfig "^2.1.1"
     debug "^2.6.0"
@@ -816,31 +816,31 @@
     serve "^6.5.6"
     url "^0.11.0"
 
-"@phenomic/helpers-transform@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/helpers-transform/-/helpers-transform-1.0.0-beta.8.tgz#08cfda53186ca3d90af602d1cfc4f35b97463409"
-  integrity sha512-a0ROXTetnqWjxisX0MywR1rY0YI8toxDNHvAvMamadXEOmHg0vQnJimJrwo9lZroEHf8Q69RaEZNe7ZLGIi/TQ==
+"@phenomic/helpers-transform@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/helpers-transform/-/helpers-transform-1.0.0-beta.11.tgz#e03f2a9b493bc3483fe3b661f57c59536067cc12"
+  integrity sha512-lNG4c9DKohDZl/i1Fd+8l57pdBbpBFJrvU6IzkgJ8M8H//r/Sgjm5ZAnUkkPl3OvdNG31pq7jXK62WBiwAczjA==
   dependencies:
     debug "^2.6.0"
     rehype-react "^3.0.0"
     rehype-stringify "^3.0.0"
     unified "^6.0.0"
 
-"@phenomic/plugin-api-related-content@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/plugin-api-related-content/-/plugin-api-related-content-1.0.0-beta.8.tgz#8dd6685859108660ff52325eac21a416f3e15265"
-  integrity sha512-qinvqNN78SjB/Z2l1CJ/nWml+l3JFPbvDHJKsneFSk63gFBVOGEWT/FnFZZfLwWDx4hZS9fXo9WAtFcI2scBUQ==
+"@phenomic/plugin-api-related-content@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/plugin-api-related-content/-/plugin-api-related-content-1.0.0-beta.11.tgz#0c0930cef2a9fd02f63cb10d56cb3c37df085ec2"
+  integrity sha512-HMjr+d95UPJ9n2/3rjvLWQI3wcDfKz286sqiWW91Hc9/uBj7oF5JSOFcU6g1RUfIS9NDzwUNhdnB6NUXdySklQ==
   dependencies:
     debug "^2.6.0"
     lodash.flatten "^4.4.0"
 
-"@phenomic/plugin-bundler-webpack@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/plugin-bundler-webpack/-/plugin-bundler-webpack-1.0.0-beta.8.tgz#2ee73592a28280e96715cd45d0bfcd5ed22a80e7"
-  integrity sha512-jfBHlfQbSCWM8xXZYSe7IY7G81W4qvvEEWVa8uetAipAQukSRAvfgxFUyBYcaW6L0izKxb49xDXLxKjuTLTDaA==
+"@phenomic/plugin-bundler-webpack@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/plugin-bundler-webpack/-/plugin-bundler-webpack-1.0.0-beta.11.tgz#a8d80d8ee350693a59eb57861480c3eb9d86e79a"
+  integrity sha512-VEz8mU4N3oRDigCZkX1c+7WUZFDXhhxd0BwzkJ5cFqDQIlUFHdU0IvzwPez0qI/5GQr+qHQ6Lm6oC/TBoPQOBg==
   dependencies:
     "@babel/core" "^7.0.0"
-    "@phenomic/babel-preset" "^1.0.0-beta.8"
+    "@phenomic/babel-preset" "^1.0.0-beta.11"
     babel-loader "^8.0.0"
     chalk "^1.1.3"
     css-loader "^1.0.0"
@@ -853,30 +853,30 @@
     webpack-dev-middleware "^3.0.0"
     webpack-hot-middleware "^2.0.0"
 
-"@phenomic/plugin-collector-files@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/plugin-collector-files/-/plugin-collector-files-1.0.0-beta.8.tgz#bd656579425f847dfd706fbedbb5d6e5a2e7fe5b"
-  integrity sha512-VHB6Cr2rv56B9FMFX2eNhKlf+ZIkmI6lTqVZ7YIB6EZ8dIJWkCqKvb6EzH1eu0RK1Ixq3djpKtcSGJTKcXujmQ==
+"@phenomic/plugin-collector-files@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/plugin-collector-files/-/plugin-collector-files-1.0.0-beta.11.tgz#b9d4de92877b7ec98824540092b7bcd1a9715d69"
+  integrity sha512-g0XnNX0BzKH7vS+dk9p5AixtGFMWxbe2PGlG1Y4T0OHQmkNTGBkEVj9Q3A3hDd8yf7gTBhquovm9QnpKJo8A7A==
   dependencies:
     debug "^2.6.0"
     globby "^6.1.0"
     sane "^1.7.0"
     socket.io "^1.7.2"
 
-"@phenomic/plugin-public-assets@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/plugin-public-assets/-/plugin-public-assets-1.0.0-beta.8.tgz#91bf7a855f35bd7cab89bdfd7a2ec257833ce047"
-  integrity sha512-HpSPE4ecurPbDQ36yGJAyv+mg5li3wdiQvue5OXMcrIPkIcJta9RIdMi91Xrw2NBxWdHz+FuEBhnvCk66kT3mA==
+"@phenomic/plugin-public-assets@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/plugin-public-assets/-/plugin-public-assets-1.0.0-beta.11.tgz#7a1d6973dc060096b15651179e26c39c5828a0de"
+  integrity sha512-CC5qTA6CsvezQ+mLjspreg/c+pS+7IWHHpGCJ0rWevgB+eGE08zwHKTSQJ4VFE/Sbt2UJtCUdsOB9BycBHs9yg==
   dependencies:
     express "^4.14.0"
     fs-extra "^3.0.1"
 
-"@phenomic/plugin-renderer-react@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/plugin-renderer-react/-/plugin-renderer-react-1.0.0-beta.8.tgz#ebe4b7ce581a4ca073a0ea849f843c459a5a62c2"
-  integrity sha512-Oh3+YTVzGEpvNLb1q9fdtpciYoKdVQo4vbN2do525bKwm3ZYFdON0IDOKHl1GihKt6F7QdHym+Z183XuqVY0xA==
+"@phenomic/plugin-renderer-react@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/plugin-renderer-react/-/plugin-renderer-react-1.0.0-beta.11.tgz#e63ba44fc335d6c9eb5c05ee4aa665ff02edda4c"
+  integrity sha512-7KVSbuYD42Sji9YWTnXSGm+8tjS4ajYHop1uvdPcm5nSNdHT4vb8vqEIQ+ApsJXXNAhATSQ/mEtFtm9uqqGRGw==
   dependencies:
-    "@phenomic/api-client" "^1.0.0-beta.8"
+    "@phenomic/api-client" "^1.0.0-beta.11"
     chalk "^1.1.3"
     classnames "^2.2.5"
     debug "^2.6.0"
@@ -886,23 +886,21 @@
     striptags "^2.0.0"
     url-join "^2.0.2"
 
-"@phenomic/plugin-transform-json@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/plugin-transform-json/-/plugin-transform-json-1.0.0-beta.8.tgz#5c9be2bfdcaec1b09e35186c090e78f0b6292a38"
-  integrity sha512-u82+suskItaH+AP+AUbdR1NyW5WCuLQuoAb5fH5zA+S3dCCX4cMI23vmAxsFG6jOjeSXzALZ1B0V3H8CZneOQA==
+"@phenomic/plugin-transform-json@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/plugin-transform-json/-/plugin-transform-json-1.0.0-beta.11.tgz#a4c6d02413b5370b4ea8d4f42e3e992a046e7711"
+  integrity sha512-ADuEFM8LQUNaV/bwye2+deSIxVhKlrN4Xq4PJcxj6y628/BvcPFVZx1KuujvGZGHLNT384sRDpTQUpc8zrtm7Q==
   dependencies:
     debug "^2.6.0"
 
-"@phenomic/plugin-transform-markdown@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/plugin-transform-markdown/-/plugin-transform-markdown-1.0.0-beta.8.tgz#1ce9f5435f69a06ad307545b0bf07b046066dcfe"
-  integrity sha512-Sf2xQ1aPcpSYO5hPH7IbN8+amfbG/yLIhZuI2vEc4N4iTZEfdefjBSDvWuauXK5clMuDwTu1xeGN0vM+D4QfhQ==
+"@phenomic/plugin-transform-markdown@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/plugin-transform-markdown/-/plugin-transform-markdown-1.0.0-beta.11.tgz#a7ee9c9465401308871e1d884eb820f751b33474"
+  integrity sha512-XCkzPE82hTfm4JaJvpIO4NRe3u8wPiZ9BRqdQOpwKsFd1yUSn+MO93+0V0ntdsK30rZzdEwY22lYG4Qy1aCzFQ==
   dependencies:
-    "@phenomic/helpers-transform" "^1.0.0-beta.8"
+    "@phenomic/helpers-transform" "^1.0.0-beta.11"
     debug "^2.6.0"
     gray-matter "^3.0.0"
-    lodash.deburr "^4.1.0"
-    lodash.kebabcase "^4.1.1"
     rehype-autolink-headings "^2.0.0"
     rehype-raw "^2.0.0"
     rehype-slug "^2.0.0"
@@ -912,18 +910,18 @@
     remark-rehype "^2.0.0"
     remark-toc "^4.0.0"
 
-"@phenomic/preset-react-app@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@phenomic/preset-react-app/-/preset-react-app-1.0.0-beta.8.tgz#6f834aa4b86a677df6bb1fec9297d32f69651a4c"
-  integrity sha512-tRhL0bIbv5sFRVxoyFZu2d9+WqjomPu8ld5PdVoRxaxzTTMxjGK4Rk6vp2Nl5TvaiyqcfuXJspAoYYQnnMVnGQ==
+"@phenomic/preset-react-app@^1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@phenomic/preset-react-app/-/preset-react-app-1.0.0-beta.11.tgz#68d07f1004ebaa4569a7a7df0059652c26901d92"
+  integrity sha512-/OdivYKLL+C1OMWsazAoCGpo0Zk05BqP50n5djNw3Cxy/3WSxEnLRmtVk/sdjkviJEg8zyy/0v3pkOPo+vTXqA==
   dependencies:
-    "@phenomic/plugin-api-related-content" "^1.0.0-beta.8"
-    "@phenomic/plugin-bundler-webpack" "^1.0.0-beta.8"
-    "@phenomic/plugin-collector-files" "^1.0.0-beta.8"
-    "@phenomic/plugin-public-assets" "^1.0.0-beta.8"
-    "@phenomic/plugin-renderer-react" "^1.0.0-beta.8"
-    "@phenomic/plugin-transform-json" "^1.0.0-beta.8"
-    "@phenomic/plugin-transform-markdown" "^1.0.0-beta.8"
+    "@phenomic/plugin-api-related-content" "^1.0.0-beta.11"
+    "@phenomic/plugin-bundler-webpack" "^1.0.0-beta.11"
+    "@phenomic/plugin-collector-files" "^1.0.0-beta.11"
+    "@phenomic/plugin-public-assets" "^1.0.0-beta.11"
+    "@phenomic/plugin-renderer-react" "^1.0.0-beta.11"
+    "@phenomic/plugin-transform-json" "^1.0.0-beta.11"
+    "@phenomic/plugin-transform-markdown" "^1.0.0-beta.11"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
@@ -2408,7 +2406,7 @@ bs-platform@^5.0.1:
 
 "bs-react-native-monorepo@https://github.com/reasonml-community/bs-react-native.git#jsx3-migration":
   version "0.0.0"
-  resolved "https://github.com/reasonml-community/bs-react-native.git#1de41af6c4c031945eb0d5a4a59c6f6a9ea4f69c"
+  resolved "https://github.com/reasonml-community/bs-react-native.git#a7f6e704097f1a8f85eafcce267ae40043e2eb16"
 
 bser@^2.0.0:
   version "2.0.0"
@@ -6685,11 +6683,6 @@ lodash.bind@^4.1.4:
   resolved "https://registry.yarnpkg.com/lodash.bind/-/lodash.bind-4.2.1.tgz#7ae3017e939622ac31b7d7d7dcb1b34db1690d35"
   integrity sha1-euMBfpOWIqwxt9fX3LGzTbFpDTU=
 
-lodash.deburr@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/lodash.deburr/-/lodash.deburr-4.1.0.tgz#ddb1bbb3ef07458c0177ba07de14422cb033ff9b"
-  integrity sha1-3bG7s+8HRYwBd7oH3hRCLLAz/5s=
-
 lodash.defaults@^4.0.1:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
@@ -6709,11 +6702,6 @@ lodash.foreach@^4.3.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.foreach/-/lodash.foreach-4.5.0.tgz#1a6a35eace401280c7f06dddec35165ab27e3e53"
   integrity sha1-Gmo16s5AEoDH8G3d7DUWWrJ+PlM=
-
-lodash.kebabcase@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/lodash.kebabcase/-/lodash.kebabcase-4.1.1.tgz#8489b1cb0d29ff88195cceca448ff6d6cc295c36"
-  integrity sha1-hImxyw0p/4gZXM7KRI/21swpXDY=
 
 lodash.map@^4.4.0:
   version "4.6.0"
@@ -8490,7 +8478,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-art@^16.8.0:
+react-art@^16.8.1:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-art/-/react-art-16.8.6.tgz#66707f8bb20a27147bce47402e38eefc9fd863fd"
   integrity sha512-viR81SLSrUNF8YCLCdhLKKP3hLMxpyJPzozl0Zq6F3ALKGcynBd92MZHVl1oLkMBvCyS4Qf8s5pandJg34YHxA==
@@ -8536,7 +8524,7 @@ react-disqus-comments@^1.2.0:
   resolved "https://registry.yarnpkg.com/react-disqus-comments/-/react-disqus-comments-1.2.0.tgz#e5aae2ea6cdce998cfc1340aab11df1be68f71f5"
   integrity sha512-FS3+AW3lWU6PXM0p/q3exqKFI/FG12XqoU7TDquXG1xbLLdZC5Ux+C0VvAg2LEeWVK8gNu5NT9kg09oWJ7JFnw==
 
-react-dom@>=16.8.1, react-dom@^16.8.0:
+react-dom@>=16.8.1, react-dom@^16.8.1:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
   integrity sha512-1nL7PIq9LTL3fthPqwkvr2zY7phIPjYrT0jp4HjyEQrEROnw4dG41VVwi/wfoCneoleqrNX7iAD+pXebJZwrwA==
@@ -8611,7 +8599,7 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-test-renderer@^16.8.0:
+react-test-renderer@^16.8.1:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.8.6.tgz#188d8029b8c39c786f998aa3efd3ffe7642d5ba1"
   integrity sha512-H2srzU5IWYT6cZXof6AhUcx/wEyJddQ8l7cLM/F7gDXYyPr4oq+vCIxJYXVGhId1J706sqziAjuOEjyNkfgoEw==
@@ -8634,7 +8622,7 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@>=16.8.1, react@^16.8.0:
+react@>=16.8.1, react@^16.8.1:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
@@ -8736,10 +8724,10 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-reason-react-compat@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/reason-react-compat/-/reason-react-compat-0.2.0.tgz#1caf4ec72e7c5ad523dd68b485ac265ca6497c01"
-  integrity sha512-wfnod0z9g+HkXhEqDj3Fq9hVUuOtLN7AgUj5XR1VVzldzzz4eepBGaTPAfqugTKHFqLDplN9b5TOFge148mYcg==
+reason-react-compat@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/reason-react-compat/-/reason-react-compat-0.4.0.tgz#9c6705f9bd67e7ff7219355f3a95fd67442b578d"
+  integrity sha512-Bwwgb6AHusLiRhdd0aupFAuMYaG3gnwR6iHYYlj9gfLD6Uxp53dtJIhS2ZMTEpCSU1JE2X0k7x3rru1IRdx9FQ==
 
 "reason-react@https://github.com/reasonml/reason-react.git":
   version "0.7.0"

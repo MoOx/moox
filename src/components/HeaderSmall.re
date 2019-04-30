@@ -3,8 +3,8 @@ open BsReactNative;
 let component = ReasonReact.statelessComponent("HeaderSmall");
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "wrapper":
         style([
           flexDirection(Row),
@@ -44,25 +44,27 @@ let styles =
           padding(Pt(6.)),
           fontSize(Float(12.)),
         ]),
-    },
+    })
   );
 
-let make = _children => {
-  ...component,
-  render: _self =>
-    <SpacedView vertical=M horizontal=XS style=styles##wrapper>
-      <ViewLink style=styles##logo href="/">
-        <SVGLogo width=24. height=24. fill=Consts.Colors.dark />
-        <Text style=styles##logoText>
-          {("  " ++ Consts.title)->ReasonReact.string}
-        </Text>
-      </ViewLink>
-      <Spacer />
-      <SocialIcons
-        wrapperStyle=styles##icons
-        iconStyle=styles##icon
-        iconColor=Consts.Colors.dark
-        iconSize=20.
-      />
-    </SpacedView>,
-};
+[@react.component]
+let make = () =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <SpacedView vertical=M horizontal=XS style=styles##wrapper>
+        <ViewLink style=styles##logo href="/">
+          <SVGLogo width=24. height=24. fill=Consts.Colors.dark />
+          <Text style=styles##logoText>
+            {("  " ++ Consts.title)->ReasonReact.string}
+          </Text>
+        </ViewLink>
+        <Spacer />
+        <SocialIcons
+          wrapperStyle=styles##icons
+          iconStyle=styles##icon
+          iconColor=Consts.Colors.dark
+          iconSize=20.
+        />
+      </SpacedView>,
+  });

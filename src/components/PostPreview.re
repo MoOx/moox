@@ -1,8 +1,8 @@
 open BsReactNative;
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "block": style([flex(1.), flexDirection(Row)]),
       "imageContainer": style([overflow(Hidden)]),
       "image":
@@ -25,29 +25,31 @@ let styles =
         ]),
       "bullet": style([]),
       "title": style([fontSize(Float(22.))]),
-    },
+    })
   );
 
 let component = ReasonReact.statelessComponent("PostPreview");
 
-let make = (~item: T.partialContentItem, _) => {
-  ...component,
-  render: _self => {
-    let href = "/blog/" ++ item##id ++ "/";
-    <View key=item##id style=styles##block>
-      <Text style=styles##text>
-        <Text style=styles##bullet> {j|•|j}->ReasonReact.string </Text>
-        <Spacer size=S />
-        <UnderlinedTextLink style=styles##title href>
-          {item##title->ReasonReact.string}
-        </UnderlinedTextLink>
-        <Spacer size=S />
-        {switch (Js.Undefined.toOption(item##lang)) {
-         | None => ReasonReact.null
-         | Some(lang) =>
-           <Text> {("[" ++ lang ++ "] ")->ReasonReact.string} </Text>
-         }}
-      </Text>
-    </View>;
-  },
-};
+[@react.component]
+let make = (~item: T.partialContentItem, ()) =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self => {
+      let href = "/blog/" ++ item##id ++ "/";
+      <View key=item##id style=styles##block>
+        <Text style=styles##text>
+          <Text style=styles##bullet> {j|•|j}->ReasonReact.string </Text>
+          <Spacer size=S />
+          <UnderlinedTextLink style=styles##title href>
+            {item##title->ReasonReact.string}
+          </UnderlinedTextLink>
+          <Spacer size=S />
+          {switch (Js.Undefined.toOption(item##lang)) {
+           | None => ReasonReact.null
+           | Some(lang) =>
+             <Text> {("[" ++ lang ++ "] ")->ReasonReact.string} </Text>
+           }}
+        </Text>
+      </View>;
+    },
+  });

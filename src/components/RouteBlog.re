@@ -1,8 +1,8 @@
 open BsReactNative;
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "title":
         style([
           fontSize(Float(36.)),
@@ -17,61 +17,66 @@ let styles =
           justifyContent(Center),
           alignItems(Center),
         ]),
-    },
+    })
   );
 
 let component = ReasonReact.statelessComponent("RouteBlog");
 
-let make = (~posts) => {
-  ...component,
-  render: _self =>
-    <AppWrapper>
-      <BsReactHelmet>
-        <title>
-          {("Blog - " ++ Consts.defaultTitle)->ReasonReact.string}
-        </title>
-      </BsReactHelmet>
-      <Container>
-        <Spacer />
-        <Text style=styles##title> "Latest Posts"->ReasonReact.string </Text>
-        {switch ((posts: T.contentList)) {
-         | Inactive
-         | Loading => <LoadingIndicator />
-         | Errored => <Error />
-         | Idle(posts) =>
-           <View>
-             <PostList posts=posts##list />
-             <View style=styles##links>
-               {switch (posts##previous |> Js.toOption) {
-                | Some(previous) =>
-                  <TextLink
-                    href={
-                      posts##previousPageIsFirst ?
-                        "/" : "/after/" ++ previous ++ "/"
-                    }>
-                    "Fresh posts"->ReasonReact.string
-                  </TextLink>
-                | None => ReasonReact.null
-                }}
-               <Text> " "->ReasonReact.string </Text>
-               {switch (posts##next |> Js.toOption) {
-                | Some(next) =>
-                  <TextLink href={"/after/" ++ next ++ "/"}>
-                    "Older posts"->ReasonReact.string
-                  </TextLink>
-                | None => ReasonReact.null
-                }}
+[@react.component]
+let make = (~posts) =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <AppWrapper>
+        <BsReactHelmet>
+          <title>
+            {("Blog - " ++ Consts.defaultTitle)->ReasonReact.string}
+          </title>
+        </BsReactHelmet>
+        <Container>
+          <Spacer />
+          <Text style=styles##title> "Latest Posts"->ReasonReact.string </Text>
+          {switch ((posts: T.contentList)) {
+           | Inactive
+           | Loading => <LoadingIndicator />
+           | Errored => <Error />
+           | Idle(posts) =>
+             <View>
+               <PostList posts=posts##list />
+               <View style=styles##links>
+                 {switch (posts##previous |> Js.toOption) {
+                  | Some(previous) =>
+                    <TextLink
+                      href={
+                        posts##previousPageIsFirst
+                          ? "/" : "/after/" ++ previous ++ "/"
+                      }>
+                      "Fresh posts"->ReasonReact.string
+                    </TextLink>
+                  | None => ReasonReact.null
+                  }}
+                 <Text> " "->ReasonReact.string </Text>
+                 {switch (posts##next |> Js.toOption) {
+                  | Some(next) =>
+                    <TextLink href={"/after/" ++ next ++ "/"}>
+                      "Older posts"->ReasonReact.string
+                    </TextLink>
+                  | None => ReasonReact.null
+                  }}
+               </View>
              </View>
-           </View>
-         }}
-        <Spacer size=XL />
-      </Container>
-    </AppWrapper>,
-};
+           }}
+          <Spacer size=XL />
+        </Container>
+      </AppWrapper>,
+  });
 
-let jsComponent =
-  ReasonReact.wrapReasonForJs(~component, jsProps =>
-    make(~posts=PhenomicPresetReactApp.jsEdge(jsProps##posts))
+[@react.component]
+let jsComponent = (~posts) =>
+  React.createElementVariadic(
+    make,
+    makeProps(~posts=PhenomicPresetReactApp.jsEdge(posts), ()),
+    [|React.null|],
   );
 
 let queries = props => {

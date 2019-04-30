@@ -1,8 +1,8 @@
 open BsReactNative;
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "title":
         style([
           fontSize(Float(28.)),
@@ -17,43 +17,48 @@ let styles =
           justifyContent(Center),
           alignItems(Center),
         ]),
-    },
+    })
   );
 
 let component = ReasonReact.statelessComponent("RouteError");
 
-let make = (~posts) => {
-  ...component,
-  render: _self =>
-    <AppWrapper>
-      <Container>
-        <Error label={j|It seems that this page doesn't exist 😕|j} />
-        <Spacer size=XL />
-        <Text style=styles##title>
-          "Latest Posts on the blog"->ReasonReact.string
-        </Text>
-        {switch ((posts: T.contentList)) {
-         | Inactive
-         | Loading => <LoadingIndicator />
-         | Errored => <Error />
-         | Idle(posts) =>
-           <View>
-             <PostList posts=posts##list />
-             <View style=styles##links>
-               <TextLink href="/blog/">
-                 "More posts"->ReasonReact.string
-               </TextLink>
+[@react.component]
+let make = (~posts) =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <AppWrapper>
+        <Container>
+          <Error label={j|It seems that this page doesn't exist 😕|j} />
+          <Spacer size=XL />
+          <Text style=styles##title>
+            "Latest Posts on the blog"->ReasonReact.string
+          </Text>
+          {switch ((posts: T.contentList)) {
+           | Inactive
+           | Loading => <LoadingIndicator />
+           | Errored => <Error />
+           | Idle(posts) =>
+             <View>
+               <PostList posts=posts##list />
+               <View style=styles##links>
+                 <TextLink href="/blog/">
+                   "More posts"->ReasonReact.string
+                 </TextLink>
+               </View>
              </View>
-           </View>
-         }}
-        <Spacer size=XL />
-      </Container>
-    </AppWrapper>,
-};
+           }}
+          <Spacer size=XL />
+        </Container>
+      </AppWrapper>,
+  });
 
-let jsComponent =
-  ReasonReact.wrapReasonForJs(~component, jsProps =>
-    make(~posts=PhenomicPresetReactApp.jsEdge(jsProps##posts))
+[@react.component]
+let jsComponent = (~posts) =>
+  React.createElementVariadic(
+    make,
+    makeProps(~posts=PhenomicPresetReactApp.jsEdge(posts), ()),
+    [|React.null|],
   );
 
 let queries = _ => {

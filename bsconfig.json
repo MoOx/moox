@@ -2,7 +2,7 @@
   "name": "moox.io",
   "refmt": 3,
   "reason": {
-    "react-jsx": 2
+    "react-jsx": 3
   },
   "package-specs": {
     "module": "es6",
@@ -24,7 +24,8 @@
     "bs-fetch",
     "@glennsl/bs-json",
     "reason-react",
-    "bs-react-native-monorepo/bs-react-native",
+    "reason-react-compat",
+    "bs-react-native-monorepo/bs-react-native-jsx3-compat",
     "@moox/bs-react-helmet",
     "@phenomic/preset-react-app",
     "@phenomic/plugin-renderer-react",

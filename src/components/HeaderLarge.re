@@ -3,8 +3,8 @@ open BsReactNative;
 let component = ReasonReact.statelessComponent("HeaderLarge");
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "menu":
         style([
           justifyContent(Center),
@@ -49,35 +49,31 @@ let styles =
           paddingVertical(Pt(6.)),
           fontSize(Float(12.)),
         ]),
-    },
+    })
   );
 
-let make = (~currentLocation, _children) => {
-  ...component,
-  render: _self =>
-    <View style=styles##menu>
-      <Container style=styles##bar wrapperStyle=styles##barWrapper>
-        <ViewLink style=styles##logo href="/">
-          <SVGLogo width=20. height=20. fill=Consts.Colors.dark />
-          <Text style=styles##logoText>
-            {("  " ++ Consts.title)->ReasonReact.string}
-          </Text>
-        </ViewLink>
-        <HeaderMenuLinks currentLocation />
-        <SocialIcons
-          wrapperStyle=styles##icons
-          iconStyle=styles##icon
-          iconSize=22.
-          iconColor=Consts.Colors.dark
-        />
-      </Container>
-    </View>,
-};
+[@react.component]
+let make = (~currentLocation, ()) =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <View style=styles##menu>
+        <Container style=styles##bar wrapperStyle=styles##barWrapper>
+          <ViewLink style=styles##logo href="/">
+            <SVGLogo width=20. height=20. fill=Consts.Colors.dark />
+            <Text style=styles##logoText>
+              {("  " ++ Consts.title)->ReasonReact.string}
+            </Text>
+          </ViewLink>
+          <HeaderMenuLinks currentLocation />
+          <SocialIcons
+            wrapperStyle=styles##icons
+            iconStyle=styles##icon
+            iconSize=22.
+            iconColor=Consts.Colors.dark
+          />
+        </Container>
+      </View>,
+  });
 
-[@bs.deriving abstract]
-type jsProps = {currentLocation: {. "pathname": string}};
-
-let default =
-  ReasonReact.wrapReasonForJs(~component, jsProps =>
-    make(~currentLocation=jsProps->currentLocationGet, [||])
-  );
+let default = make;

@@ -1,46 +1,48 @@
 let component = ReasonReact.statelessComponent("AppMeta");
 
 /* [@bs.module] external coverBlur : string = "../../../cover.blur.js"; */
-let make = _ => {
-  ...component,
-  render: _self =>
-    <BsReactHelmet defaultTitle=Consts.defaultTitle>
-      <html lang="en" dir="ltr" />
-      <meta charSet="utf-8" />
-      /* analytics */
-      <link rel="dns-prefetch" href="https://a.moox.fr" />
-      <link rel="preconnect" href="https://a.moox.fr" />
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/apple-touch-icon.png"
-      />
-      <link
-        rel="icon"
-        type_="image/png"
-        sizes="32x32"
-        href="/favicon-32x32.png"
-      />
-      <link
-        rel="icon"
-        type_="image/png"
-        sizes="16x16"
-        href="/favicon-16x16.png"
-      />
-      <link rel="manifest" href="/site.webmanifest" />
-      /* <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000f2b" /> */
-      <meta name="msapplication-TileColor" content="#fafcff" />
-      <meta name="theme-color" content="#fafcff" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, viewport-fit=cover"
-      />
-      <style>
-        {j|@-ms-viewport { width: device-width } @viewport { width: device-width }|j}
-        ->ReasonReact.string
-      </style>
-      <style>
-        {j|
+[@react.component]
+let make = () =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <BsReactHelmet defaultTitle=Consts.defaultTitle>
+        <html lang="en" dir="ltr" />
+        <meta charSet="utf-8" />
+        /* analytics */
+        <link rel="dns-prefetch" href="https://a.moox.fr" />
+        <link rel="preconnect" href="https://a.moox.fr" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type_="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type_="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        /* <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000f2b" /> */
+        <meta name="msapplication-TileColor" content="#fafcff" />
+        <meta name="theme-color" content="#fafcff" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+        <style>
+          {j|@-ms-viewport { width: device-width } @viewport { width: device-width }|j}
+          ->ReasonReact.string
+        </style>
+        <style>
+          {j|
 html {
   width: 100%;
   height: 100%;
@@ -78,7 +80,7 @@ body {
 @media (min-width: 500px) { .WindowSizeFilterSMax { display: none } }
 @media (max-width: 501px) { .WindowSizeFilterMMin { display: none } }
   |j}
-        ->ReasonReact.string
-      </style>
-    </BsReactHelmet>,
-};
+          ->ReasonReact.string
+        </style>
+      </BsReactHelmet>,
+  });

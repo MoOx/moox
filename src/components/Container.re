@@ -3,8 +3,8 @@ open BsReactNative;
 let component = ReasonReact.statelessComponent("Container");
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "wrapper":
         style([
           flex(1.),
@@ -19,36 +19,40 @@ let styles =
           width(Pct(100.)),
           paddingHorizontal(Pt(Spacer.space /. 4.)),
         ]),
-    },
+    })
   );
 
 let noStyle = Style.style([]);
 
+[@react.component]
 let make =
     (
       ~wrapperStyle=?,
       ~style=?,
       ~backgroundColor=Some(Consts.Colors.light),
       ~maxWidth=840.,
-      children,
+      ~children,
+      (),
     ) => {
-  ...component,
-  render: _self =>
-    <View
-      style={Style.concat([
-        styles##wrapper,
-        backgroundColor->Belt.Option.mapWithDefault(noStyle, bg =>
-          Style.style([Style.backgroundColor(Style.String(bg))])
-        ),
-        wrapperStyle->Belt.Option.getWithDefault(noStyle),
-      ])}>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
       <View
         style={Style.concat([
-          styles##container,
-          Style.style([Style.maxWidth(Pt(maxWidth))]),
-          style->Belt.Option.getWithDefault(noStyle),
+          styles##wrapper,
+          backgroundColor->Belt.Option.mapWithDefault(noStyle, bg =>
+            Style.style([Style.backgroundColor(Style.String(bg))])
+          ),
+          wrapperStyle->Belt.Option.getWithDefault(noStyle),
         ])}>
-        ...children
-      </View>
-    </View>,
+        <View
+          style={Style.concat([
+            styles##container,
+            Style.style([Style.maxWidth(Pt(maxWidth))]),
+            style->Belt.Option.getWithDefault(noStyle),
+          ])}>
+          children
+        </View>
+      </View>,
+  });
 };

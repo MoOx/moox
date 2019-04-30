@@ -1,8 +1,8 @@
 open BsReactNative;
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "title":
         style([
           fontSize(Float(36.)),
@@ -45,7 +45,7 @@ let styles =
           justifyContent(Center),
           alignItems(FlexStart),
         ]),
-    },
+    })
   );
 
 let grayIconDomStyle =
@@ -61,340 +61,355 @@ let grayIconDomStyle =
 
 let component = ReasonReact.statelessComponent("RouteResume");
 
-let make = (~items) => {
-  ...component,
-  render: _self =>
-    <AppWrapper>
-      <BsReactHelmet>
-        <title>
-          {("Resume - " ++ Consts.defaultTitle)->ReasonReact.string}
-        </title>
-      </BsReactHelmet>
-      <WindowSizeFilter.SMax> <ResumeJumbotronSmall /> </WindowSizeFilter.SMax>
-      <WindowSizeFilter.MMin> <ResumeJumbotronLarge /> </WindowSizeFilter.MMin>
-      <Container>
-        <SpacedView horizontal=M vertical=L>
-          <View style=Style.(style([alignItems(Center)]))>
-            <TextWeb style=styles##textStrong accessibilityRole="heading">
-              {j|Freelance Mobile & Web Developer|j}->ReasonReact.string
-            </TextWeb>
-            <Spacer />
-            <Text style=styles##textLight>
-              {j|I make front-ends using React, JavaScript & ReasonML.|j}
-              ->ReasonReact.string
-            </Text>
-          </View>
-        </SpacedView>
-        <View
-          style=Style.(
-            style([
-              flexDirection(Row),
-              flexWrap(Wrap),
-              justifyContent(Center),
-              alignItems(FlexStart),
-            ])
-          )>
-          <SpacedView
-            horizontal=S
-            vertical=M
-            style=Style.(
-              style([
-                justifyContent(Center),
-                alignItems(Center),
-                flex(1.),
-                minWidth(Pt(240.)),
-                maxWidth(Pt(310.)),
-              ])
-            )>
-            <Text style=styles##nanoTitle>
-              "THINGS I WORK WITH"->ReasonReact.string
-            </Text>
-            <View style=styles##activities>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGJavaScript fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "JavaScript"->ReasonReact.string
+[@react.component]
+let make = (~items) =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <AppWrapper>
+        <BsReactHelmet>
+          <title>
+            {("Resume - " ++ Consts.defaultTitle)->ReasonReact.string}
+          </title>
+        </BsReactHelmet>
+        <WindowSizeFilter.SMax>
+          <ResumeJumbotronSmall />
+        </WindowSizeFilter.SMax>
+        <WindowSizeFilter.MMin>
+          <ResumeJumbotronLarge />
+        </WindowSizeFilter.MMin>
+        <Container>
+          <SpacedView horizontal=M vertical=L>
+            <View
+              style=Style.(style([alignItems(Center)]))
+              accessibilityRole=`header>
+              <View accessibilityRole=`header>
+                <Text style=styles##textStrong>
+                  {j|Freelance Mobile & Web Developer|j}->ReasonReact.string
                 </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGReact fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "React"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGReason fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "ReasonML"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGJest fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Jest"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGTypeScript fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "TypeScript"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGFlow fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Flow"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGGraphql fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Graphql"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGApollo fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Apollo"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGWebpack fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Webpack"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGPhotoshop fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Photoshop"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGSketch fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Sketch"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGCommandLine fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText> "CLI"->ReasonReact.string </Text>
-              </SpacedView>
+              </View>
+              <Spacer />
+              <Text style=styles##textLight>
+                {j|I make front-ends using React, JavaScript & ReasonML.|j}
+                ->ReasonReact.string
+              </Text>
             </View>
           </SpacedView>
-          <SpacedView
-            horizontal=S
-            vertical=M
+          <View
             style=Style.(
               style([
-                justifyContent(FlexStart),
+                flexDirection(Row),
+                flexWrap(Wrap),
+                justifyContent(Center),
                 alignItems(FlexStart),
-                flex(1.),
-                flexBasis(Pt(240.)),
               ])
             )>
-            <Text
+            <SpacedView
+              horizontal=S
+              vertical=M
               style=Style.(
                 style([
-                  fontSize(Float(16.)),
-                  lineHeight(24.),
-                  color(String(Consts.Colors.dark)),
+                  justifyContent(Center),
+                  alignItems(Center),
+                  flex(1.),
+                  minWidth(Pt(240.)),
+                  maxWidth(Pt(310.)),
                 ])
               )>
-              {j|Hi, I am Maxime Thirouin, also known as MoOx. I live near Toulouse, France.
+              <Text style=styles##nanoTitle>
+                "THINGS I WORK WITH"->ReasonReact.string
+              </Text>
+              <View style=styles##activities>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGJavaScript fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "JavaScript"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGReact fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "React"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGReason fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "ReasonML"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGJest fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Jest"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGTypeScript fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "TypeScript"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGFlow fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Flow"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGGraphql fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Graphql"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGApollo fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Apollo"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGWebpack fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Webpack"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGPhotoshop fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Photoshop"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGSketch fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Sketch"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGCommandLine fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "CLI"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+              </View>
+            </SpacedView>
+            <SpacedView
+              horizontal=S
+              vertical=M
+              style=Style.(
+                style([
+                  justifyContent(FlexStart),
+                  alignItems(FlexStart),
+                  flex(1.),
+                  flexBasis(Pt(240.)),
+                ])
+              )>
+              <Text
+                style=Style.(
+                  style([
+                    fontSize(Float(16.)),
+                    lineHeight(24.),
+                    color(String(Consts.Colors.dark)),
+                  ])
+                )>
+                {j|Hi, I am Maxime Thirouin, also known as MoOx. I live near Toulouse, France.
 
 I am a software developer specialized in front-end development of mobile & web applications.
 I love to design and develop UIs. I care about UX, responsiveness, performance, maintainability and scalability.
 
 When I am not coding or meditating, I enjoy simple things like gardening, watching a movie or enjoying one of the various activities that life has to offer.|j}
-              ->ReasonReact.string
-            </Text>
-          </SpacedView>
-          <SpacedView
-            horizontal=S
-            vertical=M
-            style=Style.(
-              style([
-                justifyContent(Center),
-                alignItems(Center),
-                flex(1.),
-                minWidth(Pt(240.)),
-                maxWidth(Pt(310.)),
-              ])
-            )>
-            <Text style=styles##nanoTitle>
-              "WEEKLY ACTIVITIES"->ReasonReact.string
-            </Text>
-            <View style=styles##activities>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGActivityCrossfit fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Crossfit"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGActivityBike fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Bike"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGActivityWakeboard fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Wakeboard"->ReasonReact.string
-                </Text>
-              </SpacedView>
-            </View>
-            <Text style=styles##nanoTitle>
-              "REGULAR ACTIVITIES"->ReasonReact.string
-            </Text>
-            <View style=styles##activities>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGActivityDiy fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Bricolage"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGMicrophone fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Podcast"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XS vertical=XS>
-                <div style=grayIconDomStyle>
-                  <SVGTraining fill="#bbb" width=48. height=48. />
-                </div>
-                <Text style=styles##iconText>
-                  "Teaching"->ReasonReact.string
-                </Text>
-              </SpacedView>
-            </View>
-            <Text style=styles##nanoTitle>
-              "CASUAL ACTIVITIES"->ReasonReact.string
-            </Text>
-            <View style=styles##activities>
-              <SpacedView horizontal=XXS vertical=XXS>
-                <div style=grayIconDomStyle>
-                  <SVGActivitySkydiving fill="#bbb" width=36. height=36. />
-                </div>
-                <Text style=styles##iconText>
-                  "Skydiving"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XXS vertical=XXS>
-                <div style=grayIconDomStyle>
-                  <SVGActivitySki fill="#bbb" width=36. height=36. />
-                </div>
-                <Text style=styles##iconText>
-                  "Alpine\nSkiing"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XXS vertical=XXS>
-                <div style=grayIconDomStyle>
-                  <SVGActivityMartialArt fill="#bbb" width=36. height=36. />
-                </div>
-                <Text style=styles##iconText>
-                  "Martial\nArt"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XXS vertical=XXS>
-                <div style=grayIconDomStyle>
-                  <SVGActivityTrekking fill="#bbb" width=36. height=36. />
-                </div>
-                <Text style=styles##iconText>
-                  "Trekking"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XXS vertical=XXS>
-                <div style=grayIconDomStyle>
-                  <SVGActivitySkateboard fill="#bbb" width=36. height=36. />
-                </div>
-                <Text style=styles##iconText>
-                  "Skate"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XXS vertical=XXS>
-                <div style=grayIconDomStyle>
-                  <SVGActivityObstacleCourseRace
-                    fill="#bbb"
-                    width=36.
-                    height=36.
-                  />
-                </div>
-                <Text style=styles##iconText>
-                  "Obstacle\nRace"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XXS vertical=XXS>
-                <div style=grayIconDomStyle>
-                  <SVGActivityBeachVolley fill="#bbb" width=36. height=36. />
-                </div>
-                <Text style=styles##iconText>
-                  "Beach\nVolley"->ReasonReact.string
-                </Text>
-              </SpacedView>
-              <SpacedView horizontal=XXS vertical=XXS>
-                <div style=grayIconDomStyle>
-                  <SVGActivitySoccer fill="#bbb" width=36. height=36. />
-                </div>
-                <Text style=styles##iconText>
-                  "Soccer"->ReasonReact.string
-                </Text>
-              </SpacedView>
-            </View>
-          </SpacedView>
-        </View>
-        <Spacer size=M />
-        <Text style=styles##title> {j|Timeline|j}->ReasonReact.string </Text>
-        {switch ((items: T.resumeList)) {
-         | Inactive
-         | Loading => <LoadingIndicator />
-         | Errored => <Error />
-         | Idle(items) => <ResumeTimeline items=items##list />
-         }}
-        <Spacer size=XL />
-      </Container>
-    </AppWrapper>,
-};
+                ->ReasonReact.string
+              </Text>
+            </SpacedView>
+            <SpacedView
+              horizontal=S
+              vertical=M
+              style=Style.(
+                style([
+                  justifyContent(Center),
+                  alignItems(Center),
+                  flex(1.),
+                  minWidth(Pt(240.)),
+                  maxWidth(Pt(310.)),
+                ])
+              )>
+              <Text style=styles##nanoTitle>
+                "WEEKLY ACTIVITIES"->ReasonReact.string
+              </Text>
+              <View style=styles##activities>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivityCrossfit fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Crossfit"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivityBike fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Bike"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivityWakeboard fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Wakeboard"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+              </View>
+              <Text style=styles##nanoTitle>
+                "REGULAR ACTIVITIES"->ReasonReact.string
+              </Text>
+              <View style=styles##activities>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivityDiy fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Bricolage"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGMicrophone fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Podcast"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XS vertical=XS>
+                  <div style=grayIconDomStyle>
+                    <SVGTraining fill="#bbb" width=48. height=48. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Teaching"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+              </View>
+              <Text style=styles##nanoTitle>
+                "CASUAL ACTIVITIES"->ReasonReact.string
+              </Text>
+              <View style=styles##activities>
+                <SpacedView horizontal=XXS vertical=XXS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivitySkydiving fill="#bbb" width=36. height=36. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Skydiving"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XXS vertical=XXS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivitySki fill="#bbb" width=36. height=36. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Alpine\nSkiing"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XXS vertical=XXS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivityMartialArt fill="#bbb" width=36. height=36. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Martial\nArt"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XXS vertical=XXS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivityTrekking fill="#bbb" width=36. height=36. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Trekking"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XXS vertical=XXS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivitySkateboard fill="#bbb" width=36. height=36. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Skate"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XXS vertical=XXS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivityObstacleCourseRace
+                      fill="#bbb"
+                      width=36.
+                      height=36.
+                    />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Obstacle\nRace"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XXS vertical=XXS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivityBeachVolley fill="#bbb" width=36. height=36. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Beach\nVolley"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+                <SpacedView horizontal=XXS vertical=XXS>
+                  <div style=grayIconDomStyle>
+                    <SVGActivitySoccer fill="#bbb" width=36. height=36. />
+                  </div>
+                  <Text style=styles##iconText>
+                    "Soccer"->ReasonReact.string
+                  </Text>
+                </SpacedView>
+              </View>
+            </SpacedView>
+          </View>
+          <Spacer size=M />
+          <Text style=styles##title> {j|Timeline|j}->ReasonReact.string </Text>
+          {switch ((items: T.resumeList)) {
+           | Inactive
+           | Loading => <LoadingIndicator />
+           | Errored => <Error />
+           | Idle(items) => <ResumeTimeline items=items##list />
+           }}
+          <Spacer size=XL />
+        </Container>
+      </AppWrapper>,
+  });
 
-let jsComponent =
-  ReasonReact.wrapReasonForJs(~component, jsProps =>
-    make(~items=PhenomicPresetReactApp.jsEdge(jsProps##items))
+[@react.component]
+let jsComponent = (~items) =>
+  React.createElementVariadic(
+    make,
+    makeProps(~items=PhenomicPresetReactApp.jsEdge(items), ()),
+    [|React.null|],
   );
 
 let queries = _ => {

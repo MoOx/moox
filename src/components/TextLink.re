@@ -1,43 +1,13 @@
-[@bs.module "./TextLink"]
-external reactClass: ReasonReact.reactClass = "default";
-
-[@bs.deriving abstract]
-type jsProps = {
-  [@bs.optional]
-  accessibilityLabel: string,
-  href: string,
-  [@bs.optional]
-  style: BsReactNative.Style.t,
-  [@bs.optional]
-  activeStyle: BsReactNative.Style.t,
-  [@bs.optional]
-  onMouseEnter: unit => unit,
-  [@bs.optional]
-  onMouseLeave: unit => unit,
-};
-
-let make =
-    (
-      ~accessibilityLabel=?,
-      ~href,
-      ~style=?,
-      ~activeStyle=?,
-      ~onMouseEnter=?,
-      ~onMouseLeave=?,
-      children,
-    ) => {
-  ReasonReact.wrapJsForReason(
-    ~reactClass,
-    ~props=
-      jsProps(
-        ~accessibilityLabel?,
-        ~href,
-        ~style?,
-        ~activeStyle?,
-        ~onMouseEnter?,
-        ~onMouseLeave?,
-        (),
-      ),
-    children,
-  );
-};
+[@bs.module "./TextLink"] [@react.component]
+external make:
+  (
+    ~accessibilityLabel: string=?,
+    ~href: string,
+    ~style: BsReactNative.Style.t=?,
+    ~activeStyle: BsReactNative.Style.t=?,
+    ~onMouseEnter: unit => unit=?,
+    ~onMouseLeave: unit => unit=?,
+    ~children: React.element=?
+  ) =>
+  React.element =
+  "default";

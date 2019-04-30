@@ -1,12 +1,16 @@
 open BsReactNative;
 
 let styles =
-  StyleSheet.create(Style.{"container": style([justifyContent(Center)])});
+  Style.(StyleSheet.create({"container": style([justifyContent(Center)])}));
 
 let component = ReasonReact.statelessComponent("LoadingIndicator");
 
-let make = _children => {
-  ...component,
-  render: _self =>
-    <SpacedView vertical=XXL> <ActivityIndicator size=`large /> </SpacedView>,
-};
+[@react.component]
+let make = () =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <SpacedView vertical=XXL>
+        <ActivityIndicator size=`large />
+      </SpacedView>,
+  });

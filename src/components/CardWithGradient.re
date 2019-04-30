@@ -5,8 +5,8 @@ let component = ReasonReact.statelessComponent("Skills");
 let triangleHeight = 80.;
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "container":
         style([
           flexDirection(Row),
@@ -47,7 +47,7 @@ let styles =
           color(String(Consts.Colors.light)),
           fontWeight(`_300),
         ]),
-    },
+    })
   );
 
 type item = {
@@ -59,40 +59,42 @@ type item = {
   icon: ReasonReact.reactElement,
 };
 
-let make = (item, _children) => {
-  ...component,
-  render: _self =>
-    <SpacedView
-      key={item.title} horizontal=M vertical=M style=styles##skillWrapper>
-      <div
-        style={ReactDOMRe.Style.make(
-          ~display="flex",
-          ~flexDirection="column",
-          ~flex="1 1 auto",
-          ~borderRadius="4px",
-          ~background=
-            "linear-gradient(0.45turn, "
-            ++ item.bg
-            ++ " 10%, "
-            ++ item.bg2
-            ++ " 110%)",
-          ~overflow="hidden",
-          (),
-        )}>
-        <View style=styles##skill>
-          {item.icon}
-          <Text
-            style=Style.(
-              concat([
-                styles##textNodeStrong,
-                style([color(String(item.color))]),
-              ])
-            )>
-            item.title->ReasonReact.string
-          </Text>
-          <Spacer style=styles##textSpace />
-          <Text style=styles##textNode> item.text->ReasonReact.string </Text>
-        </View>
-      </div>
-    </SpacedView>,
-};
+[@react.component]
+let make = (~item, ()) =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <SpacedView
+        key={item.title} horizontal=M vertical=M style=styles##skillWrapper>
+        <div
+          style={ReactDOMRe.Style.make(
+            ~display="flex",
+            ~flexDirection="column",
+            ~flex="1 1 auto",
+            ~borderRadius="4px",
+            ~background=
+              "linear-gradient(0.45turn, "
+              ++ item.bg
+              ++ " 10%, "
+              ++ item.bg2
+              ++ " 110%)",
+            ~overflow="hidden",
+            (),
+          )}>
+          <View style=styles##skill>
+            {item.icon}
+            <Text
+              style=Style.(
+                concat([
+                  styles##textNodeStrong,
+                  style([color(String(item.color))]),
+                ])
+              )>
+              item.title->ReasonReact.string
+            </Text>
+            <Spacer style=styles##textSpace />
+            <Text style=styles##textNode> item.text->ReasonReact.string </Text>
+          </View>
+        </div>
+      </SpacedView>,
+  });

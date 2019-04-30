@@ -4,8 +4,8 @@ let component = ReasonReact.statelessComponent("Huge");
 
 let styles =
   StyleSheet.create(
-    Style.(
-      {
+    {
+      Style.{
         "hugeText":
           style([
             display(Flex),
@@ -15,11 +15,14 @@ let styles =
             lineHeight(120.),
             justifyContent(Center),
           ]),
-      }
-    ),
+      };
+    },
   );
 
-let make = children => {
-  ...component,
-  render: _self => <Text style=styles##hugeText> ...children </Text>,
+[@react.component]
+let make = (~children, ()) => {
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self => <Text style=styles##hugeText> children </Text>,
+  });
 };

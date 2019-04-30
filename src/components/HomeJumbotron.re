@@ -5,8 +5,8 @@ let component = ReasonReact.statelessComponent("Jumbotron");
 let triangleHeight = 80.;
 
 let styles =
-  StyleSheet.create(
-    Style.{
+  Style.(
+    StyleSheet.create({
       "container":
         style([
           flexDirection(Row),
@@ -61,50 +61,55 @@ let styles =
           color(String(Consts.Colors.dark)),
           fontWeight(`_200),
         ]),
-    },
+    })
   );
 
-let make = _children => {
-  ...component,
-  render: _self => {
-    <View style=styles##container>
-      <MeBackground style=styles##bg />
-      <View style=styles##contentWrapper>
-        <WindowSizeFilter.MMin
-          style=Style.(
-            style([
-              position(Absolute),
-              right(Pt(-20.)),
-              bottom(Pt(-80.)),
-              Transform.make(~rotate="6deg", ()),
-            ])
-          )>
-          <SVGLogo
-            width=360.
-            height=360.
-            fill=Consts.Colors.lightest
-            style=Style.(style([opacity(Float(0.06))]))
-          />
-        </WindowSizeFilter.MMin>
-        <WindowSizeFilter.MMin
-          style=Style.(style([width(Pct(20.)), height(Pt(1.))]))
-        />
-        <ViewWeb style=styles##content accessibilityRole="heading">
-          <Text style=styles##title> "MoOx"->ReasonReact.string </Text>
-          <Text style=styles##subtitle>
-            "Maxime Thirouin"->ReasonReact.string
-          </Text>
-          <Spacer />
-          <SpacedView style=styles##textWrapper horizontal=M vertical=M>
-            <Text style=styles##textStrong>
-              {j|Freelance Front-End Developer|j}->ReasonReact.string
+[@react.component]
+let make = () =>
+  ReactCompat.useRecordApi({
+    ...component,
+    render: _self =>
+      <View style=styles##container>
+        <MeBackground style=styles##bg />
+        <View style=styles##contentWrapper>
+          <WindowSizeFilter.MMin>
+            <View
+              style=Style.(
+                style([
+                  position(Absolute),
+                  right(Pt(-20.)),
+                  bottom(Pt(-80.)),
+                  Transform.make(~rotate="6deg", ()),
+                ])
+              )>
+              <SVGLogo
+                width=360.
+                height=360.
+                fill=Consts.Colors.lightest
+                style=Style.(style([opacity(Float(0.06))]))
+              />
+            </View>
+          </WindowSizeFilter.MMin>
+          <WindowSizeFilter.MMin>
+            <View
+              style=Style.(style([width(Pct(20.)), height(Pt(1.))]))
+            />
+          </WindowSizeFilter.MMin>
+          <View style=styles##content accessibilityRole=`header>
+            <Text style=styles##title> "MoOx"->ReasonReact.string </Text>
+            <Text style=styles##subtitle>
+              "Maxime Thirouin"->ReasonReact.string
             </Text>
-            <Text style=styles##textLight>
-              {j|Mobile & Web|j}->ReasonReact.string
-            </Text>
-          </SpacedView>
-        </ViewWeb>
-      </View>
-    </View>;
-  },
-};
+            <Spacer />
+            <SpacedView style=styles##textWrapper horizontal=M vertical=M>
+              <Text style=styles##textStrong>
+                {j|Freelance Front-End Developer|j}->ReasonReact.string
+              </Text>
+              <Text style=styles##textLight>
+                {j|Mobile & Web|j}->ReasonReact.string
+              </Text>
+            </SpacedView>
+          </View>
+        </View>
+      </View>,
+  });
