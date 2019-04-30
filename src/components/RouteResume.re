@@ -76,12 +76,12 @@ let make = (~items) => {
         <SpacedView horizontal=M vertical=L>
           <View style=Style.(style([alignItems(Center)]))>
             <TextWeb style=styles##textStrong accessibilityRole="heading">
-              {j|Freelance Mobile & Web Developer|j}->R.string
+              {j|Freelance Mobile & Web Developer|j}->ReasonReact.string
             </TextWeb>
             <Spacer />
             <Text style=styles##textLight>
               {j|I make front-ends using React, JavaScript & ReasonML.|j}
-              ->R.string
+              ->ReasonReact.string
             </Text>
           </View>
         </SpacedView>
@@ -107,7 +107,7 @@ let make = (~items) => {
               ])
             )>
             <Text style=styles##nanoTitle>
-              {"THINGS I WORK WITH" |> R.string}
+              "THINGS I WORK WITH"->ReasonReact.string
             </Text>
             <View style=styles##activities>
               <SpacedView horizontal=XS vertical=XS>
@@ -247,7 +247,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
               ])
             )>
             <Text style=styles##nanoTitle>
-              {"WEEKLY ACTIVITIES" |> R.string}
+              "WEEKLY ACTIVITIES"->ReasonReact.string
             </Text>
             <View style=styles##activities>
               <SpacedView horizontal=XS vertical=XS>
@@ -276,7 +276,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
               </SpacedView>
             </View>
             <Text style=styles##nanoTitle>
-              {"REGULAR ACTIVITIES" |> R.string}
+              "REGULAR ACTIVITIES"->ReasonReact.string
             </Text>
             <View style=styles##activities>
               <SpacedView horizontal=XS vertical=XS>
@@ -305,7 +305,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
               </SpacedView>
             </View>
             <Text style=styles##nanoTitle>
-              {"CASUAL ACTIVITIES" |> R.string}
+              "CASUAL ACTIVITIES"->ReasonReact.string
             </Text>
             <View style=styles##activities>
               <SpacedView horizontal=XXS vertical=XXS>
@@ -380,7 +380,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
           </SpacedView>
         </View>
         <Spacer size=M />
-        <Text style=styles##title> {{j|Timeline|j} |> R.string} </Text>
+        <Text style=styles##title> {j|Timeline|j}->ReasonReact.string </Text>
         {switch ((items: T.resumeList)) {
          | Inactive
          | Loading => <LoadingIndicator />

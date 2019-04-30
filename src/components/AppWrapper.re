@@ -24,7 +24,7 @@ let make = children => {
             ~right="0",
             (),
           )}>
-          <AppMenuWithRouter />
+          <TabBarWithRouter />
         </div>
       </WindowSizeFilter.SMax>
     </>,

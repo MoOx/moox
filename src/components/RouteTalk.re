@@ -34,7 +34,9 @@ let make = (~contentItem) => {
            <BsReactHelmet>
              <title> "Loading..."->ReasonReact.string </title>
            </BsReactHelmet>
-           <Html.H1 textStyle=styles##title> {"..." |> R.string} </Html.H1>
+           <Html.H1 textStyle=styles##title>
+             "..."->ReasonReact.string
+           </Html.H1>
            <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
              <ActivityIndicator size=`large />
            </View>
@@ -44,7 +46,9 @@ let make = (~contentItem) => {
            <BsReactHelmet>
              <title> "Ooops..."->ReasonReact.string </title>
            </BsReactHelmet>
-           <Html.H1 textStyle=styles##title> {"Oupssss" |> R.string} </Html.H1>
+           <Html.H1 textStyle=styles##title>
+             "Oupssss"->ReasonReact.string
+           </Html.H1>
            <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
              <Error />
            </View>
@@ -55,11 +59,11 @@ let make = (~contentItem) => {
              <title> {contentItem##title->ReasonReact.string} </title>
            </BsReactHelmet>
            <Html.H1 textStyle=styles##title>
-             {contentItem##title |> R.string}
+             {contentItem##title->ReasonReact.string}
            </Html.H1>
            <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
              {switch (Js.Undefined.toOption(contentItem##videoEmbed)) {
-              | None => R.null
+              | None => ReasonReact.null
               | Some(videoEmbed) =>
                 <View>
                   <div
@@ -86,7 +90,7 @@ let make = (~contentItem) => {
                 </View>
               }}
              {switch (Js.Undefined.toOption(contentItem##slidesEmbed)) {
-              | None => R.null
+              | None => ReasonReact.null
               | Some(slidesEmbed) =>
                 <View>
                   <div
@@ -113,9 +117,11 @@ let make = (~contentItem) => {
                 </View>
               }}
              {switch (Js.Undefined.toOption(contentItem##slides)) {
-              | None => R.null
+              | None => ReasonReact.null
               | Some(slides) =>
-                <Spacer> <a href=slides> {slides |> R.string} </a> </Spacer>
+                <Spacer>
+                  <a href=slides> slides->ReasonReact.string </a>
+                </Spacer>
               }}
              <MyBodyRenderer body=contentItem##body />
            </View>

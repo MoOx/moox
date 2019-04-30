@@ -1,4 +1,4 @@
-[@bs.module "./AppMenuWithRouter"]
+[@bs.module "./TabBarWithRouter"]
 external reactClass: ReasonReact.reactClass = "default";
 
 let make = children =>

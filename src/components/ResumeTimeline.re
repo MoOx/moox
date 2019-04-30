@@ -38,7 +38,8 @@ let make = (~items, _) => {
          latestYear := year;
          <View key=item##id style=styles##flex>
            {newYear ?
-              <Text style=styles##yearText> {year |> R.string} </Text> : R.null}
+              <Text style=styles##yearText> year->ReasonReact.string </Text> :
+              ReasonReact.null}
            <View style=styles##item>
              {i mod 2 == 1 ? tlSpacer : ReasonReact.null}
              <ResumeTimelineEntry item />

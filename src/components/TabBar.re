@@ -1,9 +1,9 @@
 open BsReactNative;
 
-let colorInActive = "#909192";
-let colorActive = Consts.Colors.dark;
+let colorInActive = Consts.Colors.tabBarIconInactive;
+let colorActive = Consts.Colors.tabBarIconActive;
 
-let component = ReasonReact.statelessComponent("AppMenu");
+let component = ReasonReact.statelessComponent("TabBar");
 
 let styles =
   StyleSheet.create(

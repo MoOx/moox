@@ -53,7 +53,7 @@ type socialLink = {
     (~iconColor: string, ~iconSize: float) => ReasonReact.reactElement,
 };
 
-let socialLinks = [
+let socialLinks = [|
   {
     text: "@MoOx on GitHub",
     link: "https://github.com/MoOx",
@@ -72,11 +72,13 @@ let socialLinks = [
     componentFunc: (~iconColor, ~iconSize) =>
       <SVGSocialTwitter fill=iconColor width=iconSize height=iconSize />,
   },
-];
+|];
 
 module Colors = {
   let darkest = "hsl(219.1, 100%, 2%)";
   let dark = "hsl(219.1, 100%, 8.5%)";
   let light = "hsl(219.1, 100%, 99%)";
   let lightest = "hsl(219.1, 100%, 99.5%)";
+  let tabBarIconInactive = "#909192";
+  let tabBarIconActive = dark;
 };

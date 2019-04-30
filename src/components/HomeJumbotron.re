@@ -90,15 +90,17 @@ let make = _children => {
           style=Style.(style([width(Pct(20.)), height(Pt(1.))]))
         />
         <ViewWeb style=styles##content accessibilityRole="heading">
-          <Text style=styles##title> {"MoOx" |> R.string} </Text>
-          <Text style=styles##subtitle> {"Maxime Thirouin" |> R.string} </Text>
+          <Text style=styles##title> "MoOx"->ReasonReact.string </Text>
+          <Text style=styles##subtitle>
+            "Maxime Thirouin"->ReasonReact.string
+          </Text>
           <Spacer />
           <SpacedView style=styles##textWrapper horizontal=M vertical=M>
             <Text style=styles##textStrong>
-              {{j|Freelance Front-End Developer|j} |> R.string}
+              {j|Freelance Front-End Developer|j}->ReasonReact.string
             </Text>
             <Text style=styles##textLight>
-              {{j|Mobile & Web|j} |> R.string}
+              {j|Mobile & Web|j}->ReasonReact.string
             </Text>
           </SpacedView>
         </ViewWeb>

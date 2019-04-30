@@ -191,10 +191,12 @@ let make = _children => {
                        style([color(String(skill.color))]),
                      ])
                    )>
-                   skill.title->R.string
+                   skill.title->ReasonReact.string
                  </Text>
                  <Spacer style=styles##textSpace />
-                 <Text style=styles##textNode> skill.text->R.string </Text>
+                 <Text style=styles##textNode>
+                   skill.text->ReasonReact.string
+                 </Text>
                </View>
              </div>
            </SpacedView>

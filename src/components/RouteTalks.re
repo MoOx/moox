@@ -33,7 +33,7 @@ let make = (~talks) => {
       </BsReactHelmet>
       <Container>
         <Spacer />
-        <Text style=styles##title> {"Latest Talks" |> R.string} </Text>
+        <Text style=styles##title> "Latest Talks"->ReasonReact.string </Text>
         {switch ((talks: T.contentList)) {
          | Inactive
          | Loading => <LoadingIndicator />
@@ -49,17 +49,17 @@ let make = (~talks) => {
                       talks##previousPageIsFirst ?
                         "/talks/" : "/talks/after/" ++ previous ++ "/"
                     }>
-                    {"Fresh talks" |> R.string}
+                    "Fresh talks"->ReasonReact.string
                   </TextLink>
-                | None => R.null
+                | None => ReasonReact.null
                 }}
-               <Text> {" " |> R.string} </Text>
+               <Text> " "->ReasonReact.string </Text>
                {switch (talks##next |> Js.toOption) {
                 | Some(next) =>
                   <TextLink href={"/talks/after/" ++ next ++ "/"}>
-                    {"Older talks" |> R.string}
+                    "Older talks"->ReasonReact.string
                   </TextLink>
-                | None => R.null
+                | None => ReasonReact.null
                 }}
              </View>
            </View>

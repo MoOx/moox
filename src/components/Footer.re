@@ -44,25 +44,27 @@ let make = _children => {
            ->Belt.Array.map(item =>
                <TextLink
                  key={item.link} style=styles##barLink href={item.link}>
-                 {item.text |> R.string}
+                 item.text->ReasonReact.string
                </TextLink>
              )
            ->ReasonReact.array}
         </View>
         <View style=styles##column>
           <View style=styles##row>
-            <Text style=styles##barText> {"Made with " |> R.string} </Text>
+            <Text style=styles##barText>
+              "Made with "->ReasonReact.string
+            </Text>
             <TextLink style=styles##barText href="https://phenomic.io">
-              {"Phenomic" |> R.string}
+              "Phenomic"->ReasonReact.string
             </TextLink>
-            <Text style=styles##barText> {" and " |> R.string} </Text>
+            <Text style=styles##barText> " and "->ReasonReact.string </Text>
             <TextLink style=styles##barText href="https://reasonml.github.io/">
-              {"Reason" |> R.string}
+              "Reason"->ReasonReact.string
             </TextLink>
           </View>
           <TextLink
             style=styles##barText href="https://github.com/MoOx/moox.io">
-            {"Source available on GitHub" |> R.string}
+            "Source available on GitHub"->ReasonReact.string
           </TextLink>
         </View>
         <SocialIcons

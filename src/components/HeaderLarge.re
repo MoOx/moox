@@ -38,16 +38,6 @@ let styles =
           fontWeight(`_700),
           color(String(Consts.Colors.dark)),
         ]),
-      "barLinks": style([flexDirection(Row)]),
-      "barLink":
-        style([
-          padding(Pt(10.)),
-          fontSize(Float(16.)),
-          lineHeight(18. *. 1.7),
-          color(String(Consts.Colors.dark)),
-        ]),
-      "barLinkActive":
-        style([textDecorationLine(Underline), textDecorationStyle(Solid)]),
       "icons": style([flexDirection(Row)]),
       "icon":
         style([
@@ -73,26 +63,7 @@ let make = (~currentLocation, _children) => {
             {("  " ++ Consts.title)->ReasonReact.string}
           </Text>
         </ViewLink>
-        <View style=styles##barLinks>
-          {Consts.menuLinks
-           /* ->Belt.Array.sliceToEnd(1) */
-           ->Belt.Array.map(item => {
-               let isActive =
-                 item.isActive(currentLocation##pathname, item.link);
-               <TextLink
-                 key={item.link}
-                 href={item.link}
-                 style=Style.(
-                   concat([
-                     styles##barLink,
-                     isActive ? styles##barLinkActive : style([]),
-                   ])
-                 )>
-                 {item.text |> R.string}
-               </TextLink>;
-             })
-           ->ReasonReact.array}
-        </View>
+        <HeaderMenuLinks currentLocation />
         <SocialIcons
           wrapperStyle=styles##icons
           iconStyle=styles##icon

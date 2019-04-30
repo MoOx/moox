@@ -6,7 +6,7 @@ let make =
     (
       ~wrapperStyle,
       ~iconStyle,
-      ~iconColor="#FBFCF8",
+      ~iconColor=Consts.Colors.lightest,
       ~iconSize=16.,
       /* note the default value that just wrap with a simple node */
       ~iconWrapperFunc=(~children) => <Text> ...children </Text>,
@@ -16,8 +16,8 @@ let make =
   render: _self =>
     <View style=wrapperStyle>
       {Consts.socialLinks
-       ->Belt.List.map(item =>
-           <TextLink
+       ->Belt.Array.map(item =>
+           <ViewLink
              key={item.link}
              style=iconStyle
              href={item.link}
@@ -25,8 +25,8 @@ let make =
              {iconWrapperFunc(
                 ~children=[|item.componentFunc(~iconColor, ~iconSize)|],
               )}
-           </TextLink>
+           </ViewLink>
          )
-       ->R.list}
+       ->ReasonReact.array}
     </View>,
 };

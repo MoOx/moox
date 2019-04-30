@@ -67,7 +67,7 @@ let make = (~posts) => {
             </SpacedView>
             <SpacedView vertical=M horizontal=XS>
               <ButtonSmallLink href="/contact/" color="rgb(0, 112, 201)">
-                <Text> "Hire me"->R.string </Text>
+                <Text> "Hire me"->ReasonReact.string </Text>
               </ButtonSmallLink>
             </SpacedView>
           </View>
@@ -119,13 +119,13 @@ Leading team to get started with latest & proven technologies is my jam. I like 
         <Spacer size=L />
         <View style=styles##center>
           <ButtonLink href="/contact/">
-            <Text> "Hire me"->R.string </Text>
+            <Text> "Hire me"->ReasonReact.string </Text>
           </ButtonLink>
           <Spacer size=L />
           <Text style=styles##nanoTitle>
-            "Or you can "->R.string
+            "Or you can "->ReasonReact.string
             <UnderlinedTextLink href="/resume/">
-              "learn more about my experiences"->R.string
+              "learn more about my experiences"->ReasonReact.string
             </UnderlinedTextLink>
           </Text>
         </View>

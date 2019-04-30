@@ -40,7 +40,7 @@ let moox =
           color(String(Consts.Colors.light)),
         ])
       )>
-      "MoOx"->R.string
+      "MoOx"->ReasonReact.string
     </Text>
     <Text
       style=Style.(
@@ -51,7 +51,7 @@ let moox =
           color(String(Consts.Colors.light)),
         ])
       )>
-      "Maxime Thirouin"->R.string
+      "Maxime Thirouin"->ReasonReact.string
     </Text>
   </View>;
 
@@ -66,7 +66,7 @@ let meta =
           fontWeight(`_100),
         ])
       )>
-      "French"->R.string
+      "French"->ReasonReact.string
     </Text>
     <Text style=Style.(style([textAlign(Center)]))>
       <Text
@@ -89,7 +89,7 @@ let meta =
             fontWeight(`_900),
           ])
         )>
-        " yo "->R.string
+        " yo "->ReasonReact.string
       </Text>
     </Text>
   </View>;
@@ -100,7 +100,7 @@ let proForXyears =
       style=Style.(
         style([color(String(Consts.Colors.light)), fontWeight(`_200)])
       )>
-      "Professional for"->R.string
+      "Professional for"->ReasonReact.string
     </Text>
     <Text
       style=Style.(
@@ -124,7 +124,7 @@ let proForXyears =
           marginTop(Pt(-20.)),
         ])
       )>
-      " years"->R.string
+      " years"->ReasonReact.string
     </Text>
   </View>;
 
@@ -139,13 +139,13 @@ let firstMobileApp =
       ])
     )>
     <Text style=Style.(style([color(String(Consts.Colors.dark))]))>
-      "First mobile"->R.string
+      "First mobile"->ReasonReact.string
     </Text>
     <Text
       style=Style.(
         style([color(String(Consts.Colors.dark)), fontSize(Float(20.))])
       )>
-      "web app"->R.string
+      "web app"->ReasonReact.string
     </Text>
     <Text
       style=Style.(
@@ -167,14 +167,14 @@ let firstMobileApp =
           fontWeight(`_100),
         ])
       )>
-      " years ago"->R.string
+      " years ago"->ReasonReact.string
     </Text>
   </SpacedView>;
 
 let firstWebsite =
   <View style=Style.(style([alignItems(Center)]))>
     <Text style=Style.(style([color(String(Consts.Colors.light))]))>
-      "First website"->R.string
+      "First website"->ReasonReact.string
     </Text>
     <Text
       style=Style.(
@@ -196,7 +196,7 @@ let firstWebsite =
           fontWeight(`_100),
         ])
       )>
-      "years ago"->R.string
+      "years ago"->ReasonReact.string
     </Text>
   </View>;
 
