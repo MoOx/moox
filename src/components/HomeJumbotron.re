@@ -94,17 +94,17 @@ let make = () =>
             style={ReactDOMRe.Style.make(~width="20%", ~height="1px", ())}
           />
           <View style=styles##content accessibilityRole=`header>
-            <Text style=styles##title> "MoOx"->ReasonReact.string </Text>
+            <Text style=styles##title> "MoOx"->React.string </Text>
             <Text style=styles##subtitle>
-              "Maxime Thirouin"->ReasonReact.string
+              "Maxime Thirouin"->React.string
             </Text>
             <Spacer />
             <SpacedView style=styles##textWrapper horizontal=M vertical=M>
               <Text style=styles##textStrong>
-                {j|Freelance Front-End Developer|j}->ReasonReact.string
+                {j|Freelance Front-End Developer|j}->React.string
               </Text>
               <Text style=styles##textLight>
-                {j|Mobile & Web|j}->ReasonReact.string
+                {j|Mobile & Web|j}->React.string
               </Text>
             </SpacedView>
           </View>

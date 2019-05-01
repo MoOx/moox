@@ -63,7 +63,7 @@ let make = (~currentLocation, ()) =>
           <ViewLink style=styles##logo href="/">
             <SVGLogo width=20. height=20. fill=Consts.Colors.dark />
             <Text style=styles##logoText>
-              {("  " ++ Consts.title)->ReasonReact.string}
+              {("  " ++ Consts.title)->React.string}
             </Text>
           </ViewLink>
           <HeaderMenuLinks currentLocation />

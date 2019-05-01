@@ -56,7 +56,7 @@ type item = {
   color: string,
   bg: string,
   bg2: string,
-  icon: ReasonReact.reactElement,
+  icon: React.element,
 };
 
 [@react.component]
@@ -90,10 +90,10 @@ let make = (~item, ()) =>
                   style([color(String(item.color))]),
                 |])
               )>
-              item.title->ReasonReact.string
+              item.title->React.string
             </Text>
             <Spacer style=styles##textSpace />
-            <Text style=styles##textNode> item.text->ReasonReact.string </Text>
+            <Text style=styles##textNode> item.text->React.string </Text>
           </View>
         </div>
       </SpacedView>,

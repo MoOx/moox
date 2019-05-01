@@ -59,17 +59,17 @@ let rec renderChild = (parentTag, index: int, child) => {
   lastSiblingHasLineBreaking := false;
   let renderChildren = (parentTag, children) =>
     if (List.length(children) == 0) {
-      ReasonReact.null;
+      React.null;
     } else {
-      ReasonReact.array(
+      React.array(
         Array.of_list(List.mapi(renderChild(parentTag), children)),
       );
     };
   switch (child) {
   | String(string) =>
     switch (parentTag) {
-    | "ul" => ReasonReact.null
-    | "ol" => ReasonReact.null
+    | "ul" => React.null
+    | "ol" => React.null
     | _ =>
       let newString =
         string_map_partial(
@@ -81,7 +81,7 @@ let rec renderChild = (parentTag, index: int, child) => {
             },
           string,
         );
-      ReasonReact.string(newString);
+      React.string(newString);
     }
   | Element(tag, props, children) =>
     switch (tag) {
@@ -114,7 +114,7 @@ let rec renderChild = (parentTag, index: int, child) => {
         [|renderChildren(tag, children)|],
       )
     }
-  | Empty => ReasonReact.null
+  | Empty => React.null
   };
 };
 

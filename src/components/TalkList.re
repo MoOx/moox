@@ -35,14 +35,12 @@ let make = (~talks, ()) =>
               latestYear := year;
               <View key=item##id style=styles##flex>
                 {newYear
-                   ? <Text style=styles##yearText>
-                       year->ReasonReact.string
-                     </Text>
-                   : ReasonReact.null}
+                   ? <Text style=styles##yearText> year->React.string </Text>
+                   : React.null}
                 <TalkPreview item />
               </View>;
             })
-         |> ReasonReact.array}
+         |> React.array}
       </View>;
     },
   });

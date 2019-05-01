@@ -36,9 +36,9 @@ let make = (~currentLocation, ()) =>
                      ? Some(styles##linkActive) : None,
                  |])
                )>
-               item.text->ReasonReact.string
+               item.text->React.string
              </TextLink>
            )
-         ->ReasonReact.array}
+         ->React.array}
       </View>,
   });

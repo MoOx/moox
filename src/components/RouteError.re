@@ -32,7 +32,7 @@ let make = (~posts) =>
           <Error label={j|It seems that this page doesn't exist 😕|j} />
           <Spacer size=XL />
           <Text style=styles##title>
-            "Latest Posts on the blog"->ReasonReact.string
+            "Latest Posts on the blog"->React.string
           </Text>
           {switch ((posts: T.contentList)) {
            | Inactive
@@ -43,7 +43,7 @@ let make = (~posts) =>
                <PostList posts=posts##list />
                <View style=styles##links>
                  <TextLink href="/blog/">
-                   "More posts"->ReasonReact.string
+                   "More posts"->React.string
                  </TextLink>
                </View>
              </View>

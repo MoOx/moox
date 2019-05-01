@@ -34,11 +34,9 @@ let make = (~contentItem, ~id) =>
          | Loading =>
            <Container>
              <BsReactHelmet>
-               <title> "Loading..."->ReasonReact.string </title>
+               <title> "Loading..."->React.string </title>
              </BsReactHelmet>
-             <Html.H1 textStyle=styles##title>
-               "..."->ReasonReact.string
-             </Html.H1>
+             <Html.H1 textStyle=styles##title> "..."->React.string </Html.H1>
              <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
                <ActivityIndicator size=`large />
              </View>
@@ -46,22 +44,20 @@ let make = (~contentItem, ~id) =>
          | Errored =>
            <Container>
              <BsReactHelmet>
-               <title> "Ooops..."->ReasonReact.string </title>
+               <title> "Ooops..."->React.string </title>
              </BsReactHelmet>
-             <Html.H1 textStyle=styles##title>
-               "Ooops"->ReasonReact.string
-             </Html.H1>
+             <Html.H1 textStyle=styles##title> "Ooops"->React.string </Html.H1>
              <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
-               <Text> "Ooops"->ReasonReact.string </Text>
+               <Text> "Ooops"->React.string </Text>
              </View>
            </Container>
          | Idle(item) =>
            <Container>
              <BsReactHelmet>
-               <title> {item##title->ReasonReact.string} </title>
+               <title> {item##title->React.string} </title>
              </BsReactHelmet>
              <Html.H1 textStyle=styles##title>
-               {item##title->ReasonReact.string}
+               {item##title->React.string}
              </Html.H1>
              <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
                <MyBodyRenderer body=item##body />

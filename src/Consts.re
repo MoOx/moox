@@ -5,9 +5,7 @@ let titleTemplate = {j|%s - |j} ++ title;
 type menuLink = {
   link: string,
   text: string,
-  icon:
-    (~width: float, ~height: float, ~fill: string, unit) =>
-    ReasonReact.reactElement,
+  icon: (~width: float, ~height: float, ~fill: string, unit) => React.element,
   isActive: (string, string) => bool,
 };
 
@@ -49,8 +47,7 @@ let menuLinks = [|
 type socialLink = {
   text: string,
   link: string,
-  componentFunc:
-    (~iconColor: string, ~iconSize: float) => ReasonReact.reactElement,
+  componentFunc: (~iconColor: string, ~iconSize: float) => React.element,
 };
 
 let socialLinks = [|

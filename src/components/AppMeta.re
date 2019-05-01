@@ -39,7 +39,7 @@ let make = () =>
         />
         <style>
           {j|@-ms-viewport { width: device-width } @viewport { width: device-width }|j}
-          ->ReasonReact.string
+          ->React.string
         </style>
         <style>
           {j|
@@ -80,7 +80,7 @@ body {
 @media (min-width: 500px) { .WindowSizeFilterSMax { display: none } }
 @media (max-width: 501px) { .WindowSizeFilterMMin { display: none } }
   |j}
-          ->ReasonReact.string
+          ->React.string
         </style>
       </BsReactHelmet>,
   });

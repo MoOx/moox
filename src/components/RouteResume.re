@@ -68,9 +68,7 @@ let make = (~items) =>
     render: _self =>
       <AppWrapper>
         <BsReactHelmet>
-          <title>
-            {("Resume - " ++ Consts.defaultTitle)->ReasonReact.string}
-          </title>
+          <title> {("Resume - " ++ Consts.defaultTitle)->React.string} </title>
         </BsReactHelmet>
         <WindowSizeFilter.SMax>
           <ResumeJumbotronSmall />
@@ -85,13 +83,13 @@ let make = (~items) =>
               accessibilityRole=`header>
               <View accessibilityRole=`header>
                 <Text style=styles##textStrong>
-                  {j|Freelance Mobile & Web Developer|j}->ReasonReact.string
+                  {j|Freelance Mobile & Web Developer|j}->React.string
                 </Text>
               </View>
               <Spacer />
               <Text style=styles##textLight>
                 {j|I make front-ends using React, JavaScript & ReasonML.|j}
-                ->ReasonReact.string
+                ->React.string
               </Text>
             </View>
           </SpacedView>
@@ -117,7 +115,7 @@ let make = (~items) =>
                 ])
               )>
               <Text style=styles##nanoTitle>
-                "THINGS I WORK WITH"->ReasonReact.string
+                "THINGS I WORK WITH"->React.string
               </Text>
               <View style=styles##activities>
                 <SpacedView horizontal=XS vertical=XS>
@@ -125,96 +123,80 @@ let make = (~items) =>
                     <SVGJavaScript fill="#bbb" width=48. height=48. />
                   </div>
                   <Text style=styles##iconText>
-                    "JavaScript"->ReasonReact.string
+                    "JavaScript"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGReact fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "React"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "React"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGReason fill="#bbb" width=48. height=48. />
                   </div>
                   <Text style=styles##iconText>
-                    "ReasonML"->ReasonReact.string
+                    "ReasonML"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGJest fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Jest"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Jest"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGTypeScript fill="#bbb" width=48. height=48. />
                   </div>
                   <Text style=styles##iconText>
-                    "TypeScript"->ReasonReact.string
+                    "TypeScript"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGFlow fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Flow"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Flow"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGGraphql fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Graphql"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Graphql"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGApollo fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Apollo"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Apollo"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGWebpack fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Webpack"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Webpack"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGPhotoshop fill="#bbb" width=48. height=48. />
                   </div>
                   <Text style=styles##iconText>
-                    "Photoshop"->ReasonReact.string
+                    "Photoshop"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGSketch fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Sketch"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Sketch"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGCommandLine fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "CLI"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "CLI"->React.string </Text>
                 </SpacedView>
               </View>
             </SpacedView>
@@ -243,7 +225,7 @@ I am a software developer specialized in front-end development of mobile & web a
 I love to design and develop UIs. I care about UX, responsiveness, performance, maintainability and scalability.
 
 When I am not coding or meditating, I enjoy simple things like gardening, watching a movie or enjoying one of the various activities that life has to offer.|j}
-                ->ReasonReact.string
+                ->React.string
               </Text>
             </SpacedView>
             <SpacedView
@@ -259,7 +241,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                 ])
               )>
               <Text style=styles##nanoTitle>
-                "WEEKLY ACTIVITIES"->ReasonReact.string
+                "WEEKLY ACTIVITIES"->React.string
               </Text>
               <View style=styles##activities>
                 <SpacedView horizontal=XS vertical=XS>
@@ -267,28 +249,26 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                     <SVGActivityCrossfit fill="#bbb" width=48. height=48. />
                   </div>
                   <Text style=styles##iconText>
-                    "Crossfit"->ReasonReact.string
+                    "Crossfit"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGActivityBike fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Bike"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Bike"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGActivityWakeboard fill="#bbb" width=48. height=48. />
                   </div>
                   <Text style=styles##iconText>
-                    "Wakeboard"->ReasonReact.string
+                    "Wakeboard"->React.string
                   </Text>
                 </SpacedView>
               </View>
               <Text style=styles##nanoTitle>
-                "REGULAR ACTIVITIES"->ReasonReact.string
+                "REGULAR ACTIVITIES"->React.string
               </Text>
               <View style=styles##activities>
                 <SpacedView horizontal=XS vertical=XS>
@@ -296,28 +276,26 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                     <SVGActivityDiy fill="#bbb" width=48. height=48. />
                   </div>
                   <Text style=styles##iconText>
-                    "Bricolage"->ReasonReact.string
+                    "Bricolage"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGMicrophone fill="#bbb" width=48. height=48. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Podcast"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Podcast"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XS vertical=XS>
                   <div style=grayIconDomStyle>
                     <SVGTraining fill="#bbb" width=48. height=48. />
                   </div>
                   <Text style=styles##iconText>
-                    "Teaching"->ReasonReact.string
+                    "Teaching"->React.string
                   </Text>
                 </SpacedView>
               </View>
               <Text style=styles##nanoTitle>
-                "CASUAL ACTIVITIES"->ReasonReact.string
+                "CASUAL ACTIVITIES"->React.string
               </Text>
               <View style=styles##activities>
                 <SpacedView horizontal=XXS vertical=XXS>
@@ -325,7 +303,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                     <SVGActivitySkydiving fill="#bbb" width=36. height=36. />
                   </div>
                   <Text style=styles##iconText>
-                    "Skydiving"->ReasonReact.string
+                    "Skydiving"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XXS vertical=XXS>
@@ -333,7 +311,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                     <SVGActivitySki fill="#bbb" width=36. height=36. />
                   </div>
                   <Text style=styles##iconText>
-                    "Alpine\nSkiing"->ReasonReact.string
+                    "Alpine\nSkiing"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XXS vertical=XXS>
@@ -341,7 +319,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                     <SVGActivityMartialArt fill="#bbb" width=36. height=36. />
                   </div>
                   <Text style=styles##iconText>
-                    "Martial\nArt"->ReasonReact.string
+                    "Martial\nArt"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XXS vertical=XXS>
@@ -349,16 +327,14 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                     <SVGActivityTrekking fill="#bbb" width=36. height=36. />
                   </div>
                   <Text style=styles##iconText>
-                    "Trekking"->ReasonReact.string
+                    "Trekking"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XXS vertical=XXS>
                   <div style=grayIconDomStyle>
                     <SVGActivitySkateboard fill="#bbb" width=36. height=36. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Skate"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Skate"->React.string </Text>
                 </SpacedView>
                 <SpacedView horizontal=XXS vertical=XXS>
                   <div style=grayIconDomStyle>
@@ -369,7 +345,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                     />
                   </div>
                   <Text style=styles##iconText>
-                    "Obstacle\nRace"->ReasonReact.string
+                    "Obstacle\nRace"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XXS vertical=XXS>
@@ -377,22 +353,20 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                     <SVGActivityBeachVolley fill="#bbb" width=36. height=36. />
                   </div>
                   <Text style=styles##iconText>
-                    "Beach\nVolley"->ReasonReact.string
+                    "Beach\nVolley"->React.string
                   </Text>
                 </SpacedView>
                 <SpacedView horizontal=XXS vertical=XXS>
                   <div style=grayIconDomStyle>
                     <SVGActivitySoccer fill="#bbb" width=36. height=36. />
                   </div>
-                  <Text style=styles##iconText>
-                    "Soccer"->ReasonReact.string
-                  </Text>
+                  <Text style=styles##iconText> "Soccer"->React.string </Text>
                 </SpacedView>
               </View>
             </SpacedView>
           </View>
           <Spacer size=M />
-          <Text style=styles##title> {j|Timeline|j}->ReasonReact.string </Text>
+          <Text style=styles##title> {j|Timeline|j}->React.string </Text>
           {switch ((items: T.resumeList)) {
            | Inactive
            | Loading => <LoadingIndicator />

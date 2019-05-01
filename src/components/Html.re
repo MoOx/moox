@@ -194,7 +194,7 @@ module Li = {
       ...component,
       render: _self =>
         <View style=styles##liWrapper>
-          <Text style=styles##liBullet> {j|•|j}->ReasonReact.string </Text>
+          <Text style=styles##liBullet> {j|•|j}->React.string </Text>
           <Text style=Style.(arrayOption([|Some(styles##li), styl|]))>
             children
           </Text>
@@ -211,7 +211,7 @@ module Br = {
   let make = () =>
     ReactCompat.useRecordApi({
       ...component,
-      render: _self => <Text> "\n"->ReasonReact.string </Text>,
+      render: _self => <Text> "\n"->React.string </Text>,
     });
 };
 

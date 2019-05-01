@@ -29,6 +29,6 @@ let make =
                 )}
              </ViewLink>
            )
-         ->ReasonReact.array}
+         ->React.array}
       </View>,
   });

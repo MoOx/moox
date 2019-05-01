@@ -37,16 +37,16 @@ let make = (~item: T.partialContentItem, ()) =>
       let href = "/blog/" ++ item##id ++ "/";
       <View key=item##id style=styles##block>
         <Text style=styles##text>
-          <Text> {j|•|j}->ReasonReact.string </Text>
+          <Text> {j|•|j}->React.string </Text>
           <Spacer size=S />
           <UnderlinedTextLink style=styles##title href>
-            {item##title->ReasonReact.string}
+            {item##title->React.string}
           </UnderlinedTextLink>
           <Spacer size=S />
           {switch (Js.Undefined.toOption(item##lang)) {
-           | None => ReasonReact.null
+           | None => React.null
            | Some(lang) =>
-             <Text> {("[" ++ lang ++ "] ")->ReasonReact.string} </Text>
+             <Text> {("[" ++ lang ++ "] ")->React.string} </Text>
            }}
         </Text>
       </View>;

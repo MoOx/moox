@@ -34,11 +34,11 @@ let make = (~label=?, ()) =>
         | Some(label) => label
         };
       <SpacedView vertical=XXL>
-        <Text style=styles##oops> "Oooops!"->ReasonReact.string </Text>
+        <Text style=styles##oops> "Oooops!"->React.string </Text>
         <View>
           <Text style=styles##title>
             /* <strong>{status |>text}</strong> */
-             errorText->ReasonReact.string </Text>
+             errorText->React.string </Text>
         </View>
       </SpacedView>;
       /*

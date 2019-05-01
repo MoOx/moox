@@ -92,7 +92,7 @@ let make = (~item: T.partialResumeItem, ()) =>
         <View style=styles##container>
           {item##image
            ->Js.undefinedToOption
-           ->Belt.Option.mapWithDefault(ReasonReact.null, image =>
+           ->Belt.Option.mapWithDefault(React.null, image =>
                <View style=styles##imageWrapper>
                  <ImageWithAspectRatio uri=image ratio={2160. /. 3840.} />
                </View>
@@ -100,7 +100,7 @@ let make = (~item: T.partialResumeItem, ()) =>
           <SpacedView style=styles##block vertical=M horizontal=M>
             <View style=styles##head>
               <Text style=styles##title>
-                {item##title->Js.String.toUpperCase->ReasonReact.string}
+                {item##title->Js.String.toUpperCase->React.string}
               </Text>
               {item##url
                ->Js.undefinedToOption
@@ -109,14 +109,14 @@ let make = (~item: T.partialResumeItem, ()) =>
                      {item##company
                       ->Js.undefinedToOption
                       ->Belt.Option.getWithDefault("")
-                      ->ReasonReact.string}
+                      ->React.string}
                    </UnderlinedTextLink>
                  )
-               ->Belt.Option.getWithDefault(ReasonReact.null)}
+               ->Belt.Option.getWithDefault(React.null)}
             </View>
             <Spacer size=XS />
             <Text style=styles##description>
-              {item##description->ReasonReact.string}
+              {item##description->React.string}
             </Text>
             <Spacer size=XS />
             <Text style=styles##duration>
@@ -136,20 +136,20 @@ let make = (~item: T.partialResumeItem, ()) =>
                    }
                  )
                )
-               ->ReasonReact.string}
+               ->React.string}
             </Text>
             <Spacer size=XL />
             <View style=styles##tags>
               {item##hashtags
                ->Belt.Array.map(t =>
                    <Text key=t style=styles##tag>
-                     {(" #" ++ t)->ReasonReact.string}
+                     {(" #" ++ t)->React.string}
                    </Text>
                  )
-               ->ReasonReact.array}
+               ->React.array}
             </View>
             {switch (links) {
-             | [||] => ReasonReact.null
+             | [||] => React.null
              | _ =>
                <>
                  <Spacer size=L />
@@ -160,13 +160,13 @@ let make = (~item: T.partialResumeItem, ()) =>
                           <Spacer size=XS />
                           <UnderlinedTextLink
                             key=l##title href=l##url style=styles##link>
-                            {l##title->ReasonReact.string}
+                            {l##title->React.string}
                             <Spacer size=XXS />
                             <SVGExternalLink />
                           </UnderlinedTextLink>
                         </>
                       )
-                    ->ReasonReact.array}
+                    ->React.array}
                  </View>
                </>
              }}

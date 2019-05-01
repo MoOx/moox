@@ -64,12 +64,12 @@ let make = (~posts) =>
               <SpacedView vertical=M horizontal=XS style=styles##flex>
                 <Text style=styles##textLight>
                   {j|I build apps using React, JavaScript & ReasonML.|j}
-                  ->ReasonReact.string
+                  ->React.string
                 </Text>
               </SpacedView>
               <SpacedView vertical=M horizontal=XS>
                 <ButtonSmallLink href="/contact/" color="rgb(0, 112, 201)">
-                  <Text> "Hire me"->ReasonReact.string </Text>
+                  <Text> "Hire me"->React.string </Text>
                 </ButtonSmallLink>
               </SpacedView>
             </View>
@@ -78,12 +78,12 @@ let make = (~posts) =>
               {j|Since I made my first website in 1998, I never stopped to learn things. I love to build useful UIs that offer the best UX possible. I like to produce durable things when working on products or long-running projects by focusing on maintainability, scalability and performance.
 Over the years, I refined my way to approach development, mostly by cultivating my empathy.
 Leading team to get started with latest & proven technologies is my jam. I like to teach people to work better on large codebase that must scale.|j}
-              ->ReasonReact.string
+              ->React.string
             </Text>
           </SpacedView>
           <Spacer />
           <Text style=styles##nanoTitle>
-            "THINGS I LIKE TO WORK WITH"->ReasonReact.string
+            "THINGS I LIKE TO WORK WITH"->React.string
           </Text>
           <Skills />
           <UnderlinedTextLink
@@ -96,14 +96,14 @@ Leading team to get started with latest & proven technologies is my jam. I like 
                 color(String("#bbc")),
               ])
             )>
-            "And more"->ReasonReact.string
+            "And more"->React.string
           </UnderlinedTextLink>
           <Spacer size=L />
         </Container>
         <Container maxWidth=1600.>
           <Spacer size=L />
           <Text style=styles##nanoTitle>
-            "COMPANIES THAT TRUSTED ME"->ReasonReact.string
+            "COMPANIES THAT TRUSTED ME"->React.string
           </Text>
           <View style=styles##row>
             <SVGCompanyKisioDigital width=200. height=200. fill="#bbb" />
@@ -116,18 +116,18 @@ Leading team to get started with latest & proven technologies is my jam. I like 
         <Spacer size=L />
         <View style=styles##center>
           <Text style=styles##nanoTitle>
-            "Interested with my profile ?"->ReasonReact.string
+            "Interested with my profile ?"->React.string
           </Text>
           <Spacer size=L />
           <View style=styles##center>
             <ButtonLink href="/contact/">
-              <Text> "Hire me"->ReasonReact.string </Text>
+              <Text> "Hire me"->React.string </Text>
             </ButtonLink>
             <Spacer size=L />
             <Text style=styles##nanoTitle>
-              "Or you can "->ReasonReact.string
+              "Or you can "->React.string
               <UnderlinedTextLink href="/resume/">
-                "learn more about my experiences"->ReasonReact.string
+                "learn more about my experiences"->React.string
               </UnderlinedTextLink>
             </Text>
           </View>
@@ -136,7 +136,7 @@ Leading team to get started with latest & proven technologies is my jam. I like 
         <Container style=styles##center>
           <Spacer size=XL />
           <Text style=styles##title>
-            "Latest Posts on the blog"->ReasonReact.string
+            "Latest Posts on the blog"->React.string
           </Text>
           {switch ((posts: T.contentList)) {
            | Inactive
@@ -147,7 +147,7 @@ Leading team to get started with latest & proven technologies is my jam. I like 
                <PostList posts=posts##list />
                <View style=styles##links>
                  <TextLink href="/blog/">
-                   "More posts"->ReasonReact.string
+                   "More posts"->React.string
                  </TextLink>
                </View>
              </View>

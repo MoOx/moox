@@ -40,7 +40,7 @@ let moox =
           color(String(Consts.Colors.light)),
         ])
       )>
-      "MoOx"->ReasonReact.string
+      "MoOx"->React.string
     </Text>
     <Text
       style=Style.(
@@ -51,7 +51,7 @@ let moox =
           color(String(Consts.Colors.light)),
         ])
       )>
-      "Maxime Thirouin"->ReasonReact.string
+      "Maxime Thirouin"->React.string
     </Text>
   </View>;
 
@@ -66,7 +66,7 @@ let meta =
           fontWeight(`_100),
         ])
       )>
-      "French"->ReasonReact.string
+      "French"->React.string
     </Text>
     <Text style=Style.(style([textAlign(Center)]))>
       <Text
@@ -78,7 +78,7 @@ let meta =
             fontWeight(`_100),
           ])
         )>
-        {string_of_int(currentYear - 1985)->ReasonReact.string}
+        {string_of_int(currentYear - 1985)->React.string}
       </Text>
       <Text
         style=Style.(
@@ -89,7 +89,7 @@ let meta =
             fontWeight(`_900),
           ])
         )>
-        " yo "->ReasonReact.string
+        " yo "->React.string
       </Text>
     </Text>
   </View>;
@@ -100,7 +100,7 @@ let proForXyears =
       style=Style.(
         style([color(String(Consts.Colors.light)), fontWeight(`_200)])
       )>
-      "Professional for"->ReasonReact.string
+      "Professional for"->React.string
     </Text>
     <Text
       style=Style.(
@@ -112,7 +112,7 @@ let proForXyears =
           marginTop(Pt(-10.)),
         ])
       )>
-      {string_of_int(currentYear - 2007)->ReasonReact.string}
+      {string_of_int(currentYear - 2007)->React.string}
     </Text>
     <Text
       style=Style.(
@@ -124,7 +124,7 @@ let proForXyears =
           marginTop(Pt(-20.)),
         ])
       )>
-      " years"->ReasonReact.string
+      " years"->React.string
     </Text>
   </View>;
 
@@ -139,13 +139,13 @@ let firstMobileApp =
       ])
     )>
     <Text style=Style.(style([color(String(Consts.Colors.dark))]))>
-      "First mobile"->ReasonReact.string
+      "First mobile"->React.string
     </Text>
     <Text
       style=Style.(
         style([color(String(Consts.Colors.dark)), fontSize(Float(20.))])
       )>
-      "web app"->ReasonReact.string
+      "web app"->React.string
     </Text>
     <Text
       style=Style.(
@@ -156,7 +156,7 @@ let firstMobileApp =
           fontWeight(`_800),
         ])
       )>
-      {string_of_int(currentYear - 2005)->ReasonReact.string}
+      {string_of_int(currentYear - 2005)->React.string}
     </Text>
     <Text
       style=Style.(
@@ -167,14 +167,14 @@ let firstMobileApp =
           fontWeight(`_100),
         ])
       )>
-      " years ago"->ReasonReact.string
+      " years ago"->React.string
     </Text>
   </SpacedView>;
 
 let firstWebsite =
   <View style=Style.(style([alignItems(Center)]))>
     <Text style=Style.(style([color(String(Consts.Colors.light))]))>
-      "First website"->ReasonReact.string
+      "First website"->React.string
     </Text>
     <Text
       style=Style.(
@@ -185,7 +185,7 @@ let firstWebsite =
           fontWeight(`_400),
         ])
       )>
-      {string_of_int(currentYear - 1999)->ReasonReact.string}
+      {string_of_int(currentYear - 1999)->React.string}
     </Text>
     <Text
       style=Style.(
@@ -196,7 +196,7 @@ let firstWebsite =
           fontWeight(`_100),
         ])
       )>
-      "years ago"->ReasonReact.string
+      "years ago"->React.string
     </Text>
   </View>;
 

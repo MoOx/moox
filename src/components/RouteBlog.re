@@ -29,13 +29,11 @@ let make = (~posts) =>
     render: _self =>
       <AppWrapper>
         <BsReactHelmet>
-          <title>
-            {("Blog - " ++ Consts.defaultTitle)->ReasonReact.string}
-          </title>
+          <title> {("Blog - " ++ Consts.defaultTitle)->React.string} </title>
         </BsReactHelmet>
         <Container>
           <Spacer />
-          <Text style=styles##title> "Latest Posts"->ReasonReact.string </Text>
+          <Text style=styles##title> "Latest Posts"->React.string </Text>
           {switch ((posts: T.contentList)) {
            | Inactive
            | Loading => <LoadingIndicator />
@@ -51,17 +49,17 @@ let make = (~posts) =>
                         posts##previousPageIsFirst
                           ? "/" : "/after/" ++ previous ++ "/"
                       }>
-                      "Fresh posts"->ReasonReact.string
+                      "Fresh posts"->React.string
                     </TextLink>
-                  | None => ReasonReact.null
+                  | None => React.null
                   }}
-                 <Text> " "->ReasonReact.string </Text>
+                 <Text> " "->React.string </Text>
                  {switch (posts##next |> Js.toOption) {
                   | Some(next) =>
                     <TextLink href={"/after/" ++ next ++ "/"}>
-                      "Older posts"->ReasonReact.string
+                      "Older posts"->React.string
                     </TextLink>
-                  | None => ReasonReact.null
+                  | None => React.null
                   }}
                </View>
              </View>

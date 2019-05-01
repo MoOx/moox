@@ -56,7 +56,7 @@ type skill = {
   color: string,
   bg: string,
   bg2: string,
-  icon: ReasonReact.reactElement,
+  icon: React.element,
 };
 
 [@react.component]
@@ -193,16 +193,16 @@ let make = () =>
                          style([color(String(skill.color))]),
                        |])
                      )>
-                     skill.title->ReasonReact.string
+                     skill.title->React.string
                    </Text>
                    <Spacer style=styles##textSpace />
                    <Text style=styles##textNode>
-                     skill.text->ReasonReact.string
+                     skill.text->React.string
                    </Text>
                  </View>
                </div>
              </SpacedView>
            )
-         ->ReasonReact.array}
+         ->React.array}
       </View>,
   });

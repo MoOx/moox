@@ -56,7 +56,7 @@ let make = () =>
         <ViewLink style=styles##logo href="/">
           <SVGLogo width=24. height=24. fill=Consts.Colors.dark />
           <Text style=styles##logoText>
-            {("  " ++ Consts.title)->ReasonReact.string}
+            {("  " ++ Consts.title)->React.string}
           </Text>
         </ViewLink>
         <Spacer />

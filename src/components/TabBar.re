@@ -61,12 +61,12 @@ let make = (~currentLocation, ()) =>
                            ? Some(styles##itemTextActive) : None,
                        |])
                      )>
-                     item.text->ReasonReact.string
+                     item.text->React.string
                    </Text>
                  </View>
                </ViewLink>
              )
-           ->ReasonReact.array}
+           ->React.array}
         </View>
       </SafeAreaView>,
   });

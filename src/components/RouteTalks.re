@@ -29,13 +29,11 @@ let make = (~talks) =>
     render: _self =>
       <AppWrapper>
         <BsReactHelmet>
-          <title>
-            {("Talks - " ++ Consts.defaultTitle)->ReasonReact.string}
-          </title>
+          <title> {("Talks - " ++ Consts.defaultTitle)->React.string} </title>
         </BsReactHelmet>
         <Container>
           <Spacer />
-          <Text style=styles##title> "Latest Talks"->ReasonReact.string </Text>
+          <Text style=styles##title> "Latest Talks"->React.string </Text>
           {switch ((talks: T.contentList)) {
            | Inactive
            | Loading => <LoadingIndicator />
@@ -51,19 +49,20 @@ let make = (~talks) =>
                         talks##previousPageIsFirst
                           ? "/talks/" : "/talks/after/" ++ previous ++ "/"
                       }>
-                      "Fresh talks"->ReasonReact.string
+                      "Fresh talks"->React.string
                     </TextLink>
-                  | None => ReasonReact.null
+                  | None => React.null
                   }}
-                 <Text> " "->ReasonReact.string </Text>
+                 <Text> " "->React.string </Text>
                  {switch (talks##next |> Js.toOption) {
                   | Some(next) =>
                     <TextLink href={"/talks/after/" ++ next ++ "/"}>
-                      "Older talks"->ReasonReact.string
+                      "Older talks"->React.string
                     </TextLink>
-                  | None => ReasonReact.null
+                  | None => React.null
                   }}
                </View>
+               React.null
              </View>
            }}
           <Spacer size=XL />

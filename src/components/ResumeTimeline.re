@@ -34,24 +34,23 @@ let make = (~items, ()) =>
       let latestYear =
         ref(items[0]##dateStart |> Js.String.slice(~from=0, ~to_=4));
       <SpacedView horizontal=S>
-        {items->Belt.Array.mapWithIndex((i, item) => {
-           let year = item##dateStart |> Js.String.slice(~from=0, ~to_=4);
-           let newYear = year !== latestYear^;
-           latestYear := year;
-           <View key=item##id style=styles##flex>
-             {newYear
-                ? <Text style=styles##yearText>
-                    year->ReasonReact.string
-                  </Text>
-                : ReasonReact.null}
-             <View style=styles##item>
-               {i mod 2 == 1 ? tlSpacer : ReasonReact.null}
-               <ResumeTimelineEntry item />
-               {i mod 2 == 0 ? tlSpacer : ReasonReact.null}
-             </View>
-           </View>;
-         })
-         |> ReasonReact.array}
+        {items
+         ->Belt.Array.mapWithIndex((i, item) => {
+             let year = item##dateStart |> Js.String.slice(~from=0, ~to_=4);
+             let newYear = year !== latestYear^;
+             latestYear := year;
+             <View key=item##id style=styles##flex>
+               {newYear
+                  ? <Text style=styles##yearText> year->React.string </Text>
+                  : React.null}
+               <View style=styles##item>
+                 {i mod 2 == 1 ? tlSpacer : React.null}
+                 <ResumeTimelineEntry item />
+                 {i mod 2 == 0 ? tlSpacer : React.null}
+               </View>
+             </View>;
+           })
+         ->React.array}
       </SpacedView>;
     },
   });

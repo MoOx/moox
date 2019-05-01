@@ -37,23 +37,23 @@ let make = (~item: T.partialContentItem, ()) =>
       let href = "/talk/" ++ item##id ++ "/";
       <View key=item##id style=styles##block>
         <Text style=styles##text>
-          <Text> {j|•|j}->ReasonReact.string </Text>
+          <Text> {j|•|j}->React.string </Text>
           <Spacer size=S />
           <UnderlinedTextLink style=styles##title href>
-            {item##title->ReasonReact.string}
+            {item##title->React.string}
             <small>
               {switch (Js.Undefined.toOption(item##conference)) {
-               | None => ReasonReact.null
+               | None => React.null
                | Some(conference) =>
-                 <Text> {(" @ " ++ conference)->ReasonReact.string} </Text>
+                 <Text> {(" @ " ++ conference)->React.string} </Text>
                }}
             </small>
           </UnderlinedTextLink>
           <Spacer size=S />
           {switch (Js.Undefined.toOption(item##lang)) {
-           | None => ReasonReact.null
+           | None => React.null
            | Some(lang) =>
-             <Text> {("[" ++ lang ++ "] ")->ReasonReact.string} </Text>
+             <Text> {("[" ++ lang ++ "] ")->React.string} </Text>
            }}
         </Text>
       </View>;
