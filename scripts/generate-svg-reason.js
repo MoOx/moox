@@ -25,8 +25,8 @@ const template = ({ name }) =>
   let make =
       (~width=defaultSize, ~height=defaultSize, ~fill="#000", ~style=?, ()) =>
     <JsImplem
-      width={string_of_float(width) ++ (_os === "web" ? "0px" : "0")}
-      height={string_of_float(height) ++ (_os === "web" ? "0px" : "0")}
+      width={(width->Js.Float.toString) ++ (_os === "web" ? "px" : "")}
+      height={(height->Js.Float.toString) ++ (_os === "web" ? "px" : "")}
       fill
       style
     />;
