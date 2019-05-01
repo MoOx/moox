@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("ButtonLink");
-
 let styles =
   Style.(
     StyleSheet.create({
@@ -22,30 +20,23 @@ let make =
       ~children,
       (),
     ) => {
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <View
-        style=Style.(
-          array([|
-            styles##btnWrapper,
-            style([borderColor(String(colour))]),
-          |])
-        )>
-        <ViewLink
-          href
-          style=Style.(
-            arrayOption([|
-              Some(styles##btn),
-              Some(style([color(String(colour))])),
-              styl,
-            |])
-          )
-          ?activeStyle
-          ?onMouseEnter
-          ?onMouseLeave>
-          <SpacedView horizontal=L vertical=M> children </SpacedView>
-        </ViewLink>
-      </View>,
-  });
+  <View
+    style=Style.(
+      array([|styles##btnWrapper, style([borderColor(String(colour))])|])
+    )>
+    <ViewLink
+      href
+      style=Style.(
+        arrayOption([|
+          Some(styles##btn),
+          Some(style([color(String(colour))])),
+          styl,
+        |])
+      )
+      ?activeStyle
+      ?onMouseEnter
+      ?onMouseLeave>
+      <SpacedView horizontal=L vertical=M> children </SpacedView>
+    </ViewLink>
+  </View>;
 };

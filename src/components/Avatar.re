@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Background");
-
 let styles =
   Style.(
     StyleSheet.create({
@@ -21,17 +19,10 @@ let width: Style.pt_only = Style.Pt(96.);
 let height: Style.pt_only = Style.Pt(96.);
 
 [@react.component]
-let make = () =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <Image
-        source={`URI(Image.(imageURISource(~uri, ~width, ~height, ())))}
-        defaultSource={
-                        `URI(
-                          Image.(defaultURISource(~uri, ~width, ~height, ())),
-                        )
-                      }
-        style=styles##avatar
-      />,
-  });
+let make = () => {
+  <Image
+    source={`URI(Image.(imageURISource(~uri, ~width, ~height, ())))}
+    defaultSource={`URI(Image.(defaultURISource(~uri, ~width, ~height, ())))}
+    style=styles##avatar
+  />;
+};

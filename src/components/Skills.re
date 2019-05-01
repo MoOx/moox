@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Skills");
-
 let triangleHeight = 80.;
 
 let styles =
@@ -60,149 +58,140 @@ type skill = {
 };
 
 [@react.component]
-let make = () =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <View style=styles##container>
-        {[|
-           {
-             title: {j|JavaScript|j},
-             text: {j|ES20** + Flow / TypeScript|j},
-             color: Consts.Colors.light,
-             bg: "#000B28",
-             bg2: Consts.Colors.dark,
-             icon:
-               <View style=styles##icon>
-                 <SVGJavaScriptMini
-                   width=170.
-                   height=170.
-                   fill=Consts.Colors.light
-                 />
-               </View>,
-           },
-           {
-             title: {j|React|j},
-             text: {j|Web or Native... or both!|j},
-             color: Consts.Colors.light,
-             bg: "#09274F",
-             bg2: Consts.Colors.dark,
-             icon:
-               <View
+let make = () => {
+  <View style=styles##container>
+    {[|
+       {
+         title: {j|JavaScript|j},
+         text: {j|ES20** + Flow / TypeScript|j},
+         color: Consts.Colors.light,
+         bg: "#000B28",
+         bg2: Consts.Colors.dark,
+         icon:
+           <View style=styles##icon>
+             <SVGJavaScriptMini
+               width=170.
+               height=170.
+               fill=Consts.Colors.light
+             />
+           </View>,
+       },
+       {
+         title: {j|React|j},
+         text: {j|Web or Native... or both!|j},
+         color: Consts.Colors.light,
+         bg: "#09274F",
+         bg2: Consts.Colors.dark,
+         icon:
+           <View
+             style=Style.(
+               array([|
+                 styles##icon,
+                 style([right(Pt(-40.)), bottom(Pt(-40.))]),
+               |])
+             )>
+             <SVGReact width=200. height=200. fill=Consts.Colors.light />
+           </View>,
+       },
+       {
+         title: {j|ReasonML|j},
+         text: {j|OCaml + BuckleScript = ♥|j},
+         color: Consts.Colors.light,
+         bg: "#035A93",
+         bg2: Consts.Colors.dark,
+         icon:
+           <View
+             style=Style.(
+               array([|
+                 styles##icon,
+                 style([right(Pt(-40.)), bottom(Pt(-40.))]),
+               |])
+             )>
+             <SVGReasonMini width=200. height=200. fill=Consts.Colors.light />
+           </View>,
+       },
+       {
+         title: {j|Front-End|j},
+         text: {j|I care about UI and UX|j},
+         color: Consts.Colors.light,
+         bg: "#28416A",
+         bg2: Consts.Colors.dark,
+         icon:
+           <View
+             style=Style.(
+               array([|
+                 styles##icon,
+                 style([right(Pt(-30.)), bottom(Pt(-30.))]),
+               |])
+             )>
+             <SVGTouch width=200. height=200. fill=Consts.Colors.light />
+           </View>,
+       },
+       {
+         title: {j|Best Practices|j},
+         text: {j|Git, Reviews, Tests...|j},
+         color: Consts.Colors.light,
+         bg: "#0FA5AE",
+         bg2: Consts.Colors.dark,
+         icon:
+           <View style=styles##icon>
+             <SVGUi width=180. height=180. fill=Consts.Colors.light />
+           </View>,
+       },
+       {
+         title: {j|Open Source|j},
+         text: {j|Sharing is caring|j},
+         color: Consts.Colors.light,
+         bg: "#36E9BE",
+         bg2: Consts.Colors.dark,
+         icon:
+           <View style=styles##icon>
+             <SVGSocialGithub
+               width=200.
+               height=200.
+               fill=Consts.Colors.light
+             />
+           </View>,
+       },
+     |]
+     ->Belt.Array.map(skill =>
+         <SpacedView
+           key={skill.title}
+           horizontal=M
+           vertical=M
+           style=styles##skillWrapper>
+           <div
+             style={ReactDOMRe.Style.make(
+               ~display="flex",
+               ~flexDirection="column",
+               ~flex="1 1 auto",
+               ~borderRadius="4px",
+               ~background=
+                 "linear-gradient(0.45turn, "
+                 ++ skill.bg
+                 ++ " 10%, "
+                 ++ skill.bg2
+                 ++ " 110%)",
+               ~overflow="hidden",
+               (),
+             )}>
+             <View style=styles##skill>
+               {skill.icon}
+               <Text
                  style=Style.(
                    array([|
-                     styles##icon,
-                     style([right(Pt(-40.)), bottom(Pt(-40.))]),
+                     styles##textNodeStrong,
+                     style([color(String(skill.color))]),
                    |])
                  )>
-                 <SVGReact width=200. height=200. fill=Consts.Colors.light />
-               </View>,
-           },
-           {
-             title: {j|ReasonML|j},
-             text: {j|OCaml + BuckleScript = ♥|j},
-             color: Consts.Colors.light,
-             bg: "#035A93",
-             bg2: Consts.Colors.dark,
-             icon:
-               <View
-                 style=Style.(
-                   array([|
-                     styles##icon,
-                     style([right(Pt(-40.)), bottom(Pt(-40.))]),
-                   |])
-                 )>
-                 <SVGReasonMini
-                   width=200.
-                   height=200.
-                   fill=Consts.Colors.light
-                 />
-               </View>,
-           },
-           {
-             title: {j|Front-End|j},
-             text: {j|I care about UI and UX|j},
-             color: Consts.Colors.light,
-             bg: "#28416A",
-             bg2: Consts.Colors.dark,
-             icon:
-               <View
-                 style=Style.(
-                   array([|
-                     styles##icon,
-                     style([right(Pt(-30.)), bottom(Pt(-30.))]),
-                   |])
-                 )>
-                 <SVGTouch width=200. height=200. fill=Consts.Colors.light />
-               </View>,
-           },
-           {
-             title: {j|Best Practices|j},
-             text: {j|Git, Reviews, Tests...|j},
-             color: Consts.Colors.light,
-             bg: "#0FA5AE",
-             bg2: Consts.Colors.dark,
-             icon:
-               <View style=styles##icon>
-                 <SVGUi width=180. height=180. fill=Consts.Colors.light />
-               </View>,
-           },
-           {
-             title: {j|Open Source|j},
-             text: {j|Sharing is caring|j},
-             color: Consts.Colors.light,
-             bg: "#36E9BE",
-             bg2: Consts.Colors.dark,
-             icon:
-               <View style=styles##icon>
-                 <SVGSocialGithub
-                   width=200.
-                   height=200.
-                   fill=Consts.Colors.light
-                 />
-               </View>,
-           },
-         |]
-         ->Belt.Array.map(skill =>
-             <SpacedView
-               key={skill.title}
-               horizontal=M
-               vertical=M
-               style=styles##skillWrapper>
-               <div
-                 style={ReactDOMRe.Style.make(
-                   ~display="flex",
-                   ~flexDirection="column",
-                   ~flex="1 1 auto",
-                   ~borderRadius="4px",
-                   ~background=
-                     "linear-gradient(0.45turn, "
-                     ++ skill.bg
-                     ++ " 10%, "
-                     ++ skill.bg2
-                     ++ " 110%)",
-                   ~overflow="hidden",
-                   (),
-                 )}>
-                 <View style=styles##skill>
-                   {skill.icon}
-                   <Text
-                     style=Style.(
-                       array([|
-                         styles##textNodeStrong,
-                         style([color(String(skill.color))]),
-                       |])
-                     )>
-                     skill.title->React.string
-                   </Text>
-                   <Spacer style=styles##textSpace />
-                   <Text style=styles##textNode>
-                     skill.text->React.string
-                   </Text>
-                 </View>
-               </div>
-             </SpacedView>
-           )
-         ->React.array}
-      </View>,
-  });
+                 skill.title->React.string
+               </Text>
+               <Spacer style=styles##textSpace />
+               <Text style=styles##textNode> skill.text->React.string </Text>
+             </View>
+           </div>
+         </SpacedView>
+       )
+     ->React.array}
+  </View>;
+};

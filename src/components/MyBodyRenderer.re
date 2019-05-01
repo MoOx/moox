@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("MyBodyRenderer");
-
 type htmlProps = {
   .
   "id": string,
@@ -119,11 +117,7 @@ let rec renderChild = (parentTag, index: int, child) => {
 };
 
 [@react.component]
-let make = (~body: jsBody, ~renderChild=renderChild, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self => {
-      let tree = jsTreeToReason(body);
-      <View> {renderChild("", 0, tree)} </View>;
-    },
-  });
+let make = (~body: jsBody, ~renderChild=renderChild, ()) => {
+  let tree = jsTreeToReason(body);
+  <View> {renderChild("", 0, tree)} </View>;
+};

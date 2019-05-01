@@ -16,19 +16,14 @@ let styles =
     })
   );
 
-let component = ReasonReact.statelessComponent("ImageWithAspectRatio");
-
 [@react.component]
-let make = (~uri, ~ratio, ~style as styl=?, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <View style=styles##imageContainer>
-        <PlaceholderWithAspectRatio ratio>
-          <ImageFromUri
-            style=Style.(arrayOption([|Some(styles##image), styl|]))
-            uri
-          />
-        </PlaceholderWithAspectRatio>
-      </View>,
-  });
+let make = (~uri, ~ratio, ~style as styl=?, ()) => {
+  <View style=styles##imageContainer>
+    <PlaceholderWithAspectRatio ratio>
+      <ImageFromUri
+        style=Style.(arrayOption([|Some(styles##image), styl|]))
+        uri
+      />
+    </PlaceholderWithAspectRatio>
+  </View>;
+};

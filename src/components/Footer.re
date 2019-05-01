@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Footer");
-
 let styles =
   Style.(
     StyleSheet.create({
@@ -35,44 +33,38 @@ let styles =
   );
 
 [@react.component]
-let make = () =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <View style=styles##menu>
-        <Container style=styles##bar wrapperStyle=styles##barWrapper>
-          <View style=styles##barLinks>
-            {Consts.menuLinks
-             ->Belt.Array.map(item =>
-                 <TextLink
-                   key={item.link} style=styles##barLink href={item.link}>
-                   item.text->React.string
-                 </TextLink>
-               )
-             ->React.array}
-          </View>
-          <View style=styles##column>
-            <View style=styles##row>
-              <Text style=styles##barText> "Made with "->React.string </Text>
-              <TextLink style=styles##barText href="https://phenomic.io">
-                "Phenomic"->React.string
-              </TextLink>
-              <Text style=styles##barText> " and "->React.string </Text>
-              <TextLink
-                style=styles##barText href="https://reasonml.github.io/">
-                "Reason"->React.string
-              </TextLink>
-            </View>
-            <TextLink
-              style=styles##barText href="https://github.com/MoOx/moox.io">
-              "Source available on GitHub"->React.string
-            </TextLink>
-          </View>
-          <SocialIcons
-            wrapperStyle=styles##icons
-            iconStyle=styles##barLink
-            iconSize=22.
-          />
-        </Container>
-      </View>,
-  });
+let make = () => {
+  <View style=styles##menu>
+    <Container style=styles##bar wrapperStyle=styles##barWrapper>
+      <View style=styles##barLinks>
+        {Consts.menuLinks
+         ->Belt.Array.map(item =>
+             <TextLink key={item.link} style=styles##barLink href={item.link}>
+               item.text->React.string
+             </TextLink>
+           )
+         ->React.array}
+      </View>
+      <View style=styles##column>
+        <View style=styles##row>
+          <Text style=styles##barText> "Made with "->React.string </Text>
+          <TextLink style=styles##barText href="https://phenomic.io">
+            "Phenomic"->React.string
+          </TextLink>
+          <Text style=styles##barText> " and "->React.string </Text>
+          <TextLink style=styles##barText href="https://reasonml.github.io/">
+            "Reason"->React.string
+          </TextLink>
+        </View>
+        <TextLink style=styles##barText href="https://github.com/MoOx/moox.io">
+          "Source available on GitHub"->React.string
+        </TextLink>
+      </View>
+      <SocialIcons
+        wrapperStyle=styles##icons
+        iconStyle=styles##barLink
+        iconSize=22.
+      />
+    </Container>
+  </View>;
+};

@@ -20,55 +20,50 @@ let styles =
     })
   );
 
-let component = ReasonReact.statelessComponent("RouteTalks");
-
 [@react.component]
-let make = (~talks) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <AppWrapper>
-        <BsReactHelmet>
-          <title> {("Talks - " ++ Consts.defaultTitle)->React.string} </title>
-        </BsReactHelmet>
-        <Container>
-          <Spacer />
-          <Text style=styles##title> "Latest Talks"->React.string </Text>
-          {switch ((talks: T.contentList)) {
-           | Inactive
-           | Loading => <LoadingIndicator />
-           | Errored => <Error />
-           | Idle(talks) =>
-             <View>
-               <TalkList talks=talks##list />
-               <View style=styles##links>
-                 {switch (talks##previous |> Js.toOption) {
-                  | Some(previous) =>
-                    <TextLink
-                      href={
-                        talks##previousPageIsFirst
-                          ? "/talks/" : "/talks/after/" ++ previous ++ "/"
-                      }>
-                      "Fresh talks"->React.string
-                    </TextLink>
-                  | None => React.null
-                  }}
-                 <Text> " "->React.string </Text>
-                 {switch (talks##next |> Js.toOption) {
-                  | Some(next) =>
-                    <TextLink href={"/talks/after/" ++ next ++ "/"}>
-                      "Older talks"->React.string
-                    </TextLink>
-                  | None => React.null
-                  }}
-               </View>
-               React.null
-             </View>
-           }}
-          <Spacer size=XL />
-        </Container>
-      </AppWrapper>,
-  });
+let make = (~talks) => {
+  <AppWrapper>
+    <BsReactHelmet>
+      <title> {("Talks - " ++ Consts.defaultTitle)->React.string} </title>
+    </BsReactHelmet>
+    <Container>
+      <Spacer />
+      <Text style=styles##title> "Latest Talks"->React.string </Text>
+      {switch ((talks: T.contentList)) {
+       | Inactive
+       | Loading => <LoadingIndicator />
+       | Errored => <Error />
+       | Idle(talks) =>
+         <View>
+           <TalkList talks=talks##list />
+           <View style=styles##links>
+             {switch (talks##previous |> Js.toOption) {
+              | Some(previous) =>
+                <TextLink
+                  href={
+                    talks##previousPageIsFirst
+                      ? "/talks/" : "/talks/after/" ++ previous ++ "/"
+                  }>
+                  "Fresh talks"->React.string
+                </TextLink>
+              | None => React.null
+              }}
+             <Text> " "->React.string </Text>
+             {switch (talks##next |> Js.toOption) {
+              | Some(next) =>
+                <TextLink href={"/talks/after/" ++ next ++ "/"}>
+                  "Older talks"->React.string
+                </TextLink>
+              | None => React.null
+              }}
+           </View>
+           React.null
+         </View>
+       }}
+      <Spacer size=XL />
+    </Container>
+  </AppWrapper>;
+};
 
 [@react.component]
 let jsComponent = (~talks) =>

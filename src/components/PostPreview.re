@@ -27,28 +27,21 @@ let styles =
     })
   );
 
-let component = ReasonReact.statelessComponent("PostPreview");
-
 [@react.component]
-let make = (~item: T.partialContentItem, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self => {
-      let href = "/blog/" ++ item##id ++ "/";
-      <View key=item##id style=styles##block>
-        <Text style=styles##text>
-          <Text> {j|•|j}->React.string </Text>
-          <Spacer size=S />
-          <UnderlinedTextLink style=styles##title href>
-            {item##title->React.string}
-          </UnderlinedTextLink>
-          <Spacer size=S />
-          {switch (Js.Undefined.toOption(item##lang)) {
-           | None => React.null
-           | Some(lang) =>
-             <Text> {("[" ++ lang ++ "] ")->React.string} </Text>
-           }}
-        </Text>
-      </View>;
-    },
-  });
+let make = (~item: T.partialContentItem, ()) => {
+  let href = "/blog/" ++ item##id ++ "/";
+  <View key=item##id style=styles##block>
+    <Text style=styles##text>
+      <Text> {j|•|j}->React.string </Text>
+      <Spacer size=S />
+      <UnderlinedTextLink style=styles##title href>
+        {item##title->React.string}
+      </UnderlinedTextLink>
+      <Spacer size=S />
+      {switch (Js.Undefined.toOption(item##lang)) {
+       | None => React.null
+       | Some(lang) => <Text> {("[" ++ lang ++ "] ")->React.string} </Text>
+       }}
+    </Text>
+  </View>;
+};

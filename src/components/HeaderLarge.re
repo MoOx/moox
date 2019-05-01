@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("HeaderLarge");
-
 let styles =
   Style.(
     StyleSheet.create({
@@ -54,27 +52,24 @@ let styles =
   );
 
 [@react.component]
-let make = (~currentLocation, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <View style=styles##menu>
-        <Container style=styles##bar wrapperStyle=styles##barWrapper>
-          <ViewLink style=styles##logo href="/">
-            <SVGLogo width=20. height=20. fill=Consts.Colors.dark />
-            <Text style=styles##logoText>
-              {("  " ++ Consts.title)->React.string}
-            </Text>
-          </ViewLink>
-          <HeaderMenuLinks currentLocation />
-          <SocialIcons
-            wrapperStyle=styles##icons
-            iconStyle=styles##icon
-            iconSize=22.
-            iconColor=Consts.Colors.dark
-          />
-        </Container>
-      </View>,
-  });
+let make = (~currentLocation, ()) => {
+  <View style=styles##menu>
+    <Container style=styles##bar wrapperStyle=styles##barWrapper>
+      <ViewLink style=styles##logo href="/">
+        <SVGLogo width=20. height=20. fill=Consts.Colors.dark />
+        <Text style=styles##logoText>
+          {("  " ++ Consts.title)->React.string}
+        </Text>
+      </ViewLink>
+      <HeaderMenuLinks currentLocation />
+      <SocialIcons
+        wrapperStyle=styles##icons
+        iconStyle=styles##icon
+        iconSize=22.
+        iconColor=Consts.Colors.dark
+      />
+    </Container>
+  </View>;
+};
 
 let default = make;

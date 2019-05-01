@@ -18,29 +18,22 @@ let styles =
     })
   );
 
-let component = ReasonReact.statelessComponent("PostList");
-
 [@react.component]
-let make = (~posts, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self => {
-      let latestYear =
-        ref(posts[0]##date |> Js.String.slice(~from=0, ~to_=4));
-      <View style=styles##list>
-        {posts
-         |> Array.map(item => {
-              let year = item##date |> Js.String.slice(~from=0, ~to_=4);
-              let newYear = year !== latestYear^;
-              latestYear := year;
-              <View key=item##id style=styles##flex>
-                {newYear
-                   ? <Text style=styles##yearText> year->React.string </Text>
-                   : React.null}
-                <PostPreview item />
-              </View>;
-            })
-         |> React.array}
-      </View>;
-    },
-  });
+let make = (~posts, ()) => {
+  let latestYear = ref(posts[0]##date |> Js.String.slice(~from=0, ~to_=4));
+  <View style=styles##list>
+    {posts
+     |> Array.map(item => {
+          let year = item##date |> Js.String.slice(~from=0, ~to_=4);
+          let newYear = year !== latestYear^;
+          latestYear := year;
+          <View key=item##id style=styles##flex>
+            {newYear
+               ? <Text style=styles##yearText> year->React.string </Text>
+               : React.null}
+            <PostPreview item />
+          </View>;
+        })
+     |> React.array}
+  </View>;
+};

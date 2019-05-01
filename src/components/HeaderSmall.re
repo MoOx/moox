@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("HeaderSmall");
-
 let styles =
   Style.(
     StyleSheet.create({
@@ -48,23 +46,20 @@ let styles =
   );
 
 [@react.component]
-let make = () =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <SpacedView vertical=M horizontal=XS style=styles##wrapper>
-        <ViewLink style=styles##logo href="/">
-          <SVGLogo width=24. height=24. fill=Consts.Colors.dark />
-          <Text style=styles##logoText>
-            {("  " ++ Consts.title)->React.string}
-          </Text>
-        </ViewLink>
-        <Spacer />
-        <SocialIcons
-          wrapperStyle=styles##icons
-          iconStyle=styles##icon
-          iconColor=Consts.Colors.dark
-          iconSize=20.
-        />
-      </SpacedView>,
-  });
+let make = () => {
+  <SpacedView vertical=M horizontal=XS style=styles##wrapper>
+    <ViewLink style=styles##logo href="/">
+      <SVGLogo width=24. height=24. fill=Consts.Colors.dark />
+      <Text style=styles##logoText>
+        {("  " ++ Consts.title)->React.string}
+      </Text>
+    </ViewLink>
+    <Spacer />
+    <SocialIcons
+      wrapperStyle=styles##icons
+      iconStyle=styles##icon
+      iconColor=Consts.Colors.dark
+      iconSize=20.
+    />
+  </SpacedView>;
+};

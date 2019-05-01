@@ -20,38 +20,31 @@ let styles =
     })
   );
 
-let component = ReasonReact.statelessComponent("RouteError");
-
 [@react.component]
-let make = (~posts) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <AppWrapper>
-        <Container>
-          <Error label={j|It seems that this page doesn't exist 😕|j} />
-          <Spacer size=XL />
-          <Text style=styles##title>
-            "Latest Posts on the blog"->React.string
-          </Text>
-          {switch ((posts: T.contentList)) {
-           | Inactive
-           | Loading => <LoadingIndicator />
-           | Errored => <Error />
-           | Idle(posts) =>
-             <View>
-               <PostList posts=posts##list />
-               <View style=styles##links>
-                 <TextLink href="/blog/">
-                   "More posts"->React.string
-                 </TextLink>
-               </View>
-             </View>
-           }}
-          <Spacer size=XL />
-        </Container>
-      </AppWrapper>,
-  });
+let make = (~posts) => {
+  <AppWrapper>
+    <Container>
+      <Error label={j|It seems that this page doesn't exist 😕|j} />
+      <Spacer size=XL />
+      <Text style=styles##title>
+        "Latest Posts on the blog"->React.string
+      </Text>
+      {switch ((posts: T.contentList)) {
+       | Inactive
+       | Loading => <LoadingIndicator />
+       | Errored => <Error />
+       | Idle(posts) =>
+         <View>
+           <PostList posts=posts##list />
+           <View style=styles##links>
+             <TextLink href="/blog/"> "More posts"->React.string </TextLink>
+           </View>
+         </View>
+       }}
+      <Spacer size=XL />
+    </Container>
+  </AppWrapper>;
+};
 
 [@react.component]
 let jsComponent = (~posts) =>

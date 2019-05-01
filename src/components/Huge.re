@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Huge");
-
 let styles =
   StyleSheet.create(
     {
@@ -21,8 +19,5 @@ let styles =
 
 [@react.component]
 let make = (~children, ()) => {
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self => <Text style=styles##hugeText> children </Text>,
-  });
+  <Text style=styles##hugeText> children </Text>;
 };

@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Jumbotron");
-
 let triangleHeight = 80.;
 
 let styles =
@@ -65,49 +63,44 @@ let styles =
   );
 
 [@react.component]
-let make = () =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <View style=styles##container>
-        <MeBackground style=styles##bg />
-        <View style=styles##contentWrapper>
-          <WindowSizeFilter.MMin>
-            <View
-              style=Style.(
-                style([
-                  position(Absolute),
-                  right(Pt(-20.)),
-                  bottom(Pt(-80.)),
-                  Transform.make(~rotate="6deg", ()),
-                ])
-              )>
-              <SVGLogo
-                width=360.
-                height=360.
-                fill=Consts.Colors.lightest
-                style=Style.(style([opacity(Float(0.06))]))
-              />
-            </View>
-          </WindowSizeFilter.MMin>
-          <WindowSizeFilter.MMin
-            style={ReactDOMRe.Style.make(~width="20%", ~height="1px", ())}
+let make = () => {
+  <View style=styles##container>
+    <MeBackground style=styles##bg />
+    <View style=styles##contentWrapper>
+      <WindowSizeFilter.MMin>
+        <View
+          style=Style.(
+            style([
+              position(Absolute),
+              right(Pt(-20.)),
+              bottom(Pt(-80.)),
+              Transform.make(~rotate="6deg", ()),
+            ])
+          )>
+          <SVGLogo
+            width=360.
+            height=360.
+            fill=Consts.Colors.lightest
+            style=Style.(style([opacity(Float(0.06))]))
           />
-          <View style=styles##content accessibilityRole=`header>
-            <Text style=styles##title> "MoOx"->React.string </Text>
-            <Text style=styles##subtitle>
-              "Maxime Thirouin"->React.string
-            </Text>
-            <Spacer />
-            <SpacedView style=styles##textWrapper horizontal=M vertical=M>
-              <Text style=styles##textStrong>
-                {j|Freelance Front-End Developer|j}->React.string
-              </Text>
-              <Text style=styles##textLight>
-                {j|Mobile & Web|j}->React.string
-              </Text>
-            </SpacedView>
-          </View>
         </View>
-      </View>,
-  });
+      </WindowSizeFilter.MMin>
+      <WindowSizeFilter.MMin
+        style={ReactDOMRe.Style.make(~width="20%", ~height="1px", ())}
+      />
+      <View style=styles##content accessibilityRole=`header>
+        <Text style=styles##title> "MoOx"->React.string </Text>
+        <Text style=styles##subtitle> "Maxime Thirouin"->React.string </Text>
+        <Spacer />
+        <SpacedView style=styles##textWrapper horizontal=M vertical=M>
+          <Text style=styles##textStrong>
+            {j|Freelance Front-End Developer|j}->React.string
+          </Text>
+          <Text style=styles##textLight>
+            {j|Mobile & Web|j}->React.string
+          </Text>
+        </SpacedView>
+      </View>
+    </View>
+  </View>;
+};

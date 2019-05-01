@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Triangle");
-
 let coef = 2. *. 0.8660254;
 
 [@react.component]
@@ -11,29 +9,26 @@ let make =
       ~color as colour=Consts.Colors.light,
       ~style as styl=?,
       (),
-    ) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <View
-        style=Style.(
-          arrayOption([|
-            Some(
-              style([
-                width(Pt(0.)),
-                height(Pt(0.)),
-                borderTopWidth(0.),
-                borderTopColor(String("transparent")),
-                borderLeftWidth(h /. coef),
-                borderLeftColor(String("transparent")),
-                borderRightWidth(h /. coef),
-                borderRightColor(String("transparent")),
-                borderBottomWidth(h),
-                borderBottomColor(String(colour)),
-              ]),
-            ),
-            styl,
-          |])
-        )
-      />,
-  });
+    ) => {
+  <View
+    style=Style.(
+      arrayOption([|
+        Some(
+          style([
+            width(Pt(0.)),
+            height(Pt(0.)),
+            borderTopWidth(0.),
+            borderTopColor(String("transparent")),
+            borderLeftWidth(h /. coef),
+            borderLeftColor(String("transparent")),
+            borderRightWidth(h /. coef),
+            borderRightColor(String("transparent")),
+            borderBottomWidth(h),
+            borderBottomColor(String(colour)),
+          ]),
+        ),
+        styl,
+      |])
+    )
+  />;
+};

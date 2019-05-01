@@ -3,8 +3,6 @@ open BsReactNative;
 let colorInActive = Consts.Colors.tabBarIconInactive;
 let colorActive = Consts.Colors.tabBarIconActive;
 
-let component = ReasonReact.statelessComponent("TabBar");
-
 let styles =
   Style.(
     StyleSheet.create({
@@ -34,41 +32,38 @@ let styles =
   );
 
 [@react.component]
-let make = (~currentLocation, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <SafeAreaView style=styles##wrapper>
-        <View style=styles##container>
-          {Consts.menuLinks
-           ->Belt.Array.map(item =>
-               <ViewLink
-                 key={item.link} href={item.link} style=styles##itemWrapper>
-                 <View style=styles##item>
-                   {item.icon(
-                      ~width=24.,
-                      ~height=24.,
-                      ~fill=
-                        item.isActive(currentLocation##pathname, item.link)
-                          ? colorActive : colorInActive,
-                      (),
-                    )}
-                   <Text
-                     style=Style.(
-                       arrayOption([|
-                         Some(styles##itemText),
-                         item.isActive(currentLocation##pathname, item.link)
-                           ? Some(styles##itemTextActive) : None,
-                       |])
-                     )>
-                     item.text->React.string
-                   </Text>
-                 </View>
-               </ViewLink>
-             )
-           ->React.array}
-        </View>
-      </SafeAreaView>,
-  });
+let make = (~currentLocation, ()) => {
+  <SafeAreaView style=styles##wrapper>
+    <View style=styles##container>
+      {Consts.menuLinks
+       ->Belt.Array.map(item =>
+           <ViewLink
+             key={item.link} href={item.link} style=styles##itemWrapper>
+             <View style=styles##item>
+               {item.icon(
+                  ~width=24.,
+                  ~height=24.,
+                  ~fill=
+                    item.isActive(currentLocation##pathname, item.link)
+                      ? colorActive : colorInActive,
+                  (),
+                )}
+               <Text
+                 style=Style.(
+                   arrayOption([|
+                     Some(styles##itemText),
+                     item.isActive(currentLocation##pathname, item.link)
+                       ? Some(styles##itemTextActive) : None,
+                   |])
+                 )>
+                 item.text->React.string
+               </Text>
+             </View>
+           </ViewLink>
+         )
+       ->React.array}
+    </View>
+  </SafeAreaView>;
+};
 
 let default = make;

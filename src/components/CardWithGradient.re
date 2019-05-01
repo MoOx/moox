@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Skills");
-
 let triangleHeight = 80.;
 
 let styles =
@@ -60,41 +58,38 @@ type item = {
 };
 
 [@react.component]
-let make = (~item, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <SpacedView
-        key={item.title} horizontal=M vertical=M style=styles##skillWrapper>
-        <div
-          style={ReactDOMRe.Style.make(
-            ~display="flex",
-            ~flexDirection="column",
-            ~flex="1 1 auto",
-            ~borderRadius="4px",
-            ~background=
-              "linear-gradient(0.45turn, "
-              ++ item.bg
-              ++ " 10%, "
-              ++ item.bg2
-              ++ " 110%)",
-            ~overflow="hidden",
-            (),
-          )}>
-          <View style=styles##skill>
-            {item.icon}
-            <Text
-              style=Style.(
-                array([|
-                  styles##textNodeStrong,
-                  style([color(String(item.color))]),
-                |])
-              )>
-              item.title->React.string
-            </Text>
-            <Spacer style=styles##textSpace />
-            <Text style=styles##textNode> item.text->React.string </Text>
-          </View>
-        </div>
-      </SpacedView>,
-  });
+let make = (~item, ()) => {
+  <SpacedView
+    key={item.title} horizontal=M vertical=M style=styles##skillWrapper>
+    <div
+      style={ReactDOMRe.Style.make(
+        ~display="flex",
+        ~flexDirection="column",
+        ~flex="1 1 auto",
+        ~borderRadius="4px",
+        ~background=
+          "linear-gradient(0.45turn, "
+          ++ item.bg
+          ++ " 10%, "
+          ++ item.bg2
+          ++ " 110%)",
+        ~overflow="hidden",
+        (),
+      )}>
+      <View style=styles##skill>
+        {item.icon}
+        <Text
+          style=Style.(
+            array([|
+              styles##textNodeStrong,
+              style([color(String(item.color))]),
+            |])
+          )>
+          item.title->React.string
+        </Text>
+        <Spacer style=styles##textSpace />
+        <Text style=styles##textNode> item.text->React.string </Text>
+      </View>
+    </div>
+  </SpacedView>;
+};

@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Background");
-
 let styles =
   StyleSheet.create(
     {
@@ -14,8 +12,5 @@ let styles =
 
 [@react.component]
 let make = (~children, ()) => {
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self => <View style=styles##background> children </View>,
-  });
+  <View style=styles##background> children </View>;
 };

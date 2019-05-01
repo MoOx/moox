@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("HeaderMenuLinks");
-
 let styles =
   Style.(
     StyleSheet.create({
@@ -19,26 +17,23 @@ let styles =
   );
 
 [@react.component]
-let make = (~currentLocation, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <View style=styles##container>
-        {Consts.menuLinks
-         ->Belt.Array.map(item =>
-             <TextLink
-               key={item.link}
-               href={item.link}
-               style=Style.(
-                 arrayOption([|
-                   Some(styles##link),
-                   item.isActive(currentLocation##pathname, item.link)
-                     ? Some(styles##linkActive) : None,
-                 |])
-               )>
-               item.text->React.string
-             </TextLink>
-           )
-         ->React.array}
-      </View>,
-  });
+let make = (~currentLocation, ()) => {
+  <View style=styles##container>
+    {Consts.menuLinks
+     ->Belt.Array.map(item =>
+         <TextLink
+           key={item.link}
+           href={item.link}
+           style=Style.(
+             arrayOption([|
+               Some(styles##link),
+               item.isActive(currentLocation##pathname, item.link)
+                 ? Some(styles##linkActive) : None,
+             |])
+           )>
+           item.text->React.string
+         </TextLink>
+       )
+     ->React.array}
+  </View>;
+};

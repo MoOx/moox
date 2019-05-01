@@ -27,35 +27,28 @@ let styles =
     })
   );
 
-let component = ReasonReact.statelessComponent("TalkPreview");
-
 [@react.component]
-let make = (~item: T.partialContentItem, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self => {
-      let href = "/talk/" ++ item##id ++ "/";
-      <View key=item##id style=styles##block>
-        <Text style=styles##text>
-          <Text> {j|•|j}->React.string </Text>
-          <Spacer size=S />
-          <UnderlinedTextLink style=styles##title href>
-            {item##title->React.string}
-            <small>
-              {switch (Js.Undefined.toOption(item##conference)) {
-               | None => React.null
-               | Some(conference) =>
-                 <Text> {(" @ " ++ conference)->React.string} </Text>
-               }}
-            </small>
-          </UnderlinedTextLink>
-          <Spacer size=S />
-          {switch (Js.Undefined.toOption(item##lang)) {
+let make = (~item: T.partialContentItem, ()) => {
+  let href = "/talk/" ++ item##id ++ "/";
+  <View key=item##id style=styles##block>
+    <Text style=styles##text>
+      <Text> {j|•|j}->React.string </Text>
+      <Spacer size=S />
+      <UnderlinedTextLink style=styles##title href>
+        {item##title->React.string}
+        <small>
+          {switch (Js.Undefined.toOption(item##conference)) {
            | None => React.null
-           | Some(lang) =>
-             <Text> {("[" ++ lang ++ "] ")->React.string} </Text>
+           | Some(conference) =>
+             <Text> {(" @ " ++ conference)->React.string} </Text>
            }}
-        </Text>
-      </View>;
-    },
-  });
+        </small>
+      </UnderlinedTextLink>
+      <Spacer size=S />
+      {switch (Js.Undefined.toOption(item##lang)) {
+       | None => React.null
+       | Some(lang) => <Text> {("[" ++ lang ++ "] ")->React.string} </Text>
+       }}
+    </Text>
+  </View>;
+};

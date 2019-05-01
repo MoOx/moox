@@ -24,7 +24,6 @@
     "bs-fetch",
     "@glennsl/bs-json",
     "reason-react",
-    "reason-react-compat",
     "bs-react-native-monorepo/bs-react-native-jsx3-compat",
     "@moox/bs-react-helmet",
     "@phenomic/preset-react-app",

@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("Container");
-
 let styles =
   Style.(
     StyleSheet.create({
@@ -32,29 +30,25 @@ let make =
       ~children,
       (),
     ) => {
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <View
-        style=Style.(
-          arrayOption([|
-            Some(styles##wrapper),
-            bgColor->Belt.Option.map(bg =>
-              style([backgroundColor(String(bg))])
-            ),
-            wrapperStyle,
-          |])
-        )>
-        <View
-          style=Style.(
-            arrayOption([|
-              Some(styles##container),
-              Some(style([maxWidth(Pt(maxW))])),
-              styl,
-            |])
-          )>
-          children
-        </View>
-      </View>,
-  });
+  <View
+    style=Style.(
+      arrayOption([|
+        Some(styles##wrapper),
+        bgColor->Belt.Option.map(bg =>
+          style([backgroundColor(String(bg))])
+        ),
+        wrapperStyle,
+      |])
+    )>
+    <View
+      style=Style.(
+        arrayOption([|
+          Some(styles##container),
+          Some(style([maxWidth(Pt(maxW))])),
+          styl,
+        |])
+      )>
+      children
+    </View>
+  </View>;
 };

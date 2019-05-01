@@ -20,22 +20,13 @@ let styles =
     })
   );
 
-let component = ReasonReact.statelessComponent("RouteHome");
-
 [@react.component]
-let make = () =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <AppWrapper>
-        <HomeJumbotron />
-        <Container maxWidth=1200.>
-          <Spacer />
-          <Services />
-          <Spacer />
-        </Container>
-        <Container> <Skills /> </Container>
-      </AppWrapper>,
-  });
+let make = () => {
+  <AppWrapper>
+    <HomeJumbotron />
+    <Container maxWidth=1200.> <Spacer /> <Services /> <Spacer /> </Container>
+    <Container> <Skills /> </Container>
+  </AppWrapper>;
+};
 
 let default = make;

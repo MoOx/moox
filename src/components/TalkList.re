@@ -18,29 +18,22 @@ let styles =
     })
   );
 
-let component = ReasonReact.statelessComponent("TalkList");
-
 [@react.component]
-let make = (~talks, ()) =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self => {
-      let latestYear =
-        ref(talks[0]##date |> Js.String.slice(~from=0, ~to_=4));
-      <View style=styles##list>
-        {talks
-         |> Array.map(item => {
-              let year = item##date |> Js.String.slice(~from=0, ~to_=4);
-              let newYear = year !== latestYear^;
-              latestYear := year;
-              <View key=item##id style=styles##flex>
-                {newYear
-                   ? <Text style=styles##yearText> year->React.string </Text>
-                   : React.null}
-                <TalkPreview item />
-              </View>;
-            })
-         |> React.array}
-      </View>;
-    },
-  });
+let make = (~talks, ()) => {
+  let latestYear = ref(talks[0]##date |> Js.String.slice(~from=0, ~to_=4));
+  <View style=styles##list>
+    {talks
+     |> Array.map(item => {
+          let year = item##date |> Js.String.slice(~from=0, ~to_=4);
+          let newYear = year !== latestYear^;
+          latestYear := year;
+          <View key=item##id style=styles##flex>
+            {newYear
+               ? <Text style=styles##yearText> year->React.string </Text>
+               : React.null}
+            <TalkPreview item />
+          </View>;
+        })
+     |> React.array}
+  </View>;
+};

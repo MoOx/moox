@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("services");
-
 let styles =
   Style.(
     StyleSheet.create({
@@ -43,45 +41,36 @@ let styles =
   );
 
 [@react.component]
-let make = () =>
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <SpacedView vertical=M style=styles##container>
-        <SpacedView horizontal=M>
-          <Text style=styles##textLight>
-            {j|I make front-ends using React, JavaScript & ReasonML. |j}
-            ->React.string
-          </Text>
-        </SpacedView>
-        <SpacedView vertical=XL style=styles##row>
-          <SpacedView style=styles##cell horizontal=M>
-            <Text style=styles##cellTitle>
-              {j|Development|j}->React.string
-            </Text>
-            <Spacer />
-            <Text style=styles##cellText>
-              {j|I am using web technologies since 1995 and made my first mobile app in 2006 and never stopped to learn things since.|j}
-              ->React.string
-            </Text>
-          </SpacedView>
-          <SpacedView style=styles##cell horizontal=M>
-            <Text style=styles##cellTitle>
-              {j|Consultancy|j}->React.string
-            </Text>
-            <Spacer />
-            <Text style=styles##cellText> {j||j}->React.string </Text>
-          </SpacedView>
-          <SpacedView style=styles##cell horizontal=M>
-            <Text style=styles##cellTitle>
-              {j|And more...|j}->React.string
-            </Text>
-            <Spacer />
-            <Text style=styles##cellText>
-              {j|!I am sure my knowledge and experiences might be useful to you in many ways.|j}
-              ->React.string
-            </Text>
-          </SpacedView>
-        </SpacedView>
-      </SpacedView>,
-  });
+let make = () => {
+  <SpacedView vertical=M style=styles##container>
+    <SpacedView horizontal=M>
+      <Text style=styles##textLight>
+        {j|I make front-ends using React, JavaScript & ReasonML. |j}
+        ->React.string
+      </Text>
+    </SpacedView>
+    <SpacedView vertical=XL style=styles##row>
+      <SpacedView style=styles##cell horizontal=M>
+        <Text style=styles##cellTitle> {j|Development|j}->React.string </Text>
+        <Spacer />
+        <Text style=styles##cellText>
+          {j|I am using web technologies since 1995 and made my first mobile app in 2006 and never stopped to learn things since.|j}
+          ->React.string
+        </Text>
+      </SpacedView>
+      <SpacedView style=styles##cell horizontal=M>
+        <Text style=styles##cellTitle> {j|Consultancy|j}->React.string </Text>
+        <Spacer />
+        <Text style=styles##cellText> {j||j}->React.string </Text>
+      </SpacedView>
+      <SpacedView style=styles##cell horizontal=M>
+        <Text style=styles##cellTitle> {j|And more...|j}->React.string </Text>
+        <Spacer />
+        <Text style=styles##cellText>
+          {j|!I am sure my knowledge and experiences might be useful to you in many ways.|j}
+          ->React.string
+        </Text>
+      </SpacedView>
+    </SpacedView>
+  </SpacedView>;
+};
