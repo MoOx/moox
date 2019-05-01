@@ -56,24 +56,13 @@ let styles =
 module H1 = {
   let component = ReasonReact.statelessComponent("Html.H1");
   [@react.component]
-  let make = (~style=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
-        <View
-          style={
-            switch (style) {
-            | None => styles##h1
-            | Some(style) => Style.concat([styles##h1, style])
-            }
-          }>
+        <View style=Style.(arrayOption([|Some(styles##h1), styl|]))>
           <Text
-            style={
-              switch (textStyle) {
-              | None => styles##h1Text
-              | Some(textStyle) => Style.concat([styles##h1Text, textStyle])
-              }
-            }>
+            style=Style.(arrayOption([|Some(styles##h1Text), textStyle|]))>
             children
           </Text>
         </View>,
@@ -84,24 +73,13 @@ module H1 = {
 module H2 = {
   let component = ReasonReact.statelessComponent("Html.H2");
   [@react.component]
-  let make = (~style=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
-        <View
-          style={
-            switch (style) {
-            | None => styles##h2
-            | Some(style) => Style.concat([styles##h2, style])
-            }
-          }>
+        <View style=Style.(arrayOption([|Some(styles##h2), styl|]))>
           <Text
-            style={
-              switch (textStyle) {
-              | None => styles##h2Text
-              | Some(textStyle) => Style.concat([styles##h2Text, textStyle])
-              }
-            }>
+            style=Style.(arrayOption([|Some(styles##h2Text), textStyle|]))>
             children
           </Text>
         </View>,
@@ -112,24 +90,13 @@ module H2 = {
 module H3 = {
   let component = ReasonReact.statelessComponent("Html.H3");
   [@react.component]
-  let make = (~style=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
-        <View
-          style={
-            switch (style) {
-            | None => styles##h3
-            | Some(style) => Style.concat([styles##h3, style])
-            }
-          }>
+        <View style=Style.(arrayOption([|Some(styles##h3), styl|]))>
           <Text
-            style={
-              switch (textStyle) {
-              | None => styles##h3Text
-              | Some(textStyle) => Style.concat([styles##h3Text, textStyle])
-              }
-            }>
+            style=Style.(arrayOption([|Some(styles##h3Text), textStyle|]))>
             children
           </Text>
         </View>,
@@ -140,24 +107,13 @@ module H3 = {
 module H4 = {
   let component = ReasonReact.statelessComponent("Html.H4");
   [@react.component]
-  let make = (~style=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
-        <View
-          style={
-            switch (style) {
-            | None => styles##h4
-            | Some(style) => Style.concat([styles##h4, style])
-            }
-          }>
+        <View style=Style.(arrayOption([|Some(styles##h4), styl|]))>
           <Text
-            style={
-              switch (textStyle) {
-              | None => styles##h4Text
-              | Some(textStyle) => Style.concat([styles##h4Text, textStyle])
-              }
-            }>
+            style=Style.(arrayOption([|Some(styles##h4Text), textStyle|]))>
             children
           </Text>
         </View>,
@@ -168,24 +124,13 @@ module H4 = {
 module H5 = {
   let component = ReasonReact.statelessComponent("Html.H5");
   [@react.component]
-  let make = (~style=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
-        <View
-          style={
-            switch (style) {
-            | None => styles##h5
-            | Some(style) => Style.concat([styles##h5, style])
-            }
-          }>
+        <View style=Style.(arrayOption([|Some(styles##h5), styl|]))>
           <Text
-            style={
-              switch (textStyle) {
-              | None => styles##h5Text
-              | Some(textStyle) => Style.concat([styles##h5Text, textStyle])
-              }
-            }>
+            style=Style.(arrayOption([|Some(styles##h5Text), textStyle|]))>
             children
           </Text>
         </View>,
@@ -196,24 +141,13 @@ module H5 = {
 module H6 = {
   let component = ReasonReact.statelessComponent("Html.H6");
   [@react.component]
-  let make = (~style=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
-        <View
-          style={
-            switch (style) {
-            | None => styles##h6
-            | Some(style) => Style.concat([styles##h6, style])
-            }
-          }>
+        <View style=Style.(arrayOption([|Some(styles##h6), styl|]))>
           <Text
-            style={
-              switch (textStyle) {
-              | None => styles##h6Text
-              | Some(textStyle) => Style.concat([styles##h6Text, textStyle])
-              }
-            }>
+            style=Style.(arrayOption([|Some(styles##h6Text), textStyle|]))>
             children
           </Text>
         </View>,
@@ -224,24 +158,13 @@ module H6 = {
 module P = {
   let component = ReasonReact.statelessComponent("Html.P");
   [@react.component]
-  let make = (~style=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
-        <View
-          style={
-            switch (style) {
-            | None => styles##p
-            | Some(style) => Style.concat([styles##p, style])
-            }
-          }>
+        <View style=Style.(arrayOption([|Some(styles##p), styl|]))>
           <Text
-            style={
-              switch (textStyle) {
-              | None => styles##pText
-              | Some(textStyle) => Style.concat([styles##pText, textStyle])
-              }
-            }>
+            style=Style.(arrayOption([|Some(styles##pText), textStyle|]))>
             children
           </Text>
         </View>,
@@ -252,17 +175,11 @@ module P = {
 module Ul = {
   let component = ReasonReact.statelessComponent("Html.Ul");
   [@react.component]
-  let make = (~style=?, ~children, ()) => {
+  let make = (~style as styl=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
-        <View
-          style={
-            switch (style) {
-            | None => styles##ul
-            | Some(style) => Style.concat([styles##ul, style])
-            }
-          }>
+        <View style=Style.(arrayOption([|Some(styles##ul), styl|]))>
           children
         </View>,
     });
@@ -272,19 +189,13 @@ module Ul = {
 module Li = {
   let component = ReasonReact.statelessComponent("Html.Li");
   [@react.component]
-  let make = (~style=?, ~children, ()) => {
+  let make = (~style as styl=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
         <View style=styles##liWrapper>
           <Text style=styles##liBullet> {j|•|j}->ReasonReact.string </Text>
-          <Text
-            style={
-              switch (style) {
-              | None => styles##li
-              | Some(style) => Style.concat([styles##li, style])
-              }
-            }>
+          <Text style=Style.(arrayOption([|Some(styles##li), styl|]))>
             children
           </Text>
         </View>,
@@ -317,25 +228,15 @@ module Hr = {
 module BlockQuote = {
   let component = ReasonReact.statelessComponent("Html.BlockQuote");
   [@react.component]
-  let make = (~style=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
     ReactCompat.useRecordApi({
       ...component,
       render: _self =>
-        <View
-          style={
-            switch (style) {
-            | None => styles##blockQuote
-            | Some(style) => Style.concat([styles##blockQuote, style])
-            }
-          }>
+        <View style=Style.(arrayOption([|Some(styles##blockQuote), styl|]))>
           <Text
-            style={
-              switch (textStyle) {
-              | None => styles##blockQuoteText
-              | Some(textStyle) =>
-                Style.concat([styles##blockQuoteText, textStyle])
-              }
-            }>
+            style=Style.(
+              arrayOption([|Some(styles##blockQuoteText), textStyle|])
+            )>
             children
           </Text>
         </View>,

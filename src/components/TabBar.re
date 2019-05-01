@@ -55,11 +55,11 @@ let make = (~currentLocation, ()) =>
                     )}
                    <Text
                      style=Style.(
-                       concat([
-                         styles##itemText,
+                       arrayOption([|
+                         Some(styles##itemText),
                          item.isActive(currentLocation##pathname, item.link)
-                           ? styles##itemTextActive : style([]),
-                       ])
+                           ? Some(styles##itemTextActive) : None,
+                       |])
                      )>
                      item.text->ReasonReact.string
                    </Text>

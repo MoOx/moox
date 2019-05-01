@@ -73,7 +73,7 @@ let make = () =>
              bg: "#000B28",
              bg2: Consts.Colors.dark,
              icon:
-               <View style=Style.(concat([styles##icon, style([])]))>
+               <View style=styles##icon>
                  <SVGJavaScriptMini
                    width=170.
                    height=170.
@@ -90,10 +90,10 @@ let make = () =>
              icon:
                <View
                  style=Style.(
-                   concat([
+                   array([|
                      styles##icon,
                      style([right(Pt(-40.)), bottom(Pt(-40.))]),
-                   ])
+                   |])
                  )>
                  <SVGReact width=200. height=200. fill=Consts.Colors.light />
                </View>,
@@ -107,10 +107,10 @@ let make = () =>
              icon:
                <View
                  style=Style.(
-                   concat([
+                   array([|
                      styles##icon,
                      style([right(Pt(-40.)), bottom(Pt(-40.))]),
-                   ])
+                   |])
                  )>
                  <SVGReasonMini
                    width=200.
@@ -128,10 +128,10 @@ let make = () =>
              icon:
                <View
                  style=Style.(
-                   concat([
+                   array([|
                      styles##icon,
                      style([right(Pt(-30.)), bottom(Pt(-30.))]),
-                   ])
+                   |])
                  )>
                  <SVGTouch width=200. height=200. fill=Consts.Colors.light />
                </View>,
@@ -143,7 +143,7 @@ let make = () =>
              bg: "#0FA5AE",
              bg2: Consts.Colors.dark,
              icon:
-               <View style=Style.(concat([styles##icon, style([])]))>
+               <View style=styles##icon>
                  <SVGUi width=180. height=180. fill=Consts.Colors.light />
                </View>,
            },
@@ -154,7 +154,7 @@ let make = () =>
              bg: "#36E9BE",
              bg2: Consts.Colors.dark,
              icon:
-               <View style=Style.(concat([styles##icon, style([])]))>
+               <View style=styles##icon>
                  <SVGSocialGithub
                    width=200.
                    height=200.
@@ -188,10 +188,10 @@ let make = () =>
                    {skill.icon}
                    <Text
                      style=Style.(
-                       concat([
+                       array([|
                          styles##textNodeStrong,
                          style([color(String(skill.color))]),
-                       ])
+                       |])
                      )>
                      skill.title->ReasonReact.string
                    </Text>

@@ -23,7 +23,6 @@ let styles =
           lineHeight(28.),
           color(String(Consts.Colors.dark)),
         ]),
-      "bullet": style([]),
       "title": style([fontSize(Float(22.))]),
     })
   );
@@ -38,7 +37,7 @@ let make = (~item: T.partialContentItem, ()) =>
       let href = "/blog/" ++ item##id ++ "/";
       <View key=item##id style=styles##block>
         <Text style=styles##text>
-          <Text style=styles##bullet> {j|•|j}->ReasonReact.string </Text>
+          <Text> {j|•|j}->ReasonReact.string </Text>
           <Spacer size=S />
           <UnderlinedTextLink style=styles##title href>
             {item##title->ReasonReact.string}

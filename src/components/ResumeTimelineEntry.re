@@ -18,7 +18,6 @@ let styles =
           borderTopRightRadius(6.),
           overflow(Hidden),
         ]),
-      "image": style([]),
       "block": style([flex(1.)]),
       "head": style([flexDirection(Row), justifyContent(SpaceBetween)]),
       "title":
@@ -95,11 +94,7 @@ let make = (~item: T.partialResumeItem, ()) =>
            ->Js.undefinedToOption
            ->Belt.Option.mapWithDefault(ReasonReact.null, image =>
                <View style=styles##imageWrapper>
-                 <ImageWithAspectRatio
-                   uri=image
-                   ratio={2160. /. 3840.}
-                   style=styles##image
-                 />
+                 <ImageWithAspectRatio uri=image ratio={2160. /. 3840.} />
                </View>
              )}
           <SpacedView style=styles##block vertical=M horizontal=M>

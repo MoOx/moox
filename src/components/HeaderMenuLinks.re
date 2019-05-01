@@ -30,11 +30,11 @@ let make = (~currentLocation, ()) =>
                key={item.link}
                href={item.link}
                style=Style.(
-                 concat([
-                   styles##link,
+                 arrayOption([|
+                   Some(styles##link),
                    item.isActive(currentLocation##pathname, item.link)
-                     ? styles##linkActive : style([]),
-                 ])
+                     ? Some(styles##linkActive) : None,
+                 |])
                )>
                item.text->ReasonReact.string
              </TextLink>

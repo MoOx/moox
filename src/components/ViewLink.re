@@ -3,7 +3,7 @@ let make =
     (
       ~accessibilityLabel=?,
       ~href,
-      ~style=?,
+      ~style as styl=?,
       ~activeStyle=?,
       ~onMouseEnter=?,
       ~onMouseLeave=?,
@@ -13,10 +13,12 @@ let make =
     ?accessibilityLabel
     href
     style=BsReactNative.(
-      Style.concat([
-        Style.style(Style.[display(Flex), flexDirection(Column)]),
-        style->Belt.Option.getWithDefault(Style.style([])),
-      ])
+      Style.(
+        arrayOption([|
+          Some(style([display(Flex), flexDirection(Column)])),
+          styl,
+        |])
+      )
     )
     ?activeStyle
     ?onMouseEnter

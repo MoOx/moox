@@ -1,7 +1,5 @@
 open BsReactNative;
 
-let component = ReasonReact.statelessComponent("UnderlinedTextLink");
-
 let styles =
   StyleSheet.create(
     {
@@ -16,19 +14,7 @@ let styles =
   );
 
 [@react.component]
-let make = (~href, ~style=?, ~children, ()) => {
-  ReactCompat.useRecordApi({
-    ...component,
-    render: _self =>
-      <TextLink
-        href
-        style={
-          switch (style) {
-          | None => styles##link
-          | Some(style) => Style.concat([styles##link, style])
-          }
-        }>
-        children
-      </TextLink>,
-  });
-};
+let make = (~href, ~style as styl=?, ~children, ()) =>
+  <TextLink href style=Style.(arrayOption([|Some(styles##link), styl|]))>
+    children
+  </TextLink>;

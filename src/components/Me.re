@@ -2,8 +2,6 @@ open BsReactNative;
 
 let component = ReasonReact.statelessComponent("Background");
 
-let styles = Style.(StyleSheet.create({"img": style([])}));
-
 let uri = "/me.png";
 let width: Style.pt_only = Style.Pt(390. /. 1.4);
 let height: Style.pt_only = Style.Pt(500. /. 1.4);
@@ -38,7 +36,6 @@ let make = () =>
                             ),
                           )
                         }
-          style=styles##img
         />
       </div>,
   });

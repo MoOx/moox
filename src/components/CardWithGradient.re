@@ -85,10 +85,10 @@ let make = (~item, ()) =>
             {item.icon}
             <Text
               style=Style.(
-                concat([
+                array([|
                   styles##textNodeStrong,
                   style([color(String(item.color))]),
-                ])
+                |])
               )>
               item.title->ReasonReact.string
             </Text>

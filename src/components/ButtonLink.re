@@ -14,8 +14,8 @@ let styles =
 let make =
     (
       ~href,
-      ~color="#efefff",
-      ~style=?,
+      ~color as colour="#efefff",
+      ~style as styl=?,
       ~activeStyle=?,
       ~onMouseEnter=?,
       ~onMouseLeave=?,
@@ -26,17 +26,21 @@ let make =
     ...component,
     render: _self =>
       <View
-        style={Style.concat([
-          styles##btnWrapper,
-          Style.style([Style.borderColor(Style.String(color))]),
-        ])}>
+        style=Style.(
+          array([|
+            styles##btnWrapper,
+            style([borderColor(String(colour))]),
+          |])
+        )>
         <ViewLink
           href
-          style={Style.concat([
-            styles##btn,
-            Style.style([Style.color(Style.String(color))]),
-            style->Belt.Option.getWithDefault(Style.style([])),
-          ])}
+          style=Style.(
+            arrayOption([|
+              Some(styles##btn),
+              Some(style([color(String(colour))])),
+              styl,
+            |])
+          )
           ?activeStyle
           ?onMouseEnter
           ?onMouseLeave>

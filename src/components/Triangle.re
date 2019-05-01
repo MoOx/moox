@@ -6,25 +6,34 @@ let coef = 2. *. 0.8660254;
 
 [@react.component]
 let make =
-    (~height=50., ~color=Consts.Colors.light, ~style=Style.style([]), ()) =>
+    (
+      ~height as h=50.,
+      ~color as colour=Consts.Colors.light,
+      ~style as styl=?,
+      (),
+    ) =>
   ReactCompat.useRecordApi({
     ...component,
     render: _self =>
       <View
-        style={Style.concat([
-          Style.style([
-            Style.width(Pt(0.)),
-            Style.height(Pt(0.)),
-            Style.borderTopWidth(0.),
-            Style.borderTopColor(String("transparent")),
-            Style.borderLeftWidth(height /. coef),
-            Style.borderLeftColor(String("transparent")),
-            Style.borderRightWidth(height /. coef),
-            Style.borderRightColor(String("transparent")),
-            Style.borderBottomWidth(height),
-            Style.borderBottomColor(String(color)),
-          ]),
-          style,
-        ])}
+        style=Style.(
+          arrayOption([|
+            Some(
+              style([
+                width(Pt(0.)),
+                height(Pt(0.)),
+                borderTopWidth(0.),
+                borderTopColor(String("transparent")),
+                borderLeftWidth(h /. coef),
+                borderLeftColor(String("transparent")),
+                borderRightWidth(h /. coef),
+                borderRightColor(String("transparent")),
+                borderBottomWidth(h),
+                borderBottomColor(String(colour)),
+              ]),
+            ),
+            styl,
+          |])
+        )
       />,
   });
