@@ -87,11 +87,12 @@ let make = (~item: T.partialResumeItem, ()) => {
     <View style=styles##container>
       {item##image
        ->Js.undefinedToOption
-       ->Belt.Option.mapWithDefault(React.null, image =>
+       ->Belt.Option.map(image =>
            <View style=styles##imageWrapper>
              <ImageWithAspectRatio uri=image ratio={2160. /. 3840.} />
            </View>
-         )}
+         )
+       ->Belt.Option.getWithDefault(React.null)}
       <SpacedView style=styles##block vertical=M horizontal=M>
         <View style=styles##head>
           <Text style=styles##title>
@@ -151,7 +152,7 @@ let make = (~item: T.partialResumeItem, ()) => {
              <View style=styles##links>
                {links
                 ->Belt.Array.map(l =>
-                    <>
+                    <React.Fragment key=l##title>
                       <Spacer size=XS />
                       <UnderlinedTextLink
                         key=l##title href=l##url style=styles##link>
@@ -159,7 +160,7 @@ let make = (~item: T.partialResumeItem, ()) => {
                         <Spacer size=XXS />
                         <SVGExternalLink />
                       </UnderlinedTextLink>
-                    </>
+                    </React.Fragment>
                   )
                 ->React.array}
              </View>

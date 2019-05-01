@@ -9,7 +9,7 @@ type htmlProps = {
   "href": string,
 };
 
-type reasonChildren = list(reasonChild)
+type reasonChildren = array(reasonChild)
 and reasonChild =
   | String(string)
   | Element(string, htmlProps, reasonChildren)
@@ -30,8 +30,8 @@ let rec jsTreeToReason = (jsChild: jsBody) =>
     let props = jsChild##p;
     let children =
       switch (Js.Undefined.toOption(jsChild##c)) {
-      | Some(c) => List.map(jsTreeToReason, Array.to_list(c))
-      | None => []
+      | Some(c) => c->Belt.Array.map(jsTreeToReason)
+      | None => [||]
       };
     Element(tag, props, children);
   | _ => Empty
@@ -52,16 +52,14 @@ let lastSiblingHasLineBreaking = ref(false);
 
 let rec renderChild = (parentTag, index: int, child) => {
   /* @todo we can do better */
-  let key = string_of_int(index);
+  let key = index->string_of_int;
   let siblingHasLineBreaking = lastSiblingHasLineBreaking^;
   lastSiblingHasLineBreaking := false;
   let renderChildren = (parentTag, children) =>
-    if (List.length(children) == 0) {
+    if (children->Belt.Array.length == 0) {
       React.null;
     } else {
-      React.array(
-        Array.of_list(List.mapi(renderChild(parentTag), children)),
-      );
+      children->Belt.Array.mapWithIndex(renderChild(parentTag))->React.array;
     };
   switch (child) {
   | String(string) =>
@@ -79,7 +77,7 @@ let rec renderChild = (parentTag, index: int, child) => {
             },
           string,
         );
-      React.string(newString);
+      newString->React.string;
     }
   | Element(tag, props, children) =>
     switch (tag) {
@@ -108,7 +106,12 @@ let rec renderChild = (parentTag, index: int, child) => {
     | _ =>
       ReactDOMRe.createElement(
         tag,
-        ~props=ReactDOMRe.objToDOMProps(props),
+        ~props=
+          ReactDOMRe.objToDOMProps(
+            Js.Obj.empty()
+            ->Js.Obj.assign({"key": key})
+            ->Js.Obj.assign(props),
+          ),
         [|renderChildren(tag, children)|],
       )
     }
