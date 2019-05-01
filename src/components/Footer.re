@@ -13,7 +13,7 @@ let styles =
           justifyContent(SpaceBetween),
         ]),
       "barWrapper": style([backgroundColor(String(Consts.Colors.dark))]),
-      "icons": style([flexDirection(Row)]),
+      "icons": style([flexDirection(Row), alignItems(Center)]),
       "barLinks": style([flexDirection(Row)]),
       "barLink":
         style([

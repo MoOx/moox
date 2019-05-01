@@ -44,6 +44,7 @@ let styles =
           flexGrow(1.),
           flexShrink(0.),
           display(Flex),
+          justifyContent(Center),
           alignItems(Center),
           paddingHorizontal(Pt(12.)),
           paddingVertical(Pt(6.)),

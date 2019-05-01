@@ -90,11 +90,9 @@ let make = () =>
               />
             </View>
           </WindowSizeFilter.MMin>
-          <WindowSizeFilter.MMin>
-            <View
-              style=Style.(style([width(Pct(20.)), height(Pt(1.))]))
-            />
-          </WindowSizeFilter.MMin>
+          <WindowSizeFilter.MMin
+            style={ReactDOMRe.Style.make(~width="20%", ~height="1px", ())}
+          />
           <View style=styles##content accessibilityRole=`header>
             <Text style=styles##title> "MoOx"->ReasonReact.string </Text>
             <Text style=styles##subtitle>

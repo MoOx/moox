@@ -10,7 +10,7 @@ let make =
       ~iconColor=Consts.Colors.lightest,
       ~iconSize=16.,
       /* note the default value that just wrap with a simple node */
-      ~iconWrapperFunc=(~children) => <Text> ...children </Text>,
+      ~iconWrapperFunc=(~children) => children,
       (),
     ) =>
   ReactCompat.useRecordApi({

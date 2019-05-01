@@ -1,17 +1,19 @@
-module SMax = {
-  let component = ReasonReact.statelessComponent("WindowSizeFilterSMax");
+open Belt;
 
+module SMax = {
   [@react.component]
-  let make = (~children, ()) => {
-    <div className="WindowSizeFilterSMax"> children </div>;
+  let make = (~style=?, ~children=?, ()) => {
+    <div className="WindowSizeFilterSMax" ?style>
+      {children->Option.getWithDefault(React.null)}
+    </div>;
   };
 };
 
 module MMin = {
-  let component = ReasonReact.statelessComponent("WindowSizeFilterMMin");
-
   [@react.component]
-  let make = (~children, ()) => {
-    <div className="WindowSizeFilterMMin"> children </div>;
+  let make = (~style=?, ~children=?, ()) => {
+    <div className="WindowSizeFilterMMin" ?style>
+      {children->Option.getWithDefault(React.null)}
+    </div>;
   };
 };
