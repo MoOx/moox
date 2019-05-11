@@ -1,28 +1,28 @@
 // @flow
 
 import * as React from "react";
-import Head from "react-helmet";
+import { Helmet } from "react-helmet";
 import { AppRegistry } from "react-native-web";
 
 const Html = ({ App, render }: PhenomicHtmlPropsType) => {
   AppRegistry.registerComponent("App", () => App);
   const app = AppRegistry.getApplication("App");
   const { Main, State, Script, Style } = render(app.element);
-  const helmet = Head.renderStatic();
+  const head = Helmet.renderStatic();
   return (
-    <html {...helmet.htmlAttributes.toComponent()}>
+    <html {...head.htmlAttributes.toComponent()}>
       <head>
-        {helmet.meta.toComponent()}
-        {helmet.title.toComponent()}
-        {helmet.base.toComponent()}
+        {head.meta.toComponent()}
+        {head.title.toComponent()}
+        {head.base.toComponent()}
         {app.getStyleElement()}
         <Style />
-        {helmet.link.toComponent()}
-        {helmet.style.toComponent()}
-        {helmet.script.toComponent()}
-        {helmet.noscript.toComponent()}
+        {head.link.toComponent()}
+        {head.style.toComponent()}
+        {head.script.toComponent()}
+        {head.noscript.toComponent()}
       </head>
-      <body {...helmet.bodyAttributes.toComponent()}>
+      <body {...head.bodyAttributes.toComponent()}>
         <Main />
         <State />
         <Script />
