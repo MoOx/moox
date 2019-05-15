@@ -18,7 +18,7 @@
     "bs-fetch": "^0.3.0",
     "bs-json": "^1.0.1",
     "bs-platform": "^5.0.1",
-    "bs-react-native-monorepo": "https://github.com/reasonml-community/bs-react-native.git#jsx3-migration",
+    "bs-react-native-monorepo": "https://github.com/reasonml-community/bs-react-native.git",
     "husky": "^1.1.4",
     "jest": "^21.2.1",
     "lint-staged": "^8.0.5",
