@@ -20,7 +20,8 @@ let styles =
 
 [@react.component]
 let make = (~talks, ()) => {
-  let latestYear = ref(talks[0]##date |> Js.String.slice(~from=0, ~to_=4));
+  let latestYear =
+    ref(Js.Date.make()->Js.Date.getFullYear->Js.Float.toString);
   <View style=styles##list>
     {talks
      |> Array.map(item => {
