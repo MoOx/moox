@@ -4,8 +4,15 @@ let styles =
   Style.(
     StyleSheet.create({
       "center": style([alignItems(Center), justifyContent(Center)]),
-      "blahblah": style([alignItems(Center)]),
+      "blahblah":
+        style([flex(1.), alignItems(Center), flexBasis(Pt(240.))]),
       "row":
+        style([
+          flexDirection(Row),
+          flexWrap(Wrap),
+          justifyContent(Center),
+        ]),
+      "rowCentered":
         style([
           flexDirection(Row),
           flexWrap(Wrap),
@@ -53,30 +60,82 @@ let styles =
 let make = (~posts) => {
   <AppWrapper>
     <HomeJumbotron />
-    <Container style=styles##center>
-      <SpacedView horizontal=M vertical=M style=styles##blahblah>
-        <View style=styles##row>
-          <SpacedView vertical=M horizontal=XS style=styles##flex>
+    <Container style=styles##center maxWidth=1200.>
+      <View style=styles##row>
+        <SpacedView horizontal=M vertical=M style=styles##blahblah>
+          <SpacedView vertical=M horizontal=XS style=styles##rowCentered>
+            <SVGLogo fill="#bbb" width=32. height=32. />
+            <Spacer size=XS />
             <Text style=styles##textLight>
-              {j|I build apps using React, JavaScript & ReasonML.|j}
-              ->React.string
+              {j|Software Architect.|j}->React.string
             </Text>
           </SpacedView>
-          <SpacedView vertical=M horizontal=XS>
-            <ButtonSmallLink href="/contact/" color="rgb(0, 112, 201)">
-              <Text> "Hire me"->React.string </Text>
-            </ButtonSmallLink>
+          <Spacer size=M />
+          <Text style=styles##blahblahText>
+            {j|Since I made my first website in 1998, I never stopped to learn things. Over the years, I refined my way to approach development, which allows me to confidently takes high-level design choices when building web & mobile apps, and selecting tools adapted to your needs.|j}
+            ->React.string
+          </Text>
+        </SpacedView>
+        <SpacedView horizontal=M vertical=M style=styles##blahblah>
+          <SpacedView vertical=M horizontal=XS style=styles##rowCentered>
+            <SVGReact fill="#bbb" width=32. height=32. />
+            <Spacer size=XS />
+            <Text style=styles##textLight>
+              {j|React Developer.|j}->React.string
+            </Text>
           </SpacedView>
-        </View>
-        <Spacer size=M />
-        <Text style=styles##blahblahText>
-          {j|Since I made my first website in 1998, I never stopped to learn things. I love to build useful UIs that offer the best UX possible. I like to produce durable things when working on products or long-running projects by focusing on maintainability, scalability and performance.
-Over the years, I refined my way to approach development, mostly by cultivating my empathy.
-Leading team to get started with latest & proven technologies is my jam. I like to teach people to work better on large codebase that must scale.|j}
-          ->React.string
-        </Text>
-      </SpacedView>
+          <Spacer size=M />
+          <Text style=styles##blahblahText>
+            {j|I think React is currently the best tool available to to produce durable things when working on products or long-running projects.
+React & React Native allows me to focus on feature with scalability and performance in mind.|j}
+            ->React.string
+          </Text>
+        </SpacedView>
+        <SpacedView horizontal=M vertical=M style=styles##blahblah>
+          <SpacedView vertical=M horizontal=XS style=styles##rowCentered>
+            <SVGMenuTalk fill="#bbb" width=32. height=32. />
+            <Spacer size=XS />
+            <Text style=styles##textLight>
+              {j|Expert, Leader, Trainer.|j}->React.string
+            </Text>
+          </SpacedView>
+          <Spacer size=M />
+          <Text style=styles##blahblahText>
+            {j|I can provide consultancy to companies of all sizes all around the world. From leading team to get started with latest & proven technologies, to teaching people to work better on large codebase at scale, I can probably help you & your team.|j}
+            ->React.string
+          </Text>
+        </SpacedView>
+      </View>
+      <View style=styles##rowCentered>
+        <SpacedView vertical=M horizontal=XS>
+          <ButtonSmallLink href="/resume/" color="rgb(0, 112, 201)">
+            <Text> "Learn more"->React.string </Text>
+            <Text
+              style=Style.(
+                style([fontSize(Float(12.)), fontWeight(`_300)])
+              )>
+              "about my experiences"->React.string
+            </Text>
+          </ButtonSmallLink>
+        </SpacedView>
+        <SpacedView vertical=M horizontal=M>
+          <Text style=styles##nanoTitle> "or"->React.string </Text>
+        </SpacedView>
+        <SpacedView vertical=M horizontal=XS>
+          <ButtonSmallLink href="/contact/" color="rgb(0, 112, 201)">
+            <Text> "Hire me"->React.string </Text>
+            <Text
+              style=Style.(
+                style([fontSize(Float(12.)), fontWeight(`_300)])
+              )>
+              "I am available!"->React.string
+            </Text>
+          </ButtonSmallLink>
+        </SpacedView>
+      </View>
       <Spacer />
+    </Container>
+    <Container style=styles##center>
       <Text style=styles##nanoTitle>
         "THINGS I LIKE TO WORK WITH"->React.string
       </Text>
@@ -100,7 +159,7 @@ Leading team to get started with latest & proven technologies is my jam. I like 
       <Text style=styles##nanoTitle>
         "COMPANIES THAT TRUSTED ME"->React.string
       </Text>
-      <View style=styles##row>
+      <View style=styles##rowCentered>
         <SVGCompanyKisioDigital width=200. height=200. fill="#bbb" />
         <SVGCompanyMolotovTv width=200. height=200. fill="#bbb" />
         <SVGCompanyAirbus width=200. height=200. fill="#bbb" />
@@ -115,17 +174,40 @@ Leading team to get started with latest & proven technologies is my jam. I like 
       </Text>
       <Spacer size=L />
       <View style=styles##center>
-        <ButtonLink href="/contact/">
-          <Text> "Hire me"->React.string </Text>
-        </ButtonLink>
-        <Spacer size=L />
-        <Text style=styles##nanoTitle>
-          "Or you can "->React.string
-          <UnderlinedTextLink href="/resume/">
-            "learn more about my experiences"->React.string
-          </UnderlinedTextLink>
-        </Text>
+        <View style=styles##rowCentered>
+          <SpacedView vertical=M horizontal=XS>
+            <ButtonLink href="/resume/">
+              <Text> "Learn more"->React.string </Text>
+              <Text
+                style=Style.(
+                  style([fontSize(Float(12.)), fontWeight(`_300)])
+                )>
+                "Check out my resume"->React.string
+              </Text>
+            </ButtonLink>
+          </SpacedView>
+          <SpacedView vertical=M horizontal=XS>
+            <ButtonLink href="/contact/">
+              <Text> "Hire me"->React.string </Text>
+              <Text
+                style=Style.(
+                  style([fontSize(Float(12.)), fontWeight(`_300)])
+                )>
+                "I am available!"->React.string
+              </Text>
+            </ButtonLink>
+          </SpacedView>
+        </View>
       </View>
+      /*
+       <Spacer size=L />
+       <Text style=styles##nanoTitle>
+         "Or you can "->React.string
+         <UnderlinedTextLink href="/resume/">
+           "learn more about my experiences"->React.string
+         </UnderlinedTextLink>
+       </Text>
+       */
       <Spacer size=XL />
     </View>
     <Container style=styles##center>
