@@ -74,6 +74,24 @@ body {
 
 @media (min-width: 500px) { .WindowSizeFilterSMax { display: none } }
 @media (max-width: 501px) { .WindowSizeFilterMMin { display: none } }
+
+.fixedBottom {
+  --gap: 20px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--gap);
+  right: var(--gap);
+  bottom: var(--gap);
+}
+@supports(padding: max(0px)) {
+  .fixedBottom {
+    left: max(var(--gap), env(safe-area-inset-left));
+    right: max(var(--gap), env(safe-area-inset-right));
+    bottom: max(var(--gap), env(safe-area-inset-bottom));
+  }
+}
   |j}
       ->React.string
     </style>

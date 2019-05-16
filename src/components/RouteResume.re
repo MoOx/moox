@@ -346,6 +346,19 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
        }}
       <Spacer size=XL />
     </Container>
+    <FixedBottom>
+      <LinkButton
+        href="/contact/"
+        round=true
+        textSize=24.
+        style=Style.(style([width(Pt(200.))]))>
+        <Text> "Hire me"->React.string </Text>
+        <Text
+          style=Style.(style([fontSize(Float(12.)), fontWeight(`_300)]))>
+          "\nI am available!"->React.string
+        </Text>
+      </LinkButton>
+    </FixedBottom>
   </AppWrapper>;
 };
 

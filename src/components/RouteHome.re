@@ -53,6 +53,7 @@ let styles =
           justifyContent(Center),
           alignItems(Center),
         ]),
+      "button": style([width(Pt(200.))]),
     })
   );
 
@@ -108,29 +109,38 @@ React & React Native allows me to focus on feature with scalability and performa
       </View>
       <View style=styles##rowCentered>
         <SpacedView vertical=M horizontal=XS>
-          <ButtonSmallLink href="/resume/" color="rgb(0, 112, 201)">
+          <LinkButton
+            href="/resume/"
+            color="rgb(0, 112, 201)"
+            textSize=24.
+            style=styles##button>
             <Text> "Learn more"->React.string </Text>
             <Text
               style=Style.(
                 style([fontSize(Float(12.)), fontWeight(`_300)])
               )>
-              "about my experiences"->React.string
+              "\nabout my experiences"->React.string
             </Text>
-          </ButtonSmallLink>
+          </LinkButton>
         </SpacedView>
         <SpacedView vertical=M horizontal=M>
           <Text style=styles##nanoTitle> "or"->React.string </Text>
         </SpacedView>
         <SpacedView vertical=M horizontal=XS>
-          <ButtonSmallLink href="/contact/" color="rgb(0, 112, 201)">
+          <LinkButton
+            href="/contact/"
+            color="rgb(0, 112, 201)"
+            mode=Outlined
+            textSize=24.
+            style=styles##button>
             <Text> "Hire me"->React.string </Text>
             <Text
               style=Style.(
                 style([fontSize(Float(12.)), fontWeight(`_300)])
               )>
-              "I am available!"->React.string
+              "\nI am available!"->React.string
             </Text>
-          </ButtonSmallLink>
+          </LinkButton>
         </SpacedView>
       </View>
       <Spacer />
@@ -176,26 +186,37 @@ React & React Native allows me to focus on feature with scalability and performa
       <View style=styles##center>
         <View style=styles##rowCentered>
           <SpacedView vertical=M horizontal=XS>
-            <ButtonLink href="/resume/">
+            <LinkButton
+              href="/resume/"
+              color=Consts.Colors.lightest
+              color2=Consts.Colors.dark
+              textSize=24.
+              mode=Outlined
+              style=styles##button>
               <Text> "Learn more"->React.string </Text>
               <Text
                 style=Style.(
                   style([fontSize(Float(12.)), fontWeight(`_300)])
                 )>
-                "Check out my resume"->React.string
+                "\nCheck out my resume"->React.string
               </Text>
-            </ButtonLink>
+            </LinkButton>
           </SpacedView>
           <SpacedView vertical=M horizontal=XS>
-            <ButtonLink href="/contact/">
+            <LinkButton
+              href="/contact/"
+              color=Consts.Colors.lightest
+              color2=Consts.Colors.dark
+              textSize=24.
+              style=styles##button>
               <Text> "Hire me"->React.string </Text>
               <Text
                 style=Style.(
                   style([fontSize(Float(12.)), fontWeight(`_300)])
                 )>
-                "I am available!"->React.string
+                "\nI am available!"->React.string
               </Text>
-            </ButtonLink>
+            </LinkButton>
           </SpacedView>
         </View>
       </View>
