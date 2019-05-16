@@ -14,8 +14,8 @@ hashtags:
   - JavaScript
   - jQuery
   - Magento
-  - ZendFramework
-  - Remote
+  - Zend Framework
+remote: true
 ---
 
 This shop use Magento CMS. Transformation of the traditional shop (around 250

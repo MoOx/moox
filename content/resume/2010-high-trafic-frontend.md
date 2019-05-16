@@ -12,7 +12,7 @@ hashtags:
   - CSS
   - JavaScript
   - jQuery
-  - Remote
+remote: true
 ---
 
 PHP used for data restitution. HTML5 / CSS 3 for the client side with a lot of

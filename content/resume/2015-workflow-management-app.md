@@ -10,6 +10,10 @@ hashtags:
   - JavaScript
   - React
   - Cordova
+  - PhoneGap
+  - Redux
+  - CSS
+  - PostCSS
   - iOS
   - Android
   - Git
@@ -18,4 +22,6 @@ hashtags:
   - Photo
   - Camera
   - Gestures
+  - Webpack
+remote: true
 ---

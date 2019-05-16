@@ -9,8 +9,10 @@ dateEnd: 2017-03-01
 hashtags:
   - JavaScript
   - React
-  - ReactNativeWeb
+  - React Native Web
   - Flow
   - Git
   - Lead
+  - Webpack
+remote: true
 ---

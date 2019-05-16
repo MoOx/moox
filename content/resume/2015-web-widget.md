@@ -10,8 +10,11 @@ hashtags:
   - JavaScript
   - React
   - Redux
-  - Flow
+  - CSS
+  - PostCSS
   - Git
   - ThirdParty
+  - Webpack
+remote: true
 image: /resume/beop.jpg
 ---

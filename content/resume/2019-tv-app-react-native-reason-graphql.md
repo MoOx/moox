@@ -5,13 +5,22 @@ description: >
 dateStart: 2019-02-25
 dateEnd: 2019-05-10
 hashtags:
-  - React
-  - ReactNative
   - ReasonML
-  - ReasonReact
-  - ReasonReactNative
+  - JavaScript
+  - React
+  - React Native
+  - Reason React
+  - Reason React Native
   - GraphQL
   - Apollo
   - Mobile
+  - MQTT
+  - iOS
+  - Auth0
+  - Cocoapods
+  - Bitrise
+  - Git
+  - Fastlane
 image: /resume/tvapp.jpg
+remote: true
 ---

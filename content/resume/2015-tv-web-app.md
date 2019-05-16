@@ -12,5 +12,6 @@ hashtags:
   - React
   - Redux
   - BestPractices
+remote: true
 image: /resume/molotov.tv.jpg
 ---

@@ -10,4 +10,5 @@ hashtags:
   - JavaScript
   - Backbone
   - Live
+remote: true
 ---

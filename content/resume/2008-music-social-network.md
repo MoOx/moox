@@ -12,8 +12,8 @@ hashtags:
   - CSS
   - JavaScript
   - jQuery
-  - ZendFramework
-  - Remote
+  - Zend Framework
+remote: true
 ---
 
 Responsible for the application architecture.

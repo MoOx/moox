@@ -12,6 +12,7 @@ hashtags:
   - Redux
   - Git
   - Legacy
+remote: true
 links:
   - title: Statutory Consolidation app
     url: https://www.viareport.com/en/statutory_consolidation/

@@ -18,6 +18,14 @@ hashtags:
   - Mobile
   - Maps
   - Location
+  - Apple Maps
+  - Google Maps
+  - Testing
+  - Jest
+  - Detox
+  - Storybook
+  - Jenkins
+  - Fastlane
 links:
   - title: Twisto iOS
     url: https://itunes.apple.com/fr/app/twisto/id592996452
@@ -32,4 +40,5 @@ links:
   - title: Tao Orléans Android
     url: https://play.google.com/store/apps/details?id=fr.tao.adm
 image: /resume/adm.jpg
+remote: true
 ---

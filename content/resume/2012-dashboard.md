@@ -11,6 +11,7 @@ hashtags:
   - Backbone
   - jQuery
 image: /resume/jirafe.jpg
+remote: true
 ---
 
 Working on the webapp v2, using Backbone.js & the less jQuery possible to avoid
