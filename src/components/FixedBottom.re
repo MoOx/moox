@@ -46,7 +46,7 @@ let make = (~scrollYAnimatedValue=?, ~children, _) => {
     dispatch(AnimateIn);
     Some(() => dispatch(AnimateOut));
   });
-  <div className="fixedBottom">
+  <div className="FixedBottomWithMargin">
     <Animated.View
       style=Style.(
         style([

@@ -10,17 +10,7 @@ let make = (~children) => {
     <WindowSizeFilter.MMin> <Footer /> </WindowSizeFilter.MMin>
     <WindowSizeFilter.SMax>
       <div style={ReactDOMRe.Style.make(~height="60px", ())} />
-      <div
-        className="menu-backdrop"
-        style={ReactDOMRe.Style.make(
-          ~position="fixed",
-          ~bottom="0",
-          ~left="0",
-          ~right="0",
-          (),
-        )}>
-        <TabBarWithRouter />
-      </div>
+      <div className="menu-backdrop FixedBottom"> <TabBarWithRouter /> </div>
     </WindowSizeFilter.SMax>
   </>;
 };

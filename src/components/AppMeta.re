@@ -75,7 +75,15 @@ body {
 @media (min-width: 500px) { .WindowSizeFilterSMax { display: none } }
 @media (max-width: 501px) { .WindowSizeFilterMMin { display: none } }
 
-.fixedBottom {
+.FixedBottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.FixedBottomWithMargin {
+  z-index: 10;
   --gap: 20px;
   position: fixed;
   left: 0;
@@ -86,10 +94,22 @@ body {
   bottom: var(--gap);
 }
 @supports(padding: max(0px)) {
-  .fixedBottom {
+  .FixedBottomWithMargin {
     left: max(var(--gap), env(safe-area-inset-left));
     right: max(var(--gap), env(safe-area-inset-right));
     bottom: max(var(--gap), env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 501px) {
+  .FixedBottomWithMargin {
+    bottom: 44px;
+    bottom: calc(44px + var(--gap));
+  }
+  @supports(padding: max(0px)) {
+    .FixedBottomWithMargin {
+      bottom: calc(44px + max(var(--gap), env(safe-area-inset-bottom)));
+    }
   }
 }
   |j}
