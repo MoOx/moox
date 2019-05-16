@@ -64,8 +64,8 @@ let make = (~posts) => {
       <View style=styles##row>
         <SpacedView horizontal=M vertical=M style=styles##blahblah>
           <SpacedView vertical=M horizontal=XS style=styles##rowCentered>
-            <SVGLogo fill="#bbb" width=32. height=32. />
-            <Spacer size=XS />
+            <SVGDevices fill="#bbb" width=32. height=32. />
+            <Spacer size=S />
             <Text style=styles##textLight>
               {j|Software Architect.|j}->React.string
             </Text>
@@ -79,7 +79,7 @@ let make = (~posts) => {
         <SpacedView horizontal=M vertical=M style=styles##blahblah>
           <SpacedView vertical=M horizontal=XS style=styles##rowCentered>
             <SVGReact fill="#bbb" width=32. height=32. />
-            <Spacer size=XS />
+            <Spacer size=S />
             <Text style=styles##textLight>
               {j|React Developer.|j}->React.string
             </Text>
@@ -94,7 +94,7 @@ React & React Native allows me to focus on feature with scalability and performa
         <SpacedView horizontal=M vertical=M style=styles##blahblah>
           <SpacedView vertical=M horizontal=XS style=styles##rowCentered>
             <SVGMenuTalk fill="#bbb" width=32. height=32. />
-            <Spacer size=XS />
+            <Spacer size=S />
             <Text style=styles##textLight>
               {j|Expert, Leader, Trainer.|j}->React.string
             </Text>
