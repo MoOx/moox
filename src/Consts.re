@@ -18,7 +18,7 @@ let menuLinks = [|
   },
   {
     link: "/resume/",
-    text: {j|Resume|j},
+    text: {j|About|j},
     icon: (~width, ~height, ~fill, _) => <SVGMenuResume width height fill />,
     isActive: (current, _link) => Js.String.startsWith("/resume/", current),
   },
