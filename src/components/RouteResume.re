@@ -372,15 +372,15 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
         <ViewLink href="/contact/">
           <WindowSizeFilter.MMin>
             <ButtonContained
-              round=true style=Style.(style(~width=300.->pt, ()))>
-              <ButtonContained.Text textSize=24.>
+              round=true style=Style.(style(~width=275.->pt, ()))>
+              <ButtonContained.Text textSize=22.>
                 "HIRE ME NOW"->React.string
                 <Text
                   style=Style.(
                     style(
-                      ~fontSize=10.,
-                      ~lineHeight=10.,
-                      ~fontWeight=`_300,
+                      ~fontSize=12.,
+                      ~lineHeight=12.,
+                      ~fontWeight=`_400,
                       (),
                     )
                   )>

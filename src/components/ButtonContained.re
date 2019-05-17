@@ -51,14 +51,17 @@ module Text = {
   let make = (~textSize=16., ~style as s=?, ~color as c2="white", ~children) =>
     <Text
       style=Style.(
-        array([|
-          style(
-            ~fontSize=textSize,
-            ~lineHeight=textSize,
-            ~fontWeight=`_600,
-            ~color=c2,
-            (),
+        arrayOption([|
+          Some(
+            style(
+              ~fontSize=textSize,
+              ~lineHeight=textSize,
+              ~fontWeight=`_600,
+              ~color=c2,
+              (),
+            ),
           ),
+          s,
         |])
       )>
       children
