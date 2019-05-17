@@ -1,7 +1,9 @@
 open Belt;
-open BsReactNative;
+open ReactNative;
 
-type state = {animation: Animated.Value.t};
+external animatedFloat: Animated.value('a) => float = "%identity";
+
+type state('a) = {animation: Animated.value('a)};
 
 type action =
   | AnimateIn
@@ -17,10 +19,14 @@ let make = (~scrollYAnimatedValue=?, ~children, _) => {
           Animated.(
             start(
               spring(
-                ~value=state.animation,
-                ~toValue=`raw(0.),
-                ~useNativeDriver=true,
-                (),
+                state.animation,
+                Value.Spring.(
+                  config(
+                    ~toValue=fromRawValue(0.),
+                    ~useNativeDriver=true,
+                    (),
+                  )
+                ),
               ),
               (),
             )
@@ -30,10 +36,14 @@ let make = (~scrollYAnimatedValue=?, ~children, _) => {
           Animated.(
             start(
               spring(
-                ~value=state.animation,
-                ~toValue=`raw(200.),
-                ~useNativeDriver=true,
-                (),
+                state.animation,
+                Value.Spring.(
+                  config(
+                    ~toValue=fromRawValue(200.),
+                    ~useNativeDriver=true,
+                    (),
+                  )
+                ),
               ),
               (),
             )
@@ -46,37 +56,45 @@ let make = (~scrollYAnimatedValue=?, ~children, _) => {
     dispatch(AnimateIn);
     Some(() => dispatch(AnimateOut));
   });
-  <div className="FixedBottomWithMargin">
-    <Animated.View
-      style=Style.(
-        style([
-          alignItems(Center),
-          // position(Absolute),
-          // left(Pt(0.)),
-          // right(Pt(0.)),
-          // bottom(Pt(0.)),
-          transform([
-            translateY(
-              Animated(
-                scrollYAnimatedValue
-                ->Option.map(scrollYAnimatedValue =>
-                    Animated.Value.add(
-                      state.animation,
-                      Animated.Value.interpolate(
-                        scrollYAnimatedValue,
-                        ~inputRange=[(-200.), 1.],
-                        ~outputRange=`float([(-200.), 1.]),
-                        (),
-                      ),
+  <div className="FixedBottom">
+    <SafeAreaView>
+      <Animated.View
+        style=Style.(
+          style(
+            ~alignItems=`center,
+            ~transform=[|
+              Transform.translateY(
+                ~translateY=
+                  Animated.(
+                    animatedFloat(
+                      scrollYAnimatedValue
+                      ->Option.map(scrollYAnimatedValue =>
+                          Animated.Value.add(
+                            state.animation,
+                            Value.interpolate(
+                              scrollYAnimatedValue,
+                              Interpolation.(
+                                config(
+                                  ~inputRange=[|(-200.), 1.|],
+                                  ~outputRange=
+                                    fromFloatArray([|(-200.), 1.|]),
+                                  (),
+                                )
+                              ),
+                            ),
+                          )
+                        )
+                      ->Option.getWithDefault(state.animation->Obj.magic),
                     )
-                  )
-                ->Option.getWithDefault(state.animation->Obj.magic),
+                  ),
               ),
-            ),
-          ]),
-        ])
-      )>
-      children
-    </Animated.View>
+            |],
+            (),
+          )
+        )>
+        children
+      </Animated.View>
+      <WindowSizeFilter.SMax> <TabBar.Placeholder /> </WindowSizeFilter.SMax>
+    </SafeAreaView>
   </div>;
 };

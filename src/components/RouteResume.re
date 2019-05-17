@@ -344,17 +344,28 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
       <Spacer size=XL />
     </Container>
     <FixedBottom>
-      <LinkButton
-        href="/contact/"
-        round=true
-        textSize=24.
-        style=Style.(style([width(Pt(200.))]))>
-        <Text> "Hire me"->React.string </Text>
-        <Text
-          style=Style.(style([fontSize(Float(12.)), fontWeight(`_300)]))>
-          "\nI am available!"->React.string
-        </Text>
-      </LinkButton>
+      <SpacedView>
+        <WindowSizeFilter.MMin>
+          <LinkButton
+            href="/contact/"
+            round=true
+            textSize=20.
+            style=Style.(style([width(Pt(250.))]))>
+            <Text> "HIRE ME NOW"->React.string </Text>
+            <Text
+              style=Style.(
+                style([fontSize(Float(10.)), fontWeight(`_300)])
+              )>
+              "\nCheck out my availabilities"->React.string
+            </Text>
+          </LinkButton>
+        </WindowSizeFilter.MMin>
+        <WindowSizeFilter.SMax>
+          <LinkButton href="/contact/" round=true textSize=16.>
+            <Text> "HIRE ME NOW"->React.string </Text>
+          </LinkButton>
+        </WindowSizeFilter.SMax>
+      </SpacedView>
     </FixedBottom>
   </AppWrapper>;
 };

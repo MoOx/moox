@@ -1,5 +1,6 @@
 open BsReactNative;
 
+let tabbarHeight = 50.;
 let colorInActive = Consts.Colors.tabBarIconInactive;
 let colorActive = Consts.Colors.tabBarIconActive;
 
@@ -15,7 +16,7 @@ let styles =
         style([
           flex(1.),
           flexDirection(Row),
-          minHeight(Pt(50.)),
+          minHeight(Pt(tabbarHeight)),
           alignItems(Center),
         ]),
       "itemWrapper": style([flex(1.), justifyContent(Center)]),
@@ -67,3 +68,13 @@ let make = (~currentLocation, ()) => {
 };
 
 let default = make;
+
+// static placeholder
+// can be used so you can properly scroll to bottom of the page
+// or you can sticky something at the bottom depending on the tabbar visibility
+module Placeholder = {
+  [@react.component]
+  let make = () => {
+    <View style=styles##container />;
+  };
+};
