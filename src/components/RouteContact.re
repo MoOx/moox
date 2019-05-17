@@ -22,9 +22,6 @@ let styles =
     })
   );
 
-[@bs.val] external window: option(Dom.window) = "window";
-let isClient = window->Belt.Option.isSome;
-
 [@react.component]
 let make = () => {
   <AppWrapper>
@@ -55,7 +52,8 @@ let make = () => {
           </Text>
           <Spacer size=L />
           <SpacedView vertical=S>
-            <ViewLink href={"mailto:" ++ (isClient ? "hello@moox.io" : "")}>
+            <ViewLink
+              href={"mailto:" ++ (Consts.isClient ? "hello@moox.io" : "")}>
               <ButtonContained color="#2589FB" style=styles##button>
                 <SVGEmail width=36. height=36. fill=Consts.Colors.light />
                 <Spacer />
