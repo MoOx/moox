@@ -25,6 +25,7 @@
     "@glennsl/bs-json",
     "reason-react",
     "bs-react-native-monorepo/bs-react-native-jsx3-compat",
+    "bs-react-native-monorepo/reason-react-native",
     "@moox/bs-react-helmet",
     "@phenomic/preset-react-app",
     "@phenomic/plugin-renderer-react",
