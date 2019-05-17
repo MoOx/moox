@@ -52,7 +52,13 @@ module Text = {
     <Text
       style=Style.(
         array([|
-          style(~fontSize=textSize, ~fontWeight=`_600, ~color=c2, ()),
+          style(
+            ~fontSize=textSize,
+            ~lineHeight=textSize,
+            ~fontWeight=`_600,
+            ~color=c2,
+            (),
+          ),
         |])
       )>
       children

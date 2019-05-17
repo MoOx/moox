@@ -60,9 +60,16 @@ let make = () => {
                 <SVGEmail width=36. height=36. fill=Consts.Colors.light />
                 <Spacer />
                 <ButtonContained.Text textSize=24.>
-                  <Text> "Email Me"->React.string </Text>
+                  "Email Me"->React.string
                   <Text
-                    style=Style.(style(~fontSize=12., ~fontWeight=`_300, ()))>
+                    style=Style.(
+                      style(
+                        ~fontSize=12.,
+                        ~lineHeight=12.,
+                        ~fontWeight=`_300,
+                        (),
+                      )
+                    )>
                     "\nhello @ moox.io"->React.string
                   </Text>
                 </ButtonContained.Text>
@@ -75,9 +82,16 @@ let make = () => {
                 <SVGPhone width=36. height=36. fill=Consts.Colors.light />
                 <Spacer />
                 <ButtonContained.Text textSize=24.>
-                  <Text> "Call Me"->React.string </Text>
+                  "Call Me"->React.string
                   <Text
-                    style=Style.(style(~fontSize=12., ~fontWeight=`_300, ()))>
+                    style=Style.(
+                      style(
+                        ~fontSize=12.,
+                        ~lineHeight=12.,
+                        ~fontWeight=`_300,
+                        (),
+                      )
+                    )>
                     "\n+33 6 78 13 54 39"->React.string
                   </Text>
                 </ButtonContained.Text>
@@ -94,9 +108,16 @@ let make = () => {
                 />
                 <Spacer />
                 <ButtonContained.Text textSize=24.>
-                  <Text> "Message Me"->React.string </Text>
+                  "Message Me"->React.string
                   <Text
-                    style=Style.(style(~fontSize=12., ~fontWeight=`_300, ()))>
+                    style=Style.(
+                      style(
+                        ~fontSize=12.,
+                        ~lineHeight=12.,
+                        ~fontWeight=`_300,
+                        (),
+                      )
+                    )>
                     "\n@MoOx on Twitter"->React.string
                   </Text>
                 </ButtonContained.Text>

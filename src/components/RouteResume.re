@@ -1,50 +1,56 @@
-open BsReactNative;
+open ReactNative;
 
 let styles =
   Style.(
     StyleSheet.create({
       "title":
-        style([
-          fontSize(Float(36.)),
-          fontWeight(`Bold),
-          textAlign(Center),
-          marginVertical(Pt(20.)),
-          color(String(Consts.Colors.dark)),
-        ]),
+        style(
+          ~fontSize=36.,
+          ~fontWeight=`bold,
+          ~textAlign=`center,
+          ~marginVertical=20.->pt,
+          ~color=Consts.Colors.dark,
+          (),
+        ),
       "textStrong":
-        style([
-          fontSize(Float(32.)),
-          color(String(Consts.Colors.dark)),
-          fontWeight(`_800),
-        ]),
+        style(
+          ~fontSize=32.,
+          ~color=Consts.Colors.dark,
+          ~fontWeight=`_800,
+          (),
+        ),
       "textLight":
-        style([
-          fontSize(Float(28.)),
-          color(String(Consts.Colors.dark)),
-          fontWeight(`_200),
-        ]),
+        style(
+          ~fontSize=28.,
+          ~color=Consts.Colors.dark,
+          ~fontWeight=`_200,
+          (),
+        ),
       "nanoTitle":
-        style([
-          fontSize(Float(14.)),
-          fontWeight(`_600),
-          textAlign(Center),
-          color(String("#bbc")),
-        ]),
+        style(
+          ~fontSize=14.,
+          ~fontWeight=`_600,
+          ~textAlign=`center,
+          ~color="#bbc",
+          (),
+        ),
       "iconText":
-        style([
-          fontSize(Float(10.)),
-          lineHeight(14.),
-          fontWeight(`_300),
-          textAlign(Center),
-          color(String("#bbc")),
-        ]),
+        style(
+          ~fontSize=10.,
+          ~lineHeight=14.,
+          ~fontWeight=`_300,
+          ~textAlign=`center,
+          ~color="#bbc",
+          (),
+        ),
       "activities":
-        style([
-          flexDirection(Row),
-          flexWrap(Wrap),
-          justifyContent(Center),
-          alignItems(FlexStart),
-        ]),
+        style(
+          ~flexDirection=`row,
+          ~flexWrap=`wrap,
+          ~justifyContent=`center,
+          ~alignItems=`flexStart,
+          (),
+        ),
     })
   );
 
@@ -59,6 +65,19 @@ let grayIconDomStyle =
     (),
   );
 
+let rightArrow = size => {
+  <View
+    style=Style.(
+      style(~transform=Transform.([|rotate(~rotate=90.->deg)|]), ())
+    )>
+    <SVGArrowRoundedWithTailTop
+      width=size
+      height=size
+      fill=Consts.Colors.light
+    />
+  </View>;
+};
+
 [@react.component]
 let make = (~items) => {
   <AppWrapper>
@@ -70,7 +89,7 @@ let make = (~items) => {
     <Container>
       <SpacedView horizontal=M vertical=L>
         <View
-          style=Style.(style([alignItems(Center)]))
+          style=Style.(style(~alignItems=`center, ()))
           accessibilityRole=`header>
           <View accessibilityRole=`header>
             <Text style=styles##textStrong>
@@ -86,23 +105,25 @@ let make = (~items) => {
       </SpacedView>
       <View
         style=Style.(
-          style([
-            flexDirection(Row),
-            flexWrap(Wrap),
-            justifyContent(Center),
-            alignItems(FlexStart),
-          ])
+          style(
+            ~flexDirection=`row,
+            ~flexWrap=`wrap,
+            ~justifyContent=`center,
+            ~alignItems=`flexStart,
+            (),
+          )
         )>
         <SpacedView
           horizontal=S
           style=Style.(
-            style([
-              justifyContent(Center),
-              alignItems(Center),
-              flex(1.),
-              minWidth(Pt(240.)),
-              maxWidth(Pt(310.)),
-            ])
+            style(
+              ~justifyContent=`center,
+              ~alignItems=`center,
+              ~flex=1.,
+              ~minWidth=240.->pt,
+              ~maxWidth=310.->pt,
+              (),
+            )
           )>
           <Text style=styles##nanoTitle>
             "THINGS I WORK WITH"->React.string
@@ -185,20 +206,22 @@ let make = (~items) => {
         <SpacedView
           horizontal=S
           style=Style.(
-            style([
-              justifyContent(FlexStart),
-              alignItems(FlexStart),
-              flex(1.),
-              flexBasis(Pt(240.)),
-            ])
+            style(
+              ~justifyContent=`flexStart,
+              ~alignItems=`flexStart,
+              ~flex=1.,
+              ~flexBasis=240.->pt,
+              (),
+            )
           )>
           <Text
             style=Style.(
-              style([
-                fontSize(Float(16.)),
-                lineHeight(24.),
-                color(String(Consts.Colors.dark)),
-              ])
+              style(
+                ~fontSize=16.,
+                ~lineHeight=24.,
+                ~color=Consts.Colors.dark,
+                (),
+              )
             )>
             {j|Hi, I am Maxime Thirouin, also known as MoOx. I live near Toulouse, France.
 
@@ -212,13 +235,14 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
         <SpacedView
           horizontal=S
           style=Style.(
-            style([
-              justifyContent(Center),
-              alignItems(Center),
-              flex(1.),
-              minWidth(Pt(240.)),
-              maxWidth(Pt(310.)),
-            ])
+            style(
+              ~justifyContent=`center,
+              ~alignItems=`center,
+              ~flex=1.,
+              ~minWidth=240.->pt,
+              ~maxWidth=310.->pt,
+              (),
+            )
           )>
           <Text style=styles##nanoTitle>
             "WEEKLY ACTIVITIES"->React.string
@@ -345,26 +369,38 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
     </Container>
     <FixedBottom>
       <SpacedView>
-        <WindowSizeFilter.MMin>
-          <LinkButton
-            href="/contact/"
-            round=true
-            textSize=20.
-            style=Style.(style([width(Pt(250.))]))>
-            <Text> "HIRE ME NOW"->React.string </Text>
-            <Text
-              style=Style.(
-                style([fontSize(Float(10.)), fontWeight(`_300)])
-              )>
-              "\nCheck out my availabilities"->React.string
-            </Text>
-          </LinkButton>
-        </WindowSizeFilter.MMin>
-        <WindowSizeFilter.SMax>
-          <LinkButton href="/contact/" round=true textSize=16.>
-            <Text> "HIRE ME NOW"->React.string </Text>
-          </LinkButton>
-        </WindowSizeFilter.SMax>
+        <ViewLink href="/contact/">
+          <WindowSizeFilter.MMin>
+            <ButtonContained
+              round=true style=Style.(style(~width=300.->pt, ()))>
+              <ButtonContained.Text textSize=24.>
+                "HIRE ME NOW"->React.string
+                <Text
+                  style=Style.(
+                    style(
+                      ~fontSize=10.,
+                      ~lineHeight=10.,
+                      ~fontWeight=`_300,
+                      (),
+                    )
+                  )>
+                  "\nCheck out my availabilities"->React.string
+                </Text>
+              </ButtonContained.Text>
+              <Spacer />
+              {rightArrow(36.)}
+            </ButtonContained>
+          </WindowSizeFilter.MMin>
+          <WindowSizeFilter.SMax>
+            <ButtonContained round=true>
+              <ButtonContained.Text>
+                "HIRE ME NOW"->React.string
+              </ButtonContained.Text>
+              <Spacer size=XS />
+              {rightArrow(20.)}
+            </ButtonContained>
+          </WindowSizeFilter.SMax>
+        </ViewLink>
       </SpacedView>
     </FixedBottom>
   </AppWrapper>;
