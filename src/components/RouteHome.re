@@ -73,7 +73,8 @@ let make = (~posts) => {
           </SpacedView>
           <Spacer size=M />
           <Text style=styles##blahblahText>
-            {j|Since I made my first website in 1998, I never stopped to learn things. Over the years, I refined my way to approach development, which allows me to confidently takes high-level design choices when building web & mobile apps, and selecting tools adapted to your needs.|j}
+            {j|I made my first website in 1998, & falled in love with web development. Since then, I never stopped to learn things.
+Over the years, I refined my way to approach development, which allows me to confidently takes high-level design choices when building web & mobile apps, and selecting tools adapted to the user interface you need.|j}
             ->React.string
           </Text>
         </SpacedView>
@@ -87,8 +88,8 @@ let make = (~posts) => {
           </SpacedView>
           <Spacer size=M />
           <Text style=styles##blahblahText>
-            {j|I think React is currently the best tool available to to produce durable things when working on products or long-running projects.
-React & React Native allows me to focus on feature with scalability and performance in mind.|j}
+            {j|I really believe that React & React Native are currently the best tools available to to produce fast & maintainable user-interfaces since the first day I tried it, in 2014.
+Their features & ecosystem allow me to be focus on creating beautiful & polished user experiences with scalability and performance in mind.|j}
             ->React.string
           </Text>
         </SpacedView>
@@ -102,7 +103,7 @@ React & React Native allows me to focus on feature with scalability and performa
           </SpacedView>
           <Spacer size=M />
           <Text style=styles##blahblahText>
-            {j|I can provide consultancy to companies of all sizes all around the world. From leading team to get started with latest & proven technologies, to teaching people to work better on large codebase at scale, I can probably help you & your team.|j}
+            {j|My various experiences made me confident about the technologies & tools I use so I can probably help you & your team, whether you need some advices, training or help to boostrap your project so you can focus on the feature your user needs.|j}
             ->React.string
           </Text>
         </SpacedView>
@@ -119,7 +120,7 @@ React & React Native allows me to focus on feature with scalability and performa
               style=Style.(
                 style([fontSize(Float(12.)), fontWeight(`_300)])
               )>
-              "\nabout my experiences"->React.string
+              "\nabout I can help you"->React.string
             </Text>
           </LinkButton>
         </SpacedView>
@@ -130,12 +131,12 @@ React & React Native allows me to focus on feature with scalability and performa
             mode=Outlined
             textSize=24.
             style=styles##button>
-            <Text> "Hire me"->React.string </Text>
+            <Text> "Hire me now"->React.string </Text>
             <Text
               style=Style.(
                 style([fontSize(Float(12.)), fontWeight(`_300)])
               )>
-              "\nI am available!"->React.string
+              "\nIf I am available"->React.string
             </Text>
           </LinkButton>
         </SpacedView>
