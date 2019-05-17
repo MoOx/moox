@@ -128,7 +128,6 @@ let proForXyears =
 
 let firstMobileApp =
   <SpacedView
-    horizontal=M
     vertical=S
     style=Style.(
       style([

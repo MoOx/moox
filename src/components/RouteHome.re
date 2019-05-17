@@ -63,8 +63,8 @@ let make = (~posts) => {
     <HomeJumbotron />
     <Container style=styles##center maxWidth=1200.>
       <View style=styles##row>
-        <SpacedView horizontal=M vertical=M style=styles##blahblah>
-          <SpacedView vertical=M horizontal=XS style=styles##rowCentered>
+        <SpacedView style=styles##blahblah>
+          <SpacedView horizontal=XS style=styles##rowCentered>
             <SVGDevices fill="#bbb" width=32. height=32. />
             <Spacer size=S />
             <Text style=styles##textLight>
@@ -77,8 +77,8 @@ let make = (~posts) => {
             ->React.string
           </Text>
         </SpacedView>
-        <SpacedView horizontal=M vertical=M style=styles##blahblah>
-          <SpacedView vertical=M horizontal=XS style=styles##rowCentered>
+        <SpacedView style=styles##blahblah>
+          <SpacedView horizontal=XS style=styles##rowCentered>
             <SVGReact fill="#bbb" width=32. height=32. />
             <Spacer size=S />
             <Text style=styles##textLight>
@@ -92,8 +92,8 @@ React & React Native allows me to focus on feature with scalability and performa
             ->React.string
           </Text>
         </SpacedView>
-        <SpacedView horizontal=M vertical=M style=styles##blahblah>
-          <SpacedView vertical=M horizontal=XS style=styles##rowCentered>
+        <SpacedView style=styles##blahblah>
+          <SpacedView horizontal=XS style=styles##rowCentered>
             <SVGMenuTalk fill="#bbb" width=32. height=32. />
             <Spacer size=S />
             <Text style=styles##textLight>
@@ -108,7 +108,7 @@ React & React Native allows me to focus on feature with scalability and performa
         </SpacedView>
       </View>
       <View style=styles##rowCentered>
-        <SpacedView vertical=M horizontal=XS>
+        <SpacedView>
           <LinkButton
             href="/resume/"
             color="rgb(0, 112, 201)"
@@ -123,10 +123,7 @@ React & React Native allows me to focus on feature with scalability and performa
             </Text>
           </LinkButton>
         </SpacedView>
-        <SpacedView vertical=M horizontal=M>
-          <Text style=styles##nanoTitle> "or"->React.string </Text>
-        </SpacedView>
-        <SpacedView vertical=M horizontal=XS>
+        <SpacedView>
           <LinkButton
             href="/contact/"
             color="rgb(0, 112, 201)"
@@ -185,7 +182,7 @@ React & React Native allows me to focus on feature with scalability and performa
       <Spacer size=L />
       <View style=styles##center>
         <View style=styles##rowCentered>
-          <SpacedView vertical=M horizontal=XS>
+          <SpacedView horizontal=XS>
             <LinkButton
               href="/resume/"
               color=Consts.Colors.lightest
@@ -202,7 +199,7 @@ React & React Native allows me to focus on feature with scalability and performa
               </Text>
             </LinkButton>
           </SpacedView>
-          <SpacedView vertical=M horizontal=XS>
+          <SpacedView horizontal=XS>
             <LinkButton
               href="/contact/"
               color=Consts.Colors.lightest
@@ -214,7 +211,7 @@ React & React Native allows me to focus on feature with scalability and performa
                 style=Style.(
                   style([fontSize(Float(12.)), fontWeight(`_300)])
                 )>
-                "\nI am available!"->React.string
+                "\nCheck out availabilities"->React.string
               </Text>
             </LinkButton>
           </SpacedView>

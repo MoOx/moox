@@ -28,7 +28,7 @@ let make = (~label=?, ()) => {
     | None => "Shit happened!"
     | Some(label) => label
     };
-  <SpacedView vertical=XXL>
+  <SpacedView vertical=XXL horizontal=None>
     <Text style=styles##oops> "Oooops!"->React.string </Text>
     <View>
       <Text style=styles##title>

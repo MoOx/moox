@@ -42,15 +42,15 @@ let styles =
 
 [@react.component]
 let make = () => {
-  <SpacedView vertical=M style=styles##container>
-    <SpacedView horizontal=M>
+  <SpacedView horizontal=None style=styles##container>
+    <SpacedView vertical=None>
       <Text style=styles##textLight>
         {j|I make front-ends using React, JavaScript & ReasonML. |j}
         ->React.string
       </Text>
     </SpacedView>
     <SpacedView vertical=XL style=styles##row>
-      <SpacedView style=styles##cell horizontal=M>
+      <SpacedView style=styles##cell vertical=None>
         <Text style=styles##cellTitle> {j|Development|j}->React.string </Text>
         <Spacer />
         <Text style=styles##cellText>
@@ -58,12 +58,12 @@ let make = () => {
           ->React.string
         </Text>
       </SpacedView>
-      <SpacedView style=styles##cell horizontal=M>
+      <SpacedView style=styles##cell vertical=None>
         <Text style=styles##cellTitle> {j|Consultancy|j}->React.string </Text>
         <Spacer />
         <Text style=styles##cellText> {j||j}->React.string </Text>
       </SpacedView>
-      <SpacedView style=styles##cell horizontal=M>
+      <SpacedView style=styles##cell vertical=None>
         <Text style=styles##cellTitle> {j|And more...|j}->React.string </Text>
         <Spacer />
         <Text style=styles##cellText>

@@ -44,7 +44,6 @@ let make = () => {
       (),
     )}>
     <SpacedView
-      horizontal=M
       vertical=L
       style=Style.(
         style([width(Pct(100.)), overflow(Hidden), alignItems(FlexStart)])

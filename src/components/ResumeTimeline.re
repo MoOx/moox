@@ -28,7 +28,7 @@ let tlSpacer =
 let make = (~items, ()) => {
   let latestYear =
     ref(items[0]##dateStart |> Js.String.slice(~from=0, ~to_=4));
-  <SpacedView horizontal=S>
+  <SpacedView horizontal=S vertical=None>
     {items
      ->Belt.Array.mapWithIndex((i, item) => {
          let year = item##dateStart |> Js.String.slice(~from=0, ~to_=4);

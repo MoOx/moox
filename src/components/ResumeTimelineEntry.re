@@ -83,7 +83,7 @@ let make = (~item: T.partialResumeItem, ()) => {
     ->int_of_float;
   let durationYears = durationInMonths / 12;
   let durationMonths = durationInMonths mod 12;
-  <SpacedView key=item##id vertical=M style=styles##wrapper>
+  <SpacedView key=item##id horizontal=None style=styles##wrapper>
     <View style=styles##container>
       {item##image
        ->Js.undefinedToOption
@@ -93,7 +93,7 @@ let make = (~item: T.partialResumeItem, ()) => {
            </View>
          )
        ->Belt.Option.getWithDefault(React.null)}
-      <SpacedView style=styles##block vertical=M horizontal=M>
+      <SpacedView style=styles##block>
         <View style=styles##head>
           <Text style=styles##title>
             {item##title->Js.String.toUpperCase->React.string}

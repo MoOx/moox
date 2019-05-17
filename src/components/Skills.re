@@ -155,11 +155,7 @@ let make = () => {
        },
      |]
      ->Belt.Array.map(skill =>
-         <SpacedView
-           key={skill.title}
-           horizontal=M
-           vertical=M
-           style=styles##skillWrapper>
+         <SpacedView key={skill.title} style=styles##skillWrapper>
            <div
              style={ReactDOMRe.Style.make(
                ~display="flex",

@@ -92,7 +92,7 @@ let make = () => {
         <Text style=styles##title> "MoOx"->React.string </Text>
         <Text style=styles##subtitle> "Maxime Thirouin"->React.string </Text>
         <Spacer />
-        <SpacedView style=styles##textWrapper horizontal=M vertical=M>
+        <SpacedView style=styles##textWrapper>
           <Text style=styles##textStrong>
             {j|Freelance Front-End Developer|j}->React.string
           </Text>

@@ -47,7 +47,7 @@ let styles =
 
 [@react.component]
 let make = () => {
-  <SpacedView vertical=M horizontal=XS style=styles##wrapper>
+  <SpacedView horizontal=XS style=styles##wrapper>
     <ViewLink style=styles##logo href="/">
       <SVGLogo width=24. height=24. fill=Consts.Colors.dark />
       <Text style=styles##logoText>

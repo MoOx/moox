@@ -95,7 +95,6 @@ let make = (~items) => {
         )>
         <SpacedView
           horizontal=S
-          vertical=M
           style=Style.(
             style([
               justifyContent(Center),
@@ -185,7 +184,6 @@ let make = (~items) => {
         </SpacedView>
         <SpacedView
           horizontal=S
-          vertical=M
           style=Style.(
             style([
               justifyContent(FlexStart),
@@ -213,7 +211,6 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
         </SpacedView>
         <SpacedView
           horizontal=S
-          vertical=M
           style=Style.(
             style([
               justifyContent(Center),

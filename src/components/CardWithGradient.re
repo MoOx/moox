@@ -59,8 +59,7 @@ type item = {
 
 [@react.component]
 let make = (~item, ()) => {
-  <SpacedView
-    key={item.title} horizontal=M vertical=M style=styles##skillWrapper>
+  <SpacedView key={item.title} style=styles##skillWrapper>
     <div
       style={ReactDOMRe.Style.make(
         ~display="flex",

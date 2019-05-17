@@ -5,5 +5,7 @@ let styles =
 
 [@react.component]
 let make = () => {
-  <SpacedView vertical=XXL> <ActivityIndicator size=`large /> </SpacedView>;
+  <SpacedView vertical=XXL horizontal=None>
+    <ActivityIndicator size=`large />
+  </SpacedView>;
 };
