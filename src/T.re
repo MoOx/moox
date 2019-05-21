@@ -46,7 +46,7 @@ type partialResumeItem = {
   "url": Js.Undefined.t(string),
   "title": string,
   "dateStart": string,
-  "dateEnd": string,
+  "dateEnd": Js.Undefined.t(string),
   "hashtags": array(string),
   "description": string,
   "links": Js.Undefined.t(array(resumeItemLink)),

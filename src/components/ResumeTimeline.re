@@ -1,3 +1,4 @@
+open Belt;
 open BsReactNative;
 
 let imageRatio = 240. /. 350.;
@@ -27,11 +28,24 @@ let tlSpacer =
 [@react.component]
 let make = (~items, ()) => {
   let latestYear =
-    ref(items[0]##dateStart |> Js.String.slice(~from=0, ~to_=4));
+    ref(
+      items[0]
+      ->Option.map(item =>
+          item##dateEnd
+          ->Js.undefinedToOption
+          ->Option.getWithDefault(item##dateStart)
+        )
+      ->Option.getWithDefault(Js.Date.make()->Js.Date.toISOString)
+      |> Js.String.slice(~from=0, ~to_=4),
+    );
   <SpacedView horizontal=S vertical=None>
     {items
-     ->Belt.Array.mapWithIndex((i, item) => {
-         let year = item##dateStart |> Js.String.slice(~from=0, ~to_=4);
+     ->Array.mapWithIndex((i, item) => {
+         let year =
+           item##dateEnd
+           ->Js.undefinedToOption
+           ->Option.getWithDefault(item##dateStart)
+           |> Js.String.slice(~from=0, ~to_=4);
          let newYear = year !== latestYear^;
          latestYear := year;
          <View key=item##id style=styles##flex>

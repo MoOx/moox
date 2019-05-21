@@ -1,3 +1,4 @@
+open Belt;
 open BsReactNative;
 
 let styles =
@@ -75,14 +76,6 @@ let styles =
 let make = (~item: T.partialResumeItem, ()) => {
   let links =
     item##links->Js.undefinedToOption->Belt.Option.getWithDefault([||]);
-  let durationInMonths =
-    DateFns.differenceInCalendarMonths(
-      Js.Date.fromString(item##dateEnd),
-      Js.Date.fromString(item##dateStart),
-    )
-    ->int_of_float;
-  let durationYears = durationInMonths / 12;
-  let durationMonths = durationInMonths mod 12;
   <SpacedView key=item##id horizontal=None style=styles##wrapper>
     <View style=styles##container>
       {item##image
@@ -114,26 +107,41 @@ let make = (~item: T.partialResumeItem, ()) => {
         <Text style=styles##description>
           {item##description->React.string}
         </Text>
-        <Spacer size=XS />
-        <Text style=styles##duration>
-          {(
-             (
-               switch (durationYears) {
-               | 0 => ""
-               | 1 => "1 year "
-               | y => string_of_int(y) ++ " years "
-               }
-             )
-             ++ (
-               switch (durationMonths) {
-               | 0 => ""
-               | 1 => "1 month "
-               | y => string_of_int(y) ++ " months "
-               }
-             )
-           )
-           ->React.string}
-        </Text>
+        {item##dateEnd
+         ->Js.undefinedToOption
+         ->Option.map(dateEnd => {
+             let durationInMonths =
+               DateFns.differenceInCalendarMonths(
+                 Js.Date.fromString(dateEnd),
+                 Js.Date.fromString(item##dateStart),
+               )
+               ->int_of_float;
+             let durationYears = durationInMonths / 12;
+             let durationMonths = durationInMonths mod 12;
+             <>
+               <Spacer size=XS />
+               <Text style=styles##duration>
+                 {(
+                    (
+                      switch (durationYears) {
+                      | 0 => ""
+                      | 1 => "1 year "
+                      | y => string_of_int(y) ++ " years "
+                      }
+                    )
+                    ++ (
+                      switch (durationMonths) {
+                      | 0 => ""
+                      | 1 => "1 month "
+                      | y => string_of_int(y) ++ " months "
+                      }
+                    )
+                  )
+                  ->React.string}
+               </Text>
+             </>;
+           })
+         ->Option.getWithDefault(React.null)}
         <Spacer size=XL />
         <View style=styles##tags>
           {item##hashtags
