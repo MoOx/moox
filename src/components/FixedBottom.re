@@ -95,7 +95,6 @@ let make = (~scrollYAnimatedValue=?, ~children, _) => {
         )>
         children
       </Animated.View>
-      <WindowSizeFilter.SMax> <TabBar.Placeholder /> </WindowSizeFilter.SMax>
     </SafeAreaView>
   </div>;
 };
