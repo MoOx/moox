@@ -76,11 +76,18 @@ body {
 @media (max-width: 501px) { .WindowSizeFilterMMin { display: none } }
 
 .FixedBottom {
+  pointer-events: none;
+  z-index: 1;
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
 }
+
+.FixedBottom * {
+  pointer-events: all;
+}
+
   |j}
       ->React.string
     </style>

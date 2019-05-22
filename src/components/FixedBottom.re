@@ -57,8 +57,9 @@ let make = (~scrollYAnimatedValue=?, ~children, _) => {
     Some(() => dispatch(AnimateOut));
   });
   <div className="FixedBottom">
-    <SafeAreaView>
+    <SafeAreaView pointerEvents=`boxNone>
       <Animated.View
+        pointerEvents=`boxNone
         style=Style.(
           style(
             ~alignItems=`center,
