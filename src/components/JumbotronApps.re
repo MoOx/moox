@@ -113,7 +113,7 @@ let make = (~scrollYAnimatedValue) => {
                               ~inputRange=[|0., 200.|],
                               ~outputRange=
                                 [|"-10deg", "-14deg"|]->fromStringArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -129,7 +129,7 @@ let make = (~scrollYAnimatedValue) => {
                             config(
                               ~inputRange=[|0., 200.|],
                               ~outputRange=[|0.8, 0.75|]->fromFloatArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -145,7 +145,7 @@ let make = (~scrollYAnimatedValue) => {
                             config(
                               ~inputRange=[|0., 200.|],
                               ~outputRange=[|40., 100.|]->fromFloatArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -161,7 +161,7 @@ let make = (~scrollYAnimatedValue) => {
                             config(
                               ~inputRange=[|0., 200.|],
                               ~outputRange=[|0., (-10.)|]->fromFloatArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -193,7 +193,7 @@ let make = (~scrollYAnimatedValue) => {
                               ~inputRange=[|0., 200.|],
                               ~outputRange=
                                 [|"15deg", "20deg"|]->fromStringArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -209,7 +209,7 @@ let make = (~scrollYAnimatedValue) => {
                             config(
                               ~inputRange=[|0., 200.|],
                               ~outputRange=[|1.1, 1.15|]->fromFloatArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -225,7 +225,7 @@ let make = (~scrollYAnimatedValue) => {
                             config(
                               ~inputRange=[|0., 200.|],
                               ~outputRange=[|20., (-20.)|]->fromFloatArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -257,7 +257,7 @@ let make = (~scrollYAnimatedValue) => {
                               ~inputRange=[|0., 200.|],
                               ~outputRange=
                                 [|"10deg", "12deg"|]->fromStringArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -273,7 +273,7 @@ let make = (~scrollYAnimatedValue) => {
                             config(
                               ~inputRange=[|0., 200.|],
                               ~outputRange=[|0.8, 0.725|]->fromFloatArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -289,7 +289,7 @@ let make = (~scrollYAnimatedValue) => {
                             config(
                               ~inputRange=[|0., 200.|],
                               ~outputRange=[|150., (-0.)|]->fromFloatArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
@@ -305,7 +305,7 @@ let make = (~scrollYAnimatedValue) => {
                             config(
                               ~inputRange=[|0., 200.|],
                               ~outputRange=[|0., 20.|]->fromFloatArray,
-                              ~extrapolateLeft=`clamp,
+                              ~extrapolateLeft=`extend,
                               ~extrapolate=`identity,
                               ~extrapolateRight=`extend,
                               (),
