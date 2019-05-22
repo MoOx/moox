@@ -50,7 +50,7 @@ let make = (~scrollYAnimatedValue=?, ~children, _) => {
           );
           state;
         },
-      {animation: Animated.Value.create(200.)},
+      {animation: Animated.Value.create(Predefined.isClient ? 200. : 0.)},
     );
   React.useEffect0(() => {
     dispatch(AnimateIn);
