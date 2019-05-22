@@ -11,12 +11,6 @@ let styles =
           marginVertical(Pt(20.)),
           color(String(Consts.Colors.dark)),
         ]),
-      "links":
-        style([
-          flexDirection(Row),
-          justifyContent(Center),
-          alignItems(Center),
-        ]),
     })
   );
 
@@ -28,40 +22,41 @@ let make = (~talks) => {
     </BsReactHelmet>
     <HeaderSmall title="Talks" />
     <Container>
-      <Spacer />
-      <Text style=styles##title> "Latest Talks"->React.string </Text>
-      {switch ((talks: T.contentList)) {
-       | Inactive
-       | Loading => <LoadingIndicator />
-       | Errored => <Error />
-       | Idle(talks) =>
-         <View>
-           <TalkList talks=talks##list />
-           <View style=styles##links>
-             {switch (talks##previous |> Js.toOption) {
-              | Some(previous) =>
-                <TextLink
-                  href={
-                    talks##previousPageIsFirst
-                      ? "/talks/" : "/talks/after/" ++ previous ++ "/"
-                  }>
-                  "Fresh talks"->React.string
-                </TextLink>
-              | None => React.null
-              }}
-             <Text> " "->React.string </Text>
-             {switch (talks##next |> Js.toOption) {
-              | Some(next) =>
-                <TextLink href={"/talks/after/" ++ next ++ "/"}>
-                  "Older talks"->React.string
-                </TextLink>
-              | None => React.null
-              }}
-           </View>
-           React.null
-         </View>
-       }}
-      <Spacer size=XL />
+      <SpacedView>
+        <TitlePre> "Latest"->React.string </TitlePre>
+        <Title> "Talks"->React.string </Title>
+        {switch ((talks: T.contentList)) {
+         | Inactive
+         | Loading => <LoadingIndicator />
+         | Errored => <Error />
+         | Idle(talks) =>
+           <>
+             <TalkList talks=talks##list />
+             <Center>
+               {switch (talks##previous |> Js.toOption) {
+                | Some(previous) =>
+                  <TextLink
+                    href={
+                      talks##previousPageIsFirst
+                        ? "/talks/" : "/talks/after/" ++ previous ++ "/"
+                    }>
+                    "Fresh talks"->React.string
+                  </TextLink>
+                | None => React.null
+                }}
+               <Text> " "->React.string </Text>
+               {switch (talks##next |> Js.toOption) {
+                | Some(next) =>
+                  <TextLink href={"/talks/after/" ++ next ++ "/"}>
+                    "Older talks"->React.string
+                  </TextLink>
+                | None => React.null
+                }}
+             </Center>
+           </>
+         }}
+        <Spacer size=L />
+      </SpacedView>
     </Container>
   </AppWrapper>;
 };

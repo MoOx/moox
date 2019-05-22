@@ -28,39 +28,41 @@ let make = (~posts) => {
     </BsReactHelmet>
     <HeaderSmall title="Blog" />
     <Container>
-      <Spacer />
-      <Text style=styles##title> "Latest Posts"->React.string </Text>
-      {switch ((posts: T.contentList)) {
-       | Inactive
-       | Loading => <LoadingIndicator />
-       | Errored => <Error />
-       | Idle(posts) =>
-         <View>
-           <PostList posts=posts##list />
-           <View style=styles##links>
-             {switch (posts##previous |> Js.toOption) {
-              | Some(previous) =>
-                <TextLink
-                  href={
-                    posts##previousPageIsFirst
-                      ? "/" : "/after/" ++ previous ++ "/"
-                  }>
-                  "Fresh posts"->React.string
-                </TextLink>
-              | None => React.null
-              }}
-             <Text> " "->React.string </Text>
-             {switch (posts##next |> Js.toOption) {
-              | Some(next) =>
-                <TextLink href={"/after/" ++ next ++ "/"}>
-                  "Older posts"->React.string
-                </TextLink>
-              | None => React.null
-              }}
+      <SpacedView>
+        <TitlePre> "Latest"->React.string </TitlePre>
+        <Title> "Posts"->React.string </Title>
+        {switch ((posts: T.contentList)) {
+         | Inactive
+         | Loading => <LoadingIndicator />
+         | Errored => <Error />
+         | Idle(posts) =>
+           <View>
+             <PostList posts=posts##list />
+             <View style=styles##links>
+               {switch (posts##previous |> Js.toOption) {
+                | Some(previous) =>
+                  <TextLink
+                    href={
+                      posts##previousPageIsFirst
+                        ? "/" : "/after/" ++ previous ++ "/"
+                    }>
+                    "Fresh posts"->React.string
+                  </TextLink>
+                | None => React.null
+                }}
+               <Text> " "->React.string </Text>
+               {switch (posts##next |> Js.toOption) {
+                | Some(next) =>
+                  <TextLink href={"/after/" ++ next ++ "/"}>
+                    "Older posts"->React.string
+                  </TextLink>
+                | None => React.null
+                }}
+             </View>
            </View>
-         </View>
-       }}
-      <Spacer size=XL />
+         }}
+        <Spacer size=L />
+      </SpacedView>
     </Container>
   </AppWrapper>;
 };

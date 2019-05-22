@@ -4,21 +4,10 @@ let styles =
   Style.(
     StyleSheet.create({
       "block": style([flex(1.), flexDirection(Row)]),
-      "imageContainer": style([overflow(Hidden)]),
-      "image":
-        style([
-          position(Absolute),
-          top(Pt(0.)),
-          bottom(Pt(0.)),
-          right(Pt(0.)),
-          left(Pt(0.)),
-        ]),
-      "row": style([flexDirection(Row), justifyContent(SpaceBetween)]),
       "text":
         style([
           flexDirection(Row),
           flex(1.),
-          padding(Pt(20.)),
           alignItems(FlexStart),
           lineHeight(28.),
           color(String(Consts.Colors.dark)),
@@ -30,7 +19,7 @@ let styles =
 [@react.component]
 let make = (~item: T.partialContentItem, ()) => {
   let href = "/blog/" ++ item##id ++ "/";
-  <View key=item##id style=styles##block>
+  <SpacedView key=item##id horizontal=None>
     <Text style=styles##text>
       <Text> {j|•|j}->React.string </Text>
       <Spacer size=S />
@@ -43,5 +32,5 @@ let make = (~item: T.partialContentItem, ()) => {
        | Some(lang) => <Text> {("[" ++ lang ++ "] ")->React.string} </Text>
        }}
     </Text>
-  </View>;
+  </SpacedView>;
 };

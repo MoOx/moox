@@ -1,28 +1,16 @@
 open BsReactNative;
 
+let styles =
+  Style.(
+    StyleSheet.create({
+      "title": style([color(String(Consts.Colors.dark))]),
+      "text":
+        style([fontSize(Float(21.)), lineHeight(33.), fontWeight(`_400)]),
+    })
+  );
+
 [@react.component]
 let make = (~contentItem) => {
-  let dimensions = Dimensions.get(`window);
-  let styles =
-    Style.(
-      StyleSheet.create({
-        "title":
-          style([
-            padding(Pt(20.)),
-            textAlign(Center),
-            color(String(Consts.Colors.dark)),
-          ]),
-        "viewSmall": style([flexGrow(1.), padding(Pt(20.))]),
-        "viewLarge": style([flexGrow(1.), padding(Pt(60.))]),
-        "text":
-          style([
-            fontSize(Float(21.)),
-            lineHeight(33.),
-            fontWeight(`_400),
-          ]),
-      })
-    );
-  let isLarge = dimensions##width > 500;
   <AppWrapper>
     {switch ((contentItem: T.contentItemNode)) {
      | Inactive
@@ -31,30 +19,33 @@ let make = (~contentItem) => {
          <BsReactHelmet>
            <title> "Loading..."->React.string </title>
          </BsReactHelmet>
-         <Html.H1 textStyle=styles##title> "..."->React.string </Html.H1>
-         <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+         <SpacedView vertical=None>
+           <Html.H1 textStyle=styles##title> "..."->React.string </Html.H1>
            <ActivityIndicator size=`large />
-         </View>
+           <Spacer size=L />
+         </SpacedView>
        </Container>
      | Errored =>
        <Container>
          <BsReactHelmet>
            <title> "Ooops..."->React.string </title>
          </BsReactHelmet>
-         <Html.H1 textStyle=styles##title> "Oupssss"->React.string </Html.H1>
-         <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+         <SpacedView vertical=None>
+           <Html.H1 textStyle=styles##title> "Oupssss"->React.string </Html.H1>
            <Error />
-         </View>
+           <Spacer size=L />
+         </SpacedView>
        </Container>
      | Idle(contentItem) =>
        <Container>
          <BsReactHelmet>
            <title> {contentItem##title->React.string} </title>
          </BsReactHelmet>
-         <Html.H1 textStyle=styles##title>
-           {contentItem##title->React.string}
-         </Html.H1>
-         <View style={isLarge ? styles##viewLarge : styles##viewSmall}>
+         <SpacedView vertical=None>
+           <Html.H1 textStyle=styles##title>
+             {contentItem##title->React.string}
+           </Html.H1>
+           <Spacer size=L />
            {switch (Js.Undefined.toOption(contentItem##videoEmbed)) {
             | None => React.null
             | Some(videoEmbed) =>
@@ -117,7 +108,8 @@ let make = (~contentItem) => {
               </SpacedView>
             }}
            <MyBodyRenderer body=contentItem##body />
-         </View>
+           <Spacer size=L />
+         </SpacedView>
        </Container>
      }}
   </AppWrapper>;

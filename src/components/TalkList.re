@@ -5,7 +5,6 @@ let imageRatio = 240. /. 350.;
 let styles =
   Style.(
     StyleSheet.create({
-      "list": style([alignItems(FlexStart), margin(Pt(20.))]),
       "flex": style([width(Pct(100.))]),
       "yearText":
         style([
@@ -22,7 +21,7 @@ let styles =
 let make = (~talks, ()) => {
   let latestYear =
     ref(Js.Date.make()->Js.Date.getFullYear->Js.Float.toString);
-  <View style=styles##list>
+  <>
     {talks
      |> Array.map(item => {
           let year = item##date |> Js.String.slice(~from=0, ~to_=4);
@@ -36,5 +35,5 @@ let make = (~talks, ()) => {
           </View>;
         })
      |> React.array}
-  </View>;
+  </>;
 };
