@@ -65,16 +65,12 @@ let grayIconDomStyle =
     (),
   );
 
-let rightArrow = size => {
+let rightArrow = (~color=Consts.Colors.light, size) => {
   <View
     style=Style.(
       style(~transform=Transform.([|rotate(~rotate=90.->deg)|]), ())
     )>
-    <SVGArrowRoundedWithTailTop
-      width=size
-      height=size
-      fill=Consts.Colors.light
-    />
+    <SVGArrowRoundedWithTailTop width=size height=size fill=color />
   </View>;
 };
 
@@ -87,23 +83,9 @@ let make = (~items) => {
       </title>
     </BsReactHelmet>
     <HeaderSmall title="Resume" animateBackgroundOpacity=`delayed />
+    <JumbotronMoOx />
+    <Spacer />
     <Container>
-      <SpacedView horizontal=M vertical=L>
-        <View
-          style=Style.(style(~alignItems=`center, ()))
-          accessibilityRole=`header>
-          <View accessibilityRole=`header>
-            <Text style=styles##textStrong>
-              {j|Freelance Mobile & Web Developer|j}->React.string
-            </Text>
-          </View>
-          <Spacer />
-          <Text style=styles##textLight>
-            {j|I make front-ends using React, JavaScript & ReasonML.|j}
-            ->React.string
-          </Text>
-        </View>
-      </SpacedView>
       <View
         style=Style.(
           style(
@@ -358,8 +340,13 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
           </View>
         </SpacedView>
       </View>
-      <Spacer size=M />
-      <Text style=styles##title> {j|Timeline|j}->React.string </Text>
+    </Container>
+    <Spacer />
+    <WindowSizeFilter.SMax> <JumbotronResumeSmall /> </WindowSizeFilter.SMax>
+    <WindowSizeFilter.MMin> <JumbotronResumeLarge /> </WindowSizeFilter.MMin>
+    <Spacer />
+    <Container>
+      <Text style=styles##title> {j|Experiences|j}->React.string </Text>
       {switch ((items: T.resumeList)) {
        | Inactive
        | Loading => <LoadingIndicator />
@@ -373,7 +360,9 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
         <ViewLink href="/contact/">
           <WindowSizeFilter.MMin>
             <ButtonContained
-              round=true style=Style.(style(~width=275.->pt, ()))>
+              round=true
+              color=Predefined.Colors.blue
+              style=Style.(style(~width=275.->pt, ()))>
               <ButtonContained.Text textSize=22.>
                 "HIRE ME NOW"->React.string
                 <Text
@@ -393,7 +382,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
             </ButtonContained>
           </WindowSizeFilter.MMin>
           <WindowSizeFilter.SMax>
-            <ButtonContained round=true>
+            <ButtonContained round=true color=Predefined.Colors.blue>
               <ButtonContained.Text>
                 "HIRE ME NOW"->React.string
               </ButtonContained.Text>

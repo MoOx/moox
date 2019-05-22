@@ -9,7 +9,7 @@ let styles =
           padding(Pt(10.)),
           fontSize(Float(16.)),
           lineHeight(18. *. 1.7),
-          color(String(Consts.Colors.dark)),
+          color(String(Consts.Colors.light)),
         ]),
       "linkActive":
         style([textDecorationLine(Underline), textDecorationStyle(Solid)]),

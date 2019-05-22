@@ -7,8 +7,6 @@ let styles =
         style([
           justifyContent(Center),
           alignItems(Center),
-          borderTopWidth(10.),
-          borderColor(String(Consts.Colors.dark)),
           shadowColor(String("#000")),
           shadowOffset(~width=0., ~height=5.),
           shadowOpacity(0.15),
@@ -20,8 +18,9 @@ let styles =
           flexDirection(Row),
           flexWrap(Wrap),
           justifyContent(SpaceBetween),
+          alignItems(Center),
         ]),
-      "barWrapper": style([backgroundColor(String(Consts.Colors.light))]),
+      "barWrapper": style([backgroundColor(String(Consts.Colors.darkest))]),
       "logo":
         style([
           flexDirection(Row),
@@ -32,9 +31,9 @@ let styles =
         ]),
       "logoText":
         style([
-          fontSize(Float(18.)),
-          fontWeight(`_700),
-          color(String(Consts.Colors.dark)),
+          fontSize(Float(24.)),
+          fontWeight(`_800),
+          color(String(Consts.Colors.light)),
         ]),
       "icons": style([flexDirection(Row)]),
       "icon":
@@ -56,18 +55,41 @@ let make = (~currentLocation, ()) => {
   <View style=styles##menu>
     <Container style=styles##bar wrapperStyle=styles##barWrapper>
       <ViewLink style=styles##logo href="/">
-        <SVGLogo width=20. height=20. fill=Consts.Colors.dark />
-        <Text style=styles##logoText>
-          {("  " ++ Consts.title)->React.string}
-        </Text>
+        <SVGLogo width=24. height=24. fill=Consts.Colors.light />
+        <Spacer size=XS />
+        <Text style=styles##logoText> Consts.title->React.string </Text>
+        <Spacer size=XS />
       </ViewLink>
       <HeaderMenuLinks currentLocation />
-      <SocialIcons
-        wrapperStyle=styles##icons
-        iconStyle=styles##icon
-        iconSize=22.
-        iconColor=Consts.Colors.dark
-      />
+      {currentLocation##pathname |> Js.String.startsWith("/contact/")
+         ? <a
+             href="/MaximeThirouin.vcf"
+             style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
+             <ButtonOutlined
+               round=true
+               verticalSpace=XXS
+               horizontalSpace=S
+               color=Predefined.Colors.pink>
+               <ButtonOutlined.Text color=Predefined.Colors.white>
+                 "Save"->React.string
+               </ButtonOutlined.Text>
+               <Spacer size=XS />
+               <SVGContact width=20. height=20. fill=Consts.Colors.light />
+             </ButtonOutlined>
+           </a>
+         : <ViewLink href="/contact/">
+             <ButtonOutlined
+               round=true
+               verticalSpace=XXS
+               horizontalSpace=S
+               color=Predefined.Colors.green>
+               <ButtonOutlined.Text color=Predefined.Colors.white>
+                 "Get in touch"->React.string
+               </ButtonOutlined.Text>
+               <Spacer size=XS />
+               {RouteResume.rightArrow(~color=Predefined.Colors.white, 20.)}
+             </ButtonOutlined>
+           </ViewLink>}
     </Container>
   </View>;
 };

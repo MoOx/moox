@@ -1,5 +1,5 @@
 let title = {j|MoOx|j};
-let defaultTitle = title ++ {j|, Freelance Front-End Web & Mobile Developer|j};
+let defaultTitle = {j|Freelance Front-End Developer, Mobile & Web|j};
 let titleTemplate = {j|%s - |j} ++ title;
 
 let isClient: bool = [%bs.raw "typeof window !== undefined"];
@@ -38,12 +38,6 @@ let menuLinks: array(TabBar.link) = [|
     icon: (~width, ~height, ~fill, _) => <SVGMenuBlog width height fill />,
     isActive: (current, _link) => Js.String.startsWith("/blog/", current),
   },
-  {
-    link: "/contact/",
-    text: {j|Contact|j},
-    icon: (~width, ~height, ~fill, _) => <SVGMenuContact width height fill />,
-    isActive: (current, link) => current == link,
-  },
 |];
 
 type socialLink = {
@@ -74,10 +68,20 @@ let socialLinks = [|
 |];
 
 module Colors = {
+  let black = "#000";
+  let white = "#fff";
   let darkest = "hsl(219.1, 100%, 2%)";
   let dark = "hsl(219.1, 100%, 8.5%)";
   let light = "hsl(219.1, 100%, 99%)";
   let lightest = "hsl(219.1, 100%, 99.5%)";
   let tabBarIconInactive = "#909192";
   let tabBarIconActive = dark;
+  let darkGrey = "#666";
+  let grey = "#aaa";
+  let lightGrey = "#eaeaea";
+  let ultralightGrey = "#f0f0f0";
+  let midGrey = "#d4d2ce";
+  let default = "#030303";
+  let blue = "#3C98D3";
+  let blueDarker = "#1E2127";
 };
