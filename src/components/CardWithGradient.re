@@ -1,20 +1,10 @@
 open BsReactNative;
 
-let triangleHeight = 80.;
-
 let styles =
   Style.(
     StyleSheet.create({
-      "container":
-        style([
-          flexDirection(Row),
-          flexWrap(Wrap),
-          justifyContent(Center),
-          alignItems(Center),
-          backgroundColor(String(Consts.Colors.light)),
-        ]),
-      "skillWrapper": style([flex(1.), flexBasis(Pt(250.))]),
-      "skill":
+      "itemWrapper": style([flex(1.), flexBasis(Pt(250.))]),
+      "item":
         style([
           padding(Pt(20.)),
           flexBasis(Pt(200.)),
@@ -22,14 +12,6 @@ let styles =
           shadowOffset(~width=0., ~height=5.),
           shadowOpacity(0.2),
           shadowRadius(10.),
-        ]),
-      "icon":
-        style([
-          position(Absolute),
-          right(Pt(-20.)),
-          bottom(Pt(-20.)),
-          opacity(Float(0.1)),
-          Transform.make(~perspective=800., ~rotate="6deg", ()),
         ]),
       "textNodeStrong":
         style([
@@ -59,23 +41,9 @@ type item = {
 
 [@react.component]
 let make = (~item, ()) => {
-  <SpacedView key={item.title} style=styles##skillWrapper>
-    <div
-      style={ReactDOMRe.Style.make(
-        ~display="flex",
-        ~flexDirection="column",
-        ~flex="1 1 auto",
-        ~borderRadius="4px",
-        ~background=
-          "linear-gradient(0.45turn, "
-          ++ item.bg
-          ++ " 10%, "
-          ++ item.bg2
-          ++ " 110%)",
-        ~overflow="hidden",
-        (),
-      )}>
-      <View style=styles##skill>
+  <SpacedView style=styles##itemWrapper>
+    <ViewWithGradient color={item.bg} color2={item.bg2}>
+      <View style=styles##item>
         {item.icon}
         <Text
           style=Style.(
@@ -89,6 +57,6 @@ let make = (~item, ()) => {
         <Spacer style=styles##textSpace />
         <Text style=styles##textNode> item.text->React.string </Text>
       </View>
-    </div>
+    </ViewWithGradient>
   </SpacedView>;
 };
