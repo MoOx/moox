@@ -3,14 +3,20 @@ open ReactNative;
 let isClient: bool = [%bs.raw "typeof window !== \"undefined\""];
 
 // https://github.com/necolas/react-native-web/pull/1351
-let hairlineWidth = {
-  let hairlineWidth = PixelRatio.roundToNearestPixel(0.4);
-  if (hairlineWidth === 0.) {
-    1. /. PixelRatio.get();
-  } else {
-    hairlineWidth;
-  };
-};
+let hairlineWidth =
+  isClient
+    ? {
+      let hairlineWidth = PixelRatio.roundToNearestPixel(0.4);
+      if (hairlineWidth === 0.) {
+        1. /. PixelRatio.get();
+      } else {
+        hairlineWidth;
+      };
+    }
+    // don't use 1 because I guess most people have retina
+    // at least the scope I have...
+    // @todo allow to config that
+    : 0.5;
 // beside this, some browser round to 0 something like 0.3333333333, instead of 0.34...)
 let hairlineWidthMaxPrecision = 6.;
 let hairlineWidth =
