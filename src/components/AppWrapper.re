@@ -27,7 +27,9 @@ let make = (~children) => {
     <View> children </View>
     <WindowSizeFilter.MMin> <Footer /> </WindowSizeFilter.MMin>
     <WindowSizeFilter.SMax>
-      <div className="menu-backdrop FixedBottom"> <TabBarWithRouter /> </div>
+      <div className="BlurView FixedBottom">
+        <TabBarWithRouter links=Consts.menuLinks />
+      </div>
       <TabBar.Placeholder />
     </WindowSizeFilter.SMax>
   </>;
