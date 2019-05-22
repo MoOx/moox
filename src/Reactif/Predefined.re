@@ -1,5 +1,7 @@
 open ReactNative;
 
+let isClient: bool = [%bs.raw "typeof window !== \"undefined\""];
+
 // https://github.com/necolas/react-native-web/pull/1351
 let hairlineWidth = {
   let hairlineWidth = PixelRatio.roundToNearestPixel(0.4);

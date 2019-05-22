@@ -80,7 +80,7 @@ let make = () => {
           </SpacedView>
           <SpacedView vertical=S>
             <ViewLink
-              href={"mailto:" ++ (Consts.isClient ? "hello@moox.io" : "")}>
+              href={"mailto:" ++ (Predefined.isClient ? "hello@moox.io" : "")}>
               <ButtonContained
                 color=Predefined.Colors.blue style=styles##button>
                 <SVGEmail width=36. height=36. fill=Consts.Colors.light />

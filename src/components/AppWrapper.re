@@ -1,12 +1,10 @@
 open ReactNative;
+open Webapi.Dom;
 
 let scrollYAnimatedValue = Animated.Value.create(0.);
 let requested = ref(false);
 
-if (Consts.isClient) {
-  // loop on each scroll event throttled with requestAnimationFrame
-
-  open Webapi.Dom;
+if (Predefined.isClient) {
   let tick = _ => {
     scrollYAnimatedValue
     ->Animated.spring(
