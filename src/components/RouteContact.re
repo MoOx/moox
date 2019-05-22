@@ -53,9 +53,36 @@ let make = () => {
           </Text>
           <Spacer size=L />
           <SpacedView vertical=S>
+            <ViewLink href="sms:+33678135439">
+              <ButtonContained color="#1FCE26" style=styles##button>
+                <SVGSpeechBubbles
+                  width=36.
+                  height=36.
+                  fill=Consts.Colors.light
+                />
+                <Spacer />
+                <ButtonContained.Text textSize=24.>
+                  "Text Me"->React.string
+                  <Text
+                    style=Style.(
+                      style(
+                        ~fontSize=12.,
+                        ~lineHeight=12.,
+                        ~fontWeight=`_300,
+                        (),
+                      )
+                    )>
+                    "\n+33 6 78 13 54 39"->React.string
+                  </Text>
+                </ButtonContained.Text>
+              </ButtonContained>
+            </ViewLink>
+          </SpacedView>
+          <SpacedView vertical=S>
             <ViewLink
               href={"mailto:" ++ (Consts.isClient ? "hello@moox.io" : "")}>
-              <ButtonContained color="#2589FB" style=styles##button>
+              <ButtonContained
+                color=Predefined.Colors.blue style=styles##button>
                 <SVGEmail width=36. height=36. fill=Consts.Colors.light />
                 <Spacer />
                 <ButtonContained.Text textSize=24.>
@@ -122,6 +149,31 @@ let make = () => {
                 </ButtonContained.Text>
               </ButtonContained>
             </ViewLink>
+          </SpacedView>
+          <SpacedView vertical=S>
+            <a
+              href="/MaximeThirouin.vcf"
+              style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
+              <ButtonContained
+                color=Predefined.Colors.pink style=styles##button>
+                <SVGContact width=36. height=36. fill=Consts.Colors.light />
+                <Spacer />
+                <ButtonContained.Text textSize=24.>
+                  "Save Me"->React.string
+                  <Text
+                    style=Style.(
+                      style(
+                        ~fontSize=12.,
+                        ~lineHeight=12.,
+                        ~fontWeight=`_300,
+                        (),
+                      )
+                    )>
+                    "\nGet my contact infos"->React.string
+                  </Text>
+                </ButtonContained.Text>
+              </ButtonContained>
+            </a>
           </SpacedView>
         </View>
       </SpacedView>
