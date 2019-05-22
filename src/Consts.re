@@ -2,7 +2,7 @@ let title = {j|MoOx|j};
 let defaultTitle = {j|Freelance Front-End Developer, Mobile & Web|j};
 let titleTemplate = {j|%s - |j} ++ title;
 
-let isClient: bool = [%bs.raw "typeof window !== undefined"];
+let isClient: bool = [%bs.raw "typeof window !== \"undefined\""];
 
 let menuLinks: array(TabBar.link) = [|
   {
