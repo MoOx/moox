@@ -7,6 +7,8 @@ let make = () => {
       <SpacedView
         horizontal=XS
         vertical=XS
+        key={Predefined.hairlineWidth->Js.Float.toString}
+        // key=Predefined.hairlineWidth is to avoid SSR/hydrate issue
         style=Style.(
           style(
             ~borderStyle=`solid,

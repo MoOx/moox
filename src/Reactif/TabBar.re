@@ -39,7 +39,10 @@ let make =
       ~colorActive=Predefined.Colors.blue,
       ~currentLocation,
     ) => {
-  <SafeAreaView style=styles##wrapper>
+  <SafeAreaView
+    key={Predefined.hairlineWidth->Js.Float.toString}
+    // key=Predefined.hairlineWidth is to avoid SSR/hydrate issue
+    style=styles##wrapper>
     <View style=styles##container>
       {links
        ->Belt.Array.map(item =>

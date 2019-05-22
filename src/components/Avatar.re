@@ -5,6 +5,8 @@ let uri = "/avatar.jpg";
 [@react.component]
 let make = (~size) => {
   <View
+    key={Predefined.hairlineWidth->Js.Float.toString}
+    // key=Predefined.hairlineWidth is to avoid SSR/hydrate issue
     style=Style.(
       style(
         ~borderWidth=Predefined.hairlineWidth,

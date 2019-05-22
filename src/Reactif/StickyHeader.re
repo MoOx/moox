@@ -244,6 +244,8 @@ let make =
     {title
      ->Option.map(title =>
          <Animated.View
+           key={Predefined.hairlineWidth->Js.Float.toString}
+           // key=Predefined.hairlineWidth is to avoid SSR/hydrate issue
            style=Style.(
              array([|styles##textWrapper, animatedDelayedOpacityToVisible|])
            )>
