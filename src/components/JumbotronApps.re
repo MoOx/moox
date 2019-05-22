@@ -74,6 +74,8 @@ let make = (~scrollYAnimatedValue) => {
                     )
                     ->animatedAngle,
                 ),
+                // the web is fast... lol
+                RNWIP.Transform.unsafeTransform("translateZ", "0"),
               |],
               (),
             )
