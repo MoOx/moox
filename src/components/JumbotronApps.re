@@ -7,9 +7,8 @@ let styles = Style.(StyleSheet.create({"center": style()}));
 
 [@react.component]
 let make = (~scrollYAnimatedValue) => {
-  <View
-    style=Style.(style(~backgroundColor=Consts.Colors.white, ~zIndex=1, ()))>
-    <WindowSizeFilter.SMax> <Spacer /> <ScreenHome /> </WindowSizeFilter.SMax>
+  <View style=Style.(style(~backgroundColor=Consts.Colors.white, ()))>
+    <WindowSizeFilter.SMax> <ScreenHome /> </WindowSizeFilter.SMax>
     <WindowSizeFilter.MMin>
       <div
         style={ReactDOMRe.Style.make(
@@ -238,9 +237,19 @@ let make = (~scrollYAnimatedValue) => {
                   (),
                 )
               )>
-              <SpacedView>
+              <SpacedView
+                style=Style.(
+                  style(
+                    ~position=`absolute,
+                    ~top=0.->pt,
+                    ~left=0.->pt,
+                    ~right=0.->pt,
+                    (),
+                  )
+                )>
                 <SVGIPhoneStatusBar width=340. height={340. /. 328. *. 12.} />
               </SpacedView>
+              <Spacer size=L />
               <ScreenHome />
             </DeviceIPhoneX>
             <DeviceIPhoneX

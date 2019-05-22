@@ -7,8 +7,8 @@ let styles =
     StyleSheet.create({
       "wrapper":
         style([
-          borderTopWidth(StyleSheet.hairlineWidth),
-          borderColor(String("#E3E4E5")),
+          borderTopWidth(Predefined.hairlineWidth),
+          borderColor(String(Predefined.Colors.separator)),
         ]),
       "container":
         style([

@@ -6,7 +6,14 @@ let uri = "/avatar.jpg";
 let make = (~size) => {
   <Image
     style=Style.(
-      style(~borderRadius=size, ~width=size->pt, ~height=size->pt, ())
+      style(
+        ~borderRadius=size,
+        ~width=size->pt,
+        ~height=size->pt,
+        ~borderWidth=Predefined.hairlineWidth,
+        ~borderColor=Predefined.Colors.separator,
+        (),
+      )
     )
     source=Image.(
       Source.(fromUriSource(uriSource(~uri, ~width=size, ~height=size, ())))

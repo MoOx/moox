@@ -1,5 +1,38 @@
 open ReactNative;
 
+// https://github.com/necolas/react-native-web/pull/1351
+let hairlineWidth = {
+  let hairlineWidth = PixelRatio.roundToNearestPixel(0.4);
+  if (hairlineWidth === 0.) {
+    1. /. PixelRatio.get();
+  } else {
+    hairlineWidth;
+  };
+};
+// beside this, some browser round to 0 something like 0.3333333333, instead of 0.34...)
+let hairlineWidthMaxPrecision = 6.;
+let hairlineWidth =
+  Js.Math.round(hairlineWidth *. 10. ** hairlineWidthMaxPrecision)
+  /. 10.
+  ** hairlineWidthMaxPrecision;
+
+// https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/
+// module Fonts = {
+//   open Style;
+//   Style	Weight	Size (Points)	Leading (Points)	Tracking (1/1000em)
+//   Large Title	Regular	34	41	+11
+//   Title 1	Regular	28	34	+13
+//   Title 2	Regular	22	28	+16
+//   Title 3	Regular	20	25	+19
+//   Headline	Semi-Bold	17	22	-24
+//   Body	Regular	17	22	-24
+//   Callout	Regular	16	21	-20
+//   Subhead	Regular	15	20	-16
+//   Footnote	Regular	13	18	-6
+//   Caption 1	Regular	12	16	0
+//   Caption 2	Regular	11	13	+6
+// };
+
 // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/
 module Colors = {
   open Style;
@@ -19,11 +52,15 @@ module Colors = {
   let blue = "rgb(0, 122, 255)";
   let purple = "rgb(88, 86, 214)";
   let pink = "rgb(255, 45, 85)";
+  let separator = "#A2A9AC";
 };
 
 let styles =
   Style.(
     StyleSheet.create({
+      "flex": style(~flex=1., ()),
+      "flexGrow": style(~flexGrow=1., ()),
+      "flexShrink": style(~flexShrink=1., ()),
       "center": style(~alignItems=`center, ~justifyContent=`center, ()),
       "col": style(~flexDirection=`column, ()),
       "colCenter":

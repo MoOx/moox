@@ -9,7 +9,7 @@ let make = (~title, ~animateBackgroundOpacity=`yes, ~getInTouch=true) => {
       title
       animateBackgroundOpacity
       color="#fff"
-      color2=Predefined.Colors.red
+      color2=Predefined.Colors.blue
       right={({color}) =>
         <>
           {getInTouch

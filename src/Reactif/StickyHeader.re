@@ -23,7 +23,7 @@ let styles =
       "overlay": style(~backgroundColor="rgba(255,255,255,0.8)", ()),
       "textWrapper":
         style(
-          ~borderBottomWidth=StyleSheet.hairlineWidth,
+          ~borderBottomWidth=Predefined.hairlineWidth,
           ~borderBottomColor="#e2e2e2",
           ~justifyContent=`center,
           ~alignItems=`center,

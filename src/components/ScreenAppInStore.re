@@ -10,7 +10,7 @@ let make = () => {
         style=Style.(
           style(
             ~borderStyle=`solid,
-            ~borderWidth=StyleSheet.hairlineWidth,
+            ~borderWidth=Predefined.hairlineWidth,
             ~borderColor=Consts.Colors.lightGrey,
             ~borderRadius=20.,
             (),
@@ -30,7 +30,6 @@ let make = () => {
           "MoOx, Inc."->React.string
         </Text>
       </View>
-      <Spacer />
       <SpacedView>
         <ViewLink href="/contact/">
           <ButtonContained round=true verticalSpace=XS color="#1F5EDC">

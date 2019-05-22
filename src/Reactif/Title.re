@@ -5,8 +5,8 @@ let styles =
     StyleSheet.create({
       "title":
         style(
-          ~fontSize=28.,
-          ~fontWeight=`_600,
+          ~fontSize=34.,
+          ~fontWeight=`_700,
           ~color=Consts.Colors.darkest,
           (),
         ),

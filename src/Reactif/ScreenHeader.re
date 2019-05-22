@@ -5,7 +5,12 @@ external animatedFloat: Animated.value('a) => float = "%identity";
 
 // @todo
 let topSpace =
-  ReactNative.Dimensions.get(`window)##height > 640 ? 130. : 110.;
+  // browser have their own toolbar etc, so we don't need large space
+  if (Platform.os === Platform.web) {
+    50.; // @todo make this more precise
+  } else {
+    ReactNative.Dimensions.get(`window)##height > 640 ? 130. : 110.;
+  };
 
 type size =
   | Medium
@@ -13,8 +18,8 @@ type size =
 
 let containerHeight =
   fun
-  | Medium => SafeArea.statusBarHeight +. topSpace
-  | Large => SafeArea.statusBarHeight +. topSpace +. 35.;
+  | Medium => topSpace
+  | Large => topSpace +. 44.;
 
 let styles =
   Style.(
@@ -33,27 +38,35 @@ let prerenderedGradient =
 [@react.component]
 let make =
     (
+      ~titlePre=?,
       ~title,
-      ~stickyTitle=?,
       ~scrollYAnimatedValue=?,
       ~backgroundSource=?,
       ~backgroundFallbackSource=?,
       ~backgroundGradient=false,
       ~backgroundElastic=false,
-      ~animateStickyBackgroundOpacity,
+      // ~stickyTitle=?,
+      // ~animateStickyBackgroundOpacity=`yes,
+      // ~left=?,
+      // ~right=?,
       ~color as colour=?,
       ~backgroundColor as bgColor="#000",
-      ~left=?,
-      ~right=?,
-      ~size: size=Medium,
-      ~children,
+      ~size: size=Large,
+      ~children=?,
     ) => {
   let deviceWidth = Dimensions.get(`window)##width->float;
   let deviceHeight = Dimensions.get(`window)##height->float;
-  let child =
-    <View style=Style.(array([|StyleSheet.absoluteFill, styles##children|]))>
-      ...children
-    </View>;
+  let child = {
+    children
+    ->Option.map(children =>
+        <View
+          style=Style.(array([|StyleSheet.absoluteFill, styles##children|]))
+          pointerEvents=`boxNone>
+          children
+        </View>
+      )
+    ->Option.getWithDefault(React.null);
+  };
   let h = containerHeight(size);
   <SpacedView
     vertical=None
@@ -119,15 +132,20 @@ let make =
          </ImageBackgroundWithBlurFallback>
        )
      ->Option.getWithDefault(child)}
-    <StickyHeader
-      title={stickyTitle->Option.getWithDefault(title)}
-      scrollOffsetY={containerHeight(size)}
-      ?scrollYAnimatedValue
-      color=?colour
-      ?left
-      ?right
-      animateBackgroundOpacity=animateStickyBackgroundOpacity
-    />
+    // <StickyHeader
+    //   title={stickyTitle->Option.getWithDefault(title)}
+    //   scrollOffsetY={containerHeight(size)}
+    //   ?scrollYAnimatedValue
+    //   color=?colour
+    //   ?left
+    //   ?right
+    //   animateBackgroundOpacity=animateStickyBackgroundOpacity
+    // />
+    {titlePre
+     ->Option.map(titlePre =>
+         <TitlePre> titlePre->ReasonReact.string </TitlePre>
+       )
+     ->Option.getWithDefault(React.null)}
     <Text
       style=Style.(
         arrayOption([|
@@ -135,18 +153,18 @@ let make =
             style(
               ~fontSize=
                 switch (size) {
-                | Medium => 24.
-                | Large => 32.
+                | Medium => 28.
+                | Large => 34.
                 },
-              ~fontWeight=`bold,
+              ~fontWeight=`_700,
               (),
             ),
           ),
-          colour->Belt.Option.map(colour => style(~color=colour, ())),
+          colour->Option.map(colour => style(~color=colour, ())),
         |])
       )>
       title->ReasonReact.string
     </Text>
-    <Spacer />
+    <Spacer size=XS />
   </SpacedView>;
 };
