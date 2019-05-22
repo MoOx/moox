@@ -20,9 +20,10 @@
   ],
   "bsc-flags": ["-bs-super-errors"],
   "bs-dependencies": [
-    "bs-date-fns",
+    "bs-webapi",
     "bs-fetch",
     "@glennsl/bs-json",
+    "bs-date-fns",
     "reason-react",
     "bs-react-native-monorepo/bs-react-native-jsx3-compat",
     "bs-react-native-monorepo/reason-react-native",

@@ -2402,6 +2402,11 @@ bs-platform@^5.0.1:
   version "0.0.0"
   resolved "https://github.com/reasonml-community/bs-react-native.git#b9e7459cfc452a7a4411de7d7f355e4ea0350445"
 
+bs-webapi@^0.15.1:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/bs-webapi/-/bs-webapi-0.15.1.tgz#c09b2e0789c3124b9e97f86eb9405ac223a8c5b1"
+  integrity sha512-U+k2zPoJ6nX2yY7i+ZfIgeZf+DNZ/mF5SS2UxkdJyqKK4sRyrOJ7xF9H9SBAnWvbMkq6WbYZcJukj8vCOOWhpQ==
+
 bser@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/bser/-/bser-2.0.0.tgz#9ac78d3ed5d915804fd87acb158bc797147a1719"
