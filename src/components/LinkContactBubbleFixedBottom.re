@@ -9,7 +9,7 @@ let make = () => {
           round=true
           horizontalSpace=S
           verticalSpace=S
-          color=Predefined.Colors.blue>
+          color=Predefined.Colors.green>
           <SVGSpeechBubble fill=Predefined.Colors.white width=24. height=24. />
         </ButtonContained>
       </ViewLink>
