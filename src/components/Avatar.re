@@ -4,22 +4,28 @@ let uri = "/avatar.jpg";
 
 [@react.component]
 let make = (~size) => {
-  <Image
+  <View
     style=Style.(
       style(
+        ~borderWidth=Predefined.hairlineWidth,
+        ~borderColor=Predefined.Colors.separator,
         ~borderRadius=size,
         ~width=size->pt,
         ~height=size->pt,
-        ~borderWidth=Predefined.hairlineWidth,
-        ~borderColor=Predefined.Colors.separator,
+        ~overflow=`hidden,
         (),
       )
-    )
-    source=Image.(
-      Source.(fromUriSource(uriSource(~uri, ~width=size, ~height=size, ())))
-    )
-    defaultSource=Image.(
-      DefaultSource.(fromUri(~uri, ~width=size, ~height=size, ()))
-    )
-  />;
+    )>
+    <Image
+      source=Image.(
+        Source.(
+          fromUriSource(uriSource(~uri, ~width=size, ~height=size, ()))
+        )
+      )
+      // SSR workaround https://github.com/necolas/react-native-web/issues/543
+      defaultSource=Image.(
+        DefaultSource.(fromUri(~uri, ~width=size, ~height=size, ()))
+      )
+    />
+  </View>;
 };

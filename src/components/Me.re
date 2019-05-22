@@ -24,6 +24,7 @@ let make = () => {
     )}>
     <Image
       source={`URI(Image.(imageURISource(~uri, ~width, ~height, ())))}
+      // SSR workaround https://github.com/necolas/react-native-web/issues/543
       defaultSource={
                       `URI(
                         Image.(defaultURISource(~uri, ~width, ~height, ())),
