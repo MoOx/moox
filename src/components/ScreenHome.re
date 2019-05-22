@@ -13,9 +13,7 @@ let make = () => {
         <Avatar size=56. />
       </SpacedView>
     </ScreenHeader>
-    <SpacedView vertical=None> <Separator /> </SpacedView>
     <SpacedView>
-      <Spacer size=XS />
       <ViewLink href="/resume/"> <CardIMakeReactApps /> </ViewLink>
       <Spacer size=L />
       <ViewLink href="/resume/">
@@ -26,8 +24,6 @@ let make = () => {
           <Title> "I can help you"->React.string </Title>
           {RouteResume.rightArrow(~color=Consts.Colors.darkest, 20.)}
         </Row.SpaceBetween>
-        <Spacer size=XS />
-        <Separator />
       </ViewLink>
     </SpacedView>
   </>;
