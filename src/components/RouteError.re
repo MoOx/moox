@@ -23,6 +23,10 @@ let styles =
 [@react.component]
 let make = (~posts) => {
   <AppWrapper>
+    <BsReactHelmet>
+      <title> {("Error 404 - " ++ Consts.defaultTitle)->React.string} </title>
+    </BsReactHelmet>
+    <HeaderSmall title="Ooops!" />
     <Container>
       <Error label={j|It seems that this page doesn't exist 😕|j} />
       <Spacer size=XL />

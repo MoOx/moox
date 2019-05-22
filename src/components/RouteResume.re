@@ -82,10 +82,11 @@ let rightArrow = size => {
 let make = (~items) => {
   <AppWrapper>
     <BsReactHelmet>
-      <title> {("Resume - " ++ Consts.defaultTitle)->React.string} </title>
+      <title>
+        {("Resume" ++ " - " ++ Consts.defaultTitle)->React.string}
+      </title>
     </BsReactHelmet>
-    <WindowSizeFilter.SMax> <ResumeJumbotronSmall /> </WindowSizeFilter.SMax>
-    <WindowSizeFilter.MMin> <ResumeJumbotronLarge /> </WindowSizeFilter.MMin>
+    <HeaderSmall title="Resume" animateBackgroundOpacity=`delayed />
     <Container>
       <SpacedView horizontal=M vertical=L>
         <View

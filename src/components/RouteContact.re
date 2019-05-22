@@ -28,6 +28,7 @@ let make = () => {
     <BsReactHelmet>
       <title> {("Contact - " ++ Consts.defaultTitle)->React.string} </title>
     </BsReactHelmet>
+    <HeaderSmall title="Contact MoOx" getInTouch=false />
     <Container>
       <WindowSizeFilter.MMin> <Spacer /> </WindowSizeFilter.MMin>
       <SpacedView vertical=L>

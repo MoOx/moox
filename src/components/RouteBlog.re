@@ -26,6 +26,7 @@ let make = (~posts) => {
     <BsReactHelmet>
       <title> {("Blog - " ++ Consts.defaultTitle)->React.string} </title>
     </BsReactHelmet>
+    <HeaderSmall title="Blog" />
     <Container>
       <Spacer />
       <Text style=styles##title> "Latest Posts"->React.string </Text>

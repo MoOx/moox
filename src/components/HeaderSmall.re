@@ -1,65 +1,43 @@
-open BsReactNative;
-
-let styles =
-  Style.(
-    StyleSheet.create({
-      "wrapper":
-        style([
-          flexDirection(Row),
-          justifyContent(SpaceBetween),
-          backgroundColor(String(Consts.Colors.light)),
-          borderTopWidth(10.),
-          borderColor(String(Consts.Colors.dark)),
-          shadowColor(String("#000")),
-          shadowOffset(~width=0., ~height=5.),
-          shadowOpacity(0.1),
-          shadowRadius(20.),
-          zIndex(1),
-        ]),
-      "logo":
-        style([
-          flexDirection(Row),
-          position(Relative),
-          zIndex(1),
-          paddingHorizontal(Pt(10.)),
-          flex(1.),
-          alignItems(Center),
-        ]),
-      "logoText": style([fontSize(Float(18.)), fontWeight(`_700)]),
-      "icons":
-        style([
-          flex(1.),
-          flexDirection(Row),
-          flexWrap(Wrap),
-          justifyContent(Center),
-        ]),
-      "icon":
-        style([
-          flexGrow(1.),
-          flexShrink(0.),
-          display(Flex),
-          alignItems(Center),
-          padding(Pt(6.)),
-          fontSize(Float(12.)),
-        ]),
-    })
-  );
+open ReactNative;
 
 [@react.component]
-let make = () => {
-  <SpacedView horizontal=XS style=styles##wrapper>
-    <ViewLink style=styles##logo href="/">
-      <SVGLogo width=24. height=24. fill=Consts.Colors.dark />
-      <Text style=styles##logoText>
-        {("  " ++ Consts.title)->React.string}
-      </Text>
-    </ViewLink>
-    <Spacer />
-    <SocialIcons
-      wrapperStyle=styles##icons
-      iconStyle=styles##icon
-      iconColor=Consts.Colors.dark
-      iconSize=20.
+let make = (~title, ~animateBackgroundOpacity=`yes, ~getInTouch=true) => {
+  <WindowSizeFilter.SMax>
+    <StickyHeader
+      scrollYAnimatedValue=AppWrapper.scrollYAnimatedValue
+      scrollOffsetY=100.
+      title
+      animateBackgroundOpacity
+      color="#fff"
+      color2=Predefined.Colors.red
+      right={({color}) =>
+        <>
+          {getInTouch
+             ? <ViewLink href="/contact/">
+                 <Row.Center>
+                   <Text
+                     style=Style.(style(~color, ~paddingBottom=2.->pt, ()))>
+                     "Get in touch"->React.string
+                   </Text>
+                   <SVGChevronRight fill=color width=19. height=19. />
+                   <Spacer size=XXS />
+                 </Row.Center>
+               </ViewLink>
+             : <a
+                 href="/MaximeThirouin.vcf"
+                 style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
+                 <Row.Center>
+                   <Text
+                     style=Style.(style(~color, ~paddingBottom=2.->pt, ()))>
+                     "Save"->React.string
+                   </Text>
+                   <Spacer size=XXS />
+                   <SVGContact fill=color width=19. height=19. />
+                   <Spacer size=XXS />
+                 </Row.Center>
+               </a>}
+        </>
+      }
     />
-  </SpacedView>;
+  </WindowSizeFilter.SMax>;
 };

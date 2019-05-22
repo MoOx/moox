@@ -22,7 +22,6 @@ Webapi.Dom.(
 let make = (~children) => {
   <>
     <AppMeta />
-    <WindowSizeFilter.SMax> <HeaderSmall /> </WindowSizeFilter.SMax>
     <WindowSizeFilter.MMin> <HeaderLargeWithRouter /> </WindowSizeFilter.MMin>
     <View> children </View>
     <WindowSizeFilter.MMin> <Footer /> </WindowSizeFilter.MMin>

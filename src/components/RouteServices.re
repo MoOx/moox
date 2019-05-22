@@ -23,7 +23,6 @@ let styles =
 [@react.component]
 let make = () => {
   <AppWrapper>
-    <HomeJumbotron />
     <Container maxWidth=1200.> <Spacer /> <Services /> <Spacer /> </Container>
     <Container> <Skills /> </Container>
   </AppWrapper>;
