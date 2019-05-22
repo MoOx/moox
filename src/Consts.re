@@ -3,14 +3,8 @@ let defaultTitle = title ++ {j|, Freelance Front-End Web & Mobile Developer|j};
 let titleTemplate = {j|%s - |j} ++ title;
 
 let isClient: bool = [%bs.raw "typeof window !== undefined"];
-type menuLink = {
-  link: string,
-  text: string,
-  icon: (~width: float, ~height: float, ~fill: string, unit) => React.element,
-  isActive: (string, string) => bool,
-};
 
-let menuLinks = [|
+let menuLinks: array(TabBar.link) = [|
   {
     link: "/",
     text: {j|Home|j},

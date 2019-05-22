@@ -1,8 +1,6 @@
 open BsReactNative;
 
 let tabbarHeight = 50.;
-let colorInActive = Consts.Colors.tabBarIconInactive;
-let colorActive = Consts.Colors.tabBarIconActive;
 
 let styles =
   Style.(
@@ -22,21 +20,28 @@ let styles =
       "itemWrapper": style([flex(1.), justifyContent(Center)]),
       "item": style([justifyContent(Center), alignItems(Center)]),
       "itemText":
-        style([
-          flex(1.),
-          color(String(colorInActive)),
-          fontSize(Float(10.)),
-          marginTop(Pt(1.5)),
-        ]),
-      "itemTextActive": style([color(String(colorActive))]),
+        style([flex(1.), fontSize(Float(10.)), marginTop(Pt(1.5))]),
     })
   );
 
+type link = {
+  link: string,
+  text: string,
+  icon: (~width: float, ~height: float, ~fill: string, unit) => React.element,
+  isActive: (string, string) => bool,
+};
+
 [@react.component]
-let make = (~currentLocation, ()) => {
+let make =
+    (
+      ~links: array(link),
+      ~colorInActive=Predefined.Colors.grey,
+      ~colorActive=Predefined.Colors.blue,
+      ~currentLocation,
+    ) => {
   <SafeAreaView style=styles##wrapper>
     <View style=styles##container>
-      {Consts.menuLinks
+      {links
        ->Belt.Array.map(item =>
            <ViewLink
              key={item.link} href={item.link} style=styles##itemWrapper>
@@ -53,8 +58,9 @@ let make = (~currentLocation, ()) => {
                  style=Style.(
                    arrayOption([|
                      Some(styles##itemText),
+                     Some(style([color(String(colorInActive))])),
                      item.isActive(currentLocation##pathname, item.link)
-                       ? Some(styles##itemTextActive) : None,
+                       ? Some(style([color(String(colorActive))])) : None,
                    |])
                  )>
                  item.text->React.string

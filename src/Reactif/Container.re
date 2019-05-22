@@ -22,24 +22,8 @@ let styles =
 
 [@react.component]
 let make =
-    (
-      ~wrapperStyle=?,
-      ~style as styl=?,
-      ~backgroundColor as bgColor=Some(Consts.Colors.light),
-      ~maxWidth as maxW=840.,
-      ~children,
-      (),
-    ) => {
-  <View
-    style=Style.(
-      arrayOption([|
-        Some(styles##wrapper),
-        bgColor->Belt.Option.map(bg =>
-          style([backgroundColor(String(bg))])
-        ),
-        wrapperStyle,
-      |])
-    )>
+    (~wrapperStyle=?, ~style as styl=?, ~maxWidth as maxW=840., ~children, ()) => {
+  <View style=Style.(arrayOption([|Some(styles##wrapper), wrapperStyle|]))>
     <View
       style=Style.(
         arrayOption([|

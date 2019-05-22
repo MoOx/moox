@@ -1,11 +1,12 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-import TabBarMenu from "./TabBar.bs.js";
+import TabBarMenu from "./../Reactif/TabBar.bs.js";
 
 function TabBarMenuWithRouter(props, context) {
   return (
     <TabBarMenu
+      {...props}
       currentLocation={(context.router || {}).location || { pathname: "" }}
     />
   );
