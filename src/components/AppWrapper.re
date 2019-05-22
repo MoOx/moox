@@ -4,21 +4,13 @@ let scrollYAnimatedValue = Animated.Value.create(0.);
 let requested = ref(false);
 
 if (Consts.isClient) {
-  Webapi.Dom.(
-    window
-    |> Window.addEventListener("scroll", _ =>
-         if (! requested^) {
-           requested := true;
-           ReactNative.AnimationFrame.request(() => {
-             scrollYAnimatedValue->Animated.Value.setValue(
-               window->Window.scrollY,
-             );
-             requested := false;
-           })
-           ->ignore;
-         }
-       )
-  );
+  let rec tick = () => {
+    Webapi.Dom.(
+      scrollYAnimatedValue->Animated.Value.setValue(window->Window.scrollY)
+    );
+    ReactNative.AnimationFrame.request(tick)->ignore;
+  };
+  ReactNative.AnimationFrame.request(tick)->ignore;
 };
 
 [@react.component]
