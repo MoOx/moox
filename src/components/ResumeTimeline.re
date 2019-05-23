@@ -6,7 +6,6 @@ let imageRatio = 240. /. 350.;
 let styles =
   Style.(
     StyleSheet.create({
-      "flex": style([flex(1.)]),
       "yearText":
         style([
           width(Pct(100.)),
@@ -15,7 +14,7 @@ let styles =
           fontSize(Float(22.)),
           fontWeight(`_700),
         ]),
-      "item": style([flex(1.), flexDirection(Row)]),
+      "item": style([flexGrow(1.), flexDirection(Row)]),
     })
   );
 
@@ -48,7 +47,7 @@ let make = (~items, ()) => {
            |> Js.String.slice(~from=0, ~to_=4);
          let newYear = year !== latestYear^;
          latestYear := year;
-         <View key=item##id style=styles##flex>
+         <React.Fragment key=item##id>
            {newYear
               ? <Text style=styles##yearText> year->React.string </Text>
               : React.null}
@@ -57,7 +56,7 @@ let make = (~items, ()) => {
              <ResumeTimelineEntry item />
              {i mod 2 == 0 ? tlSpacer : React.null}
            </View>
-         </View>;
+         </React.Fragment>;
        })
      ->React.array}
   </SpacedView>;

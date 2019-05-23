@@ -4,9 +4,10 @@ open BsReactNative;
 let styles =
   Style.(
     StyleSheet.create({
-      "wrapper": style([flex(1.)]),
+      "wrapper": style([flexGrow(1.), flexShrink(1.)]),
       "container":
         style([
+          flexGrow(1.),
           backgroundColor(String(Consts.Colors.lightest)),
           shadowColor(String("#000")),
           shadowOffset(~width=0., ~height=5.),

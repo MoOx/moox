@@ -5,7 +5,8 @@ let styles =
     StyleSheet.create({
       "wrapper":
         style([
-          flex(1.),
+          flexGrow(1.),
+          flexShrink(1.),
           width(Pct(100.)),
           overflow(Hidden),
           alignItems(Center),
@@ -13,7 +14,8 @@ let styles =
       "container":
         style([
           justifyContent(Center),
-          flex(1.),
+          flexGrow(1.),
+          flexShrink(1.),
           width(Pct(100.)),
           paddingHorizontal(Pt(Spacer.space /. 4.)),
         ]),
