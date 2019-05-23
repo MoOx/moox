@@ -28,9 +28,8 @@ let make = (~posts) => {
     </BsReactHelmet>
     <HeaderSmall title="Blog" />
     <Container>
+      <ScreenHeader titlePre="Latest" title="Posts" />
       <SpacedView>
-        <TitlePre> "Latest"->React.string </TitlePre>
-        <Title> "Posts"->React.string </Title>
         {switch ((posts: T.contentList)) {
          | Inactive
          | Loading => <LoadingIndicator />

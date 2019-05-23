@@ -22,9 +22,8 @@ let make = (~talks) => {
     </BsReactHelmet>
     <HeaderSmall title="Talks" />
     <Container>
+      <ScreenHeader titlePre="Latest" title="Talks" />
       <SpacedView>
-        <TitlePre> "Latest"->React.string </TitlePre>
-        <Title> "Talks"->React.string </Title>
         {switch ((talks: T.contentList)) {
          | Inactive
          | Loading => <LoadingIndicator />
