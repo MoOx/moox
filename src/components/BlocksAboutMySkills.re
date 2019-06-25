@@ -34,7 +34,7 @@ let make = () => {
         </SpacedView>
         <Spacer size=M />
         <Text style=styles##blahblahText>
-          {j|I made my first website in 1998, & falled in love with web development. Since then, I never stopped to learn things.
+          {j|I made my first website in 1998, & fell in love with web development. Since then, I never stopped to learn things.
 Over the years, I refined my way to approach development, which allows me to confidently takes high-level design choices when building web & mobile apps, and selecting tools adapted to the user interface you need.|j}
           ->React.string
         </Text>
