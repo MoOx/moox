@@ -3,8 +3,7 @@ open BsReactNative;
 let styles =
   Style.(
     StyleSheet.create({
-      "menu":
-        style([zIndex(-1), justifyContent(Center), alignItems(Center)]),
+      "menu": style([justifyContent(Center), alignItems(Center)]),
       "bar":
         style([
           flexDirection(Row),

@@ -33,7 +33,7 @@ let make = (~children) => {
   <>
     <AppMeta />
     <WindowSizeFilter.MMin> <HeaderLargeWithRouter /> </WindowSizeFilter.MMin>
-    <View> children </View>
+    children
     <WindowSizeFilter.MMin> <Footer /> </WindowSizeFilter.MMin>
     <WindowSizeFilter.SMax>
       <div className="BlurView FixedBottom">
