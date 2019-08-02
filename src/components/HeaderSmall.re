@@ -1,4 +1,5 @@
 open ReactNative;
+open ReactMultiversal;
 
 [@react.component]
 let make = (~title, ~animateBackgroundOpacity=`yes, ~getInTouch=true) => {
@@ -16,7 +17,7 @@ let make = (~title, ~animateBackgroundOpacity=`yes, ~getInTouch=true) => {
              ? <ViewLink href="/contact/">
                  <Row.Center>
                    <Text
-                     style=Style.(style(~color, ~paddingBottom=2.->pt, ()))>
+                     style=Style.(style(~color, ~paddingBottom=2.->dp, ()))>
                      "Get in touch"->React.string
                    </Text>
                    <SVGChevronRight fill=color width=19. height=19. />
@@ -28,7 +29,7 @@ let make = (~title, ~animateBackgroundOpacity=`yes, ~getInTouch=true) => {
                  style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
                  <Row.Center>
                    <Text
-                     style=Style.(style(~color, ~paddingBottom=2.->pt, ()))>
+                     style=Style.(style(~color, ~paddingBottom=2.->dp, ()))>
                      "Save"->React.string
                    </Text>
                    <Spacer size=XXS />

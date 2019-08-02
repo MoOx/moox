@@ -1,4 +1,5 @@
 open BsReactNative;
+open ReactMultiversal;
 
 let styles =
   Style.(StyleSheet.create({"container": style([justifyContent(Center)])}));

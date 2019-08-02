@@ -1,4 +1,5 @@
 open BsReactNative;
+open ReactMultiversal;
 
 let currentYear = Js.Date.getFullYear(Js.Date.make())->int_of_float;
 

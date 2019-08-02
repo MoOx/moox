@@ -1,4 +1,5 @@
 open ReactNative;
+open ReactMultiversal;
 
 let uri = "/avatar.jpg";
 
@@ -12,8 +13,8 @@ let make = (~size) => {
         ~borderWidth=Predefined.hairlineWidth,
         ~borderColor=Predefined.Colors.separator,
         ~borderRadius=size,
-        ~width=size->pt,
-        ~height=size->pt,
+        ~width=size->dp,
+        ~height=size->dp,
         ~overflow=`hidden,
         (),
       )

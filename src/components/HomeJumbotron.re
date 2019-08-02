@@ -1,4 +1,5 @@
 open BsReactNative;
+open ReactMultiversal;
 
 let triangleHeight = 80.;
 
@@ -74,7 +75,7 @@ let make = () => {
               position(Absolute),
               right(Pt(-20.)),
               bottom(Pt(-80.)),
-              Transform.make(~rotate="6deg", ()),
+              transform([rotate(Deg(6.))]),
             ])
           )>
           <SVGLogo

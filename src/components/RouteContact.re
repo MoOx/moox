@@ -1,4 +1,5 @@
 open ReactNative;
+open ReactMultiversal;
 
 let styles =
   Style.(
@@ -18,7 +19,7 @@ let styles =
           (),
         ),
       "actions": style(~alignItems=`center, ()),
-      "button": style(~width=250.->pt, ~alignItems=`flexStart, ()),
+      "button": style(~width=250.->dp, ~alignItems=`flexStart, ()),
     })
   );
 

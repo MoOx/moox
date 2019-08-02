@@ -1,10 +1,11 @@
 open ReactNative;
+open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
       "blahblah":
-        style(~flex=1., ~alignItems=`center, ~flexBasis=240.->pt, ()),
+        style(~flex=1., ~alignItems=`center, ~flexBasis=240.->dp, ()),
       "blahblahText":
         style(~fontSize=16., ~lineHeight=24., ~color=Consts.Colors.dark, ()),
       "textLight":
@@ -14,13 +15,13 @@ let styles =
           ~fontWeight=`_200,
           (),
         ),
-      "button": style(~width=200.->pt, ()),
+      "button": style(~width=200.->dp, ()),
     })
   );
 
 [@react.component]
 let make = () => {
-  <Container maxWidth=1200.>
+  <Container maxWidth={1200.->Style.dp}>
     <Row.Wrap>
       <SpacedView style=styles##blahblah>
         <SpacedView horizontal=XS>

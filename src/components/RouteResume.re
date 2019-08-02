@@ -1,4 +1,5 @@
 open ReactNative;
+open ReactMultiversal;
 
 let styles =
   Style.(
@@ -8,7 +9,7 @@ let styles =
           ~fontSize=36.,
           ~fontWeight=`bold,
           ~textAlign=`center,
-          ~marginVertical=20.->pt,
+          ~marginVertical=20.->dp,
           ~color=Consts.Colors.dark,
           (),
         ),
@@ -66,10 +67,7 @@ let grayIconDomStyle =
   );
 
 let rightArrow = (~color=Consts.Colors.light, size) => {
-  <View
-    style=Style.(
-      style(~transform=Transform.([|rotate(~rotate=90.->deg)|]), ())
-    )>
+  <View style=Style.(style(~transform=[|rotate(~rotate=90.->deg)|], ()))>
     <SVGArrowRoundedWithTailTop width=size height=size fill=color />
   </View>;
 };
@@ -103,8 +101,8 @@ let make = (~items) => {
               ~justifyContent=`center,
               ~alignItems=`center,
               ~flex=1.,
-              ~minWidth=240.->pt,
-              ~maxWidth=310.->pt,
+              ~minWidth=240.->dp,
+              ~maxWidth=310.->dp,
               (),
             )
           )>
@@ -193,7 +191,7 @@ let make = (~items) => {
               ~justifyContent=`flexStart,
               ~alignItems=`flexStart,
               ~flex=1.,
-              ~flexBasis=240.->pt,
+              ~flexBasis=240.->dp,
               (),
             )
           )>
@@ -222,8 +220,8 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
               ~justifyContent=`center,
               ~alignItems=`center,
               ~flex=1.,
-              ~minWidth=240.->pt,
-              ~maxWidth=310.->pt,
+              ~minWidth=240.->dp,
+              ~maxWidth=310.->dp,
               (),
             )
           )>
@@ -362,7 +360,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
             <ButtonContained
               round=true
               color=Predefined.Colors.blue
-              style=Style.(style(~width=275.->pt, ()))>
+              style=Style.(style(~width=275.->dp, ()))>
               <ButtonContained.Text textSize=22.>
                 "HIRE ME NOW"->React.string
                 <Text

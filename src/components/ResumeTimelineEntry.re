@@ -1,5 +1,6 @@
 open Belt;
 open BsReactNative;
+open ReactMultiversal;
 
 let styles =
   Style.(

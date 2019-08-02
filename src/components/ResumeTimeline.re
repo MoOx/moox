@@ -1,5 +1,6 @@
 open Belt;
 open BsReactNative;
+open ReactMultiversal;
 
 let imageRatio = 240. /. 350.;
 

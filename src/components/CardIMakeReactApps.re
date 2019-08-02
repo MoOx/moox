@@ -1,4 +1,5 @@
 open ReactNative;
+open ReactMultiversal;
 
 [@react.component]
 let make = () => {
@@ -9,12 +10,12 @@ let make = () => {
           style(
             ~position=`absolute,
             ~opacity=0.1,
-            ~transform=
-              Transform.(
-                [|perspective(~perspective=800.), rotate(~rotate=6.->deg)|]
-              ),
-            ~right=(-40.)->pt,
-            ~bottom=(-50.)->pt,
+            ~transform=[|
+              perspective(~perspective=800.),
+              rotate(~rotate=6.->deg),
+            |],
+            ~right=(-40.)->dp,
+            ~bottom=(-50.)->dp,
             (),
           )
         )>

@@ -1,4 +1,5 @@
 open BsReactNative;
+open ReactMultiversal;
 
 let triangleHeight = 80.;
 

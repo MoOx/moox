@@ -1,4 +1,5 @@
 open BsReactNative;
+open ReactMultiversal;
 
 let styles =
   Style.(
@@ -23,7 +24,11 @@ let styles =
 [@react.component]
 let make = () => {
   <AppWrapper>
-    <Container maxWidth=1200.> <Spacer /> <Services /> <Spacer /> </Container>
+    <Container maxWidth={1200.->ReactNative.Style.dp}>
+      <Spacer />
+      <Services />
+      <Spacer />
+    </Container>
     <Container> <Skills /> </Container>
   </AppWrapper>;
 };

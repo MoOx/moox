@@ -1,7 +1,5 @@
 open ReactNative;
-open ReactNative.Transform;
-external animatedFloat: Animated.value('a) => float = "%identity";
-external animatedAngle: Animated.value('a) => angle = "%identity";
+open ReactMultiversal;
 
 let styles = Style.(StyleSheet.create({"center": style()}));
 
@@ -37,8 +35,8 @@ let make = (~scrollYAnimatedValue) => {
           style=Style.(
             style(
               ~position=`absolute,
-              ~top=(-100.)->pt,
-              ~right=(-20.)->pt,
+              ~top=(-100.)->dp,
+              ~right=(-20.)->dp,
               ~transform=[|rotate(~rotate=4.->deg)|],
               (),
             )
@@ -54,8 +52,8 @@ let make = (~scrollYAnimatedValue) => {
           style=Style.(
             style(
               ~position=`absolute,
-              ~left=(-250.)->pt,
-              ~bottom=(-250.)->pt,
+              ~left=(-250.)->dp,
+              ~bottom=(-250.)->dp,
               ~transform=[|
                 rotateZ(
                   ~rotateZ=
@@ -71,10 +69,10 @@ let make = (~scrollYAnimatedValue) => {
                         ),
                       )
                     )
-                    ->animatedAngle,
+                    ->Animated.StyleProp.angle,
                 ),
                 // the web is fast... lol
-                RNWIP.Transform.unsafeTransform("translateZ", "0"),
+                unsafeTransform({"translateZ": "0"}),
               |],
               (),
             )
@@ -87,10 +85,10 @@ let make = (~scrollYAnimatedValue) => {
           />
         </Animated.View>
         <Container
-          maxWidth=1200.
+          maxWidth={1200.->Style.dp}
           style=Style.(
             style(
-              ~maxHeight=600.->pt,
+              ~maxHeight=600.->dp,
               ~justifyContent=`flexStart,
               ~alignItems=`center,
               (),
@@ -119,7 +117,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedAngle,
+                        ->Animated.StyleProp.angle,
                     ),
                     scale(
                       ~scale=
@@ -135,7 +133,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedFloat,
+                        ->Animated.StyleProp.float,
                     ),
                     translateY(
                       ~translateY=
@@ -151,7 +149,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedFloat,
+                        ->Animated.StyleProp.float,
                     ),
                     translateX(
                       ~translateX=
@@ -167,7 +165,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedFloat,
+                        ->Animated.StyleProp.float,
                     ),
                   |],
                   (),
@@ -199,7 +197,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedAngle,
+                        ->Animated.StyleProp.angle,
                     ),
                     scale(
                       ~scale=
@@ -215,7 +213,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedFloat,
+                        ->Animated.StyleProp.float,
                     ),
                     translateY(
                       ~translateY=
@@ -231,7 +229,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedFloat,
+                        ->Animated.StyleProp.float,
                     ),
                   |],
                   (),
@@ -241,9 +239,9 @@ let make = (~scrollYAnimatedValue) => {
                 style=Style.(
                   style(
                     ~position=`absolute,
-                    ~top=0.->pt,
-                    ~left=0.->pt,
-                    ~right=0.->pt,
+                    ~top=0.->dp,
+                    ~left=0.->dp,
+                    ~right=0.->dp,
                     (),
                   )
                 )>
@@ -273,7 +271,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedAngle,
+                        ->Animated.StyleProp.angle,
                     ),
                     scale(
                       ~scale=
@@ -289,7 +287,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedFloat,
+                        ->Animated.StyleProp.float,
                     ),
                     translateY(
                       ~translateY=
@@ -305,7 +303,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedFloat,
+                        ->Animated.StyleProp.float,
                     ),
                     translateX(
                       ~translateX=
@@ -321,7 +319,7 @@ let make = (~scrollYAnimatedValue) => {
                             ),
                           )
                         )
-                        ->animatedFloat,
+                        ->Animated.StyleProp.float,
                     ),
                   |],
                   (),

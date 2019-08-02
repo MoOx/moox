@@ -1,3 +1,5 @@
+open ReactMultiversal;
+
 [@react.component]
 let make =
     (

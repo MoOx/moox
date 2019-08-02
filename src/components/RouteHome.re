@@ -1,7 +1,8 @@
 open ReactNative;
+open ReactMultiversal;
 
 let styles =
-  Style.(StyleSheet.create({"button": style(~width=200.->pt, ())}));
+  Style.(StyleSheet.create({"button": style(~width=200.->dp, ())}));
 
 [@react.component]
 let make = (~posts) => {
@@ -34,7 +35,7 @@ let make = (~posts) => {
       </Center>
       <Spacer size=L />
     </Container>
-    <Container maxWidth=1600.>
+    <Container maxWidth={1600.->Style.dp}>
       <Spacer size=L />
       <Center>
         <TitlePre> "COMPANIES THAT TRUSTED ME"->React.string </TitlePre>

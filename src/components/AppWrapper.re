@@ -1,4 +1,5 @@
 open ReactNative;
+open ReactMultiversal;
 open Webapi.Dom;
 
 let scrollYAnimatedValue = Animated.Value.create(0.);

@@ -1,4 +1,5 @@
 open ReactNative;
+open ReactMultiversal;
 
 [@react.component]
 let make = () => {
@@ -37,7 +38,7 @@ let make = () => {
             ~borderWidth=1.,
             ~borderColor=Consts.Colors.lightGrey,
             ~width=90.->pct,
-            ~padding=(Spacer.space /. 2.)->pt,
+            ~padding=(Spacer.space /. 2.)->dp,
             (),
           )
         )

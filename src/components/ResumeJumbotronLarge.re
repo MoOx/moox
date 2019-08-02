@@ -1,4 +1,5 @@
 open BsReactNative;
+open ReactMultiversal;
 
 let currentYear = Js.Date.getFullYear(Js.Date.make())->int_of_float;
 
@@ -215,7 +216,7 @@ let make = () => {
           position(Absolute),
           right(Pt(-20.)),
           bottom(Pt(20.)),
-          Transform.make(~rotate="6deg", ()),
+          transform([rotate(Deg(6.))]),
         ])
       )>
       <SVGLogo

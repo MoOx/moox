@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-import TabBarMenu from "./../Reactif/TabBar.bs.js";
+import TabBarMenu from "react-multiversal/src/TabBar.bs.js";
 
 function TabBarMenuWithRouter(props, context) {
   return (
