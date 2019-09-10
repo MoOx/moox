@@ -1,70 +1,53 @@
-==================================================================
 https://keybase.io/moox
 --------------------------------------------------------------------
 
 I hereby claim:
 
-  * I am an admin of http://moox.io
+  * I am an admin of https://moox.io
   * I am moox (https://keybase.io/moox) on keybase.
-  * I have a public key with fingerprint 9AB7 B020 7796 868F 8754  5C91 59CB 5F52 988F 2A32
+  * I have a public key ASAV63S6LCHJ5ZeJSVQnOSDG1ABsuZgI0Ek_A9eyHqo-hAo
 
-To claim this, I am signing this object:
+To do so, I am signing this object:
 
 {
-    "body": {
-        "key": {
-            "fingerprint": "9ab7b0207796868f87545c9159cb5f52988f2a32",
-            "host": "keybase.io",
-            "key_id": "59cb5f52988f2a32",
-            "uid": "75b1f1db849759e51b6ea773b014ad00",
-            "username": "moox"
-        },
-        "service": {
-            "hostname": "moox.io",
-            "protocol": "http:"
-        },
-        "type": "web_service_binding",
-        "version": 1
+  "body": {
+    "key": {
+      "eldest_kid": "01010bb9a0dc25509aa8db6f73a724c0e7d2d9ce28d5a072002f9ab6b38f0223d2a70a",
+      "host": "keybase.io",
+      "kid": "012015eb74ba2c21c9e597894954273920c6d4006cb99808d0493f03d7b21eaa3e840a",
+      "uid": "75b1f1db849759e51b6ea773b014ad00",
+      "username": "moox"
     },
-    "ctime": 1412050140,
-    "expire_in": 157680000,
-    "prev": "ab1bc72db144b8d825bfb723493628aac20f033c38ca1ce1bb891ea7f5a71a6d",
-    "seqno": 4,
-    "tag": "signature"
+    "merkle_root": {
+      "ctime": 1568131306,
+      "hash": "f9deebc089d925b0d366cd42ee767ad547c26681cf7b95295afd5fb1514fdcde9867ce248b75016e8212548e1a5b30e3db2a627bd6f9ec113d07dd0cac364fd5",
+      "hash_meta": "38c23c6ac038548f8b6272e0fce3cebb45d3071daad722ee9052fab0c5a56ba0",
+      "seqno": 6452430
+    },
+    "service": {
+      "entropy": "Pc8cqeVBwcWmORgZTuxel0BA",
+      "hostname": "moox.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "4.4.1"
+  },
+  "ctime": 1568131319,
+  "expire_in": 504576000,
+  "prev": "aa3bb01926aee92c9c595df6c2e862f6cd10054b5d8f9e8b7e2f159f5f6c8036",
+  "seqno": 23,
+  "tag": "signature"
 }
 
-with the aforementioned key, yielding the PGP signature:
+which yields the signature:
 
------BEGIN PGP MESSAGE-----
-Version: Keybase OpenPGP v1.0.5
-Comment: https://keybase.io/crypto
-
-yMLrAnicO8LLzMDFGHk6PmhGv5YR4+kDL0oZQrR07lQrJeWnVCpZVStlp4KptMy8
-9NSigqLMvBIlKyXLxCTzJAMjA3NzSzMLM4s0C3NTE9NkS0NTy+Qk0zRTI0sLizSj
-RGMjJR2ljPxikA6gMUmJxal6mflAMSAnPjMFKIpFfSlYwtw0yTDNMCXJwsTS3NQy
-1dQwySw10dzcOMnA0CQxxcAApLA4tSgvMTcVqDo3P79CqVZHCShSlpmcCnIvyFok
-WYi9BUX5JfnJ+TlAwYySkgIrkJ6SygKQovLUpHio9vikzLwUoHeBGspSi4oz8/OU
-rAyBKpNLMkHmGZoYGhmYAt1hoKOUWlGQWZQanwlSYWpuZmEABCBrUsuARiYmGSYl
-mxulJBmamCRZpFgYmSalJZkbGZtYGpsZWSQmJhsZpBkYGycbWyQnGianGiYlWVga
-An2ZZppobpholqIE8lBhXr6SlQnQmYnpQCOLM9PzEktKi1KVag8djGFhYORiYGNl
-AkUYAxenACwa/Sby/48UmcvhP0XA9IRKc9/bUwV2kgEpfxJ6WQvmfUg/6dsQcGXd
-rKa9Xx3Pt9TbaJz2VV61RiN6xmx9RoGyR1azPrZl+e79mVoxdV1wWmnptrO+TtVN
-l9Y/5xAv2Z4rtj4o6cJRfZHmroQrimv5Qk8eeit/4e4HHnWHfb8fTLb4yW2mUudj
-7sJT8G05e0rPjbBN+y+9Wf/rza7dh7k+dPRHtPzT23TaieeI9fP1R1OiOkSct/U3
-vVDlOFqwqv4+c32b79/fMsyJi62Utstf0JqarleyIeo412HupaJbilZ5rJbL53Df
-Z9fhFahteepizOqmrDn3TN04f2+0MlSw8q1ZNCNIMl7t6uzz6gsObZkaFdV75nTE
-dO3zK1yN3BfXPzN7Z7pszswrn/a31F9V0LPdfKLqvNLPhx57E28fi7DYmdLwT+qE
-nuvNl7+qjsTVhC+3vLxiakT53Yk5oV/P+ic8m9Z+/lDkvumOdwWDX6y68NLFJvju
-8senV9jrKTiVHVN5zGJRkzbn9U4NE74bWT8K33wyiOwPvBOlLruNw+XEefaTBxI5
-G74USnK94zdMk4hwWJpx+mXyl6tH5I9uea4qabRb8/tCzWyZpoytPWllfDN/pzNd
-+2dpwTg1sl69TcBLptNKcPOJYx8qg2rvbAkXT9iccVA473Pk0ZDTS4Lu3VdKLGFt
-WecQnLdXp2fCe8ufQbXM8soek/bwSWspAwBTeYtT
-=9BA6
------END PGP MESSAGE-----
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgFet0uiwhyeWXiUlUJzkgxtQAbLmYCNBJPwPXsh6qPoQKp3BheWxvYWTESpcCF8QgqjuwGSau6SycWV32wuhi9s0QBUtdj56Lfi8Vn19sgDbEIKcvSj/3R/2bUukq9xi/L5wgkv+Vxi/MB1PreQS4iR0kAgHCo3NpZ8RAl0JtULPvz8b2xdnc62pQwN+g70qHjfXkiar6IBKeFt225eDHM7TXL18Zg70pa0hwNVApa9KQPDpgMgXDGQOdD6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIJ+4skRX6+RO2MuWizF/bnHl5QYgS3XzM/u5ZvQWvCfFo3RhZ80CAqd2ZXJzaW9uAQ==
 
 And finally, I am proving ownership of this host by posting or
 appending to this document.
 
 View my publicly-auditable identity here: https://keybase.io/moox
-
-==================================================================
