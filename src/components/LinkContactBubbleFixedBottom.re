@@ -15,6 +15,8 @@ let make = () => {
         </ButtonContained>
       </ViewLink>
     </SpacedView>
-    <WindowSizeFilter.SMax> <TabBar.Placeholder /> </WindowSizeFilter.SMax>
+    <WindowSizeFilter.SMax>
+      <TabBarWrapper.Placeholder />
+    </WindowSizeFilter.SMax>
   </FixedBottom>;
 };

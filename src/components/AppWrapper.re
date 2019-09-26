@@ -40,7 +40,7 @@ let make = (~children) => {
       <div className="BlurView FixedBottom">
         <TabBarWithRouter links=Consts.menuLinks />
       </div>
-      <TabBar.Placeholder />
+      <TabBarWrapper.Placeholder />
     </WindowSizeFilter.SMax>
   </>;
 };

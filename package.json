@@ -31,7 +31,7 @@
     "react-disqus-comments": "^1.2.0",
     "react-dom": "^16.8.1",
     "react-helmet": "^6.0.0-beta",
-    "react-multiversal": "https://github.com/MoOx/react-multiversal.git#1fe6971",
+    "react-multiversal": "https://github.com/MoOx/react-multiversal.git#e4ee89e",
     "react-native-web": "^0.9.8",
     "react-router": "^3.2.0",
     "react-test-renderer": "^16.8.1",

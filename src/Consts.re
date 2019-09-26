@@ -4,7 +4,14 @@ let title = {j|MoOx|j};
 let defaultTitle = {j|Freelance Front-End Developer, Mobile & Web|j};
 let titleTemplate = {j|%s - |j} ++ title;
 
-let menuLinks: array(TabBar.link) = [|
+type menuLink = {
+  link: string,
+  text: string,
+  icon: (~width: float, ~height: float, ~fill: string, unit) => React.element,
+  isActive: (string, string) => bool,
+};
+
+let menuLinks: array(menuLink) = [|
   {
     link: "/",
     text: {j|Home|j},

@@ -8538,9 +8538,9 @@ react-is@^16.8.6:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-"react-multiversal@https://github.com/MoOx/react-multiversal.git#1fe6971":
+"react-multiversal@https://github.com/MoOx/react-multiversal.git#e4ee89e":
   version "0.0.0"
-  resolved "https://github.com/MoOx/react-multiversal.git#1fe6971f6118d9e130ac11cf3642abf8d537da84"
+  resolved "https://github.com/MoOx/react-multiversal.git#e4ee89e3c71ea30bcacc4603561127e28896ae05"
 
 react-native-web@^0.9.8:
   version "0.9.13"

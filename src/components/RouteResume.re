@@ -390,7 +390,9 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
           </WindowSizeFilter.SMax>
         </ViewLink>
       </SpacedView>
-      <WindowSizeFilter.SMax> <TabBar.Placeholder /> </WindowSizeFilter.SMax>
+      <WindowSizeFilter.SMax>
+        <TabBarWrapper.Placeholder />
+      </WindowSizeFilter.SMax>
     </FixedBottom>
   </AppWrapper>;
 };

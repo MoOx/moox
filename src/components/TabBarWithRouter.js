@@ -1,21 +1,22 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-import TabBarMenu from "react-multiversal/src/TabBar.bs.js";
+// import TabBar from "react-multiversal/src/TabBar.bs.js";
+import TabBar from "./TabBar.bs.js";
 
-function TabBarMenuWithRouter(props, context) {
+function TabBarWithRouter(props, context) {
   return (
-    <TabBarMenu
+    <TabBar
       {...props}
       currentLocation={(context.router || {}).location || { pathname: "" }}
     />
   );
 }
 
-TabBarMenuWithRouter.contextTypes = {
+TabBarWithRouter.contextTypes = {
   router: PropTypes.object.isRequired,
 };
 
-TabBarMenuWithRouter.displayName = "TabBarMenuWithRouter";
+TabBarWithRouter.displayName = "TabBarWithRouter";
 
-export default TabBarMenuWithRouter;
+export default TabBarWithRouter;
