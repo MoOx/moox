@@ -2405,6 +2405,10 @@ bs-platform@^5.0.6:
   resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-5.0.6.tgz#88c13041fb020479800de3d82c680bf971091425"
   integrity sha512-6Boa2VEcWJp2WJr38L7bp3J929nYha7gDarjxb070jWzgfPJ/WbzjipmSfnu2eqqk1MfjEIpBipbPz6n1NISwA==
 
+"bs-react-native-jsx3-compat@https://github.com/reason-react-native/bs-react-native-jsx3-compat.git":
+  version "0.11.1"
+  resolved "https://github.com/reason-react-native/bs-react-native-jsx3-compat.git#6ece4162f6da046f9be5e4176b81ef0fc768c594"
+
 bs-webapi@^0.15.1:
   version "0.15.1"
   resolved "https://registry.yarnpkg.com/bs-webapi/-/bs-webapi-0.15.1.tgz#c09b2e0789c3124b9e97f86eb9405ac223a8c5b1"
@@ -8712,9 +8716,9 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-"reason-react-native-monorepo@https://github.com/reasonml-community/reason-react-native.git#3e4a914":
-  version "0.0.0"
-  resolved "https://github.com/reasonml-community/reason-react-native.git#3e4a9142d1f21f6f0e3e39dff58253b637dd2ac7"
+"reason-react-native@https://github.com/reason-react-native/reason-react-native.git#9012a7b":
+  version "0.60.0"
+  resolved "https://github.com/reason-react-native/reason-react-native.git#9012a7b0ecbe75fa9520e2034e4167c7b6d12458"
 
 "reason-react@https://github.com/reasonml/reason-react.git":
   version "0.7.0"
