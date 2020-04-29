@@ -44,7 +44,7 @@ let make = (~posts) => {
                   <TextLink
                     href={
                       posts##previousPageIsFirst
-                        ? "/" : "/after/" ++ previous ++ "/"
+                        ? "/blog/" : "/blog/after/" ++ previous ++ "/"
                     }>
                     "Fresh posts"->React.string
                   </TextLink>
@@ -53,7 +53,7 @@ let make = (~posts) => {
                <Text> " "->React.string </Text>
                {switch (posts##next |> Js.toOption) {
                 | Some(next) =>
-                  <TextLink href={"/after/" ++ next ++ "/"}>
+                  <TextLink href={"/blog/after/" ++ next ++ "/"}>
                     "Older posts"->React.string
                   </TextLink>
                 | None => React.null
