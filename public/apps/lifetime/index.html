@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Hide The Notch</title>
+    <title>LifeTime</title>
     <meta name="description" content="" />
     <meta
       name="viewport"
@@ -53,7 +53,8 @@
         left: 0;
         background: #5497d0;
         background: url(./background.jpg) 50% 50% / cover;
-        filter: grayscale(100%) blur(8px);
+        /*filter: grayscale(100%); blur(8px);*/
+        filter: grayscale(80%);
       }
 
       .background-mask {
@@ -107,6 +108,7 @@
       .icon-preview {
         width: 64px;
         height: 64px;
+        border-radius: 12px;
       }
 
       .spacer {
@@ -130,12 +132,9 @@
 
       @media (min-width: 800px) {
         .blahblah {
-          max-width: 25vw;
-        }
-      }
-      @media (min-width: 800px) {
-        .blahblah {
+          max-width: 30vw;
           position: absolute;
+          top: 0;
           right: 0;
           bottom: 0;
         }
@@ -144,7 +143,7 @@
       .screenshot {
         height: 600px;
         height: 50vh;
-        margin: 2rem;
+        margin: 2rem 0;
         filter: drop-shadow(0 1em 1em rgba(0, 0, 0, 0.8));
       }
 
@@ -232,19 +231,37 @@
     <div class="View wrapper">
       <div class="View content">
         <div class="View header flex-row">
-          <img class="icon-preview" src="icon-preview.png" alt="" />
+          <img class="icon-preview" src="icon.png" alt="" />
           <div class="spacer"></div>
-          <h1>Hide The Notch</h1>
+          <h1>LifeTime</h1>
         </div>
-        <img class="screenshot" src="screenshot.png" alt="" />
-        <div class="blahblah">
-          <p>Want to have a nice wallpaper?</p>
+        <div class="View flex-row">
+          <img class="screenshot" src="screenshot.png" alt="" />
           <div class="spacer"></div>
-          <p>Want to hide that notch?</p>
+          <img class="another screenshot" src="screenshot-2.png" alt="" />
+        </div>
+        <div class="blahblah">
+          <p>You live in your calendar?</p>
+          <div class="spacer"></div>
+          <p>You like stats?</p>
           <div class="spacer"></div>
           <p>
-            Use some of our beautiful pictures or your own photos to create a
-            stunning wallpaper with our effects. Try one of our notch masks.
+            Let LifeTime become your personal coach, helping you to reach your
+            goals and spend your valuable time on things you love. LifeTime can
+            help you to understand how you use your time and rely on calendar
+            events to learn how you use it. By saving events into your
+            calendars, you will be able to visualize reports so you can take
+            more informed decisions about how to use your valuable time.
+          </p>
+          <div class="spacer"></div>
+          <p><strong>About Privacy</strong></p>
+          <div class="spacer"></div>
+          <p>
+            LifeTime is designed to protect your information. LifeTime only run
+            computation on your device and does not share your information
+            anywhere. All the informations retrieved from your calendars are
+            only used on your devices, to generate reports & offers you
+            suggestions. It's that simple for now.
           </p>
         </div>
       </div>
@@ -253,10 +270,8 @@
       <div class="spacer"></div>
       <div class="spacer"></div>
       <div class="View flex-row">
-        <a
-          href="https://apps.apple.com/us/app/hide-the-notch/id1312839983?ls=1"
-          class="AppStoreButton"
-        >
+        <!-- href="https://apps.apple.com/us/app/lifetime/" -->
+        <a class="AppStoreButton">
           <span class="AppStoreButton-effect"></span>
           <svg
             class="AppStoreButton-logo"
@@ -269,7 +284,7 @@
             />
           </svg>
           <span class="AppStoreButton-text">
-            <span class="AppStoreButton-text-line1">Available on the</span>
+            <span class="AppStoreButton-text-line1">Soon available on the</span>
             <span class="AppStoreButton-text-line2">App Store</span>
           </span>
         </a>
@@ -279,7 +294,7 @@
       <div class="spacer"></div>
       <div class="spacer"></div>
       <div class="View footer flex-row">
-        © 2017 Maxime Thirouin. All Rights Reserved.
+        © 2020 Maxime Thirouin. All Rights Reserved.
       </div>
     </div>
   </body>
