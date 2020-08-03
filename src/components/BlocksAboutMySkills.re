@@ -52,7 +52,7 @@ Over the years, I refined my way to approach development, which allows me to con
         </SpacedView>
         <Spacer size=M />
         <Text style=styles##blahblahText>
-          {j|I really believe that React & React Native are currently the best tools available to to produce fast & maintainable user-interfaces since the first day I tried it, in 2014.
+          {j|I really believe that React & React Native are currently the best tools available to produce fast & maintainable user-interfaces since the first day I tried it, in 2014.
 Their features & ecosystem allow me to be focus on creating beautiful & polished user experiences with scalability and performance in mind.|j}
           ->React.string
         </Text>
