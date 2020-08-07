@@ -1,63 +1,65 @@
-open BsReactNative;
+open ReactNative;
 
 let styles =
   Style.(
     StyleSheet.create({
-      "h1": style([marginTop(Pt(42.)), marginBottom(Pt(24.))]),
-      "h1Text": style([fontSize(Float(42.)), fontWeight(`Bold)]),
-      "h2": style([marginTop(Pt(34.)), marginBottom(Pt(18.))]),
-      "h2Text": style([fontSize(Float(34.)), fontWeight(`Bold)]),
-      "h3": style([marginTop(Pt(26.)), marginBottom(Pt(13.))]),
-      "h3Text": style([fontSize(Float(26.)), fontWeight(`Bold)]),
-      "h4": style([marginTop(Pt(24.)), marginBottom(Pt(12.))]),
-      "h4Text": style([fontSize(Float(24.)), fontWeight(`Bold)]),
-      "h5": style([marginTop(Pt(22.)), marginBottom(Pt(11.))]),
-      "h5Text": style([fontSize(Float(22.)), fontWeight(`Bold)]),
-      "h6": style([marginTop(Pt(22.)), marginBottom(Pt(11.))]),
-      "h6Text": style([fontSize(Float(22.)), fontWeight(`Bold)]),
-      "p": style([marginTop(Pt(29.)), marginBottom(Pt(29.))]),
-      "pText":
-        style([fontSize(Float(21.)), lineHeight(32.), fontWeight(`_300)]),
-      "ul": style([marginBottom(Pt(29.))]),
-      "li":
-        style([fontSize(Float(21.)), lineHeight(32.), fontWeight(`_300)]),
-      "liWrapper": style([flexDirection(Row)]),
+      "h1": style(~marginTop=42.->dp, ~marginBottom=24.->dp, ()),
+      "h1Text": style(~fontSize=42., ~fontWeight=`bold, ()),
+      "h2": style(~marginTop=34.->dp, ~marginBottom=18.->dp, ()),
+      "h2Text": style(~fontSize=34., ~fontWeight=`bold, ()),
+      "h3": style(~marginTop=26.->dp, ~marginBottom=13.->dp, ()),
+      "h3Text": style(~fontSize=26., ~fontWeight=`bold, ()),
+      "h4": style(~marginTop=24.->dp, ~marginBottom=12.->dp, ()),
+      "h4Text": style(~fontSize=24., ~fontWeight=`bold, ()),
+      "h5": style(~marginTop=22.->dp, ~marginBottom=11.->dp, ()),
+      "h5Text": style(~fontSize=22., ~fontWeight=`bold, ()),
+      "h6": style(~marginTop=22.->dp, ~marginBottom=11.->dp, ()),
+      "h6Text": style(~fontSize=22., ~fontWeight=`bold, ()),
+      "p": style(~marginTop=29.->dp, ~marginBottom=29.->dp, ()),
+      "pText": style(~fontSize=21., ~lineHeight=32., ~fontWeight=`_300, ()),
+      "ul": style(~marginBottom=29.->dp, ()),
+      "li": style(~fontSize=21., ~lineHeight=32., ~fontWeight=`_300, ()),
+      "liWrapper": style(~flexDirection=`row, ()),
       "liBullet":
-        style([
-          lineHeight(32.),
-          paddingHorizontal(Pt(10.)),
-          alignSelf(FlexStart),
-        ]),
+        style(
+          ~lineHeight=32.,
+          ~paddingHorizontal=10.->dp,
+          ~alignSelf=`flexStart,
+          (),
+        ),
       "blockQuote":
-        style([
-          paddingTop(Pt(29.)),
-          paddingHorizontal(Pt(20.)),
-          marginBottom(Pt(29.)),
-          borderLeftColor(String("#9ca0a3")),
-          borderLeftWidth(3.),
-        ]),
+        style(
+          ~paddingTop=29.->dp,
+          ~paddingHorizontal=20.->dp,
+          ~marginBottom=29.->dp,
+          ~borderLeftColor="#9ca0a3",
+          ~borderLeftWidth=3.,
+          (),
+        ),
       "blockQuoteText":
-        style([
-          fontSize(Float(24.)),
-          lineHeight(32.),
-          fontWeight(`_300),
-          color(String("#515355")),
-        ]),
+        style(
+          ~fontSize=24.,
+          ~lineHeight=32.,
+          ~fontWeight=`_300,
+          ~color="#515355",
+          (),
+        ),
       "hr":
-        style([
-          marginBottom(Pt(29.)),
-          marginHorizontal(Pt(29.)),
-          height(Pt(3.)),
-          backgroundColor(String("#ddd")),
-        ]),
+        style(
+          ~marginBottom=29.->dp,
+          ~marginHorizontal=29.->dp,
+          ~height=3.->dp,
+          ~backgroundColor="#ddd",
+          (),
+        ),
     })
   );
 
 module H1 = {
   [@react.component]
-  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle as tStyl=?, ~children, ()) => {
     <View style=Style.(arrayOption([|Some(styles##h1), styl|]))>
-      <Text style=Style.(arrayOption([|Some(styles##h1Text), textStyle|]))>
+      <Text style=Style.(arrayOption([|Some(styles##h1Text), tStyl|]))>
         children
       </Text>
     </View>;
@@ -66,9 +68,9 @@ module H1 = {
 
 module H2 = {
   [@react.component]
-  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle as tStyle=?, ~children, ()) => {
     <View style=Style.(arrayOption([|Some(styles##h2), styl|]))>
-      <Text style=Style.(arrayOption([|Some(styles##h2Text), textStyle|]))>
+      <Text style=Style.(arrayOption([|Some(styles##h2Text), tStyle|]))>
         children
       </Text>
     </View>;
@@ -77,9 +79,9 @@ module H2 = {
 
 module H3 = {
   [@react.component]
-  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle as tStyle=?, ~children, ()) => {
     <View style=Style.(arrayOption([|Some(styles##h3), styl|]))>
-      <Text style=Style.(arrayOption([|Some(styles##h3Text), textStyle|]))>
+      <Text style=Style.(arrayOption([|Some(styles##h3Text), tStyle|]))>
         children
       </Text>
     </View>;
@@ -88,9 +90,9 @@ module H3 = {
 
 module H4 = {
   [@react.component]
-  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle as tStyle=?, ~children, ()) => {
     <View style=Style.(arrayOption([|Some(styles##h4), styl|]))>
-      <Text style=Style.(arrayOption([|Some(styles##h4Text), textStyle|]))>
+      <Text style=Style.(arrayOption([|Some(styles##h4Text), tStyle|]))>
         children
       </Text>
     </View>;
@@ -99,9 +101,9 @@ module H4 = {
 
 module H5 = {
   [@react.component]
-  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle as tStyle=?, ~children, ()) => {
     <View style=Style.(arrayOption([|Some(styles##h5), styl|]))>
-      <Text style=Style.(arrayOption([|Some(styles##h5Text), textStyle|]))>
+      <Text style=Style.(arrayOption([|Some(styles##h5Text), tStyle|]))>
         children
       </Text>
     </View>;
@@ -110,9 +112,9 @@ module H5 = {
 
 module H6 = {
   [@react.component]
-  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle as tStyle=?, ~children, ()) => {
     <View style=Style.(arrayOption([|Some(styles##h6), styl|]))>
-      <Text style=Style.(arrayOption([|Some(styles##h6Text), textStyle|]))>
+      <Text style=Style.(arrayOption([|Some(styles##h6Text), tStyle|]))>
         children
       </Text>
     </View>;
@@ -121,9 +123,9 @@ module H6 = {
 
 module P = {
   [@react.component]
-  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle as tStyle=?, ~children, ()) => {
     <View style=Style.(arrayOption([|Some(styles##p), styl|]))>
-      <Text style=Style.(arrayOption([|Some(styles##pText), textStyle|]))>
+      <Text style=Style.(arrayOption([|Some(styles##pText), tStyle|]))>
         children
       </Text>
     </View>;
@@ -165,12 +167,10 @@ module Hr = {
 
 module BlockQuote = {
   [@react.component]
-  let make = (~style as styl=?, ~textStyle=?, ~children, ()) => {
+  let make = (~style as styl=?, ~textStyle as tStyle=?, ~children, ()) => {
     <View style=Style.(arrayOption([|Some(styles##blockQuote), styl|]))>
       <Text
-        style=Style.(
-          arrayOption([|Some(styles##blockQuoteText), textStyle|])
-        )>
+        style=Style.(arrayOption([|Some(styles##blockQuoteText), tStyle|]))>
         children
       </Text>
     </View>;

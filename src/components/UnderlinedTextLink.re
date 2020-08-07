@@ -1,16 +1,15 @@
-open BsReactNative;
+open ReactNative;
 
 let styles =
-  StyleSheet.create(
-    {
-      Style.{
-        "link":
-          style([
-            textDecorationLine(Underline),
-            textDecorationStyle(Solid),
-          ]),
-      };
-    },
+  Style.(
+    StyleSheet.create({
+      "link":
+        style(
+          ~textDecorationLine=`underline,
+          ~textDecorationStyle=`solid,
+          (),
+        ),
+    })
   );
 
 [@react.component]

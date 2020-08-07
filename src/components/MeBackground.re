@@ -1,36 +1,19 @@
-open BsReactNative;
+open ReactNative;
 
 let uri = "/me-bg.jpg";
 let w = 1750. /. 2.;
 let h = 850. /. 2.;
-let ptwidth: Style.pt_only = Style.Pt(w);
-let ptheight: Style.pt_only = Style.Pt(h);
 
 [@react.component]
 let make = (~style as styl=?, ()) => {
   <Image
-    source={
-             `URI(
-               Image.(
-                 imageURISource(~uri, ~width=ptwidth, ~height=ptheight, ())
-               ),
-             )
-           }
+    source=Image.(
+      Source.fromUriSource(uriSource(~uri, ~width=w, ~height=h, ()))
+    )
     // SSR workaround https://github.com/necolas/react-native-web/issues/543
-    defaultSource={
-                    `URI(
-                      Image.(
-                        defaultURISource(
-                          ~uri,
-                          ~width=ptwidth,
-                          ~height=ptheight,
-                          (),
-                        )
-                      ),
-                    )
-                  }
+    defaultSource={Image.DefaultSource.fromUri(~uri, ~width=w, ~height=h, ())}
     style=Style.(
-      arrayOption([|Some(style([width(Pt(w)), height(Pt(h))])), styl|])
+      arrayOption([|Some(style(~width=w->dp, ~height=h->dp, ())), styl|])
     )
   />;
 };

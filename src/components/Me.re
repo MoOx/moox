@@ -1,8 +1,8 @@
-open BsReactNative;
+open ReactNative;
 
 let uri = "/me.png";
-let width: Style.pt_only = Style.Pt(390. /. 1.4);
-let height: Style.pt_only = Style.Pt(500. /. 1.4);
+let width = 390. /. 1.4;
+let height = 500. /. 1.4;
 
 [@react.component]
 let make = () => {
@@ -23,13 +23,11 @@ let make = () => {
       (),
     )}>
     <Image
-      source={`URI(Image.(imageURISource(~uri, ~width, ~height, ())))}
+      source=Image.(
+        Source.fromUriSource(uriSource(~uri, ~width, ~height, ()))
+      )
       // SSR workaround https://github.com/necolas/react-native-web/issues/543
-      defaultSource={
-                      `URI(
-                        Image.(defaultURISource(~uri, ~width, ~height, ())),
-                      )
-                    }
+      defaultSource={Image.DefaultSource.fromUri(~uri, ~width, ~height, ())}
     />
   </div>;
 };

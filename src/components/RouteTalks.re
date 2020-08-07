@@ -1,17 +1,18 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
       "title":
-        style([
-          fontSize(Float(36.)),
-          fontWeight(`Bold),
-          textAlign(Center),
-          marginVertical(Pt(20.)),
-          color(String(Consts.Colors.dark)),
-        ]),
+        style(
+          ~fontSize=36.,
+          ~fontWeight=`bold,
+          ~textAlign=`center,
+          ~marginVertical=20.->dp,
+          ~color=Consts.Colors.dark,
+          (),
+        ),
     })
   );
 

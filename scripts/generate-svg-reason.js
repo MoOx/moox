@@ -14,7 +14,7 @@ const template = ({ name }) =>
         ~width: string,
         ~height: string,
         ~fill: string,
-        ~style: option(BsReactNative.Style.t),
+        ~style: option(ReactNative.Style.t),
         unit
       ) =>
       React.element =

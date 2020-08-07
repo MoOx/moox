@@ -1,4 +1,4 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let triangleHeight = 80.;
@@ -6,28 +6,31 @@ let triangleHeight = 80.;
 let styles =
   Style.(
     StyleSheet.create({
-      "container": style([alignItems(Center)]),
-      "icons": style([textAlign(Center), lineHeight(60.)]),
-      "icon": style([paddingHorizontal(Pt(26.))]),
+      "container": style(~alignItems=`center, ()),
+      "icons": style(~textAlign=`center, ~lineHeight=60., ()),
+      "icon": style(~paddingHorizontal=26.->dp, ()),
       "text":
-        style([
-          backgroundColor(String(Consts.Colors.light)),
-          padding(Pt(20.)),
-          alignItems(Center),
-          width(Pct(100.)),
-        ]),
+        style(
+          ~backgroundColor=Consts.Colors.light,
+          ~padding=20.->dp,
+          ~alignItems=`center,
+          ~width=100.->pct,
+          (),
+        ),
       "textNodeStrong":
-        style([
-          fontSize(Float(32.)),
-          color(String(Consts.Colors.dark)),
-          fontWeight(`_800),
-        ]),
+        style(
+          ~fontSize=32.,
+          ~color=Consts.Colors.dark,
+          ~fontWeight=`_800,
+          (),
+        ),
       "textNode":
-        style([
-          fontSize(Float(28.)),
-          color(String(Consts.Colors.dark)),
-          fontWeight(`_200),
-        ]),
+        style(
+          ~fontSize=28.,
+          ~color=Consts.Colors.dark,
+          ~fontWeight=`_200,
+          (),
+        ),
     })
   );
 
@@ -47,16 +50,17 @@ let make = () => {
     <SpacedView
       vertical=L
       style=Style.(
-        style([width(Pct(100.)), overflow(Hidden), alignItems(FlexStart)])
+        style(~width=100.->pct, ~overflow=`hidden, ~alignItems=`flexStart, ())
       )>
       <View
         style=Style.(
-          style([
-            width(Pct(100.)),
-            flexDirection(Row),
-            justifyContent(SpaceAround),
-            alignItems(FlexEnd),
-          ])
+          style(
+            ~width=100.->pct,
+            ~flexDirection=`row,
+            ~justifyContent=`spaceAround,
+            ~alignItems=`flexEnd,
+            (),
+          )
         )>
         ResumeJumbotronLarge.moox
         <Spacer />
@@ -65,19 +69,20 @@ let make = () => {
       <Spacer size=L />
       <View
         style=Style.(
-          style([position(Absolute), bottom(Pt(40.)), left(Pct(80.))])
+          style(~position=`absolute, ~bottom=40.->dp, ~left=80.->pct, ())
         )>
-        <View style=Style.(style([left(Pct(-50.))]))> <Me /> </View>
+        <View style=Style.(style(~left=(-50.)->pct, ()))> <Me /> </View>
       </View>
       <View
         style=Style.(
-          style([
-            zIndex(2),
-            width(Pct(100.)),
-            flexDirection(Row),
-            justifyContent(SpaceAround),
-            alignItems(FlexEnd),
-          ])
+          style(
+            ~zIndex=2,
+            ~width=100.->pct,
+            ~flexDirection=`row,
+            ~justifyContent=`spaceAround,
+            ~alignItems=`flexEnd,
+            (),
+          )
         )>
         <View>
           ResumeJumbotronLarge.proForXyears

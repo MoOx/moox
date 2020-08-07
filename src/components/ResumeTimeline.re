@@ -1,5 +1,5 @@
 open Belt;
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let imageRatio = 240. /. 350.;
@@ -8,14 +8,15 @@ let styles =
   Style.(
     StyleSheet.create({
       "yearText":
-        style([
-          width(Pct(100.)),
-          marginTop(Pt(20.)),
-          textAlign(Center),
-          fontSize(Float(22.)),
-          fontWeight(`_700),
-        ]),
-      "item": style([flexGrow(1.), flexDirection(Row)]),
+        style(
+          ~width=100.->pct,
+          ~marginTop=20.->dp,
+          ~textAlign=`center,
+          ~fontSize=22.,
+          ~fontWeight=`_700,
+          (),
+        ),
+      "item": style(~flexGrow=1., ~flexDirection=`row, ()),
     })
   );
 

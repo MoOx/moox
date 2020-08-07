@@ -1,35 +1,32 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
-      "menu": style([justifyContent(Center), alignItems(Center)]),
+      "menu": style(~justifyContent=`center, ~alignItems=`center, ()),
       "bar":
-        style([
-          flexDirection(Row),
-          flexWrap(Wrap),
-          justifyContent(SpaceBetween),
-        ]),
-      "barWrapper": style([backgroundColor(String(Consts.Colors.dark))]),
-      "icons": style([flexDirection(Row), alignItems(Center)]),
-      "barLinks": style([flexDirection(Row)]),
+        style(
+          ~flexDirection=`row,
+          ~flexWrap=`wrap,
+          ~justifyContent=`spaceBetween,
+          (),
+        ),
+      "barWrapper": style(~backgroundColor=Consts.Colors.dark, ()),
+      "icons": style(~flexDirection=`row, ~alignItems=`center, ()),
+      "barLinks": style(~flexDirection=`row, ()),
       "barLink":
-        style([
-          padding(Pt(10.)),
-          fontSize(Float(14.)),
-          lineHeight(44.),
-          color(String("#FBFCF8")),
-        ]),
-      "barText":
-        style([
-          fontSize(Float(10.)),
-          lineHeight(20.),
-          color(String("#FBFCF8")),
-        ]),
+        style(
+          ~padding=10.->dp,
+          ~fontSize=14.,
+          ~lineHeight=44.,
+          ~color="#FBFCF8",
+          (),
+        ),
+      "barText": style(~fontSize=10., ~lineHeight=20., ~color="#FBFCF8", ()),
       "row":
-        style([flexDirection(Row), flexWrap(Wrap), alignItems(Center)]),
-      "column": style([alignItems(Center), justifyContent(Center)]),
+        style(~flexDirection=`row, ~flexWrap=`wrap, ~alignItems=`center, ()),
+      "column": style(~alignItems=`center, ~justifyContent=`center, ()),
     })
   );
 

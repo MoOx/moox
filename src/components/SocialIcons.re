@@ -1,4 +1,4 @@
-open BsReactNative;
+open ReactNative;
 
 [@react.component]
 let make =

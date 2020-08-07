@@ -17,7 +17,6 @@
     "bs-fetch": "^0.3.0",
     "bs-json": "^1.0.1",
     "bs-platform": "^5.0.6",
-    "bs-react-native-jsx3-compat": "https://github.com/reason-react-native/bs-react-native-jsx3-compat.git",
     "bs-webapi": "^0.15.1",
     "husky": "^1.1.4",
     "jest": "^21.2.1",

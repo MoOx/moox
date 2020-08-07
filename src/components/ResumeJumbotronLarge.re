@@ -1,4 +1,4 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let currentYear = Js.Date.getFullYear(Js.Date.make())->int_of_float;
@@ -8,22 +8,24 @@ let triangleHeight = 80.;
 let leftTriangle =
   <Triangle
     style=Style.(
-      style([
-        position(Absolute),
-        bottom(Pct(0.)),
-        right(Pt((-1.) *. triangleHeight /. Triangle.coef)),
-      ])
+      style(
+        ~position=`absolute,
+        ~bottom=0.->pct,
+        ~right=((-1.) *. triangleHeight /. Triangle.coef)->dp,
+        (),
+      )
     )
     height=triangleHeight
   />;
 let rightTriangle =
   <Triangle
     style=Style.(
-      style([
-        position(Absolute),
-        bottom(Pct(0.)),
-        left(Pt((-1.) *. triangleHeight /. Triangle.coef)),
-      ])
+      style(
+        ~position=`absolute,
+        ~bottom=0.->pct,
+        ~left=((-1.) *. triangleHeight /. Triangle.coef)->dp,
+        (),
+      )
     )
     height=triangleHeight
   />;
@@ -32,23 +34,25 @@ let moox =
   <View>
     <Text
       style=Style.(
-        style([
-          fontSize(Float(64.)),
-          lineHeight(66.),
-          fontWeight(`_700),
-          color(String(Consts.Colors.light)),
-        ])
+        style(
+          ~fontSize=64.,
+          ~lineHeight=66.,
+          ~fontWeight=`_700,
+          ~color=Consts.Colors.light,
+          (),
+        )
       )>
       "MoOx"->React.string
     </Text>
     <Text
       style=Style.(
-        style([
-          fontSize(Float(26.)),
-          lineHeight(26.),
-          fontWeight(`_200),
-          color(String(Consts.Colors.light)),
-        ])
+        style(
+          ~fontSize=26.,
+          ~lineHeight=26.,
+          ~fontWeight=`_200,
+          ~color=Consts.Colors.light,
+          (),
+        )
       )>
       "Maxime Thirouin"->React.string
     </Text>
@@ -58,35 +62,38 @@ let meta =
   <View>
     <Text
       style=Style.(
-        style([
-          color(String(Consts.Colors.light)),
-          fontSize(Float(18.)),
-          lineHeight(18.),
-          fontWeight(`_100),
-        ])
+        style(
+          ~color=Consts.Colors.light,
+          ~fontSize=18.,
+          ~lineHeight=18.,
+          ~fontWeight=`_100,
+          (),
+        )
       )>
       "French"->React.string
     </Text>
-    <Text style=Style.(style([textAlign(Center)]))>
+    <Text style=Style.(style(~textAlign=`center, ()))>
       <Text
         style=Style.(
-          style([
-            color(String(Consts.Colors.light)),
-            fontSize(Float(56.)),
-            lineHeight(56.),
-            fontWeight(`_100),
-          ])
+          style(
+            ~color=Consts.Colors.light,
+            ~fontSize=56.,
+            ~lineHeight=56.,
+            ~fontWeight=`_100,
+            (),
+          )
         )>
         {string_of_int(currentYear - 1985)->React.string}
       </Text>
       <Text
         style=Style.(
-          style([
-            color(String(Consts.Colors.light)),
-            fontSize(Float(18.)),
-            lineHeight(18.),
-            fontWeight(`_900),
-          ])
+          style(
+            ~color=Consts.Colors.light,
+            ~fontSize=18.,
+            ~lineHeight=18.,
+            ~fontWeight=`_900,
+            (),
+          )
         )>
         " yo "->React.string
       </Text>
@@ -94,34 +101,34 @@ let meta =
   </View>;
 
 let proForXyears =
-  <View style=Style.(style([alignItems(FlexStart)]))>
+  <View style=Style.(style(~alignItems=`flexStart, ()))>
     <Text
-      style=Style.(
-        style([color(String(Consts.Colors.light)), fontWeight(`_200)])
-      )>
+      style=Style.(style(~color=Consts.Colors.light, ~fontWeight=`_200, ()))>
       "Professional for"->React.string
     </Text>
     <Text
       style=Style.(
-        style([
-          color(String(Consts.Colors.light)),
-          fontSize(Float(116.)),
-          lineHeight(116.),
-          fontWeight(`_700),
-          marginTop(Pt(-10.)),
-        ])
+        style(
+          ~color=Consts.Colors.light,
+          ~fontSize=116.,
+          ~lineHeight=116.,
+          ~fontWeight=`_700,
+          ~marginTop=dp(-10.),
+          (),
+        )
       )>
       {string_of_int(currentYear - 2007)->React.string}
     </Text>
     <Text
       style=Style.(
-        style([
-          color(String(Consts.Colors.light)),
-          fontSize(Float(64.)),
-          lineHeight(64.),
-          fontWeight(`_100),
-          marginTop(Pt(-20.)),
-        ])
+        style(
+          ~color=Consts.Colors.light,
+          ~fontSize=64.,
+          ~lineHeight=64.,
+          ~fontWeight=`_100,
+          ~marginTop=dp(-20.),
+          (),
+        )
       )>
       " years"->React.string
     </Text>
@@ -131,68 +138,66 @@ let firstMobileApp =
   <SpacedView
     vertical=S
     style=Style.(
-      style([
-        alignItems(Center),
-        backgroundColor(String(Consts.Colors.light)),
-      ])
+      style(~alignItems=`center, ~backgroundColor=Consts.Colors.light, ())
     )>
-    <Text style=Style.(style([color(String(Consts.Colors.dark))]))>
+    <Text style=Style.(style(~color=Consts.Colors.dark, ()))>
       "First mobile"->React.string
     </Text>
-    <Text
-      style=Style.(
-        style([color(String(Consts.Colors.dark)), fontSize(Float(20.))])
-      )>
+    <Text style=Style.(style(~color=Consts.Colors.dark, ~fontSize=20., ()))>
       "web app"->React.string
     </Text>
     <Text
       style=Style.(
-        style([
-          color(String(Consts.Colors.dark)),
-          fontSize(Float(76.)),
-          lineHeight(76.),
-          fontWeight(`_800),
-        ])
+        style(
+          ~color=Consts.Colors.dark,
+          ~fontSize=76.,
+          ~lineHeight=76.,
+          ~fontWeight=`_800,
+          (),
+        )
       )>
       {string_of_int(currentYear - 2005)->React.string}
     </Text>
     <Text
       style=Style.(
-        style([
-          color(String(Consts.Colors.dark)),
-          fontSize(Float(18.)),
-          lineHeight(18.),
-          fontWeight(`_100),
-        ])
+        style(
+          ~color=Consts.Colors.dark,
+          ~fontSize=18.,
+          ~lineHeight=18.,
+          ~fontWeight=`_100,
+          (),
+        )
       )>
       " years ago"->React.string
     </Text>
   </SpacedView>;
 
 let firstWebsite =
-  <View style=Style.(style([alignItems(Center)]))>
-    <Text style=Style.(style([color(String(Consts.Colors.light))]))>
+  <View style=Style.(style(~alignItems=`center, ()))>
+    <Text style=Style.(style(~color=Consts.Colors.light, ()))>
       "First website"->React.string
     </Text>
     <Text
       style=Style.(
-        style([
-          color(String(Consts.Colors.light)),
-          fontSize(Float(76.)),
-          lineHeight(76.),
-          fontWeight(`_400),
-        ])
+        style(
+          ~color=Consts.Colors.light,
+          ~fontSize=76.,
+          ~lineHeight=76.,
+          ~fontWeight=`_400,
+          (),
+        )
       )>
       {string_of_int(currentYear - 1999)->React.string}
     </Text>
     <Text
       style=Style.(
-        style([
-          color(String(Consts.Colors.light)),
-          fontSize(Float(18.)),
-          lineHeight(18.),
-          fontWeight(`_100),
-        ])
+        style(
+          ~color=Consts.Colors.light,
+          ~fontSize=18.,
+          ~lineHeight=18.,
+          ~fontWeight=`_100,
+          (),
+        )
       )>
       "years ago"->React.string
     </Text>
@@ -212,70 +217,74 @@ let make = () => {
     )}>
     <View
       style=Style.(
-        style([
-          position(Absolute),
-          right(Pt(-20.)),
-          bottom(Pt(20.)),
-          transform([rotate(Deg(6.))]),
-        ])
+        style(
+          ~position=`absolute,
+          ~right=dp(-20.),
+          ~bottom=20.->dp,
+          ~transform=[|rotate(~rotate=6.->deg)|],
+          (),
+        )
       )>
       <SVGLogo
         width=320.
         height=320.
         fill=Consts.Colors.light
-        style=Style.(style([opacity(Float(0.02))]))
+        style=Style.(style(~opacity=0.02, ()))
       />
     </View>
-    <View style=Style.(style([justifyContent(FlexEnd), flex(1.)]))>
+    <View style=Style.(style(~justifyContent=`flexEnd, ~flex=1., ()))>
       <View
         style=Style.(
-          style([
-            /* width(Pct(100.)), */
-            backgroundColor(String(Consts.Colors.light)),
-            height(Pt(triangleHeight)),
-          ])
+          style(
+            /* ~width=100.->pct, */
+            ~backgroundColor=Consts.Colors.light,
+            ~height=dp(triangleHeight),
+            (),
+          )
         )>
         leftTriangle
         <Spacer size=L />
       </View>
     </View>
-    <View style=Style.(style([flexGrow(1.)]))>
+    <View style=Style.(style(~flexGrow=1., ()))>
       <View
         style=Style.(
-          style([position(Absolute), bottom(Pt(0.)), left(Pct(51.))])
+          style(~position=`absolute, ~bottom=0.->dp, ~left=51.->pct, ())
         )>
-        <View style=Style.(style([left(Pct(-50.))]))> <Me /> </View>
+        <View style=Style.(style(~left=(-50.)->pct, ()))> <Me /> </View>
       </View>
       <View
         style=Style.(
-          style([
-            flexGrow(1.),
-            zIndex(1),
-            width(Pct(100.)),
-            /* minHeight(Pt(390.)), */
-            /* overflow(Hidden), */
-            alignItems(Center),
-          ])
+          style(
+            ~flexGrow=1.,
+            ~zIndex=1,
+            ~width=100.->pct,
+            /* minHeight(390.->dp), */
+            /* ~overflow=`hidden */
+            ~alignItems=`center,
+            (),
+          )
         )>
         <Spacer size=L />
-        <View style=Style.(style([flexDirection(Row), flexGrow(1.)]))>
-          <View style=Style.(style([justifyContent(SpaceBetween)]))>
+        <View style=Style.(style(~flexDirection=`row, ~flexGrow=1., ()))>
+          <View style=Style.(style(~justifyContent=`spaceBetween, ()))>
             moox
             proForXyears
           </View>
           <Spacer size=XXL />
           <View
             style=Style.(
-              style([
-                flex(1.),
-                justifyContent(FlexEnd),
-                alignItems(Center),
-              ])
+              style(
+                ~flex=1.,
+                ~justifyContent=`flexEnd,
+                ~alignItems=`center,
+                (),
+              )
             )>
             meta
           </View>
           <Spacer size=XXL />
-          <View style=Style.(style([justifyContent(SpaceBetween)]))>
+          <View style=Style.(style(~justifyContent=`spaceBetween, ()))>
             firstMobileApp
             <Spacer size=L />
             firstWebsite
@@ -284,13 +293,14 @@ let make = () => {
         <Spacer size=L />
       </View>
     </View>
-    <View style=Style.(style([justifyContent(FlexEnd), flex(1.)]))>
+    <View style=Style.(style(~justifyContent=`flexEnd, ~flex=1., ()))>
       <View
         style=Style.(
-          style([
-            backgroundColor(String(Consts.Colors.light)),
-            height(Pt(triangleHeight)),
-          ])
+          style(
+            ~backgroundColor=Consts.Colors.light,
+            ~height=dp(triangleHeight),
+            (),
+          )
         )>
         rightTriangle
       </View>

@@ -1,43 +1,43 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
-      "container": style([alignItems(Center)]),
+      "container": style(~alignItems=`center, ()),
       "text":
-        style([
-          backgroundColor(String(Consts.Colors.light)),
-          padding(Pt(20.)),
-          alignItems(Center),
-          width(Pct(100.)),
-        ]),
+        style(
+          ~backgroundColor=Consts.Colors.light,
+          ~padding=20.->dp,
+          ~alignItems=`center,
+          ~width=100.->pct,
+          (),
+        ),
       "textLight":
-        style([
-          fontSize(Float(28.)),
-          color(String(Consts.Colors.dark)),
-          fontWeight(`_200),
-        ]),
+        style(
+          ~fontSize=28.,
+          ~color=Consts.Colors.dark,
+          ~fontWeight=`_200,
+          (),
+        ),
       "textStrong":
-        style([
-          fontSize(Float(32.)),
-          color(String(Consts.Colors.dark)),
-          fontWeight(`_800),
-        ]),
-      "row": style([flexDirection(Row), flexWrap(Wrap)]),
-      "cell": style([flex(1.), flexBasis(Pt(240.))]),
+        style(
+          ~fontSize=32.,
+          ~color=Consts.Colors.dark,
+          ~fontWeight=`_800,
+          (),
+        ),
+      "row": style(~flexDirection=`row, ~flexWrap=`wrap, ()),
+      "cell": style(~flex=1., ~flexBasis=240.->dp, ()),
       "cellTitle":
-        style([
-          fontSize(Float(32.)),
-          color(String(Consts.Colors.dark)),
-          fontWeight(`_600),
-        ]),
+        style(
+          ~fontSize=32.,
+          ~color=Consts.Colors.dark,
+          ~fontWeight=`_600,
+          (),
+        ),
       "cellText":
-        style([
-          fontSize(Float(16.)),
-          lineHeight(24.),
-          color(String(Consts.Colors.dark)),
-        ]),
+        style(~fontSize=16., ~lineHeight=24., ~color=Consts.Colors.dark, ()),
     })
   );
 

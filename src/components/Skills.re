@@ -1,23 +1,28 @@
-open BsReactNative;
+open ReactNative;
 
 let styles =
   Style.(
     StyleSheet.create({
       "container":
-        style([
-          flexDirection(Row),
-          flexWrap(Wrap),
-          justifyContent(Center),
-          alignItems(Center),
-        ]),
+        style(
+          ~flexDirection=`row,
+          ~flexWrap=`wrap,
+          ~justifyContent=`center,
+          ~alignItems=`center,
+          (),
+        ),
       "icon":
-        style([
-          position(Absolute),
-          right(Pt(-20.)),
-          bottom(Pt(-20.)),
-          opacity(Float(0.1)),
-          transform([perspective(Float(800.)), rotate(Deg(6.))]),
-        ]),
+        style(
+          ~position=`absolute,
+          ~right=dp(-20.),
+          ~bottom=dp(-20.),
+          ~opacity=0.1,
+          ~transform=[|
+            perspective(~perspective=800.),
+            rotate(~rotate=6.->deg),
+          |],
+          (),
+        ),
     })
   );
 
@@ -44,7 +49,7 @@ let skills: array(CardWithGradient.item) = [|
         style=Style.(
           array([|
             styles##icon,
-            style([right(Pt(-40.)), bottom(Pt(-40.))]),
+            style(~right=(-40.)->dp, ~bottom=(-40.)->dp, ()),
           |])
         )>
         <SVGReact width=200. height=200. fill=Consts.Colors.light />
@@ -61,7 +66,7 @@ let skills: array(CardWithGradient.item) = [|
         style=Style.(
           array([|
             styles##icon,
-            style([right(Pt(-40.)), bottom(Pt(-40.))]),
+            style(~right=(-40.)->dp, ~bottom=(-40.)->dp, ()),
           |])
         )>
         <SVGReasonMini width=200. height=200. fill=Consts.Colors.light />
@@ -78,7 +83,7 @@ let skills: array(CardWithGradient.item) = [|
         style=Style.(
           array([|
             styles##icon,
-            style([right(Pt(-30.)), bottom(Pt(-30.))]),
+            style(~right=(-30.)->dp, ~bottom=(-30.)->dp, ()),
           |])
         )>
         <SVGTouch width=200. height=200. fill=Consts.Colors.light />

@@ -1,76 +1,67 @@
 open Belt;
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
-      "wrapper": style([flexGrow(1.), flexShrink(1.)]),
+      "wrapper": style(~flexGrow=1., ~flexShrink=1., ()),
       "container":
-        style([
-          flexGrow(1.),
-          backgroundColor(String(Consts.Colors.lightest)),
-          shadowColor(String("#000")),
-          shadowOffset(~width=0., ~height=5.),
-          shadowOpacity(0.15),
-          shadowRadius(30.),
-        ]),
+        style(
+          ~flexGrow=1.,
+          ~backgroundColor=Consts.Colors.lightest,
+          ~shadowColor="#000",
+          ~shadowOffset=offset(~width=0., ~height=5.),
+          ~shadowOpacity=0.15,
+          ~shadowRadius=30.,
+          (),
+        ),
       "imageWrapper":
-        style([
-          borderTopLeftRadius(6.),
-          borderTopRightRadius(6.),
-          overflow(Hidden),
-        ]),
-      "block": style([flex(1.)]),
-      "head": style([flexDirection(Row), justifyContent(SpaceBetween)]),
-      "title":
-        style([
-          fontSize(Float(14.)),
-          color(String("#888")),
-          fontWeight(`_500),
-        ]),
-      "company":
-        style([
-          fontSize(Float(16.)),
-          color(String("#333")),
-          fontWeight(`_100),
-        ]),
-      "description": style([fontSize(Float(24.)), fontWeight(`_700)]),
-      "duration":
-        style([
-          fontSize(Float(14.)),
-          color(String("#666")),
-          fontWeight(`_300),
-        ]),
+        style(
+          ~borderTopLeftRadius=6.,
+          ~borderTopRightRadius=6.,
+          ~overflow=`hidden,
+          (),
+        ),
+      "block": style(~flex=1., ()),
+      "head": style(~flexDirection=`row, ~justifyContent=`spaceBetween, ()),
+      "title": style(~fontSize=14., ~color="#888", ~fontWeight=`_500, ()),
+      "company": style(~fontSize=16., ~color="#333", ~fontWeight=`_100, ()),
+      "description": style(~fontSize=24., ~fontWeight=`_700, ()),
+      "duration": style(~fontSize=14., ~color="#666", ~fontWeight=`_300, ()),
       "links":
-        style([
-          flex(1.),
-          flexDirection(Row),
-          flexWrap(Wrap),
-          justifyContent(FlexEnd),
-        ]),
+        style(
+          ~flex=1.,
+          ~flexDirection=`row,
+          ~flexWrap=`wrap,
+          ~justifyContent=`flexEnd,
+          (),
+        ),
       "link":
-        style([
-          display(Flex),
-          justifyContent(Center),
-          alignItems(FlexEnd),
-          fontSize(Float(14.)),
-          color(String(Consts.Colors.dark)),
-          fontWeight(`_200),
-        ]),
+        style(
+          ~display=`flex,
+          ~justifyContent=`center,
+          ~alignItems=`flexEnd,
+          ~fontSize=14.,
+          ~color=Consts.Colors.dark,
+          ~fontWeight=`_200,
+          (),
+        ),
       "tags":
-        style([
-          flex(1.),
-          flexDirection(Row),
-          flexWrap(Wrap),
-          justifyContent(FlexEnd),
-        ]),
+        style(
+          ~flex=1.,
+          ~flexDirection=`row,
+          ~flexWrap=`wrap,
+          ~justifyContent=`flexEnd,
+          (),
+        ),
       "tag":
-        style([
-          fontSize(Float(14.)),
-          color(String(Consts.Colors.dark)),
-          fontWeight(`_300),
-        ]),
+        style(
+          ~fontSize=14.,
+          ~color=Consts.Colors.dark,
+          ~fontWeight=`_300,
+          (),
+        ),
     })
   );
 

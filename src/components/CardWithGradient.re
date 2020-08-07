@@ -1,33 +1,36 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
-      "itemWrapper": style([flex(1.), flexBasis(Pt(250.))]),
+      "itemWrapper": style(~flex=1., ~flexBasis=250.->dp, ()),
       "item":
-        style([
-          padding(Pt(20.)),
-          flexBasis(Pt(200.)),
-          shadowColor(String("#000")),
-          shadowOffset(~width=0., ~height=5.),
-          shadowOpacity(0.2),
-          shadowRadius(10.),
-        ]),
+        style(
+          ~padding=20.->dp,
+          ~flexBasis=200.->dp,
+          ~shadowColor="#000",
+          ~shadowOffset=offset(~width=0., ~height=5.),
+          ~shadowOpacity=0.2,
+          ~shadowRadius=10.,
+          (),
+        ),
       "textNodeStrong":
-        style([
-          fontSize(Float(32.)),
-          color(String(Consts.Colors.light)),
-          fontWeight(`_800),
-        ]),
-      "textSpace": style([flex(1.)]),
+        style(
+          ~fontSize=32.,
+          ~color=Consts.Colors.light,
+          ~fontWeight=`_800,
+          (),
+        ),
+      "textSpace": style(~flex=1., ()),
       "textNode":
-        style([
-          textAlign(Right),
-          fontSize(Float(16.)),
-          color(String(Consts.Colors.light)),
-          fontWeight(`_300),
-        ]),
+        style(
+          ~textAlign=`right,
+          ~fontSize=16.,
+          ~color=Consts.Colors.light,
+          ~fontWeight=`_300,
+          (),
+        ),
     })
   );
 
@@ -48,10 +51,7 @@ let make = (~item, ()) => {
         {item.icon}
         <Text
           style=Style.(
-            array([|
-              styles##textNodeStrong,
-              style([color(String(item.color))]),
-            |])
+            array([|styles##textNodeStrong, style(~color=item.color, ())|])
           )>
           item.title->React.string
         </Text>

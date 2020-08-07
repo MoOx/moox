@@ -1,12 +1,11 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
-      "title": style([color(String(Consts.Colors.dark))]),
-      "text":
-        style([fontSize(Float(21.)), lineHeight(33.), fontWeight(`_400)]),
+      "title": style(~color=Consts.Colors.dark, ()),
+      "text": style(~fontSize=21., ~lineHeight=33., ~fontWeight=`_400, ()),
     })
   );
 
@@ -22,7 +21,7 @@ let make = (~contentItem, ~id) => {
          </BsReactHelmet>
          <SpacedView vertical=None>
            <Html.H1 textStyle=styles##title> "..."->React.string </Html.H1>
-           <ActivityIndicator size=`large />
+           <ActivityIndicator size=ActivityIndicator.Size.large />
            <Spacer size=L />
          </SpacedView>
        </Container>

@@ -25,7 +25,6 @@
     "@glennsl/bs-json",
     "bs-date-fns",
     "reason-react",
-    "bs-react-native-jsx3-compat",
     "reason-react-native",
     "react-multiversal",
     "@moox/bs-react-helmet",

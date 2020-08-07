@@ -1,4 +1,4 @@
-open BsReactNative;
+open ReactNative;
 
 let coef = 2. *. 0.8660254;
 
@@ -14,18 +14,19 @@ let make =
     style=Style.(
       arrayOption([|
         Some(
-          style([
-            width(Pt(0.)),
-            height(Pt(0.)),
-            borderTopWidth(0.),
-            borderTopColor(String("transparent")),
-            borderLeftWidth(h /. coef),
-            borderLeftColor(String("transparent")),
-            borderRightWidth(h /. coef),
-            borderRightColor(String("transparent")),
-            borderBottomWidth(h),
-            borderBottomColor(String(colour)),
-          ]),
+          style(
+            ~width=0.->dp,
+            ~height=0.->dp,
+            ~borderTopWidth=0.,
+            ~borderTopColor="transparent",
+            ~borderLeftWidth=h /. coef,
+            ~borderLeftColor="transparent",
+            ~borderRightWidth=h /. coef,
+            ~borderRightColor="transparent",
+            ~borderBottomWidth=h,
+            ~borderBottomColor=colour,
+            (),
+          ),
         ),
         styl,
       |])

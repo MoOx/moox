@@ -12,10 +12,10 @@ let make =
   <TextLink
     ?accessibilityLabel
     href
-    style=BsReactNative.(
+    style=ReactNative.(
       Style.(
         arrayOption([|
-          Some(style([display(Flex), flexDirection(Column)])),
+          Some(style(~display=`flex, ~flexDirection=`column, ())),
           styl,
         |])
       )

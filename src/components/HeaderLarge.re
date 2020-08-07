@@ -1,61 +1,71 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
       "barWrapper":
-        style([
-          shadowColor(String("#000")),
-          shadowOffset(~width=0., ~height=5.),
-          shadowOpacity(0.15),
-          shadowRadius(20.),
-          zIndex(1),
-          backgroundColor(String(Predefined.Colors.white)),
-        ]),
+        style(
+          ~shadowColor="#000",
+          ~shadowOffset=offset(~width=0., ~height=5.),
+          ~shadowOpacity=0.15,
+          ~shadowRadius=20.,
+          ~zIndex=1,
+          ~backgroundColor=Predefined.Colors.white,
+          (),
+        ),
       "bar":
-        style([
-          flexDirection(Row),
-          flexWrap(Wrap),
-          justifyContent(SpaceBetween),
-          alignItems(Center),
-        ]),
+        style(
+          ~flexDirection=`row,
+          ~flexWrap=`wrap,
+          ~justifyContent=`spaceBetween,
+          ~alignItems=`center,
+          (),
+        ),
       "logo":
-        style([
-          flexDirection(Row),
-          position(Relative),
-          zIndex(1),
-          paddingHorizontal(Pt(10.)),
-          alignItems(Center),
-        ]),
+        style(
+          ~flexDirection=`row,
+          ~position=`relative,
+          ~zIndex=1,
+          ~paddingHorizontal=10.->dp,
+          ~alignItems=`center,
+          (),
+        ),
       "logoText":
-        style([
-          fontSize(Float(26.)),
-          fontWeight(`_700),
-          color(String(Predefined.Colors.black)),
-        ]),
-      "icons": style([flexDirection(Row)]),
+        style(
+          ~fontSize=26.,
+          ~fontWeight=`_700,
+          ~color=Predefined.Colors.black,
+          (),
+        ),
+      "icons": style(~flexDirection=`row, ()),
       "icon":
-        style([
-          flexGrow(1.),
-          flexShrink(0.),
-          display(Flex),
-          justifyContent(Center),
-          alignItems(Center),
-          paddingHorizontal(Pt(12.)),
-          paddingVertical(Pt(6.)),
-          fontSize(Float(12.)),
-        ]),
-      "linkContainer": style([flexDirection(Row)]),
+        style(
+          ~flexGrow=1.,
+          ~flexShrink=0.,
+          ~display=`flex,
+          ~justifyContent=`center,
+          ~alignItems=`center,
+          ~paddingHorizontal=12.->dp,
+          ~paddingVertical=6.->dp,
+          ~fontSize=12.,
+          (),
+        ),
+      "linkContainer": style(~flexDirection=`row, ()),
       "link":
-        style([
-          padding(Pt(10.)),
-          fontSize(Float(16.)),
-          lineHeight(18. *. 1.7),
-          color(String(Predefined.Colors.black)),
-        ]),
+        style(
+          ~padding=10.->dp,
+          ~fontSize=16.,
+          ~lineHeight=18. *. 1.7,
+          ~color=Predefined.Colors.black,
+          (),
+        ),
       "linkActive":
-        style([textDecorationLine(Underline), textDecorationStyle(Solid)]),
+        style(
+          ~textDecorationLine=`underline,
+          ~textDecorationStyle=`solid,
+          (),
+        ),
     })
   );
 

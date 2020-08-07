@@ -1,4 +1,4 @@
-open BsReactNative;
+open ReactNative;
 
 type htmlProps = {
   .

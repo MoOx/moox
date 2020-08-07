@@ -1,13 +1,10 @@
-open BsReactNative;
+open ReactNative;
 
 let styles =
-  StyleSheet.create(
-    {
-      Style.{
-        "background":
-          style([borderRadius(6.), backgroundColor(String("#FBFCF8"))]),
-      };
-    },
+  Style.(
+    StyleSheet.create({
+      "background": style(~borderRadius=6., ~backgroundColor="#FBFCF8", ()),
+    })
   );
 
 [@react.component]

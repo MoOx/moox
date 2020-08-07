@@ -1,18 +1,19 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
       "text":
-        style([
-          flexDirection(Row),
-          flex(1.),
-          alignItems(FlexStart),
-          lineHeight(28.),
-          color(String(Consts.Colors.dark)),
-        ]),
-      "title": style([fontSize(Float(22.))]),
+        style(
+          ~flexDirection=`row,
+          ~flex=1.,
+          ~alignItems=`flexStart,
+          ~lineHeight=28.,
+          ~color=Consts.Colors.dark,
+          (),
+        ),
+      "title": style(~fontSize=22., ()),
     })
   );
 

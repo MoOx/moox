@@ -1,19 +1,20 @@
-open BsReactNative;
+open ReactNative;
 
 let imageRatio = 240. /. 350.;
 
 let styles =
   Style.(
     StyleSheet.create({
-      "flex": style([width(Pct(100.))]),
+      "flex": style(~width=100.->pct, ()),
       "yearText":
-        style([
-          width(Pct(100.)),
-          marginTop(Pt(20.)),
-          textAlign(Center),
-          fontSize(Float(22.)),
-          fontWeight(`_700),
-        ]),
+        style(
+          ~width=100.->pct,
+          ~marginTop=20.->dp,
+          ~textAlign=`center,
+          ~fontSize=22.,
+          ~fontWeight=`_700,
+          (),
+        ),
     })
   );
 

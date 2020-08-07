@@ -1,24 +1,26 @@
-open BsReactNative;
+open ReactNative;
 open ReactMultiversal;
 
 let styles =
   Style.(
     StyleSheet.create({
-      "container": style([justifyContent(Center), alignItems(Center)]),
+      "container": style(~justifyContent=`center, ~alignItems=`center, ()),
       "oops":
-        style([
-          textAlign(Center),
-          fontSize(Float(64.)),
-          lineHeight(64.),
-          color(String("#ddd")),
-        ]),
+        style(
+          ~textAlign=`center,
+          ~fontSize=64.,
+          ~lineHeight=64.,
+          ~color="#ddd",
+          (),
+        ),
       "title":
-        style([
-          margin(Pt(60.)),
-          fontSize(Float(24.)),
-          lineHeight(48.),
-          textAlign(Center),
-        ]),
+        style(
+          ~margin=60.->dp,
+          ~fontSize=24.,
+          ~lineHeight=48.,
+          ~textAlign=`center,
+          (),
+        ),
     })
   );
 
