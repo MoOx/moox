@@ -9,7 +9,6 @@
     "@phenomic/core": "^1.0.0-beta.11",
     "@phenomic/preset-react-app": "^1.0.0-beta.11",
     "@svgr/cli": "^3.1.0",
-    "b64-image": "^0.0.1",
     "babel-jest": "^21.2.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-react-native-web": "^0.3.3",
@@ -18,6 +17,7 @@
     "bs-fetch": "^0.3.0",
     "bs-json": "^1.0.1",
     "bs-platform": "^5.0.6",
+    "bs-react-native-jsx3-compat": "https://github.com/reason-react-native/bs-react-native-jsx3-compat.git",
     "bs-webapi": "^0.15.1",
     "husky": "^1.1.4",
     "jest": "^21.2.1",
@@ -37,9 +37,7 @@
     "react-test-renderer": "^16.8.1",
     "reason-react": "https://github.com/reasonml/reason-react.git",
     "reason-react-native": "https://github.com/reason-react-native/reason-react-native.git#9012a7b",
-    "bs-react-native-jsx3-compat": "https://github.com/reason-react-native/bs-react-native-jsx3-compat.git",
-    "symlink-dir": "^3.1.0",
-    "trash-cli": "^1.4.0"
+    "trash-cli": "^3.1.0"
   },
   "scripts": {
     "format": "yarn format:most && yarn format:re",
@@ -54,8 +52,6 @@
     "svg:convert:native": "svgr --icon --native -d assets/SVGs/components assets/SVGs",
     "svg:convert:re": "node scripts/generate-svg-reason.js assets/SVGs/components",
     "svg:convert": "trash assets/SVGs/components && yarn svg:convert:web && yarn svg:convert:native && yarn svg:convert:re",
-    "cover-blur-base64": "mkdirp lib && convert -resize 32x32 public/cover.jpg public/cover.blur.jpg && echo \"module.exports = \\\"$(b64-image public/cover.blur.jpg)\\\"\" > lib/cover.blur.js",
-    "#prepare": "yarn clean && yarn cover-blur-base64 && yarn svg:convert && yarn re:build",
     "prepare": "yarn clean && yarn svg:convert && yarn re:build",
     "start": "echo Choose start:web or start:native",
     "start:re": "yarn re:build -w",
