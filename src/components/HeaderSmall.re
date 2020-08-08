@@ -10,6 +10,22 @@ let make =
     ) => {
   <WindowSizeFilter.SMax>
     <StickyHeader
+      backgroundElement={
+        <StickyHeaderBackground
+          backdropFilter="saturate(200%) brightness(150%) grayscale(20%) blur(20px)"
+          style=Style.(
+            style(
+              ~position=`absolute,
+              ~top=0.->dp,
+              ~left=0.->dp,
+              ~bottom=0.->dp,
+              ~right=0.->dp,
+              ~backgroundColor="rgba(255,255,255,0.8)",
+              (),
+            )
+          )
+        />
+      }
       scrollYAnimatedValue=AppWrapper.scrollYAnimatedValue
       scrollOffsetY=100.
       title
@@ -25,7 +41,11 @@ let make =
                      style=Style.(style(~color, ~paddingBottom=2.->dp, ()))>
                      "Get in touch"->React.string
                    </Text>
-                   <SVGChevronRight fill=color width=19. height=19. />
+                   <SVGChevronRight
+                     fill=color
+                     width={19.->Style.dp}
+                     height={19.->Style.dp}
+                   />
                    <Spacer size=XXS />
                  </Row.Center>
                </ViewLink>
@@ -38,7 +58,11 @@ let make =
                      "Save"->React.string
                    </Text>
                    <Spacer size=XXS />
-                   <SVGContact fill=color width=19. height=19. />
+                   <SVGContact
+                     fill=color
+                     width={19.->Style.dp}
+                     height={19.->Style.dp}
+                   />
                    <Spacer size=XXS />
                  </Row.Center>
                </a>}

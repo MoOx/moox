@@ -19,7 +19,11 @@ let make = () => {
             (),
           )
         )>
-        <SVGLogo width=64. height=64. fill=Consts.Colors.dark />
+        <SVGLogo
+          width={64.->Style.dp}
+          height={64.->Style.dp}
+          fill=Consts.Colors.dark
+        />
       </SpacedView>
       <Spacer />
       <View>

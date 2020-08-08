@@ -221,15 +221,15 @@ let make = () => {
           ~position=`absolute,
           ~right=dp(-20.),
           ~bottom=20.->dp,
+          ~opacity=0.02,
           ~transform=[|rotate(~rotate=6.->deg)|],
           (),
         )
       )>
       <SVGLogo
-        width=320.
-        height=320.
+        width={320.->Style.dp}
+        height={320.->Style.dp}
         fill=Consts.Colors.light
-        style=Style.(style(~opacity=0.02, ()))
       />
     </View>
     <View style=Style.(style(~justifyContent=`flexEnd, ~flex=1., ()))>

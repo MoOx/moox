@@ -1,3 +1,5 @@
+open ReactNative;
+
 let title = {j|MoOx|j};
 let defaultTitle = {j|Freelance Front-End Developer, Mobile & Web|j};
 let titleTemplate = {j|%s - |j} ++ title;
@@ -13,26 +15,30 @@ let menuLinks: array(menuLink) = [|
   {
     link: "/",
     text: {j|Home|j},
-    icon: (~width, ~height, ~fill, _) => <SVGMenuHome width height fill />,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGMenuHome width={width->Style.dp} height={height->Style.dp} fill />,
     isActive: (current, link) => current == link,
   },
   // {
   //   link: "/solutions/",
   //   text: {j|Solutions|j},
-  //   icon: (~width, ~height, ~fill, _) => <SVGMenuResume width height fill />,
+  //   icon: (~width, ~height, ~fill, _) =>
+  //     <SVGMenuResume width={width->Style.dp} height={height->Style.dp} fill />,
   //   isActive: (current, _link) =>
   //     Js.String.startsWith("/solutions/", current),
   // },
   {
     link: "/resume/",
     text: {j|About|j},
-    icon: (~width, ~height, ~fill, _) => <SVGMenuResume width height fill />,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGMenuResume width={width->Style.dp} height={height->Style.dp} fill />,
     isActive: (current, _link) => Js.String.startsWith("/resume/", current),
   },
   {
     link: "/talks/",
     text: {j|Talks|j},
-    icon: (~width, ~height, ~fill, _) => <SVGMenuTalk width height fill />,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGMenuTalk width={width->Style.dp} height={height->Style.dp} fill />,
     isActive: (current, _link) =>
       Js.String.startsWith("/talks/", current)
       || Js.String.startsWith("/talk/", current),
@@ -40,7 +46,8 @@ let menuLinks: array(menuLink) = [|
   {
     link: "/blog/",
     text: {j|Blog|j},
-    icon: (~width, ~height, ~fill, _) => <SVGMenuBlog width height fill />,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGMenuBlog width={width->Style.dp} height={height->Style.dp} fill />,
     isActive: (current, _link) => Js.String.startsWith("/blog/", current),
   },
 |];
@@ -56,19 +63,31 @@ let socialLinks = [|
     text: "@MoOx on GitHub",
     link: "https://github.com/MoOx",
     componentFunc: (~iconColor, ~iconSize) =>
-      <SVGSocialGithub fill=iconColor width=iconSize height=iconSize />,
+      <SVGSocialGithub
+        fill=iconColor
+        width={iconSize->Style.dp}
+        height={iconSize->Style.dp}
+      />,
   },
   {
     text: "@MoOx on LinkedIn",
     link: "https://www.linkedin.com/in/maxthirouin/",
     componentFunc: (~iconColor, ~iconSize) =>
-      <SVGSocialLinkedin fill=iconColor width=iconSize height=iconSize />,
+      <SVGSocialLinkedin
+        fill=iconColor
+        width={iconSize->Style.dp}
+        height={iconSize->Style.dp}
+      />,
   },
   {
     text: "@MoOx on Twitter",
     link: "https://twitter.com/MoOx",
     componentFunc: (~iconColor, ~iconSize) =>
-      <SVGSocialTwitter fill=iconColor width=iconSize height=iconSize />,
+      <SVGSocialTwitter
+        fill=iconColor
+        width={iconSize->Style.dp}
+        height={iconSize->Style.dp}
+      />,
   },
 |];
 

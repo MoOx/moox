@@ -41,11 +41,31 @@ let make = (~posts) => {
         <TitlePre> "COMPANIES THAT TRUSTED ME"->React.string </TitlePre>
       </Center>
       <Row.Wrap.Center>
-        <SVGCompanyKisioDigital width=200. height=200. fill="#bbb" />
-        <SVGCompanyMolotovTv width=200. height=200. fill="#bbb" />
-        <SVGCompanyAirbus width=200. height=200. fill="#bbb" />
-        <SVGCompanyViareport width=200. height=200. fill="#bbb" />
-        <SVGCompanyJirafe width=200. height=200. fill="#bbb" />
+        <SVGCompanyKisioDigital
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill="#bbb"
+        />
+        <SVGCompanyMolotovTv
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill="#bbb"
+        />
+        <SVGCompanyAirbus
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill="#bbb"
+        />
+        <SVGCompanyViareport
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill="#bbb"
+        />
+        <SVGCompanyJirafe
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill="#bbb"
+        />
       </Row.Wrap.Center>
     </Container>
     <Spacer />

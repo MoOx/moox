@@ -19,7 +19,11 @@ let make = () => {
             (),
           )
         )>
-        <SVGReact width=200. height=200. fill=Consts.Colors.light />
+        <SVGReact
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill=Consts.Colors.light
+        />
       </View>
       <Text
         style=Style.(
@@ -67,7 +71,11 @@ let make = () => {
           (),
         )
       )>
-      <SVGDevices fill=Consts.Colors.lightGrey width=42. height=42. />
+      <SVGDevices
+        fill=Consts.Colors.lightGrey
+        width={42.->Style.dp}
+        height={42.->Style.dp}
+      />
       <Spacer />
       <Text
         style=Style.(

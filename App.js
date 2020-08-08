@@ -1,5 +1,6 @@
 import * as React from "react";
 import { AppRegistry } from "react-native-web";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Router, Route, browserHistory } from "react-router";
 import { createApp, renderApp } from "@phenomic/preset-react-app/lib/client";
 import { withPhenomicApi } from "@phenomic/preset-react-app/src/phenomicPresetReactApp.bs.js";
@@ -70,7 +71,9 @@ const routes = () => (
 );
 
 const render = (rootComponent, rootTag) => {
-  AppRegistry.registerComponent("App", () => () => rootComponent);
+  AppRegistry.registerComponent("App", () => () => (
+    <SafeAreaProvider>{rootComponent}</SafeAreaProvider>
+  ));
   AppRegistry.runApplication("App", { rootTag });
 };
 

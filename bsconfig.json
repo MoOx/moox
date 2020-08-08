@@ -26,6 +26,7 @@
     "bs-date-fns",
     "reason-react",
     "reason-react-native",
+    "@reason-react-native/svg",
     "react-multiversal",
     "@moox/bs-react-helmet",
     "@phenomic/preset-react-app",

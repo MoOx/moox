@@ -11,7 +11,11 @@ let make = () => {
           horizontalSpace=S
           verticalSpace=S
           color={Predefined.Colors.Ios.light.green}>
-          <SVGSpeechBubble fill=Predefined.Colors.white width=24. height=24. />
+          <SVGSpeechBubble
+            fill=Predefined.Colors.white
+            width={24.->Style.dp}
+            height={24.->Style.dp}
+          />
         </ButtonContained>
       </ViewLink>
     </SpacedView>

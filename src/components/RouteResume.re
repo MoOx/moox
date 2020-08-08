@@ -112,73 +112,121 @@ let make = (~items) => {
           <View style=styles##activities>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGJavaScript fill="#bbb" width=48. height=48. />
+                <SVGJavaScript
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "JavaScript"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGReact fill="#bbb" width=48. height=48. />
+                <SVGReact
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "React"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGReason fill="#bbb" width=48. height=48. />
+                <SVGReason
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "ReasonML"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGJest fill="#bbb" width=48. height=48. />
+                <SVGJest
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Jest"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGTypeScript fill="#bbb" width=48. height=48. />
+                <SVGTypeScript
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "TypeScript"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGFlow fill="#bbb" width=48. height=48. />
+                <SVGFlow
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Flow"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGGraphql fill="#bbb" width=48. height=48. />
+                <SVGGraphql
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Graphql"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGApollo fill="#bbb" width=48. height=48. />
+                <SVGApollo
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Apollo"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGWebpack fill="#bbb" width=48. height=48. />
+                <SVGWebpack
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Webpack"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGPhotoshop fill="#bbb" width=48. height=48. />
+                <SVGPhotoshop
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Photoshop"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGSketch fill="#bbb" width=48. height=48. />
+                <SVGSketch
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Sketch"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGCommandLine fill="#bbb" width=48. height=48. />
+                <SVGCommandLine
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "CLI"->React.string </Text>
             </SpacedView>
@@ -231,19 +279,31 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
           <View style=styles##activities>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGActivityCrossfit fill="#bbb" width=48. height=48. />
+                <SVGActivityCrossfit
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Crossfit"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGActivityBike fill="#bbb" width=48. height=48. />
+                <SVGActivityBike
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Bike"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGActivityWakeboard fill="#bbb" width=48. height=48. />
+                <SVGActivityWakeboard
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Wakeboard"->React.string </Text>
             </SpacedView>
@@ -254,19 +314,31 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
           <View style=styles##activities>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGActivityDiy fill="#bbb" width=48. height=48. />
+                <SVGActivityDiy
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Bricolage"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGMicrophone fill="#bbb" width=48. height=48. />
+                <SVGMicrophone
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Podcast"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=XS>
               <div style=grayIconDomStyle>
-                <SVGTraining fill="#bbb" width=48. height=48. />
+                <SVGTraining
+                  fill="#bbb"
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Teaching"->React.string </Text>
             </SpacedView>
@@ -277,13 +349,21 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
           <View style=styles##activities>
             <SpacedView horizontal=XXS vertical=XXS>
               <div style=grayIconDomStyle>
-                <SVGActivitySkydiving fill="#bbb" width=36. height=36. />
+                <SVGActivitySkydiving
+                  fill="#bbb"
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Skydiving"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XXS vertical=XXS>
               <div style=grayIconDomStyle>
-                <SVGActivitySki fill="#bbb" width=36. height=36. />
+                <SVGActivitySki
+                  fill="#bbb"
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText>
                 "Alpine\nSkiing"->React.string
@@ -291,7 +371,11 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
             </SpacedView>
             <SpacedView horizontal=XXS vertical=XXS>
               <div style=grayIconDomStyle>
-                <SVGActivityMartialArt fill="#bbb" width=36. height=36. />
+                <SVGActivityMartialArt
+                  fill="#bbb"
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText>
                 "Martial\nArt"->React.string
@@ -299,13 +383,21 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
             </SpacedView>
             <SpacedView horizontal=XXS vertical=XXS>
               <div style=grayIconDomStyle>
-                <SVGActivityTrekking fill="#bbb" width=36. height=36. />
+                <SVGActivityTrekking
+                  fill="#bbb"
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Trekking"->React.string </Text>
             </SpacedView>
             <SpacedView horizontal=XXS vertical=XXS>
               <div style=grayIconDomStyle>
-                <SVGActivitySkateboard fill="#bbb" width=36. height=36. />
+                <SVGActivitySkateboard
+                  fill="#bbb"
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Skate"->React.string </Text>
             </SpacedView>
@@ -313,8 +405,8 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
               <div style=grayIconDomStyle>
                 <SVGActivityObstacleCourseRace
                   fill="#bbb"
-                  width=36.
-                  height=36.
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
                 />
               </div>
               <Text style=styles##iconText>
@@ -323,7 +415,11 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
             </SpacedView>
             <SpacedView horizontal=XXS vertical=XXS>
               <div style=grayIconDomStyle>
-                <SVGActivityBeachVolley fill="#bbb" width=36. height=36. />
+                <SVGActivityBeachVolley
+                  fill="#bbb"
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText>
                 "Beach\nVolley"->React.string
@@ -331,7 +427,11 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
             </SpacedView>
             <SpacedView horizontal=XXS vertical=XXS>
               <div style=grayIconDomStyle>
-                <SVGActivitySoccer fill="#bbb" width=36. height=36. />
+                <SVGActivitySoccer
+                  fill="#bbb"
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                />
               </div>
               <Text style=styles##iconText> "Soccer"->React.string </Text>
             </SpacedView>
@@ -376,7 +476,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                 </Text>
               </ButtonContained.Text>
               <Spacer />
-              {rightArrow(36.)}
+              {rightArrow(36.->Style.dp)}
             </ButtonContained>
           </WindowSizeFilter.MMin>
           <WindowSizeFilter.SMax>
@@ -386,7 +486,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                 "HIRE ME NOW"->React.string
               </ButtonContained.Text>
               <Spacer size=XS />
-              {rightArrow(20.)}
+              {rightArrow(20.->Style.dp)}
             </ButtonContained>
           </WindowSizeFilter.SMax>
         </ViewLink>

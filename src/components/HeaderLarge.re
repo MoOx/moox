@@ -73,7 +73,11 @@ let styles =
 let make = (~currentLocation, ()) => {
   <Container style=styles##bar wrapperStyle=styles##barWrapper>
     <ViewLink style=styles##logo href="/">
-      <SVGLogo width=24. height=24. fill=Predefined.Colors.black />
+      <SVGLogo
+        width={24.->Style.dp}
+        height={24.->Style.dp}
+        fill=Predefined.Colors.black
+      />
       <Spacer size=XS />
       <Text style=styles##logoText> Consts.title->React.string </Text>
       <Spacer size=XS />
@@ -109,7 +113,11 @@ let make = (~currentLocation, ()) => {
                "Save"->React.string
              </ButtonOutlined.Text>
              <Spacer size=XS />
-             <SVGContact width=20. height=20. fill=Consts.Colors.light />
+             <SVGContact
+               width={20.->Style.dp}
+               height={20.->Style.dp}
+               fill=Consts.Colors.light
+             />
            </ButtonOutlined>
          </a>
        : <ViewLink href="/contact/">
@@ -122,7 +130,10 @@ let make = (~currentLocation, ()) => {
                "Get in touch"->React.string
              </ButtonOutlined.Text>
              <Spacer size=XS />
-             {RouteResume.rightArrow(~color=Predefined.Colors.white, 20.)}
+             {RouteResume.rightArrow(
+                ~color=Predefined.Colors.white,
+                20.->Style.dp,
+              )}
            </ButtonOutlined>
          </ViewLink>}
   </Container>;

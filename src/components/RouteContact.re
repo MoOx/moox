@@ -57,8 +57,8 @@ let make = () => {
             <ViewLink href="sms:+33678135439">
               <ButtonContained color="#1FCE26" style=styles##button>
                 <SVGSpeechBubbles
-                  width=36.
-                  height=36.
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
                   fill=Consts.Colors.light
                 />
                 <Spacer />
@@ -84,7 +84,11 @@ let make = () => {
               href={"mailto:" ++ (Predefined.isClient ? "hello@moox.io" : "")}>
               <ButtonContained
                 color={Predefined.Colors.Ios.light.blue} style=styles##button>
-                <SVGEmail width=36. height=36. fill=Consts.Colors.light />
+                <SVGEmail
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                  fill=Consts.Colors.light
+                />
                 <Spacer />
                 <ButtonContained.Text textSize=24.>
                   "Email Me"->React.string
@@ -106,7 +110,11 @@ let make = () => {
           <SpacedView vertical=S>
             <ViewLink href="tel:+33678135439">
               <ButtonContained color="#1FCE26" style=styles##button>
-                <SVGPhone width=36. height=36. fill=Consts.Colors.light />
+                <SVGPhone
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                  fill=Consts.Colors.light
+                />
                 <Spacer />
                 <ButtonContained.Text textSize=24.>
                   "Call Me"->React.string
@@ -129,8 +137,8 @@ let make = () => {
             <ViewLink href="https://twitter.com/MoOx">
               <ButtonContained color="rgb(0, 112, 201)" style=styles##button>
                 <SVGSocialTwitter
-                  width=36.
-                  height=36.
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
                   fill=Consts.Colors.light
                 />
                 <Spacer />
@@ -157,7 +165,11 @@ let make = () => {
               style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
               <ButtonContained
                 color={Predefined.Colors.Ios.light.pink} style=styles##button>
-                <SVGContact width=36. height=36. fill=Consts.Colors.light />
+                <SVGContact
+                  width={36.->Style.dp}
+                  height={36.->Style.dp}
+                  fill=Consts.Colors.light
+                />
                 <Spacer />
                 <ButtonContained.Text textSize=24.>
                   "Save Me"->React.string

@@ -35,7 +35,11 @@ let skills: array(CardWithGradient.item) = [|
     bg2: Consts.Colors.dark,
     icon:
       <View style=styles##icon>
-        <SVGJavaScriptMini width=170. height=170. fill=Consts.Colors.light />
+        <SVGJavaScriptMini
+          width={170.->Style.dp}
+          height={170.->Style.dp}
+          fill=Consts.Colors.light
+        />
       </View>,
   },
   {
@@ -52,7 +56,11 @@ let skills: array(CardWithGradient.item) = [|
             style(~right=(-40.)->dp, ~bottom=(-40.)->dp, ()),
           |])
         )>
-        <SVGReact width=200. height=200. fill=Consts.Colors.light />
+        <SVGReact
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill=Consts.Colors.light
+        />
       </View>,
   },
   {
@@ -69,7 +77,11 @@ let skills: array(CardWithGradient.item) = [|
             style(~right=(-40.)->dp, ~bottom=(-40.)->dp, ()),
           |])
         )>
-        <SVGReasonMini width=200. height=200. fill=Consts.Colors.light />
+        <SVGReasonMini
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill=Consts.Colors.light
+        />
       </View>,
   },
   {
@@ -86,7 +98,11 @@ let skills: array(CardWithGradient.item) = [|
             style(~right=(-30.)->dp, ~bottom=(-30.)->dp, ()),
           |])
         )>
-        <SVGTouch width=200. height=200. fill=Consts.Colors.light />
+        <SVGTouch
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill=Consts.Colors.light
+        />
       </View>,
   },
   {
@@ -97,7 +113,11 @@ let skills: array(CardWithGradient.item) = [|
     bg2: Consts.Colors.dark,
     icon:
       <View style=styles##icon>
-        <SVGUi width=180. height=180. fill=Consts.Colors.light />
+        <SVGUi
+          width={180.->Style.dp}
+          height={180.->Style.dp}
+          fill=Consts.Colors.light
+        />
       </View>,
   },
   {
@@ -108,7 +128,11 @@ let skills: array(CardWithGradient.item) = [|
     bg2: Consts.Colors.dark,
     icon:
       <View style=styles##icon>
-        <SVGSocialGithub width=200. height=200. fill=Consts.Colors.light />
+        <SVGSocialGithub
+          width={200.->Style.dp}
+          height={200.->Style.dp}
+          fill=Consts.Colors.light
+        />
       </View>,
   },
 |];

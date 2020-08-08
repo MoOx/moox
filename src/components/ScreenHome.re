@@ -23,7 +23,7 @@ let make = () => {
         </TitlePre>
         <Row.SpaceBetween>
           <Title> "I can help you"->React.string </Title>
-          {RouteResume.rightArrow(~color=Consts.Colors.darkest, 20.)}
+          {RouteResume.rightArrow(~color=Consts.Colors.darkest, 20.->Style.dp)}
         </Row.SpaceBetween>
       </ViewLink>
     </SpacedView>

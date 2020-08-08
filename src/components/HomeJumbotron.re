@@ -79,15 +79,15 @@ let make = () => {
               ~position=`absolute,
               ~right=dp(-20.),
               ~bottom=dp(-80.),
+              ~opacity=0.06,
               ~transform=[|rotate(~rotate=6.->deg)|],
               (),
             )
           )>
           <SVGLogo
-            width=360.
-            height=360.
+            width={360.->Style.dp}
+            height={360.->Style.dp}
             fill=Consts.Colors.lightest
-            style=Style.(style(~opacity=0.06, ()))
           />
         </View>
       </WindowSizeFilter.MMin>

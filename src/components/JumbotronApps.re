@@ -37,15 +37,15 @@ let make = (~scrollYAnimatedValue) => {
               ~position=`absolute,
               ~top=(-100.)->dp,
               ~right=(-20.)->dp,
+              ~opacity=0.05,
               ~transform=[|rotate(~rotate=4.->deg)|],
               (),
             )
           )>
           <SVGLogo
-            width=500.
-            height=500.
+            width={500.->Style.dp}
+            height={500.->Style.dp}
             fill=Consts.Colors.lightest
-            style=Style.(style(~opacity=0.05, ()))
           />
         </View>
         <Animated.View
@@ -54,6 +54,7 @@ let make = (~scrollYAnimatedValue) => {
               ~position=`absolute,
               ~left=(-250.)->dp,
               ~bottom=(-250.)->dp,
+              ~opacity=0.2,
               ~transform=[|
                 rotateZ(
                   ~rotateZ=
@@ -78,10 +79,9 @@ let make = (~scrollYAnimatedValue) => {
             )
           )>
           <SVGReact
-            width=750.
-            height=750.
+            width={750.->Style.dp}
+            height={750.->Style.dp}
             fill=Consts.Colors.lightest
-            style=Style.(style(~opacity=0.2, ()))
           />
         </Animated.View>
         <Container
@@ -245,7 +245,10 @@ let make = (~scrollYAnimatedValue) => {
                     (),
                   )
                 )>
-                <SVGIPhoneStatusBar width=340. height={340. /. 328. *. 12.} />
+                <SVGIPhoneStatusBar
+                  width={340.->Style.dp}
+                  height={(340. /. 328. *. 12.)->Style.dp}
+                />
               </SpacedView>
               <Spacer size=L />
               <ScreenHome />

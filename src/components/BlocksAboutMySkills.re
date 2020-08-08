@@ -26,7 +26,11 @@ let make = () => {
       <SpacedView style=styles##blahblah>
         <SpacedView horizontal=XS>
           <Row.Wrap.Center>
-            <SVGDevices fill="#bbb" width=32. height=32. />
+            <SVGDevices
+              fill="#bbb"
+              width={32.->Style.dp}
+              height={32.->Style.dp}
+            />
             <Spacer size=S />
             <Text style=styles##textLight>
               {j|Software Architect.|j}->React.string
@@ -43,7 +47,11 @@ Over the years, I refined my way to approach development, which allows me to con
       <SpacedView style=styles##blahblah>
         <SpacedView horizontal=XS>
           <Row.Wrap.Center>
-            <SVGReact fill="#bbb" width=32. height=32. />
+            <SVGReact
+              fill="#bbb"
+              width={32.->Style.dp}
+              height={32.->Style.dp}
+            />
             <Spacer size=S />
             <Text style=styles##textLight>
               {j|React Developer.|j}->React.string
@@ -60,7 +68,11 @@ Their features & ecosystem allow me to be focus on creating beautiful & polished
       <SpacedView style=styles##blahblah>
         <SpacedView horizontal=XS>
           <Row.Wrap.Center>
-            <SVGMenuTalk fill="#bbb" width=32. height=32. />
+            <SVGMenuTalk
+              fill="#bbb"
+              width={32.->Style.dp}
+              height={32.->Style.dp}
+            />
             <Spacer size=S />
             <Text style=styles##textLight>
               {j|Expert, Leader, Trainer.|j}->React.string
