@@ -4,7 +4,7 @@ open ReactMultiversal;
 [@react.component]
 let make = () => {
   <>
-    <ScreenHeader titlePre={"Hi, I am"->String.uppercase} title="MoOx">
+    <ScreenHeader titlePre={"Hi, I am"->Js.String.toUpperCase} title="MoOx">
       <SpacedView
         vertical=XS
         style=Style.(
@@ -19,7 +19,7 @@ let make = () => {
       <Spacer size=L />
       <ViewLink href="/resume/">
         <TitlePre>
-          {"Need help for your app?"->String.uppercase->React.string}
+          {"Need help for your app?"->Js.String.toUpperCase->React.string}
         </TitlePre>
         <Row.SpaceBetween>
           <Title> "I can help you"->React.string </Title>

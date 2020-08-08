@@ -104,7 +104,7 @@ let make = (~currentLocation, ()) => {
              round=true
              verticalSpace=XXS
              horizontalSpace=S
-             color=Predefined.Colors.pink>
+             color={Predefined.Colors.Ios.light.pink}>
              <ButtonOutlined.Text color=Predefined.Colors.white>
                "Save"->React.string
              </ButtonOutlined.Text>
@@ -117,7 +117,7 @@ let make = (~currentLocation, ()) => {
              round=true
              verticalSpace=XXS
              horizontalSpace=S
-             color=Predefined.Colors.blue>
+             color={Predefined.Colors.Ios.light.blue}>
              <ButtonOutlined.Text color=Predefined.Colors.white>
                "Get in touch"->React.string
              </ButtonOutlined.Text>

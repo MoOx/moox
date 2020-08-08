@@ -2,7 +2,12 @@ open ReactNative;
 open ReactMultiversal;
 
 [@react.component]
-let make = (~title, ~animateBackgroundOpacity=`yes, ~getInTouch=true) => {
+let make =
+    (
+      ~title,
+      ~animateBackgroundOpacity: StickyHeader.animateBackgroundOpacity=True,
+      ~getInTouch=true,
+    ) => {
   <WindowSizeFilter.SMax>
     <StickyHeader
       scrollYAnimatedValue=AppWrapper.scrollYAnimatedValue
@@ -10,7 +15,7 @@ let make = (~title, ~animateBackgroundOpacity=`yes, ~getInTouch=true) => {
       title
       animateBackgroundOpacity
       color="#fff"
-      color2=Predefined.Colors.blue
+      color2={Predefined.Colors.Ios.light.blue}
       right={({color}) =>
         <>
           {getInTouch

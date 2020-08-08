@@ -83,7 +83,7 @@ let make = () => {
             <ViewLink
               href={"mailto:" ++ (Predefined.isClient ? "hello@moox.io" : "")}>
               <ButtonContained
-                color=Predefined.Colors.blue style=styles##button>
+                color={Predefined.Colors.Ios.light.blue} style=styles##button>
                 <SVGEmail width=36. height=36. fill=Consts.Colors.light />
                 <Spacer />
                 <ButtonContained.Text textSize=24.>
@@ -156,7 +156,7 @@ let make = () => {
               href="/MaximeThirouin.vcf"
               style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
               <ButtonContained
-                color=Predefined.Colors.pink style=styles##button>
+                color={Predefined.Colors.Ios.light.pink} style=styles##button>
                 <SVGContact width=36. height=36. fill=Consts.Colors.light />
                 <Spacer />
                 <ButtonContained.Text textSize=24.>

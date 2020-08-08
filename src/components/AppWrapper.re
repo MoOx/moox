@@ -11,6 +11,7 @@ if (Predefined.isClient) {
     ->Animated.spring(
         Animated.Value.Spring.config(
           ~toValue=window->Window.scrollY->Animated.Value.Spring.fromRawValue,
+          ~useNativeDriver=true,
           (),
         ),
       )

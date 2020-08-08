@@ -80,7 +80,7 @@ let make = (~items) => {
         {("Resume" ++ " - " ++ Consts.defaultTitle)->React.string}
       </title>
     </BsReactHelmet>
-    <HeaderSmall title="Resume" animateBackgroundOpacity=`delayed />
+    <HeaderSmall title="Resume" animateBackgroundOpacity=Delayed />
     <JumbotronMoOx />
     <Spacer />
     <Container>
@@ -359,7 +359,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
           <WindowSizeFilter.MMin>
             <ButtonContained
               round=true
-              color=Predefined.Colors.blue
+              color={Predefined.Colors.Ios.light.blue}
               style=Style.(style(~width=275.->dp, ()))>
               <ButtonContained.Text textSize=22.>
                 "HIRE ME NOW"->React.string
@@ -380,7 +380,8 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
             </ButtonContained>
           </WindowSizeFilter.MMin>
           <WindowSizeFilter.SMax>
-            <ButtonContained round=true color=Predefined.Colors.blue>
+            <ButtonContained
+              round=true color={Predefined.Colors.Ios.light.blue}>
               <ButtonContained.Text>
                 "HIRE ME NOW"->React.string
               </ButtonContained.Text>
