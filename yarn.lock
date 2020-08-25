@@ -8385,10 +8385,10 @@ reason-react-native@^0.62.0:
   resolved "https://registry.yarnpkg.com/reason-react-native/-/reason-react-native-0.62.3.tgz#a2653e735b5a006c7efcb20dcdf0e2ebe922cf8f"
   integrity sha512-PA//0AZVVEB8iJKjYxOoFarXrMhhr7H++k9n7SmwVNy+XeUtwCiTIytqi29dCILtfNieHfT7+WTPpEzg2koOBg==
 
-reason-react@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/reason-react/-/reason-react-0.8.0.tgz#a55143f95a872596c92b54595e7904c03ee7c9db"
-  integrity sha512-97AfK3eCF6vfP8rnbq3k6GgXsZt//OiPMINTUk5luJ8W0Wt/JaYsDG6eWKP8Zx3gPpxSU1EPjB1pUm6o6fBnFA==
+reason-react@^0.9.0:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/reason-react/-/reason-react-0.9.1.tgz#30a887158200b659aa03e2d75ff4cc54dc462bb0"
+  integrity sha512-nlH0O2TDy9KzOLOW+vlEQk4ExHOeciyzFdoLcsmmiit6hx6H5+CVDrwJ+8aiaLT/kqK5xFOjy4PS7PftWz4plA==
 
 recursive-readdir@2.2.1:
   version "2.2.1"
