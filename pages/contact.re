@@ -26,9 +26,9 @@ let styles =
 [@react.component]
 let make = () => {
   <AppWrapper>
-    <BsReactHelmet>
+    <Next.Head>
       <title> {("Contact - " ++ Consts.defaultTitle)->React.string} </title>
-    </BsReactHelmet>
+    </Next.Head>
     <HeaderSmall title="Contact MoOx" getInTouch=false />
     <Container>
       <WindowSizeFilter.MMin> <Spacer /> </WindowSizeFilter.MMin>

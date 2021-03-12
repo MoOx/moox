@@ -70,7 +70,8 @@ let styles =
   );
 
 [@react.component]
-let make = (~currentLocation, ()) => {
+let make = () => {
+  let {pathname} = Next.useRouter();
   <Container style=styles##bar wrapperStyle=styles##barWrapper>
     <ViewLink style=styles##logo href="/">
       <SVGLogo
@@ -88,19 +89,14 @@ let make = (~currentLocation, ()) => {
            <TextLink
              key={item.link}
              href={item.link}
-             style=Style.(
-               arrayOption([|
-                 Some(styles##link),
-                 item.isActive(currentLocation##pathname, item.link)
-                   ? Some(styles##linkActive) : None,
-               |])
-             )>
+             style=styles##link
+             activeStyle=styles##linkActive>
              item.text->React.string
            </TextLink>
          )
        ->React.array}
     </View>
-    {currentLocation##pathname |> Js.String.startsWith("/contact/")
+    {pathname |> Js.String.startsWith("/contact/")
        ? <a
            href="/MaximeThirouin.vcf"
            style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
@@ -130,10 +126,11 @@ let make = (~currentLocation, ()) => {
                "Get in touch"->React.string
              </ButtonOutlined.Text>
              <Spacer size=XS />
-             {RouteResume.rightArrow(
-                ~color=Predefined.Colors.white,
-                20.->Style.dp,
-              )}
+             <SVGArrowRoundedWithTailTop
+               width={20.->Style.dp}
+               height={20.->Style.dp}
+               fill=Predefined.Colors.white
+             />
            </ButtonOutlined>
          </ViewLink>}
   </Container>;

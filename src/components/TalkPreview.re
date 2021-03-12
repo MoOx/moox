@@ -18,16 +18,16 @@ let styles =
   );
 
 [@react.component]
-let make = (~item: T.partialContentItem, ()) => {
-  let href = "/talk/" ++ item##id ++ "/";
-  <SpacedView key=item##id horizontal=None>
+let make = (~item: TalksFrontend.t, ()) => {
+  let href = "/talk/" ++ item.id ++ "/";
+  <SpacedView key={item.id} horizontal=None>
     <Text style=styles##text>
       <Text> {j|•|j}->React.string </Text>
       <Spacer size=S />
       <UnderlinedTextLink style=styles##title href>
-        {item##title->React.string}
+        item.title->React.string
         <small>
-          {switch (Js.Undefined.toOption(item##conference)) {
+          {switch (item.conference->Js.Null.toOption) {
            | None => React.null
            | Some(conference) =>
              <Text> {(" @ " ++ conference)->React.string} </Text>
@@ -35,7 +35,7 @@ let make = (~item: T.partialContentItem, ()) => {
         </small>
       </UnderlinedTextLink>
       <Spacer size=S />
-      {switch (Js.Undefined.toOption(item##lang)) {
+      {switch (item.lang->Js.Null.toOption) {
        | None => React.null
        | Some(lang) => <Text> {("[" ++ lang ++ "] ")->React.string} </Text>
        }}

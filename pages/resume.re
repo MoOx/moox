@@ -1,5 +1,17 @@
+open Belt;
 open ReactNative;
 open ReactMultiversal;
+
+module Malformed = {
+  type t = {
+    id: string,
+    message: string,
+  };
+};
+type props = {
+  items: array(ResumeFrontend.t),
+  malformed: array(Malformed.t),
+};
 
 let styles =
   Style.(
@@ -54,7 +66,6 @@ let styles =
         ),
     })
   );
-
 let grayIconDomStyle =
   ReactDOMRe.Style.make(
     ~display="flex",
@@ -65,7 +76,6 @@ let grayIconDomStyle =
       |> Js.Array.joinWith(" "),
     (),
   );
-
 let rightArrow = (~color=Consts.Colors.light, size) => {
   <View style=Style.(style(~transform=[|rotate(~rotate=90.->deg)|], ()))>
     <SVGArrowRoundedWithTailTop width=size height=size fill=color />
@@ -73,13 +83,14 @@ let rightArrow = (~color=Consts.Colors.light, size) => {
 };
 
 [@react.component]
-let make = (~items) => {
+let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => {
+  malformed->Array.map(Js.Console.error)->ignore;
   <AppWrapper>
-    <BsReactHelmet>
+    <Next.Head>
       <title>
         {("Resume" ++ " - " ++ Consts.defaultTitle)->React.string}
       </title>
-    </BsReactHelmet>
+    </Next.Head>
     <HeaderSmall title="Resume" animateBackgroundOpacity=Delayed />
     <JumbotronMoOx />
     <Spacer />
@@ -253,10 +264,8 @@ let make = (~items) => {
               )
             )>
             {j|Hi, I am Maxime Thirouin, also known as MoOx. I live near Toulouse, France.
-
 I am a software developer specialized in front-end development of mobile & web applications.
 I love to design and develop UIs. I care about UX, responsiveness, performance, maintainability and scalability.
-
 When I am not coding or meditating, I enjoy simple things like gardening, watching a movie or enjoying one of the various activities that life has to offer.|j}
             ->React.string
           </Text>
@@ -445,12 +454,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
     <Spacer />
     <Container>
       <Text style=styles##title> {j|Experiences|j}->React.string </Text>
-      {switch ((items: T.resumeList)) {
-       | Inactive
-       | Loading => <LoadingIndicator />
-       | Errored => <Error />
-       | Idle(items) => <ResumeTimeline items=items##list />
-       }}
+      <ResumeTimeline items />
       <Spacer size=XL />
     </Container>
     <FixedBottom>
@@ -498,25 +502,37 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
   </AppWrapper>;
 };
 
-[@react.component]
-let jsComponent = (~items) =>
-  React.createElementVariadic(
-    make,
-    makeProps(~items=PhenomicPresetReactApp.jsEdge(items), ()),
-    [|React.null|],
-  );
+let default = (props: props) =>
+  make(makeProps(~items=props.items, ~malformed=props.malformed, ()));
 
-let queries = _ => {
-  let items =
-    PhenomicPresetReactApp.query(
-      List({
-        path: "content/resume",
-        by: Some("default"),
-        value: None,
-        order: None,
-        sort: Some("dateStart"),
-        limit: None,
-      }),
-    );
-  {"items": items};
-};
+let getStaticProps: Next.GetStaticProps.t(props, unit) =
+  _ctx => {
+    open ResumeFrontend;
+    let (items, malformed) =
+      BackendApi.getAll(`resume)
+      ->Array.reduce(
+          ([||], [||]),
+          (acc, itemData) => {
+            let (items, malformed) = acc;
+            let decoded = itemData.json->decode(itemData.slug, _);
+            switch (decoded) {
+            | Error(message) => (
+                items,
+                malformed->Array.concat([|
+                  {Malformed.id: itemData.slug, message},
+                |]),
+              )
+            | Ok(post) =>
+              items->Js.Array2.push(post)->ignore;
+              (items, malformed);
+            };
+          },
+        );
+
+    Js.Promise.resolve({
+      "props": {
+        items: items->orderByDate,
+        malformed,
+      },
+    });
+  };

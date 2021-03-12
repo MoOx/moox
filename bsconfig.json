@@ -15,22 +15,22 @@
       "subdirs": true
     },
     {
+      "dir": "pages",
+      "subdirs": true
+    },
+    {
       "dir": "assets/SVGs/components"
     }
   ],
   "bsc-flags": ["-bs-super-errors"],
   "bs-dependencies": [
-    "bs-webapi",
-    "bs-fetch",
     "@glennsl/bs-json",
-    "bs-date-fns",
-    "reason-react",
-    "reason-react-native",
+    "@reason-react-native/safe-area-context",
     "@reason-react-native/svg",
+    "bs-webapi",
     "react-multiversal",
-    "@moox/bs-react-helmet",
-    "@phenomic/preset-react-app",
-    "@phenomic/plugin-renderer-react",
-    "@phenomic/api-client"
+    "reason-promise",
+    "reason-react-native",
+    "reason-react"
   ]
 }

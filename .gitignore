@@ -60,3 +60,7 @@ lib
 assets/SVGs/components
 tmp
 *.bs.js
+content/**/*.json
+
+# next.js
+.next

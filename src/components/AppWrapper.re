@@ -32,16 +32,14 @@ if (Predefined.isClient) {
 
 [@react.component]
 let make = (~children) => {
-  <>
+  <ReactNativeSafeAreaContext.SafeAreaProvider>
     <AppMeta />
-    <WindowSizeFilter.MMin> <HeaderLargeWithRouter /> </WindowSizeFilter.MMin>
+    <WindowSizeFilter.MMin> <HeaderLarge /> </WindowSizeFilter.MMin>
     children
     <WindowSizeFilter.MMin> <Footer /> </WindowSizeFilter.MMin>
     <WindowSizeFilter.SMax>
-      <div className="BlurView FixedBottom">
-        <TabBarWithRouter links=Consts.menuLinks />
-      </div>
+      <div className="BlurView FixedBottom"> <TabBar /> </div>
       <TabBarWrapper.Placeholder />
     </WindowSizeFilter.SMax>
-  </>;
+  </ReactNativeSafeAreaContext.SafeAreaProvider>;
 };

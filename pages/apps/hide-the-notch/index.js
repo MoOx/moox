@@ -1,17 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Hide The Notch</title>
-    <meta name="description" content="" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="apple-touch-icon" href="icon.png" />
-    <link rel="icon" type="image/png" href="icon.png" />
-    <style>
+import Head from "next/head";
+
+const HideTheNotchApp = () => {
+  return (
+    <>
+      <Head>
+        <html lang="en" />
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Hide The Notch</title>
+        <meta name="description" content="" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link rel="apple-touch-icon" href="/apps/hide-the-notch/icon.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/apps/hide-the-notch/icon.png"
+        />
+        <style>
+          {`
       * {
         box-sizing: border-box;
         position: relative;
@@ -35,12 +44,18 @@
       }
 
       body {
+        height: 100%;
+      }
+      
+      #__next {
+        display: flex;
+        flex-direction: column;
         min-height: 100%;
         padding: 1em;
       }
 
       @media (min-width: 800px) {
-        body {
+        #__next {
           padding: 10vh 0;
         }
       }
@@ -52,7 +67,7 @@
         right: 0;
         left: 0;
         background: #5497d0;
-        background: url(./background.jpg) 50% 50% / cover;
+        background: url(/apps/hide-the-notch/background.jpg) 50% 50% / cover;
         filter: grayscale(100%) blur(8px);
       }
 
@@ -223,64 +238,76 @@
         font-size: 12px;
         opacity: 0.8;
         color: rgba(255, 255, 255, 0.6);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="background"></div>
-    <div class="background-mask"></div>
-    <div class="View wrapper">
-      <div class="View content">
-        <div class="View header flex-row">
-          <img class="icon-preview" src="icon-preview.png" alt="" />
-          <div class="spacer"></div>
-          <h1>Hide The Notch</h1>
-        </div>
-        <img class="screenshot" src="screenshot.png" alt="" />
-        <div class="blahblah">
-          <p>Want to have a nice wallpaper?</p>
-          <div class="spacer"></div>
-          <p>Want to hide that notch?</p>
-          <div class="spacer"></div>
-          <p>
-            Use some of our beautiful pictures or your own photos to create a
-            stunning wallpaper with our effects. Try one of our notch masks.
-          </p>
-        </div>
-      </div>
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-      <div class="View flex-row">
-        <a
-          href="https://apps.apple.com/us/app/hide-the-notch/id1312839983?ls=1"
-          class="AppStoreButton"
-        >
-          <span class="AppStoreButton-effect"></span>
-          <svg
-            class="AppStoreButton-logo"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="#fff"
-              d="M22 17.607c-.786 2.28-3.139 6.317-5.563 6.361-1.608.031-2.125-.953-3.963-.953-1.837 0-2.412.923-3.932.983-2.572.099-6.542-5.827-6.542-10.995 0-4.747 3.308-7.1 6.198-7.143 1.55-.028 3.014 1.045 3.959 1.045.949 0 2.727-1.29 4.596-1.101.782.033 2.979.315 4.389 2.377-3.741 2.442-3.158 7.549.858 9.426zm-5.222-17.607c-2.826.114-5.132 3.079-4.81 5.531 2.612.203 5.118-2.725 4.81-5.531z"
+      }`}
+        </style>
+      </Head>
+      <div className="background"></div>
+      <div className="background-mask"></div>
+      <div className="View wrapper">
+        <div className="View content">
+          <div className="View header flex-row">
+            <img
+              className="icon-preview"
+              src="/apps/hide-the-notch/icon-preview.png"
+              alt=""
             />
-          </svg>
-          <span class="AppStoreButton-text">
-            <span class="AppStoreButton-text-line1">Available on the</span>
-            <span class="AppStoreButton-text-line2">App Store</span>
-          </span>
-        </a>
+            <div className="spacer"></div>
+            <h1 style={{ fontSize: "24px" }}>Hide The Notch</h1>
+          </div>
+          <img
+            className="screenshot"
+            src="/apps/hide-the-notch/screenshot.png"
+            alt=""
+          />
+          <div className="blahblah">
+            <p>Want to have a nice wallpaper?</p>
+            <div className="spacer"></div>
+            <p>Want to hide that notch?</p>
+            <div className="spacer"></div>
+            <p>
+              Use some of our beautiful pictures or your own photos to create a
+              stunning wallpaper with our effects. Try one of our notch masks.
+            </p>
+          </div>
+        </div>
+        <div className="spacer"></div>
+        <div className="spacer"></div>
+        <div className="spacer"></div>
+        <div className="spacer"></div>
+        <div className="View flex-row">
+          <a
+            href="https://apps.apple.com/us/app/hide-the-notch/id1312839983?ls=1"
+            className="AppStoreButton"
+          >
+            <span className="AppStoreButton-effect"></span>
+            <svg
+              className="AppStoreButton-logo"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M22 17.607c-.786 2.28-3.139 6.317-5.563 6.361-1.608.031-2.125-.953-3.963-.953-1.837 0-2.412.923-3.932.983-2.572.099-6.542-5.827-6.542-10.995 0-4.747 3.308-7.1 6.198-7.143 1.55-.028 3.014 1.045 3.959 1.045.949 0 2.727-1.29 4.596-1.101.782.033 2.979.315 4.389 2.377-3.741 2.442-3.158 7.549.858 9.426zm-5.222-17.607c-2.826.114-5.132 3.079-4.81 5.531 2.612.203 5.118-2.725 4.81-5.531z"
+              />
+            </svg>
+            <span className="AppStoreButton-text">
+              <span className="AppStoreButton-text-line1">
+                Available on the
+              </span>
+              <span className="AppStoreButton-text-line2">App Store</span>
+            </span>
+          </a>
+        </div>
+        <div className="spacer"></div>
+        <div className="spacer"></div>
+        <div className="spacer"></div>
+        <div className="spacer"></div>
+        <div className="View footer flex-row">
+          © 2017 Maxime Thirouin. All Rights Reserved.
+        </div>
       </div>
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-      <div class="View footer flex-row">
-        © 2017 Maxime Thirouin. All Rights Reserved.
-      </div>
-    </div>
-  </body>
-</html>
+    </>
+  );
+};
+
+export default HideTheNotchApp;

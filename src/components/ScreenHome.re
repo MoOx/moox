@@ -23,7 +23,14 @@ let make = () => {
         </TitlePre>
         <Row.SpaceBetween>
           <Title> "I can help you"->React.string </Title>
-          {RouteResume.rightArrow(~color=Consts.Colors.darkest, 20.->Style.dp)}
+          <View
+            style=Style.(style(~transform=[|rotate(~rotate=90.->deg)|], ()))>
+            <SVGArrowRoundedWithTailTop
+              width={20.->Style.dp}
+              height={20.->Style.dp}
+              fill=Consts.Colors.darkest
+            />
+          </View>
         </Row.SpaceBetween>
       </ViewLink>
     </SpacedView>

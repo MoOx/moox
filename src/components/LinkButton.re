@@ -4,8 +4,6 @@ open ReactMultiversal;
 let make =
     (
       ~href,
-      ~onMouseEnter=?,
-      ~onMouseLeave=?,
       // ButtonContainer props
       ~textSize=?,
       ~accessibilityLabel=?,
@@ -20,7 +18,7 @@ let make =
       ~children,
       (),
     ) => {
-  <ViewLink href ?onMouseEnter ?onMouseLeave>
+  <ViewLink href>
     <ButtonContainer
       ?textSize
       ?accessibilityLabel

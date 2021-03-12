@@ -1,18 +1,32 @@
+open Belt;
 open ReactNative;
 open ReactMultiversal;
+
+module Malformed = {
+  type t = {
+    id: string,
+    message: string,
+  };
+};
+type props = {
+  posts: array(BlogFrontend.t),
+  malformed: array(Malformed.t),
+};
+type params = unit;
 
 let styles =
   Style.(StyleSheet.create({"button": style(~width=200.->dp, ())}));
 
 [@react.component]
-let make = (~posts) => {
+let make = (~posts: array(BlogFrontend.t), ~malformed: array(Malformed.t)) => {
+  malformed->Array.map(Js.Console.error)->ignore;
   <AppWrapper>
-    <BsReactHelmet>
+    <Next.Head>
       <title>
         {(Consts.title ++ ", React & React Native " ++ Consts.defaultTitle)
          ->React.string}
       </title>
-    </BsReactHelmet>
+    </Next.Head>
     <HeaderSmall title="MoOx" />
     <LinkContactBubbleFixedBottom />
     <JumbotronApps scrollYAnimatedValue=AppWrapper.scrollYAnimatedValue />
@@ -105,57 +119,56 @@ let make = (~posts) => {
         </Row.Wrap.Center>
       </Center>
     </SpacedView>
-    /*
-     <Spacer size=L />
-     <Text style=styles##nanoTitle>
-       "Or you can "->React.string
-       <UnderlinedTextLink href="/resume/">
-         "learn more about my experiences"->React.string
-       </UnderlinedTextLink>
-     </Text>
-     */
     <Container>
       <SpacedView vertical=L>
         <Center>
           <Title> "Latest Posts on the Blog"->React.string </Title>
         </Center>
-        {switch ((posts: T.contentList)) {
-         | Inactive
-         | Loading => <LoadingIndicator />
-         | Errored => <Error />
-         | Idle(posts) =>
-           <View>
-             <PostList posts=posts##list />
-             <Row.Center>
-               <TextLink href="/blog/"> "More posts"->React.string </TextLink>
-             </Row.Center>
-           </View>
-         }}
+        <View>
+          <Spacer />
+          <PostList posts />
+          <Spacer />
+          <Row.Center>
+            <TextLink href="/blog/"> "More posts"->React.string </TextLink>
+          </Row.Center>
+        </View>
       </SpacedView>
     </Container>
   </AppWrapper>;
 };
 
-[@react.component]
-let jsComponent = (~posts) =>
-  React.createElementVariadic(
-    make,
-    makeProps(~posts=PhenomicPresetReactApp.jsEdge(posts), ()),
-    [|React.null|],
-  );
+let default = (props: props) =>
+  make(makeProps(~posts=props.posts, ~malformed=props.malformed, ()));
 
-let queries = _ => {
-  let posts =
-    PhenomicPresetReactApp.query(
-      PaginatedList({
-        path: "content/blog",
-        by: Some("default"),
-        value: None,
-        order: None,
-        sort: None,
-        limit: Some(5),
-        after: None,
-      }),
-    );
-  {"posts": posts};
-};
+let getStaticProps: Next.GetStaticProps.t(props, params) =
+  _ctx => {
+    let (posts, malformed) =
+      BackendApi.getAll(`blog)
+      ->Array.reduce(
+          ([||], [||]),
+          (acc, postData) => {
+            let (posts, malformed) = acc;
+            let decoded =
+              postData.json->BlogFrontend.decode(postData.slug, _);
+            switch (decoded) {
+            | Error(message) => (
+                posts,
+                malformed->Array.concat([|
+                  {Malformed.id: postData.slug, message},
+                |]),
+              )
+            | Ok(post) =>
+              posts->Js.Array2.push(post)->ignore;
+              (posts, malformed);
+            };
+          },
+        );
+
+    Js.Promise.resolve({
+      "props": {
+        posts:
+          posts->BlogFrontend.orderByDate->Array.slice(~len=5, ~offset=0),
+        malformed,
+      },
+    });
+  };

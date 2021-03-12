@@ -65,14 +65,17 @@ let styles =
     })
   );
 
+[@bs.module "date-fns"]
+external differenceInCalendarMonths: (Js.Date.t, Js.Date.t) => float =
+  "differenceInCalendarMonths";
+
 [@react.component]
-let make = (~item: T.partialResumeItem, ()) => {
-  let links =
-    item##links->Js.undefinedToOption->Belt.Option.getWithDefault([||]);
-  <SpacedView key=item##id horizontal=None style=styles##wrapper>
+let make = (~item: ResumeFrontend.t) => {
+  let links = item.links->Js.Null.toOption->Belt.Option.getWithDefault([||]);
+  <SpacedView key={item.id} horizontal=None style=styles##wrapper>
     <View style=styles##container>
-      {item##image
-       ->Js.undefinedToOption
+      {item.image
+       ->Js.Null.toOption
        ->Belt.Option.map(image =>
            <View style=styles##imageWrapper>
              <ImageWithAspectRatio uri=image ratio={2160. /. 3840.} />
@@ -82,14 +85,14 @@ let make = (~item: T.partialResumeItem, ()) => {
       <SpacedView style=styles##block>
         <View style=styles##head>
           <Text style=styles##title>
-            {item##title->Js.String.toUpperCase->React.string}
+            {item.title->Js.String.toUpperCase->React.string}
           </Text>
-          {item##url
-           ->Js.undefinedToOption
+          {item.url
+           ->Js.Null.toOption
            ->Belt.Option.map(url =>
                <UnderlinedTextLink href=url style=styles##company>
-                 {item##company
-                  ->Js.undefinedToOption
+                 {item.company
+                  ->Js.Null.toOption
                   ->Belt.Option.getWithDefault("")
                   ->React.string}
                </UnderlinedTextLink>
@@ -98,15 +101,18 @@ let make = (~item: T.partialResumeItem, ()) => {
         </View>
         <Spacer size=XS />
         <Text style=styles##description>
-          {item##description->React.string}
+          {item.description
+           ->Js.Null.toOption
+           ->Option.map(React.string)
+           ->Option.getWithDefault(React.null)}
         </Text>
-        {item##dateEnd
-         ->Js.undefinedToOption
+        {item.dateEnd
+         ->Js.Null.toOption
          ->Option.map(dateEnd => {
              let durationInMonths =
-               DateFns.differenceInCalendarMonths(
+               differenceInCalendarMonths(
                  Js.Date.fromString(dateEnd),
-                 Js.Date.fromString(item##dateStart),
+                 Js.Date.fromString(item.dateStart),
                )
                ->int_of_float;
              let durationYears = durationInMonths / 12;
@@ -137,7 +143,7 @@ let make = (~item: T.partialResumeItem, ()) => {
          ->Option.getWithDefault(React.null)}
         <Spacer size=XL />
         <View style=styles##tags>
-          {item##hashtags
+          {item.hashtags
            ->Belt.Array.map(t =>
                <Text key=t style=styles##tag>
                  {(" #" ++ t)->React.string}
@@ -152,12 +158,12 @@ let make = (~item: T.partialResumeItem, ()) => {
              <Spacer size=L />
              <View style=styles##links>
                {links
-                ->Belt.Array.map(l =>
-                    <React.Fragment key=l##title>
+                ->Belt.Array.map(link =>
+                    <React.Fragment key={link.title}>
                       <Spacer size=XS />
                       <UnderlinedTextLink
-                        key=l##title href=l##url style=styles##link>
-                        {l##title->React.string}
+                        key={link.title} href={link.url} style=styles##link>
+                        link.title->React.string
                         <Spacer size=XXS />
                         <SVGExternalLink />
                       </UnderlinedTextLink>

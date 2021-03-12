@@ -22,7 +22,7 @@ let make = (~backdropFilter=?, ~style as s=?, ~children=?) =>
             arrayOption([|
               s,
               backdropFilter->Option.map(f =>
-                unsafeStyle({"webkitBackdropFilter": f, "backdropFilter": f})
+                unsafeStyle({"WebkitBackdropFilter": f, "backdropFilter": f})
               ),
             |])
           ),

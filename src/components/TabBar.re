@@ -13,14 +13,15 @@ let styles =
   );
 
 [@react.component]
-let make = (~currentLocation, ()) => {
+let make = () => {
+  let currentLocation = "";
   <TabBarWrapper>
     {Consts.menuLinks
      ->Array.map(({link, text, icon, isActive}) =>
          <ViewLink key=link href=link style=styles##itemWrapper>
            <TabBarItem
              icon
-             isActive={isActive(currentLocation##pathname, link)}
+             isActive={isActive(currentLocation, link)}
              colorActive
              colorInactive
              text

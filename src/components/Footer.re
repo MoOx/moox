@@ -46,16 +46,29 @@ let make = () => {
       <View style=styles##column>
         <View style=styles##row>
           <Text style=styles##barText> "Made with "->React.string </Text>
-          <TextLink style=styles##barText href="https://phenomic.io">
-            "Phenomic"->React.string
+          <TextLink style=styles##barText href="https://rescript-lang.org/">
+            "ReScript, "->React.string
+          </TextLink>
+          <TextLink style=styles##barText href="https://reactnative.dev">
+            "React Native"->React.string
+          </TextLink>
+          <TextLink
+            style=styles##barText
+            href="https://necolas.github.io/react-native-web/">
+            " Web, "->React.string
+          </TextLink>
+          <TextLink style=styles##barText href="https://nextjs.org">
+            "Next.js"->React.string
           </TextLink>
           <Text style=styles##barText> " and "->React.string </Text>
-          <TextLink style=styles##barText href="https://reasonml.github.io/">
-            "Reason"->React.string
+          <TextLink
+            style=styles##barText
+            href="https://github.com/reason-react-native">
+            "ReScript React Native"->React.string
           </TextLink>
         </View>
         <TextLink style=styles##barText href="https://github.com/MoOx/moox.io">
-          "Source available on GitHub"->React.string
+          "100% Over-engineered source available on GitHub"->React.string
         </TextLink>
       </View>
       <SocialIcons

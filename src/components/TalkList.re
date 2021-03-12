@@ -1,3 +1,4 @@
+open Belt;
 open ReactNative;
 
 let imageRatio = 240. /. 350.;
@@ -19,22 +20,21 @@ let styles =
   );
 
 [@react.component]
-let make = (~talks, ()) => {
+let make = (~talks: array(TalksFrontend.t), ()) => {
   let latestYear =
     ref(Js.Date.make()->Js.Date.getFullYear->Js.Float.toString);
   <>
-    {talks
-     |> Array.map(item => {
-          let year = item##date |> Js.String.slice(~from=0, ~to_=4);
-          let newYear = year !== latestYear^;
-          latestYear := year;
-          <View key=item##id style=styles##flex>
-            {newYear
-               ? <Text style=styles##yearText> year->React.string </Text>
-               : React.null}
-            <TalkPreview item />
-          </View>;
-        })
+    {talks->Array.map(item => {
+       let year = item.date |> Js.String.slice(~from=0, ~to_=4);
+       let newYear = year !== latestYear^;
+       latestYear := year;
+       <View key={item.id} style=styles##flex>
+         {newYear
+            ? <Text style=styles##yearText> year->React.string </Text>
+            : React.null}
+         <TalkPreview item />
+       </View>;
+     })
      |> React.array}
   </>;
 };

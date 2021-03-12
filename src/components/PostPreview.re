@@ -1,3 +1,4 @@
+open Belt;
 open ReactNative;
 open ReactMultiversal;
 
@@ -19,17 +20,20 @@ let styles =
   );
 
 [@react.component]
-let make = (~item: T.partialContentItem, ()) => {
-  let href = "/blog/" ++ item##id ++ "/";
-  <SpacedView key=item##id horizontal=None>
+let make = (~item: BlogFrontend.t, ()) => {
+  let href = "/blog/" ++ item.id ++ "/";
+  <SpacedView key={item.id} horizontal=None>
     <Text style=styles##text>
       <Text> {j|•|j}->React.string </Text>
       <Spacer size=S />
       <UnderlinedTextLink style=styles##title href>
-        {item##title->React.string}
+        {item.title
+         ->Js.Null.toOption
+         ->Option.getWithDefault("...")
+         ->React.string}
       </UnderlinedTextLink>
       <Spacer size=S />
-      {switch (Js.Undefined.toOption(item##lang)) {
+      {switch (item.lang->Js.Null.toOption) {
        | None => React.null
        | Some(lang) => <Text> {("[" ++ lang ++ "] ")->React.string} </Text>
        }}

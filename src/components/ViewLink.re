@@ -5,8 +5,6 @@ let make =
       ~href,
       ~style as styl=?,
       ~activeStyle=?,
-      ~onMouseEnter=?,
-      ~onMouseLeave=?,
       ~children,
     ) =>
   <TextLink
@@ -20,8 +18,6 @@ let make =
         |])
       )
     )
-    ?activeStyle
-    ?onMouseEnter
-    ?onMouseLeave>
+    ?activeStyle>
     children
   </TextLink>;

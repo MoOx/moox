@@ -1,7 +1,7 @@
 /* [@bs.module] external coverBlur : string = "../../../cover.blur.js"; */
 [@react.component]
 let make = () => {
-  <BsReactHelmet defaultTitle=Consts.defaultTitle>
+  <Next.Head>
     <html lang="en" dir="ltr" />
     <meta charSet="utf-8" />
     /* analytics */
@@ -28,10 +28,7 @@ let make = () => {
     /* <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000f2b" /> */
     <meta name="msapplication-TileColor" content="#fafcff" />
     <meta name="theme-color" content="#fafcff" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       {j|@-ms-viewport { width: device-width } @viewport { width: device-width }|j}
       ->React.string
@@ -46,8 +43,14 @@ html {
 }
 body {
   min-width: 100%;
-  min-height: 100%;
+  height: 100%;
   overflow-x: hidden;
+}
+/* Force Next-generated DOM elements to fill their parent's height */
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 @supports(padding: max(0px)) {
@@ -253,5 +256,5 @@ body {
   |j}
       ->React.string
     </style>
-  </BsReactHelmet>;
+  </Next.Head>;
 };

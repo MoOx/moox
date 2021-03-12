@@ -1,3 +1,77 @@
+/* because I am lazy */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+figure {
+  border: 1px solid #eee;
+}
+
+figcaption {
+  font-style: italic;
+  text-align: center;
+  margin: 0;
+  display: block;
+  background: #fafafa;
+  line-height: 44px;
+  border-top: 1px solid #eee;
+}
+
+/* we use this tags for semantics/indexing only */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+code {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+    monospace;
+}
+
+/* code highlight */
+.hljs {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.01);
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.75);
+  overflow: auto;
+}
+
+.hljs-operator {
+  color: #a626a4;
+}
+.hljs-attr,
+.hljs-character,
+.hljs-keyword,
+.hljs-name,
+.hljs-params,
+.hljs-string {
+  color: #50a14f;
+}
+.hljs-module-identifier,
+.hljs-tag,
+.hljs-title {
+  color: #4078f2;
+}
+.hljs-built_in,
+.hljs-constructor {
+  color: #e45649;
+}
+
 /* legacy css for old blog post */
 .flex-media--unknown {
   text-align: center;
@@ -69,26 +143,4 @@
 }
 .flex-media--1-1 img.flex-media__item {
   height: auto;
-}
-
-/* because I am lazy */
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-}
-
-figure {
-  border: 1px solid #eee;
-}
-
-figcaption {
-  font-style: italic;
-  text-align: center;
-  margin: 0;
-  display: block;
-  background: #fafafa;
-  line-height: 44px;
-  border-top: 1px solid #eee;
 }
