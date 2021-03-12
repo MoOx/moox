@@ -9,6 +9,6 @@ video: https://www.youtube.com/watch?v=_fcK_Jdt_So
 videoEmbed: https://www.youtube.com/embed/_fcK_Jdt_So
 ---
 
-* http://reasonml.github.io
-* https://bucklescript.github.io
-* https://reasonml.github.io/reason-react/
+- <http://reasonml.github.io>
+- <https://bucklescript.github.io>
+- <https://reasonml.github.io/reason-react/>

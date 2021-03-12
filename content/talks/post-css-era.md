@@ -20,20 +20,20 @@ your code and to write future proof CSS (using cssnext). But what about inline
 styles? Are they a good idea? What's the downside of this method? Can we mix
 both methods? Should we use this today?
 
-* http://putaindecode.io/fr/articles/css/preprocesseurs/
-* http://pressupinc.com/blog/2014/11/dont-overextend-yourself-in-sass/
-* http://putaindecode.io/fr/articles/css/bem/
-* http://philipwalton.com/articles/extending-styles/
-* https://github.com/postcss/postcss
-* http://cssnext.io/
-* http://putaindecode.io/fr/articles/js/grunt/
-* http://putaindecode.io/fr/articles/js/gulp/
-* http://putaindecode.io/fr/articles/js/webpack/
-* http://babeljs.io/
-* http://mdast.js.org/
-* http://putaindecode.io/fr/articles/js/webpack/premier-exemple/
-* http://putaindecode.io/fr/articles/wordpress/webpack/
-* https://github.com/css-modules/css-modules
-* http://glenmaddern.com/slides/modular-style#44
-* https://github.com/necolas/react-native-web
-* https://github.com/facebook/css-layout
+- <http://putaindecode.io/fr/articles/css/preprocesseurs/>
+- <http://pressupinc.com/blog/2014/11/dont-overextend-yourself-in-sass/>
+- <http://putaindecode.io/fr/articles/css/bem/>
+- <http://philipwalton.com/articles/extending-styles/>
+- <https://github.com/postcss/postcss>
+- <https://cssnext.github.io/>
+- <http://putaindecode.io/fr/articles/js/grunt/>
+- <http://putaindecode.io/fr/articles/js/gulp/>
+- <http://putaindecode.io/fr/articles/js/webpack/>
+- <http://babeljs.io/>
+- <http://mdast.js.org/>
+- <http://putaindecode.io/fr/articles/js/webpack/premier-exemple/>
+- <http://putaindecode.io/fr/articles/wordpress/webpack/>
+- <https://github.com/css-modules/css-modules>
+- <http://glenmaddern.com/slides/modular-style#44>
+- <https://github.com/necolas/react-native-web>
+- <https://github.com/facebook/css-layout>
