@@ -19,8 +19,9 @@ const HideTheNotchApp = () => {
           type="image/png"
           href="/apps/hide-the-notch/icon.png"
         />
-        <style>
-          {`
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
       * {
         box-sizing: border-box;
         position: relative;
@@ -238,8 +239,9 @@ const HideTheNotchApp = () => {
         font-size: 12px;
         opacity: 0.8;
         color: rgba(255, 255, 255, 0.6);
-      }`}
-        </style>
+      }`,
+          }}
+        />
       </Head>
       <div className="background"></div>
       <div className="background-mask"></div>

@@ -15,8 +15,9 @@ const LifeTimeApp = () => {
         />
         <link rel="apple-touch-icon" href="icon.png" />
         <link rel="icon" type="image/png" href="icon.png" />
-        <style>
-          {`
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
         * {
             box-sizing: border-box;
             position: relative;
@@ -196,8 +197,9 @@ const LifeTimeApp = () => {
             font-size: 12px;
             opacity: 0.8;
             color: rgba(255, 255, 255, 0.6);
-        }`}
-        </style>
+        }`,
+          }}
+        />
       </Head>
       <div class="background"></div>
       <div class="background-mask"></div>
