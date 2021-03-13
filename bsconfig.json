@@ -15,10 +15,6 @@
       "subdirs": true
     },
     {
-      "dir": "pages",
-      "subdirs": true
-    },
-    {
       "dir": "assets/SVGs/components"
     }
   ],
