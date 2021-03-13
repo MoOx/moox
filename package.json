@@ -54,7 +54,7 @@
     "markdown": "markdown-to-json \"content/**/*.md\"",
     "prepare": "yarn svg && yarn markdown && yarn re:clean && yarn re:build",
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "test": "jest"
   },
