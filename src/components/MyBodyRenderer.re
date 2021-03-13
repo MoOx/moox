@@ -129,10 +129,9 @@ let rec renderChild = (~keepNewlines=false, parentTag, index: int, child) => {
     switch (tag) {
     /* html tags */
     | "a" =>
-      Js.log((key, props));
       <Html.A key ?props>
         {renderChildren(~keepNewlines, tag, children)}
-      </Html.A>;
+      </Html.A>
     | "h1" =>
       <Html.H1 key ?props>
         {renderChildren(~keepNewlines, tag, children)}
