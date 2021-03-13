@@ -1,3 +1,4 @@
-import BlogPost, { getStaticProps } from "../blogItem.bs";
-export default BlogPost;
-export { getStaticProps, getStaticPaths } from "../blogItem.bs";
+export { getStaticPaths } from "../../src/pages/PageBlogPost.bs.js";
+export { getStaticProps } from "../../src/pages/PageBlogPost.bs.js";
+import page from "../../src/pages/PageBlogPost.bs.js";
+export default page;

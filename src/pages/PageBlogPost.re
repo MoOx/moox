@@ -8,6 +8,7 @@ module Malformed = {
     message: string,
   };
 };
+
 type props = {post: Result.t(BlogFrontend.t, Malformed.t)};
 type params = {slug: string};
 
