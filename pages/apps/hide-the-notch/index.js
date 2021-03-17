@@ -47,10 +47,8 @@ const HideTheNotchApp = () => {
       body {
         height: 100%;
       }
-      
+
       #__next {
-        display: flex;
-        flex-direction: column;
         min-height: 100%;
         padding: 1em;
       }

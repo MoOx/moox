@@ -30,14 +30,8 @@ html {
 }
 body {
   min-width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-}
-/* Force Next-generated DOM elements to fill their parent's height */
-#__next {
-  display: flex;
-  flex-direction: column;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 @supports(padding: max(0px)) {

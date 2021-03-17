@@ -41,20 +41,18 @@ const LifeTimeApp = () => {
         }
 
         body {
-            height: 100%;
+          height: 100%;
         }
-        
+  
         #__next {
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-            padding: 1em;
+          min-height: 100%;
+          padding: 1em;
         }
-
+  
         @media (min-width: 800px) {
-            #__next {
+          #__next {
             padding: 10vh 0;
-            }
+          }
         }
 
         .background {
