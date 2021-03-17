@@ -4,15 +4,11 @@ const HideTheNotchApp = () => {
   return (
     <>
       <Head>
-        <html lang="en" />
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <title>Hide The Notch</title>
         <meta name="description" content="" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="apple-touch-icon" href="/apps/hide-the-notch/icon.png" />
         <link
           rel="icon"

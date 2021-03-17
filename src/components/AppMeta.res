@@ -1,7 +1,6 @@
 @react.component
 let make = () => {
   <Next.Head>
-    <html lang="en" dir="ltr" />
     <meta charSet="utf-8" />
     /* analytics */
     <link rel="dns-prefetch" href="https://a.moox.fr" />
