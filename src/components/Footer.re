@@ -23,7 +23,7 @@ let styles =
           ~color="#FBFCF8",
           (),
         ),
-      "barText": style(~fontSize=10., ~lineHeight=20., ~color="#FBFCF8", ()),
+      "barText": style(~fontSize=12., ~lineHeight=20., ~color="#FBFCF8", ()),
       "row":
         style(~flexDirection=`row, ~flexWrap=`wrap, ~alignItems=`center, ()),
       "column": style(~alignItems=`center, ~justifyContent=`center, ()),
