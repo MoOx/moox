@@ -49,10 +49,14 @@ let styles =
         ),
       "iconText":
         style(
-          ~fontSize=10.,
+          ~position=`absolute,
+          ~top=64.->dp,
+          ~left=0.->dp,
+          ~right=0.->dp,
+          ~textAlign=`center,
+          ~fontSize=12.,
           ~lineHeight=14.,
           ~fontWeight=`_300,
-          ~textAlign=`center,
           ~color="#bbc",
           (),
         ),
@@ -121,7 +125,7 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
             "THINGS I WORK WITH"->React.string
           </Text>
           <View style=styles##activities>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGJavaScript
                   fill="#bbb"
@@ -129,9 +133,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "JavaScript"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGReact
                   fill="#bbb"
@@ -139,9 +144,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "React"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGReason
                   fill="#bbb"
@@ -149,9 +155,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "ReasonML"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGJest
                   fill="#bbb"
@@ -159,9 +166,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Jest"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGTypeScript
                   fill="#bbb"
@@ -169,9 +177,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "TypeScript"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGFlow
                   fill="#bbb"
@@ -179,9 +188,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Flow"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGGraphql
                   fill="#bbb"
@@ -189,9 +199,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Graphql"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGApollo
                   fill="#bbb"
@@ -199,9 +210,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Apollo"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGWebpack
                   fill="#bbb"
@@ -209,9 +221,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Webpack"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGPhotoshop
                   fill="#bbb"
@@ -219,9 +232,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Photoshop"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGSketch
                   fill="#bbb"
@@ -229,9 +243,10 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Sketch"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGCommandLine
                   fill="#bbb"
@@ -239,6 +254,7 @@ let make = (~items: array(ResumeFrontend.t), ~malformed: array(Malformed.t)) => 
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "CLI"->React.string </Text>
             </SpacedView>
           </View>
@@ -286,7 +302,7 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
             "WEEKLY ACTIVITIES"->React.string
           </Text>
           <View style=styles##activities>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGActivityCrossfit
                   fill="#bbb"
@@ -294,9 +310,10 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Crossfit"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGActivityBike
                   fill="#bbb"
@@ -304,24 +321,27 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Bike"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
-                <SVGActivityWakeboard
+                <SVGActivityRunning
                   fill="#bbb"
-                  width={48.->Style.dp}
-                  height={48.->Style.dp}
+                  width={44.->Style.dp}
+                  height={44.->Style.dp}
                 />
               </div>
-              <Text style=styles##iconText> "Wakeboard"->React.string </Text>
+              <Spacer size=XXS />
+              <Text style=styles##iconText> "Footing"->React.string </Text>
             </SpacedView>
           </View>
+          <Spacer size=XS />
           <Text style=styles##nanoTitle>
             "REGULAR ACTIVITIES"->React.string
           </Text>
           <View style=styles##activities>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGActivityDiy
                   fill="#bbb"
@@ -329,9 +349,10 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Bricolage"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGMicrophone
                   fill="#bbb"
@@ -339,9 +360,10 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Podcast"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XS vertical=XS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGTraining
                   fill="#bbb"
@@ -349,100 +371,49 @@ When I am not coding or meditating, I enjoy simple things like gardening, watchi
                   height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText> "Teaching"->React.string </Text>
             </SpacedView>
           </View>
+          <Spacer size=XS />
           <Text style=styles##nanoTitle>
             "CASUAL ACTIVITIES"->React.string
           </Text>
           <View style=styles##activities>
-            <SpacedView horizontal=XXS vertical=XXS>
-              <div style=grayIconDomStyle>
-                <SVGActivitySkydiving
-                  fill="#bbb"
-                  width={36.->Style.dp}
-                  height={36.->Style.dp}
-                />
-              </div>
-              <Text style=styles##iconText> "Skydiving"->React.string </Text>
-            </SpacedView>
-            <SpacedView horizontal=XXS vertical=XXS>
-              <div style=grayIconDomStyle>
-                <SVGActivitySki
-                  fill="#bbb"
-                  width={36.->Style.dp}
-                  height={36.->Style.dp}
-                />
-              </div>
-              <Text style=styles##iconText>
-                "Alpine\nSkiing"->React.string
-              </Text>
-            </SpacedView>
-            <SpacedView horizontal=XXS vertical=XXS>
-              <div style=grayIconDomStyle>
-                <SVGActivityMartialArt
-                  fill="#bbb"
-                  width={36.->Style.dp}
-                  height={36.->Style.dp}
-                />
-              </div>
-              <Text style=styles##iconText>
-                "Martial\nArt"->React.string
-              </Text>
-            </SpacedView>
-            <SpacedView horizontal=XXS vertical=XXS>
-              <div style=grayIconDomStyle>
-                <SVGActivityTrekking
-                  fill="#bbb"
-                  width={36.->Style.dp}
-                  height={36.->Style.dp}
-                />
-              </div>
-              <Text style=styles##iconText> "Trekking"->React.string </Text>
-            </SpacedView>
-            <SpacedView horizontal=XXS vertical=XXS>
-              <div style=grayIconDomStyle>
-                <SVGActivitySkateboard
-                  fill="#bbb"
-                  width={36.->Style.dp}
-                  height={36.->Style.dp}
-                />
-              </div>
-              <Text style=styles##iconText> "Skate"->React.string </Text>
-            </SpacedView>
-            <SpacedView horizontal=XXS vertical=XXS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
                 <SVGActivityObstacleCourseRace
                   fill="#bbb"
-                  width={36.->Style.dp}
-                  height={36.->Style.dp}
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
                 />
               </div>
+              <Spacer size=XXS />
               <Text style=styles##iconText>
                 "Obstacle\nRace"->React.string
               </Text>
             </SpacedView>
-            <SpacedView horizontal=XXS vertical=XXS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
-                <SVGActivityBeachVolley
+                <SVGActivityTrekking
                   fill="#bbb"
-                  width={36.->Style.dp}
-                  height={36.->Style.dp}
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
                 />
               </div>
-              <Text style=styles##iconText>
-                "Beach\nVolley"->React.string
-              </Text>
+              <Spacer size=XXS />
+              <Text style=styles##iconText> "Trekking"->React.string </Text>
             </SpacedView>
-            <SpacedView horizontal=XXS vertical=XXS>
+            <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
-                <SVGActivitySoccer
+                <SVGActivityWakeboard
                   fill="#bbb"
-                  width={36.->Style.dp}
-                  height={36.->Style.dp}
+                  width={48.->Style.dp}
+                  height={48.->Style.dp}
                 />
               </div>
-              <Text style=styles##iconText> "Soccer"->React.string </Text>
+              <Spacer size=XXS />
+              <Text style=styles##iconText> "Wakeboard"->React.string </Text>
             </SpacedView>
           </View>
         </SpacedView>
