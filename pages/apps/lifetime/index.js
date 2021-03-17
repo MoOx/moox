@@ -254,10 +254,7 @@ const LifeTimeApp = () => {
         <div class="spacer"></div>
         <div class="View flex-row">
           <div class="View">
-            <a
-              class="button"
-              href="mailto:apps+lifetime@moox.io?subject=[LifeTime]%20iOS%20beta%20request"
-            >
+            <a class="button" href="https://testflight.apple.com/join/HZJj4kel">
               <svg width="40px" height="40px" viewBox="0 0 24 24">
                 <path
                   fill="#fff"
@@ -306,16 +303,16 @@ const LifeTimeApp = () => {
             </a>
             <a
               class="AskBeta"
-              href="mailto:apps+lifetime@moox.io?subject=[LifeTime]%20iOS%20beta%20request"
+              href="https://testflight.apple.com/join/HZJj4kel"
             >
-              <span>Ask for Beta access for</span> <strong>iOS</strong>
+              <span>Beta access for</span> <strong>iOS</strong> via TestFlight
             </a>
           </div>
           <div class="spacer"></div>
           <div class="View">
             <a
               class="button"
-              href="mailto:apps+lifetime@moox.io?subject=[LifeTime]%20Android%20beta%20request"
+              href="https://play.google.com/store/apps/details?id=io.moox.lifetime"
             >
               <svg width="36px" height="40px" viewBox="0 0 926 1032">
                 <defs>
@@ -414,7 +411,7 @@ const LifeTimeApp = () => {
               </svg>
               <div class="button-text">
                 <span style={{ textTransform: "uppercase", fontSize: "14px" }}>
-                  Soon on
+                  Early Access on
                 </span>
                 <svg width="159" height="32px" viewBox="0 0 3399 684">
                   <g
@@ -428,12 +425,6 @@ const LifeTimeApp = () => {
                   </g>
                 </svg>
               </div>
-            </a>
-            <a
-              class="AskBeta"
-              href="mailto:apps+lifetime@moox.io?subject=[LifeTime]%20Android%20beta%20request"
-            >
-              <span>Ask for Beta access for</span> <strong>Android</strong>
             </a>
           </div>
         </div>
