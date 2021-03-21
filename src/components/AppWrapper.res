@@ -16,14 +16,17 @@ if Predefined.isClient {
       ),
     )
     ->Animated.start()
-  window |> Window.addEventListener("scroll", _ =>
-    if !requested.contents {
-      requested := true
-      ReactNative.AnimationFrame.request(() => {
-        tick()
-        requested := false
-      })->ignore
-    }
+  window->Window.addEventListener(
+    "scroll",
+    _ =>
+      if !requested.contents {
+        requested := true
+        ReactNative.AnimationFrame.request(() => {
+          tick()
+          requested := false
+        })->ignore
+      },
+    _,
   )
 }
 
@@ -53,7 +56,7 @@ let make = (~children) =>
     <AppMeta />
     <WindowSizeFilter.MMin> <HeaderLarge /> </WindowSizeFilter.MMin>
     children
-    <WindowSizeFilter.MMin> <Footer /> </WindowSizeFilter.MMin>
+    <Footer />
     <WindowSizeFilter.SMax>
       <div className="BlurView FixedBottom"> <TabBar /> </div> <TabBarWrapper.Placeholder />
     </WindowSizeFilter.SMax>

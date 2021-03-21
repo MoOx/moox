@@ -4,55 +4,73 @@ open ReactMultiversal
 let styles = {
   open Style
   StyleSheet.create({
-    "menu": style(~justifyContent=#center, ~alignItems=#center, ()),
-    "bar": style(~flexDirection=#row, ~flexWrap=#wrap, ~justifyContent=#spaceBetween, ()),
-    "barWrapper": style(~backgroundColor=Consts.Colors.dark, ()),
-    "icons": style(~flexDirection=#row, ~alignItems=#center, ()),
-    "barLinks": style(~flexDirection=#row, ()),
-    "barLink": style(~padding=10.->dp, ~fontSize=14., ~lineHeight=44., ~color="#FBFCF8", ()),
-    "barText": style(~fontSize=12., ~lineHeight=20., ~color="#FBFCF8", ()),
-    "row": style(~flexDirection=#row, ~flexWrap=#wrap, ~alignItems=#center, ()),
-    "column": style(~alignItems=#center, ~justifyContent=#center, ()),
+    "icon": style(~padding=10.->dp, ()),
+    "link": style(~padding=10.->dp, ~fontSize=14., ~color="#FBFCF8", ()),
+    // "bar": style(~flexDirection=#row, ~flexWrap=#wrap, ~justifyContent=#spaceBetween, ()),
+    // "barWrapper": style(~backgroundColor=Consts.Colors.dark, ()),
+    "text": style(~fontSize=12., ~lineHeight=20., ~color="#FBFCF8", ()),
+    // "row": style(~flexDirection=#row, ~flexWrap=#wrap, ~alignItems=#center, ()),
+    // "column": style(~alignItems=#center, ~justifyContent=#center, ()),
   })
 }
 
 @react.component
 let make = () =>
-  <View style={styles["menu"]}>
-    <Container style={styles["bar"]} wrapperStyle={styles["barWrapper"]}>
-      <View style={styles["barLinks"]}>
-        {Consts.menuLinks
-        ->Belt.Array.map(item =>
-          <TextLink key=item.link style={styles["barLink"]} href=item.link>
-            {item.text->React.string}
-          </TextLink>
-        )
-        ->React.array}
+  <View>
+    <Container
+      wrapperStyle={
+        open Style
+        style(~backgroundColor=Consts.Colors.dark, ())
+      }>
+      <View
+        style={Style.array([
+          Predefined.styles["rowWrap"],
+          Predefined.styles["flex"],
+          Predefined.styles["alignCenter"],
+        ])}>
+        <SpacedView horizontal=S vertical=S>
+          <SocialIcons
+            wrapperStyle={Predefined.styles["rowCenter"]} iconStyle={styles["icon"]} iconSize=48.
+          />
+        </SpacedView>
+        <View style={Predefined.styles["flex"]} />
+        <SpacedView
+          horizontal=S
+          vertical=S
+          style={Style.array([Predefined.styles["rowWrap"], Predefined.styles["flexShrink"]])}>
+          {Consts.menuLinks
+          ->Belt.Array.map(item =>
+            <TextLink key=item.link style={styles["link"]} href=item.link>
+              {item.text->React.string}
+            </TextLink>
+          )
+          ->React.array}
+        </SpacedView>
       </View>
-      <View style={styles["column"]}>
-        <View style={styles["row"]}>
-          <Text style={styles["barText"]}> {"Made with "->React.string} </Text>
-          <TextLink style={styles["barText"]} href="https://rescript-lang.org/">
+      <SpacedView horizontal=L vertical=L style={Predefined.styles["rowWrap"]}>
+        <View style={Style.array([Predefined.styles["rowWrap"], Predefined.styles["flexShrink"]])}>
+          <Text style={styles["text"]}> {"Made with "->React.string} </Text>
+          <TextLink style={styles["text"]} href="https://rescript-lang.org/">
             {"ReScript, "->React.string}
           </TextLink>
-          <TextLink style={styles["barText"]} href="https://reactnative.dev">
+          <TextLink style={styles["text"]} href="https://reactnative.dev">
             {"React Native"->React.string}
           </TextLink>
-          <TextLink style={styles["barText"]} href="https://necolas.github.io/react-native-web/">
+          <TextLink style={styles["text"]} href="https://necolas.github.io/react-native-web/">
             {" Web, "->React.string}
           </TextLink>
-          <TextLink style={styles["barText"]} href="https://nextjs.org">
+          <TextLink style={styles["text"]} href="https://nextjs.org">
             {"Next.js"->React.string}
           </TextLink>
-          <Text style={styles["barText"]}> {" and "->React.string} </Text>
-          <TextLink style={styles["barText"]} href="https://github.com/reason-react-native">
+          <Text style={styles["text"]}> {" and "->React.string} </Text>
+          <TextLink style={styles["text"]} href="https://github.com/reason-react-native">
             {"ReScript React Native"->React.string}
           </TextLink>
         </View>
-        <TextLink style={styles["barText"]} href="https://github.com/MoOx/moox.io">
+        <Text style={styles["text"]}> {j`  ·  `->React.string} </Text>
+        <TextLink style={styles["text"]} href="https://github.com/MoOx/moox.io">
           {"100% Over-engineered source available on GitHub"->React.string}
         </TextLink>
-      </View>
-      <SocialIcons wrapperStyle={styles["icons"]} iconStyle={styles["barLink"]} iconSize=22. />
+      </SpacedView>
     </Container>
   </View>

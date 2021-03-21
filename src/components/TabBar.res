@@ -1,6 +1,5 @@
 open Belt
 open ReactNative
-open ReactMultiversal
 
 let colorInactive = Consts.Colors.tabBarIconInactive
 let colorActive = Consts.Colors.tabBarIconActive
@@ -14,18 +13,22 @@ let styles = {
 
 @react.component
 let make = () => {
-  let currentLocation = ""
-  <TabBarWrapper>
+  let currentLocation = Next.useRouter().pathname
+  <ReactMultiversal.TabBarWrapper>
     {Consts.menuLinks
-    ->Array.map(({link, text, icon, isActive}) =>
+    ->Array.map(({link, text, textSmall, icon, isActive}) =>
       <ViewLink key=link href=link style={styles["itemWrapper"]}>
         <TabBarItem
-          icon isActive={isActive(currentLocation, link)} colorActive colorInactive text
+          icon
+          isActive={isActive(currentLocation, link)}
+          colorActive
+          colorInactive
+          text={textSmall->Option.getWithDefault(text)}
         />
       </ViewLink>
     )
     ->React.array}
-  </TabBarWrapper>
+  </ReactMultiversal.TabBarWrapper>
 }
 
 let default = make
