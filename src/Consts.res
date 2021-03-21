@@ -20,34 +20,34 @@ let menuLinks: array<menuLink> = [
     isActive: (current, link) => current == link,
   },
   // {
-  //   link: "/solutions/",
+  //   link: "/solutions",
   //   text: {j|Solutions|j},
   //   icon: (~width, ~height, ~fill, _) =>
   //     <SVGMenuResume width={width->Style.dp} height={height->Style.dp} fill />,
   //   isActive: (current, _link) =>
-  //     Js.String.startsWith("/solutions/", current),
+  //     Js.String.startsWith("/solutions", current),
   // },
   {
-    link: "/resume/",
+    link: "/resume",
     text: j`About`,
     icon: (~width, ~height, ~fill, _) =>
       <SVGMenuResume width={width->Style.dp} height={height->Style.dp} fill />,
-    isActive: (current, _link) => Js.String.startsWith("/resume/", current),
+    isActive: (current, _link) => Js.String.startsWith("/resume", current),
   },
   {
-    link: "/talks/",
+    link: "/talks",
     text: j`Talks`,
     icon: (~width, ~height, ~fill, _) =>
       <SVGMenuTalk width={width->Style.dp} height={height->Style.dp} fill />,
     isActive: (current, _link) =>
-      Js.String.startsWith("/talks/", current) || Js.String.startsWith("/talk/", current),
+      Js.String.startsWith("/talks", current) || Js.String.startsWith("/talk", current),
   },
   {
-    link: "/blog/",
+    link: "/blog",
     text: j`Blog`,
     icon: (~width, ~height, ~fill, _) =>
       <SVGMenuBlog width={width->Style.dp} height={height->Style.dp} fill />,
-    isActive: (current, _link) => Js.String.startsWith("/blog/", current),
+    isActive: (current, _link) => Js.String.startsWith("/blog", current),
   },
 ]
 
@@ -85,8 +85,6 @@ module Colors = {
   let dark = "hsl(219.1, 100%, 8.5%)"
   let light = "hsl(219.1, 100%, 99%)"
   let lightest = "hsl(219.1, 100%, 99.5%)"
-  let tabBarIconInactive = "#909192"
-  let tabBarIconActive = dark
   let darkGrey = "#666"
   let grey = "#aaa"
   let lightGrey = "#eaeaea"
@@ -95,4 +93,6 @@ module Colors = {
   let default = "#030303"
   let blue = "#3C98D3"
   let blueDarker = "#1E2127"
+  let tabBarIconInactive = "#909192"
+  let tabBarIconActive = blue
 }
