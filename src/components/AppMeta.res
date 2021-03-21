@@ -28,9 +28,16 @@ html {
   background: #fff;
 }
 body {
+  display: flex;
+  flex-grow: 1;
   min-width: 100%;
   min-height: 100%;
   overflow-x: hidden;
+}
+
+#__next {
+  display: flex;
+  flex-grow: 1;
 }
 
 @supports(padding: max(0px)) {
