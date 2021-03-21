@@ -32,7 +32,7 @@ let make = (
       color2=Predefined.Colors.Ios.light.blue
       right={({color}) => <>
         {getInTouch
-          ? <ViewLink href="/contact/">
+          ? <ViewLink href="/contact">
               <Row.Center>
                 <Text
                   style={
@@ -42,7 +42,6 @@ let make = (
                   {"Get in touch"->React.string}
                 </Text>
                 <SVGChevronRight fill=color width={19.->Style.dp} height={19.->Style.dp} />
-                <Spacer size=XXS />
               </Row.Center>
             </ViewLink>
           : <a href="/MaximeThirouin.vcf" style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
@@ -56,7 +55,6 @@ let make = (
                 </Text>
                 <Spacer size=XXS />
                 <SVGContact fill=color width={19.->Style.dp} height={19.->Style.dp} />
-                <Spacer size=XXS />
               </Row.Center>
             </a>}
       </>}
