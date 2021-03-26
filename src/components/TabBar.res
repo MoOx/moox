@@ -16,14 +16,10 @@ let make = () => {
   let currentLocation = Next.useRouter().pathname
   <ReactMultiversal.TabBarWrapper>
     {Consts.menuLinks
-    ->Array.map(({link, text, textSmall, icon, isActive}) =>
+    ->Array.map(({link, text, icon, isActive}) =>
       <ViewLink key=link href=link style={styles["itemWrapper"]}>
         <TabBarItem
-          icon
-          isActive={isActive(currentLocation, link)}
-          colorActive
-          colorInactive
-          text={textSmall->Option.getWithDefault(text)}
+          icon isActive={isActive(currentLocation, link)} colorActive colorInactive text={text}
         />
       </ViewLink>
     )
