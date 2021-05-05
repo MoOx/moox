@@ -35,7 +35,7 @@ let make = (~item: Result.t<TalksFrontend.t, Malformed.t>) =>
           | Some(videoEmbed) =>
             <View>
               <div
-                style={ReactDOMRe.Style.make(
+                style={ReactDOM.Style.make(
                   ~position="relative",
                   ~overflow="hidden",
                   ~paddingBottom="56.2502460948%",
@@ -43,7 +43,7 @@ let make = (~item: Result.t<TalksFrontend.t, Malformed.t>) =>
                 )}>
                 <iframe
                   allowFullScreen=true
-                  style={ReactDOMRe.Style.make(
+                  style={ReactDOM.Style.make(
                     ~position="absolute",
                     ~top="0",
                     ~left="0",
@@ -62,7 +62,7 @@ let make = (~item: Result.t<TalksFrontend.t, Malformed.t>) =>
           | Some(slidesEmbed) =>
             <View>
               <div
-                style={ReactDOMRe.Style.make(
+                style={ReactDOM.Style.make(
                   ~position="relative",
                   ~overflow="hidden",
                   ~paddingBottom="56.2502460948%",
@@ -70,7 +70,7 @@ let make = (~item: Result.t<TalksFrontend.t, Malformed.t>) =>
                 )}>
                 <iframe
                   allowFullScreen=true
-                  style={ReactDOMRe.Style.make(
+                  style={ReactDOM.Style.make(
                     ~position="absolute",
                     ~top="0",
                     ~left="0",

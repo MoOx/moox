@@ -1,4 +1,3 @@
-open Belt
 open ReactNative
 open ReactMultiversal
 

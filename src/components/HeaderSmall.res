@@ -44,7 +44,7 @@ let make = (
                 <SVGChevronRight fill=color width={19.->Style.dp} height={19.->Style.dp} />
               </Row.Center>
             </ViewLink>
-          : <a href="/MaximeThirouin.vcf" style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
+          : <a href="/MaximeThirouin.vcf" style={ReactDOM.Style.make(~textDecoration="none", ())}>
               <Row.Center>
                 <Text
                   style={

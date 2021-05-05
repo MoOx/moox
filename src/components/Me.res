@@ -7,7 +7,7 @@ let height = 500. /. 1.4
 @react.component
 let make = () =>
   <div
-    style={ReactDOMRe.Style.make(
+    style={ReactDOM.Style.make(
       ~display="flex",
       ~flexDirection="column",
       ~flex="1 1 auto",

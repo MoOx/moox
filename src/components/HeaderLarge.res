@@ -74,7 +74,7 @@ let make = () => {
       ->React.array}
     </View>
     {pathname |> Js.String.startsWith("/contact/")
-      ? <a href="/MaximeThirouin.vcf" style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
+      ? <a href="/MaximeThirouin.vcf" style={ReactDOM.Style.make(~textDecoration="none", ())}>
           <ButtonOutlined
             round=true verticalSpace=XXS horizontalSpace=S color=Predefined.Colors.Ios.light.pink>
             <ButtonOutlined.Text color=Predefined.Colors.white>

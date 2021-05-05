@@ -26,7 +26,7 @@ let currentYear = Js.Date.getFullYear(Js.Date.make())->int_of_float
 @react.component
 let make = () =>
   <div
-    style={ReactDOMRe.Style.make(
+    style={ReactDOM.Style.make(
       ~display="flex",
       ~flexDirection="column",
       ~flex="1 1 auto",

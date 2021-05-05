@@ -123,7 +123,7 @@ let make = () =>
             </ViewLink>
           </SpacedView>
           <SpacedView vertical=S>
-            <a href="/MaximeThirouin.vcf" style={ReactDOMRe.Style.make(~textDecoration="none", ())}>
+            <a href="/MaximeThirouin.vcf" style={ReactDOM.Style.make(~textDecoration="none", ())}>
               <ButtonContained color=Predefined.Colors.Ios.light.pink style={styles["button"]}>
                 <SVGContact width={36.->Style.dp} height={36.->Style.dp} fill=Consts.Colors.light />
                 <Spacer />

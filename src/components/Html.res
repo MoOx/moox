@@ -304,7 +304,7 @@ module Pre = {
         open Style
         arrayOption([Some(styles["pre"]), styl])
       }>
-      {ReactDOMRe.createElement("pre", ~props=ReactDOMRe.objToDOMProps(props), [children])}
+      {React.createElementVariadic(ReactDOM.stringToComponent("pre"), props->Obj.magic, [children])}
     </View>
 }
 
@@ -316,7 +316,11 @@ module CodeBlock = {
         open Style
         arrayOption([Some(styles["codeBlock"]), styl])
       }>
-      {ReactDOMRe.createElement("code", ~props=ReactDOMRe.objToDOMProps(props), [children])}
+      {React.createElementVariadic(
+        ReactDOM.stringToComponent("code"),
+        props->Obj.magic,
+        [children],
+      )}
     </View>
 }
 
@@ -328,7 +332,11 @@ module Code = {
         open Style
         arrayOption([Some(styles["codeText"]), styl])
       }>
-      {ReactDOMRe.createElement("code", [children])}
+      {React.createElementVariadic(
+        ReactDOM.stringToComponent("code"),
+        ReactDOM.domProps(),
+        [children],
+      )}
     </Text>
 }
 

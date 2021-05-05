@@ -63,7 +63,7 @@ let make = () =>
             {"Next.js"->React.string}
           </TextLink>
           <Text style={styles["text"]}> {" and "->React.string} </Text>
-          <TextLink style={styles["text"]} href="https://github.com/reason-react-native">
+          <TextLink style={styles["text"]} href="https://rescript-react-native.github.io">
             {"ReScript React Native"->React.string}
           </TextLink>
         </View>

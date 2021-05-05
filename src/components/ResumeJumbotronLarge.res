@@ -193,7 +193,7 @@ let firstWebsite =
 @react.component
 let make = () =>
   <div
-    style={ReactDOMRe.Style.make(
+    style={ReactDOM.Style.make(
       ~display="flex",
       ~flexDirection="row",
       ~justifyContent="space-between",

@@ -77,7 +77,7 @@ let make = (
               }}
             />
           </View>
-        : ReasonReact.null}
+        : React.null}
       <Text
         style={
           open Style

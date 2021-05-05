@@ -54,7 +54,7 @@ let make = () =>
           <SVGLogo width={360.->Style.dp} height={360.->Style.dp} fill=Consts.Colors.lightest />
         </View>
       </WindowSizeFilter.MMin>
-      <WindowSizeFilter.MMin style={ReactDOMRe.Style.make(~width="20%", ~height="1px", ())} />
+      <WindowSizeFilter.MMin style={ReactDOM.Style.make(~width="20%", ~height="1px", ())} />
       <View style={styles["content"]} accessibilityRole=#header>
         <Text style={styles["title"]}> {"MoOx"->React.string} </Text>
         <Text style={styles["subtitle"]}> {"Maxime Thirouin"->React.string} </Text>

@@ -16,7 +16,7 @@ let make = (~scrollYAnimatedValue) =>
     <WindowSizeFilter.SMax> <ScreenHome /> </WindowSizeFilter.SMax>
     <WindowSizeFilter.MMin>
       <div
-        style={ReactDOMRe.Style.make(
+        style={ReactDOM.Style.make(
           // ~background="#fff",
           // ~background=
           //   "linear-gradient(to right, #2AF598 0%, #00d2ff 50%, #3a7bd5 100%)",
@@ -171,7 +171,7 @@ let make = (~scrollYAnimatedValue) =>
             </DeviceIPhoneX>
             <DeviceIPhoneX
               domStyle={
-                open ReactDOMRe.Style
+                open ReactDOM.Style
                 make(~transform="translateZ(400px)", ())
               }
               style={

@@ -2,7 +2,7 @@ const path = require("path");
 const bsconfigJson = require("./bsconfig.json");
 const packageJson = require("./package.json");
 const modulesToTranspile = [
-  "bs-platform",
+  "rescript",
   ...bsconfigJson["bs-dependencies"],
   ...Object.keys(packageJson.dependencies).filter((dep) =>
     dep.startsWith("react-native"),

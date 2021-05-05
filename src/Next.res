@@ -98,7 +98,7 @@ module GetServerSideProps = {
 
   // See: https://github.com/zeit/next.js/blob/canary/packages/next/types/index.d.ts
   type context<'props, 'params> = {
-    params: Js.t<'params>,
+    params: 'params,
     query: Js.Dict.t<string>,
     req: Req.t,
     res: Res.t,
@@ -112,7 +112,7 @@ module GetStaticProps = {
   type context<'props, 'params> = {
     params: 'params,
     query: Js.Dict.t<string>,
-    req: Js.Nullable.t<Js.t<'props>>,
+    req: Js.Nullable.t<'props>,
   }
 
   type t<'props, 'params> = context<'props, 'params> => Js.Promise.t<{"props": 'props}>

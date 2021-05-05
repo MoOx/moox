@@ -1,7 +1,7 @@
 @react.component
 let make = (~color, ~color2, ~children, ()) =>
   <div
-    style={ReactDOMRe.Style.make(
+    style={ReactDOM.Style.make(
       ~display="flex",
       ~flexDirection="column",
       ~flex="1 1 auto",

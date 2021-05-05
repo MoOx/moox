@@ -1,9 +1,6 @@
 {
   "name": "moox.io",
-  "refmt": 3,
-  "reason": {
-    "react-jsx": 3
-  },
+  "reason": { "react-jsx": 3 },
   "package-specs": {
     "module": "es6",
     "in-source": true
@@ -21,12 +18,11 @@
   "bsc-flags": ["-bs-super-errors"],
   "bs-dependencies": [
     "@glennsl/bs-json",
-    "@reason-react-native/safe-area-context",
-    "@reason-react-native/svg",
+    "@rescript-react-native/safe-area-context",
+    "@rescript-react-native/svg",
+    "@rescript/react",
     "bs-webapi",
     "react-multiversal",
-    "reason-promise",
-    "reason-react-native",
-    "reason-react"
+    "rescript-react-native"
   ]
 }

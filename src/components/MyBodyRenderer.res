@@ -149,13 +149,12 @@ let rec renderChild = (~keepNewlines=false, parentTag, index: int, child) => {
     | "br" => <Html.Br key />
     | "hr" => <Html.Hr key />
     | _ =>
-      ReactDOMRe.createElement(
-        tag,
-        ~props=ReactDOMRe.objToDOMProps(
-          props
-          ->Option.map(props => Js.Obj.empty()->Js.Obj.assign(props)->Js.Obj.assign({"key": key}))
-          ->Option.getWithDefault({"key": key}),
-        ),
+      React.createElementVariadic(
+        ReactDOM.stringToComponent(tag),
+        props
+        ->Option.map(props => Js.Obj.empty()->Js.Obj.assign(props)->Js.Obj.assign({"key": key}))
+        ->Option.getWithDefault({"key": key})
+        ->Obj.magic,
         [renderChildren(~keepNewlines, tag, children)],
       )
     }

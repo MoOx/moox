@@ -48,7 +48,7 @@ let styles = {
     ),
   })
 }
-let grayIconDomStyle = ReactDOMRe.Style.make(
+let grayIconDomStyle = ReactDOM.Style.make(
   ~display="flex",
   ~flexDirection="column",
   ~flex="1 1 auto",
