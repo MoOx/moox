@@ -22,6 +22,7 @@
     "rescript-react-native": "^0.64.3"
   },
   "devDependencies": {
+    "@moox/markdown-to-json": "^1.0.0",
     "babel-jest": "^21.2.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-react-native-web": "^0.13.0",
@@ -29,7 +30,6 @@
     "gray-matter": "^4.0.2",
     "husky": "^1.1.4",
     "lint-staged": "^8.0.5",
-    "markdown-to-json": "https://github.com/MoOx/markdown-to-json",
     "mkdirp": "^0.5.1",
     "next": "^10.0.8",
     "next-transpile-modules": "^6.3.0",
