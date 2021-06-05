@@ -28,20 +28,20 @@
     "babel-plugin-react-native-web": "^0.13.0",
     "babel-preset-react-native": "^4.0.0",
     "gray-matter": "^4.0.2",
-    "husky": "^1.1.4",
-    "lint-staged": "^8.0.5",
+    "lint-staged": "^10.0.0",
     "mkdirp": "^0.5.1",
     "next": "^10.0.8",
     "next-transpile-modules": "^6.3.0",
     "npm-run-all": "^4.0.2",
     "prettier": "^2.2.1",
     "rescript": "^9.1.0",
+    "simple-git-hooks": "^2.4.1",
     "trash-cli": "^3.1.0"
   },
   "scripts": {
-    "format": "npm run format:most && npm run format:re",
+    "format": "npm run format:most && npm run format:res",
     "format:most": "prettier --write \"**/*.{js,json,css,md}\" \"!package.json\"",
-    "format:re": "find . -name \"*.re\" | grep -v \"node_modules\" | xargs bsrefmt --in-place",
+    "format:res": "rescript format -all",
     "clean": "npm run re:clean && npm run svg:clean",
     "res:clean": "rescript clean",
     "res:build": "rescript build",
@@ -62,18 +62,10 @@
     "proseWrap": "always"
   },
   "lint-staged": {
-    "*.re": [
-      "bsrefmt --in-place",
-      "git add"
-    ],
-    "*.{js,json,css,md}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.{md,json,js,css}": "prettier --write",
+    "*.{res,resi}": "rescript format"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "simple-git-hooks": {
+    "pre-commit": "lint-staged"
   }
 }
