@@ -89,7 +89,7 @@ let make = () => {
             vertical=S
             style={Style.viewStyle(~flexGrow=1., ~flexShrink=1., ~flexBasis=180.->Style.dp, ())}>
             <TextLink
-              href="/app/hide-the-notch"
+              href="/apps/hide-the-notch"
               style={Style.textStyle(~fontSize=36., ~lineHeight=36., ~fontWeight=#bold, ())}>
               {"Hide The Notch"->React.string}
             </TextLink>
