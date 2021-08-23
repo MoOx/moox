@@ -47,8 +47,8 @@ let skills: array<CardWithGradient.item> = [
     </View>,
   },
   {
-    title: j`ReasonML`,
-    text: j`OCaml + BuckleScript = ♥`,
+    title: j`ReScript`,
+    text: j`≃ Fully Typed JavaScript ♥`,
     color: Consts.Colors.light,
     bg: "#035A93",
     bg2: Consts.Colors.dark,

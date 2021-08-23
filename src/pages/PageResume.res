@@ -122,7 +122,7 @@ let make = (~items: array<ResumeFrontend.t>, ~malformed: array<Malformed.t>) => 
                 <SVGReason fill="#bbb" width={48.->Style.dp} height={48.->Style.dp} />
               </div>
               <Spacer size=XXS />
-              <Text style={styles["iconText"]}> {"ReasonML"->React.string} </Text>
+              <Text style={styles["iconText"]}> {"ReScript"->React.string} </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>

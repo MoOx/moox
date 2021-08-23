@@ -20,3 +20,12 @@ remote: true
 
 This shop use Magento CMS. Transformation of the traditional shop (around 250
 products) to a marketplace (several thousand products).
+
+---
+
+Responsable technique de la boutique en ligne Enjoysunglasses.com, avec essayage
+virtuel de lunettes de soleil, sous la plateforme e-commerce Magento.
+
+- Transformation de la boutique classique en marketplace de la lunettes de
+  soleil passant de 250 produits à plusieurs milliers.
+- Contribution à l'écosystème Open Source Magento

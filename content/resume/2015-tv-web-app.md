@@ -15,3 +15,14 @@ hashtags:
 remote: true
 image: /resume/molotov.tv.jpg
 ---
+
+- Audit on a fresh React codebase
+- Adjustements made about "good practices"
+- Compilation of a report full of recommendations speed up day-to-day
+  development
+
+---
+
+- Audit sur une codebase React fraiche
+- Rectification sur des bonnes pratiques
+- Livraison de conseilles pour améliorer le démarrage du projet

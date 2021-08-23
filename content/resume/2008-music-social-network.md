@@ -16,4 +16,13 @@ hashtags:
 remote: true
 ---
 
-Responsible for the application architecture.
+Responsible for the application architecture of a new social network for
+musicians using PHP & the Zend Framework.
+
+---
+
+Portail / réseau social pour musiciens ( Musity.fr ) avec le Zend Framework.
+
+- Responsable de l'architecture de l'application.
+- Création de widgets front-end avec jQuery
+- Lead développeur

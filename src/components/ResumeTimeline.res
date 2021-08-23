@@ -25,10 +25,7 @@ let tlSpacer =
 @react.component
 let make = (~items: array<ResumeFrontend.t>, ()) => {
   let latestYear = ref(
-    items[0]
-    ->Option.map(item => item.dateEnd->Js.Null.toOption->Option.getWithDefault(item.dateStart))
-    ->Option.getWithDefault(Js.Date.make()->Js.Date.toISOString)
-      |> Js.String.slice(~from=0, ~to_=4),
+    (Js.Date.now()->Js.Date.fromFloat->Js.Date.getFullYear +. 1.)->Js.Float.toFixed,
   )
   <SpacedView horizontal=S vertical=None>
     {items

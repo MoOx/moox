@@ -16,4 +16,16 @@ hashtags:
 remote: true
 ---
 
-Responsible for the application architecture.
+Development of a real estate portal with PHP & the Zend Framework.
+
+Also in charge of developing several online shops using osCommerce, Prestashop &
+Magento.
+
+---
+
+Développement d'un portail immobilier avec PHP et le Zend Framework.
+
+Également responsable du développement de plusieurs boutiques en ligne avec
+osCommerce, Prestashop et Magento.
+
+Contributions open source à Prestashop et Magento.

@@ -29,7 +29,7 @@ let make = () =>
       <SpacedView horizontal=None style={styles["container"]}>
         <SpacedView vertical=None>
           <Text style={styles["textLight"]}>
-            {j`I make front-ends using React, JavaScript & ReasonML. `->React.string}
+            {j`I make front-ends using React, JavaScript & ReScript. `->React.string}
           </Text>
         </SpacedView>
         <SpacedView vertical=XL style={styles["row"]}>
