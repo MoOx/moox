@@ -12,7 +12,7 @@ customisation possible. Si vous souhaitez utiliser cela dès aujourd'hui, je vou
 renvois sur le projet que j'ai créé qui permet d'utiliser aujourd'hui la syntaxe
 CSS de demain:**
 
-### ⇢ _[cssnext](https://cssnext.io)_
+### ⇢ _[cssnext](https://cssnext.github.io)_
 
 ---
 
@@ -196,7 +196,9 @@ Et maintenant, [je vous explique comment se passer des quelques lignes de
 commandes lorsque l’on utilise Compass souvent, grâce à une petit appli
 compatible Mac OS X, Linux (et même Windows) ;) ][18]
 
-[1]: /blog/utiliser-des-variables-fonctions-css "Utiliser des variables et fonctions CSS, c’est possible !"
+[1]:
+  /blog/utiliser-des-variables-fonctions-css
+  "Utiliser des variables et fonctions CSS, c’est possible !"
 [2]: http://sass-lang.com/
 [3]: http://vimeo.com/11671458
 [4]: http://vimeo.com/ltackett
@@ -208,7 +210,8 @@ compatible Mac OS X, Linux (et même Windows) ;) ][18]
 [10]: http://rubyinstaller.org/
 [11]: http://sass-lang.com/tutorial.html
 [12]: http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#partials
-[13]: https://github.com/chriseppstein/compass/tree/stable/frameworks/compass/stylesheets
+[13]:
+  https://github.com/chriseppstein/compass/tree/stable/frameworks/compass/stylesheets
 [14]: http://compass-style.org/reference/compass/css3/
 [15]: http://compass-style.org/reference/compass/utilities/sprites/
 [16]: http://compass-style.org/help/

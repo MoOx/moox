@@ -6,7 +6,7 @@ tags:
 ---
 
 Following my [farewell to CSS](../farewell-css/), I am deprecating
-[cssnext](http://cssnext.io).
+[cssnext](https://cssnext.github.io).
 
 ## tl;dr
 
@@ -58,28 +58,28 @@ If you want a sort of changelog, here is what you can expect
 
 ### Removed
 
-* pixrem (generates pixel fallbacks for rem units)
-* postcss-calc (reduces calc, not really a polyfill)
-* postcss-color-function (color() is now color-mod())
-* postcss-color-rgba-fallback (IE8 fallback for alpha colors)
-* postcss-pseudoelements (IE8 fallback for : => :: pseudos)
+- pixrem (generates pixel fallbacks for rem units)
+- postcss-calc (reduces calc, not really a polyfill)
+- postcss-color-function (color() is now color-mod())
+- postcss-color-rgba-fallback (IE8 fallback for alpha colors)
+- postcss-pseudoelements (IE8 fallback for : => :: pseudos)
 
 ### Added
 
-* postcss-color-mod-function (color() is now color-mod())
-* postcss-dir-pseudo-class (:dir(ltr) and :dir(rtl) directional selectors)
-* postcss-focus-visible (requires WICG focus-visible js polyfill)
-* postcss-focus-within (requires focus-within js polyfill)
-* postcss-logical (new margin-block, inset, etc. directional properties)
-* postcss-page-break (fallback break-_ properties with page-break-_ alias)
+- postcss-color-mod-function (color() is now color-mod())
+- postcss-dir-pseudo-class (:dir(ltr) and :dir(rtl) directional selectors)
+- postcss-focus-visible (requires WICG focus-visible js polyfill)
+- postcss-focus-within (requires focus-within js polyfill)
+- postcss-logical (new margin-block, inset, etc. directional properties)
+- postcss-page-break (fallback break-_ properties with page-break-_ alias)
 
 #### Available but inactive by default (Stage 3+ is active by default):
 
-* postcss-color-rgb (Stage 2)
-* postcss-custom-media (Stage 2)
-* postcss-custom-selectors (Stage 2)
-* postcss-nesting (Stage 1)
-* postcss-apply (Rejected as a standard)
+- postcss-color-rgb (Stage 2)
+- postcss-custom-media (Stage 2)
+- postcss-custom-selectors (Stage 2)
+- postcss-nesting (Stage 1)
+- postcss-apply (Rejected as a standard)
 
 You will find more accurate and up to date informations on this
 [notice to cssnext users on postcss-preset-env repo](https://github.com/csstools/postcss-preset-env/issues/32)

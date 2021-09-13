@@ -25,4 +25,4 @@ image: /resume/molotov.tv.jpg
 
 - Audit sur une codebase React fraiche
 - Rectification sur des bonnes pratiques
-- Livraison de conseilles pour améliorer le démarrage du projet
+- Livraison de conseils pour améliorer le démarrage du projet

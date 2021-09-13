@@ -1,5 +1,6 @@
 ---
 title: "Media/TV Remote App"
+url: "https://www.loewe.tv/"
 description: >
   TV/media remote app made with React Native, ReScript, GraphQL & Apollo
 dateStart: 2019-02-25
@@ -51,7 +52,8 @@ GraphQL (avec Apollo).
 - Re-architecture de la codebase de l'app mobile faite avec React Native et
   ReScript dans le but de simplifier les contributions.
 - Dévelopment de plusieurs composants React bas niveau pour simplifier le
-  dévelopment au quotidien development to follow the rapidely evolving mockups
+  dévelopment au quotidien development pour suivre l'évolution rapide des
+  mockups
 - Temps passé à affiner les détails de l'interface, avec intégration d'un
   multitudes d'animations afin que l'application donne vraiment un feeling
   natif, et non mi-web / mi-mobile

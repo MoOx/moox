@@ -1,6 +1,5 @@
 ---
 company: "Social Share"
-url: "http://social-share.net"
 title: "Feed UI"
 description: >
   Social feed of online publications

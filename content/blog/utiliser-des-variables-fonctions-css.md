@@ -11,7 +11,7 @@ d'écriture prévoient beaucoup de customisation possible. Si vous souhaitez
 utiliser cela dès aujourd'hui, je vous renvois sur le projet que j'ai créé qui
 permet d'utiliser aujourd'hui la syntaxe CSS de demain:**
 
-### ⇢ _[cssnext](https://cssnext.io)_
+### ⇢ _[cssnext](https://cssnext.github.io)_
 
 ---
 
@@ -41,9 +41,9 @@ d’attendre CSS 4 qui sera surement pas officiel avant 20 ans (sachant que CSS 
 n’est encore qu’un brouillon et que CSS 2.1 est à peine ouvert aux
 commentaires…) Du coup, voilà ce que j’ai recencé à ce jour:
 
-* [Sass][6] dispo sur [GitHub][7]
-* [LESS][8] dispo sur [GitHub][9]
-* [Stylus][10] dispo sur [GitHub][11]
+- [Sass][6] dispo sur [GitHub][7]
+- [LESS][8] dispo sur [GitHub][9]
+- [Stylus][10] dispo sur [GitHub][11]
 
 ## Présentation des surcouches existantes aux langages des CSS
 
@@ -56,7 +56,7 @@ outils. Puis s’ils résument pas bien, c’est pas de ma faute, c’est comme 
 > Sass rend les CSS à nouveau amusant. Sass est une extension de CSS 3, en
 > ajoutant règles imbriqués, variables, [mixins][12], l’héritage de sélection,
 > et encore plus. Cela ce transforme en CSS standard, bien formaté, à l’aide
-> d’outils en ligne de commande ou avec des plugins de frameworks web [-ou un
+> d’outils en ligne de commande ou avec des plugins de frameworks web [-ou un >
 > petit outil avec GUI que je vous présenterais ;) ].
 >
 > Sass à 2 syntaxes. La principale (depuis Sass 3) est connu sous le nom de
@@ -158,11 +158,11 @@ syntaxe d’origine (Scss, LESS), et une qui veut simplifier (Sass, Stylus). La
 syntaxe ne fait pas tout, il faut aussi regarder la méthode de génération des
 feuilles de style en CSS :
 
-* Sass possède une méthode en ligne de commande qui va surveiller vos fichiers
+- Sass possède une méthode en ligne de commande qui va surveiller vos fichiers
   .sass ou .scss et va mettre à jour tout seul vos CSS,
-* LESS possède pour le développement, un fichier javascript, et pour la
+- LESS possède pour le développement, un fichier javascript, et pour la
   production, un compilateur (ligne de commande),
-* Stylus utilise une méthode de compilation (je n’ai pas été foutu de trouver un
+- Stylus utilise une méthode de compilation (je n’ai pas été foutu de trouver un
   exemple clair rapidement)
 
 Sass est basé sur Ruby, LESS et Stylus sur Javascript (Node.js). Tous les 3
@@ -200,7 +200,8 @@ solution Sass/Compass (et son installation) ][18]puis un autre sur [comment se
 passer des lignes de commandes avec Compass.app !][19]
 
 [1]: http://cssresetr.com/
-[2]: http://css.4design.tl/framework-css-semantique-maquette-dynamique-et-autres-notes
+[2]:
+  http://css.4design.tl/framework-css-semantique-maquette-dynamique-et-autres-notes
 [3]: http://css.4design.tl/framework-css-mettez-vos-grilles-au-pas
 [4]: https://github.com/stubbornella/oocss
 [5]: http://fr.wikipedia.org/wiki/Objet_(informatique)
