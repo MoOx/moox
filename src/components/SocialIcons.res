@@ -13,7 +13,7 @@ let make = (
   <View style=wrapperStyle>
     {Consts.socialLinks
     ->Belt.Array.map(item =>
-      <ViewLink key=item.link style=?iconStyle href=item.link accessibilityLabel=item.text>
+      <ViewLink key=item.link style=?iconStyle href=item.link accessibilityLabel=item.alt>
         {iconWrapperFunc(~children=item.componentFunc(~iconColor, ~iconSize))}
       </ViewLink>
     )

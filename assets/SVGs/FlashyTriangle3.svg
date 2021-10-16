@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="288px" height="272px" viewBox="0 0 288 272" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>assets/SVGs/FlashyTriangle3</title>
+    <defs>
+        <linearGradient x1="19.0285067%" y1="0%" x2="89.2609756%" y2="73.0309166%" id="flt3-linearGradient-1">
+            <stop stop-color="#FECF24" offset="0%"></stop>
+            <stop stop-color="#FD12C9" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="89.2609756%" y1="69.255008%" x2="14.9277865%" y2="31.2222459%" id="flt3-linearGradient-2">
+            <stop stop-color="#90F0FF" offset="0%"></stop>
+            <stop stop-color="#79E3EA" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="12.9″-iPad-Pro" transform="translate(-395.000000, -3455.000000)" fill="url(#flt3-linearGradient-1)" stroke="url(#flt3-linearGradient-2)" stroke-width="8.17021277">
+            <path d="M462.778216,3445.9274 L683.147288,3647.59297 L440.116204,3720.18981 L462.778216,3445.9274 Z" id="assets/SVGs/FlashyTriangle3" transform="translate(559.876565, 3584.563015) rotate(78.000000) translate(-559.876565, -3584.563015) "></path>
+        </g>
+    </g>
+</svg>

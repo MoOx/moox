@@ -23,6 +23,7 @@
     "@rescript/react",
     "bs-webapi",
     "react-multiversal",
-    "rescript-react-native"
+    "rescript-react-native",
+    "rescript-tinycolor"
   ]
 }

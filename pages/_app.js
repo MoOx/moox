@@ -4,6 +4,19 @@ import { init } from "@socialgouv/matomo-next";
 
 import "../styles.css";
 
+if (typeof window === "undefined") {
+  require("react-native").Dimensions.set({
+    window: {
+      width: 360,
+      height: 640,
+    },
+    screen: {
+      width: 360,
+      height: 640,
+    },
+  });
+}
+
 class MyApp extends App {
   componentDidMount() {
     init({

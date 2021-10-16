@@ -55,7 +55,7 @@ let styles = {
 
 @react.component
 let make = () => {
-  let {pathname} = Next.useRouter()
+  let {asPath} = Next.useRouter()
   <Container style={styles["bar"]} wrapperStyle={styles["barWrapper"]}>
     <ViewLink style={styles["logo"]} href="/">
       <SVGLogo width={24.->Style.dp} height={24.->Style.dp} fill=Predefined.Colors.black />
@@ -73,7 +73,7 @@ let make = () => {
       )
       ->React.array}
     </View>
-    {pathname |> Js.String.startsWith("/contact/")
+    {asPath |> Js.String.startsWith("/contact")
       ? <a href="/MaximeThirouin.vcf" style={ReactDOM.Style.make(~textDecoration="none", ())}>
           <ButtonOutlined
             round=true verticalSpace=XXS horizontalSpace=S color=Predefined.Colors.Ios.light.pink>

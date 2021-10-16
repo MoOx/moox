@@ -1,9 +1,12 @@
 open ReactNative
 open ReactMultiversal
 
+let blue = "#3C98D3"
+let blueDarker = "#1E2127"
+
 @react.component
 let make = () =>
-  <ViewWithGradient color=Consts.Colors.blue color2=Consts.Colors.blueDarker>
+  <ViewWithGradient color=blue color2=blueDarker>
     <SpacedView>
       <View
         style={
@@ -47,7 +50,7 @@ let make = () =>
       style={
         open Style
         style(
-          ~backgroundColor=Consts.Colors.blue,
+          ~backgroundColor=blue,
           ~flexDirection=#row,
           ~borderBottomLeftRadius=4.,
           ~borderBottomRightRadius=4.,

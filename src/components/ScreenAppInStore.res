@@ -10,6 +10,7 @@ let make = () =>
         vertical=XS
         key={Predefined.hairlineWidth->Js.Float.toString}
         style=// key=Predefined.hairlineWidth is to avoid SSR/hydrate issue
+
         {
           open Style
           style(
@@ -96,7 +97,7 @@ let make = () =>
           <Text
             style={
               open Style
-              style(~color=Consts.Colors.blue, ())
+              style(~color=Predefined.Colors.Ios.light.blue, ())
             }>
             {"Read more"->React.string}
           </Text>

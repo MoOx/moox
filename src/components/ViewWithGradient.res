@@ -5,7 +5,7 @@ let make = (~color, ~color2, ~children, ()) =>
       ~display="flex",
       ~flexDirection="column",
       ~flex="1 1 auto",
-      ~borderRadius="4px",
+      ~borderRadius="6px",
       ~background="linear-gradient(0.45turn, " ++ (color ++ (" 10%, " ++ (color2 ++ " 110%)"))),
       ~overflow="hidden",
       (),

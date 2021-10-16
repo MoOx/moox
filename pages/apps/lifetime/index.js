@@ -317,7 +317,7 @@ const LifeTimeApp = () => {
                     y1="4.94958549%"
                     x2="26.4625815%"
                     y2="71.9258683%"
-                    id="linearGradient-1"
+                    id="apg-linearGradient-1"
                   >
                     <stop stop-color="#00A0FF" offset="0%"></stop>
                     <stop stop-color="#00A1FF" offset="0.6569999%"></stop>
@@ -331,7 +331,7 @@ const LifeTimeApp = () => {
                     y1="50.0004315%"
                     x2="-130.551706%"
                     y2="50.0004315%"
-                    id="linearGradient-2"
+                    id="apg-linearGradient-2"
                   >
                     <stop stop-color="#FFE000" offset="0%"></stop>
                     <stop stop-color="#FFBD00" offset="40.87%"></stop>
@@ -343,7 +343,7 @@ const LifeTimeApp = () => {
                     y1="30.90425%"
                     x2="-50.1292379%"
                     y2="136.019454%"
-                    id="linearGradient-3"
+                    id="apg-linearGradient-3"
                   >
                     <stop stop-color="#FF3A44" offset="0%"></stop>
                     <stop stop-color="#C31162" offset="100%"></stop>
@@ -353,7 +353,7 @@ const LifeTimeApp = () => {
                     y1="-11.8250802%"
                     x2="42.0848536%"
                     y2="35.086648%"
-                    id="linearGradient-4"
+                    id="apg-linearGradient-4"
                   >
                     <stop stop-color="#32A071" offset="0%"></stop>
                     <stop stop-color="#2DA771" offset="6.85%"></stop>
@@ -366,22 +366,22 @@ const LifeTimeApp = () => {
                   <path
                     d="M18.4,16.1 C6.8,28.6 0.1,47.7 0.1,72.7 L0.1,959.4 C0.1,984.4 6.8,1003.5 18.8,1015.5 L21.9,1018.2 L518.7,521.4 L518.7,510.3 L21.5,13.4 C21.5,13.4 18.4,16.1 18.4,16.1 Z"
                     id="Path"
-                    fill="url(#linearGradient-1)"
+                    fill="url(#apg-linearGradient-1)"
                   ></path>
                   <path
                     d="M684,687.5 L518.3,521.8 L518.3,510.2 L684,344.5 L687.6,346.7 L883.6,458.1 C939.7,489.7 939.7,541.9 883.6,573.9 L687.6,685.3 C687.6,685.3 684,687.5 684,687.5 Z"
                     id="Path"
-                    fill="url(#linearGradient-2)"
+                    fill="url(#apg-linearGradient-2)"
                   ></path>
                   <path
                     d="M687.6,685.3 L518.3,516 L18.4,1015.9 C36.7,1035.5 67.4,1037.7 101.7,1018.6 L687.6,685.3"
                     id="Path"
-                    fill="url(#linearGradient-3)"
+                    fill="url(#apg-linearGradient-3)"
                   ></path>
                   <path
                     d="M687.6,346.7 L101.7,13.9 C67.4,-5.7 36.6,-3 18.4,16.6 L518.3,516 L687.6,346.7 Z"
                     id="Path"
-                    fill="url(#linearGradient-4)"
+                    fill="url(#apg-linearGradient-4)"
                   ></path>
                   <path
                     d="M684,681.7 L102.1,1012.3 C69.6,1031 40.6,1029.7 21.9,1012.7 L18.8,1015.8 L21.9,1018.5 C40.6,1035.4 69.6,1036.8 102.1,1018.1 L688,685.3 C688,685.3 684,681.7 684,681.7 Z"

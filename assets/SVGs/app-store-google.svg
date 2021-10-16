@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="27px" viewBox="0 0 24 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>assets/SVGs/app-store-google</title>
+    <defs>
+        <linearGradient x1="61.0301652%" y1="4.94958549%" x2="26.4625815%" y2="71.9258683%" id="apg-linearGradient-1">
+            <stop stop-color="#00A0FF" offset="0%"></stop>
+            <stop stop-color="#00A1FF" offset="0.6569999%"></stop>
+            <stop stop-color="#00BEFF" offset="26.01%"></stop>
+            <stop stop-color="#00D2FF" offset="51.22%"></stop>
+            <stop stop-color="#00DFFF" offset="76.04%"></stop>
+            <stop stop-color="#00E3FF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="107.630451%" y1="50.0004315%" x2="-130.551706%" y2="50.0004315%" id="apg-linearGradient-2">
+            <stop stop-color="#FFE000" offset="0%"></stop>
+            <stop stop-color="#FFBD00" offset="40.87%"></stop>
+            <stop stop-color="#FFA500" offset="77.54%"></stop>
+            <stop stop-color="#FF9C00" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="86.243474%" y1="30.90425%" x2="-50.1292379%" y2="136.019454%" id="apg-linearGradient-3">
+            <stop stop-color="#FF3A44" offset="0%"></stop>
+            <stop stop-color="#C31162" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-18.8105628%" y1="-11.8250802%" x2="42.0848536%" y2="35.086648%" id="apg-linearGradient-4">
+            <stop stop-color="#32A071" offset="0%"></stop>
+            <stop stop-color="#2DA771" offset="6.85%"></stop>
+            <stop stop-color="#15CF74" offset="47.62%"></stop>
+            <stop stop-color="#06E775" offset="80.09%"></stop>
+            <stop stop-color="#00F076" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="12.9″-iPad-Pro" transform="translate(-1125.000000, -4376.000000)">
+            <g id="assets/SVGs/app-store-google" transform="translate(1125.000000, 4376.000000)">
+                <path d="M0.474298056,0.409352669 C0.173650108,0.733326751 1.47326356e-15,1.22835915 1.47326356e-15,1.87630731 L1.47326356e-15,24.8577328 C1.47326356e-15,25.505681 0.173650108,26.0007134 0.484665227,26.3117285 L0.565010799,26.3817069 L13.4410367,13.505681 L13.4410367,13.217992 L0.554643629,0.339374267 C0.554643629,0.339374267 0.474298056,0.409352669 0.474298056,0.409352669 Z" id="Path" fill="url(#apg-linearGradient-1)"></path>
+                <path d="M17.72527,17.8106486 L13.4306695,13.5160481 L13.4306695,13.2154002 L17.72527,8.92079975 L17.8185745,8.97781919 L22.8984881,11.8650762 C24.3524838,12.6840827 24.3524838,14.0369985 22.8984881,14.8663721 L17.8185745,17.7536291 C17.8185745,17.7536291 17.72527,17.8106486 17.72527,17.8106486 Z" id="Path" fill="url(#apg-linearGradient-2)"></path>
+                <path d="M17.8185745,17.7536291 L13.4306695,13.3657242 L0.474298056,26.3220956 C0.948596112,26.830087 1.74427646,26.8871064 2.63326134,26.3920741 L17.8185745,17.7536291" id="Path" fill="url(#apg-linearGradient-3)"></path>
+                <path d="M17.8185745,8.97781919 L2.63326134,0.352333231 C1.74427646,-0.15565813 0.94600432,-0.0856797282 0.474298056,0.422311632 L13.4306695,13.3657242 L17.8185745,8.97781919 Z" id="Path" fill="url(#apg-linearGradient-4)"></path>
+                <path d="M17.72527,17.6603246 L2.64362851,26.2287911 C1.8012959,26.7134563 1.04967603,26.679763 0.565010799,26.2391583 L0.484665227,26.3195039 L0.565010799,26.3894823 C1.04967603,26.8274952 1.8012959,26.8637803 2.64362851,26.3791151 L17.8289417,17.7536291 C17.8289417,17.7536291 17.72527,17.6603246 17.72527,17.6603246 Z" id="Path" fill="#000000" fill-rule="nonzero" opacity="0.2"></path>
+                <path d="M22.8984881,14.7160481 L17.712311,17.6603246 L17.8056156,17.7536291 L22.8855292,14.8663721 C23.6138229,14.4516853 23.9714903,13.9074088 23.9714903,13.3657242 C23.9274298,13.8633483 23.5568035,14.3350546 22.8984881,14.7160481 Z" id="Path" fill="#000000" fill-rule="nonzero" opacity="0.12"></path>
+                <path d="M2.63326134,0.502657205 L22.8984881,12.0154002 C23.5568035,12.3860265 23.9274298,12.8706918 23.9844492,13.3657242 C23.9844492,12.8240395 23.6267819,12.279763 22.8984881,11.8650762 L2.63326134,0.352333231 C1.17926566,-0.479632212 0,0.21496822 0,1.87630731 L0,2.02663129 C0,0.362700401 1.17926566,-0.318941067 2.63326134,0.502657205 Z" id="Path" fill="#FFFFFF" opacity="0.25"></path>
+            </g>
+        </g>
+    </g>
+</svg>

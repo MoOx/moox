@@ -57,7 +57,5 @@ let make = (~children) =>
     <WindowSizeFilter.MMin> <HeaderLarge /> </WindowSizeFilter.MMin>
     children
     <Footer />
-    <WindowSizeFilter.SMax>
-      <div className="BlurView FixedBottom"> <TabBar /> </div> <TabBarWrapper.Placeholder />
-    </WindowSizeFilter.SMax>
+    <WindowSizeFilter.SMax> <TabBar /> </WindowSizeFilter.SMax>
   </ReactNativeSafeAreaContext.SafeAreaProvider>

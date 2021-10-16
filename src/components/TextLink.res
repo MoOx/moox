@@ -1,7 +1,7 @@
 open ReactNative
 
 let defaultIsActive = (href: string, router: Next.router) =>
-  router.pathname === href || router.pathname ++ "/" === href
+  router.asPath === href || router.asPath ++ "/" === href
 
 @react.component
 let make = (
@@ -18,9 +18,10 @@ let make = (
   let style = Style.arrayOption([styl, isActive(href, router) ? activeStyle : None])
   href->Js.String2.startsWith("/")
     ? <Next.Link href={href}>
-        <Text ?accessibilityLabel accessibilityRole ?numberOfLines style> {children} </Text>
+        <Text href ?accessibilityLabel accessibilityRole ?numberOfLines style> {children} </Text>
       </Next.Link>
     : <Text
+        href
         ?accessibilityLabel
         accessibilityRole
         ?numberOfLines

@@ -97,6 +97,7 @@ let make = (~scrollYAnimatedValue) =>
               style(~flexDirection=#row, ())
             }>
             <DeviceIPhoneX
+              width=450.
               style={
                 open Style
                 style(
@@ -170,14 +171,12 @@ let make = (~scrollYAnimatedValue) =>
               <Spacer size=L /> <ScreenAppInSearch />
             </DeviceIPhoneX>
             <DeviceIPhoneX
-              domStyle={
-                open ReactDOM.Style
-                make(~transform="translateZ(400px)", ())
-              }
+              width=450.
               style={
                 open Style
                 style(
                   ~transform=[
+                    unsafeTransform({"translateZ": "400px"}),
                     perspective(~perspective=1000.),
                     rotateX(
                       ~rotateX={
@@ -231,16 +230,15 @@ let make = (~scrollYAnimatedValue) =>
               <SpacedView
                 style={
                   open Style
-                  style(~position=#absolute, ~top=0.->dp, ~left=0.->dp, ~right=0.->dp, ())
+                  style(~position=#absolute, ~top=0.->dp, ~left=5.->dp, ~right=0.->dp, ())
                 }>
-                <SVGIPhoneStatusBar
-                  width={340.->Style.dp} height={(340. /. 328. *. 12.)->Style.dp}
-                />
+                <SVGIPhoneStatusBar width={100.->Style.pct} />
               </SpacedView>
               <Spacer size=L />
               <ScreenHome />
             </DeviceIPhoneX>
             <DeviceIPhoneX
+              width=450.
               style={
                 open Style
                 style(
