@@ -5,7 +5,7 @@ title: "Transport Mobile App"
 description: >
   iOS / Android app built for cities and transport networks
 dateStart: 2019-06-06
-dateEnd: 2021-09-31
+dateEnd: 2021-12-31
 hashtags:
   - JavaScript
   - React

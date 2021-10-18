@@ -24,6 +24,23 @@ let tlSpacer =
 
 @react.component
 let make = (~items: array<ResumeFrontend.t>, ()) => {
+  items
+  ->Js.Array2.sortInPlaceWith((a, b) => {
+    let aYear =
+      a.dateEnd->Js.Null.toOption->Option.getWithDefault(a.dateStart)
+        |> Js.String.slice(~from=0, ~to_=4)
+    let bYear =
+      b.dateEnd->Js.Null.toOption->Option.getWithDefault(b.dateStart)
+        |> Js.String.slice(~from=0, ~to_=4)
+    if aYear < bYear {
+      1
+    } else if aYear > bYear {
+      -1
+    } else {
+      0
+    }
+  })
+  ->ignore
   let latestYear = ref(
     (Js.Date.now()->Js.Date.fromFloat->Js.Date.getFullYear +. 1.)->Js.Float.toFixed,
   )
