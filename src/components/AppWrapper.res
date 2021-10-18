@@ -1,4 +1,5 @@
 open ReactNative
+open ReactNative.Style
 open ReactMultiversal
 open Webapi.Dom
 
@@ -56,6 +57,21 @@ let make = (~children) =>
     <AppMeta />
     <WindowSizeFilter.MMin> <HeaderLarge /> </WindowSizeFilter.MMin>
     children
-    <Footer />
+    <GradientLinearBackground
+      stops=[
+        {
+          offset: 0.->pct,
+          stopColor: "#01093C",
+          stopOpacity: "1",
+        },
+        {
+          offset: 100.->pct,
+          stopColor: "#060C4E",
+          stopOpacity: "1",
+        },
+      ]
+      style={Predefined.styles["flex1"]}>
+      <WebsiteFooter />
+    </GradientLinearBackground>
     <WindowSizeFilter.SMax> <TabBar /> </WindowSizeFilter.SMax>
   </ReactNativeSafeAreaContext.SafeAreaProvider>
