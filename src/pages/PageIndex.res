@@ -15,6 +15,9 @@ let make = () => {
   }, [deviceY_set])
   <ReactNativeSafeAreaContext.SafeAreaProvider initialMetrics=AppWrapper.initialMetrics>
     <AppMeta />
+    <Next.Head>
+      <title> {(Consts.title ++ ", " ++ Consts.defaultTitle)->React.string} </title>
+    </Next.Head>
     <GradientLinearBackground
       stops=[
         {
