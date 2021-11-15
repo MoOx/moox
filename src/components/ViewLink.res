@@ -1,5 +1,12 @@
 @react.component
-let make = (~accessibilityLabel=?, ~href, ~style as styl=?, ~activeStyle=?, ~children) =>
+let make = (
+  ~accessibilityLabel=?,
+  ~href,
+  ~style as styl=?,
+  ~activeStyle=?,
+  ~children,
+  ~onPress: option<ReactNative.Event.pressEvent => unit>=?,
+) =>
   <TextLink
     ?accessibilityLabel
     href
@@ -8,6 +15,7 @@ let make = (~accessibilityLabel=?, ~href, ~style as styl=?, ~activeStyle=?, ~chi
       open Style
       arrayOption([Some(style(~display=#flex, ~flexDirection=#column, ())), styl])
     }
-    ?activeStyle>
+    ?activeStyle
+    ?onPress>
     children
   </TextLink>

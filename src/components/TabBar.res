@@ -2,11 +2,19 @@ open Belt
 open ReactNative
 open ReactMultiversal
 
+let height = 50.
+
 let styles = {
   open Style
   StyleSheet.create({
     "itemWrapper": viewStyle(~flex=1., ~justifyContent=#center, ()),
-    "tabbar": viewStyle(~flex=1., ~flexDirection=#row, ~minHeight=50.->dp, ~alignItems=#center, ()),
+    "tabbar": viewStyle(
+      ~flex=1.,
+      ~flexDirection=#row,
+      ~minHeight=height->dp,
+      ~alignItems=#center,
+      (),
+    ),
   })
 }
 
