@@ -174,7 +174,7 @@ let make = () => {
                       accessible=false
                       style={textStyle(
                         ~position=#absolute,
-                        ~bottom=-25.->dp,
+                        ~bottom=-30.->dp,
                         ~fontFamily="StoneHarbourWash",
                         ~fontSize=150.,
                         ~lineHeight=150.,
@@ -216,6 +216,20 @@ let make = () => {
                         (),
                       )->unsafeAddStyle({"WebkitTextStroke": "1.5px #3EF8D9"})}>
                       {"APPS"->React.string}
+                    </Text>
+                    <Text
+                      style={textStyle(
+                        ~fontFamily="Phosphate",
+                        ~fontSize=30.,
+                        ~lineHeight=30.,
+                        ~color="#fff",
+                        ~textShadowColor="#1DB6B2",
+                        ~textShadowRadius=10.,
+                        ~marginTop=-15.->dp,
+                        ~textAlign=#right,
+                        (),
+                      )->unsafeAddStyle({"WebkitTextStroke": "0.5px #3EF8D9"})}>
+                      {"& WEBSITES"->React.string}
                     </Text>
                     <Spacer size=XL />
                   </View>

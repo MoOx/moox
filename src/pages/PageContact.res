@@ -12,7 +12,13 @@ let styles = {
 }
 
 @react.component
-let make = () =>
+let make = () => {
+  let (isClient, isClient_set) = React.useState(() => false)
+  React.useEffect1(() => {
+    isClient_set(_ => true)
+    None
+  }, [])
+
   <AppWrapper>
     <Next.Head> <title> {("Contact - " ++ Consts.defaultTitle)->React.string} </title> </Next.Head>
     <HeaderSmall title="Contact MoOx" getInTouch=false />
@@ -67,7 +73,7 @@ let make = () =>
             </ViewLink>
           </SpacedView>
           <SpacedView vertical=S>
-            <ViewLink href={"mailto:" ++ (Predefined.isClient ? "hello@moox.io" : "")}>
+            <ViewLink href={"mailto:" ++ (isClient ? "hello@moox.io" : "")}>
               <ButtonContained color=Predefined.Colors.Ios.light.blue style={styles["button"]}>
                 <SVGEmail width={36.->Style.dp} height={36.->Style.dp} fill=Consts.Colors.light />
                 <Spacer />
@@ -146,5 +152,6 @@ let make = () =>
       <WindowSizeFilter.MMin> <Spacer size=L /> </WindowSizeFilter.MMin>
     </Container>
   </AppWrapper>
+}
 
 let default = make
