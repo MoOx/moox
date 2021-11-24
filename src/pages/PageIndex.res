@@ -14,7 +14,7 @@ let make = () => {
   let gridLayoutCallback = React.useCallback1((e: Event.layoutEvent) => {
     let layout = e.nativeEvent.layout
     gridLayout_set(_ => Some(layout))
-  }, [gridLayout])
+  }, [gridLayout_set])
 
   let (deviceY, deviceY_set) = React.useState(() => 1.)
   let onDeviceLayout = React.useCallback1((e: Event.layoutEvent) => {
