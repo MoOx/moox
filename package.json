@@ -5,12 +5,15 @@
   "dependencies": {
     "@ctrl/tinycolor": "^3.4.0",
     "@glennsl/bs-json": "^3.0.0",
+    "@react-native-community/eslint-config": "^3.0.1",
     "@rescript-react-native/safe-area-context": "^3.0.1",
     "@rescript-react-native/svg": "^12.1.6",
     "@rescript/react": "^0.10.0",
     "@socialgouv/matomo-next": "^1.2.1",
     "bs-webapi": "^0.19.0",
     "date-fns": "^2.22.1",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^8.3.0",
     "react": "^16.10.0",
     "react-art": "^16.10.0",
     "react-disqus-comments": "^1.2.0",
@@ -27,11 +30,11 @@
   },
   "devDependencies": {
     "@moox/markdown-to-json": "^1.0.0",
-    "babel-jest": "^21.2.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-react-native-web": "^0.13.0",
     "babel-preset-react-native": "^4.0.0",
     "gray-matter": "^4.0.2",
+    "husky": "^7.0.4",
     "lint-staged": "^10.0.0",
     "mkdirp": "^0.5.1",
     "next": "^10.0.8",
@@ -39,7 +42,6 @@
     "npm-run-all": "^4.0.2",
     "prettier": "^2.2.1",
     "rescript": "^9.1.0",
-    "simple-git-hooks": "^2.4.1",
     "trash-cli": "^3.1.0"
   },
   "scripts": {
@@ -55,11 +57,12 @@
     "#svg:native": "react-from-svg assets/SVGs assets/SVGs/components --with-native-for-rescript",
     "svg": "npm run svg:clean && npm run svg:web",
     "markdown": "markdown-to-json \"content/**/*.md\"",
-    "prepare": "npm run svg && npm run markdown && npm run res:clean && npm run res:build",
+    "prepare": "husky install && npm run svg && npm run markdown && npm run res:clean && npm run res:build",
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start",
-    "test": "jest"
+    "lint": "eslint .",
+    "test": "npm run lint"
   },
   "prettier": {
     "trailingComma": "all",
@@ -68,8 +71,5 @@
   "lint-staged": {
     "*.{md,json,js,css}": "prettier --write",
     "*.{res,resi}": "rescript format"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "lint-staged"
   }
 }

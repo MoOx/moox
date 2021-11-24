@@ -1,4 +1,4 @@
-import { Children } from "react";
+import * as React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { AppRegistry } from "react-native";
 import { getThemeHtmlId, getThemeStyleSheet } from "../src/T.bs.js";

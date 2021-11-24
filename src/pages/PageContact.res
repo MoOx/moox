@@ -17,7 +17,7 @@ let make = () => {
   React.useEffect1(() => {
     isClient_set(_ => true)
     None
-  }, [])
+  }, [isClient_set])
 
   <AppWrapper>
     <Next.Head> <title> {("Contact - " ++ Consts.defaultTitle)->React.string} </title> </Next.Head>

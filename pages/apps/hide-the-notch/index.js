@@ -1,3 +1,4 @@
+import * as React from "react";
 import Head from "next/head";
 
 const HideTheNotchApp = () => {
@@ -237,8 +238,8 @@ const HideTheNotchApp = () => {
           }}
         />
       </Head>
-      <div className="background"></div>
-      <div className="background-mask"></div>
+      <div className="background" />
+      <div className="background-mask" />
       <div className="View wrapper">
         <div className="View content">
           <div className="View header flex-row">
@@ -247,7 +248,7 @@ const HideTheNotchApp = () => {
               src="/apps/hide-the-notch/icon-preview.png"
               alt=""
             />
-            <div className="spacer"></div>
+            <div className="spacer" />
             <h1 style={{ fontSize: "24px" }}>Hide The Notch</h1>
           </div>
           <img
@@ -257,19 +258,19 @@ const HideTheNotchApp = () => {
           />
           <div className="blahblah">
             <p>Want to have a nice wallpaper?</p>
-            <div className="spacer"></div>
+            <div className="spacer" />
             <p>Want to hide that notch?</p>
-            <div className="spacer"></div>
+            <div className="spacer" />
             <p>
               Use some of our beautiful pictures or your own photos to create a
               stunning wallpaper with our effects. Try one of our notch masks.
             </p>
           </div>
         </div>
-        <div className="spacer"></div>
-        <div className="spacer"></div>
-        <div className="spacer"></div>
-        <div className="spacer"></div>
+        <div className="spacer" />
+        <div className="spacer" />
+        <div className="spacer" />
+        <div className="spacer" />
         <div className="View flex-row">
           <a
             href="https://apps.apple.com/us/app/hide-the-notch/id1312839983?ls=1"
@@ -294,10 +295,10 @@ const HideTheNotchApp = () => {
             </span>
           </a>
         </div>
-        <div className="spacer"></div>
-        <div className="spacer"></div>
-        <div className="spacer"></div>
-        <div className="spacer"></div>
+        <div className="spacer" />
+        <div className="spacer" />
+        <div className="spacer" />
+        <div className="spacer" />
         <div className="View footer flex-row">
           © 2017 Maxime Thirouin. All Rights Reserved.
         </div>
