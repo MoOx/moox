@@ -1,6 +1,5 @@
 open Belt
 
-let contentFolder = Node.Path.join2(Node.Process.cwd(), "content")
 type contentType = [
   | #blog
   | #resume
@@ -21,7 +20,10 @@ type content = {
 
 let getOne = (filename: string, contentType: contentType): option<content> => {
   let fullPath =
-    contentFolder->Node.Path.join2(contentType->contentTypeString)->Node.Path.join2(filename)
+    Node.Process.cwd()
+    ->Node.Path.join2("content")
+    ->Node.Path.join2(contentType->contentTypeString)
+    ->Node.Path.join2(filename)
 
   if Node.Fs.existsSync(fullPath) {
     let fileContents = fullPath->Node.Fs.readFileSync(#utf8)
@@ -36,7 +38,10 @@ let getOne = (filename: string, contentType: contentType): option<content> => {
 
 let getAll = (contentType: contentType): array<content> => {
   let filenames =
-    contentFolder->Node.Path.join2(contentType->contentTypeString)->Node.Fs.readdirSync
+    Node.Process.cwd()
+    ->Node.Path.join2("content")
+    ->Node.Path.join2(contentType->contentTypeString)
+    ->Node.Fs.readdirSync
   filenames
   ->Array.keep(file => file->Js.String2.endsWith(".json"))
   ->Array.reduce([], (acc, filename) => {
