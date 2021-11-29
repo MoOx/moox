@@ -1,13 +1,12 @@
 open ReactNative
 open ReactMultiversal
 
-let uri = "/avatar.jpg"
-
 @react.component
 let make = (
   ~size,
   ~borderWidth=Predefined.hairlineWidth,
   ~borderColor=Predefined.Colors.separator,
+  ~uri="/avatar.jpg",
 ) => {
   let width = size -. borderWidth *. 2.
   let height = size -. borderWidth *. 2.

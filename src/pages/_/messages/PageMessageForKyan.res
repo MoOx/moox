@@ -982,7 +982,66 @@ Merci en tout cas pour tout ce que tu amènes partout où tu bosses !
             <Text style={array([Font.ios["body"], theme.styles["textOnMain"]])}>
               {`Si tu as la moindre questions, n'hésites surtout pas.`->React.string}
             </Text>
+            <Spacer size=L />
+            <ViewLink href="https://moox.io" style={Predefined.styles["rowCenter"]}>
+              <Avatar size=40. borderWidth=2. borderColor="#000" />
+              <Text style={array([Font.ios["title2"], theme.styles["textOnMain"]])}>
+                {` `->React.string}
+                <Text
+                  style={array([
+                    Font.weight["800"],
+                    textStyle(~textDecorationLine=#underline, ()),
+                  ])}>
+                  {`@MoOx`->React.string}
+                </Text>
+                {` le développeur`->React.string}
+              </Text>
+            </ViewLink>
+            <Spacer />
+            <ViewLink
+              href="https://instagram.com/max__carre" style={Predefined.styles["rowCenter"]}>
+              <Avatar
+                size=35.
+                borderWidth=2.
+                borderColor="#000"
+                uri="https://d1fdloi71mui9q.cloudfront.net/KtJ2oMEQeiCQsKBACeoj_u2DQHHRkGOmGiXpH"
+              />
+              <Text style={array([Font.ios["body"], theme.styles["textOnMain"]])}>
+                {`  `->React.string}
+                <Text
+                  style={array([
+                    Font.weight["500"],
+                    textStyle(~textDecorationLine=#underline, ()),
+                  ])}>
+                  {`Max Carré`->React.string}
+                </Text>
+                {` le stand-upper`->React.string}
+              </Text>
+            </ViewLink>
+            <Spacer />
+            <ViewLink
+              href="https://www.instagram.com/mooxitoh" style={Predefined.styles["rowCenter"]}>
+              <Avatar
+                size=30.
+                borderWidth=2.
+                borderColor="#000"
+                uri="https://d1fdloi71mui9q.cloudfront.net/Ozz0FABtToK7wu1R74Mi_1N3jc2z6me31Btmf"
+              />
+              <Text
+                style={array([
+                  Font.ios["callout"],
+                  Font.weight["200"],
+                  theme.styles["textOnMain"],
+                ])}>
+                {`  `->React.string}
+                <Text style={array([textStyle(~textDecorationLine=#underline, ())])}>
+                  {`@mooxitoh`->React.string}
+                </Text>
+                {` l'humain créatif`->React.string}
+              </Text>
+            </ViewLink>
           </SpacedView>
+          <Spacer />
           <SpacedView vertical=S>
             <ViewLink
               onPress={_ => push(["trackEvent", "message-pour-kyan", "contact", "sms"])}
