@@ -5,7 +5,7 @@ tags:
   - css
 ---
 
-Following my [farewell to CSS](../farewell-css/), I am deprecating
+Following my [farewell to CSS](/blog/farewell-css/), I am deprecating
 [cssnext](https://cssnext.github.io).
 
 ## tl;dr
@@ -14,7 +14,7 @@ Just switch to [`postcss-preset-env`](http://preset-env.cssdb.org/).
 
 ## Why are you doing this?
 
-Like I said in my [farewell to CSS](../farewell-css/) post, I don't use CSS
+Like I said in my [farewell to CSS](/blog/farewell-css/) post, I don't use CSS
 directly anymore. And things have been this way for years now. I also have been
 tired of PostCSS (because I disagree with the vision and the directions taken by
 the project).
@@ -88,4 +88,4 @@ You will find more accurate and up to date informations on this
 
 Hope this way you don't feel abandonned. This is better for you to upgrade and
 rely on a more mature database, with stages, or like me,
-[stop using CSS directly](../farewell-css/).
+[stop using CSS directly](/blog/farewell-css/).

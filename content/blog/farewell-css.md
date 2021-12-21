@@ -28,13 +28,13 @@ http://blog.vjeux.com/2014/javascript/react-css-in-js-nationjs.html
 To refresh your memory, here is the list of problems that you encounter when
 working with CSS on apps
 
-* No local variables.
-* Implicit dependencies.
-* No dead code elimination.
-* No code minification.
-* No sharing of constants.
-* Non-deterministic resolution.
-* No isolation.
+- No local variables.
+- Implicit dependencies.
+- No dead code elimination.
+- No code minification.
+- No sharing of constants.
+- Non-deterministic resolution.
+- No isolation.
 
 The way CSS is currently evolving won't fix anything.
 
@@ -43,10 +43,10 @@ The way CSS is currently evolving won't fix anything.
 Meanwhile, CSS-in-JS is becoming clearly more and more popular as it can help to
 avoid all those problems and also has some benefits:
 
-* Generates the minimum required CSS.
-* Offers good runtime performance.
-* Supports static and dynamic styles.
-* Helps to pre-render critical CSS.
+- Generates the minimum required CSS.
+- Offers good runtime performance.
+- Supports static and dynamic styles.
+- Helps to pre-render critical CSS.
 
 At the end, at least for now on the web, we still use CSS, but as a low-level
 primitive (like React is using the DOM). Just like any code we write ends up
@@ -62,10 +62,10 @@ Yoga is just an example and you can probably find other alternatives like
 
 In addition to previous benefits, using this kind of solution also adds
 
-* Simple API and expressive subset of CSS.
-* Support for RTL layouts.
-* Easy pre-rendering of critical CSS (if your target compilation is the web)
-* Statically type-checked styles ♥️.
+- Simple API and expressive subset of CSS.
+- Support for RTL layouts.
+- Easy pre-rendering of critical CSS (if your target compilation is the web)
+- Statically type-checked styles ♥️.
 
 ## “But you don't know how to use CSS”
 
@@ -75,9 +75,9 @@ For those that are going to say something like
 
 Before saying anything like this, be sure that:
 
-* you haven't shipped one-shot projects only without having to maintain those on
+- you haven't shipped one-shot projects only without having to maintain those on
   the long run
-* you actually had more than 1000 CSS selectors in production for a single
+- you actually had more than 1000 CSS selectors in production for a single
   project
 
 Using CSS for small projects is probably ok, but it's not for medium and large
@@ -93,7 +93,7 @@ I really believe that CSS will become a low level primitive, a target for
 compilation, and nothing more in the near future. And for a far future, it may
 even become obsolete and not used.
 
-This is why I am [deprecating cssnext](../deprecating-cssnext/) as of today.
+This is why I am [deprecating cssnext](/blog/deprecating-cssnext/) as of today.
 
 ## What's next for me?
 
