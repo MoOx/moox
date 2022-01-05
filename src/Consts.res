@@ -23,6 +23,14 @@ let menuLinks: array<menuLink> = [
     isActive: (current, link) => current == link,
   },
   {
+    link: "/resume",
+    text: j`About`,
+    textSmall: None,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGMenuResume width={width->Style.dp} height={height->Style.dp} fill />,
+    isActive: (current, _link) => Js.String.startsWith("/resume", current),
+  },
+  {
     link: "/development",
     text: `Development`,
     textSmall: Some(`Dev`),
@@ -46,14 +54,7 @@ let menuLinks: array<menuLink> = [
   //   isActive: (current, _link) =>
   //     Js.String.startsWith("/solutions", current),
   // },
-  {
-    link: "/resume",
-    text: j`About`,
-    textSmall: None,
-    icon: (~width, ~height, ~fill, _) =>
-      <SVGMenuResume width={width->Style.dp} height={height->Style.dp} fill />,
-    isActive: (current, _link) => Js.String.startsWith("/resume", current),
-  },
+
   {
     link: "/talks",
     text: j`Talks`,
