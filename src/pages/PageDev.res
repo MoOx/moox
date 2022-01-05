@@ -16,7 +16,10 @@ type params = unit
 
 let styles = {
   open Style
-  StyleSheet.create({"button": style(~width=200.->dp, ())})
+  {
+    "button": style(~width=200.->dp, ()),
+    "logoStyle": Style.unsafeStyle({"filter": "grayscale(100%) contrast(25%) brightness(150%)"}),
+  }->StyleSheet.create
 }
 
 @react.component
@@ -38,6 +41,25 @@ let make = (~posts: array<BlogFrontend.t>, ~malformed: array<Malformed.t>) => {
         style(~backgroundColor=Consts.Colors.light, ())
       }>
       <Spacer size=L />
+      <Container maxWidth={1600.->Style.dp}>
+        <Spacer size=L />
+        <Center> <TitlePre> {"COMPANIES THAT TRIED TO HIRE ME"->React.string} </TitlePre> </Center>
+        <Row.Wrap.Center>
+          <SVGCompanyFacebook
+            width={200.->Style.dp} height={200.->Style.dp} style={styles["logoStyle"]}
+          />
+          <SVGCompanyTwitter
+            width={200.->Style.dp} height={200.->Style.dp} style={styles["logoStyle"]}
+          />
+          <SVGCompanyMicrosoft
+            width={200.->Style.dp} height={200.->Style.dp} style={styles["logoStyle"]}
+          />
+          <SVGCompanyGoogle
+            width={200.->Style.dp} height={200.->Style.dp} style={styles["logoStyle"]}
+          />
+        </Row.Wrap.Center>
+      </Container>
+      <Spacer size=L />
       <Center> <TitlePre> {"THINGS I LIKE TO WORK WITH"->React.string} </TitlePre> </Center>
       <Skills />
       <Center>
@@ -54,13 +76,22 @@ let make = (~posts: array<BlogFrontend.t>, ~malformed: array<Malformed.t>) => {
     </Container>
     <Container maxWidth={1600.->Style.dp}>
       <Spacer size=L />
-      <Center> <TitlePre> {"COMPANIES THAT TRUSTED ME"->React.string} </TitlePre> </Center>
+      <Center>
+        <TitlePre> {`🇫🇷 FRENCH COMPANIES THAT TRUSTED ME`->React.string} </TitlePre>
+      </Center>
       <Row.Wrap.Center>
-        <SVGCompanyKisioDigital width={200.->Style.dp} height={200.->Style.dp} fill="#bbb" />
-        <SVGCompanyMolotovTv width={200.->Style.dp} height={200.->Style.dp} fill="#bbb" />
-        <SVGCompanyAirbus width={200.->Style.dp} height={200.->Style.dp} fill="#bbb" />
-        <SVGCompanyViareport width={200.->Style.dp} height={200.->Style.dp} fill="#bbb" />
-        <SVGCompanyJirafe width={200.->Style.dp} height={200.->Style.dp} fill="#bbb" />
+        <SVGCompanyAirbus
+          width={200.->Style.dp} height={200.->Style.dp} style={styles["logoStyle"]}
+        />
+        <SVGCompanyMolotovTv
+          width={200.->Style.dp} height={200.->Style.dp} style={styles["logoStyle"]}
+        />
+        <SVGCompanyKisioDigital
+          width={200.->Style.dp} height={200.->Style.dp} style={styles["logoStyle"]}
+        />
+        <SVGCompanyAlltricks
+          width={200.->Style.dp} height={200.->Style.dp} style={styles["logoStyle"]}
+        />
       </Row.Wrap.Center>
     </Container>
     <Spacer />
