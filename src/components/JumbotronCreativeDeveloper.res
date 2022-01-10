@@ -99,13 +99,13 @@ let make = () => {
             (),
           ),
           unsafeStyle({
-            // "mix-blend-mode": "color-dodge", // ligtttthhhh
-            // "mix-blend-mode": "hard-light", // hummm
-            // "mix-blend-mode": "lighten", // need exposure (constrat+)
-            // "mix-blend-mode": "luminosity", // good mix
-            // "mix-blend-mode": "overlay", // fade
-            // "mix-blend-mode": "plus-lighter", // over exposed
-            "mix-blend-mode": "screen",
+            // "mixBlendMode": "color-dodge", // ligtttthhhh
+            // "mixBlendMode": "hard-light", // hummm
+            // "mixBlendMode": "lighten", // need exposure (constrat+)
+            // "mixBlendMode": "luminosity", // good mix
+            // "mixBlendMode": "overlay", // fade
+            // "mixBlendMode": "plus-lighter", // over exposed
+            "mixBlendMode": "screen",
             "filter": "grayscale(100%) contrast(2)",
           }),
         ])}>
