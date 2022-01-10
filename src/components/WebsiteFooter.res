@@ -5,7 +5,7 @@ open ReactMultiversal
 
 @react.component
 let make = () => {
-  let theme = T.useTheme(#auto)
+  let theme = T.useTheme()
   let skySize = 400.
   <View style={viewStyle(~transform=[unsafeTransform({"translateZ": "0px"})], ())}>
     <View
@@ -113,7 +113,7 @@ let make = () => {
                   {item.icon(
                     ~width=Spacer.size(M),
                     ~height=Spacer.size(M),
-                    ~fill=theme.namedColors.textOnMain,
+                    ~fill=theme.colors.textOnMain,
                     (),
                   )}
                 </Text>
@@ -143,10 +143,7 @@ let make = () => {
                 href=item.link
                 accessibilityLabel=item.alt
                 style={array([Predefined.styles["row"], Predefined.styles["alignCenter"]])}>
-                {item.componentFunc(
-                  ~iconColor=theme.namedColors.textOnMain,
-                  ~iconSize=Spacer.size(M),
-                )}
+                {item.componentFunc(~iconColor=theme.colors.textOnMain, ~iconSize=Spacer.size(M))}
                 <SpacedView horizontal=XS vertical=XS>
                   <Text style={array([Font.iosEm["body"], theme.styles["textOnMain"]])}>
                     {item.text->React.string}
@@ -163,10 +160,7 @@ let make = () => {
                 accessibilityLabel=item.alt
                 style={array([Predefined.styles["row"], Predefined.styles["alignCenter"]])}>
                 <Spacer size=XXS />
-                {item.componentFunc(
-                  ~iconColor=theme.namedColors.textOnMain,
-                  ~iconSize=Spacer.size(S),
-                )}
+                {item.componentFunc(~iconColor=theme.colors.textOnMain, ~iconSize=Spacer.size(S))}
                 <Spacer size=XXS />
                 <SpacedView horizontal=XXS vertical=XS>
                   <Text
@@ -199,10 +193,7 @@ let make = () => {
                 href=item.link
                 accessibilityLabel=item.alt
                 style={array([Predefined.styles["row"], Predefined.styles["alignCenter"]])}>
-                {item.componentFunc(
-                  ~iconColor=theme.namedColors.textOnMain,
-                  ~iconSize=Spacer.size(M),
-                )}
+                {item.componentFunc(~iconColor=theme.colors.textOnMain, ~iconSize=Spacer.size(M))}
                 <SpacedView horizontal=XS vertical=XS>
                   <Text style={array([Font.iosEm["body"], theme.styles["textOnMain"]])}>
                     {item.text->React.string}
@@ -235,7 +226,11 @@ let make = () => {
           </View>
         </SpacedView>
       </SpacedView>
-      <View style={Predefined.styles["center"]}>
+      <View
+        style={array([
+          Predefined.styles["center"],
+          viewStyle(~overflow=#hidden, ~maxWidth=100.->pct, ()),
+        ])}>
         <Text
           accessible=false
           style={textStyle(
@@ -244,6 +239,7 @@ let make = () => {
             ~lineHeight=200.,
             (),
           )->unsafeAddStyle({
+            "fontSize": "min(200px, 50vw)",
             "filter": "drop-shadow(0 2px 4px rgba(122,22,102,0.50))",
             "WebkitTextStroke": "1px #A56C99",
             "backgroundClip": "text",

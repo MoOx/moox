@@ -1,8 +1,8 @@
 open ReactNative
 open ReactMultiversal
 
-let title = j`moox`
-let defaultTitle = j`Freelance Front-End Developer, Mobile & Web`
+let title = j`MoOx`
+let defaultTitle = j`Freelance Creative Developer, Front-End / Mobile & Web`
 let titleTemplate = j`%s - ` ++ title
 
 type menuLink = {

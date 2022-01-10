@@ -1,25 +1,15 @@
 open Belt
 open ReactNative
-
-let imageRatio = 240. /. 350.
+open ReactNative.Style
+open ReactMultiversal
 
 let styles = {
-  open Style
-  StyleSheet.create({
-    "flex": style(~width=100.->pct, ()),
-    "yearText": style(
-      ~width=100.->pct,
-      ~marginTop=20.->dp,
-      ~textAlign=#center,
-      ~fontSize=22.,
-      ~fontWeight=#_700,
-      (),
-    ),
-  })
-}
+  "flex": style(~width=100.->pct, ()),
+}->StyleSheet.create
 
 @react.component
 let make = (~talks: array<TalksFrontend.t>, ()) => {
+  let theme = T.useTheme()
   let latestYear = ref(Js.Date.make()->Js.Date.getFullYear->Js.Float.toString)
   <>
     {talks->Array.map(item => {
@@ -27,7 +17,13 @@ let make = (~talks: array<TalksFrontend.t>, ()) => {
       let newYear = year !== latestYear.contents
       latestYear := year
       <View key=item.id style={styles["flex"]}>
-        {newYear ? <Text style={styles["yearText"]}> {year->React.string} </Text> : React.null}
+        {newYear
+          ? <View style={Predefined.styles["center"]}>
+              <Text style={array([Font.iosEm["title2"], theme.styles["text"]])}>
+                {year->React.string}
+              </Text>
+            </View>
+          : React.null}
         <TalkPreview item />
       </View>
     }) |> React.array}

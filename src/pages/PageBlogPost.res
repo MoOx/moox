@@ -27,29 +27,31 @@ let make = (~post: Result.t<BlogFrontend.t, Malformed.t>) =>
   | Ok(post) =>
     let title = post.title->Js.Null.toOption->Option.getWithDefault("")
     <AppWrapper>
-      <Container>
-        <Next.Head> <title> {title->React.string} </title> </Next.Head>
-        <SpacedView vertical=None>
-          <Html.H1 textStyle={styles["title"]}> {title->React.string} </Html.H1>
-          {post.body
-          ->Js.Null.toOption
-          ->Option.map(body => <MyBodyRenderer body />)
-          ->Option.getWithDefault(React.null)}
-          <Spacer size=XXL />
-          <DisqusComments
-            shortname="moox"
-            identifier={"http://moox.io/blog/" ++ (post.id ++ "/")}
-            url={"http://moox.io/blog/" ++ (post.id ++ "/")}
-          />
-          <Spacer size=L />
-        </SpacedView>
-      </Container>
+      <Next.Head> <title> {title->React.string} </title> </Next.Head>
+      <View style={T.stylesLight["back"]}>
+        <Container>
+          <SpacedView vertical=None>
+            <Html.H1 textStyle={styles["title"]}> {title->React.string} </Html.H1>
+            {post.body
+            ->Js.Null.toOption
+            ->Option.map(body => <MyBodyRenderer body />)
+            ->Option.getWithDefault(React.null)}
+            <Spacer size=XXL />
+            <DisqusComments
+              shortname="moox"
+              identifier={"http://moox.io/blog/" ++ (post.id ++ "/")}
+              url={"http://moox.io/blog/" ++ (post.id ++ "/")}
+            />
+            <Spacer size=L />
+          </SpacedView>
+        </Container>
+      </View>
     </AppWrapper>
   }
 
 let default = (props: props) => make(makeProps(~post=props.post, ()))
 
-let getStaticProps: Next.GetStaticProps.t<props, params> = ctx => {
+let getStaticProps: Next.Page.GetStaticProps.t<props, params> = ctx => {
   let {params} = ctx
   let postData = BackendApi.getOne(params.slug ++ ".json", #blog)
   let props = {
@@ -71,8 +73,8 @@ let getStaticProps: Next.GetStaticProps.t<props, params> = ctx => {
   Js.Promise.resolve({"props": props})
 }
 
-let getStaticPaths: Next.GetStaticPaths.t<params> = () => {
-  open Next.GetStaticPaths
+let getStaticPaths: Next.Page.GetStaticPaths.t<params> = () => {
+  open Next.Page.GetStaticPaths
 
   let paths = BackendApi.getAll(#blog)->Array.map(postData => {
     params: {

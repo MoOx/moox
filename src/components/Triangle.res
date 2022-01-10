@@ -3,7 +3,7 @@ open ReactNative
 let coef = 2. *. 0.8660254
 
 @react.component
-let make = (~height as h=50., ~color as colour=Consts.Colors.light, ~style as styl=?, ()) =>
+let make = (~height as h=50., ~color as colour, ~style as styl=?, ()) =>
   <View
     style={
       open Style

@@ -1,5 +1,6 @@
 open Belt
 open ReactNative
+open ReactNative.Style
 open ReactMultiversal
 
 module Malformed = {
@@ -13,38 +14,32 @@ type props = {
   malformed: array<Malformed.t>,
 }
 
-let styles = {
-  open Style
-  StyleSheet.create({
-    "title": style(
-      ~fontSize=36.,
-      ~fontWeight=#bold,
-      ~textAlign=#center,
-      ~marginVertical=20.->dp,
-      ~color=Consts.Colors.dark,
-      (),
-    ),
-    "links": style(~flexDirection=#row, ~justifyContent=#center, ~alignItems=#center, ()),
-  })
-}
-
 @react.component
 let make = (~posts: array<BlogFrontend.t>, ~malformed: array<Malformed.t>) => {
+  let theme = T.useTheme()
   malformed->Array.map(Js.Console.error)->ignore
   <AppWrapper>
     <Next.Head> <title> {("Blog - " ++ Consts.defaultTitle)->React.string} </title> </Next.Head>
     <HeaderSmall title="Blog" />
-    <Container>
-      <ScreenHeader titlePre="Latest" title="Posts" />
-      <SpacedView> <PostList posts /> </SpacedView>
-      <Spacer size=L />
-    </Container>
+    <View style={theme.styles["back"]}>
+      <Container>
+        <Spacer />
+        <Text style={array([Font.ios["subtitle1"], theme.styles["textLight1"]])}>
+          {"Latest"->React.string}
+        </Text>
+        <Text style={array([Font.iosEm["largeTitle"], theme.styles["text"]])}>
+          {"Posts"->React.string}
+        </Text>
+        <SpacedView> <PostList posts /> </SpacedView>
+        <Spacer size=L />
+      </Container>
+    </View>
   </AppWrapper>
 }
 
 let default = (props: props) => make(makeProps(~posts=props.posts, ~malformed=props.malformed, ()))
 
-let getStaticProps: Next.GetStaticProps.t<props, unit> = _ctx => {
+let getStaticProps: Next.Page.GetStaticProps.t<props, unit> = _ctx => {
   let (posts, malformed) = BackendApi.getAll(#blog)->Array.reduce(([], []), (acc, postData) => {
     let (posts, malformed) = acc
     let decoded = postData.json->BlogFrontend.decode(postData.slug, _)

@@ -155,19 +155,19 @@ module Size = {
   module Android = {
     let l = v => v *. 1.2
     // line = nothing defined, web guide show "normal", which is approx 1.2
-    let headline1 = {size: 96., line: 96.->l, spacing: -1.5, weight: light, weightEm: light}
-    let headline2 = {size: 60., line: 60.->l, spacing: -0.5, weight: light, weightEm: light}
-    let headline3 = {size: 48., line: 48.->l, spacing: 0., weight: regular, weightEm: regular}
-    let headline4 = {size: 34., line: 34.->l, spacing: 0.25, weight: regular, weightEm: regular}
-    let headline5 = {size: 24., line: 24.->l, spacing: 0., weight: regular, weightEm: regular}
-    let headline6 = {size: 20., line: 20.->l, spacing: 0.15, weight: medium, weightEm: medium}
-    let subtitle1 = {size: 16., line: 16.->l, spacing: 0.15, weight: regular, weightEm: regular}
-    let subtitle2 = {size: 14., line: 14.->l, spacing: 0.1, weight: regular, weightEm: regular}
-    let body1 = {size: 16., line: 16.->l, spacing: 0.5, weight: regular, weightEm: regular}
-    let body2 = {size: 14., line: 14.->l, spacing: 0.25, weight: regular, weightEm: regular}
-    let button = {size: 14., line: 14.->l, spacing: 1.25, weight: medium, weightEm: medium}
-    let caption = {size: 12., line: 12.->l, spacing: 0.4, weight: regular, weightEm: regular}
-    let overline = {size: 10., line: 10.->l, spacing: 1.5, weight: regular, weightEm: regular}
+    let headline1 = {size: 96., line: 96.->l, spacing: -1.5, weight: light, weightEm: medium}
+    let headline2 = {size: 60., line: 60.->l, spacing: -0.5, weight: light, weightEm: medium}
+    let headline3 = {size: 48., line: 48.->l, spacing: 0., weight: regular, weightEm: bold}
+    let headline4 = {size: 34., line: 34.->l, spacing: 0.25, weight: regular, weightEm: bold}
+    let headline5 = {size: 24., line: 24.->l, spacing: 0., weight: regular, weightEm: bold}
+    let headline6 = {size: 20., line: 20.->l, spacing: 0.15, weight: medium, weightEm: semibold}
+    let subtitle1 = {size: 16., line: 16.->l, spacing: 0.15, weight: regular, weightEm: semibold}
+    let subtitle2 = {size: 14., line: 14.->l, spacing: 0.1, weight: regular, weightEm: semibold}
+    let body1 = {size: 16., line: 16.->l, spacing: 0.5, weight: regular, weightEm: medium}
+    let body2 = {size: 14., line: 14.->l, spacing: 0.25, weight: regular, weightEm: medium}
+    let button = {size: 14., line: 14.->l, spacing: 1.25, weight: medium, weightEm: semibold}
+    let caption = {size: 12., line: 12.->l, spacing: 0.4, weight: regular, weightEm: medium}
+    let overline = {size: 10., line: 10.->l, spacing: 1.5, weight: regular, weightEm: medium}
   }
 
   // lets do this: allow people to use HIG or MD naming on any platform

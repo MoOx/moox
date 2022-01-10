@@ -1,29 +1,16 @@
 open ReactNative
+open ReactNative.Style
 open ReactMultiversal
-
-let styles = {
-  open Style
-  StyleSheet.create({
-    "text": style(
-      ~flexDirection=#row,
-      ~flex=1.,
-      ~alignItems=#flexStart,
-      ~lineHeight=28.,
-      ~color=Consts.Colors.dark,
-      (),
-    ),
-    "title": style(~fontSize=22., ()),
-  })
-}
 
 @react.component
 let make = (~item: TalksFrontend.t, ()) => {
+  let theme = T.useTheme()
   let href = "/talk/" ++ (item.id ++ "/")
   <SpacedView key=item.id horizontal=None>
-    <Text style={styles["text"]}>
+    <Text style={array([Font.ios["title3"], theme.styles["text"]])}>
       <Text> {j`•`->React.string} </Text>
       <Spacer size=S />
-      <UnderlinedTextLink style={styles["title"]} href>
+      <UnderlinedTextLink href>
         {item.title->React.string}
         <small>
           {switch item.conference->Js.Null.toOption {

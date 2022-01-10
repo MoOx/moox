@@ -3,8 +3,7 @@ company: "Fittingbox"
 url: "https://www.fittingbox.com/"
 title: "E-commerce website"
 description: >
-  Technical manager of the shop Enjoysunglasses.com, sunglasses e-shop with a
-  virtual try-on solution
+  Technical manager of a sunglasses e-shop with a virtual try-on solution
 dateStart: 2009-06-01
 dateEnd: 2010-07-01
 hashtags:
@@ -23,8 +22,8 @@ products) to a marketplace (several thousand products).
 
 ---
 
-Responsable technique de la boutique en ligne Enjoysunglasses.com, avec essayage
-virtuel de lunettes de soleil, sous la plateforme e-commerce Magento.
+Responsable technique d'une boutique en ligne avec essayage virtuel de lunettes
+de soleil, sous la plateforme e-commerce Magento.
 
 - Transformation de la boutique classique en marketplace de la lunettes de
   soleil passant de 250 produits à plusieurs milliers.

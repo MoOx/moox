@@ -1,9 +1,9 @@
 open Belt
 open ReactNative
+open ReactNative.Style
 open ReactMultiversal
 
 let styles = {
-  open Style
   StyleSheet.create({
     "block": style(~flex=1., ~flexDirection=#row, ()),
     "text": style(
@@ -20,9 +20,10 @@ let styles = {
 
 @react.component
 let make = (~item: BlogFrontend.t, ()) => {
+  let theme = T.useTheme()
   let href = "/blog/" ++ (item.id ++ "/")
   <SpacedView key=item.id horizontal=None>
-    <Text style={styles["text"]}>
+    <Text style={array([Font.ios["title3"], theme.styles["text"]])}>
       <Text> {j`•`->React.string} </Text>
       <Spacer size=S />
       <UnderlinedTextLink style={styles["title"]} href>

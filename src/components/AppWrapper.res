@@ -52,11 +52,14 @@ let initialMetrics = {
 }
 
 @react.component
-let make = (~children) =>
+let make = (~children) => {
+  // let theme = T.useTheme()
+
+  let windowsDims = Dimensions.useWindowDimensions()
+  let moonLightSize = min(windowsDims.width /. 2., 300.)
+
   <ReactNativeSafeAreaContext.SafeAreaProvider initialMetrics>
     <AppMeta />
-    <WindowSizeFilter.MMin> <HeaderLarge /> </WindowSizeFilter.MMin>
-    children
     <GradientLinearBackground
       stops=[
         {
@@ -71,7 +74,40 @@ let make = (~children) =>
         },
       ]
       style={Predefined.styles["flex1"]}>
-      <WebsiteFooter />
+      <GradientRadialBackground
+      // angle=135.
+        stops=[
+          {
+            offset: 0.->pct,
+            stopColor: "#00F6FF",
+            stopOpacity: "0.2",
+          },
+          {
+            offset: 50.->pct,
+            stopColor: "#00F6FF",
+            stopOpacity: "0",
+          },
+        ]
+        style={viewStyle(
+          ~position=#absolute,
+          ~top=0.->dp,
+          ~left=0.->dp,
+          ~width=moonLightSize->dp,
+          ~height=moonLightSize->dp,
+          (),
+        )}
+      />
+      <div
+        style={ReactDOM.Style.make(
+          ~display="flex",
+          ~flexDirection="column",
+          ~flexGrow="1",
+          ~background="url(/_/stars.png) repeat 0% 0% / 400px 300px",
+          (),
+        )}>
+        <WebsiteHeader /> children <WebsiteFooter />
+      </div>
     </GradientLinearBackground>
     <WindowSizeFilter.SMax> <TabBar /> </WindowSizeFilter.SMax>
   </ReactNativeSafeAreaContext.SafeAreaProvider>
+}

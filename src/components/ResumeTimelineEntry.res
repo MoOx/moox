@@ -8,6 +8,8 @@ let styles = {
     "wrapper": style(~flexGrow=1., ~flexShrink=1., ()),
     "container": style(
       ~flexGrow=1.,
+      ~flexShrink=1.,
+      ~borderRadius=10.,
       ~backgroundColor=Consts.Colors.lightest,
       ~shadowColor="#000",
       ~shadowOffset=offset(~width=0., ~height=5.),
@@ -15,12 +17,21 @@ let styles = {
       ~shadowRadius=30.,
       (),
     ),
-    "imageWrapper": style(~borderTopLeftRadius=6., ~borderTopRightRadius=6., ~overflow=#hidden, ()),
-    "block": style(~flex=1., ()),
-    "head": style(~flexDirection=#row, ~justifyContent=#spaceBetween, ()),
+    "imageWrapper": style(
+      ~borderTopLeftRadius=10.,
+      ~borderTopRightRadius=10.,
+      ~overflow=#hidden,
+      (),
+    ),
     "title": style(~fontSize=14., ~color="#888", ~fontWeight=#_500, ()),
     "company": style(~fontSize=16., ~color="#333", ~fontWeight=#_100, ()),
-    "description": style(~fontSize=24., ~fontWeight=#_700, ()),
+    "description": textStyle(
+      ~flexShrink=1.,
+      ~fontSize=24.,
+      ~fontWeight=#_700,
+      ~overflow=#hidden,
+      (),
+    ),
     "duration": style(~fontSize=14., ~color="#666", ~fontWeight=#_300, ()),
     "links": style(~flex=1., ~flexDirection=#row, ~flexWrap=#wrap, ~justifyContent=#flexEnd, ()),
     "link": style(
@@ -53,8 +64,8 @@ let make = (~item: ResumeFrontend.t) => {
         </View>
       )
       ->Belt.Option.getWithDefault(React.null)}
-      <SpacedView style={styles["block"]}>
-        <View style={styles["head"]}>
+      <SpacedView style={Predefined.styles["flexGrow"]}>
+        <View style={Predefined.styles["rowWrapSpaceBetween"]}>
           <Text style={styles["title"]}> {item.title->Js.String.toUpperCase->React.string} </Text>
           {item.url
           ->Js.Null.toOption

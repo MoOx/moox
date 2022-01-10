@@ -6,7 +6,7 @@ let originalWidth = 389.
 let originalRatio = originalHeight /. originalWidth
 
 @react.component
-let make = (~style as s=?, ~width, ~children) => {
+let make = (~style as s=?, ~width, ~children, ~backgroundColor="#fff") => {
   let height = width *. originalRatio
   <Animated.View
     style={arrayOption([s, Some(viewStyle(~width=width->dp, ~height=height->dp, ()))])}>
@@ -14,7 +14,7 @@ let make = (~style as s=?, ~width, ~children) => {
       style={viewStyle(
         ~flexGrow=1.,
         ~flexShrink=1.,
-        ~backgroundColor="#fff",
+        ~backgroundColor,
         ~margin=(width *. 0.05)->dp,
         ~borderRadius=width *. 0.1,
         ~overflow=#hidden,

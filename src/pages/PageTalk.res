@@ -25,82 +25,84 @@ let make = (~item: Result.t<TalksFrontend.t, Malformed.t>) =>
   | Error({message}) => message->React.string
   | Ok(item) =>
     <AppWrapper>
-      <Container>
-        <Next.Head> <title> {item.title->React.string} </title> </Next.Head>
-        <SpacedView vertical=None>
-          <Html.H1 textStyle={styles["title"]}> {item.title->React.string} </Html.H1>
-          <Spacer size=L />
-          {switch Js.Null.toOption(item.videoEmbed) {
-          | None => React.null
-          | Some(videoEmbed) =>
-            <View>
-              <div
-                style={ReactDOM.Style.make(
-                  ~position="relative",
-                  ~overflow="hidden",
-                  ~paddingBottom="56.2502460948%",
-                  (),
-                )}>
-                <iframe
-                  allowFullScreen=true
+      <View style={T.stylesLight["back"]}>
+        <Container>
+          <Next.Head> <title> {item.title->React.string} </title> </Next.Head>
+          <SpacedView vertical=None>
+            <Html.H1 textStyle={styles["title"]}> {item.title->React.string} </Html.H1>
+            <Spacer size=L />
+            {switch Js.Null.toOption(item.videoEmbed) {
+            | None => React.null
+            | Some(videoEmbed) =>
+              <View>
+                <div
                   style={ReactDOM.Style.make(
-                    ~position="absolute",
-                    ~top="0",
-                    ~left="0",
-                    ~width="100%",
-                    ~height="100%",
+                    ~position="relative",
+                    ~overflow="hidden",
+                    ~paddingBottom="56.2502460948%",
                     (),
-                  )}
-                  src=videoEmbed
-                />
-              </div>
-              <Spacer />
-            </View>
-          }}
-          {switch Js.Null.toOption(item.slidesEmbed) {
-          | None => React.null
-          | Some(slidesEmbed) =>
-            <View>
-              <div
-                style={ReactDOM.Style.make(
-                  ~position="relative",
-                  ~overflow="hidden",
-                  ~paddingBottom="56.2502460948%",
-                  (),
-                )}>
-                <iframe
-                  allowFullScreen=true
+                  )}>
+                  <iframe
+                    allowFullScreen=true
+                    style={ReactDOM.Style.make(
+                      ~position="absolute",
+                      ~top="0",
+                      ~left="0",
+                      ~width="100%",
+                      ~height="100%",
+                      (),
+                    )}
+                    src=videoEmbed
+                  />
+                </div>
+                <Spacer />
+              </View>
+            }}
+            {switch Js.Null.toOption(item.slidesEmbed) {
+            | None => React.null
+            | Some(slidesEmbed) =>
+              <View>
+                <div
                   style={ReactDOM.Style.make(
-                    ~position="absolute",
-                    ~top="0",
-                    ~left="0",
-                    ~width="100%",
-                    ~height="100%",
+                    ~position="relative",
+                    ~overflow="hidden",
+                    ~paddingBottom="56.2502460948%",
                     (),
-                  )}
-                  src=slidesEmbed
-                />
-              </div>
-              <Spacer />
-            </View>
-          }}
-          {switch Js.Null.toOption(item.slides) {
-          | None => React.null
-          | Some(slides) => <SpacedView> <a href=slides> {slides->React.string} </a> </SpacedView>
-          }}
-          {item.body
-          ->Js.Null.toOption
-          ->Option.map(body => <MyBodyRenderer body />)
-          ->Option.getWithDefault(React.null)}
-          <Spacer size=L />
-        </SpacedView>
-      </Container>
+                  )}>
+                  <iframe
+                    allowFullScreen=true
+                    style={ReactDOM.Style.make(
+                      ~position="absolute",
+                      ~top="0",
+                      ~left="0",
+                      ~width="100%",
+                      ~height="100%",
+                      (),
+                    )}
+                    src=slidesEmbed
+                  />
+                </div>
+                <Spacer />
+              </View>
+            }}
+            {switch Js.Null.toOption(item.slides) {
+            | None => React.null
+            | Some(slides) => <SpacedView> <a href=slides> {slides->React.string} </a> </SpacedView>
+            }}
+            {item.body
+            ->Js.Null.toOption
+            ->Option.map(body => <MyBodyRenderer body />)
+            ->Option.getWithDefault(React.null)}
+            <Spacer size=L />
+          </SpacedView>
+        </Container>
+      </View>
     </AppWrapper>
   }
 
 let default = (props: props) => make(makeProps(~item=props.item, ()))
 
-let getStaticProps: Next.GetStaticProps.t<props, params> = ctx => {
+let getStaticProps: Next.Page.GetStaticProps.t<props, params> = ctx => {
   open TalksFrontend
   let {params} = ctx
   let itemData = BackendApi.getOne(params.slug ++ ".json", #talks)
@@ -123,8 +125,8 @@ let getStaticProps: Next.GetStaticProps.t<props, params> = ctx => {
   Js.Promise.resolve({"props": props})
 }
 
-let getStaticPaths: Next.GetStaticPaths.t<params> = () => {
-  open Next.GetStaticPaths
+let getStaticPaths: Next.Page.GetStaticPaths.t<params> = () => {
+  open Next.Page.GetStaticPaths
 
   let paths = BackendApi.getAll(#talks)->Array.map(itemData => {
     params: {

@@ -57,7 +57,7 @@ let skills: array<CardWithGradient.item> = [
         open Style
         array([styles["icon"], style(~right=-40.->dp, ~bottom=-40.->dp, ())])
       }>
-      <SVGReasonMini width={200.->Style.dp} height={200.->Style.dp} fill=Consts.Colors.light />
+      <SVGDevRescriptIcon width={200.->Style.dp} height={200.->Style.dp} fill=Consts.Colors.light />
     </View>,
   },
   {

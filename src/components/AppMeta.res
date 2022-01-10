@@ -78,7 +78,7 @@ body {
 
 .FixedBottom {
   pointer-events: none;
-  z-index: 1;
+  z-index: 1000;
   position: fixed;
   left: 0;
   right: 0;

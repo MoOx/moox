@@ -20,24 +20,24 @@ let styles = {
 
 @react.component
 let make = () => {
-  let theme = T.useTheme(#auto)
-  let currentLocation = Next.useRouter().asPath
+  let theme = T.useTheme()
+  let currentLocation = Next.Router.useRouter().asPath
   <>
     <style
       dangerouslySetInnerHTML={{
         "__html": `
 .TabBarBackground {
-  background-color: ${theme.namedColors.back};
-  border-top: 0.5px solid ${theme.namedColors.back};
+  background-color: ${theme.colors.back};
+  border-top: 0.5px solid ${theme.colors.back};
 }
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .TabBarBackground {
-    background-color: ${theme.namedColors.back
+    background-color: ${theme.colors.back
           ->RescriptTinycolor.TinyColor.makeFromString
           ->Option.map(c =>
             c->RescriptTinycolor.TinyColor.setAlpha(0.75, _)->RescriptTinycolor.TinyColor.toString
           )
-          ->Option.getWithDefault(theme.namedColors.back)};
+          ->Option.getWithDefault(theme.colors.back)};
     -webkit-backdrop-filter: saturate(200%) brightness(150%) grayscale(20%) blur(20px);
     backdrop-filter: saturate(200%) brightness(150%) grayscale(20%) blur(20px);
   }
@@ -52,8 +52,8 @@ let make = () => {
             <TabBarItem
               icon
               isActive={isActive(currentLocation, link)}
-              colorActive={theme.namedColors.main}
-              colorInactive={theme.colors.gray}
+              colorActive={theme.colors.main}
+              colorInactive={theme.colors.systemGray}
               text={textSmall->Option.getWithDefault(text)}
             />
           </ViewLink>

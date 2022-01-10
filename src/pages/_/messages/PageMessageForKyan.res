@@ -27,7 +27,7 @@ let make = () => {
     None
   }, [isClient_set])
 
-  let theme = T.useTheme(#auto)
+  let theme = T.useTheme()
   let scrollYAnimatedValue = AppWrapper.scrollYAnimatedValue
   let windowsDims = Dimensions.useWindowDimensions()
   let moonLightSize = min(windowsDims.width /. 2., 300.)

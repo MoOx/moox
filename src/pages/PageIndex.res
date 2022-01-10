@@ -5,7 +5,7 @@ open Style
 
 @react.component
 let make = () => {
-  let theme = T.useTheme(#auto)
+  let theme = T.useTheme()
   let scrollYAnimatedValue = AppWrapper.scrollYAnimatedValue
   let windowsDims = Dimensions.useWindowDimensions()
   let moonLightSize = min(windowsDims.width /. 2., 300.)
@@ -72,9 +72,13 @@ let make = () => {
           (),
         )}>
         <WebsiteHeader />
-        <Spacer size=XXL />
-        <View onLayout={gridLayoutCallback} style={Predefined.styles["center"]}>
-          <Spacer size=M />
+        <Spacer size=XL />
+        <View
+          onLayout={gridLayoutCallback}
+          style={array([
+            Predefined.styles["center"],
+            viewStyle(~transform=[unsafeTransform({"translateZ": "1000px"})], ()),
+          ])}>
           <Spacer size=XL />
           <Animated.View
             style={array([
@@ -83,14 +87,14 @@ let make = () => {
               viewStyle(
                 ~transform=gridLayout->Option.mapWithDefault(
                   [
-                    unsafeTransform({"translateZ": "-1000px"}),
+                    unsafeTransform({"translateZ": "1000px"}),
                     translateY(~translateY=-25.),
                     perspective(~perspective=1000.),
                     rotateY(~rotateY=15.->deg),
                     rotateX(~rotateX=40.->deg),
                   ],
                   layout => [
-                    unsafeTransform({"translateZ": "-1000px"}),
+                    unsafeTransform({"translateZ": "1000px"}),
                     translateY(~translateY=-25.),
                     perspective(~perspective=1000.),
                     scale(
@@ -143,13 +147,13 @@ let make = () => {
             <ImageFromUri
               uri="/_/8x8grid.png"
               resizeMode=#contain
-              style={imageStyle(~width=750.->dp, ~height=750.->dp, ())}
+              style={imageStyle(~width=650.->dp, ~height=650.->dp, ())}
             />
           </Animated.View>
           <View
             style={Style.array([
               Predefined.styles["center"],
-              viewStyle(~transform=[unsafeTransform({"translateZ": "0px"})], ()),
+              viewStyle(~transform=[unsafeTransform({"translateZ": "2000px"})], ()),
             ])}>
             <Animated.View
               style={viewStyle(
@@ -638,27 +642,144 @@ let make = () => {
           <Spacer size=XL />
         </View>
         <Spacer size=XXL />
-        <Spacer size=XL />
+        <Spacer size=XXL />
+        <WindowSizeFilter.MMin> <Spacer size=XXL /> </WindowSizeFilter.MMin>
         {
           let realWidth = 450.
-          let visualWidth = 200.
+          let visualWidth = 240.
           let visualHeight = visualWidth *. DeviceIPhoneX.originalRatio
           let deviceInitialScale = visualWidth /. realWidth
           let maxWidthToPlayWith = min(windowsDims.width, 800.) -. visualWidth /. 2.
           let gap = max(0., deviceY -. visualHeight /. 2.)
           <View
             onLayout=onDeviceLayout
-            style={array([
-              Predefined.styles["center"],
-              viewStyle(
-                ~zIndex=1,
-                ~transform=[unsafeTransform({"translateZ": "1px"})],
-                ~width=100.->pct,
-                // ~borderWidth=1.,
-                // ~borderColor="red",
-                (),
-              ),
-            ])}>
+            style={array([Predefined.styles["center"], viewStyle(~zIndex=2, ())])}>
+            <View
+              style={array([
+                StyleSheet.absoluteFill,
+                Predefined.styles["center"],
+                viewStyle(
+                  ~top=-10.->pct,
+                  ~bottom=-10.->pct,
+                  ~transform=[
+                    rotate(~rotate=-3.->deg),
+                    scale(~scale=1.1),
+                    unsafeTransform({"translateZ": "0px"}),
+                  ],
+                  (),
+                ),
+                unsafeStyle({
+                  "background": "linear-gradient(120deg, #F451C8, #EACE5E)",
+                }),
+              ])}>
+              <Container>
+                <Text
+                  style={array([
+                    textStyle(
+                      ~position=#absolute,
+                      ~top=10.->pct,
+                      ~left=0.->pct,
+                      ~opacity=0.25,
+                      ~fontSize=60.,
+                      (),
+                    ),
+                    T.stylesDark["text"],
+                  ])}>
+                  {"< "->React.string}
+                  <Text style={textStyle(~fontFamily="Phosphate", ())}>
+                    {"HTML"->React.string}
+                  </Text>
+                  {" />"->React.string}
+                </Text>
+                <Text
+                  style={array([
+                    textStyle(
+                      ~position=#absolute,
+                      ~bottom=10.->pct,
+                      ~left=15.->pct,
+                      ~opacity=0.35,
+                      ~fontFamily="StoneHarbour",
+                      ~fontSize=60.,
+                      (),
+                    ),
+                    T.stylesDark["text"],
+                  ])}>
+                  {".css {}"->React.string}
+                </Text>
+                <Text
+                  style={array([
+                    textStyle(
+                      ~position=#absolute,
+                      ~top=30.->pct,
+                      ~left=35.->pct,
+                      ~opacity=0.5,
+                      ~fontSize=50.,
+                      (),
+                    ),
+                    Font.weight["thin"],
+                    T.stylesDark["text"],
+                  ])}>
+                  {"JavaScript()"->React.string}
+                </Text>
+                <Text
+                  style={array([
+                    textStyle(
+                      ~position=#absolute,
+                      ~top=50.->pct,
+                      ~left=40.->pct,
+                      ~opacity=0.25,
+                      ~fontSize=20.,
+                      (),
+                    ),
+                    Font.weight["ultralight"],
+                    T.stylesDark["text"],
+                  ])}>
+                  {"TypeScript()"->React.string}
+                </Text>
+                <Text
+                  style={array([
+                    textStyle(
+                      ~position=#absolute,
+                      ~bottom=20.->pct,
+                      ~right=40.->pct,
+                      ~opacity=0.4,
+                      ~fontSize=18.,
+                      (),
+                    ),
+                    Font.weight["ultralight"],
+                    T.stylesDark["text"],
+                  ])}>
+                  {"<React/>"->React.string}
+                </Text>
+                <View
+                  style={array([
+                    viewStyle(
+                      ~position=#absolute,
+                      ~top=40.->pct,
+                      ~right=0.->pct,
+                      ~opacity=0.20,
+                      (),
+                    ),
+                  ])}>
+                  <SVGDevPhpIcon width={128.->dp} height={128.->dp} fill={T.colorsDark.text} />
+                </View>
+                <Text
+                  style={array([
+                    textStyle(
+                      ~position=#absolute,
+                      ~top=10.->pct,
+                      ~right=15.->pct,
+                      ~opacity=0.25,
+                      (),
+                    ),
+                    T.stylesDark["text"],
+                    Font.iosEm["title1"],
+                  ])}>
+                  {"rescript()"->React.string}
+                </Text>
+              </Container>
+            </View>
+            <Spacer size=XXL />
             <Spacer size=XXL />
             <Spacer size=XXL />
             <WindowSizeFilter.SMax> <Spacer size=XXL /> <Spacer size=XXL /> </WindowSizeFilter.SMax>
@@ -666,9 +787,10 @@ let make = () => {
               width=realWidth
               style={viewStyle(
                 ~position=#absolute,
+                ~zIndex=2,
                 ~transform=[
                   perspective(~perspective=1000.),
-                  unsafeTransform({"translateZ": "0px"}),
+                  unsafeTransform({"translateZ": "100px"}),
                   scale(
                     ~scale={
                       open Animated.Interpolation
@@ -741,10 +863,23 @@ let make = () => {
                 ],
                 (),
               )}>
-              <Spacer size=L /> <ScreenAppInStore />
+              <Spacer size=L />
+              <SpacedView style={Predefined.styles["rowSpaceBetween"]}>
+                <View>
+                  <Text style={array([Font.ios["subtitle1"], T.stylesLight["textLight1"]])}>
+                    {"HI, I AM"->React.string}
+                  </Text>
+                  <Text style={array([Font.iosEm["largeTitle"], T.stylesLight["text"]])}>
+                    {"MoOx"->React.string}
+                  </Text>
+                </View>
+                <Avatar size=56. />
+              </SpacedView>
+              <ScreenHome theme=#light />
             </DeviceIPhoneX>
           </View>
         }
+        <Spacer size=XXL />
         <Spacer size=XXL />
         {
           let skewYValue = -15.->deg
@@ -831,7 +966,7 @@ let make = () => {
               </Text>
               <Spacer size=M />
               <Text style={array([Font.ios["body"], theme.styles["text"]])}>
-                {`Because I am an artist before being a developer, I will focus on offering the best experience to the user. That's what mather after all.`->React.string}
+                {`Because I am an artist before being a developer, I will focus on offering the best experience to the user. That's what matter after all.`->React.string}
               </Text>
               <Spacer size=L />
               <Text style={array([Font.iosEm["title1"], theme.styles["textMain"]])}>
@@ -916,14 +1051,13 @@ let make = () => {
               ~marginLeft=0.->dp,
               (),
             )}>
-            <Spacer size=L />
             <View
               style={array([
                 StyleSheet.absoluteFill,
                 viewStyle(
                   ~backgroundColor="#190349",
                   ~transform=[
-                    unsafeTransform({"translateZ": "-1000px"}),
+                    unsafeTransform({"translateZ": "0px"}),
                     translateY(~translateY=-25.),
                     perspective(~perspective=1000.),
                     rotateY(~rotateY=10.->deg),
@@ -938,50 +1072,51 @@ let make = () => {
             />
             <View
               style={viewStyle(
-                ~maxWidth=350.->dp,
+                ~maxWidth=380.->dp,
                 ~margin=auto,
-                ~transform=[unsafeTransform({"translateZ": "0px"})],
+                ~transform=[unsafeTransform({"translateZ": "1000px"})],
                 (),
               )}>
-              <Text
-                style={textStyle(
-                  ~fontFamily="StoneHarbour",
-                  ~fontSize=100.,
-                  ~lineHeight=100.,
-                  ~color="#fff",
-                  (),
-                )->unsafeAddStyle({
-                  "filter": "drop-shadow(1px 1px 1px rgba(0,0,0,0.5)) drop-shadow(2px 8px 11px rgba(254,167,183,0.22))",
-                  // "WebkitTextStroke": "0.5px #EC6FCB",
-                  "backgroundClip": "text",
-                  "WebkitTextFillColor": "transparent",
-                  "backgroundImage": "linear-gradient(0deg, #DBC469 0%, #EC6FCB 80%)",
-                })}>
-                {"Design"->React.string}
-              </Text>
-              <Spacer size=L />
-              <Text style={array([Font.ios["body"], theme.styles["textOnMain"]])}>
-                {`Depending on your need, I will always be sure to offer you what is best to achieve your goal.
+              <SpacedView vertical=L>
+                <Text
+                  style={textStyle(
+                    ~fontFamily="StoneHarbour",
+                    ~fontSize=100.,
+                    ~lineHeight=100.,
+                    ~color="#fff",
+                    (),
+                  )->unsafeAddStyle({
+                    "filter": "drop-shadow(1px 1px 1px rgba(0,0,0,0.5)) drop-shadow(2px 8px 11px rgba(254,167,183,0.22))",
+                    // "WebkitTextStroke": "0.5px #EC6FCB",
+                    "backgroundClip": "text",
+                    "WebkitTextFillColor": "transparent",
+                    "backgroundImage": "linear-gradient(0deg, #DBC469 0%, #EC6FCB 80%)",
+                  })}>
+                  {"Design"->React.string}
+                </Text>
+                <Spacer size=L />
+                <Text style={array([Font.ios["body"], theme.styles["textOnMain"]])}>
+                  {`Depending on your need, I will always be sure to offer you what is best to achieve your goal.
 Wether you need an original design or something that will blend in the platform you want to support, I will be able to help you. `->React.string}
-                {`When it comes to optimise user experience, I try to make websites & apps that don’t reinvente the weel so users can always find their way into your world. `->React.string}
-              </Text>
-              <Text
-                style={textStyle(
-                  ~fontFamily="StoneHarbourWash",
-                  ~fontSize=150.,
-                  ~lineHeight=150.,
-                  ~textAlign=#center,
-                  (),
-                )->unsafeAddStyle({
-                  "filter": "drop-shadow(1px 1px 1px rgba(0,0,0,0.5)) drop-shadow(2px 8px 11px rgba(254,167,183,0.22))",
-                  "backgroundImage": "linear-gradient(50deg, #EC6FCB 0%, #DBC469 60%)",
-                  "WebkitTextStroke": "0.5px #A56C99",
-                  "backgroundClip": "text",
-                  "WebkitTextFillColor": "transparent",
-                })}>
-                {"b"->React.string}
-              </Text>
-              <Spacer size=L />
+                  {`When it comes to optimise user experience, I try to make websites & apps that don’t reinvente the weel so users can always find their way into your world. `->React.string}
+                </Text>
+                <Text
+                  style={textStyle(
+                    ~fontFamily="StoneHarbourWash",
+                    ~fontSize=150.,
+                    ~lineHeight=150.,
+                    ~textAlign=#center,
+                    (),
+                  )->unsafeAddStyle({
+                    "filter": "drop-shadow(1px 1px 1px rgba(0,0,0,0.5)) drop-shadow(2px 8px 11px rgba(254,167,183,0.22))",
+                    "backgroundImage": "linear-gradient(50deg, #EC6FCB 0%, #DBC469 60%)",
+                    "WebkitTextStroke": "0.5px #A56C99",
+                    "backgroundClip": "text",
+                    "WebkitTextFillColor": "transparent",
+                  })}>
+                  {"b"->React.string}
+                </Text>
+              </SpacedView>
             </View>
           </View>
           <Spacer size=XXL />
@@ -1002,12 +1137,12 @@ Wether you need an original design or something that will blend in the platform 
                 viewStyle(
                   ~backgroundColor="#792F93",
                   ~transform=[
-                    unsafeTransform({"translateZ": "-1000px"}),
+                    unsafeTransform({"translateZ": "0px"}),
                     translateY(~translateY=-60.),
                     perspective(~perspective=750.),
                     rotateX(~rotateX=10.->deg),
                     rotateY(~rotateY=-10.->deg),
-                    rotateZ(~rotateZ=5.->deg),
+                    rotateZ(~rotateZ=4.->deg),
                   ],
                   (),
                 )->unsafeAddStyle({
@@ -1018,46 +1153,47 @@ Wether you need an original design or something that will blend in the platform 
             />
             <View
               style={viewStyle(
-                ~maxWidth=300.->dp,
+                ~maxWidth=380.->dp,
                 ~margin=auto,
-                ~transform=[unsafeTransform({"translateZ": "0px"})],
+                ~transform=[unsafeTransform({"translateZ": "1000px"})],
                 (),
               )}>
-              <Text
-                style={textStyle(
-                  ~fontFamily="Phosphate",
-                  ~fontSize=100.,
-                  ~lineHeight=100.,
-                  ~color="#fff",
-                  ~textAlign=#right,
-                  (),
-                )->unsafeAddStyle({
-                  "WebkitTextStroke": "1px #3EF8D9",
-                  "filter": "drop-shadow(0 0 14px #1DB6B2)",
-                })}>
-                {"CODE"->React.string}
-              </Text>
-              <Spacer size=L />
-              <Text style={array([Font.ios["body"], theme.styles["textOnMain"]])}>
-                {`I made my first website when I was a kid. I didn’t stop hacking things since then.
+              <SpacedView vertical=L>
+                <Text
+                  style={textStyle(
+                    ~fontFamily="Phosphate",
+                    ~fontSize=100.,
+                    ~lineHeight=100.,
+                    ~color="#fff",
+                    ~textAlign=#right,
+                    (),
+                  )->unsafeAddStyle({
+                    "WebkitTextStroke": "1px #3EF8D9",
+                    "filter": "drop-shadow(0 0 14px #1DB6B2)",
+                  })}>
+                  {"CODE"->React.string}
+                </Text>
+                <Spacer size=L />
+                <Text style={array([Font.ios["body"], theme.styles["textOnMain"]])}>
+                  {`I made my first website when I was a kid. I didn’t stop hacking things since then.
 I always try things to discover news stuff and learn everyday.
 Now I build websites & apps like a pro. My various experiences help me to make the right choice with technologies each time I have decision to take without doing all the mistakes I did in the past. Because I have done a lot of them (and we all know that learning from our own mistakes is the best way to go).`->React.string}
-              </Text>
-              <Text
-                style={textStyle(
-                  ~fontFamily="Phosphate",
-                  ~fontSize=150.,
-                  ~lineHeight=150.,
-                  ~color="#fff",
-                  ~textAlign=#right,
-                  (),
-                )->unsafeAddStyle({
-                  "WebkitTextStroke": "1px #3EF8D9",
-                  "filter": "drop-shadow(0 0 14px #1DB6B2)",
-                })}>
-                {"-"->React.string}
-              </Text>
-              <Spacer size=L />
+                </Text>
+                <Text
+                  style={textStyle(
+                    ~fontFamily="Phosphate",
+                    ~fontSize=150.,
+                    ~lineHeight=150.,
+                    ~color="#fff",
+                    ~textAlign=#right,
+                    (),
+                  )->unsafeAddStyle({
+                    "WebkitTextStroke": "1px #3EF8D9",
+                    "filter": "drop-shadow(0 0 14px #1DB6B2)",
+                  })}>
+                  {"-"->React.string}
+                </Text>
+              </SpacedView>
             </View>
           </View>
           <Spacer size=XXL />

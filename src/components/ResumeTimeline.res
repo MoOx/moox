@@ -1,29 +1,20 @@
 open Belt
 open ReactNative
+open ReactNative.Style
 open ReactMultiversal
 
 let imageRatio = 240. /. 350.
 
 let styles = {
-  open Style
-  StyleSheet.create({
-    "yearText": style(
-      ~width=100.->pct,
-      ~marginTop=20.->dp,
-      ~textAlign=#center,
-      ~fontSize=22.,
-      ~fontWeight=#_700,
-      (),
-    ),
-    "item": style(~flexGrow=1., ~flexDirection=#row, ()),
-  })
-}
+  "item": style(~flexGrow=1., ~flexShrink=1., ~flexDirection=#row, ()),
+}->StyleSheet.create
 
 let tlSpacer =
   <> <Spacer size=L /> <WindowSizeFilter.MMin> <Spacer size=XXL /> </WindowSizeFilter.MMin> </>
 
 @react.component
 let make = (~items: array<ResumeFrontend.t>, ()) => {
+  // let theme = T.useTheme()
   items
   ->Js.Array2.sortInPlaceWith((a, b) => {
     let aYear =
@@ -53,7 +44,15 @@ let make = (~items: array<ResumeFrontend.t>, ()) => {
       let newYear = year !== latestYear.contents
       latestYear := year
       <React.Fragment key=item.id>
-        {newYear ? <Text style={styles["yearText"]}> {year->React.string} </Text> : React.null}
+        {newYear
+          ? <Center>
+              <SpacedView>
+                <Text style={array([Font.iosEm["title1"], T.stylesDark["text"]])}>
+                  {year->React.string}
+                </Text>
+              </SpacedView>
+            </Center>
+          : React.null}
         <View style={styles["item"]}>
           {mod(i, 2) == 1 ? tlSpacer : React.null}
           <ResumeTimelineEntry item />
