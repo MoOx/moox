@@ -20,7 +20,7 @@ let make = (~posts: array<BlogFrontend.t>, ~malformed: array<Malformed.t>) => {
   malformed->Array.map(Js.Console.error)->ignore
   <AppWrapper>
     <Next.Head> <title> {("Blog - " ++ Consts.defaultTitle)->React.string} </title> </Next.Head>
-    <HeaderSmall title="Blog" />
+    // <HeaderSmall title="Blog" />
     <View style={theme.styles["back"]}>
       <Container>
         <Spacer />

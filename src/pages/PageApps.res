@@ -9,7 +9,7 @@ let make = () => {
         {(Consts.title ++ (", React & React Native " ++ Consts.defaultTitle))->React.string}
       </title>
     </Next.Head>
-    <HeaderSmall title="Apps" />
+    // <HeaderSmall title="Apps" />
     <View style={Predefined.styles["flex"]}>
       <Container
         wrapperStyle={

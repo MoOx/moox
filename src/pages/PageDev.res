@@ -30,7 +30,7 @@ let make = (~posts: array<BlogFrontend.t>, ~malformed: array<Malformed.t>) => {
         {(Consts.title ++ (", React & React Native " ++ Consts.defaultTitle))->React.string}
       </title>
     </Next.Head>
-    <HeaderSmall title="MoOx" />
+    // <HeaderSmall title="MoOx" />
     <LinkContactBubbleFixedBottom />
     <View style={theme.styles["back"]}>
       <JumbotronApps scrollYAnimatedValue=AppWrapper.scrollYAnimatedValue />

@@ -20,7 +20,7 @@ let make = (~items: array<TalksFrontend.t>, ~malformed: array<Malformed.t>) => {
   malformed->Array.map(Js.Console.error)->ignore
   <AppWrapper>
     <Next.Head> <title> {("Talks - " ++ Consts.defaultTitle)->React.string} </title> </Next.Head>
-    <HeaderSmall title="Talks" />
+    // <HeaderSmall title="Talks" />
     <JumbotronTalks />
     <View style={theme.styles["back"]}>
       <Spacer />
