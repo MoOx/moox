@@ -38,14 +38,49 @@ let menuLinks: array<menuLink> = [
       <SVGCode width={width->Style.dp} height={height->Style.dp} fill />,
     isActive: (current, link) => current == link,
   },
-  // {
-  //   link: "/apps",
-  //   text: `Apps`,
-  //   textSmall: None,
-  //   icon: (~width, ~height, ~fill, _) =>
-  //     <SVGApps width={width->Style.dp} height={height->Style.dp} fill />,
-  //   isActive: (current, link) => current == link,
-  // },
+  {
+    link: "/contact",
+    text: `Contact`,
+    textSmall: None,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGEmail width={width->Style.dp} height={height->Style.dp} fill />,
+    isActive: (current, link) => current == link,
+  },
+]
+
+let menuLinksAndMore: array<menuLink> = [
+  {
+    link: "/",
+    text: j`Home`,
+    textSmall: None,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGMenuHome width={width->Style.dp} height={height->Style.dp} fill />,
+    isActive: (current, link) => current == link,
+  },
+  {
+    link: "/resume",
+    text: j`About`,
+    textSmall: None,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGMenuResume width={width->Style.dp} height={height->Style.dp} fill />,
+    isActive: (current, _link) => Js.String.startsWith("/resume", current),
+  },
+  {
+    link: "/development",
+    text: `Development`,
+    textSmall: Some(`Dev`),
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGCode width={width->Style.dp} height={height->Style.dp} fill />,
+    isActive: (current, link) => current == link,
+  },
+  {
+    link: "/apps",
+    text: `Apps`,
+    textSmall: None,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGApps width={width->Style.dp} height={height->Style.dp} fill />,
+    isActive: (current, link) => current == link,
+  },
   // {
   //   link: "/solutions",
   //   text: {j|Solutions|j},
@@ -54,7 +89,6 @@ let menuLinks: array<menuLink> = [
   //   isActive: (current, _link) =>
   //     Js.String.startsWith("/solutions", current),
   // },
-
   {
     link: "/talks",
     text: j`Talks`,
@@ -71,6 +105,14 @@ let menuLinks: array<menuLink> = [
     icon: (~width, ~height, ~fill, _) =>
       <SVGMenuBlog width={width->Style.dp} height={height->Style.dp} fill />,
     isActive: (current, _link) => Js.String.startsWith("/blog", current),
+  },
+  {
+    link: "/contact",
+    text: `Contact`,
+    textSmall: None,
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGEmail width={width->Style.dp} height={height->Style.dp} fill />,
+    isActive: (current, link) => current == link,
   },
 ]
 

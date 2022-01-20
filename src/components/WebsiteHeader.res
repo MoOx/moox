@@ -151,7 +151,13 @@ let make = () => {
             </View>}
         </Pressable>
         {isProfileOpen
-          ? <View style={viewStyle(~position=#absolute, ~top=70.->dp, ~right=24.->dp, ())}>
+          ? <View
+              style={viewStyle(
+                ~position=#absolute,
+                ~top=70.->dp,
+                ~right=24.->dp,
+                (),
+              )->unsafeAddStyle({"filter": "drop-shadow(0 0px 1px rgba(0, 0, 0, 0.75))"})}>
               <ViewLink href="/contact/" accessibilityLabel="Contact" style={styles["icon"]}>
                 <SVGEmail
                   fill=Consts.Colors.lightest width={20.->Style.dp} height={20.->Style.dp}

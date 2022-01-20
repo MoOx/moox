@@ -103,7 +103,7 @@ let make = () => {
           </SpacedView>
           <Spacer />
           <View>
-            {Consts.menuLinks
+            {Consts.menuLinksAndMore
             ->Array.map(item =>
               <ViewLink
                 key=item.link
