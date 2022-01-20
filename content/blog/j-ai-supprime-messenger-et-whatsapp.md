@@ -74,7 +74,7 @@ ciblées.**
 
 Du coup, si vous êtes curieux, je vous invite à regarder les alternatives :
 
-- [Signal](https://signal.org) : open source, recommandée par _Edouard Snowden_,
+- [Signal](https://signal.org) : open source, recommandée par _Edward Snowden_,
   donc vous pouvez faire confiance niveau vie privée et sécurité.
 - [Telegram](http://telegram.org) : source fermée, mais chiffrée pour les
   communications entre 2 personnes uniquement (les messages de groupes ne sont
@@ -100,7 +100,7 @@ personne ayant assez d’argent pour ne pas avoir à s’en soucier).
 Lancez-vous ! Essayez une application et voyez celle qui vous convient le mieux.
 Ou gardez les 2. N’hésitez pas à me faire vos retours d’expériences.
 
-##  Comment faire changer les gens/mon réseau autour de moi ?
+## Comment faire changer les gens/mon réseau autour de moi ?
 
 Dernier point important : tout seul ce n'est pas très utile. Il faudra donc que
 vos proches utilisent aussi ces applications.
