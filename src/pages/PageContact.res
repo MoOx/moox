@@ -4,7 +4,8 @@ open ReactMultiversal
 
 let styles = {
   "actions": style(~alignItems=#center, ()),
-  "button": style(~width=250.->dp, ~alignItems=#flexStart, ()),
+  "buttonsContainer": style(~maxWidth=300.->dp, ()),
+  "button": style(~width=100.->pct, ~alignItems=#flexStart, ()),
 }->StyleSheet.create
 
 @react.component
@@ -19,30 +20,30 @@ let make = () => {
   <AppWrapper>
     <Next.Head> <title> {("Contact - " ++ Consts.defaultTitle)->React.string} </title> </Next.Head>
     // <HeaderSmall title="Contact MoOx" getInTouch=false />
-    <Container>
-      <WindowSizeFilter.MMin> <Spacer /> </WindowSizeFilter.MMin>
-      <View style={array([theme.styles["back"], viewStyle(~borderRadius=10., ())])}>
-        <SpacedView vertical=L>
-          <Text style={array([Font.iosEm["subhead"], theme.styles["text"]])}>
-            {"Awaiting your message"->React.string}
-          </Text>
-          <Text style={array([Font.iosEm["largeTitle"], theme.styles["text"]])}>
-            {"Contact Maxime"->React.string}
-          </Text>
-          <Spacer size=L />
+    <WindowSizeFilter.MMin> <Spacer /> </WindowSizeFilter.MMin>
+    <Container style={array([theme.styles["back"], viewStyle(~borderRadius=10., ())])}>
+      <SpacedView vertical=L>
+        <Text style={array([Font.iosEm["subhead"], theme.styles["text"]])}>
+          {"Awaiting your message"->React.string}
+        </Text>
+        <Text style={array([Font.iosEm["largeTitle"], theme.styles["text"]])}>
+          {"Contact Maxime"->React.string}
+        </Text>
+        <Spacer size=L />
+        <Text style={array([Font.ios["body"], theme.styles["text"]])}>
+          {"Want to get in touch with me?"->React.string}
+        </Text>
+        <Spacer size=L />
+        <View style={styles["actions"]}>
           <Text style={array([Font.ios["body"], theme.styles["text"]])}>
-            {"Want to get in touch with me?"->React.string}
+            {"You got lucky.\nI am currently "->React.string}
+            <Text style={style(~fontWeight=#bold, ())}>
+              {"accepting new projects."->React.string}
+            </Text>
           </Text>
           <Spacer size=L />
-          <View style={styles["actions"]}>
-            <Text style={array([Font.ios["body"], theme.styles["text"]])}>
-              {"You got lucky.\nI am currently "->React.string}
-              <Text style={style(~fontWeight=#bold, ())}>
-                {"accepting new projects."->React.string}
-              </Text>
-            </Text>
-            <Spacer size=L />
-            <SpacedView vertical=S>
+          <View style={styles["buttonsContainer"]}>
+            <SpacedView vertical=S horizontal=None>
               <ViewLink href="sms:+33678135439">
                 <ButtonContained color="#1FCE26" style={styles["button"]}>
                   <SVGSpeechBubbles
@@ -58,7 +59,7 @@ let make = () => {
                 </ButtonContained>
               </ViewLink>
             </SpacedView>
-            <SpacedView vertical=S>
+            <SpacedView vertical=S horizontal=None>
               <ViewLink href={"mailto:" ++ (isClient ? "hello@moox.io" : "")}>
                 <ButtonContained color=Predefined.Colors.Ios.light.blue style={styles["button"]}>
                   <SVGEmail width={36.->Style.dp} height={36.->Style.dp} fill=Consts.Colors.light />
@@ -72,7 +73,7 @@ let make = () => {
                 </ButtonContained>
               </ViewLink>
             </SpacedView>
-            <SpacedView vertical=S>
+            <SpacedView vertical=S horizontal=None>
               <ViewLink href="tel:+33678135439">
                 <ButtonContained color="#1FCE26" style={styles["button"]}>
                   <SVGPhone width={36.->Style.dp} height={36.->Style.dp} fill=Consts.Colors.light />
@@ -86,7 +87,7 @@ let make = () => {
                 </ButtonContained>
               </ViewLink>
             </SpacedView>
-            <SpacedView vertical=S>
+            <SpacedView vertical=S horizontal=None>
               <ViewLink href="https://twitter.com/MoOx">
                 <ButtonContained color="rgb(0, 112, 201)" style={styles["button"]}>
                   <SVGSocialTwitter
@@ -102,7 +103,7 @@ let make = () => {
                 </ButtonContained>
               </ViewLink>
             </SpacedView>
-            <SpacedView vertical=S>
+            <SpacedView vertical=S horizontal=None>
               <ViewLink href="https://www.linkedin.com/in/maxthirouin">
                 <ButtonContained color="rgb(10, 102, 194)" style={styles["button"]}>
                   <SVGSocialLinkedin
@@ -118,7 +119,7 @@ let make = () => {
                 </ButtonContained>
               </ViewLink>
             </SpacedView>
-            <SpacedView vertical=S>
+            <SpacedView vertical=S horizontal=None>
               <a href="/MaximeThirouin.vcf" style={ReactDOM.Style.make(~textDecoration="none", ())}>
                 <ButtonContained color=Predefined.Colors.Ios.light.pink style={styles["button"]}>
                   <SVGContact
@@ -135,11 +136,11 @@ let make = () => {
               </a>
             </SpacedView>
           </View>
-        </SpacedView>
-      </View>
+        </View>
+      </SpacedView>
       <Spacer size=XL />
-      <WindowSizeFilter.MMin> <Spacer size=L /> </WindowSizeFilter.MMin>
     </Container>
+    <WindowSizeFilter.MMin> <Spacer size=L /> </WindowSizeFilter.MMin>
   </AppWrapper>
 }
 
