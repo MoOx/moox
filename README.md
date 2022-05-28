@@ -1,6 +1,6 @@
 # Hey!
 
-<a href="https://github.com/MoOx/rescript-next?sponsor=1">
+<a href="https://github.com/sponsors/MoOx">
   <img width="140" align="right" alt="Sponsoring button" src="https://github.com/moox/.github/raw/main/FUNDING.svg">
 </a>
 
