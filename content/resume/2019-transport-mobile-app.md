@@ -1,11 +1,11 @@
 ---
-company: "Kisio Digital"
-url: "http://www.kisiodigital.com"
+company: "Hove"
+url: "https://navitia.io"
 title: "Transport Mobile App"
 description: >
   iOS / Android app built for cities and transport networks
 dateStart: 2019-06-06
-dateEnd: 2021-12-31
+dateEnd: 2022-12-31
 hashtags:
   - JavaScript
   - React

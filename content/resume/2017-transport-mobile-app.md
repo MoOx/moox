@@ -1,6 +1,6 @@
 ---
 company: "Kisio Digital"
-url: "http://www.kisiodigital.com"
+url: "http://www.kisio.com"
 title: "Transport Mobile App"
 description: >
   iOS / Android app built for cities and transport networks
