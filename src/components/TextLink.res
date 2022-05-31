@@ -33,6 +33,7 @@ let make = (
         onPress={_ => {
           onPress->Option.map(onPress => onPress(_))->ignore
           Linking.openURL(href)->ignore
+          event->Event.PressEvent.preventDefault
         }}>
         {children}
       </Text>
