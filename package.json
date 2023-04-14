@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@moox/markdown-to-json": "^1.0.0",
-    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-module-resolver": "^5.0.0",
     "babel-plugin-react-native-web": "^0.13.0",
     "babel-preset-react-native": "^4.0.0",
     "gray-matter": "^4.0.2",
