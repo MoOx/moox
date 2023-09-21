@@ -168,7 +168,7 @@ let make = () => {
                     "backgroundImage": "linear-gradient(0deg, #792F93 0%, #000064 80%)",
                   }),
                 ])}>
-                {j`Creative Developer`->React.string}
+                {j`Front-End Developer`->React.string}
               </Text>
               <View style={array([Predefined.styles["row"], viewStyle(~alignItems=#center, ())])}>
                 <Text style={array([Font.weight["200"]])}> {j`For `->React.string} </Text>

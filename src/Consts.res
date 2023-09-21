@@ -2,7 +2,7 @@ open ReactNative
 open ReactMultiversal
 
 let title = j`MoOx`
-let defaultTitle = j`Freelance Creative Developer, Front-End / Mobile & Web`
+let defaultTitle = j`Freelance Developer, Front-End / Mobile & Web`
 let titleTemplate = j`%s - ` ++ title
 
 type menuLink = {

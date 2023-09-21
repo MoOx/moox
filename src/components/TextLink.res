@@ -30,7 +30,7 @@ let make = (
         accessibilityRole
         ?numberOfLines
         style
-        onPress={_ => {
+        onPress={event => {
           onPress->Option.map(onPress => onPress(_))->ignore
           Linking.openURL(href)->ignore
           event->Event.PressEvent.preventDefault
