@@ -1,5 +1,6 @@
 open Belt
 open ReactNative
+open ReactNative.Style
 open ReactMultiversal
 
 module Malformed = {
@@ -12,16 +13,9 @@ module Malformed = {
 type props = {post: Result.t<BlogFrontend.t, Malformed.t>}
 type params = {slug: string}
 
-let styles = {
-  open Style
-  StyleSheet.create({
-    "title": style(~color=Consts.Colors.dark, ()),
-    "text": style(~fontSize=21., ~lineHeight=33., ~fontWeight=#_400, ()),
-  })
-}
-
 @react.component
-let make = (~post: Result.t<BlogFrontend.t, Malformed.t>) =>
+let make = (~post: Result.t<BlogFrontend.t, Malformed.t>) => {
+  let theme = T.useTheme()
   switch post {
   | Error({message}) => message->React.string
   | Ok(post) =>
@@ -31,7 +25,18 @@ let make = (~post: Result.t<BlogFrontend.t, Malformed.t>) =>
       <View style={T.stylesLight["back"]}>
         <Container>
           <SpacedView vertical=None>
-            <Html.H1 textStyle={styles["title"]}> {title->React.string} </Html.H1>
+            <Html.H1 textStyle={array([Font.iosEm["largeTitle"], theme.styles["text"]])}>
+              {title->React.string}
+            </Html.H1>
+            {post.date
+            ->Js.Null.toOption
+            ->Option.map(date =>
+              <Text style={array([Font.ios["subtitle1"], theme.styles["textLight1"]])}>
+                {date->Js.String2.slice(~from=0, ~to_=10)->React.string}
+              </Text>
+            )
+            ->Option.getWithDefault(React.null)}
+            <Spacer size=M />
             {post.body
             ->Js.Null.toOption
             ->Option.map(body => <MyBodyRenderer body />)
@@ -48,7 +53,7 @@ let make = (~post: Result.t<BlogFrontend.t, Malformed.t>) =>
       </View>
     </AppWrapper>
   }
-
+}
 let default = (props: props) => make(makeProps(~post=props.post, ()))
 
 let getStaticProps: Next.Page.GetStaticProps.t<props, params> = ctx => {
