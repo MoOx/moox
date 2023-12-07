@@ -1,6 +1,6 @@
 ---
 date: 2023-12-07
-title: "Why you should use _React_ Native for your Web apps"
+title: "Why you should use React Native for your Web apps"
 tags:
   - react
   - react-native
