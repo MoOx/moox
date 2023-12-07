@@ -114,8 +114,9 @@ platforms since you will be restricted to the DOM. The shared codebase and
 components between _React Native for Web_ and _React Native_ for mobile make it
 easier to extend the application to mobile platforms in the future. This
 strategic choice allows for flexibility in future development plans without the
-need for a complete overhaul of the existing web application. You could even use
-your codebase for Windows or macOS applications using
+need for a complete overhaul of the existing web application, or worst and even
+more expensive: multiples implementations. You could even use your codebase for
+Windows or macOS applications using
 [React Native for Windows and macOS](https://microsoft.github.io/react-native-windows/),
 a project maintained by Microsoft, used on
 [huge products like Office or the Windows Xbox app](https://microsoft.github.io/react-native-windows/resources-showcase).
