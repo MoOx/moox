@@ -10,14 +10,14 @@ let styles = {
 @react.component
 let make = (~posts: array<BlogFrontend.t>, ()) => {
   let theme = T.useTheme()
-  let latestYear = ref(Js.Date.make()->Js.Date.getFullYear->Js.Float.toString)
+  let latestYear = ref((Js.Date.make()->Js.Date.getFullYear +. 1.)->Js.Float.toString)
   <>
     {posts->Array.map(item => {
       let year =
         item.date
         ->Js.Null.toOption
         ->Option.map(s => s->Js.String2.slice(~from=0, ~to_=4))
-        ->Option.getWithDefault("2000")
+        ->Option.getWithDefault("2050")
       let newYear = year !== latestYear.contents
       latestYear := year
       <View key=item.id style={styles["flex"]}>
