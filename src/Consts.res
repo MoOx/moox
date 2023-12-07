@@ -39,6 +39,14 @@ let menuLinks: array<menuLink> = [
     isActive: (current, link) => current == link,
   },
   {
+    link: "/blog",
+    text: `Blog`,
+    textSmall: Some(`Blog`),
+    icon: (~width, ~height, ~fill, _) =>
+      <SVGMenuBlog width={width->Style.dp} height={height->Style.dp} fill />,
+    isActive: (current, link) => current == link,
+  },
+  {
     link: "/contact",
     text: `Contact`,
     textSmall: None,
