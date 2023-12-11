@@ -1,10 +1,12 @@
 ---
-date: 2023-12-07
+date: 2023-12-11
 title: "Why you should use React Native for your Web apps"
 tags:
   - react
   - react-native
 ---
+
+<small>[Version de cette article en français](/blog/pourquoi-vous-devriez-utiliser-react-native-pour-vos-applications-web/)</small>
 
 [_React Native for Web_](https://necolas.github.io/react-native-web/), a web
 clone of the widely embraced [React Native](https://reactnative.dev) framework,
