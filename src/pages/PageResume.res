@@ -174,7 +174,7 @@ let make = (~items: array<ResumeFrontend.t>, ~malformed: array<Malformed.t>) => 
             {j`Hi, I am Maxime Thirouin, also known as MoOx. I live near Toulouse, France.
 I am a software developer specialized in front-end development of mobile & web applications.
 I love to design and develop UIs. I care about UX, responsiveness, performance, maintainability and scalability.
-When I am not coding or meditating, I enjoy simple things like gardening, watching a movie or enjoying one of the various activities that life has to offer.`->React.string}
+When I am not coding, I do things like doing stand-up comedy, watching a movie or enjoying one of the various activities that life has to offer.`->React.string}
           </Text>
         </SpacedView>
         <SpacedView
