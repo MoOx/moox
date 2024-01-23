@@ -6,7 +6,7 @@ tags:
   - react-native
 ---
 
-<small>[Version de cette article en français](/blog/pourquoi-vous-devriez-utiliser-react-native-pour-vos-applications-web/)</small>
+<small>[🇫🇷 Version de cette article en français](/blog/pourquoi-vous-devriez-utiliser-react-native-pour-vos-applications-web/)</small>
 
 [_React Native for Web_](https://necolas.github.io/react-native-web/), a web
 clone of the widely embraced [React Native](https://reactnative.dev) framework,

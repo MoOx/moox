@@ -7,7 +7,7 @@ tags:
 lang: fr
 ---
 
-<small>[English version of this post](/blog/why-you-should-use-react-native-for-web/)</small>
+<small>[🇺🇸 English version of this post](/blog/why-you-should-use-react-native-for-web/)</small>
 
 [_React Native for Web_](https://necolas.github.io/react-native-web/), un clone
 web du framework largement adopté [React Native](https://reactnative.dev), est
