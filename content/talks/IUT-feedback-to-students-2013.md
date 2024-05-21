@@ -10,6 +10,6 @@ slidesEmbed: https://speakerdeck.com/player/958f51092f364824ac43765e320cdc50?tit
 - <http://toulousejs.francejs.org/>
 - <http://francejs.org/>
 - <http://putaindecode.fr>
-- <https://twitter.com/MoOx>
+- <https://x.com/MoOx>
 - <https://github.com/MoOx>
 - <https://moox.io/>

@@ -17,4 +17,4 @@ slidesEmbed: https://speakerdeck.com/player/a6a598dff0674415b7f4e25dc3bd8fab?tit
 - <https://github.com/MoOx/compass-recipes/blob/master/templates/icon-fonts/README.md>
 - <https://gist.github.com/MoOx/2793699>
 - <https://github.com/MoOx/compass-recipes>
-- <https://twitter.com/MoOx>
+- <https://x.com/MoOx>

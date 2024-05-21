@@ -117,5 +117,5 @@ I also look forward to
 
 <figure class="flex-media--unknown">
   <img class="flex-media__item" src="/media/yoga-in-webassembly.jpg" />
-  <figcaption><a href="https://twitter.com/MoOx/status/997119336400777217">twitter.com/MoOx/status/997119336400777217</a></figcaption>
+  <figcaption><a href="https://x.com/MoOx/status/997119336400777217">x.com/MoOx/status/997119336400777217</a></figcaption>
 </figure>

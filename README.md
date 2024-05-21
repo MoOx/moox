@@ -21,5 +21,5 @@ apps. I enjoy working with:
 _More informations about me on my website **<https://moox.io>**._
 
 [![GitHub followers](https://img.shields.io/github/followers/MoOx?style=social&label=Follow%20me)](https://github.com/MoOx)
-[![Twitter Follow](https://img.shields.io/twitter/follow/MoOx?style=social&label=Follow%20me)](https://twitter.com/MoOx)
+[![X Follow](https://img.shields.io/twitter/follow/MoOx?style=social&label=Follow%20me)](https://x.com/MoOx)
 [![Sponsor my work](https://github.com/moox/.github/raw/main/FUNDING-button.svg)](https://github.com/sponsors/MoOx)

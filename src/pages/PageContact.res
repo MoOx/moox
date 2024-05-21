@@ -44,6 +44,22 @@ let make = () => {
           <Spacer size=L />
           <View style={styles["buttonsContainer"]}>
             <SpacedView vertical=S horizontal=None>
+              <ViewLink href="https://www.linkedin.com/in/maxthirouin">
+                <ButtonContained color="rgb(10, 102, 194)" style={styles["button"]}>
+                  <SVGSocialLinkedin
+                    width={36.->Style.dp} height={36.->Style.dp} fill=Consts.Colors.light
+                  />
+                  <Spacer />
+                  <ButtonContained.Text textSize=24.>
+                    {"Reach Me"->React.string}
+                    <Text style={style(~fontSize=12., ~lineHeight=12., ~fontWeight=#_300, ())}>
+                      {"\n@maxthirouin on LinkedIn"->React.string}
+                    </Text>
+                  </ButtonContained.Text>
+                </ButtonContained>
+              </ViewLink>
+            </SpacedView>
+            <SpacedView vertical=S horizontal=None>
               <ViewLink href="sms:+33678135439">
                 <ButtonContained color="#1FCE26" style={styles["button"]}>
                   <SVGSpeechBubbles
@@ -88,32 +104,16 @@ let make = () => {
               </ViewLink>
             </SpacedView>
             <SpacedView vertical=S horizontal=None>
-              <ViewLink href="https://twitter.com/MoOx">
-                <ButtonContained color="rgb(0, 112, 201)" style={styles["button"]}>
-                  <SVGSocialTwitter
+              <ViewLink href="https://x.com/MoOx">
+                <ButtonContained color="rgb(0, 0, 0)" style={styles["button"]}>
+                  <SVGSocialX
                     width={36.->Style.dp} height={36.->Style.dp} fill=Consts.Colors.light
                   />
                   <Spacer />
                   <ButtonContained.Text textSize=24.>
                     {"Message Me"->React.string}
                     <Text style={style(~fontSize=12., ~lineHeight=12., ~fontWeight=#_300, ())}>
-                      {"\n@MoOx on Twitter"->React.string}
-                    </Text>
-                  </ButtonContained.Text>
-                </ButtonContained>
-              </ViewLink>
-            </SpacedView>
-            <SpacedView vertical=S horizontal=None>
-              <ViewLink href="https://www.linkedin.com/in/maxthirouin">
-                <ButtonContained color="rgb(10, 102, 194)" style={styles["button"]}>
-                  <SVGSocialLinkedin
-                    width={36.->Style.dp} height={36.->Style.dp} fill=Consts.Colors.light
-                  />
-                  <Spacer />
-                  <ButtonContained.Text textSize=24.>
-                    {"Reach Me"->React.string}
-                    <Text style={style(~fontSize=12., ~lineHeight=12., ~fontWeight=#_300, ())}>
-                      {"\n@maxthirouin on LinkedIn"->React.string}
+                      {"\n@MoOx on X"->React.string}
                     </Text>
                   </ButtonContained.Text>
                 </ButtonContained>

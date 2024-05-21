@@ -7,15 +7,15 @@ NICKNAME:MoOx
 TITLE:Développeur Freelance Front-End Web & Mobile
 EMAIL;type=INTERNET;type=WORK;type=pref:hello@moox.io
 TEL;type=IPHONE;type=CELL;type=VOICE;type=pref:+33 6 78 13 54 39
-X-SOCIALPROFILE;type=twitter:http://twitter.com/MoOx
+X-SOCIALPROFILE;type=twitter:http://x.com/MoOx
 X-SOCIALPROFILE;type=linkedin:http://www.linkedin.com/in/maxthirouin
 NOTE:SIRET 521 013 268 00029\n
 item1.URL;type=pref:https://moox.io
 item1.X-ABLabel:_$!<HomePage>!$_
 item2.URL:https://github.com/MoOx
 item2.X-ABLabel:GitHub
-item3.URL:https://twitter.com/MoOx
-item3.X-ABLabel:Twitter
+item3.URL:https://x.com/MoOx
+item3.X-ABLabel:X
 item4.URL:https://www.linkedin.com/in/maxthirouin
 item4.X-ABLabel:LinkedIn
 PHOTO;ENCODING=b;TYPE=JPEG:/9j/4AAQSkZJRgABAQAAkACQAAD/4QB0RXhpZgAATU0AKgAA

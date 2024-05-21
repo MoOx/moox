@@ -82,31 +82,6 @@ let menuLinksAndMore: array<menuLink> = [
     isActive: (current, link) => current == link,
   },
   {
-    link: "/apps",
-    text: `Apps`,
-    textSmall: None,
-    icon: (~width, ~height, ~fill, _) =>
-      <SVGApps width={width->Style.dp} height={height->Style.dp} fill />,
-    isActive: (current, link) => current == link,
-  },
-  // {
-  //   link: "/solutions",
-  //   text: {j|Solutions|j},
-  //   icon: (~width, ~height, ~fill, _) =>
-  //     <SVGMenuResume width={width->Style.dp} height={height->Style.dp} fill />,
-  //   isActive: (current, _link) =>
-  //     Js.String.startsWith("/solutions", current),
-  // },
-  {
-    link: "/talks",
-    text: j`Talks`,
-    textSmall: None,
-    icon: (~width, ~height, ~fill, _) =>
-      <SVGMenuTalk width={width->Style.dp} height={height->Style.dp} fill />,
-    isActive: (current, _link) =>
-      Js.String.startsWith("/talks", current) || Js.String.startsWith("/talk", current),
-  },
-  {
     link: "/blog",
     text: j`Blog`,
     textSmall: None,
@@ -144,11 +119,11 @@ let socialLinks = [
       <SVGSocialGithub fill=iconColor width={iconSize->Style.dp} height={iconSize->Style.dp} />,
   },
   {
-    text: "Twitter",
-    alt: "@MoOx on Twitter",
-    link: "https://twitter.com/MoOx",
+    text: "X",
+    alt: "@MoOx on X",
+    link: "https://x.com/MoOx",
     componentFunc: (~iconColor, ~iconSize) =>
-      <SVGSocialTwitter fill=iconColor width={iconSize->Style.dp} height={iconSize->Style.dp} />,
+      <SVGSocialX fill=iconColor width={iconSize->Style.dp} height={iconSize->Style.dp} />,
   },
   {
     text: "LinkedIn",
@@ -177,39 +152,24 @@ let socialLinks2 = [
 
 let moreLinks = [
   {
-    text: "App Store",
-    alt: "@MoOx on Apple App Store",
-    link: "https://apps.apple.com/us/developer/maxime-thirouin/id1312839982",
-    componentFunc: (~iconColor, ~iconSize) =>
-      <SVGAppStoreApple fill=iconColor width={iconSize->Style.dp} height={iconSize->Style.dp} />,
-  },
-  {
-    text: "Play Store",
-    alt: "@MoOx on Google Play Store",
-    link: "https://play.google.com/store/apps/dev?id=8171431484805703288",
-    componentFunc: (~iconColor, ~iconSize) =>
-      <SVGAppStoreGoogle fill=iconColor width={iconSize->Style.dp} height={iconSize->Style.dp} />,
-  },
-  {
     text: "npm",
     alt: "@MoOx on npm",
     link: "https://www.npmjs.com/~moox",
     componentFunc: (~iconColor, ~iconSize) =>
       <SVGAppStoreNpm fill=iconColor width={iconSize->Style.dp} height={iconSize->Style.dp} />,
   },
+  {
+    link: "/talks",
+    text: j`Talks`,
+    componentFunc: (~iconColor, ~iconSize) =>
+      <SVGMenuTalk fill=iconColor width={iconSize->Style.dp} height={iconSize->Style.dp} />,
+    alt: "",
+  },
 ]
 let moreLinks2 = [
   {
     text: "Putain de code!",
     link: "https://putaindecode.io",
-  },
-  {
-    text: "Source Karma",
-    link: "https://sourcekarma.vercel.app/MoOx",
-  },
-  {
-    text: "Git Awards",
-    link: "http://git-awards.com/users/moox",
   },
 ]
 
