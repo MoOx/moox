@@ -14,18 +14,20 @@ let tlSpacer =
 
 @react.component
 let make = (~items: array<ResumeFrontend.t>, ()) => {
+  let todayDateOnlyAsISOString =
+    Js.Date.make()->Js.Date.toISOString->Js.String.slice(~from=0, ~to_=10)
   // let theme = T.useTheme()
   items
   ->Js.Array2.sortInPlaceWith((a, b) => {
-    let aYear =
-      a.dateEnd->Js.Null.toOption->Option.getWithDefault(a.dateStart)
-        |> Js.String.slice(~from=0, ~to_=4)
-    let bYear =
-      b.dateEnd->Js.Null.toOption->Option.getWithDefault(b.dateStart)
-        |> Js.String.slice(~from=0, ~to_=4)
-    if aYear < bYear {
+    let aDate =
+      a.dateEnd->Js.Null.toOption->Option.getWithDefault(todayDateOnlyAsISOString)
+        |> Js.String.slice(~from=0, ~to_=10)
+    let bDate =
+      b.dateEnd->Js.Null.toOption->Option.getWithDefault(todayDateOnlyAsISOString)
+        |> Js.String.slice(~from=0, ~to_=10)
+    if aDate < bDate {
       1
-    } else if aYear > bYear {
+    } else if aDate > bDate {
       -1
     } else {
       0
@@ -39,7 +41,7 @@ let make = (~items: array<ResumeFrontend.t>, ()) => {
     {items
     ->Array.mapWithIndex((i, item) => {
       let year =
-        item.dateEnd->Js.Null.toOption->Option.getWithDefault(item.dateStart)
+        item.dateEnd->Js.Null.toOption->Option.getWithDefault(todayDateOnlyAsISOString)
           |> Js.String.slice(~from=0, ~to_=4)
       let newYear = year !== latestYear.contents
       latestYear := year

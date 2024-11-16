@@ -2,6 +2,10 @@ open ReactNative
 open ReactNative.Style
 open ReactMultiversal
 
+let styles = {
+  "logoStyle": Style.unsafeStyle({"filter": "grayscale(100%) contrast(25%) brightness(150%)"}),
+}->StyleSheet.create
+
 @react.component
 let make = (~theme as themeMode=#auto) => {
   let theme = T.useTheme(~mode=themeMode, ())
@@ -82,40 +86,76 @@ let make = (~theme as themeMode=#auto) => {
       </ViewLink>
       <Spacer size=S />
       <View style={Predefined.styles["rowWrapCenter"]}>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGDevHtml width={64.->dp} height={64.->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGDevCss width={64.->dp} height={64.->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGDevJavascript width={64.->dp} height={64.->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGDevTypescript width={64.->dp} height={64.->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS style={Predefined.styles["center"]}>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGDevPhp width={(256. /. 4.)->dp} height={(136. /. 4.)->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGDevWordpress width={64.->dp} height={64.->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGDevPhotoshop width={64.->dp} height={64.->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGSketch width={64.->dp} height={64.->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGAppStoreApple width={64.->dp} height={64.->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGAppStoreGoogle width={64.->dp} height={64.->dp} />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGReact width={64.->dp} height={64.->dp} fill="#61dafb" />
         </SpacedView>
-        <SpacedView horizontal=XS vertical=XS>
+        <SpacedView
+          horizontal=XS
+          vertical=XS
+          style={array([styles["logoStyle"], Predefined.styles["center"]])}>
           <SVGDevRescript width={64.->dp} height={64.->dp} />
         </SpacedView>
       </View>

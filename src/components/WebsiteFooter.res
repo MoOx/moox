@@ -262,13 +262,8 @@ let make = () => {
         ])}>
         <View style={array([Predefined.styles["rowWrap"], Predefined.styles["flexShrink"]])}>
           <Text style={array([Font.ios["footnote"], theme.styles["textOnMain"]])}>
-            {"Made with "->React.string}
+            {"Website made with "->React.string}
           </Text>
-          <TextLink
-            style={array([Font.ios["footnote"], theme.styles["textOnMain"]])}
-            href="https://rescript-lang.org/">
-            {"ReScript, "->React.string}
-          </TextLink>
           <TextLink
             style={array([Font.ios["footnote"], theme.styles["textOnMain"]])}
             href="https://reactnative.dev">
@@ -277,20 +272,15 @@ let make = () => {
           <TextLink
             style={array([Font.ios["footnote"], theme.styles["textOnMain"]])}
             href="https://necolas.github.io/react-native-web/">
-            {" Web, "->React.string}
-          </TextLink>
-          <TextLink
-            style={array([Font.ios["footnote"], theme.styles["textOnMain"]])}
-            href="https://nextjs.org">
-            {"Next.js"->React.string}
+            {" for Web"->React.string}
           </TextLink>
           <Text style={array([Font.ios["footnote"], theme.styles["textOnMain"]])}>
             {" and "->React.string}
           </Text>
           <TextLink
             style={array([Font.ios["footnote"], theme.styles["textOnMain"]])}
-            href="https://rescript-react-native.github.io">
-            {"ReScript React Native"->React.string}
+            href="https://nextjs.org">
+            {"Next.js"->React.string}
           </TextLink>
           <Text style={array([Font.ios["footnote"], theme.styles["textOnMain"]])}>
             {". "->React.string}

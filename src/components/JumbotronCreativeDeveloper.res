@@ -88,16 +88,9 @@ let make = () => {
           }),
         ])}
       />
-      <View
-        style={array([
-          viewStyle(
-            ~position=#absolute,
-            ~top=60.->dp,
-            // ~bottom=0.->dp,
-            ~left=25.->pct,
-            ~justifyContent=#flexEnd,
-            (),
-          ),
+      <Container
+        wrapperStyle={array([
+          viewStyle(~height=100.->pct, ()),
           unsafeStyle({
             // "mixBlendMode": "color-dodge", // ligtttthhhh
             // "mixBlendMode": "hard-light", // hummm
@@ -109,8 +102,23 @@ let make = () => {
             "filter": "grayscale(100%) contrast(2)",
           }),
         ])}>
-        <Next.Image src="/me-with-hand-mic.png" width=350. height=350. objectFit=#contain />
-      </View>
+        <View
+          style={array([
+            viewStyle(
+              ~position=#absolute,
+              ~top=60.->dp,
+              // ~bottom=0.->dp,
+              ~left=-6.->pct,
+              ~right=0.->pct,
+              // ~justifyContent=#flexEnd,
+              ~flexDirection=#row,
+              (),
+            ),
+          ])}>
+          <WindowSizeFilter.SMax style={ReactDOM.Style.make(~width="50%", ~height="1px", ())} />
+          <Next.Image src="/me-with-hand-mic.png" width=400. height=400. objectFit=#contain />
+        </View>
+      </Container>
       <View style={array([StyleSheet.absoluteFill, Predefined.styles["rowCenter"]])}>
         <WindowSizeFilter.MMin>
           <View
@@ -126,7 +134,7 @@ let make = () => {
           </View>
         </WindowSizeFilter.MMin>
         <div style={ReactDOM.Style.make(~width="5%", ~height="1px", ())} />
-        <WindowSizeFilter.MMin style={ReactDOM.Style.make(~width="35%", ~height="1px", ())} />
+        <WindowSizeFilter.MMin style={ReactDOM.Style.make(~width="40%", ~height="1px", ())} />
         <View style={styles["content"]} accessibilityRole=#header>
           <Text
             style={array([

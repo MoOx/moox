@@ -31,14 +31,6 @@ links:
     url: https://apps.apple.com/fr/app/ilévia/id429143032
   - title: Ilévia Android
     url: https://play.google.com/store/apps/details?id=com.transpole.mobi
-  - title: TCL iOS
-    url: https://apps.apple.com/fr/app/tcl/id579379606
-  - title: TCL Android
-    url: https://play.google.com/store/apps/details?id=com.micropole.android.tcl_mobile
-  - title: Vermeille iOS
-    url: https://apps.apple.com/fr/app/vermeille/id556842045
-  - title: Vermeille Android
-    url: https://play.google.com/store/apps/details?id=com.micropole.android.canaltp.sts
 image: /resume/adm.jpg
 remote: true
 ---

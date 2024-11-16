@@ -47,7 +47,7 @@ let skills: array<CardWithGradient.item> = [
     </View>,
   },
   {
-    title: j`ReScript`,
+    title: j`TypeScript`,
     text: j`≃ Fully Typed JavaScript ♥`,
     color: Consts.Colors.light,
     bg: "#035A93",
@@ -57,7 +57,7 @@ let skills: array<CardWithGradient.item> = [
         open Style
         array([styles["icon"], style(~right=-40.->dp, ~bottom=-40.->dp, ())])
       }>
-      <SVGDevRescriptIcon width={200.->Style.dp} height={200.->Style.dp} fill=Consts.Colors.light />
+      <SVGDevTypescript width={200.->Style.dp} height={200.->Style.dp} fill=Consts.Colors.light />
     </View>,
   },
   {

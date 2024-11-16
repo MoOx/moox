@@ -141,6 +141,7 @@ let socialLinks2 = [
     componentFunc: (~iconColor, ~iconSize) =>
       <SVGSocialDribbble fill=iconColor width={iconSize->Style.dp} height={iconSize->Style.dp} />,
   },
+  /*
   {
     text: "Youtube",
     alt: "@MoOx on Youtube",
@@ -148,6 +149,7 @@ let socialLinks2 = [
     componentFunc: (~iconColor, ~iconSize) =>
       <SVGSocialYoutube fill=iconColor width={iconSize->Style.dp} height={iconSize->Style.dp} />,
   },
+ */
 ]
 
 let moreLinks = [

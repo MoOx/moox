@@ -49,7 +49,7 @@ saine. On s'occupe pas des finitions, juste d'une bonne base.
 
 Par exemple choisir
 [React Native (et/ou React Native for Web) pour son projet mobile et/ou web sera une bonne base sans risque](/blog/pourquoi-vous-devriez-utiliser-react-native-pour-vos-applications-web/).
-Je en parle pas de prendre LA super solution de CSS-in-JS ou de choisir la
+Je ne parle pas de prendre LA super solution de CSS-in-JS ou de choisir la
 solution pour votre store interne mais de choisir une bonne fondation.
 L'équation de la simplicité peut être plus que délicate. Donc il s'agit plutôt
 de trouver le bon équilibre entre le simple et le fonctionnel. Ne compliquez pas
@@ -59,7 +59,7 @@ les choses, mais ne soyez pas non plus timide.
 
 Vous avez probablement entendu parler du KISS, qui signifie "Keep It Simple,
 Stupid". Le côté stupide, je le vois plus comme un côté niais. Soyez niais et
-gentil avec votre code et avec vous-mêmes. La simplicité est une manière
+gentil avec votre code et avec vous-même. La simplicité est une manière
 d'exprimer l'amour pour notre futur nous qui devra maintenir ce code. Si vous
 pouvez faire une implémentation d'une partie dans un fichier de 500 lignes de
 codes, pourquoi vouloir à tout prix séparer des choses dans 10 fichiers de 50

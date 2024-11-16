@@ -109,7 +109,10 @@ let make = (~item: ResumeFrontend.t) => {
             </Text>
           </>
         })
-        ->Option.getWithDefault(React.null)}
+        ->Option.getWithDefault(<>
+          <Spacer size=XS />
+          <Text style={styles["duration"]}> {"Work In Progress"->React.string} </Text>
+        </>)}
         <Spacer size=XL />
         <View style={styles["tags"]}>
           {item.hashtags

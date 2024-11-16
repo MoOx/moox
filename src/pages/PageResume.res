@@ -91,10 +91,10 @@ let make = (~items: array<ResumeFrontend.t>, ~malformed: array<Malformed.t>) => 
             </SpacedView>
             <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
-                <SVGDevRescript width={48.->Style.dp} height={48.->Style.dp} />
+                <SVGDevTypescript fill="#bbb" width={48.->Style.dp} height={48.->Style.dp} />
               </div>
               <Spacer size=XXS />
-              <Text style={styles["iconText"]}> {"ReScript"->React.string} </Text>
+              <Text style={styles["iconText"]}> {"TypeScript"->React.string} </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
@@ -105,10 +105,10 @@ let make = (~items: array<ResumeFrontend.t>, ~malformed: array<Malformed.t>) => 
             </SpacedView>
             <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>
-                <SVGDevTypescript fill="#bbb" width={48.->Style.dp} height={48.->Style.dp} />
+                <SVGDevRescript width={48.->Style.dp} height={48.->Style.dp} />
               </div>
               <Spacer size=XXS />
-              <Text style={styles["iconText"]}> {"TypeScript"->React.string} </Text>
+              <Text style={styles["iconText"]}> {"ReScript"->React.string} </Text>
             </SpacedView>
             <SpacedView horizontal=XS vertical=S>
               <div style=grayIconDomStyle>

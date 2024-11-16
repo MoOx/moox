@@ -1,9 +1,9 @@
 ---
 company: "FKLG Production"
-url: "https://unebonneboutique.com/"
+url: "https://fklg.fr"
 title: "VOD Platform"
 description: >
-  VOD platform built with Shopify & Vimeo > unebonneboutique.com
+  VOD platform built with Shopify & Vimeo
 dateStart: 2023-11-01
 dateEnd: 2023-12-31
 hashtags:
@@ -17,6 +17,9 @@ hashtags:
   - CSS
 image: /resume/unebonneboutique.jpg
 remote: true
+links:
+  - title: "UneBonneBoutique.com - Une Bonne Soirée"
+    url: "https://unebonneboutique.com/collections/une-bonne-soiree"
 ---
 
 Setup of a secured VOD streaming platform for Kyan Khojandi (a famous French

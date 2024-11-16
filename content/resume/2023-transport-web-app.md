@@ -1,6 +1,6 @@
 ---
 company: "Hove"
-url: "https://navitia.io"
+url: "https://hove.com/"
 title: "Transport Web App"
 description: >
   Web app built for cities and transport networks
@@ -18,7 +18,7 @@ hashtags:
   - Maps
   - Location
   - Jawg
-image: /resume/adm.jpg
+#image: /resume/adm.jpg
 remote: true
 ---
 

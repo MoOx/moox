@@ -1,6 +1,6 @@
 ---
 company: "Hove"
-url: "https://navitia.io"
+url: "https://hove.com/"
 title: "Transport Mobile App"
 description: >
   iOS / Android app built for cities and transport networks
