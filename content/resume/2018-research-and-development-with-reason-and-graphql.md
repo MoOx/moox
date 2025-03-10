@@ -21,9 +21,6 @@ hashtags:
   - Webpack
 image: /resume/damebio.jpg
 remote: true
-links:
-  - title: "D'Âme Bio"
-    url: https://dame.bio/
 ---
 
 R&D on ReScript, Ocaml, GraphQL / Apollo, React Native + React Native Web and

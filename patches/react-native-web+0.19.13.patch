@@ -1,0 +1,155 @@
+diff --git a/node_modules/react-native-web/dist/cjs/modules/useResponderEvents/ResponderTouchHistoryStore.js b/node_modules/react-native-web/dist/cjs/modules/useResponderEvents/ResponderTouchHistoryStore.js
+index b596e16..23bff0f 100644
+--- a/node_modules/react-native-web/dist/cjs/modules/useResponderEvents/ResponderTouchHistoryStore.js
++++ b/node_modules/react-native-web/dist/cjs/modules/useResponderEvents/ResponderTouchHistoryStore.js
+@@ -18,7 +18,7 @@ var _ResponderEventTypes = require("./ResponderEventTypes");
+  * when touches end and start again.
+  */
+ 
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ var MAX_TOUCH_BANK = 20;
+ function timestampForTouch(touch) {
+   // The legacy internal implementation provides "timeStamp", which has been
+diff --git a/node_modules/react-native-web/dist/cjs/vendor/react-native/Animated/AnimatedEvent.js b/node_modules/react-native-web/dist/cjs/vendor/react-native/Animated/AnimatedEvent.js
+index 4d46710..fcddf71 100644
+--- a/node_modules/react-native-web/dist/cjs/vendor/react-native/Animated/AnimatedEvent.js
++++ b/node_modules/react-native-web/dist/cjs/vendor/react-native/Animated/AnimatedEvent.js
+@@ -18,7 +18,7 @@ exports.attachNativeEvent = attachNativeEvent;
+ var _AnimatedValue = _interopRequireDefault(require("./nodes/AnimatedValue"));
+ var _NativeAnimatedHelper = _interopRequireWildcard(require("./NativeAnimatedHelper"));
+ var _invariant = _interopRequireDefault(require("fbjs/lib/invariant"));
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ function attachNativeEvent(viewRef, eventName, argMapping) {
+   // Find animated values in `argMapping` and create an array representing their
+   // key path inside the `nativeEvent` object. Ex.: ['contentOffset', 'x'].
+diff --git a/node_modules/react-native-web/dist/cjs/vendor/react-native/Animated/nodes/AnimatedInterpolation.js b/node_modules/react-native-web/dist/cjs/vendor/react-native/Animated/nodes/AnimatedInterpolation.js
+index 133db4b..10a3806 100644
+--- a/node_modules/react-native-web/dist/cjs/vendor/react-native/Animated/nodes/AnimatedInterpolation.js
++++ b/node_modules/react-native-web/dist/cjs/vendor/react-native/Animated/nodes/AnimatedInterpolation.js
+@@ -20,7 +20,7 @@ var _AnimatedWithChildren = _interopRequireDefault(require("./AnimatedWithChildr
+ var _NativeAnimatedHelper = _interopRequireDefault(require("../NativeAnimatedHelper"));
+ var _invariant = _interopRequireDefault(require("fbjs/lib/invariant"));
+ var _normalizeColors = _interopRequireDefault(require("@react-native/normalize-colors"));
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ var linear = t => t;
+ 
+ /**
+diff --git a/node_modules/react-native-web/dist/cjs/vendor/react-native/LayoutAnimation/index.js b/node_modules/react-native-web/dist/cjs/vendor/react-native/LayoutAnimation/index.js
+index 14ec3d7..eeb4503 100644
+--- a/node_modules/react-native-web/dist/cjs/vendor/react-native/LayoutAnimation/index.js
++++ b/node_modules/react-native-web/dist/cjs/vendor/react-native/LayoutAnimation/index.js
+@@ -15,7 +15,7 @@ exports.__esModule = true;
+ exports.default = void 0;
+ var _Platform = _interopRequireDefault(require("../../../exports/Platform"));
+ var _UIManager = _interopRequireDefault(require("../../../exports/UIManager"));
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ function configureNext(config, onAnimationDidEnd) {
+   if (!_Platform.default.isTesting) {
+     _UIManager.default.configureNextLayoutAnimation(config, onAnimationDidEnd !== null && onAnimationDidEnd !== void 0 ? onAnimationDidEnd : function () {}, function () {} /* unused onError */);
+diff --git a/node_modules/react-native-web/dist/cjs/vendor/react-native/VirtualizedList/VirtualizedListContext.js b/node_modules/react-native-web/dist/cjs/vendor/react-native/VirtualizedList/VirtualizedListContext.js
+index 180aef9..a9a2a1e 100644
+--- a/node_modules/react-native-web/dist/cjs/vendor/react-native/VirtualizedList/VirtualizedListContext.js
++++ b/node_modules/react-native-web/dist/cjs/vendor/react-native/VirtualizedList/VirtualizedListContext.js
+@@ -20,7 +20,7 @@ var React = _react;
+  * @format
+  */
+ 
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ var VirtualizedListContext = exports.VirtualizedListContext = /*#__PURE__*/React.createContext(null);
+ if (__DEV__) {
+   VirtualizedListContext.displayName = 'VirtualizedListContext';
+diff --git a/node_modules/react-native-web/dist/cjs/vendor/react-native/VirtualizedList/index.js b/node_modules/react-native-web/dist/cjs/vendor/react-native/VirtualizedList/index.js
+index f9df024..b689ad0 100644
+--- a/node_modules/react-native-web/dist/cjs/vendor/react-native/VirtualizedList/index.js
++++ b/node_modules/react-native-web/dist/cjs/vendor/react-native/VirtualizedList/index.js
+@@ -36,7 +36,7 @@ var React = _interopRequireWildcard(require("react"));
+  * @format
+  */
+ 
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ var ON_EDGE_REACHED_EPSILON = 0.001;
+ var _usedIndexForKey = false;
+ var _keylessItemComponentName = '';
+diff --git a/node_modules/react-native-web/dist/modules/useResponderEvents/ResponderTouchHistoryStore.js b/node_modules/react-native-web/dist/modules/useResponderEvents/ResponderTouchHistoryStore.js
+index 6f47ae6..9477279 100644
+--- a/node_modules/react-native-web/dist/modules/useResponderEvents/ResponderTouchHistoryStore.js
++++ b/node_modules/react-native-web/dist/modules/useResponderEvents/ResponderTouchHistoryStore.js
+@@ -14,7 +14,6 @@ import { isStartish, isMoveish, isEndish } from './ResponderEventTypes';
+  * when touches end and start again.
+  */
+ 
+-var __DEV__ = process.env.NODE_ENV !== 'production';
+ var MAX_TOUCH_BANK = 20;
+ function timestampForTouch(touch) {
+   // The legacy internal implementation provides "timeStamp", which has been
+diff --git a/node_modules/react-native-web/dist/vendor/react-native/Animated/AnimatedEvent.js b/node_modules/react-native-web/dist/vendor/react-native/Animated/AnimatedEvent.js
+index 24ecf01..77cef36 100644
+--- a/node_modules/react-native-web/dist/vendor/react-native/Animated/AnimatedEvent.js
++++ b/node_modules/react-native-web/dist/vendor/react-native/Animated/AnimatedEvent.js
+@@ -14,7 +14,7 @@ import AnimatedValue from './nodes/AnimatedValue';
+ import NativeAnimatedHelper from './NativeAnimatedHelper';
+ import invariant from 'fbjs/lib/invariant';
+ import { shouldUseNativeDriver } from './NativeAnimatedHelper';
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ export function attachNativeEvent(viewRef, eventName, argMapping) {
+   // Find animated values in `argMapping` and create an array representing their
+   // key path inside the `nativeEvent` object. Ex.: ['contentOffset', 'x'].
+diff --git a/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedInterpolation.js b/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedInterpolation.js
+index bc10447..13fb7d7 100644
+--- a/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedInterpolation.js
++++ b/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedInterpolation.js
+@@ -17,7 +17,7 @@ import AnimatedWithChildren from './AnimatedWithChildren';
+ import NativeAnimatedHelper from '../NativeAnimatedHelper';
+ import invariant from 'fbjs/lib/invariant';
+ import normalizeColor from '@react-native/normalize-colors';
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ var linear = t => t;
+ 
+ /**
+diff --git a/node_modules/react-native-web/dist/vendor/react-native/LayoutAnimation/index.js b/node_modules/react-native-web/dist/vendor/react-native/LayoutAnimation/index.js
+index d35bbf1..aa6bb86 100644
+--- a/node_modules/react-native-web/dist/vendor/react-native/LayoutAnimation/index.js
++++ b/node_modules/react-native-web/dist/vendor/react-native/LayoutAnimation/index.js
+@@ -12,7 +12,7 @@
+ 
+ import Platform from '../../../exports/Platform';
+ import UIManager from '../../../exports/UIManager';
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ function configureNext(config, onAnimationDidEnd) {
+   if (!Platform.isTesting) {
+     UIManager.configureNextLayoutAnimation(config, onAnimationDidEnd !== null && onAnimationDidEnd !== void 0 ? onAnimationDidEnd : function () {}, function () {} /* unused onError */);
+diff --git a/node_modules/react-native-web/dist/vendor/react-native/VirtualizedList/VirtualizedListContext.js b/node_modules/react-native-web/dist/vendor/react-native/VirtualizedList/VirtualizedListContext.js
+index b69965b..43a2d90 100644
+--- a/node_modules/react-native-web/dist/vendor/react-native/VirtualizedList/VirtualizedListContext.js
++++ b/node_modules/react-native-web/dist/vendor/react-native/VirtualizedList/VirtualizedListContext.js
+@@ -11,7 +11,7 @@ import _objectSpread from "@babel/runtime/helpers/objectSpread2";
+ 
+ import * as React from 'react';
+ import { useContext, useMemo } from 'react';
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ export var VirtualizedListContext = /*#__PURE__*/React.createContext(null);
+ if (__DEV__) {
+   VirtualizedListContext.displayName = 'VirtualizedListContext';
+diff --git a/node_modules/react-native-web/dist/vendor/react-native/VirtualizedList/index.js b/node_modules/react-native-web/dist/vendor/react-native/VirtualizedList/index.js
+index 1f52b73..0231829 100644
+--- a/node_modules/react-native-web/dist/vendor/react-native/VirtualizedList/index.js
++++ b/node_modules/react-native-web/dist/vendor/react-native/VirtualizedList/index.js
+@@ -30,7 +30,7 @@ import { computeWindowedRenderLimits, keyExtractor as defaultKeyExtractor } from
+ import invariant from 'fbjs/lib/invariant';
+ import nullthrows from 'nullthrows';
+ import * as React from 'react';
+-var __DEV__ = process.env.NODE_ENV !== 'production';
++
+ var ON_EDGE_REACHED_EPSILON = 0.001;
+ var _usedIndexForKey = false;
+ var _keylessItemComponentName = '';

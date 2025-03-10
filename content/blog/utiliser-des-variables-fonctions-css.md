@@ -6,10 +6,10 @@ tags:
   - css
 ---
 
-**Note: cette article est déprécié puisque les spécifications CSS en cours
+⚠️ **Note: cette article est déprécié puisque les spécifications CSS en cours
 d'écriture prévoient beaucoup de customisation possible. Si vous souhaitez
 utiliser cela dès aujourd'hui, je vous renvois sur le projet que j'ai créé qui
-permet d'utiliser aujourd'hui la syntaxe CSS de demain:**
+permet d'utiliser aujourd'hui la syntaxe CSS de demain**
 
 ### ⇢ _[cssnext](https://cssnext.github.io)_
 
@@ -57,7 +57,8 @@ outils. Puis s’ils résument pas bien, c’est pas de ma faute, c’est comme 
 > ajoutant règles imbriqués, variables, [mixins][12], l’héritage de sélection,
 > et encore plus. Cela ce transforme en CSS standard, bien formaté, à l’aide
 > d’outils en ligne de commande ou avec des plugins de frameworks web [-ou un >
-> petit outil avec GUI que je vous présenterais ;) ].
+>
+> > petit outil avec GUI que je vous présenterais ;) ].
 >
 > Sass à 2 syntaxes. La principale (depuis Sass 3) est connu sous le nom de
 > “SCSS » (pour “Sassy CSS”), et est un surensemble de la syntaxe CSS 3. Cela
@@ -137,7 +138,7 @@ $margin: 16px;
 
 #### Petit exemple de code Stylus
 
-```
+```stylus
 border-radius()
   -webkit-border-radius arguments
   -moz-border-radius arguments
@@ -196,12 +197,11 @@ _En tout cas, il y’a du choix, alors passez à la vitesse supérieur avec vos 
 !_
 
 Edit: Depuis j’ai publié d’autres articles relatifs, un plus détaillé sur [la
-solution Sass/Compass (et son installation) ][18]puis un autre sur [comment se
+solution Sass/Compass (et son installation)][18]puis un autre sur [comment se
 passer des lignes de commandes avec Compass.app !][19]
 
 [1]: http://cssresetr.com/
-[2]:
-  http://css.4design.tl/framework-css-semantique-maquette-dynamique-et-autres-notes
+[2]: http://css.4design.tl/framework-css-semantique-maquette-dynamique-et-autres-notes
 [3]: http://css.4design.tl/framework-css-mettez-vos-grilles-au-pas
 [4]: https://github.com/stubbornella/oocss
 [5]: http://fr.wikipedia.org/wiki/Objet_(informatique)

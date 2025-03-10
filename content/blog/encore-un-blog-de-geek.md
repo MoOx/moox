@@ -6,7 +6,7 @@ tags:
   - blog
 ---
 
-Bienvenue (ou pas) sur ma tentative de blog. Moi c’est Maxime, aka MoOx sur le
+Bienvenue (ou pas) sur ma tentative de blog. Moi c’est Max, aka MoOx sur le
 net.
 
 Depuis le temps que j’en parlais à [un de mes lolcat][1]. Depuis le temps que je

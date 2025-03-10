@@ -26,11 +26,6 @@ hashtags:
   - Storybook
   - Jenkins
   - Fastlane
-links:
-  - title: Ilévia iOS
-    url: https://apps.apple.com/fr/app/ilévia/id429143032
-  - title: Ilévia Android
-    url: https://play.google.com/store/apps/details?id=com.transpole.mobi
 image: /resume/adm.jpg
 remote: true
 ---

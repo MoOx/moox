@@ -186,11 +186,11 @@ git remote -v
 
 This should give you something like this
 
-```
-origin	https://github.com/YOU/YOUR-REPO.git (fetch)
-origin	https://github.com/YOU/YOUR-REPO.git (push)
-origin	https://gitlab.com/YOU/YOUR-REPO.git (push)
-origin	https://bitbucket.org/YOU/YOUR-REPO.git (push)
+```console
+origin  https://github.com/YOU/YOUR-REPO.git (fetch)
+origin  https://github.com/YOU/YOUR-REPO.git (push)
+origin  https://gitlab.com/YOU/YOUR-REPO.git (push)
+origin  https://bitbucket.org/YOU/YOUR-REPO.git (push)
 ```
 
 Now you can just use `git push` and it will push on all remote 🙂.
@@ -205,7 +205,7 @@ git config --global url.ssh://git@gitlab.com/.insteadOf https://gitlab.com/
 git config --global url.ssh://git@bitbucket.org/.insteadOf https://bitbucket.org/
 ```
 
-### Problem is `git pull` will only pull from the first url.
+### Problem is `git pull` will only pull from the first url
 
 There is inconsitencies with `git push --all` (push all branches to default
 remote) and `git pull --all` (pull from the first url of the default remote).
@@ -227,15 +227,15 @@ git remote -v
 
 Should give you something like this
 
-```
-origin	ssh://git@github.com/YOU/YOUR-REPO.git (fetch)
-origin	ssh://git@github.com/YOU/YOUR-REPO.git (push)
-origin	ssh://git@gitlab.com/YOU/YOUR-REPO.git (push)
-origin	ssh://git@bitbucket.org/YOU/YOUR-REPO.git (push)
-origin-gitlab	ssh://git@gitlab.com/YOU/YOUR-REPO.git (fetch)
-origin-gitlab	ssh://git@gitlab.com/YOU/YOUR-REPO.git (push)
-origin-bitbucket	ssh://git@bitbucket.org/YOU/YOUR-REPO.git (fetch)
-origin-bitbucket	ssh://git@bitbucket.org/YOU/YOUR-REPO.git (push)
+```console
+origin  ssh://git@github.com/YOU/YOUR-REPO.git (fetch)
+origin  ssh://git@github.com/YOU/YOUR-REPO.git (push)
+origin  ssh://git@gitlab.com/YOU/YOUR-REPO.git (push)
+origin  ssh://git@bitbucket.org/YOU/YOUR-REPO.git (push)
+origin-gitlab  ssh://git@gitlab.com/YOU/YOUR-REPO.git (fetch)
+origin-gitlab  ssh://git@gitlab.com/YOU/YOUR-REPO.git (push)
+origin-bitbucket  ssh://git@bitbucket.org/YOU/YOUR-REPO.git (fetch)
+origin-bitbucket  ssh://git@bitbucket.org/YOU/YOUR-REPO.git (push)
 ```
 
 Now you can use `git push` to push to all remotes and use `git pull --all` to
@@ -278,15 +278,15 @@ care, you should not face this very often.
 If you encounter this case and want to force push, be sure that your branch is
 not protected on
 
-###### GitHub
+1 - GitHub
 
-```
+```console
 https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}/settings/branches
 ```
 
-##### GitLab
+2 - GitLab
 
-```
+```console
 https://gitlab.com/${GIT_USER_NAME}/${GIT_REPO_NAME}/protected_branches
 ```
 
@@ -304,8 +304,8 @@ and run the appropriate command for the places where my repo is missing.
 
 Alternatively, you might be interested by this things
 
-* https://pypi.python.org/pypi/github2gitlab
-* https://github.com/xuhdev/backup-on-the-go
+- [pypi.python.org/pypi/github2gitlab](https://pypi.python.org/pypi/github2gitlab)
+- [github.com/xuhdev/backup-on-the-go](https://github.com/xuhdev/backup-on-the-go)
 
 ## FAQ
 
@@ -341,13 +341,13 @@ remote by default.)
 
 ### For each repos
 
-1.  Export your username (assuming you have the same on all platforms)
+1 - Export your username (assuming you have the same on all platforms)
 
 ```console
 export GIT_USER_NAME=$USER
 ```
 
-2.  For new repo (if your repo already exist on GitHub, go to step below.)
+2 - For new repo (if your repo already exist on GitHub, go to step below.)
 
 ```console
 export GIT_REPO_NAME=your-repo
@@ -356,7 +356,7 @@ git init
 hub create
 ```
 
-3.  For existing GitHub repo
+3 - For existing GitHub repo
 
 ```console
 export GIT_REPO_NAME=$(basename $(pwd))
@@ -366,14 +366,14 @@ bb create --protocol=ssh --scm=git --public $GIT_REPO_NAME
 
 Then, to add remotes
 
-```
+```console
 git remote set-url origin --add https://gitlab.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
 git remote set-url origin --add https://bitbucket.org/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
 git remote add origin-gitlab https://gitlab.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
 git remote add origin-bitbucket https://bitbucket.org/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
 ```
 
-4.  Check that everything is ok
+4 - Check that everything is ok
 
 ```console
 git remote -v
@@ -381,7 +381,7 @@ git remote -v
 
 You should get something like
 
-```
+```console
 origin  ssh://git@github.com/YOU/YOUR-REPO.git (fetch)
 origin  ssh://git@github.com/YOU/YOUR-REPO.git (push)
 origin  ssh://git@gitlab.com/YOU/YOUR-REPO.git (push)
@@ -415,6 +415,6 @@ It will look like this
 I pushed this [tl;dr on a repo](https://github.com/MoOx/git-init), maybe I will
 make a script someday 😄. Well, three repos.
 
-* https://github.com/MoOx/git-init
-* https://gitlab.com/MoOx/git-init
-* https://bitbucket.org/MoOx/git-init
+- [github.com/MoOx/git-init](https://github.com/MoOx/git-init)
+- [gitlab.com/MoOx/git-init](https://gitlab.com/MoOx/git-init)
+- [bitbucket.org/MoOx/git-init](https://bitbucket.org/MoOx/git-init)

@@ -21,45 +21,34 @@ installation is finished, you need to restart the computer to be able to use
 KeyRemap4MacBook. After reboot, you will notice a new empty icon which look like
 a key in your menu bar.
 
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" title="KeyRemap4MacBook-menu-bar-icon" src="/media/2011/06/KeyRemap4MacBook-menu-bar-icon.png" alt="" />
-</figure>
+![KeyRemap4MacBook-menu-bar-icon](/media/2011/06/KeyRemap4MacBook-menu-bar-icon.png)
 
 You can open KeyRemap4MacBook from this icon or find the dedicated Preference
 Pane under « System Preferences ». On the « Change Key » tab, look at « Change
 Control_L Key (Left Control) » and select « Control_L to Fn ».
 
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" title="KeyRemap4MacBook-Control_L-to-Fn" src="/media/2011/06/KeyRemap4MacBook-Control_L-to-Fn.png" alt=""/>
-</figure>
+![KeyRemap4MacBook-Control_L-to-Fn](/media/2011/06/KeyRemap4MacBook-Control_L-to-Fn.png)
 
 After that your need to change <kbd>fn</kbd> behavior too. So look at « Change
 Control_L Key (Left Control) » and select « Control_L to Fn ».
 
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" title="KeyRemap4MacBook-Fn-to-Control_L" src="/media/2011/06/KeyRemap4MacBook-Fn-to-Control_L.png" alt="" />
-</figure>
+![KeyRemap4MacBook-Fn-to-Control_L](/media/2011/06/KeyRemap4MacBook-Fn-to-Control_L.png)
 
 Eventually you can remove the menu bar icon under the « MenuBar » tab. Just
 unselect the « Show icon in menu bar » option.
 
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" title="KeyRemap4MacBook-Remove-from-menu-bar" src="/media/2011/06/KeyRemap4MacBook-Remove-from-menu-bar.png" alt="" />
-</figure>
+![KeyRemap4MacBook-Remove-from-menu-bar](/media/2011/06/KeyRemap4MacBook-Remove-from-menu-bar.png)
 
 ## Switch <kbd>ctrl</kbd> and <kbd>fn</kbd> on the Macbook (Pro/Air) Keyboard
 
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" title="Macbook Pro Keyboard - Switch Ctrl and Fn - Remove keys" src="/media/2011/06/Macbook-Pro-Keyboard-Switch-Ctrl-and-Fn-Remove-keys.jpg" alt="" />
-</figure>
+![Macbook Pro Keyboard - Switch Ctrl and Fn - Remove keys](/media/2011/06/Macbook-Pro-Keyboard-Switch-Ctrl-and-Fn-Remove-keys.jpg)
 
 Now <kbd>ctrl</kbd> and <kbd>fn</kbd> are switched on your OS, you need to
 switch the real keys ! This part is quite easy, it just require some delicacy.
 Checkout the following video to see how to switch the keys on your Macbook
 Keyboard.
 
-<figure class="flex-media--16-9">
-<iframe class="flex-media__item" src="https://www.youtube.com/embed/kh88cn_rtLo" frameborder="0" allowfullscreen></iframe></figure>
+[youtube.com/embed/kh88cn_rtLo](https://www.youtube.com/embed/kh88cn_rtLo)
 
 Now you can use your <kbd>ctrl</kbd> as your <kbd>fn</kbd> and your
 <kbd>fn</kbd> as <kbd>ctrl</kbd> !

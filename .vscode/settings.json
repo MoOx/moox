@@ -1,11 +1,15 @@
 {
-  "javascript.validate.enable": false,
-  "typescript.format.enable": false,
-  "typescript.validate.enable": false,
-  "flow.useBundledFlow": false,
-  "eslint.enable": true,
-  "triggerTaskOnSave.tasks": {
-    "eslint-rescript": ["src/**/*.res"]
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true
   },
-  "triggerTaskOnSave.delay": 1000
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "always",
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.validate": ["javascript"],
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true
 }

@@ -6,7 +6,7 @@ tags:
   - css
 ---
 
-**Note: Depuis le temps où j'ai écrit cette article, je suis passé à autre
+⚠️ **Note: Depuis le temps où j'ai écrit cette article, je suis passé à autre
 chose, puisque les spécifications CSS en cours d'écriture prévoient beaucoup de
 customisation possible. Si vous souhaitez utiliser cela dès aujourd'hui, je vous
 renvois sur le projet que j'ai créé qui permet d'utiliser aujourd'hui la syntaxe
@@ -16,8 +16,6 @@ CSS de demain:**
 
 ---
 
-<figure class="flex-media--3-1"><a href="http://sass-lang.com/"><img class="flex-media__item" src="/media/2011/05/sass.jpg" alt="sass" /></a></figure>
-
 Comme je l’ai expliqué dans mon précédent article, aujourd’hui il est possible
 de passer la vitesse supérieure avec ses CSS, afin d’avoir à sa disposition
 [variables et fonctions CSS][1]. Voici donc un petit mémo concernant la solution
@@ -25,10 +23,6 @@ que j’ai choisi [Sass][2] avec la librairie Compass.
 
 Pour vous donner l’eau à la bouche, voici une petite vidéo que j’ai trouvé sur
 le site de Compass.
-
-<figure class="flex-media--4-3">
-  <iframe class="flex-media__item" src="https://player.vimeo.com/video/11671458" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></figure>
-[An introduction to Compass][3] from [Lorin Tackett][4] on [Vimeo][5].
 
 ## Pourquoi j’ai choisi **Sass**
 
@@ -121,11 +115,11 @@ Sass partiels][12].
 
 Exemple de structure de dossier/fichiers SCSS :
 
-```
+```console
 /partials/
-    _header.scss
-    _body.scss
-    _footer.scss
+  _header.scss
+  _body.scss
+  _footer.scss
 style.scss
 ```
 
@@ -143,16 +137,9 @@ style.scss contiendra des includes :
 La librairie Compass utilise se système à outrance ([la preuve sur le Github de
 Compass][13]) :) Pratique non?
 
-<del datetime="2011-05-13T06:32:42+00:00">Superbe</del> transition : je vous
-propose de passer à l’étape 2 avec Compass.
+Superbe transition : je vous propose de passer à l’étape 2 avec Compass.
 
 ## La librairie Compass
-
-{{/markdown}}
-
-  <figure class="flex-media--3-1">
-    <a href="http://compass-style.org/"><img class="flex-media__item" src="/media/2011/05/compass.jpg" alt="compass" /></a>
-  </figure>
 
 Maintenant que vous êtes équipé de la boite à outils CSS, il faut bien commencer
 à la remplir ! Pour ce faire je vous propose d’installer la super [librairie
@@ -186,7 +173,7 @@ Je vous laisse maintenant vous amuser avec ces nouveaux joujoux ! Profitez bien
 
 **Et si vous avez besoin de quelques fonctions Sass utilisant Compass, j’ai un
 petit repo Github [Compass-Recipes][17]. N’hésitez pas à y contribuer si vous
-vous sentez l’âme de Git-eur :) **
+vous sentez l’âme de Git-eur :)**
 
 _Je vous conseille vivement de parcourir les documentations respectives de Sass
 et Compass, non pas pour tout apprendre d’un coup, mais plutôt afin
@@ -194,15 +181,10 @@ d’entre-apercevoir l’étendu des possibilités !_
 
 Et maintenant, [je vous explique comment se passer des quelques lignes de
 commandes lorsque l’on utilise Compass souvent, grâce à une petit appli
-compatible Mac OS X, Linux (et même Windows) ;) ][18]
+compatible Mac OS X, Linux (et même Windows) ;)][18]
 
-[1]:
-  /blog/utiliser-des-variables-fonctions-css
-  "Utiliser des variables et fonctions CSS, c’est possible !"
+[1]: /blog/utiliser-des-variables-fonctions-css "Utiliser des variables et fonctions CSS, c’est possible !"
 [2]: http://sass-lang.com/
-[3]: http://vimeo.com/11671458
-[4]: http://vimeo.com/ltackett
-[5]: http://vimeo.com
 [6]: http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html
 [7]: http://lesscss.org/#docs
 [8]: http://compass-style.org/
@@ -210,8 +192,7 @@ compatible Mac OS X, Linux (et même Windows) ;) ][18]
 [10]: http://rubyinstaller.org/
 [11]: http://sass-lang.com/tutorial.html
 [12]: http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#partials
-[13]:
-  https://github.com/chriseppstein/compass/tree/stable/frameworks/compass/stylesheets
+[13]: https://github.com/chriseppstein/compass/tree/stable/frameworks/compass/stylesheets
 [14]: http://compass-style.org/reference/compass/css3/
 [15]: http://compass-style.org/reference/compass/utilities/sprites/
 [16]: http://compass-style.org/help/

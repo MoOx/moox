@@ -23,7 +23,7 @@ l’objet d’un autre billet) afin d’avoir un environnement proche de celui q
 j’ai en production.
 
 Du coup, nativement sur mon Mac OS, je n’ai besoin que d’un simple **serveur web
-Apache/PHP/MySQL **. Rien qui casse la baraque, juste de quoi faire tourner
+Apache/PHP/MySQL**. Rien qui casse la baraque, juste de quoi faire tourner
 quelques petits scripts (voir un WordPress) sans allumer une VM. Si vous
 cherchez une solution complète, ej vous invite à vous rendre sur mon lien
 ci-dessus.
@@ -34,14 +34,6 @@ Maintenant que _OS X Lion_ vient de sortir, les versions des logiciels qu’ils
 embarquent sont assez récente. **Apache 2** est juste à activer dans les
 préférences du système dans la partie qui concerne le _Partage_ (_Sharing_ si
 votre OS est en anglais)
-
-<figure class="flex-media--unknown">
-  <img src="/media/2011/07/OS-X-Lion-System-Preferences-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing" class="flex-media__item" />
-</figure>
-
-<figure class="flex-media--unknown">
-  <img src="/media/2011/07/OS-X-Lion-System-Preferences-Sharing-Web-Sharing.png" alt="" title="OS-X-Lion--System-Preferences--Sharing--Web-Sharing" class="flex-media__item" />
-</figure>
 
 Vous pouvez vérifier en cliquant sur un des liens que Apache fonctionne bien.
 Vous devriez voir une page avec « It works ! ».

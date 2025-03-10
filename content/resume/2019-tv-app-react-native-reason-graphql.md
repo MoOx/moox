@@ -25,11 +25,6 @@ hashtags:
   - Fastlane
 image: /resume/tvapp.jpg
 remote: true
-links:
-  - title: Loewe app iOS
-    url: https://apps.apple.com/fr/app/loewe-app/id1191442362
-  - title: Loewe app Android
-    url: https://play.google.com/store/apps/details?id=de.loewe.loeweapp
 ---
 
 Short mission to boost development of a TV/media remote app made with React

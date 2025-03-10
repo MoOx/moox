@@ -1,7 +1,7 @@
 ---
 company: "Aardvark Intelligence"
 url: "https://www.aardvarkintel.com"
-title: "Chatbot AI Interface"
+title: "AI Chatbot"
 description: >
   Generative AI solution for automating legal and financial data
 dateStart: 2024-04-03
@@ -15,9 +15,12 @@ hashtags:
   - React Native for Web
 #image: /resume/aarvark.jpg
 remote: true
+links:
+  - title: Aardvark
+    url: https://www.aardvarkintel.com
 ---
 
-Frontend development of user interfaces for an AI-driven solution specializing
+Front-end development of user interfaces for an AI-driven solution specializing
 in automating legal and financial data, enhancing data visualization to help
 businesses maximize revenue and streamline decision-making.
 
