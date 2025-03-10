@@ -1,0 +1,21 @@
+/* code highlight */
+.hljs-operator {
+  color: #a626a4;
+}
+.hljs-attr,
+.hljs-character,
+.hljs-keyword,
+.hljs-name,
+.hljs-params,
+.hljs-string {
+  color: #50a14f;
+}
+.hljs-module-identifier,
+.hljs-tag,
+.hljs-title {
+  color: #4078f2;
+}
+.hljs-built_in,
+.hljs-constructor {
+  color: #e45649;
+}

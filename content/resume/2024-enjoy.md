@@ -17,7 +17,7 @@ links:
     url: https://apps.apple.com/us/app/enjoy-restaurants-near-you/id6502472738
 ---
 
-Frontend development for a mobile app that helps you find food and drinks near
+Front-end development for a mobile app that helps you find food and drinks near
 you, the exact opposite of Uber Eats & friends. From MVP to production, I worked
 on the app's UI and UX, integrating new features and fixing bugs.
 

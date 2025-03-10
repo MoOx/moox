@@ -21,10 +21,6 @@ your VM name)</ins>
 So, in your « user folder » (~/), there will be a Library folder, hidden in OS X
 Lion, so to see it, open the Finder, in the « Go » menu, hold <kbd>⌥</kbd>.
 
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" title="Open Library folder with Finder" src="/media/2011/10/Open-Library-folder-wtih-Finder.png" alt="" />
-</figure>
-
 Inside that Library folder, there is a folder called VirtualBox, which contains
 a Machines folder. In each VM folder, open the `*.vbox` file using a
 text-editor. It’s a XML file.
@@ -43,10 +39,6 @@ It looks like:
 Exit Virtual Box, change this « true » to « false » and Save. Restart Virtual
 Box and (or open it if you had it closed) and the hardware virtualization
 extensions will be disabled.
-
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" title="Edit Virtualbox xml file" src="/media/2011/10/Edit-Virtualbox-xml-file.png" alt="" />
-</figure>
 
 Seems like a clear bug with VirtualBox, being that the setting is grayed out in
 the GUI but you can change it in the XML config file and that fixes the problem.

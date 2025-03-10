@@ -10,7 +10,7 @@ tags:
   - php
 ---
 
-**Note: Cette article est déprécié. Voyez plutôt le lien suivant si vous êtes
+⚠️ **Note: Cette article est déprécié. Voyez plutôt le lien suivant si vous êtes
 débutant, ou tournez-vous vers [Homebrew][6] si vous êtes plus averti(e).**
 
 _Pour une version plus simple à mettre en place,
@@ -26,14 +26,14 @@ disquette et upload par glisser déposer… Si si…
 Enfin bref. _Installer un serveur web local sur OS X_ basé sur
 **Apache/PHP/MySQL** peut se faire de plusieurs manières :
 
-* [Activer le serveur web installé par défaut sur
+- [Activer le serveur web installé par défaut sur
   Mac](/blog/configurer-serveur-web-apache-php-mysql-sur-os-lion,
-* Installer la solution [XAMPP][1] des amis d’apache,
-* Installer la solution [MAMP][2],
-* Installer la solution [Zend Server (Community Edition)][3],
-* Utiliser une solution à partir d’un gestionnaire de paquet tel que
+- Installer la solution [XAMPP][1] des amis d’apache,
+- Installer la solution [MAMP][2],
+- Installer la solution [Zend Server (Community Edition)][3],
+- Utiliser une solution à partir d’un gestionnaire de paquet tel que
   [MacPorts][4], [Fink][5] ou [Howbrew][6],
-* Se démerder avec du code source et tout compiler soit même !
+- Se démerder avec du code source et tout compiler soit même !
 
 ## Quelle solution choisir pour son serveur web sous Mac OS X ?
 
@@ -78,9 +78,7 @@ Apache/PHP sont déjà présents (bien que la version ne soit pas à jour et les
 extensions présentes ne se bousculent pas), il faut utiliser d’autres sources…
 Donc je me suis simplement orienté vers **MacPorts** :
 
-<blockquote lang="en">
-    The MacPorts Project is an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the <a href="//www.apple.com/osx/">Mac OS X</a> operating system. To that end we provide the command-line driven MacPorts software package under a <a href="//opensource.org/licenses/bsd-license.php">BSD License</a>, and through it easy access to thousands of ports that <a href="//guide.macports.org/#introduction">greatly simplify</a> the task of <a href="//guide.macports.org/#using">compiling and installing</a> open-source software on your Mac.
-</blockquote>
+> The MacPorts Project is an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the [Mac OS X](//www.apple.com/osx/) operating system. To that end we provide the command-line driven MacPorts software package under a [BSD License](//opensource.org/licenses/bsd-license.php), and through it easy access to thousands of ports that [greatly simplify](//guide.macports.org/#introduction) the task of [compiling and installing](//guide.macports.org/#using) open-source software on your Mac.
 
 Pour installer **MacPorts** rien de difficile : on se rend sur le site officiel
 du projet, on télécharge l’image disque puis on installe ça facilement
@@ -121,7 +119,7 @@ Ensuite on passe aux paquets de base, manière de ne pas avoir à installer un
 paquet toutes les 2h à chaque « *Fatal Error : Class not found* » :)
 
 _Note: N’ayez pas peur de copier les commentaires des les lignes de codes dans
-votre terminal, ça reste des commentaires, même pour un terminal ;) _
+votre terminal, ça reste des commentaires, même pour un terminal ;)_
 
 ```bash
 # usefull packages
@@ -168,7 +166,7 @@ DirectoryIndex index.html index.php
 
 On peut aussi ajouter la conf du module apache php (en fin de fichier ?)
 
-```
+```apache
 Include conf/extra/mod_php.conf
 ```
 
@@ -176,7 +174,7 @@ Ayant déjà vécu un paquet de reinstall système, j’ai l’habitude de mettr
 configs dans mes dossiers perso indépendamment du système, voilà donc ce que
 j’ai ajouté en à la fin du httpd.conf.
 
-```
+```apache
 Include /Users/YOUR-USERNAME/Dropbox/Servers/conf/development/*
 ```
 

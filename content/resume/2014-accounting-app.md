@@ -1,6 +1,6 @@
 ---
 company: ViaReport
-url: "https://www.viareport.com"
+url: "https://insightsoftware.com/viareport/"
 title: "Accounting app"
 role: "Front-end Developer"
 description: >
@@ -15,8 +15,8 @@ hashtags:
   - Legacy
 remote: true
 links:
-  - title: Statutory Consolidation app
-    url: https://www.viareport.com/en/statutory_consolidation/
+  - title: Viareport Consolidation
+    url: https://insightsoftware.com/viareport/viareport-conso-report/
 ---
 
 Development of a new front-end architecture for a complex UI to ease generation

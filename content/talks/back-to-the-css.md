@@ -8,7 +8,7 @@ video: https://www.youtube.com/watch?v=bUDcGfuHzJI
 videoEmbed: https://www.youtube.com/embed/bUDcGfuHzJI
 ---
 
-Maxime explains the need for CSS preprocessors in large frontend projects and
+Max explains the need for CSS preprocessors in large frontend projects and
 introduces cssnext, a project that allows us to use CSS specs not yet
 implemented in popular browsers.
 

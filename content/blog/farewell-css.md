@@ -23,7 +23,7 @@ strict methodologies and tooling. Not solution for the future.
 Many have already talked & written about the limits of CSS for apps and the most
 accurate reference to me is still one of the first (from 2014).
 
-http://blog.vjeux.com/2014/javascript/react-css-in-js-nationjs.html
+[blog.vjeux.com/2014/javascript/react-css-in-js-nationjs.html](http://blog.vjeux.com/2014/javascript/react-css-in-js-nationjs.html)
 
 To refresh your memory, here is the list of problems that you encounter when
 working with CSS on apps
@@ -115,7 +115,5 @@ brings me strong static typed validation. No more debugging for a stupid typo.
 I also look forward to
 [react-native-dom](https://github.com/vincentriemer/react-native-dom).
 
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" src="/media/yoga-in-webassembly.jpg" />
-  <figcaption><a href="https://x.com/MoOx/status/997119336400777217">x.com/MoOx/status/997119336400777217</a></figcaption>
-</figure>
+![yoga in webassembly](/media/yoga-in-webassembly.jpg)
+[x.com/MoOx/status/997119336400777217](https://x.com/MoOx/status/997119336400777217)

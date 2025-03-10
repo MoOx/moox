@@ -13,15 +13,7 @@ Here is the solution :
 
 Go into the `/Applications/Netbeans` folder, and open the Netbeans package.
 
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" src="/media/2011/10/open-netbeans-package.png" alt="" title="Open Netbeans.app package" />
-</figure>
-
 Then open `etc/netbeans.conf`
-
-<figure class="flex-media--unknown">
-  <img class="flex-media__item" src="/media/2011/10/open-netbeans-conf.png" alt="" title="Edit netbeans.conf" />
-</figure>
 
 You should see in the file :
 
