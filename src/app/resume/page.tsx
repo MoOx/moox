@@ -65,7 +65,7 @@ export default function PageResume() {
     <WebsiteWrapper>
       <Spacer size="m" />
       <Container
-        wrapperStyle={{ zIndex: 1, overflow: "visible" }}
+        wrapperStyle={{ zIndex: 1 }}
         maxWidth={900}
         style={{
           flexDirection: "row",

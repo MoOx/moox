@@ -149,6 +149,7 @@ export default function Home() {
       </View>
       <BlockPassionated resumeEntry={resumeEntry} />
       <Spacer size="xxxl" />
+      <Spacer size="m" />
       <BlockFrontendArchitect />
       <Spacer size="l" />
       <BlockCompaniesTried />

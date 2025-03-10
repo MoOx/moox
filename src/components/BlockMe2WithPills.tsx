@@ -48,7 +48,12 @@ export default function BlockMe1WithSmallPills() {
         </Me>
       </IfWindowWidthIs>
       <IfWindowWidthIs smallerThan={WindowWidth.s}>
-        <View style={[StyleSheet.absoluteFill, { pointerEvents: "none" }]}>
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            { pointerEvents: "none", overflow: "hidden" },
+          ]}
+        >
           <View
             style={{
               position: "absolute",

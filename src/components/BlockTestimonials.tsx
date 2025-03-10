@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { gradientStaticIndigoStyles, useTheme } from "@/app/styles";
+import { boxShadow, themeLight, useTheme } from "@/app/styles";
 import { socials } from "@/consts";
 import { size } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
+import { GradientRadial } from "@/react-multiversal/GradientRadial";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
+import Spacer from "@/react-multiversal/Spacer";
 import SVGQuote from "@/svgs/components/SVGQuote";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 
@@ -92,31 +94,41 @@ const testimonials1 = testimonials.slice(0, midpoint);
 const testimonials2 = testimonials.slice(midpoint);
 
 const TestimonialItem = ({ item }: { item: Testimonial }) => {
-  const theme = useTheme("light");
+  const theme = useTheme("dark");
   return (
     <SpacedView
       key={item.name}
       horizontal="m"
       vertical="m"
       gap="s"
-      style={[
-        theme.styles.back,
-        { borderRadius: size("s"), flexShrink: 1, flexBasis: 360 },
-      ]}
+      style={{
+        borderRadius: size("s"),
+        flexShrink: 1,
+        flexBasis: 360,
+        boxShadow: [boxShadow.moreVisible, boxShadow.forTransparent].join(","),
+      }}
     >
-      {/* <GradientLinear
+      <GradientLinear
         angle={-90}
         stops={[
-          { offset: 0, stopColor: "#F2F2F2", stopOpacity: "0.2" },
+          { offset: 0, stopColor: "#F2F2F2", stopOpacity: "0.1" },
           {
             offset: 100,
             stopColor: "#E1E1E1",
-            stopOpacity: "0.5",
+            stopOpacity: "0.35",
           },
         ]}
-        style={[StyleSheet.absoluteFill, { borderRadius: size("s") }]}
-      /> */}
-      <SVGQuote width={32} height={32} fill={theme.dynamicColors.text} />
+        style={[
+          StyleSheet.absoluteFill,
+          { borderRadius: size("s"), backdropFilter: "blur(4px)" },
+        ]}
+      />
+      <SVGQuote
+        width={32}
+        height={32}
+        fill={theme.dynamicColors.text}
+        style={{ zIndex: 1 }}
+      />
       <Text style={[fontStyles.ios.callout, theme.styles.text]}>
         {item.content}
       </Text>
@@ -158,44 +170,49 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
   );
 };
 
+const gradientStyles = [
+  StyleSheet.absoluteFill,
+  { transform: [{ skewY: "1deg" }, { scaleY: 1.025 }] },
+];
 export default function BlockTestimonials() {
   const theme = useTheme();
+
   return (
-    <View
-      style={
-        [
-          // theme.styles.backMain,
-          // {
-          //   backgroundImage: `radial-gradient(circle at 50% 50%, #352A9F 0%,rgb(25, 18, 87) 50%)`,
-          // },
-        ]
-      }
-    >
+    <View>
       <GradientLinear
-        stops={gradientStaticIndigoStyles}
-        angle={190}
-        style={[
-          StyleSheet.absoluteFill,
-          { transform: [{ skewY: "1deg" }, { scaleY: 1.025 }] },
+        style={gradientStyles}
+        stops={[
+          { offset: 0, stopColor: "#9623c0" },
+          { offset: 100, stopColor: themeLight.colors.textIndigoAlt2 },
         ]}
+        angle={160}
       />
-      {/* <Image
-        src={"/bg/priscilla-du-preez-XkKCui44iM0-unsplash.jpg"}
-        width={1024}
-        height={500}
-        alt=""
-        style={{
-          ...StyleSheet.absoluteFillObject,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          mixBlendMode: "luminosity",
-          opacity: 0.1,
-          filter: "blur(6px)",
-        }}
-      /> */}
-      <Container>
-        <SpacedView vertical="xxl" horizontal="xl" gap="xl">
+      <GradientRadial
+        style={gradientStyles}
+        stops={[
+          { offset: 0, stopColor: "#12e9ec", stopOpacity: "0.75" },
+          { offset: 100, stopColor: "#12e9ec", stopOpacity: "0" },
+        ]}
+        coordinates={{ cx: "10%", cy: "20%", fx: "5%", fy: "25%" }}
+      />
+      <GradientRadial
+        style={gradientStyles}
+        stops={[
+          { offset: 0, stopColor: "#9623c0", stopOpacity: "0.75" },
+          { offset: 100, stopColor: "#9623c0", stopOpacity: "0" },
+        ]}
+        coordinates={{ cx: "20%", cy: "100%", fx: "15%", fy: "80%", r: "40%" }}
+      />
+      <GradientRadial
+        style={gradientStyles}
+        stops={[
+          { offset: 0, stopColor: "#2816A8", stopOpacity: "0.6" },
+          { offset: 100, stopColor: "#2816A8", stopOpacity: "0" },
+        ]}
+        coordinates={{ cx: "50%", cy: "100%", fx: "60%", fy: "100%" }}
+      />
+      <Container wrapperStyle={{ zIndex: 1 }}>
+        <SpacedView vertical="xl" horizontal="xl" gap="xl">
           <SpacedView gap="s">
             <Text
               style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
@@ -242,8 +259,12 @@ export default function BlockTestimonials() {
             <LinkView
               href={`${socials.linkedin}/details/recommendations/`}
               style={[
-                theme.styles.backMain,
-                { borderRadius: size("xl"), maxWidth: "100%" },
+                {
+                  backgroundColor: "rgb(10, 102, 194)",
+                  borderRadius: size("xl"),
+                  maxWidth: "100%",
+                  boxShadow: boxShadow.default,
+                },
               ]}
             >
               <SpacedView
@@ -265,6 +286,7 @@ export default function BlockTestimonials() {
                 />
               </SpacedView>
             </LinkView>
+            <Spacer size="m" />
           </View>
         </SpacedView>
       </Container>
