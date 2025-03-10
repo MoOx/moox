@@ -13,9 +13,12 @@ import Svg, { Path } from "react-native-svg";
 
 import { boxShadow } from "@/app/styles";
 import { supportsHover } from "@/react-multiversal/supports";
+import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
 import { useFocus } from "@/react-multiversal/useFocus";
 
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
+
+type ColorScheme = "light" | "dark";
 
 export const defaultSvgPaths = {
   light:
@@ -84,8 +87,8 @@ type ColorSchemeToggleTheme = {
 };
 
 const useAnimatedIconStyle = (
-  iconValue: "light" | "dark" | "auto",
-  value: "light" | "auto" | "dark",
+  iconValue: UserColorScheme,
+  value: UserColorScheme,
   inactiveIconSize: number,
   iconSize: number,
   iconSpringOptions: WithSpringConfig
@@ -108,8 +111,8 @@ const useAnimatedIconStyle = (
   }, [iconValue, value, inactiveIconSize, iconSize, iconSpringOptions]);
 
 const useAnimatedColorProps = (
-  iconValue: "light" | "dark" | "auto",
-  value: "light" | "auto" | "dark",
+  iconValue: UserColorScheme,
+  value: UserColorScheme,
   actualColor: SharedValue<number>,
   activeTheme: ColorSchemeToggleTheme
 ) =>
@@ -157,10 +160,10 @@ export default function ColorSchemeToggle({
     mass: 0.25,
   },
 }: {
-  systemColorScheme: "light" | "dark";
-  value: "light" | "auto" | "dark";
-  actualValue: "light" | "dark";
-  onChange: (value: "light" | "auto" | "dark") => void;
+  systemColorScheme: ColorScheme;
+  value: UserColorScheme;
+  actualValue: ColorScheme;
+  onChange: (value: UserColorScheme) => void;
   theme?: ColorSchemeToggleTheme;
   focusedTheme?: ColorSchemeToggleTheme;
   toggleSize?: number;
@@ -304,14 +307,14 @@ export default function ColorSchemeToggle({
     iconSpringOptions
   );
   const animatedIconStyleDark = useAnimatedIconStyle(
-    "light",
+    "dark",
     value,
     inactiveIconSize,
     iconSize,
     iconSpringOptions
   );
   const animatedIconStyleAuto = useAnimatedIconStyle(
-    "light",
+    "auto",
     value,
     inactiveIconSize,
     iconSize,

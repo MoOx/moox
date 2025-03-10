@@ -23,30 +23,28 @@ export const transparentToBlack: StopData[] = [
 type GradientCoordinates = {
   cx?: number | string;
   cy?: number | string;
-  rx?: number | string;
-  ry?: number | string;
   fx?: number | string;
   fy?: number | string;
+  r?: number | string;
 };
 
 const idPrefix = "GradientRadial-";
 
 export function GradientRadial({
-  width,
-  height,
+  width = "100%",
+  height = "100%",
   stops = transparentToBlack,
   coordinates = {
     cx: "50%",
     cy: "50%",
-    rx: "50%",
-    ry: "50%",
-    fx: "50%",
-    fy: "50%",
+    r: "50%",
+    // fx: "50%",
+    // fy: "50%",
   },
   style,
 }: {
-  width: number | string;
-  height: number | string;
+  width?: number | string;
+  height?: number | string;
   stops?: StopData[];
   coordinates?: GradientCoordinates;
   style?: StyleProp<ViewStyle>;
@@ -61,15 +59,7 @@ export function GradientRadial({
   return (
     <Svg width={width} height={height} style={style}>
       <Defs>
-        <RadialGradient
-          id={id}
-          cx={coordinates.cx}
-          cy={coordinates.cy}
-          rx={coordinates.rx}
-          ry={coordinates.ry}
-          fx={coordinates.fx}
-          fy={coordinates.fy}
-        >
+        <RadialGradient id={id} {...coordinates}>
           {stops.map((stop) => (
             <Stop
               key={`${stop.offset}-${stop.stopColor}-${stop.stopOpacity}`}

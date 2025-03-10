@@ -6,7 +6,7 @@
     "node": "22.x"
   },
   "scripts": {
-    "prepare": "patch-package &&husky && npm run svg && npm run markdown",
+    "prepare": "patch-package && husky && npm run svg && npm run markdown",
     "dev": "next dev",
     "build": "npm run prepare && next build",
     "start": "next start",
@@ -17,7 +17,7 @@
     "svg:web": "react-from-svg svgs src/svgs/components --with-native-for-typescript",
     "svg": "npm run svg:clean && npm run svg:web",
     "markdown": "markdown-to-json \"content/**/*.md\"",
-    "test": "npm run lint && tsc --noEmit"
+    "test": "npm run lint && tsc --noEmit && npm run build"
   },
   "overrides": {
     "react-native": {
