@@ -5,6 +5,7 @@ import * as React from "react";
 import { Text, View } from "react-native";
 
 import { useTheme } from "@/app/styles";
+import BlockInterestedButtons from "@/components/BlockInterestedButtons";
 import ThemeToggle from "@/components/ThemeToggle";
 import WebsiteFooterLandscape from "@/components/WebsiteFooterLandscape";
 import {
@@ -28,7 +29,9 @@ export default function WebsiteFooter() {
 
   return (
     <>
-      <WebsiteFooterLandscape />
+      <WebsiteFooterLandscape>
+        <BlockInterestedButtons />
+      </WebsiteFooterLandscape>
       <View
         style={[theme.styles.backAlt, { alignItems: "center" }]}
         id={footerAnchor}

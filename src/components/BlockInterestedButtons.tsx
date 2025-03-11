@@ -8,7 +8,7 @@ import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 
 export default function BlockInterestedButtons() {
-  const theme = useTheme();
+  const theme = useTheme("dark");
 
   return (
     <Container>
@@ -24,7 +24,7 @@ export default function BlockInterestedButtons() {
           }}
           gap="l"
         >
-          <LinkButton href="/resume/" mode="outline">
+          <LinkButton href="/resume/" mode="outline" theme="dark">
             {(textStyles) => (
               <Text style={textStyles}>
                 <Text style={fontStyles.iosEm.title3}>{"Learn more"}</Text>

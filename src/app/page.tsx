@@ -12,7 +12,6 @@ import {
 import BlockCompaniesTried from "@/components/BlockCompaniesTried";
 import BlockCompaniesTrust from "@/components/BlockCompaniesTrust";
 import BlockFrontendArchitect from "@/components/BlockFrontendArchitect";
-import BlockInterestedButtons from "@/components/BlockInterestedButtons";
 import BlockMe1WithSmallPills from "@/components/BlockMe1WithSmallPills";
 import BlockPassionated from "@/components/BlockPassionated";
 import BlockTestimonials from "@/components/BlockTestimonials";
@@ -157,7 +156,6 @@ export default function Home() {
       <BlockTestimonials />
       <Spacer size="xl" />
       <BlockCompaniesTrust />
-      <BlockInterestedButtons />
     </WebsiteWrapper>
   );
 }
