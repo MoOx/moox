@@ -18,7 +18,7 @@ export type Testimonial = {
   avatar: string;
   name: string;
   title: string;
-  content: JSX.Element;
+  content: React.ReactNode;
 };
 export const testimonials: Testimonial[] = [
   {

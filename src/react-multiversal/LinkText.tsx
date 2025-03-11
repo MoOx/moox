@@ -15,7 +15,7 @@ import {
 import TextUnderlined from "@/react-multiversal/TextUnderlined";
 
 export type LinkTextProps = TextProps & {
-  ref?: React.MutableRefObject<Text | null>;
+  ref?: React.RefObject<Text | null>;
   activeStyle?: StyleProp<TextStyle>;
   children: React.ReactNode;
   href: string;
@@ -34,7 +34,6 @@ const isInternalLink = (href: string) =>
   href.startsWith("/") || href.startsWith("#");
 
 export default function LinkText({
-  ref,
   activeStyle,
   href,
   isActive = defaultIsActive,
@@ -46,9 +45,8 @@ export default function LinkText({
   const pathname = usePathname();
   const styles = [style, isActive(href, pathname!) ? activeStyle : undefined];
   return isInternalLink(href) ? (
-    <Link href={href} legacyBehavior>
+    <Link href={href} legacyBehavior={true} passHref={false}>
       <TextUnderlined
-        ref={ref}
         role={role}
         href={href}
         style={styles}
@@ -58,7 +56,6 @@ export default function LinkText({
     </Link>
   ) : (
     <TextUnderlined
-      ref={ref}
       href={href}
       role={role}
       style={styles}

@@ -17,7 +17,7 @@ export default function WebsiteFooterLandscape({
 }) {
   const theme = useTheme();
   const skySize = 400;
-  const parallaxOffset = 200;
+  const parallaxOffset = 100;
 
   return (
     <View style={{ flex: 1 }}>
@@ -40,37 +40,31 @@ export default function WebsiteFooterLandscape({
           <Parallax
             transforms={[{ translateY: parallaxOffset }]}
             springOptions={{ mass: 0.25 }}
-          >
-            <View
-              style={{
-                ...StyleSheet.absoluteFillObject,
-                top: -parallaxOffset,
-                height: skySize + parallaxOffset,
-                backgroundImage: `radial-gradient(farthest-side at 50% 100%, ${
-                  theme.dynamicColors.gradientLandscape1
-                } 0%, ${theme.dynamicColors.gradientLandscape2} 50%, ${
-                  theme.dynamicColors.gradientLandscape3
-                } 100%)`,
-              }}
-            />
-          </Parallax>
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              // top: -parallaxOffset,
+              height: skySize,
+              backgroundImage: `radial-gradient(farthest-side at 50% 100%, ${
+                theme.dynamicColors.gradientLandscape1
+              } 0%, ${theme.dynamicColors.gradientLandscape2} 50%, ${
+                theme.dynamicColors.gradientLandscape3
+              } 100%)`,
+            }}
+          />
           <Parallax
-            transforms={[{ translateY: parallaxOffset * 1.25 }]}
+            transforms={[{ translateY: parallaxOffset * 1.1 }]}
             springOptions={{ mass: 0.25 }}
-          >
-            <View
-              style={{
-                ...StyleSheet.absoluteFillObject,
-                top: -parallaxOffset,
-                height: skySize + parallaxOffset,
-                backgroundImage: `linear-gradient(to bottom, ${
-                  theme.dynamicColors.gradientLandscape3
-                } 50%, ${theme.dynamicColors.gradientLandscape2} 75%, ${
-                  theme.dynamicColors.gradientLandscape1
-                } 100%)`,
-              }}
-            />
-          </Parallax>
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              // top: -parallaxOffset,
+              height: skySize,
+              backgroundImage: `linear-gradient(to bottom, ${
+                theme.dynamicColors.gradientLandscape3
+              } 50%, ${theme.dynamicColors.gradientLandscape2} 75%, ${
+                theme.dynamicColors.gradientLandscape1
+              } 100%)`,
+            }}
+          />
         </View>
         {/* Sun */}
         <Parallax
@@ -114,8 +108,8 @@ export default function WebsiteFooterLandscape({
           <Image
             src="/_/landscape-mountains.svg"
             alt=""
-            width={623 * 0.85}
-            height={180 * 0.85}
+            width={Math.round(622 * 0.85)}
+            height={Math.round(180 * 0.85)}
           />
         </View>
         {/* Tree */}
@@ -141,9 +135,13 @@ export default function WebsiteFooterLandscape({
         <Image
           src="/_/paintbrush-fast-turquoise.svg"
           alt=""
-          width={409 / 2}
-          height={96 / 2}
-          style={{ position: "absolute", top: 80, left: -20 }}
+          width={Math.round(409 / 2)}
+          height={Math.round(96 / 2)}
+          style={{
+            position: "absolute",
+            top: 80,
+            left: -20,
+          }}
         />
         <SVGFlashyTriangle3
           style={{ position: "absolute", top: 10, left: 0 }}

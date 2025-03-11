@@ -15,24 +15,8 @@ const nextConfig: NextConfig = {
   env: {
     ENV: process.env.NODE_ENV,
   },
-  /*
   experimental: {
     turbo: {
-      rules: {
-        "*.(js|jsx|ts|tsx)": {
-          loaders: [
-            // react-native packages requires often global __DEV__ constant
-            {
-              loader: "string-replace-loader",
-              options: {
-                search: "__DEV__",
-                replace:
-                  process.env.NODE_ENV !== "production" ? "true" : "false",
-              },
-            },
-          ],
-        },
-      },
       resolveAlias: {
         "react-native": "react-native-web",
       },
@@ -50,7 +34,6 @@ const nextConfig: NextConfig = {
       ],
     },
   },
-  */
   webpack: (config, { webpack }) => {
     // react-native packages requires often global __DEV__ constant
     config.plugins.push(

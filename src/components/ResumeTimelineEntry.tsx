@@ -89,6 +89,7 @@ export const ResumeTimelineEntry = ({
             }}
             width={2160}
             height={3840}
+            priority={true}
             alt={""}
           />
         </View>

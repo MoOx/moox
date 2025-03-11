@@ -19,6 +19,7 @@ import {
 import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
+import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
@@ -30,6 +31,9 @@ export default function WebsiteFooter() {
   return (
     <>
       <WebsiteFooterLandscape>
+        <IfWindowWidthIs smallerThan="m">
+          <Spacer size="xxxl" />
+        </IfWindowWidthIs>
         <BlockInterestedButtons />
       </WebsiteFooterLandscape>
       <View
