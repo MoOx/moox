@@ -7,11 +7,17 @@ import { StyleSheet, View } from "react-native";
 import { useTheme } from "@/app/styles";
 import Avatar from "@/react-multiversal/Avatar";
 import GradientLinear from "@/react-multiversal/GradientLinear";
+import Parallax from "@/react-multiversal/Parallax";
 import SVGFlashyTriangle3 from "@/svgs/components/SVGFlashyTriangle3";
 
-export default function WebsiteFooterLandscape() {
+export default function WebsiteFooterLandscape({
+  children,
+}: {
+  children?: React.ReactNode;
+}) {
   const theme = useTheme();
   const skySize = 400;
+  const parallaxOffset = 200;
 
   return (
     <View style={{ flex: 1 }}>
@@ -30,18 +36,46 @@ export default function WebsiteFooterLandscape() {
           }}
         />
         {/* Sky Gradient */}
-        <View
-          style={{
-            height: skySize,
-            backgroundImage: `radial-gradient(ellipse at 50% 100%, ${
-              theme.dynamicColors.gradientLandscape1
-            } 0%, ${theme.dynamicColors.gradientLandscape2} 50%, ${
-              theme.dynamicColors.gradientLandscape3
-            } 100%)`,
-          }}
-        />
+        <View style={{ height: skySize }}>
+          <Parallax
+            transforms={[{ translateY: parallaxOffset }]}
+            springOptions={{ mass: 0.25 }}
+          >
+            <View
+              style={{
+                ...StyleSheet.absoluteFillObject,
+                top: -parallaxOffset,
+                height: skySize + parallaxOffset,
+                backgroundImage: `radial-gradient(farthest-side at 50% 100%, ${
+                  theme.dynamicColors.gradientLandscape1
+                } 0%, ${theme.dynamicColors.gradientLandscape2} 50%, ${
+                  theme.dynamicColors.gradientLandscape3
+                } 100%)`,
+              }}
+            />
+          </Parallax>
+          <Parallax
+            transforms={[{ translateY: parallaxOffset * 1.25 }]}
+            springOptions={{ mass: 0.25 }}
+          >
+            <View
+              style={{
+                ...StyleSheet.absoluteFillObject,
+                top: -parallaxOffset,
+                height: skySize + parallaxOffset,
+                backgroundImage: `linear-gradient(to bottom, ${
+                  theme.dynamicColors.gradientLandscape3
+                } 50%, ${theme.dynamicColors.gradientLandscape2} 75%, ${
+                  theme.dynamicColors.gradientLandscape1
+                } 100%)`,
+              }}
+            />
+          </Parallax>
+        </View>
         {/* Sun */}
-        <View
+        <Parallax
+          transforms={[{ translateY: 60 }, { scale: -0.3 }]}
+          springOptions={{ mass: 0.25 }}
           style={{
             position: "absolute",
             top: 60,
@@ -49,15 +83,15 @@ export default function WebsiteFooterLandscape() {
             right: 0,
             alignItems: "center",
             justifyContent: "flex-end",
-            height: skySize + 120,
+            height: skySize + 40,
           }}
         >
-          <Image src="/_/landscape-sun.svg" alt="" width={500} height={500} />
-        </View>
+          <Image src="/_/landscape-sun.svg" alt="" width={400} height={400} />
+        </Parallax>
         {/* Floor */}
         <View
           style={{
-            height: 140,
+            height: 120,
             backgroundColor: "#01093C",
             backgroundImage: "url(/_/landscape-floor.png)",
             backgroundRepeat: "no-repeat",
@@ -74,14 +108,14 @@ export default function WebsiteFooterLandscape() {
             right: 0,
             justifyContent: "flex-end",
             alignItems: "center",
-            height: skySize + 40,
+            height: skySize + 30,
           }}
         >
           <Image
             src="/_/landscape-mountains.svg"
             alt=""
-            width={623}
-            height={180}
+            width={623 * 0.85}
+            height={180 * 0.85}
           />
         </View>
         {/* Tree */}
@@ -127,6 +161,7 @@ export default function WebsiteFooterLandscape() {
           <Avatar size={88} />
         </View>
       </View>
+      <View style={[StyleSheet.absoluteFill]}>{children}</View>
     </View>
   );
 }

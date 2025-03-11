@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="609px" height="556px" viewBox="0 0 609 556" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>assets/SVGs/landscape-sun</title>
+<svg width="621px" height="542px" viewBox="0 0 621 542" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>public/_/landscape-sun</title>
     <defs>
-        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="89.560647%" gradientTransform="translate(0.500000,0.000000),scale(0.847412,1.000000),rotate(90.000000),translate(-0.500000,-0.000000)" id="radialGradient-1">
+        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="89.560647%" gradientTransform="translate(0.5, 0), scale(0.7956, 1), rotate(90), scale(1, 1.3774), translate(-0.5, -0)" id="radialGradient-1">
             <stop stop-color="#FFFDF3" offset="0%"></stop>
             <stop stop-color="#FFEB86" offset="15.7681639%"></stop>
             <stop stop-color="#F89289" offset="70.2710795%"></stop>
             <stop stop-color="#F15B7C" offset="100%"></stop>
         </radialGradient>
-        <path d="M1126.11733,3751.78923 C1132.52304,3770.44313 1136,3790.45572 1136,3811.27942 C1136,3860.94252 1116.22337,3905.9921 1084.10692,3939.00029 L820.893079,3939.00029 C788.776626,3905.9921 769,3860.94252 769,3811.27942 C769,3790.45572 772.476963,3770.44313 778.882666,3751.78923 Z M1111.53836,3719.79077 C1115.96872,3727.45718 1119.85938,3735.47387 1123.15847,3743.78905 L781.84153,3743.78905 C785.140625,3735.47387 789.031279,3727.45718 793.461637,3719.79077 Z M1089.8971,3689.79071 C1094.94842,3695.48551 1099.65029,3701.49662 1103.96915,3707.79053 L801.030849,3707.79053 C805.349711,3701.49662 810.051581,3695.48551 815.102903,3689.79071 Z M1058.69351,3661.79111 C1063.95605,3665.52728 1069.01282,3669.53372 1073.84353,3673.79018 L831.156475,3673.79018 C835.98718,3669.53372 841.043951,3665.52728 846.306495,3661.79111 Z M952.5,3628 C977.268612,3628 1000.89106,3632.90141 1022.44812,3641.7861 L882.551878,3641.7861 C904.108939,3632.90141 927.731388,3628 952.5,3628 Z" id="path-2"></path>
-        <filter x="-51.1%" y="-60.3%" width="202.2%" height="220.6%" filterUnits="objectBoundingBox" id="filter-3">
+        <path d="M1118.81803,3906.00337 C1115.56737,3911.52833 1112.03507,3916.86809 1108.24085,3922.00298 L812.759153,3922.00298 C808.964928,3916.86809 805.432633,3911.52833 802.181968,3906.00337 Z M1138.98802,3856.00258 C1137.52392,3862.12705 1135.75204,3868.13218 1133.68961,3874.00077 L787.310387,3874.00077 C785.247957,3868.13218 783.476075,3862.12705 782.011978,3856.00258 Z M1143.989,3812 L1144,3813.27942 C1144,3819.60016 1143.67965,3825.84618 1143.05429,3832.00215 L777.945711,3832.00215 C777.320348,3825.84618 777,3819.60016 777,3813.27942 C777,3812.85228 777.001463,3812.42549 777.004384,3811.99905 L1143.989,3812 Z M1139.77572,3773.99872 C1141.34658,3781.18387 1142.49546,3788.52658 1143.19513,3795.99963 L777.804874,3795.99963 C778.504539,3788.52658 779.653423,3781.18387 781.224283,3773.99872 Z M1127.85551,3737.99766 C1131.90778,3746.97042 1135.25796,3756.32752 1137.83612,3765.99909 L783.163879,3765.99909 C785.742036,3756.32752 789.092219,3746.97042 793.144491,3737.99766 Z M960.5,3630 C1033.41233,3630 1096.39247,3672.47362 1125.99165,3734.00027 L795.008346,3734.00027 C824.607525,3672.47362 887.58767,3630 960.5,3630 Z" id="path-2"></path>
+        <filter x="-51.5%" y="-64.2%" width="203.1%" height="228.4%" filterUnits="objectBoundingBox" id="filter-3">
             <feMorphology radius="12.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
             <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
             <feGaussianBlur stdDeviation="50" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
@@ -17,7 +17,7 @@
         </filter>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="assets/SVGs/landscape-sun" transform="translate(-648.000000, -3507.000000)">
+        <g id="public/_/landscape-sun" transform="translate(-650, -3505)">
             <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
             <use fill="url(#radialGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
         </g>
