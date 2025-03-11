@@ -7,7 +7,7 @@
   },
   "scripts": {
     "prepare": "patch-package && husky && npm run svg && npm run markdown",
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "npm run prepare && next build",
     "start": "next start",
     "lint": "next lint",
@@ -32,7 +32,9 @@
     },
     "react-native-safe-area-context": {
       "react": "19.0.0"
-    }
+    },
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.0",
@@ -41,7 +43,7 @@
     "@types/tinycolor2": "^1.4.6",
     "@vercel/speed-insights": "^1.1.0",
     "date-fns": "^4.1.0",
-    "next": "15.1.2",
+    "next": "15.2.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native-gesture-handler": "^2.21.2",
@@ -49,6 +51,7 @@
     "react-native-safe-area-context": "^4.14.0",
     "react-native-svg": "^15.10.1",
     "react-native-web": "^0.19.13",
+    "react-native-worklets": "^0.1.0",
     "tinycolor2": "^1.6.0",
     "ts-pattern": "^5.5.0"
   },
@@ -57,10 +60,10 @@
     "@tsconfig/react-native": "^3.0.5",
     "@types/jest": "^29.5.14",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
     "eslint": "^8",
-    "eslint-config-next": "15.1.2",
+    "eslint-config-next": "15.2.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-unused-imports": "^4.1.4",

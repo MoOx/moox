@@ -1,3 +1,4 @@
+import "@/__DEV__";
 import "@/app/styles.css";
 import "@/react-multiversal/react-native/Next.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";

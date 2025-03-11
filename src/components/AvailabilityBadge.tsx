@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { StyleProp, Text, View, ViewStyle } from "react-native";
 import Animated, { CSSAnimationKeyframes } from "react-native-reanimated";
@@ -5,7 +7,6 @@ import type { AnimatedStyle } from "react-native-reanimated";
 
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
-import LinkView from "@/react-multiversal/LinkView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useFocus } from "@/react-multiversal/useFocus";
 
@@ -33,52 +34,52 @@ const pulseAnimationStyle: AnimatedStyle<any> = {
 
 export default function AvailabilityBadge({
   style,
-  showTextOnFocus = false,
+  showText = false,
 }: {
   style?: StyleProp<ViewStyle>;
-  showTextOnFocus?: boolean;
+  showText?: boolean | "on-focus";
 }) {
-  const ref = React.useRef<Text>(null);
+  const ref = React.useRef<View>(null);
   const [hasAnyFocus] = useFocus(ref);
 
   return (
-    <LinkView ref={ref} href="/contact">
-      <Animated.View
-        style={[
-          {
-            flexDirection: "row",
-            alignItems: "center",
-            borderRadius: 16,
-            backgroundColor: "rgba(40, 199, 128, 0.15)",
-            paddingHorizontal: size("xs"),
-            paddingVertical: size("xs"),
-          },
-          pulseAnimationStyle,
-          style,
-        ]}
-      >
-        <View
-          style={{
-            width: 8,
-            height: 8,
-            borderRadius: 8,
-            backgroundColor: "#28c780",
-          }}
-        />
+    <Animated.View
+      ref={ref}
+      style={[
+        {
+          flexDirection: "row",
+          alignItems: "center",
+          borderRadius: 16,
+          backgroundColor: "rgba(40, 199, 128, 0.15)",
+          paddingHorizontal: size("xs"),
+          paddingVertical: size("xs"),
+        },
+        pulseAnimationStyle,
+        style,
+      ]}
+    >
+      <View
+        style={{
+          width: 8,
+          height: 8,
+          borderRadius: 8,
+          backgroundColor: "#28c780",
+        }}
+      />
+      {!showText ? null : (
         <Animated.View
           style={[
             { flexDirection: "row" },
-            showTextOnFocus &&
-              ({
-                opacity: hasAnyFocus ? 1 : 0,
-                transform: [{ translateX: hasAnyFocus ? 0 : -20 }],
-                width: hasAnyFocus ? "auto" : 0,
-                height: hasAnyFocus ? "auto" : 0,
-                overflow: "hidden",
-                transitionProperty: ["opacity", "transform", "width", "height"],
-                transitionDuration: 300,
-                transitionTimingFunction: "ease-in-out",
-              } as AnimatedStyle<any>),
+            {
+              opacity: hasAnyFocus ? 1 : 0,
+              transform: [{ translateX: hasAnyFocus ? 0 : -20 }],
+              width: hasAnyFocus ? "auto" : 0,
+              height: hasAnyFocus ? "auto" : 0,
+              overflow: "hidden",
+              // transitionProperty: ["opacity", "transform", "width", "height"],
+              transitionDuration: "300ms",
+              transitionTimingFunction: "ease-in-out",
+            },
           ]}
         >
           <Spacer size="xxs" />
@@ -95,7 +96,7 @@ export default function AvailabilityBadge({
             {"Available for Work"}
           </Text>
         </Animated.View>
-      </Animated.View>
-    </LinkView>
+      )}
+    </Animated.View>
   );
 }

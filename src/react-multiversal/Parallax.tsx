@@ -3,6 +3,7 @@ import {
   MatrixTransform,
   MaximumOneOf,
   PerspectiveTransform,
+  Platform,
   RotateTransform,
   RotateXTransform,
   RotateYTransform,
@@ -208,33 +209,59 @@ export default function Parallax({
   style?: StyleProp<ViewStyle>;
   staticTransforms?: TransformStyle[];
   transforms?: ParallaxTransform[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
   disabled?: boolean;
   debug?: boolean;
   springOptions?: SpringConfig;
 }) {
-  const scrollY = useScrollWindowOffset(springOptions);
+  const [scrollOffsetAnimValue, getOffset] =
+    useScrollWindowOffset(springOptions);
   const targetRef = React.useRef<View>(null);
   const windowDimensions = useWindowDimensions();
   const [layoutInWindow, setLayoutInWindow] =
     React.useState<ElementLayout | null>(null);
+  const observerRef = React.useRef<IntersectionObserver | null>(null);
 
   const updateLayout = React.useCallback(() => {
-    targetRef.current?.measureInWindow((x, y, width, height) => {
-      if (x === 0 && y === 0 && width === 0 && height === 0) {
-        return;
-      }
-      setLayoutInWindow({
-        x,
-        y: y + scrollY.get(),
-        width,
-        height,
+    return requestAnimationFrame(() => {
+      targetRef.current?.measureInWindow((x, y, width, height) => {
+        if (x === 0 && y === 0 && width === 0 && height === 0) {
+          return;
+        }
+        setLayoutInWindow({
+          x,
+          y: y + getOffset(),
+          width,
+          height,
+        });
       });
     });
-  }, [scrollY]);
+  }, [getOffset]);
 
-  React.useLayoutEffect(() => {
-    updateLayout();
+  React.useEffect(() => {
+    if (Platform.OS === "web") {
+      const animationFrames: number[] = [];
+      const targetElement = targetRef.current as unknown as HTMLElement;
+      if (targetElement && window.IntersectionObserver) {
+        observerRef.current = new IntersectionObserver((entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            animationFrames.push(updateLayout());
+          }
+        });
+        observerRef.current.observe(targetElement);
+      }
+
+      return () => {
+        observerRef.current?.disconnect();
+        animationFrames.forEach((af) => cancelAnimationFrame(af));
+      };
+    } else {
+      const animationFrame = updateLayout();
+      return () => {
+        observerRef.current?.disconnect();
+        cancelAnimationFrame(animationFrame);
+      };
+    }
   }, [updateLayout, windowDimensions]);
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -247,7 +274,7 @@ export default function Parallax({
       if (ratio === 0) ratio = 0.001; // Avoid division by zero
 
       return interpolate(
-        scrollY.get(),
+        scrollOffsetAnimValue.get(),
         inputRange,
         [-value / ratio, 0, value / ratio],
         { extrapolateRight: "clamp", extrapolateLeft: "clamp" }
@@ -262,7 +289,13 @@ export default function Parallax({
         ),
       ],
     };
-  }, [scrollY, layoutInWindow, windowDimensions, staticTransforms, transforms]);
+  }, [
+    scrollOffsetAnimValue,
+    layoutInWindow,
+    windowDimensions,
+    staticTransforms,
+    transforms,
+  ]);
 
   return (
     <>

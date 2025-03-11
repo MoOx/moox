@@ -117,7 +117,9 @@ export default function WebsiteHeader() {
                 </svg>
               </View>
             </LinkView>
-            <AvailabilityBadge showTextOnFocus={true} />
+            <LinkView href="/contact">
+              <AvailabilityBadge showText={"on-focus"} />
+            </LinkView>
           </View>
           <IfWindowWidthIs
             smallerThan={WindowWidth.xxs}

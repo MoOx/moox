@@ -14,27 +14,41 @@ const isClient = typeof window !== "undefined";
 //     : useScrollWindowOffset();
 // };
 
+const getWindowOffset = isClient ? () => window.scrollY : () => 0;
+
 export const useScrollWindowOffset = (
   sprintOptions?: SpringConfig,
-  getDocumentOffset = isClient ? () => window.scrollY : () => 0
+  getOffset = getWindowOffset
 ) => {
   const requested = React.useRef(false);
 
-  const scrollOffset = useSharedValue(getDocumentOffset());
+  const scrollOffset = useSharedValue(getOffset());
 
   React.useEffect(() => {
     const listener = () => {
       if (!requested.current) {
         requested.current = true;
         requestAnimationFrame(() => {
-          scrollOffset.set(withSpring(getDocumentOffset(), sprintOptions));
+          scrollOffset.set(withSpring(getOffset(), sprintOptions));
           requested.current = false;
         });
       }
     };
-    window.addEventListener("scroll", listener);
-    return () => window.removeEventListener("scroll", listener);
-  }, [scrollOffset, getDocumentOffset, sprintOptions]);
+    const opts = {
+      capture: true,
+      passive: true,
+    };
+    window.addEventListener("scroll", listener, opts);
+    return () => {
+      window.removeEventListener("scroll", listener, opts);
+      // ensure the scroll offset is set to the current scroll position
+      // (if the shared value get reused, the current value will remain
+      // and this can lead to unexpected behavior
+      // (eg: next/link click don't trigger the scroll event,
+      // so value is not up to date with actual scroll position))
+      scrollOffset.set(getOffset());
+    };
+  }, [scrollOffset, getOffset, sprintOptions]);
 
-  return scrollOffset;
+  return [scrollOffset, getOffset] as const;
 };

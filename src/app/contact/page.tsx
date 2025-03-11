@@ -95,7 +95,9 @@ export default function PageContact() {
                 {"Contact Max"}
               </Text>
             </View>
-            <AvailabilityBadge />
+            <LinkView href="/contact">
+              <AvailabilityBadge />
+            </LinkView>
           </SpacedView>
           <Spacer size="xxxl" />
           <SpacedView

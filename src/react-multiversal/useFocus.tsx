@@ -11,7 +11,7 @@ const FOCUS = "focus";
 const BLUR = "blur";
 
 export function useFocus<T>(
-  ref?: React.MutableRefObject<T | null>,
+  ref?: React.RefObject<T | null>,
   {
     onHover,
     onLeave,
@@ -46,15 +46,16 @@ export function useFocus<T>(
   React.useEffect(() => {
     const n = ref?.current as HTMLElement;
     if (n?.nodeType === Node.ELEMENT_NODE) {
-      n.addEventListener(POINTERENTER, handleHoverOn);
-      n.addEventListener(POINTERLEAVE, handleHoverOff);
-      n.addEventListener(FOCUS, handleFocusOn);
-      n.addEventListener(BLUR, handleFocusOff);
+      const opts = { passive: true, capture: true };
+      n.addEventListener(POINTERENTER, handleHoverOn, opts);
+      n.addEventListener(POINTERLEAVE, handleHoverOff, opts);
+      n.addEventListener(FOCUS, handleFocusOn, opts);
+      n.addEventListener(BLUR, handleFocusOff, opts);
       return () => {
-        n.removeEventListener(POINTERENTER, handleHoverOn);
-        n.removeEventListener(POINTERLEAVE, handleHoverOff);
-        n.removeEventListener(FOCUS, handleFocusOn);
-        n.removeEventListener(BLUR, handleFocusOff);
+        n.removeEventListener(POINTERENTER, handleHoverOn, opts);
+        n.removeEventListener(POINTERLEAVE, handleHoverOff, opts);
+        n.removeEventListener(FOCUS, handleFocusOn, opts);
+        n.removeEventListener(BLUR, handleFocusOff, opts);
       };
     }
   }, [ref, handleHoverOn, handleHoverOff, handleFocusOn, handleFocusOff]);

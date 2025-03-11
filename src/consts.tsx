@@ -46,8 +46,8 @@ export const socials = {
 type LinkWithIcon = {
   href: string;
   alt?: string;
-  icon: React.FC<LinksIconProps>;
-  isActive?: (currentLink: string, link: string) => boolean;
+  icon: (props: LinksIconProps) => React.ReactNode;
+  isActive?: (currentLink: string | null, link: string) => boolean;
 };
 type LinksWithIcon = {
   [key: string]: LinkWithIcon;
@@ -72,7 +72,8 @@ export const internalLinks: LinksWithIcon = {
       ) : (
         <SVGMenuHome style={style} width={size} height={size} fill={color} />
       ),
-    isActive: (currentLink: string, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
   Resume: {
     href: "/resume",
@@ -87,7 +88,8 @@ export const internalLinks: LinksWithIcon = {
       ) : (
         <SVGMenuResume style={style} width={size} height={size} fill={color} />
       ),
-    isActive: (currentLink: string, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
   Contact: {
     href: "/contact",
@@ -102,7 +104,8 @@ export const internalLinks: LinksWithIcon = {
       ) : (
         <SVGMenuContact style={style} width={size} height={size} fill={color} />
       ),
-    isActive: (currentLink: string, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
   More: {
     href: "#" + footerAnchor,
@@ -114,7 +117,8 @@ export const internalLinks: LinksWithIcon = {
         fill={color}
       />
     ),
-    isActive: (currentLink: string, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
 };
 

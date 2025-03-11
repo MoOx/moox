@@ -30,7 +30,7 @@ export default function InPlaceOrPortal({
   const ref = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     if (isInPlace && document) {
-      const handleClickOutside = (event: MouseEvent) => {
+      const listener = (event: MouseEvent) => {
         if (
           ref.current &&
           !ref.current.contains(event.target as Node) &&
@@ -41,9 +41,13 @@ export default function InPlaceOrPortal({
       };
       const appRoot = document.documentElement;
       if (appRoot) {
-        appRoot.addEventListener("click", handleClickOutside, true);
+        const opts = {
+          capture: true,
+          passive: true,
+        };
+        appRoot.addEventListener("click", listener, opts);
         return () => {
-          appRoot.removeEventListener("click", handleClickOutside, true);
+          appRoot.removeEventListener("click", listener, opts);
         };
       }
     }
