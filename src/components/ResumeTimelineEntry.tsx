@@ -67,7 +67,7 @@ export const ResumeTimelineEntry = ({
   return (
     <View
       style={[
-        theme.styles.back,
+        theme.styles.backOnAlt,
         {
           borderRadius: 10,
           flexShrink: 1,
