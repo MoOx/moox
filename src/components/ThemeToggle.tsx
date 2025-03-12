@@ -92,10 +92,10 @@ export default function ThemeToggle({
   );
 
   const [detailsVisible, setDetailsVisible] = React.useState(false);
-  const handleHover = React.useCallback(() => {
+  const handleFocus = React.useCallback(() => {
     setDetailsVisible(true);
   }, [setDetailsVisible]);
-  const handleLeave = React.useCallback(() => {
+  const handleBlur = React.useCallback(() => {
     setDetailsVisible(false);
   }, [setDetailsVisible]);
 
@@ -113,10 +113,10 @@ export default function ThemeToggle({
           mode === "light" ? toggleThemes.theme : toggleThemes.focusedTheme
         }
         focusedTheme={toggleThemes.focusedTheme}
-        onHover={handleHover}
-        onLeave={handleLeave}
-        onFocus={handleHover}
-        onBlur={handleLeave}
+        onPointerFocus={handleFocus}
+        onPointerLeave={handleBlur}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
       {showLabels ? (
         <IfWindowWidthIs largerThan={showLabels}>
@@ -151,7 +151,7 @@ export default function ThemeToggle({
       {!detailsVisible ? null : !showPreview ? null : (
         <InPlaceOrPortal
           id="theme-details"
-          onExit={handleLeave}
+          onExit={handleBlur}
           inPlaceStyle={[
             theme.styles.backAlt,
             {

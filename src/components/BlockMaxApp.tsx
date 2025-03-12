@@ -142,7 +142,7 @@ export default function BlockMaxApp({
               </Text>
             </View>
             <LinkView href="/contact">
-              <AvailabilityBadge />
+              <AvailabilityBadge showText={true} />
             </LinkView>
           </SpacedView>
           <Spacer size="m" />

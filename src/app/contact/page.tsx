@@ -96,7 +96,7 @@ export default function PageContact() {
               </Text>
             </View>
             <LinkView href="/contact">
-              <AvailabilityBadge />
+              <AvailabilityBadge showText={true} />
             </LinkView>
           </SpacedView>
           <Spacer size="xxxl" />
