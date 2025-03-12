@@ -150,8 +150,8 @@ export default function ColorSchemeToggle({
   inactiveIconSize = 18,
   svgViewBox = "0 0 28 28",
   svgPaths = defaultSvgPaths,
-  onHover,
-  onLeave,
+  onPointerFocus,
+  onPointerLeave,
   onFocus,
   onBlur,
   iconSpringOptions = {
@@ -178,16 +178,16 @@ export default function ColorSchemeToggle({
     dark: string;
     auto: string;
   };
-  onHover?: () => void;
-  onLeave?: () => void;
+  onPointerFocus?: () => void;
+  onPointerLeave?: () => void;
   onFocus?: () => void;
   onBlur?: () => void;
   iconSpringOptions?: WithSpringConfig;
 }) {
   const ref = React.useRef(null);
   const [hasAnyFocus] = useFocus(ref, {
-    onHover,
-    onLeave,
+    onPointerFocus,
+    onPointerLeave,
     onFocus,
     onBlur,
   });

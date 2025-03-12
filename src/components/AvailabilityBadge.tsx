@@ -34,13 +34,13 @@ const pulseAnimationStyle: AnimatedStyle<any> = {
 
 export default function AvailabilityBadge({
   style,
-  showText = false,
+  showText,
 }: {
   style?: StyleProp<ViewStyle>;
-  showText?: boolean | "on-focus";
+  showText: boolean | "on-focus";
 }) {
   const ref = React.useRef<View>(null);
-  const [hasAnyFocus] = useFocus(ref);
+  const [hasAnyFocus] = useFocus(ref, { debounceOff: 500 });
 
   return (
     <Animated.View
@@ -70,7 +70,7 @@ export default function AvailabilityBadge({
         <Animated.View
           style={[
             { flexDirection: "row" },
-            {
+            showText === "on-focus" && {
               opacity: hasAnyFocus ? 1 : 0,
               transform: [{ translateX: hasAnyFocus ? 0 : -20 }],
               width: hasAnyFocus ? "auto" : 0,
