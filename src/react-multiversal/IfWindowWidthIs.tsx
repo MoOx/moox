@@ -79,6 +79,7 @@ export function Next_IfWindowWidthIs() {
       isServerInserted.current = true;
       return (
         <style
+          id="react-multiversal--IfWindowWidthIs"
           dangerouslySetInnerHTML={{
             __html: cssRules.join("\n"),
           }}

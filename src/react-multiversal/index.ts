@@ -1,4 +1,3 @@
-import { useWindowDimensions } from "react-native";
 import { match } from "ts-pattern";
 
 const baseSpace = 16;
@@ -82,30 +81,3 @@ export enum WindowWidth {
   xxl = 1920,
   xxxl = Infinity,
 }
-export const useWindowWidth = () => useWindowDimensions().width;
-
-type responsiveSpacing = {
-  rxxl: AbsoluteSize;
-  rxl: AbsoluteSize;
-  rl: AbsoluteSize;
-  rm: AbsoluteSize;
-};
-export const useResponsiveSpacing = (): responsiveSpacing => ({
-  rxxl: useWindowWidth() >= WindowWidth.l ? "xxl" : "l",
-  rxl: useWindowWidth() >= WindowWidth.l ? "xl" : "m",
-  rl: useWindowWidth() >= WindowWidth.l ? "l" : "m",
-  rm: useWindowWidth() >= WindowWidth.l ? "m" : "s",
-});
-
-// do not put any colors here, use useTheme() instead
-// export const globalStyles = StyleSheet.create({
-// });
-
-// export const useDynamicStyles = () => {
-//   const theme = useTheme();
-//   return React.useMemo(() => {
-//     const styles = {
-//     };
-//     return StyleSheet.create(styles);
-//   }, [theme]);
-// };

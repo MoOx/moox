@@ -1,7 +1,15 @@
-import * as React from "react";
-import { Platform, StyleProp, View, ViewStyle } from "react-native";
+"use client";
 
-import { useWindowWidth, WindowWidth } from "@/react-multiversal";
+import * as React from "react";
+import {
+  Platform,
+  StyleProp,
+  useWindowDimensions,
+  View,
+  ViewStyle,
+} from "react-native";
+
+import { WindowWidth } from "@/react-multiversal";
 import { Portal } from "@/react-multiversal/Portal";
 
 export default function InPlaceOrPortal({
@@ -21,7 +29,7 @@ export default function InPlaceOrPortal({
   children: React.ReactNode;
   skipRefs?: React.RefObject<any>[];
 }) {
-  const windowWidth = useWindowWidth();
+  const windowWidth = useWindowDimensions().width;
   // force portal for native or small screen, for web only large screen
   const isInPlace = Platform.OS === "web" && windowWidth >= breakpoint;
 

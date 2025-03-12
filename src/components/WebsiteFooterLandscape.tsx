@@ -17,7 +17,6 @@ export default function WebsiteFooterLandscape({
 }) {
   const theme = useTheme();
   const skySize = 400;
-  const parallaxOffset = 100;
 
   return (
     <View style={{ flex: 1 }}>
@@ -35,52 +34,82 @@ export default function WebsiteFooterLandscape({
             background: "url(/_/stars.png) repeat 0% 0% / 400px 300px",
           }}
         />
-        {/* Sky Gradient */}
-        <View style={{ height: skySize }}>
-          <Parallax
-            transforms={[{ translateY: parallaxOffset }]}
-            springOptions={{ mass: 0.25 }}
-            style={{
-              ...StyleSheet.absoluteFillObject,
-              // top: -parallaxOffset,
-              height: skySize,
-              backgroundImage: `radial-gradient(farthest-side at 50% 100%, ${
-                theme.dynamicColors.gradientLandscape1
-              } 0%, ${theme.dynamicColors.gradientLandscape2} 50%, ${
-                theme.dynamicColors.gradientLandscape3
-              } 100%)`,
-            }}
-          />
-          <Parallax
-            transforms={[{ translateY: parallaxOffset * 1.1 }]}
-            springOptions={{ mass: 0.25 }}
-            style={{
-              ...StyleSheet.absoluteFillObject,
-              // top: -parallaxOffset,
-              height: skySize,
-              backgroundImage: `linear-gradient(to bottom, ${
-                theme.dynamicColors.gradientLandscape3
-              } 50%, ${theme.dynamicColors.gradientLandscape2} 75%, ${
-                theme.dynamicColors.gradientLandscape1
-              } 100%)`,
-            }}
-          />
-        </View>
-        {/* Sun */}
+        <View style={{ height: skySize }} />
         <Parallax
-          transforms={[{ translateY: 60 }, { scale: -0.3 }]}
-          springOptions={{ mass: 0.25 }}
+          // Radial Sun Gradient
+          springOptions={{ mass: 1, damping: 50, stiffness: 50 }}
+          staticTransforms={[{ scaleX: 2 }]}
+          transforms={[{ translateX: 40 }, { translateY: 40 }]}
           style={{
             position: "absolute",
-            top: 60,
+            top: 0,
             left: 0,
-            right: 0,
+            width: "50%",
+            height: skySize,
+          }}
+          contentStyle={[
+            StyleSheet.absoluteFill,
+            { transformOrigin: "bottom center" },
+          ]}
+        >
+          <View
+            style={[
+              StyleSheet.absoluteFill,
+              {
+                backgroundImage: `radial-gradient(
+                  farthest-side at 50% 100%,
+                  ${theme.dynamicColors.gradientLandscape1} 0%,
+                  ${theme.dynamicColors.gradientLandscape2} 50%,
+                  ${theme.dynamicColors.gradientLandscape3} 100%)`,
+              },
+            ]}
+          />
+        </Parallax>
+        <Parallax
+          // Horizontal Sky Gradient
+          springOptions={{ mass: 1, damping: 100, stiffness: 50 }}
+          transforms={[{ translateY: 100 }]}
+          style={StyleSheet.absoluteFill}
+          contentStyle={[
+            StyleSheet.absoluteFill,
+            {
+              backgroundImage: `linear-gradient(to top, ${
+                theme.dynamicColors.gradientLandscape1
+              } 20%, ${theme.dynamicColors.gradientLandscape2} 50%, ${
+                theme.dynamicColors.gradientLandscape3
+              } 80%)`,
+            },
+          ]}
+        />
+        <Parallax
+          // Sun
+          springOptions={{ mass: 1, damping: 50, stiffness: 50 }}
+          transforms={[
+            { translateX: 40 },
+            { translateY: 40 },
+            { scale: -0.25 },
+          ]}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "50%",
+            height: skySize,
+          }}
+          contentStyle={{
+            ...StyleSheet.absoluteFillObject,
             alignItems: "center",
             justifyContent: "flex-end",
-            height: skySize + 40,
+            transformOrigin: "bottom center",
           }}
         >
-          <Image src="/_/landscape-sun.svg" alt="" width={400} height={400} />
+          <Image
+            src="/_/landscape-sun.svg"
+            alt=""
+            width={360}
+            height={360}
+            style={{ transform: "translateY(100px)" }}
+          />
         </Parallax>
         {/* Floor */}
         <View
@@ -91,6 +120,7 @@ export default function WebsiteFooterLandscape({
             backgroundRepeat: "no-repeat",
             backgroundPosition: "50% 0%",
             backgroundSize: "cover",
+            opacity: 0.9,
           }}
         />
         {/* Mountains */}
