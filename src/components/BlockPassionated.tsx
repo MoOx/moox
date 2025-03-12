@@ -1,13 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 
 import { ResumeItem } from "@/api";
 import { useTheme } from "@/app/styles";
 import { gradientStaticIndigoStyles } from "@/app/styles";
 import BlockMaxApp from "@/components/BlockMaxApp";
-import { size, useWindowWidth, WindowWidth } from "@/react-multiversal";
+import { size } from "@/react-multiversal";
+import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
@@ -27,7 +28,7 @@ export default function BlockPassionated({
   const theme = useTheme();
   const deviceWidth = 360;
   // const deviceRatio = 1;
-  const windowWidth = useWindowWidth();
+  const windowWidth = useWindowDimensions().width;
 
   const device = (
     <View

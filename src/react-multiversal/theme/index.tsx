@@ -59,8 +59,8 @@ export function makeTheme<ThemeColorMap extends ThemeMinimalColorMap>(
     dark: generateStyles(themedColors.dark),
   };
 
-  const htmlKey = "multiversal";
-  const htmlClass = htmlKey + "--root";
+  const htmlKey = "react-multiversal-";
+  const htmlClass = htmlKey + "-root";
   const htmlStyleId = htmlKey + "-css";
 
   // @todo implement dynamic colors for iOS using DynamicColorIOS & similar for Android

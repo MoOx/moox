@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import {
   MatrixTransform,
@@ -43,18 +44,42 @@ const parseDegreeValue = (value: DegreeValue): number => {
   return value;
 };
 
-export type ParallaxTransform =
-  | { translateX: number }
-  | { translateY: number }
-  | { scale: number }
-  | { scaleX: number }
-  | { scaleY: number }
-  | { rotate: DegreeValue }
-  | { rotateX: DegreeValue }
-  | { rotateY: DegreeValue }
-  | { skewX: DegreeValue }
-  | { skewY: DegreeValue }
-  | { perspective: number };
+export type PercentageValue = number | `${number}%`;
+
+const parsePercentageValue = (
+  value: PercentageValue
+): { value: number; isPercentage: boolean } => {
+  if (typeof value === "string") {
+    return { value: parseFloat(value), isPercentage: true };
+  }
+  return { value, isPercentage: false };
+};
+
+type TranslateX = { translateX: PercentageValue };
+type TranslateY = { translateY: PercentageValue };
+type Scale = { scale: number };
+type ScaleX = { scaleX: number };
+type ScaleY = { scaleY: number };
+type Rotate = { rotate: DegreeValue };
+type RotateX = { rotateX: DegreeValue };
+type RotateY = { rotateY: DegreeValue };
+type SkewX = { skewX: DegreeValue };
+type SkewY = { skewY: DegreeValue };
+type Perspective = { perspective: number };
+
+export type ParallaxTransform = MaximumOneOf<
+  TranslateX &
+    TranslateY &
+    Scale &
+    ScaleX &
+    ScaleY &
+    Rotate &
+    RotateX &
+    RotateY &
+    SkewX &
+    SkewY &
+    Perspective
+>;
 
 type TransformStyle = MaximumOneOf<
   PerspectiveTransform &
@@ -73,16 +98,38 @@ type TransformStyle = MaximumOneOf<
 >;
 
 const getTransformValue = (
-  transform: ParallaxTransform,
-  createInterpolation: (value: number, ratio?: number) => number
+  transform:
+    | TranslateX
+    | TranslateY
+    | Scale
+    | ScaleX
+    | ScaleY
+    | Rotate
+    | RotateX
+    | RotateY
+    | SkewX
+    | SkewY
+    | Perspective,
+  createInterpolation: (value: number, ratio?: number) => number,
+  layout?: ElementLayout
 ): TransformStyle => {
   return match(transform)
-    .with({ translateX: P.select() }, (value) => ({
-      translateX: createInterpolation(value),
-    }))
-    .with({ translateY: P.select() }, (value) => ({
-      translateY: createInterpolation(value),
-    }))
+    .with({ translateX: P.select() }, (value) => {
+      const { value: parsedValue, isPercentage } = parsePercentageValue(value);
+      const translationValue =
+        isPercentage && layout
+          ? createInterpolation((parsedValue * layout.width) / 100)
+          : createInterpolation(parsedValue);
+      return { translateX: translationValue };
+    })
+    .with({ translateY: P.select() }, (value) => {
+      const { value: parsedValue, isPercentage } = parsePercentageValue(value);
+      const translationValue =
+        isPercentage && layout
+          ? createInterpolation((parsedValue * layout.height) / 100)
+          : createInterpolation(parsedValue);
+      return { translateY: translationValue };
+    })
     .with({ scale: P.select() }, (value) => ({
       scale: 1 + createInterpolation(value),
     }))
@@ -113,10 +160,26 @@ const getTransformValue = (
     .exhaustive();
 };
 
-function ParallaxDebugOverlay({ layout: layout }: { layout: ElementLayout }) {
+function ParallaxDebugOverlay({
+  layout,
+  getScrollViewHeight,
+}: {
+  layout: ElementLayout;
+  getScrollViewHeight: () => number;
+}) {
   const id = React.useId();
   const windowDimensions = useWindowDimensions();
-  const [start, end] = layoutToRange(layout, windowDimensions);
+  const [start, end, maxScrollPosition] = layoutToRange({
+    layout,
+    windowDimensions,
+    getScrollViewHeight,
+  });
+  const maxScroll = calculateMaxScrollPosition(
+    windowDimensions,
+    getScrollViewHeight
+  );
+  const isInTopViewport = layout.y < windowDimensions.height;
+  const isInBottomViewport = layout.y + layout.height > maxScrollPosition;
 
   const rangeAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -168,7 +231,19 @@ function ParallaxDebugOverlay({ layout: layout }: { layout: ElementLayout }) {
             </Animated.Text>
             <Animated.Text style={{ color: "white", fontSize: 10 }}>
               {"Calculation Data: "}
-              {JSON.stringify({ start, end }, null, 2)}
+              {JSON.stringify(
+                {
+                  start,
+                  end,
+                  maxScrollPosition,
+                  isInTopViewport,
+                  isInBottomViewport,
+                  maxScroll,
+                  scrollViewHeight: getScrollViewHeight(),
+                },
+                null,
+                2
+              )}
             </Animated.Text>
           </Animated.View>
         </Animated.View>
@@ -177,42 +252,119 @@ function ParallaxDebugOverlay({ layout: layout }: { layout: ElementLayout }) {
   );
 }
 
-const layoutToRange = (layout: ElementLayout, windowDimensions: ScaledSize) => {
-  const wasInitiallyVisible = layout.y < windowDimensions.height;
+/**
+ * Calculates the maximum possible scroll position for the page
+ * This is the document height minus the window height
+ */
+const calculateMaxScrollPosition = (
+  windowDimensions: ScaledSize,
+  getScrollViewHeight: () => number
+): number => {
+  return Math.max(0, getScrollViewHeight() - windowDimensions.height);
+};
+
+const layoutToRange = ({
+  layout,
+  windowDimensions,
+  getScrollViewHeight,
+}: {
+  layout: ElementLayout;
+  windowDimensions: ScaledSize;
+  getScrollViewHeight: () => number;
+}): [number, number, number] => {
+  // Calculate the maximum possible scroll position
+  const maxScrollPosition = calculateMaxScrollPosition(
+    windowDimensions,
+    getScrollViewHeight
+  );
+
+  // Check if element is in the top viewport (initially visible without scrolling)
+  const isInTopViewport = layout.y < windowDimensions.height;
+
+  // Check if element is in the bottom viewport (visible at max scroll)
+  const isInBottomViewport = layout.y + layout.height > maxScrollPosition;
+
+  // For elements in the top viewport, start at 0
+  // For other elements, start when they're about to enter the viewport
   const start = Math.max(
     0,
-    wasInitiallyVisible ? 0 : layout.y - windowDimensions.height
+    isInTopViewport ? 0 : layout.y - windowDimensions.height
   );
-  return [start, Math.max(start + 1, layout.y + layout.height)];
+
+  // For elements in the bottom viewport, ensure they complete their animation
+  // by setting the end to the max scroll position
+  // For other elements, use their natural end position
+  const end = isInBottomViewport
+    ? maxScrollPosition
+    : Math.max(start + 1, layout.y + layout.height);
+
+  return [start, end, maxScrollPosition];
 };
-const layoutToInputRange = (
-  layout: ElementLayout,
-  windowDimensions: ScaledSize
-) => {
-  const [start, end] = layoutToRange(layout, windowDimensions);
+
+const layoutToInputRange = ({
+  layout,
+  windowDimensions,
+  getScrollViewHeight,
+}: {
+  layout: ElementLayout;
+  windowDimensions: ScaledSize;
+  getScrollViewHeight: () => number;
+}): [number, number, number] => {
+  const [start, end] = layoutToRange({
+    layout,
+    windowDimensions,
+    getScrollViewHeight,
+  });
+
+  // Adjust the input range to account for the maximum scroll position
   return [
+    // First value: when element is about to enter viewport
     Math.min(start - windowDimensions.height, start - 1),
+    // Middle value: when element starts to be visible
     start,
-    Math.max(end, start + 1),
+    // Last value: when element is fully visible
+    end,
   ];
 };
 
 export default function Parallax({
   style,
+  contentStyle,
   staticTransforms = [],
   transforms = [{ scale: 1.2 }],
   children,
   disabled = false,
   debug = false,
   springOptions,
+  reverse = false,
+  getScrollViewHeight = () => {
+    if (Platform.OS === "web" && typeof document !== "undefined") {
+      // For web, use the actual document height
+      return Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight,
+        document.body.clientHeight,
+        document.documentElement.clientHeight
+      );
+    }
+    throw new Error(
+      "Parallax: getScrollViewHeight() should be provided for this platform." +
+        "You should probably listen to <ScrollView> 'onContentSizeChange' prop and retrieve 'event.nativeEvent.layout.height' in a state."
+    );
+  },
 }: {
   style?: StyleProp<ViewStyle>;
+  contentStyle?: StyleProp<ViewStyle>;
   staticTransforms?: TransformStyle[];
   transforms?: ParallaxTransform[];
   children?: React.ReactNode;
   disabled?: boolean;
   debug?: boolean;
   springOptions?: SpringConfig;
+  reverse?: boolean;
+  getScrollViewHeight?: () => number;
 }) {
   const [scrollOffsetAnimValue, getOffset] =
     useScrollWindowOffset(springOptions);
@@ -258,7 +410,6 @@ export default function Parallax({
     } else {
       const animationFrame = updateLayout();
       return () => {
-        observerRef.current?.disconnect();
         cancelAnimationFrame(animationFrame);
       };
     }
@@ -269,15 +420,23 @@ export default function Parallax({
       return { transform: staticTransforms };
     }
 
-    const inputRange = layoutToInputRange(layoutInWindow, windowDimensions);
+    const inputRange = layoutToInputRange({
+      layout: layoutInWindow,
+      windowDimensions,
+      getScrollViewHeight,
+    });
+
     const createInterpolation = (value: number, ratio: number = 1) => {
       if (ratio === 0) ratio = 0.001; // Avoid division by zero
+
+      const outputRange = [-value / ratio, 0, value / ratio];
+      if (reverse) outputRange.reverse();
 
       return interpolate(
         scrollOffsetAnimValue.get(),
         inputRange,
-        [-value / ratio, 0, value / ratio],
-        { extrapolateRight: "clamp", extrapolateLeft: "clamp" }
+        outputRange,
+        "clamp"
       );
     };
 
@@ -285,32 +444,36 @@ export default function Parallax({
       transform: [
         ...staticTransforms,
         ...transforms.map((transform) =>
-          getTransformValue(transform, createInterpolation)
+          getTransformValue(transform, createInterpolation, layoutInWindow)
         ),
       ],
     };
   }, [
-    scrollOffsetAnimValue,
     layoutInWindow,
     windowDimensions,
     staticTransforms,
     transforms,
+    reverse,
+    scrollOffsetAnimValue,
+    getScrollViewHeight,
   ]);
 
   return (
-    <>
+    <View ref={targetRef} style={style}>
       <Animated.View
-        ref={targetRef}
         style={[
-          style,
+          contentStyle,
           disabled ? { transform: staticTransforms } : animatedStyles,
         ]}
       >
         {children}
       </Animated.View>
       {debug && layoutInWindow ? (
-        <ParallaxDebugOverlay layout={layoutInWindow} />
+        <ParallaxDebugOverlay
+          layout={layoutInWindow}
+          getScrollViewHeight={getScrollViewHeight}
+        />
       ) : null}
-    </>
+    </View>
   );
 }

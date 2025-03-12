@@ -9,6 +9,7 @@ import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import { GradientRadial } from "@/react-multiversal/GradientRadial";
 import LinkView from "@/react-multiversal/LinkView";
+import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import SVGQuote from "@/svgs/components/SVGQuote";
@@ -170,47 +171,94 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
   );
 };
 
-const gradientStyles = [
-  StyleSheet.absoluteFill,
-  { transform: [{ skewY: "1deg" }, { scaleY: 1.025 }] },
-];
 export default function BlockTestimonials() {
   const theme = useTheme();
 
   return (
     <View>
-      <GradientLinear
-        style={gradientStyles}
-        stops={[
-          { offset: 0, stopColor: "#9623c0" },
-          { offset: 100, stopColor: themeLight.colors.textIndigoAlt2 },
+      <View
+        style={[
+          StyleSheet.absoluteFill,
+          {
+            overflow: "hidden",
+            transform: [{ skewY: "1deg" }, { scaleY: 1.025 }],
+          },
         ]}
-        angle={160}
-      />
-      <GradientRadial
-        style={gradientStyles}
-        stops={[
-          { offset: 0, stopColor: "#12e9ec", stopOpacity: "0.75" },
-          { offset: 100, stopColor: "#12e9ec", stopOpacity: "0" },
-        ]}
-        coordinates={{ cx: "10%", cy: "20%", fx: "5%", fy: "25%" }}
-      />
-      <GradientRadial
-        style={gradientStyles}
-        stops={[
-          { offset: 0, stopColor: "#9623c0", stopOpacity: "0.75" },
-          { offset: 100, stopColor: "#9623c0", stopOpacity: "0" },
-        ]}
-        coordinates={{ cx: "20%", cy: "100%", fx: "15%", fy: "80%", r: "40%" }}
-      />
-      <GradientRadial
-        style={gradientStyles}
-        stops={[
-          { offset: 0, stopColor: "#2816A8", stopOpacity: "0.6" },
-          { offset: 100, stopColor: "#2816A8", stopOpacity: "0" },
-        ]}
-        coordinates={{ cx: "50%", cy: "100%", fx: "60%", fy: "100%" }}
-      />
+      >
+        <GradientLinear
+          // global gradient
+          style={StyleSheet.absoluteFill}
+          stops={[
+            { offset: 0, stopColor: "#9623c0" },
+            { offset: 100, stopColor: themeLight.colors.textIndigoAlt2 },
+          ]}
+          angle={160}
+        />
+        <Parallax
+          // corner top left blue
+          style={StyleSheet.absoluteFill}
+          contentStyle={StyleSheet.absoluteFill}
+          transforms={[
+            { translateX: 100 },
+            { translateY: 100 },
+            // { scale: 0.2 },
+          ]}
+          springOptions={{ mass: 2 }}
+        >
+          <GradientRadial
+            style={[
+              StyleSheet.absoluteFill,
+              { transform: [{ translateX: -100 }, { translateY: -100 }] },
+            ]}
+            stops={[
+              { offset: 0, stopColor: "#12e9ec", stopOpacity: "0.75" },
+              { offset: 100, stopColor: "#12e9ec", stopOpacity: "0" },
+            ]}
+            coordinates={{ cx: "10%", cy: "20%", fx: "5%", fy: "25%" }}
+          />
+        </Parallax>
+        <Parallax
+          // corner bottom left purple
+          style={StyleSheet.absoluteFill}
+          contentStyle={StyleSheet.absoluteFill}
+          transforms={[{ translateX: 100 }, { translateY: -100 }]}
+          springOptions={{ mass: 4 }}
+        >
+          <GradientRadial
+            style={[
+              StyleSheet.absoluteFill,
+              { transform: [{ translateX: -100 }, { translateY: 100 }] },
+            ]}
+            stops={[
+              { offset: 0, stopColor: "#9623c0", stopOpacity: "0.75" },
+              { offset: 100, stopColor: "#9623c0", stopOpacity: "0" },
+            ]}
+            coordinates={{
+              cx: "20%",
+              cy: "100%",
+              fx: "15%",
+              fy: "80%",
+              r: "40%",
+            }}
+          />
+        </Parallax>
+        <Parallax
+          // bottom right blue
+          style={StyleSheet.absoluteFill}
+          contentStyle={StyleSheet.absoluteFill}
+          transforms={[{ translateX: -200 }]}
+          reverse={true}
+        >
+          <GradientRadial
+            style={StyleSheet.absoluteFill}
+            stops={[
+              { offset: 0, stopColor: "#2816A8", stopOpacity: "0.6" },
+              { offset: 100, stopColor: "#2816A8", stopOpacity: "0" },
+            ]}
+            coordinates={{ cx: "50%", cy: "100%", fx: "60%", fy: "100%" }}
+          />
+        </Parallax>
+      </View>
       <Container wrapperStyle={{ zIndex: 1 }}>
         <SpacedView vertical="xl" horizontal="xl" gap="xl">
           <SpacedView gap="s">
