@@ -4,7 +4,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { ResumeItem } from "@/api";
-import { boxShadow, useTheme } from "@/app/styles";
+import { boxShadows, useTheme } from "@/app/styles";
 import { Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkText from "@/react-multiversal/LinkText";
@@ -72,7 +72,7 @@ export const ResumeTimelineEntry = ({
           borderRadius: 10,
           flexShrink: 1,
           flexBasis: 480,
-          boxShadow: boxShadow.default,
+          boxShadow: boxShadows.default,
         },
       ]}
     >

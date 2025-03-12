@@ -13,7 +13,7 @@ import {
 import Animated from "react-native-reanimated";
 
 import { ResumeItem } from "@/api";
-import { alpha, boxShadow, colors, useTheme } from "@/app/styles";
+import { alpha, boxShadows, colors, useTheme } from "@/app/styles";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import ButtonView from "@/components/ButtonView";
 import DeviceiPhoneDynamicIsland from "@/components/DeviceIphoneDynamicIsland";
@@ -113,7 +113,7 @@ export default function BlockMaxApp({
           style={[
             theme.styles.backOnAlt,
             {
-              boxShadow: boxShadow.default,
+              boxShadow: boxShadows.default,
               borderRadius: 16,
               borderWidth: 1,
               borderColor: "rgba(0, 0, 0, 0.1)",
@@ -169,7 +169,13 @@ export default function BlockMaxApp({
           </View>
           <Spacer />
           <View style={{ flexDirection: "row" }}>
-            <LinkButton href="/contact" horizontalSpace="s" verticalSpace="xxs">
+            <LinkButton
+              href="/contact"
+              spaceHorizontal="s"
+              spaceVertical="xxs"
+              spaceGap={"xxs"}
+              effect="subtle"
+            >
               {(textStyles) => (
                 <>
                   <SVGChevronRight
@@ -178,7 +184,6 @@ export default function BlockMaxApp({
                     fill={textStyles.color}
                     style={{ opacity: 0.4 }}
                   />
-                  <Spacer size="xxs" />
                   <Text style={[textStyles, fontStyles.iosEm.caption1]}>
                     {"Hire Me"}
                   </Text>
@@ -196,9 +201,11 @@ export default function BlockMaxApp({
               }}
             >
               <ButtonView
-                horizontalSpace="s"
-                verticalSpace="xxs"
+                spaceHorizontal="s"
+                spaceVertical="xxs"
+                spaceGap={6}
                 mode="outline"
+                effect="subtle"
               >
                 {(textStyles) => (
                   <>
@@ -208,7 +215,6 @@ export default function BlockMaxApp({
                       fill={textStyles.color}
                       style={{ opacity: 0.2 }}
                     />
-                    <Spacer size={6} />
                     <View>
                       <Animated.Text
                         style={[
@@ -285,8 +291,8 @@ export default function BlockMaxApp({
                     key={href}
                     aria-label={alt}
                     mode="outline"
-                    horizontalSpace="xs"
-                    verticalSpace="xs"
+                    spaceHorizontal="xs"
+                    spaceVertical="xs"
                     href={href}
                     style={theme.styles.back}
                   >
@@ -335,7 +341,7 @@ export default function BlockMaxApp({
           borderStyle: "solid",
           borderColor: alpha(colors.black, 0.1),
           backgroundColor: theme.dynamicColors.back,
-          boxShadow: boxShadow.default,
+          boxShadow: boxShadows.default,
         }}
       >
         <SpacedView

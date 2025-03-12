@@ -11,7 +11,7 @@ import Animated, {
 } from "react-native-reanimated";
 import Svg, { Path } from "react-native-svg";
 
-import { boxShadow } from "@/app/styles";
+import { boxShadows } from "@/app/styles";
 import { supportsHover } from "@/react-multiversal/supports";
 import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
 import { useFocus } from "@/react-multiversal/useFocus";
@@ -222,7 +222,7 @@ export default function ColorSchemeToggle({
           width: toggleSize,
           height: toggleSize,
           borderRadius: toggleSize,
-          boxShadow: boxShadow.moreVisible,
+          boxShadow: boxShadows.moreVisible,
         },
         icon: {
           zIndex: 2,

@@ -6,7 +6,6 @@ import LinkButton from "@/components/LinkButton";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
-import Spacer from "@/react-multiversal/Spacer";
 import SVGMenuContactFill from "@/svgs/components/SVGMenuContactFill";
 import SVGMenuResumeFill from "@/svgs/components/SVGMenuResumeFill";
 
@@ -29,14 +28,11 @@ export default function BlockInterestedButtons() {
         >
           <LinkButton
             href="/resume/"
-            mode="outline"
+            blurAmount={16}
+            color={alpha(colors.white, 0.15)}
             theme="dark"
-            style={{
-              WebkitBackdropFilter: "blur(16px)",
-              backdropFilter: "blur(16px)",
-              backgroundColor: alpha(colors.white, 0.15),
-            }}
-            horizontalSpace="xl"
+            spaceHorizontal="xl"
+            spaceVertical="m"
           >
             {(textStyles) => (
               <>
@@ -45,14 +41,13 @@ export default function BlockInterestedButtons() {
                   height={36}
                   fill={theme.dynamicColors.textOnMain}
                 />
-                <Spacer size="s" />
                 <Text style={[textStyles, fontStyles.iosEm.title3]}>
                   {"More about me"}
                 </Text>
               </>
             )}
           </LinkButton>
-          <LinkButton href="/contact/" horizontalSpace="xl">
+          <LinkButton href="/contact/" spaceHorizontal="xl" spaceVertical="m">
             {(textStyles) => (
               <>
                 <SVGMenuContactFill
@@ -60,7 +55,6 @@ export default function BlockInterestedButtons() {
                   height={36}
                   fill={theme.dynamicColors.textOnMain}
                 />
-                <Spacer size="s" />
                 <Text style={[textStyles, fontStyles.iosEm.title3]}>
                   {"Hire me"}
                 </Text>

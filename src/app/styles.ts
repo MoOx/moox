@@ -41,10 +41,29 @@ type ThemedColors = {
   ultraLight: string;
 };
 
-export const boxShadow = {
-  default: `0 0 1px ${alpha(colors.black, 0.1)}, 0 4px 20px ${alpha(colors.black, 0.1)}`,
-  moreVisible: `0 2px 4px ${alpha(colors.black, 0.2)}`,
-  forTransparent: `0 0 1px ${colors.white}, 0 4px 20px ${alpha(colors.black, 0.1)}`,
+export const boxShadows = {
+  default: [
+    {
+      offsetX: 0,
+      offsetY: 0,
+      blurRadius: 1,
+      color: alpha(colors.black, 0.1),
+    },
+    {
+      offsetX: 0,
+      offsetY: 4,
+      blurRadius: 20,
+      color: alpha(colors.black, 0.1),
+    },
+  ],
+  moreVisible: [
+    {
+      offsetX: 0,
+      offsetY: 2,
+      blurRadius: 4,
+      color: alpha(colors.black, 0.2),
+    },
+  ],
 };
 
 export const themedColors: ThemeColors<ThemedColors> = {
