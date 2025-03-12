@@ -6,7 +6,7 @@ import { Text, View } from "react-native";
 
 import {
   alpha,
-  boxShadow,
+  boxShadows,
   colors,
   themeDark,
   themeLight,
@@ -120,7 +120,7 @@ export default function WebsiteMobileMenu() {
               borderColor: alpha(colors.black, 0.25),
               borderStyle: "solid",
               backgroundColor: theme.dynamicColors.back,
-              boxShadow: boxShadow.default,
+              boxShadow: boxShadows.default,
             }}
           >
             <WebsiteMobileMenuLinks />

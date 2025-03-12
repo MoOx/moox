@@ -1,10 +1,13 @@
 "use client";
+import "@/__DEV__";
 
 import * as React from "react";
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 
 import { themeLight, useTheme } from "@/app/styles";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
+import ButtonView from "@/components/ButtonView";
+import LinkButton from "@/components/LinkButton";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { sendStringAsMailString, socials } from "@/consts";
 import Container from "@/react-multiversal/Container";
@@ -22,7 +25,6 @@ function ContactButton({
   Icon,
   title,
   subtitle,
-  color,
 }: {
   Icon: React.ComponentType<{
     width: number;
@@ -32,22 +34,18 @@ function ContactButton({
   }>;
   title: string;
   subtitle: string;
-  color: string;
 }) {
   return (
-    <SpacedView
-      vertical="s"
-      horizontal="s"
+    <View
       style={[
         {
           flexDirection: "row",
           alignItems: "center",
           borderRadius: 10,
-          backgroundColor: color,
         },
       ]}
     >
-      <Icon width={36} height={36} fill="#fff" style={{ flexShrink: 0 }} />
+      <Icon width={32} height={32} fill="#fff" style={{ flexShrink: 0 }} />
       <Spacer size="s" />
       <View>
         <Text style={[fontStyles.iosEm.callout, themeLight.styles.textOnMain]}>
@@ -57,7 +55,7 @@ function ContactButton({
           {subtitle}
         </Text>
       </View>
-    </SpacedView>
+    </View>
   );
 }
 
@@ -108,68 +106,73 @@ export default function PageContact() {
               justifyContent: "center",
             }}
           >
-            <LinkView
+            <LinkButton
+              color="rgb(10, 102, 194)"
               style={styles.button}
               href="https://www.linkedin.com/in/maxthirouin"
+              spaceHorizontal="xl"
             >
               <ContactButton
                 Icon={SVGSocialLinkedin}
                 title="Reach Me"
                 subtitle="On LinkedIn"
-                color="rgb(10, 102, 194)"
               />
-            </LinkView>
+            </LinkButton>
 
-            <LinkView
+            <LinkButton
               style={styles.button}
               href={!isClient ? "" : "sms:+33" + socials.call}
+              color="#1FCE26"
+              spaceHorizontal="xl"
             >
               <ContactButton
                 Icon={SVGMenuSpeechFill}
                 title="Text Me"
                 subtitle={"+" + socials.ind + socials.call}
-                color="#1FCE26"
               />
-            </LinkView>
+            </LinkButton>
 
-            <LinkView
+            <LinkButton
               style={styles.button}
               href={
                 !isClient
                   ? ""
                   : "mailto:" + sendStringAsMailString(socials.send)
               }
+              color="#007AFF"
+              spaceHorizontal="xl"
             >
               <ContactButton
                 Icon={SVGEmail}
                 title="Email Me"
                 subtitle={sendStringAsMailString(socials.send, true)}
-                color="#007AFF"
               />
-            </LinkView>
+            </LinkButton>
 
-            <LinkView
+            <LinkButton
               style={styles.button}
               href={!isClient ? "" : "tel:+33" + socials.call}
+              color="#1FCE26"
+              spaceHorizontal="xl"
             >
               <ContactButton
                 Icon={SVGPhone}
                 title="Call Me"
                 subtitle={"+" + socials.ind + socials.call}
-                color="#1FCE26"
               />
-            </LinkView>
+            </LinkButton>
 
             <a
               style={{ ...styles.button, textDecoration: "none" }}
               href="/MaximeThirouin.vcf"
             >
-              <ContactButton
-                Icon={SVGContact}
-                title="Save Me"
-                subtitle="Get my contact infos"
-                color="#FF2D55"
-              />
+              <ButtonView color="#FF2D55" spaceHorizontal="xl">
+                <ContactButton
+                  Icon={SVGContact}
+                  title="Save Me"
+                  subtitle="Get my contact infos"
+                />
+              </ButtonView>
             </a>
           </SpacedView>
           <Spacer size="xxxl" />

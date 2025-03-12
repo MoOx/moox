@@ -5,8 +5,11 @@ import { match } from "ts-pattern";
 
 import { alpha, colors, useTheme } from "@/app/styles";
 import { Size } from "@/react-multiversal";
+import BlurView from "@/react-multiversal/BlurView";
+import GradientLinear from "@/react-multiversal/GradientLinear";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
+import { boxShadowGlass } from "@/react-multiversal/utils.styles";
 
 export type Mode = "outline" | "default" | "gradient";
 export type Indicator = "none" | "activity" | "success";
@@ -17,11 +20,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderRadius: 100,
-    boxShadow: [
-      alpha(colors.black, 0.04) + " 0px 1px 1px 0px",
-      alpha(colors.black, 0.06) + " 0px -1px 1px 0px inset",
-      alpha(colors.black, 0.1) + " 0px 0px 0px 0.1px",
-    ].join(","),
   },
   indicatorContainer: {
     zIndex: 1,
@@ -34,14 +32,48 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   row: {
+    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
 });
 
+const stylesEffect = StyleSheet.create({
+  glass: {
+    borderWidth: 0,
+    boxShadow: boxShadowGlass(),
+  },
+  subtle: {
+    boxShadow: [
+      {
+        color: alpha(colors.black, 0.04),
+        offsetX: 0,
+        offsetY: 1,
+        blurRadius: 1,
+      },
+      {
+        color: alpha(colors.black, 0.06),
+        offsetX: 0,
+        offsetY: -1,
+        blurRadius: 1,
+        inset: true,
+      },
+      {
+        color: alpha(colors.black, 0.1),
+        offsetX: 0,
+        offsetY: 0,
+        blurRadius: 0,
+        spreadDistance: 0.1,
+      },
+    ],
+  },
+});
+
 export type ButtonViewProps = Omit<ViewProps, "children"> & {
   alt?: boolean;
+  blurAmount?: number;
+  borderColorAlt?: string;
   children:
     | React.ReactNode
     | (({
@@ -52,117 +84,134 @@ export type ButtonViewProps = Omit<ViewProps, "children"> & {
         opacity: number;
       }) => React.ReactNode)
     | undefined;
-  horizontalSpace?: Size;
+  color?: string;
+  colorAlt?: string;
   indicator?: Indicator;
   indicatorSize?: number;
   mode?: Mode;
+  spaceGap?: Size;
+  spaceHorizontal?: Size;
+  spaceVertical?: Size;
+  textColor?: string;
+  textColorAlt?: string;
+  textColorOn?: string;
   theme?: UserColorScheme;
-  verticalSpace?: Size;
+  effect?: "glass" | "subtle" | "none";
 };
 
 const ButtonView = ({
   alt,
+  blurAmount = 0,
+  borderColorAlt: _borderColorAlt,
   children,
-  horizontalSpace = "xxl",
+  color: _color,
+  colorAlt: _colorAlt,
+  effect = "glass",
   indicator = "none",
   indicatorSize = 18,
-  verticalSpace = "m",
   mode = "default",
+  spaceGap = "s",
+  spaceHorizontal = "m",
+  spaceVertical = "s",
+  style,
+  textColor: _textColor,
+  textColorAlt: _textColorAlt,
+  textColorOn: _textColorOn,
   theme: _theme = "auto",
   ...props
 }: ButtonViewProps) => {
   const theme = useTheme(_theme);
-
+  const color = _color ?? theme.dynamicColors.backMain;
+  const colorAlt = _colorAlt ?? theme.dynamicColors.backAlt;
   const textColor =
     mode === "outline"
       ? !alt
-        ? theme.dynamicColors.text
-        : theme.dynamicColors.textMain
-      : theme.dynamicColors.textOnMain;
+        ? (_textColor ?? theme.dynamicColors.text)
+        : (_textColorAlt ?? theme.dynamicColors.textMain)
+      : (_textColorOn ?? theme.dynamicColors.textOnMain);
+  const borderColorAlt = _borderColorAlt ?? theme.dynamicColors.ultraLight;
   const childrenStyles = React.useMemo(() => {
     return {
       color: textColor,
       opacity: indicator !== "none" ? 0 : 1,
     };
   }, [textColor, indicator]);
+  const styleBtn = React.useMemo(() => {
+    return [
+      styles.container,
+      match(mode)
+        .with("default", () => ({
+          backgroundColor: !alt ? color : colorAlt,
+          borderColor: "transparent",
+        }))
+        .with("outline", () => ({
+          backgroundColor: "transparent",
+          borderColor: !alt ? borderColorAlt : color,
+        }))
+        .with("gradient", () => ({
+          backgroundColor: "transparent",
+          borderColor: "transparent",
+          borderWidth: 0,
+        }))
+        .exhaustive(),
+      match(effect)
+        .with("glass", () => stylesEffect.glass)
+        .with("subtle", () => stylesEffect.subtle)
+        .with("none", () => null)
+        .exhaustive(),
+      style,
+    ];
+  }, [mode, alt, color, colorAlt, borderColorAlt, style, effect]);
+  const elementBackground =
+    mode !== "gradient" ? null : (
+      <View style={StyleSheet.absoluteFill}>
+        <GradientLinear
+          stops={[
+            {
+              offset: 0,
+              stopColor: !alt ? color : colorAlt,
+            },
+            {
+              offset: 100,
+              stopColor: !alt ? colorAlt : color,
+            },
+          ]}
+          width="100%"
+          height="100%"
+        />
+      </View>
+    );
+  const elementIndicator = match(indicator)
+    .with("activity", () => (
+      <ActivityIndicator size={indicatorSize} color={textColor} />
+    ))
+    .with("success", () => (
+      <Text style={[{ fontSize: indicatorSize, color: textColor }]}>
+        {"✔"}
+      </Text>
+    ))
+    .with("none", () => null)
+    .exhaustive();
+
   return (
-    <View
-      {...props}
-      style={[
-        styles.container,
-        match(mode)
-          .with("default", () => ({
-            backgroundColor: !alt
-              ? theme.dynamicColors.backMain
-              : theme.dynamicColors.backAlt,
-            borderColor: "transparent",
-          }))
-          .with("outline", () => ({
-            backgroundColor: "transparent", // theme.dynamicColors.back,
-            borderColor: !alt
-              ? theme.dynamicColors.ultraLight
-              : theme.dynamicColors.backMain,
-          }))
-          .with("gradient", () => ({
-            backgroundColor: "transparent",
-            borderColor: "transparent",
-            borderWidth: 0,
-          }))
-          .exhaustive(),
-        props.style,
-      ]}
-    >
-      {/* {mode !== "gradient" ? null : (
-        <View style={StyleSheet.absoluteFill}>
-          <GradientLinear
-            stops={[
-              {
-                offset: 0,
-                stopColor: !alt
-                  ? theme.dynamicColors.
-                  : gradients["purple100dark"][0],
-              },
-              {
-                offset: 100,
-                stopColor: !alt
-                  ? gradients["purple100"][1]
-                  : gradients["purple100dark"][1],
-              },
-            ]}
-            width="100%"
-            height="100%"
-            x1={0}
-            y1={0}
-            x2={"100%"}
-            y2={0}
-          />
-        </View>
-      )} */}
+    <BlurView blurAmount={blurAmount} style={styleBtn} {...props}>
+      {elementBackground}
       <SpacedView
-        horizontal={horizontalSpace}
-        vertical={verticalSpace}
+        horizontal={spaceHorizontal}
+        vertical={spaceVertical}
+        gap={spaceGap}
         style={styles.row}
       >
-        {indicator === "none" ? null : indicator === "activity" ? (
-          <View style={styles.indicatorContainer}>
-            <ActivityIndicator size={indicatorSize} color={textColor} />
-          </View>
-        ) : (
-          indicator === "success" && (
-            <View style={styles.indicatorContainer}>
-              <Text style={[{ fontSize: indicatorSize, color: textColor }]}>
-                {"✔"}
-              </Text>
-            </View>
-          )
-        )}
+        {elementIndicator ? (
+          <View style={styles.indicatorContainer}>{elementIndicator}</View>
+        ) : null}
         {typeof children === "function" ? (
           children(childrenStyles)
         ) : (
-          <Text style={childrenStyles}>{children}</Text>
+          <Text style={[childrenStyles, styles.row]}>{children}</Text>
         )}
       </SpacedView>
-    </View>
+    </BlurView>
   );
 };
 

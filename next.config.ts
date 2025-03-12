@@ -35,6 +35,8 @@ const nextConfig: NextConfig = {
     },
   },
   webpack: (config, { webpack }) => {
+    config.resolve.mainFields = ["module", "main"];
+
     // react-native packages requires often global __DEV__ constant
     config.plugins.push(
       new webpack.DefinePlugin({

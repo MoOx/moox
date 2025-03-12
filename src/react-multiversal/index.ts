@@ -58,11 +58,11 @@ export const squareStyle = (s?: AbsoluteSize) => {
   const v = typeof s !== "number" ? size(s) : s;
   return { width: v, height: v };
 };
-export const horizontalSpaceStyle = (s?: Size) => {
+export const spaceHorizontalStyle = (s?: Size) => {
   const v = typeof s !== "number" ? size(s) : s;
   return v > 0 ? { paddingHorizontal: v } : { marginHorizontal: v };
 };
-export const verticalSpaceStyle = (s?: Size) => {
+export const spaceVerticalStyle = (s?: Size) => {
   const v = typeof s !== "number" ? size(s) : s;
   return v > 0 ? { paddingVertical: v } : { marginVertical: v };
 };

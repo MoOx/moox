@@ -15,8 +15,8 @@ export default function Pill({
   year,
   ago = false,
   pillSpace = "xs",
-  horizontalSpace = "l",
-  verticalSpace = "xs",
+  spaceHorizontal = "l",
+  spaceVertical = "xs",
 }: {
   style?: StyleProp<ViewStyle>;
   pre?: string;
@@ -26,8 +26,8 @@ export default function Pill({
   year: number;
   ago?: boolean;
   pillSpace?: AbsoluteSize;
-  horizontalSpace?: AbsoluteSize;
-  verticalSpace?: AbsoluteSize;
+  spaceHorizontal?: AbsoluteSize;
+  spaceVertical?: AbsoluteSize;
 }) {
   const theme = useTheme();
   const thisYear = React.useMemo(() => new Date().getFullYear(), []);
@@ -38,16 +38,16 @@ export default function Pill({
       style={[
         {
           backgroundColor: alpha(theme.colors.backMain, 0.25),
-          WebkitBackdropFilter: "blur(10px)",
-          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(6px)",
+          backdropFilter: "blur(6px)",
           borderRadius: 100,
         },
         style,
       ]}
     >
       <SpacedView
-        horizontal={horizontalSpace}
-        vertical={verticalSpace}
+        horizontal={spaceHorizontal}
+        vertical={spaceVertical}
         style={[theme.styles.backAlt, { borderRadius: 100 }]}
       >
         {!pre ? null : (

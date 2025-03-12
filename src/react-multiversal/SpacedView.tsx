@@ -3,9 +3,9 @@ import { View, ViewProps } from "react-native";
 
 import {
   gapSpaceStyle,
-  horizontalSpaceStyle,
+  spaceHorizontalStyle,
   Size,
-  verticalSpaceStyle,
+  spaceVerticalStyle,
 } from "@/react-multiversal";
 
 const SpacedView = ({
@@ -23,8 +23,8 @@ const SpacedView = ({
   <View
     {...props}
     style={[
-      verticalSpaceStyle(vertical),
-      horizontalSpaceStyle(horizontal),
+      spaceVerticalStyle(vertical),
+      spaceHorizontalStyle(horizontal),
       gapSpaceStyle(gap),
       style,
     ]}

@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { boxShadow, themeLight, useTheme } from "@/app/styles";
+import { boxShadows, themeLight, useTheme } from "@/app/styles";
+import GlassView from "@/components/GlassView";
+import LinkButton from "@/components/LinkButton";
 import { socials } from "@/consts";
 import { size } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
@@ -8,7 +10,6 @@ import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import { GradientRadial } from "@/react-multiversal/GradientRadial";
-import LinkView from "@/react-multiversal/LinkView";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
@@ -97,77 +98,73 @@ const testimonials2 = testimonials.slice(midpoint);
 const TestimonialItem = ({ item }: { item: Testimonial }) => {
   const theme = useTheme("dark");
   return (
-    <SpacedView
-      key={item.name}
-      horizontal="m"
-      vertical="m"
-      gap="s"
+    <GlassView
+      blurAmount={48}
       style={{
         borderRadius: size("s"),
         flexShrink: 1,
         flexBasis: 360,
-        boxShadow: [boxShadow.moreVisible, boxShadow.forTransparent].join(","),
+        boxShadow: boxShadows.moreVisible,
       }}
     >
-      <GradientLinear
-        angle={-90}
-        stops={[
-          { offset: 0, stopColor: "#F2F2F2", stopOpacity: "0.1" },
-          {
-            offset: 100,
-            stopColor: "#E1E1E1",
-            stopOpacity: "0.35",
-          },
-        ]}
-        style={[
-          StyleSheet.absoluteFill,
-          { borderRadius: size("s"), backdropFilter: "blur(4px)" },
-        ]}
-      />
-      <SVGQuote
-        width={32}
-        height={32}
-        fill={theme.dynamicColors.text}
-        style={{ zIndex: 1 }}
-      />
-      <Text style={[fontStyles.ios.callout, theme.styles.text]}>
-        {item.content}
-      </Text>
-      <SpacedView
-        gap="xs"
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-        }}
-      >
-        <Avatar
-          size={36}
-          borderWidth={1}
-          borderColor="#979797"
-          uri={item.avatar}
+      <SpacedView key={item.name} horizontal="m" vertical="m" gap="s">
+        <GradientLinear
+          angle={-90}
+          stops={[
+            { offset: 0, stopColor: "#F2F2F2", stopOpacity: "0.1" },
+            {
+              offset: 100,
+              stopColor: "#E1E1E1",
+              stopOpacity: "0.35",
+            },
+          ]}
+          style={[StyleSheet.absoluteFill, { borderRadius: size("s") }]}
         />
-        <View>
-          <Text
-            style={[
-              fontStyles.iosEm.body,
-              theme.styles.text,
-              { opacity: 0.75 },
-            ]}
-          >
-            {item.name}
-          </Text>
-          <Text
-            style={[
-              fontStyles.ios.caption1,
-              theme.styles.text,
-              { opacity: 0.5 },
-            ]}
-          >
-            {item.title}
-          </Text>
-        </View>
+        <SVGQuote
+          width={32}
+          height={32}
+          fill={theme.dynamicColors.text}
+          style={{ zIndex: 1 }}
+        />
+        <Text style={[fontStyles.ios.callout, theme.styles.text]}>
+          {item.content}
+        </Text>
+        <SpacedView
+          gap="xs"
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Avatar
+            size={36}
+            borderWidth={1}
+            borderColor="#979797"
+            uri={item.avatar}
+          />
+          <View>
+            <Text
+              style={[
+                fontStyles.iosEm.body,
+                theme.styles.text,
+                { opacity: 0.75 },
+              ]}
+            >
+              {item.name}
+            </Text>
+            <Text
+              style={[
+                fontStyles.ios.caption1,
+                theme.styles.text,
+                { opacity: 0.5 },
+              ]}
+            >
+              {item.title}
+            </Text>
+          </View>
+        </SpacedView>
       </SpacedView>
-    </SpacedView>
+    </GlassView>
   );
 };
 
@@ -304,36 +301,28 @@ export default function BlockTestimonials() {
             </SpacedView>
           </View>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <LinkView
+            <LinkButton
+              spaceHorizontal="xl"
+              spaceVertical="m"
+              color="rgb(10, 102, 194)"
               href={`${socials.linkedin}/details/recommendations/`}
-              style={[
-                {
-                  backgroundColor: "rgb(10, 102, 194)",
-                  borderRadius: size("xl"),
-                  maxWidth: "100%",
-                  boxShadow: boxShadow.default,
-                },
-              ]}
             >
-              <SpacedView
-                horizontal="xxl"
-                vertical="m"
-                gap="s"
-                style={{ flexDirection: "row", alignItems: "center" }}
-              >
-                <Text
-                  style={[fontStyles.iosEm.title3, theme.styles.textOnMain]}
-                >
-                  {"Read all my Recommendations"}
-                </Text>
-                <SVGSocialLinkedin
-                  width={28}
-                  height={28}
-                  fill={theme.dynamicColors.textOnMain}
-                  style={{ flexShrink: 0 }}
-                />
-              </SpacedView>
-            </LinkView>
+              {() => (
+                <>
+                  <Text
+                    style={[fontStyles.iosEm.title3, theme.styles.textOnMain]}
+                  >
+                    {"Read all my Recommendations"}
+                  </Text>
+                  <SVGSocialLinkedin
+                    width={28}
+                    height={28}
+                    fill={theme.dynamicColors.textOnMain}
+                    style={{ flexShrink: 0 }}
+                  />
+                </>
+              )}
+            </LinkButton>
             <Spacer size="m" />
           </View>
         </SpacedView>

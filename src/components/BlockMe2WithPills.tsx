@@ -24,8 +24,8 @@ export default function BlockMe2WithPills() {
               year={2007}
               titleStyle={[fontStyles.iosEm.title3, { fontWeight: "900" }]}
               pillSpace="s"
-              horizontalSpace="xxl"
-              verticalSpace="xs"
+              spaceHorizontal="xxl"
+              spaceVertical="xs"
             />
           </Parallax>
           <Parallax
@@ -38,8 +38,8 @@ export default function BlockMe2WithPills() {
               year={2018}
               titleStyle={[fontStyles.iosEm.headline, { fontWeight: "900" }]}
               pillSpace="s"
-              horizontalSpace="xxl"
-              verticalSpace="xs"
+              spaceHorizontal="xxl"
+              spaceVertical="xs"
             />
           </Parallax>
           <Parallax
@@ -98,8 +98,8 @@ export default function BlockMe2WithPills() {
                   title="Mobile Developer"
                   year={2018}
                   pillSpace="s"
-                  horizontalSpace="xl"
-                  verticalSpace="xs"
+                  spaceHorizontal="xl"
+                  spaceVertical="xs"
                   titleStyle={[fontStyles.iosEm.callout]}
                 />
               </Parallax>
