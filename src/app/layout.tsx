@@ -2,6 +2,7 @@ import "@/__DEV__";
 import "@/app/styles.css";
 import "@/react-multiversal/react-native/Next.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Viewport } from "next";
 
 import { getWebHtmlClass, getWebStyleSheet } from "@/app/styles";
 import { WebsiteMobileMenuBackdropStyles } from "@/components/WebsiteMobileMenu";
@@ -13,6 +14,10 @@ import {
   UserColorScheme,
 } from "@/react-multiversal/theme/colorScheme";
 import Next_UserColorSchemeInit from "@/react-multiversal/theme/Next_UserColorSchemeInit";
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
+};
 
 export default /*async*/ function RootLayout({
   children,
@@ -70,11 +75,6 @@ export default /*async*/ function RootLayout({
         {/* <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000f2b" /> */}
         <meta name="msapplication-TileColor" content="#01093C" />
         <meta name="theme-color" content={"#480D9B"} />
-
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
 
         <Next_UserColorSchemeInit colorScheme={userColorScheme} />
         <Next_IfWindowWidthIs />
