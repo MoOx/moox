@@ -192,11 +192,7 @@ export default function ColorSchemeToggle({
     onBlur,
   });
   const activeTheme = hasAnyFocus ? focusedTheme : theme;
-  const value = supportsHover()
-    ? hasAnyFocus
-      ? _value
-      : actualValue
-    : actualValue;
+  const value = supportsHover() ? (hasAnyFocus ? _value : actualValue) : _value;
 
   const dynamicStyles = React.useMemo(
     () =>
@@ -247,18 +243,18 @@ export default function ColorSchemeToggle({
     const nextValue =
       // we loop from the opposite system color scheme to avoid unecessary click
       systemColorScheme === "light"
-        ? value === "light"
+        ? _value === "light"
           ? "auto"
-          : value === "auto"
+          : _value === "auto"
             ? "dark"
             : "light"
-        : value === "dark"
+        : _value === "dark"
           ? "auto"
-          : value === "auto"
+          : _value === "auto"
             ? "light"
             : "dark";
     onChange(nextValue);
-  }, [onChange, systemColorScheme, value]);
+  }, [onChange, systemColorScheme, _value]);
 
   const animatedBackgroundStyle = useAnimatedStyle(
     () => ({
