@@ -22,6 +22,7 @@ import { fontStyles } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
+import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 
@@ -31,10 +32,15 @@ export default function WebsiteFooter() {
   return (
     <>
       <WebsiteFooterLandscape>
-        <IfWindowWidthIs smallerThan="m">
-          <Spacer size="xxxl" />
-        </IfWindowWidthIs>
-        <BlockInterestedButtons />
+        <Parallax
+          staticTransforms={[{ translateY: 20 }]}
+          transforms={[{ translateY: -20 }, { scale: 0.05 }]}
+        >
+          <IfWindowWidthIs smallerThan="m">
+            <Spacer size="xxxl" />
+          </IfWindowWidthIs>
+          <BlockInterestedButtons />
+        </Parallax>
       </WebsiteFooterLandscape>
       <View
         style={[theme.styles.backAlt, { alignItems: "center" }]}
