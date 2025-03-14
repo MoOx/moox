@@ -49,12 +49,12 @@ export default function Me({
             stops={[
               {
                 offset: 0,
-                stopColor: theme.colors.textLight2,
+                stopColor: theme.dynamicColors.textLight2,
                 stopOpacity: "0.3",
               },
               {
                 offset: 80,
-                stopColor: theme.colors.textLight1,
+                stopColor: theme.dynamicColors.textLight1,
                 stopOpacity: "0",
               },
             ]}
@@ -74,12 +74,12 @@ export default function Me({
             stops={[
               {
                 offset: 0,
-                stopColor: theme.colors.textLight2,
+                stopColor: theme.dynamicColors.textLight2,
                 stopOpacity: "0.4",
               },
               {
                 offset: 80,
-                stopColor: theme.colors.textLight1,
+                stopColor: theme.dynamicColors.textLight1,
                 stopOpacity: "0",
               },
             ]}
