@@ -1,10 +1,12 @@
 import "@/__DEV__";
 import "@/app/styles.css";
 import "@/react-multiversal/react-native/Next.css";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Viewport } from "next";
 
 import { getWebHtmlClass, getWebStyleSheet } from "@/app/styles";
+import AnalyticsMatomo from "@/components/AnalyticsMatomo";
 import { WebsiteMobileMenuBackdropStyles } from "@/components/WebsiteMobileMenu";
 import { Next_IfWindowWidthIs } from "@/react-multiversal/IfWindowWidthIs";
 import { NextStyleSheetProvider } from "@/react-multiversal/react-native/NextStyleSheetProvider";
@@ -86,6 +88,8 @@ export default /*async*/ function RootLayout({
           <ReactNativeProviders>{children}</ReactNativeProviders>
         </NextStyleSheetProvider>
         <SpeedInsights />
+        <Analytics />
+        <AnalyticsMatomo />
       </body>
     </html>
   );
