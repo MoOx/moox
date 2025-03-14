@@ -109,8 +109,18 @@ export default function Me({
         <style
           dangerouslySetInnerHTML={{
             __html: `
-                :root { --maxMeBrightness: 110% }
-                @media (prefers-color-scheme: dark) { :root { --maxMeBrightness: 90% }}
+                .userColorScheme-auto,
+                .userColorScheme-light {
+                  --maxMeBrightness: 110%
+                }
+                .userColorScheme-dark {
+                  --maxMeBrightness: 90%
+                }
+                @media (prefers-color-scheme: dark) {
+                  .userColorScheme-auto {
+                    --maxMeBrightness: 90%
+                  }
+                }
                 `,
           }}
         />
