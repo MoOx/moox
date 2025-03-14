@@ -18,12 +18,12 @@ import { size, WindowWidth } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
 import BlurView from "@/react-multiversal/BlurView";
 import Container from "@/react-multiversal/Container";
+import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
-import { boxShadowGlass } from "@/react-multiversal/utils.styles";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 

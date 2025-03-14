@@ -3,7 +3,7 @@ import { View, type ViewProps } from "react-native";
 
 export type BlurViewProps = ViewProps & {
   blurAmount?: number;
-  blurType?: "light" | "dark" | "default";
+  // blurType?: BlurType;
 };
 
 export default function BlurView({
@@ -17,7 +17,7 @@ export default function BlurView({
       {...props}
       style={[
         style,
-        {
+        blurAmount !== 0 && {
           WebkitBackdropFilter: `blur(${blurAmount}px)`,
           backdropFilter: `blur(${blurAmount}px)`,
         },

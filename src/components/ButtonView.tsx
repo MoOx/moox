@@ -6,10 +6,10 @@ import { match } from "ts-pattern";
 import { alpha, colors, useTheme } from "@/app/styles";
 import { Size } from "@/react-multiversal";
 import BlurView from "@/react-multiversal/BlurView";
+import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
-import { boxShadowGlass } from "@/react-multiversal/utils.styles";
 
 export type Mode = "outline" | "default" | "gradient";
 export type Indicator = "none" | "activity" | "success";

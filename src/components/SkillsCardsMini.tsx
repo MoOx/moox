@@ -3,8 +3,10 @@ import * as React from "react";
 import { StyleSheet, Text, View, ViewStyle } from "react-native";
 
 import { themeDark } from "@/app/styles";
-import ViewWithGradient from "@/components/ViewWithGradient";
+import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
+import { boxShadowGlass } from "@/react-multiversal/GlassView";
+import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkText from "@/react-multiversal/LinkText";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
@@ -32,6 +34,8 @@ type SkillItem = {
   icon?: React.ReactNode;
   child: React.ReactNode;
 };
+
+const borderRadius = size("s");
 
 export default function SkillsCardsMini() {
   const skills: SkillItem[] = React.useMemo(
@@ -171,12 +175,30 @@ export default function SkillsCardsMini() {
       }}
     >
       {skills.map((item) => (
-        <ViewWithGradient
+        <View
           key={item.title}
-          color={item.bg}
-          color2={item.bg2}
-          style={{ flexGrow: 1, flexBasis: 180, minWidth: 180 }}
+          style={{
+            flexGrow: 1,
+            flexBasis: 180,
+            minWidth: 180,
+            overflow: "hidden",
+            borderRadius,
+          }}
         >
+          <GradientLinear
+            angle={60}
+            stops={[
+              { offset: 10, stopColor: item.bg },
+              { offset: 100, stopColor: item.bg2 },
+            ]}
+            style={StyleSheet.absoluteFill}
+          />
+          <View
+            style={[
+              StyleSheet.absoluteFill,
+              { borderRadius, boxShadow: boxShadowGlass() },
+            ]}
+          />
           <SpacedView horizontal="m" vertical="m" style={{ flexGrow: 1 }}>
             <SpacedView
               gap="xs"
@@ -196,7 +218,7 @@ export default function SkillsCardsMini() {
             <Spacer size="s" />
             {item.child}
           </SpacedView>
-        </ViewWithGradient>
+        </View>
       ))}
     </SpacedView>
   );

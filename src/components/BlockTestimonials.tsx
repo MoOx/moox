@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import { boxShadows, themeLight, useTheme } from "@/app/styles";
-import GlassView from "@/components/GlassView";
 import LinkButton from "@/components/LinkButton";
 import { socials } from "@/consts";
 import { size } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
+import BlurView from "@/react-multiversal/BlurView";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
+import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import { GradientRadial } from "@/react-multiversal/GradientRadial";
 import Parallax from "@/react-multiversal/Parallax";
@@ -98,7 +99,7 @@ const testimonials2 = testimonials.slice(midpoint);
 const TestimonialItem = ({ item }: { item: Testimonial }) => {
   const theme = useTheme("dark");
   return (
-    <GlassView
+    <BlurView
       blurAmount={48}
       style={{
         borderRadius: size("s"),
@@ -107,19 +108,25 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
         boxShadow: boxShadows.moreVisible,
       }}
     >
+      <GradientLinear
+        angle={-90}
+        stops={[
+          { offset: 0, stopColor: "#F2F2F2", stopOpacity: "0.1" },
+          {
+            offset: 100,
+            stopColor: "#E1E1E1",
+            stopOpacity: "0.35",
+          },
+        ]}
+        style={[StyleSheet.absoluteFill, { borderRadius: size("s") }]}
+      />
+      <View
+        style={[
+          StyleSheet.absoluteFill,
+          { borderRadius: size("s"), boxShadow: boxShadowGlass() },
+        ]}
+      />
       <SpacedView key={item.name} horizontal="m" vertical="m" gap="s">
-        <GradientLinear
-          angle={-90}
-          stops={[
-            { offset: 0, stopColor: "#F2F2F2", stopOpacity: "0.1" },
-            {
-              offset: 100,
-              stopColor: "#E1E1E1",
-              stopOpacity: "0.35",
-            },
-          ]}
-          style={[StyleSheet.absoluteFill, { borderRadius: size("s") }]}
-        />
         <SVGQuote
           width={32}
           height={32}
@@ -164,7 +171,7 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
           </View>
         </SpacedView>
       </SpacedView>
-    </GlassView>
+    </BlurView>
   );
 };
 
