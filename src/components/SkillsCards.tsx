@@ -3,8 +3,10 @@ import * as React from "react";
 import { StyleSheet, Text, View, ViewStyle } from "react-native";
 
 import { themeDark } from "@/app/styles";
-import ViewWithGradient from "@/components/ViewWithGradient";
+import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
+import { boxShadowGlass } from "@/react-multiversal/GlassView";
+import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
@@ -239,6 +241,7 @@ export default function SkillsCards() {
     ],
     []
   );
+  const borderRadius = size("s");
 
   return (
     <SpacedView
@@ -251,20 +254,38 @@ export default function SkillsCards() {
       }}
     >
       {skills.map((item) => (
-        <ViewWithGradient
+        <View
           key={item.title}
-          color={item.bg}
-          color2={item.bg2}
-          style={{ flexGrow: 1, flexBasis: 240, minWidth: 240 }}
+          style={{
+            flexGrow: 1,
+            flexBasis: 240,
+            minWidth: 240,
+            borderRadius,
+          }}
         >
           <SpacedView
             horizontal="xl"
             vertical="xl"
             style={{
               flexGrow: 1,
-              // flexBasis: 240,
+              borderRadius,
+              overflow: "hidden",
             }}
           >
+            <GradientLinear
+              angle={60}
+              stops={[
+                { offset: 10, stopColor: item.bg },
+                { offset: 100, stopColor: item.bg2 },
+              ]}
+              style={StyleSheet.absoluteFill}
+            />
+            <View
+              style={[
+                StyleSheet.absoluteFill,
+                { borderRadius, boxShadow: boxShadowGlass() },
+              ]}
+            />
             <SpacedView
               gap="s"
               style={{
@@ -283,7 +304,7 @@ export default function SkillsCards() {
             <Spacer size="s" />
             {item.child}
           </SpacedView>
-        </ViewWithGradient>
+        </View>
       ))}
     </SpacedView>
   );

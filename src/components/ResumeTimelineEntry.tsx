@@ -5,12 +5,15 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { ResumeItem } from "@/api";
 import { boxShadows, useTheme } from "@/app/styles";
-import { Size } from "@/react-multiversal";
+import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
+import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import LinkText from "@/react-multiversal/LinkText";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
+
+const borderRadius = size("s");
 
 const styles = StyleSheet.create({
   container: {
@@ -18,9 +21,9 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   imageWrapper: {
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
     overflow: "hidden",
+    borderTopLeftRadius: borderRadius,
+    borderTopRightRadius: borderRadius,
   },
   company: {
     textAlign: "right",
@@ -69,7 +72,7 @@ export const ResumeTimelineEntry = ({
       style={[
         theme.styles.backOnAlt,
         {
-          borderRadius: 10,
+          borderRadius,
           flexShrink: 1,
           flexBasis: 480,
           boxShadow: boxShadows.default,
@@ -94,6 +97,12 @@ export const ResumeTimelineEntry = ({
           />
         </View>
       )}
+      <View
+        style={[
+          StyleSheet.absoluteFill,
+          { borderRadius, boxShadow: boxShadowGlass() },
+        ]}
+      />
       <SpacedView
         style={{ flexGrow: 1 }}
         horizontal={horizontal}

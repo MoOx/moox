@@ -3,8 +3,8 @@ import { View, ViewProps } from "react-native";
 
 import {
   gapSpaceStyle,
-  spaceHorizontalStyle,
   Size,
+  spaceHorizontalStyle,
   spaceVerticalStyle,
 } from "@/react-multiversal";
 
