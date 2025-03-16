@@ -87,6 +87,7 @@ export default function BlockMe2WithPills() {
                   title="Web Developer"
                   year={2007}
                   pillSpace="s"
+                  transitionSize="s"
                 />
               </Parallax>
               <Parallax
@@ -101,13 +102,19 @@ export default function BlockMe2WithPills() {
                   spaceHorizontal="xl"
                   spaceVertical="xs"
                   titleStyle={[fontStyles.iosEm.callout]}
+                  transitionSize="s"
                 />
               </Parallax>
               <Parallax
                 style={{ position: "absolute", top: -50, right: 80 }}
                 transforms={pTransforms(10, 0, -0.05)}
               >
-                <Pill title="First Website" year={1999} ago={true} />
+                <Pill
+                  title="First Website"
+                  year={1999}
+                  ago={true}
+                  transitionSize="s"
+                />
               </Parallax>
               <Parallax
                 style={{ position: "absolute", top: 280, left: 30 }}
@@ -118,6 +125,7 @@ export default function BlockMe2WithPills() {
                   detail="PalmOS"
                   year={2006}
                   ago={true}
+                  transitionSize="s"
                 />
               </Parallax>
             </Me>

@@ -80,46 +80,72 @@ export default function Home() {
             }}
           >
             <View>
-              <Text
-                style={[
-                  fontStyles.ios.headline,
-                  theme.styles.textLight2,
-                  // { fontWeight: "200" },
-                ]}
-              >
+              <Text style={[fontStyles.ios.headline, theme.styles.textLight2]}>
                 {"Hello,"}
               </Text>
               <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
                 {"I'm "}{" "}
-                <Text style={gradientTextFlashyStylesInv(theme)}>{"Max."}</Text>
+                <React.unstable_ViewTransition name="text--max">
+                  <Text style={gradientTextFlashyStylesInv(theme)}>
+                    {"Max."}
+                  </Text>
+                </React.unstable_ViewTransition>
               </Text>
             </View>
-            <View>
-              <Text
-                style={[
-                  fontStyles.iosEm.headline,
-                  theme.styles.textLight2,
-                  // { fontWeight: "200" },
-                ]}
-              >
-                {"A Web & Mobile"}
+            <IfWindowWidthIs largerThan={WindowWidth.s}>
+              <View>
+                <Text
+                  style={[fontStyles.iosEm.headline, theme.styles.textLight2]}
+                >
+                  {"A Web & Mobile"}
+                </Text>
+                <React.unstable_ViewTransition name="text--front-end-developer">
+                  <Text
+                    style={[
+                      theme.styles.text,
+                      gradientTextFlashyStyles(theme),
+                      {
+                        fontSize: 48,
+                        lineHeight: 48,
+                        fontWeight: "900",
+                      },
+                    ]}
+                  >
+                    {"Front-End Developer."}
+                  </Text>
+                </React.unstable_ViewTransition>
+              </View>
+              <Spacer size="m" />
+              <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
+                {"I can build the "}
+                <Text style={gradientTextFlashyStylesInv(theme)}>{"app"}</Text>
+                {"\n"}
+                {" you are dreaming about."}
               </Text>
-              <Text
-                style={[
-                  // fontStyles.iosEm.largeTitle,
-                  gradientTextFlashyStyles(theme),
-                  {
-                    fontSize: 42,
-                    lineHeight: 42,
-                    fontWeight: "900",
-                  },
-                ]}
-              >
-                {"Front-End Developer."}
-              </Text>
-            </View>
-
+            </IfWindowWidthIs>
             <IfWindowWidthIs smallerThan={WindowWidth.s}>
+              <View>
+                <Text
+                  style={[fontStyles.iosEm.headline, theme.styles.textLight2]}
+                >
+                  {"A Web & Mobile"}
+                </Text>
+                <React.unstable_ViewTransition name="text--front-end-developer-m">
+                  <Text
+                    style={[
+                      theme.styles.text,
+                      gradientTextFlashyStyles(theme),
+                      {
+                        fontSize: 48,
+                        lineHeight: 48,
+                        fontWeight: "900",
+                      },
+                    ]}
+                  >
+                    {"Front-End Developer."}
+                  </Text>
+                </React.unstable_ViewTransition>
+              </View>
               <Text
                 style={[
                   fontStyles.iosEm.title1,
@@ -129,15 +155,6 @@ export default function Home() {
               >
                 {"I can build the "}
                 <Text style={gradientTextFlashyStylesInv(theme)}>{"app"}</Text>
-                {" you are dreaming about."}
-              </Text>
-            </IfWindowWidthIs>
-            <IfWindowWidthIs largerThan={WindowWidth.s}>
-              <Spacer size="m" />
-              <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-                {"I can build the "}
-                <Text style={gradientTextFlashyStylesInv(theme)}>{"app"}</Text>
-                {"\n"}
                 {" you are dreaming about."}
               </Text>
             </IfWindowWidthIs>

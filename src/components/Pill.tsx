@@ -18,6 +18,7 @@ export default function Pill({
   pillSpace = "xs",
   spaceHorizontal = "l",
   spaceVertical = "xs",
+  transitionSize = "",
 }: {
   style?: StyleProp<ViewStyle>;
   pre?: string;
@@ -29,9 +30,14 @@ export default function Pill({
   pillSpace?: AbsoluteSize;
   spaceHorizontal?: AbsoluteSize;
   spaceVertical?: AbsoluteSize;
+  transitionSize?: string;
 }) {
   const theme = useTheme();
   const thisYear = React.useMemo(() => new Date().getFullYear(), []);
+  const transitionName =
+    "text--" +
+    (title + pre + detail + year).replace(/[^a-z0-9/s]+/gi, "-") +
+    transitionSize;
   return (
     <GlassView
       borderWidth={0.5}
@@ -43,73 +49,75 @@ export default function Pill({
         style,
       ]}
     >
-      <SpacedView horizontal={pillSpace} vertical={pillSpace}>
-        <SpacedView
-          horizontal={spaceHorizontal}
-          vertical={spaceVertical}
-          style={[theme.styles.backAlt, { borderRadius: 100 }]}
-        >
-          {!pre ? null : (
-            <Text
-              style={[
-                fontStyles.iosEm.caption2,
-                theme.styles.textLight1,
-                {
-                  lineHeight: fontStyles.iosEm.caption2.fontSize,
-                  fontWeight: "300",
-                },
-              ]}
-            >
-              {pre}
-            </Text>
-          )}
-          <Text
-            style={[
-              titleStyle || fontStyles.iosEm.caption1,
-              pre ? theme.styles.textMainDark : theme.styles.textMain,
-              {
-                lineHeight: titleStyle
-                  ? undefined
-                  : fontStyles.iosEm.caption1.fontSize,
-                fontWeight: "800",
-              },
-            ]}
+      <React.unstable_ViewTransition name={transitionName}>
+        <SpacedView horizontal={pillSpace} vertical={pillSpace}>
+          <SpacedView
+            horizontal={spaceHorizontal}
+            vertical={spaceVertical}
+            style={[theme.styles.backAlt, { borderRadius: 100 }]}
           >
-            {title}
-            {!detail ? null : (
+            {!pre ? null : (
               <Text
                 style={[
                   fontStyles.iosEm.caption2,
                   theme.styles.textLight1,
                   {
-                    position: "absolute",
-                    top: 12,
-                    left: 0,
                     lineHeight: fontStyles.iosEm.caption2.fontSize,
                     fontWeight: "300",
                   },
                 ]}
               >
-                {detail}
+                {pre}
               </Text>
             )}
-          </Text>
+            <Text
+              style={[
+                titleStyle || fontStyles.iosEm.caption1,
+                pre ? theme.styles.textMainDark : theme.styles.textMain,
+                {
+                  lineHeight: titleStyle
+                    ? undefined
+                    : fontStyles.iosEm.caption1.fontSize,
+                  fontWeight: "800",
+                },
+              ]}
+            >
+              {title}
+              {!detail ? null : (
+                <Text
+                  style={[
+                    fontStyles.iosEm.caption2,
+                    theme.styles.textLight1,
+                    {
+                      position: "absolute",
+                      top: 12,
+                      left: 0,
+                      lineHeight: fontStyles.iosEm.caption2.fontSize,
+                      fontWeight: "300",
+                    },
+                  ]}
+                >
+                  {detail}
+                </Text>
+              )}
+            </Text>
 
-          <Text
-            style={[
-              fontStyles.iosEm.caption2,
-              pre ? theme.styles.textMain : theme.styles.text,
-              {
-                lineHeight: fontStyles.iosEm.caption2.fontSize,
-                fontWeight: "300",
-                textAlign: pre || detail ? "right" : "center",
-              },
-            ]}
-          >
-            {thisYear - year + " years" + (ago ? " ago" : "")}
-          </Text>
+            <Text
+              style={[
+                fontStyles.iosEm.caption2,
+                pre ? theme.styles.textMain : theme.styles.text,
+                {
+                  lineHeight: fontStyles.iosEm.caption2.fontSize,
+                  fontWeight: "300",
+                  textAlign: pre || detail ? "right" : "center",
+                },
+              ]}
+            >
+              {thisYear - year + " years" + (ago ? " ago" : "")}
+            </Text>
+          </SpacedView>
         </SpacedView>
-      </SpacedView>
+      </React.unstable_ViewTransition>
     </GlassView>
   );
 }

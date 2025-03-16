@@ -16,6 +16,8 @@ const nextConfig: NextConfig = {
     ENV: process.env.NODE_ENV,
   },
   experimental: {
+    viewTransition: true,
+
     turbo: {
       resolveAlias: {
         "react-native": "react-native-web",
@@ -34,6 +36,7 @@ const nextConfig: NextConfig = {
       ],
     },
   },
+
   webpack: (config, { webpack }) => {
     config.resolve.mainFields = ["module", "main"];
 
