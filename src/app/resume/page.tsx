@@ -32,21 +32,23 @@ export default function PageResume() {
   const theme = useTheme();
   const items = getAll<ResumeItem>("resume");
 
-  const headline = (
+  const headline = (transitionName: string) => (
     <>
-      <Text
-        style={[
-          theme.styles.text,
-          gradientTextIndigoStyles(theme),
-          {
-            fontSize: 48,
-            lineHeight: 48,
-            fontWeight: "900",
-          },
-        ]}
-      >
-        {"Front-End Developer"}
-      </Text>
+      <React.unstable_ViewTransition name={transitionName}>
+        <Text
+          style={[
+            theme.styles.text,
+            gradientTextIndigoStyles(theme),
+            {
+              fontSize: 48,
+              lineHeight: 48,
+              fontWeight: "900",
+            },
+          ]}
+        >
+          {"Front-End Developer."}
+        </Text>
+      </React.unstable_ViewTransition>
       <Text style={[fontStyles.ios.headline, theme.styles.textMainDark]}>
         {"Freelance "}
         <Text
@@ -89,34 +91,36 @@ export default function PageResume() {
               vertical="m"
               style={{ position: "absolute", top: 0, left: 0, right: -300 }}
             >
-              {headline}
+              {headline("text--front-end-developer")}
             </SpacedView>
             <Spacer size="xxxl" />
           </IfWindowWidthIs>
           <IfWindowWidthIs smallerThan={WindowWidth.m}>
-            {headline}
+            {headline("text--front-end-developer-m")}
             <Spacer size="xl" />
           </IfWindowWidthIs>
-          <Text
-            style={[
-              theme.styles.text,
-              gradientTextFlashyStylesInv(theme),
-              {
-                fontSize: 64,
-                lineHeight: 64,
-                fontWeight: "900",
-              },
-            ]}
-          >
-            {"Max"}
-          </Text>
+          <React.unstable_ViewTransition name="text--max">
+            <Text
+              style={[
+                theme.styles.text,
+                gradientTextFlashyStylesInv(theme),
+                {
+                  fontSize: 64,
+                  lineHeight: 64,
+                  fontWeight: "900",
+                },
+              ]}
+            >
+              {"Max."}
+            </Text>
+          </React.unstable_ViewTransition>
           <View>
             <Text
               style={[
                 theme.styles.textLight1,
                 {
-                  fontSize: 40,
-                  lineHeight: 40,
+                  fontSize: 44,
+                  lineHeight: 44,
                   fontWeight: "100",
                   letterSpacing: 1,
                 },
@@ -128,8 +132,8 @@ export default function PageResume() {
               style={[
                 theme.styles.textLight1,
                 {
-                  fontSize: 40,
-                  lineHeight: 40,
+                  fontSize: 44,
+                  lineHeight: 44,
                   fontWeight: "100",
                 },
               ]}
