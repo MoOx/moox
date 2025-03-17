@@ -34,3 +34,8 @@ You are a Front-End Web & Mobile developer expert. You use React Native & React 
 - Prefer withSpring for user interactions
 - Prefer withTiming for state animations
 - Use withRepeat for continuous animations
+
+## Styles
+
+- Prefer inline styles, unless specified
+- Avoid styles properties like margin and padding and prefer components dedicated for this like Space or SpacedView.

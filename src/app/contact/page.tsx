@@ -1,70 +1,55 @@
 "use client";
 import "@/__DEV__";
 
+import Image from "next/image";
 import * as React from "react";
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import Animated, { SlideInLeft } from "react-native-reanimated";
 
-import { themeLight, useTheme } from "@/app/styles";
+import { useTheme } from "@/app/styles";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import ButtonView from "@/components/ButtonView";
-import LinkButton from "@/components/LinkButton";
+import ContactCard from "@/components/ContactCard";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
-import { sendStringAsMailString, socials } from "@/consts";
+import { ind, sendStringAsMailString, socials } from "@/consts";
+import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
+import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import SVGChevronRight from "@/svgs/components/SVGChevronRight";
 import SVGContact from "@/svgs/components/SVGContact";
 import SVGEmail from "@/svgs/components/SVGEmail";
-import SVGMenuSpeechFill from "@/svgs/components/SVGMenuSpeechFill";
+import SVGJavaScriptOutline from "@/svgs/components/SVGJavaScriptOutline";
+import SVGMenuContactFill from "@/svgs/components/SVGMenuContactFill";
 import SVGPhone from "@/svgs/components/SVGPhone";
+import SVGSocialBsky from "@/svgs/components/SVGSocialBsky";
+import SVGSocialDribbble from "@/svgs/components/SVGSocialDribbble";
+import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
-
-function ContactButton({
-  Icon,
-  title,
-  subtitle,
-}: {
-  Icon: React.ComponentType<{
-    width: number;
-    height: number;
-    fill: string;
-    style?: StyleProp<ViewStyle>;
-  }>;
-  title: string;
-  subtitle: string;
-}) {
-  return (
-    <View
-      style={[
-        {
-          flexDirection: "row",
-          alignItems: "center",
-          borderRadius: 10,
-        },
-      ]}
-    >
-      <Icon width={32} height={32} fill="#fff" style={{ flexShrink: 0 }} />
-      <Spacer size="s" />
-      <View>
-        <Text style={[fontStyles.iosEm.callout, themeLight.styles.textOnMain]}>
-          {title}
-        </Text>
-        <Text style={[fontStyles.ios.caption2, themeLight.styles.textOnMain]}>
-          {subtitle}
-        </Text>
-      </View>
-    </View>
-  );
-}
+import SVGSocialX from "@/svgs/components/SVGSocialX";
 
 const styles = StyleSheet.create({
-  button: {
+  gradientEdge: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    width: size("l"),
+    zIndex: 1,
+  },
+  gradientLeft: {
+    left: 0,
+  },
+  gradientRight: {
+    right: 0,
+  },
+  cardContainer: {
     flexGrow: 1,
-    maxWidth: 240,
   },
 });
+
 export default function PageContact() {
   const theme = useTheme();
   const [isClient, setIsClient] = React.useState(false);
@@ -75,9 +60,10 @@ export default function PageContact() {
 
   return (
     <WebsiteWrapper>
-      <Container maxWidth={640}>
-        <SpacedView vertical="l" horizontal="l">
+      <Container maxWidth={768}>
+        <SpacedView vertical="m">
           <SpacedView
+            horizontal="l"
             gap="m"
             style={{
               flexDirection: "row",
@@ -87,95 +73,211 @@ export default function PageContact() {
           >
             <View style={{ flexGrow: 1 }}>
               <Text style={[fontStyles.iosEm.subhead, theme.styles.textLight2]}>
-                {"Awaiting your message"}
+                {"Hey it's BotMax"}
               </Text>
               <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-                {"Contact Max"}
+                {"What can I help with?"}
               </Text>
             </View>
             <LinkView href="/contact">
               <AvailabilityBadge showText={true} />
             </LinkView>
           </SpacedView>
-          <Spacer size="xxxl" />
-          <SpacedView
-            gap="m"
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
-          >
-            <LinkButton
-              color="rgb(10, 102, 194)"
-              style={styles.button}
-              href="https://www.linkedin.com/in/maxthirouin"
-              spaceHorizontal="xl"
+          <Spacer size="xl" />
+          <SpacedView>
+            <GradientLinear
+              angle={0}
+              stops={[
+                { offset: 0, stopColor: theme.dynamicColors.back },
+                {
+                  offset: 100,
+                  stopColor: theme.dynamicColors.back,
+                  stopOpacity: "0",
+                },
+              ]}
+              style={[styles.gradientEdge, styles.gradientLeft]}
+            />
+            <GradientLinear
+              angle={0}
+              stops={[
+                {
+                  offset: 0,
+                  stopColor: theme.dynamicColors.back,
+                  stopOpacity: "0",
+                },
+                { offset: 100, stopColor: theme.dynamicColors.back },
+              ]}
+              style={[styles.gradientEdge, styles.gradientRight]}
+            />
+            <style>
+              {`#contact-scroll { scroll-padding-inline-start: ${size("m")}px }`}
+            </style>
+            <ScrollView
+              id="contact-scroll"
+              horizontal
+              pagingEnabled={true}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingHorizontal: size("m") }}
+              // snapToAlignment="center"
             >
-              <ContactButton
-                Icon={SVGSocialLinkedin}
-                title="Reach Me"
-                subtitle="On LinkedIn"
-              />
-            </LinkButton>
-
-            <LinkButton
-              style={styles.button}
-              href={!isClient ? "" : "sms:+33" + socials.call}
-              color="#1FCE26"
-              spaceHorizontal="xl"
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <LinkView
+                  style={styles.cardContainer}
+                  href={!isClient ? "" : "sms:+33" + socials.text.value}
+                >
+                  <ContactCard
+                    Icon={SVGMenuContactFill}
+                    title={"Send Max a Message"}
+                    subtitle={"+" + ind + socials.text.value}
+                    color={socials.text.color}
+                    colorAlt={socials.text.colorAlt}
+                  />
+                </LinkView>
+              </SpacedView>
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <LinkView
+                  style={styles.cardContainer}
+                  href={
+                    !isClient
+                      ? ""
+                      : "mailto:" + sendStringAsMailString(socials.send.value)
+                  }
+                >
+                  <ContactCard
+                    Icon={SVGEmail}
+                    title={"Send Max\nan Email"}
+                    subtitle={sendStringAsMailString(socials.send.value, true)}
+                    color={socials.send.color}
+                    colorAlt={socials.send.colorAlt}
+                  />
+                </LinkView>
+              </SpacedView>
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <LinkView
+                  style={styles.cardContainer}
+                  href={!isClient ? "" : "tel:+33" + socials.call.value}
+                >
+                  <ContactCard
+                    Icon={SVGPhone}
+                    title="Call Max"
+                    subtitle={"+" + ind + socials.call.value}
+                    color={socials.call.color}
+                    colorAlt={socials.call.colorAlt}
+                  />
+                </LinkView>
+              </SpacedView>
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <a
+                  style={{ ...styles.cardContainer, textDecoration: "none" }}
+                  href={socials.vcf.value}
+                >
+                  <ContactCard
+                    Icon={SVGContact}
+                    title="Download Max's Card"
+                    subtitle="Save his info for later"
+                    color={socials.vcf.color}
+                    colorAlt={socials.vcf.colorAlt}
+                  />
+                </a>
+              </SpacedView>
+            </ScrollView>
+            <Spacer size="m" />
+            <style>
+              {`#contact-scroll-2 { scroll-padding-inline-start: ${size("m")}px }`}
+            </style>
+            <ScrollView
+              id="contact-scroll-2"
+              horizontal
+              pagingEnabled={true}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingHorizontal: size("m") }}
             >
-              <ContactButton
-                Icon={SVGMenuSpeechFill}
-                title="Text Me"
-                subtitle={"+" + socials.ind + socials.call}
-              />
-            </LinkButton>
-
-            <LinkButton
-              style={styles.button}
-              href={
-                !isClient
-                  ? ""
-                  : "mailto:" + sendStringAsMailString(socials.send)
-              }
-              color="#007AFF"
-              spaceHorizontal="xl"
-            >
-              <ContactButton
-                Icon={SVGEmail}
-                title="Email Me"
-                subtitle={sendStringAsMailString(socials.send, true)}
-              />
-            </LinkButton>
-
-            <LinkButton
-              style={styles.button}
-              href={!isClient ? "" : "tel:+33" + socials.call}
-              color="#1FCE26"
-              spaceHorizontal="xl"
-            >
-              <ContactButton
-                Icon={SVGPhone}
-                title="Call Me"
-                subtitle={"+" + socials.ind + socials.call}
-              />
-            </LinkButton>
-
-            <a
-              style={{ ...styles.button, textDecoration: "none" }}
-              href="/MaximeThirouin.vcf"
-            >
-              <ButtonView color="#FF2D55" spaceHorizontal="xl">
-                <ContactButton
-                  Icon={SVGContact}
-                  title="Save Me"
-                  subtitle="Get my contact infos"
-                />
-              </ButtonView>
-            </a>
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <LinkView
+                  style={styles.cardContainer}
+                  href={socials.linkedin.value}
+                >
+                  <ContactCard
+                    mode="outline"
+                    Icon={SVGSocialLinkedin}
+                    title={"Connect\nwith Max"}
+                    subtitle="On LinkedIn"
+                    color={socials.linkedin.color}
+                    colorAlt={socials.linkedin.colorAlt}
+                  />
+                </LinkView>
+              </SpacedView>
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <LinkView
+                  style={styles.cardContainer}
+                  href={socials.github.value}
+                >
+                  <ContactCard
+                    mode="outline"
+                    Icon={SVGSocialGithub}
+                    title="Checkout Max's Profile"
+                    subtitle="On GitHub"
+                    color={socials.github.color}
+                    colorAlt={socials.github.colorAlt}
+                  />
+                </LinkView>
+              </SpacedView>
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <LinkView
+                  style={styles.cardContainer}
+                  href={socials.bsky.value}
+                >
+                  <ContactCard
+                    mode="outline"
+                    Icon={SVGSocialBsky}
+                    title={"Connect\nwith Max"}
+                    subtitle="On Bluesky"
+                    color={socials.bsky.color}
+                    colorAlt={socials.bsky.colorAlt}
+                  />
+                </LinkView>
+              </SpacedView>
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <LinkView
+                  style={styles.cardContainer}
+                  href={socials.dribbble.value}
+                >
+                  <ContactCard
+                    mode="outline"
+                    Icon={SVGSocialDribbble}
+                    title="Check pixels"
+                    subtitle="On Dribbble"
+                    color={socials.dribbble.color}
+                    colorAlt={socials.dribbble.colorAlt}
+                  />
+                </LinkView>
+              </SpacedView>
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <LinkView style={styles.cardContainer} href={socials.npm.value}>
+                  <ContactCard
+                    mode="outline"
+                    Icon={SVGJavaScriptOutline}
+                    title="$ npm install"
+                    subtitle="@moox On NPM"
+                    color={socials.npm.color}
+                    colorAlt={socials.npm.colorAlt}
+                  />
+                </LinkView>
+              </SpacedView>
+              <SpacedView horizontal="xs" style={styles.cardContainer}>
+                <LinkView style={styles.cardContainer} href={socials.x.value}>
+                  <ContactCard
+                    mode="outline"
+                    Icon={SVGSocialX}
+                    title="Tweet to Max via DM"
+                    subtitle="On X"
+                    color={socials.x.color}
+                    colorAlt={socials.x.colorAlt}
+                  />
+                </LinkView>
+              </SpacedView>
+            </ScrollView>
           </SpacedView>
-          <Spacer size="xxxl" />
         </SpacedView>
       </Container>
     </WebsiteWrapper>

@@ -84,7 +84,6 @@ export default function WebsiteHeader() {
           height: 100,
           transform: [{ skewY: "1deg" }],
         }}
-        // angle={180}
         stops={gradientFlashyStops(theme)}
       />
       <Container
@@ -172,14 +171,14 @@ export default function WebsiteHeader() {
                 gap="m"
                 style={[styles.menuGroup, { justifyContent: "flex-end" }]}
               >
-                <LinkView href={socials.linkedin}>
+                <LinkView href={socials.linkedin.value}>
                   <SVGSocialLinkedin
                     width={20}
                     height={20}
                     fill={theme.dynamicColors.text}
                   />
                 </LinkView>
-                <LinkView href={socials.github}>
+                <LinkView href={socials.github.value}>
                   <SVGSocialGithub
                     width={20}
                     height={20}

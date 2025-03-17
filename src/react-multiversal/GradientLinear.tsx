@@ -29,6 +29,10 @@ type GradientCoordinates = {
 
 const idPrefix = "GradientLinear-";
 
+const roundNumberTo10DecimalsAsString = (number: number) => {
+  return number.toString().slice(0, 10);
+};
+
 export function calculateGradientCoordinates(
   angle: number
 ): GradientCoordinates {
@@ -38,10 +42,10 @@ export function calculateGradientCoordinates(
   const x2 = 0.5 + 0.5 * Math.cos(radians);
   const y2 = 0.5 + 0.5 * Math.sin(radians);
   return {
-    x1: x1.toString(),
-    y1: y1.toString(),
-    x2: x2.toString(),
-    y2: y2.toString(),
+    x1: roundNumberTo10DecimalsAsString(x1),
+    y1: roundNumberTo10DecimalsAsString(y1),
+    x2: roundNumberTo10DecimalsAsString(x2),
+    y2: roundNumberTo10DecimalsAsString(y2),
   };
 }
 
