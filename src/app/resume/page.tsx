@@ -144,7 +144,7 @@ export default function PageResume() {
           <Spacer size="l" />
           <View>
             <LinkView
-              href={socials.github}
+              href={socials.github.value}
               underlineOnFocus={true}
               style={{ flexDirection: "row", alignItems: "center" }}
             >
@@ -155,12 +155,12 @@ export default function PageResume() {
               />
               <Spacer size="xs" />
               <Text style={theme.styles.textLight1}>
-                {visualUrl(socials.github)}
+                {visualUrl(socials.github.value)}
               </Text>
             </LinkView>
             <Spacer size="s" />
             <LinkView
-              href={socials.linkedin}
+              href={socials.linkedin.value}
               underlineOnFocus={true}
               style={{ flexDirection: "row", alignItems: "center" }}
             >
@@ -171,7 +171,7 @@ export default function PageResume() {
               />
               <Spacer size="xs" />
               <Text style={theme.styles.textLight1}>
-                {visualUrl(socials.linkedin)}
+                {visualUrl(socials.linkedin.value)}
               </Text>
             </LinkView>
           </View>

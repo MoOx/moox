@@ -193,7 +193,7 @@ export default function BlockMaxApp({
             <Spacer size="s" />
             <Pressable
               onPress={() => {
-                Clipboard.setString(sendStringAsMailString(socials.send));
+                Clipboard.setString(sendStringAsMailString(socials.send.value));
                 setCopied(true);
                 setTimeout(() => {
                   setCopied(false);
