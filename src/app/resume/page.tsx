@@ -14,7 +14,7 @@ import BlockMe2WithPills from "@/components/BlockMe2WithPills";
 import ResumeIntro from "@/components/ResumeIntro";
 import ResumeStats from "@/components/ResumeStats";
 import { ResumeTimeline } from "@/components/ResumeTimeline";
-import SkillsCardsMini from "@/components/SkillsCardsMini";
+import SkillsCards from "@/components/SkillsCards";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { socials, visualUrl } from "@/consts";
 import { WindowWidth } from "@/react-multiversal";
@@ -197,7 +197,7 @@ export default function PageResume() {
             {"Skills"}
           </Text>
           <Spacer size="l" />
-          <SkillsCardsMini />
+          <SkillsCards mode="mini" />
         </SpacedView>
       </Container>
       <Spacer size="xxl" />
