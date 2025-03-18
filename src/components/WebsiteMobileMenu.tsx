@@ -30,16 +30,16 @@ export const WebsiteMobileMenuBackdropStyles = () => {
             .userColorScheme-auto [data-website-footer-backdrop="true"],
             .userColorScheme-light [data-website-footer-backdrop="true"] {
               background-color: ${alpha(themeLight.colors.back, 0.85)} !important;
-              backdrop-filter: saturate(200%) brightness(200%) blur(20px);
+              backdrop-filter: saturate(200%) brightness(200%) blur(24px);
             }
             .userColorScheme-dark [data-website-footer-backdrop="true"] {
               background-color: ${alpha(themeDark.colors.back, 0.85)} !important;
-              backdrop-filter: saturate(200%) brightness(200%) blur(20px);
+              backdrop-filter: saturate(200%) brightness(200%) blur(24px);
             }
             @media (prefers-color-scheme: dark) {
               .userColorScheme-auto [data-website-footer-backdrop="true"] {
                 background-color: ${alpha(themeDark.colors.back, 0.85)} !important;
-                backdrop-filter: saturate(200%) brightness(200%) blur(20px);
+                backdrop-filter: saturate(200%) brightness(200%) blur(24px);
               }
             }
           }`,
@@ -107,7 +107,7 @@ export default function WebsiteMobileMenu() {
         <SpacedView horizontal="xs" vertical="xs">
           <SpacedView
             dataSet={{ "website-footer-backdrop": "true" }}
-            horizontal="m"
+            horizontal="xl"
             vertical="xxs"
             style={{
               flexDirection: "row",
@@ -116,7 +116,7 @@ export default function WebsiteMobileMenu() {
               alignItems: "center",
 
               borderWidth: 0.5,
-              borderRadius: 16,
+              borderRadius: 18,
               borderColor: alpha(colors.black, 0.25),
               borderStyle: "solid",
               backgroundColor: theme.dynamicColors.back,
