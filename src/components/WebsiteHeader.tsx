@@ -98,6 +98,7 @@ export default function WebsiteHeader() {
       >
         <BlurView
           blurAmount={24}
+          webBackdropFilter={"saturate(175%)"}
           style={{
             backgroundColor: theme.dynamicColors.backMainAlpha05,
             padding: 5,
