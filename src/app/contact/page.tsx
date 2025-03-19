@@ -1,17 +1,15 @@
 "use client";
 import "@/__DEV__";
 
-import Image from "next/image";
 import * as React from "react";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import Animated, { SlideInLeft } from "react-native-reanimated";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { useTheme } from "@/app/styles";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
-import ButtonView from "@/components/ButtonView";
+import ChatBot from "@/components/ChatBot";
 import ContactCard from "@/components/ContactCard";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
-import { ind, sendStringAsMailString, socials } from "@/consts";
+import { socials } from "@/consts";
 import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -19,7 +17,6 @@ import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
-import SVGChevronRight from "@/svgs/components/SVGChevronRight";
 import SVGContact from "@/svgs/components/SVGContact";
 import SVGEmail from "@/svgs/components/SVGEmail";
 import SVGJavaScriptOutline from "@/svgs/components/SVGJavaScriptOutline";
@@ -30,6 +27,9 @@ import SVGSocialDribbble from "@/svgs/components/SVGSocialDribbble";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 import SVGSocialX from "@/svgs/components/SVGSocialX";
+
+const ind = "33";
+const sendStringAsMailString = (str: string) => str.replace("/", "@");
 
 const styles = StyleSheet.create({
   gradientEdge: {
@@ -118,7 +118,6 @@ export default function PageContact() {
               pagingEnabled={true}
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={{ paddingHorizontal: size("m") }}
-              // snapToAlignment="center"
             >
               <SpacedView horizontal="xs" style={styles.cardContainer}>
                 <LinkView
@@ -146,7 +145,7 @@ export default function PageContact() {
                   <ContactCard
                     Icon={SVGEmail}
                     title={"Send Max\nan Email"}
-                    subtitle={sendStringAsMailString(socials.send.value, true)}
+                    subtitle={sendStringAsMailString(socials.send.value)}
                     color={socials.send.color}
                     colorAlt={socials.send.colorAlt}
                   />
@@ -279,7 +278,9 @@ export default function PageContact() {
             </ScrollView>
           </SpacedView>
         </SpacedView>
+        <ChatBot />
       </Container>
+      <Spacer size="xxxl" />
     </WebsiteWrapper>
   );
 }
