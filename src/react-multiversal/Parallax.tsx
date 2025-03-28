@@ -335,6 +335,7 @@ export default function Parallax({
   children,
   disabled = false,
   debug = false,
+  debugState,
   springOptions,
   reverse = false,
   getScrollViewHeight = () => {
@@ -362,6 +363,7 @@ export default function Parallax({
   children?: React.ReactNode;
   disabled?: boolean;
   debug?: boolean;
+  debugState?: "start" | "end";
   springOptions?: SpringConfig;
   reverse?: boolean;
   getScrollViewHeight?: () => number;
@@ -426,16 +428,30 @@ export default function Parallax({
       getScrollViewHeight,
     });
 
-    const createInterpolation = (value: number, ratio: number = 1) => {
-      if (ratio === 0) ratio = 0.001; // Avoid division by zero
+    const createInterpolation = (value: number, ratio: number = 1): number => {
+      if (ratio === 0) ratio = 0.001;
 
-      const outputRange = [-value / ratio, 0, value / ratio];
-      if (reverse) outputRange.reverse();
+      const baseValue = value / ratio;
+      let start = -baseValue;
+      let end = baseValue;
+
+      if (reverse) {
+        start = baseValue;
+        end = -baseValue;
+      }
+
+      // Force a specific value when debugState is set
+      if (debugState === "start") {
+        return start;
+      }
+      if (debugState === "end") {
+        return end;
+      }
 
       return interpolate(
         scrollOffsetAnimValue.get(),
         inputRange,
-        outputRange,
+        [start, 0, end],
         "clamp"
       );
     };
@@ -456,6 +472,7 @@ export default function Parallax({
     reverse,
     scrollOffsetAnimValue,
     getScrollViewHeight,
+    debugState,
   ]);
 
   return (

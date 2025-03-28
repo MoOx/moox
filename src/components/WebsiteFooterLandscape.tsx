@@ -10,13 +10,15 @@ import GradientLinear from "@/react-multiversal/GradientLinear";
 import Parallax from "@/react-multiversal/Parallax";
 import SVGFlashyTriangle3 from "@/svgs/components/SVGFlashyTriangle3";
 
+const skySize = 400;
+const floorHeight = 120;
+
 export default function WebsiteFooterLandscape({
   children,
 }: {
   children?: React.ReactNode;
 }) {
   const theme = useTheme();
-  const skySize = 400;
 
   return (
     <View style={{ flex: 1 }}>
@@ -37,7 +39,7 @@ export default function WebsiteFooterLandscape({
         <View style={{ height: skySize }} />
         <Parallax
           // Radial Sun Gradient
-          springOptions={{ mass: 1, damping: 50, stiffness: 50 }}
+          springOptions={{ mass: 20, damping: 100, stiffness: 80 }}
           staticTransforms={[{ scaleX: 2 }]}
           transforms={[{ translateX: 40 }, { translateY: 40 }]}
           style={{
@@ -45,7 +47,7 @@ export default function WebsiteFooterLandscape({
             top: 0,
             left: 0,
             width: "50%",
-            height: skySize,
+            height: skySize + floorHeight + 40,
           }}
           contentStyle={[
             StyleSheet.absoluteFill,
@@ -67,15 +69,21 @@ export default function WebsiteFooterLandscape({
         </Parallax>
         <Parallax
           // Horizontal Sky Gradient
-          springOptions={{ mass: 1, damping: 100, stiffness: 50 }}
-          transforms={[{ translateY: 100 }]}
-          style={StyleSheet.absoluteFill}
+          springOptions={{ mass: 20, damping: 100, stiffness: 80 }}
+          transforms={[{ translateY: 50 }]}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: skySize + floorHeight + 50,
+          }}
           contentStyle={[
             StyleSheet.absoluteFill,
             {
               backgroundImage: `linear-gradient(to top, ${
                 theme.dynamicColors.gradientLandscape1
-              } 20%, ${theme.dynamicColors.gradientLandscape2} 50%, ${
+              } 15%, ${theme.dynamicColors.gradientLandscape2} 50%, ${
                 theme.dynamicColors.gradientLandscape3
               } 80%)`,
             },
@@ -83,12 +91,8 @@ export default function WebsiteFooterLandscape({
         />
         <Parallax
           // Sun
-          springOptions={{ mass: 1, damping: 50, stiffness: 50 }}
-          transforms={[
-            { translateX: 40 },
-            { translateY: 40 },
-            { scale: -0.25 },
-          ]}
+          springOptions={{ mass: 20, damping: 120, stiffness: 150 }}
+          transforms={[{ translateX: 40 }, { translateY: 10 }, { scale: -0.1 }]}
           style={{
             position: "absolute",
             top: 0,
@@ -106,21 +110,21 @@ export default function WebsiteFooterLandscape({
           <Image
             src="/_/landscape-sun.svg"
             alt=""
-            width={360}
-            height={360}
+            width={300}
+            height={300}
             style={{ transform: "translateY(100px)" }}
           />
         </Parallax>
         {/* Floor */}
         <View
           style={{
-            height: 120,
+            height: floorHeight,
             backgroundColor: "#01093C",
             backgroundImage: "url(/_/landscape-floor.png)",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "50% 0%",
             backgroundSize: "cover",
-            opacity: 0.9,
+            opacity: 0.94,
           }}
         />
         {/* Mountains */}

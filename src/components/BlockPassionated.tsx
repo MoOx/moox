@@ -44,10 +44,10 @@ export default function BlockPassionated({
     >
       <View style={{ transform: revertSkew }}>
         <Parallax
-          springOptions={{ damping: 30, mass: 1, stiffness: 150, velocity: 0 }}
+          springOptions={{ mass: 4, damping: 100, stiffness: 100 }}
           staticTransforms={[{ perspective: 800 }]}
           transforms={[
-            { translateY: windowWidth > WindowWidth.m ? -600 : -420 },
+            { translateY: windowWidth > WindowWidth.m ? -640 : -500 },
             { scale: -0.4 },
             { rotateX: "20deg" },
             { skewX: "2deg" },
