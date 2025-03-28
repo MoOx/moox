@@ -12,6 +12,7 @@ export type ResumeItem = ContentItem & {
   company: string;
   dateStart: string;
   dateEnd?: string;
+  wip?: boolean;
   description?: string;
   hashtags: string[];
   image?: string;
