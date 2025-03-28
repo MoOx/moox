@@ -23,6 +23,8 @@ type ThemedColors = {
   backMain: string;
   backMainAlpha05: string;
   text: string;
+  textAlt: string;
+  textDark: string;
   textMain: string;
   textMainDark: string;
   textLight1: string;
@@ -75,7 +77,8 @@ export const themedColors: ThemeColors<ThemedColors> = {
     backMain: colors.indigo,
     backMainAlpha05: alpha(colors.indigo, 0.05),
     text: "#373737",
-    // textAlt: "#666666",
+    textAlt: "#555",
+    textDark: "#111",
     textMain: colors.indigo,
     textMainDark: "#3A1E90",
     textLight1: platformColors.ios.light.gray,
@@ -104,7 +107,9 @@ export const themedColors: ThemeColors<ThemedColors> = {
     backOnAlt: "#150030",
     backMain: colors.indigo,
     backMainAlpha05: alpha(platformColors.ios.dark.gray6, 0.05),
-    text: alpha(colors.white, 0.98),
+    text: alpha(colors.white, 0.95),
+    textAlt: colors.white,
+    textDark: alpha(colors.white, 0.5),
     textMain: colors.indigo,
     textMainDark: "#7b4fff",
     textLight1: platformColors.ios.dark.gray,
@@ -174,19 +179,36 @@ export const gradientStaticIndigoStyles = [
   { offset: 0, stopColor: themeLight.colors.textIndigoAlt },
   { offset: 100, stopColor: themeLight.colors.textIndigoAlt2 },
 ];
-const gradientTextStyles = (stops: GradientStop[]) =>
+const makeGradientTextStyles = (stops: GradientStop[], angle: number = 90) =>
   ({
     alignSelf: "flex-start",
     backgroundClip: "text",
     WebkitTextFillColor: "transparent",
-    backgroundImage: `linear-gradient(90deg, ${stops.map((s) => `${s.stopColor} ${s.offset}%`).join(", ")})`,
+    backgroundImage: `linear-gradient(${angle}deg, ${stops.map((s) => `${s.stopColor} ${s.offset}%`).join(", ")})`,
   }) as TextStyle;
 
-export const gradientTextIndigoStyles = (theme: Theme<ThemedColors>) =>
-  gradientTextStyles(gradientIndigoStops(theme));
-export const gradientTextIndigoStylesInv = (theme: Theme<ThemedColors>) =>
-  gradientTextStyles(gradientIndigoStopsInv(theme));
-export const gradientTextFlashyStyles = (theme: Theme<ThemedColors>) =>
-  gradientTextStyles(gradientFlashyStops(theme));
-export const gradientTextFlashyStylesInv = (theme: Theme<ThemedColors>) =>
-  gradientTextStyles(gradientFlashyStopsInv(theme));
+export const gradientTextIndigoStyles = (
+  theme: Theme<ThemedColors>,
+  angle?: number
+) => makeGradientTextStyles(gradientIndigoStops(theme), angle);
+export const gradientTextIndigoStylesInv = (
+  theme: Theme<ThemedColors>,
+  angle?: number
+) => makeGradientTextStyles(gradientIndigoStopsInv(theme), angle);
+export const gradientTextFlashyStyles = (
+  theme: Theme<ThemedColors>,
+  angle?: number
+) => makeGradientTextStyles(gradientFlashyStops(theme), angle);
+export const gradientTextFlashyStylesInv = (
+  theme: Theme<ThemedColors>,
+  angle?: number
+) => makeGradientTextStyles(gradientFlashyStopsInv(theme), angle);
+
+export const gradientText = (theme: Theme<ThemedColors>) => [
+  { offset: 0, stopColor: theme.dynamicColors.textAlt },
+  { offset: 100, stopColor: theme.dynamicColors.textDark },
+];
+export const gradientTextStyles = (
+  theme: Theme<ThemedColors>,
+  angle: number = 180
+) => makeGradientTextStyles(gradientText(theme), angle);

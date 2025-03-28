@@ -1,5 +1,6 @@
 ---
 company: "Shopbot"
+url: "https://www.shopbot.com.au"
 title: "First focus on front-end"
 description: >
   UI Development on high-trafic websites focused on Front-end.
