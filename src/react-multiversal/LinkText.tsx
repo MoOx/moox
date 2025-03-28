@@ -7,24 +7,19 @@ import {
   GestureResponderEvent,
   Linking,
   StyleProp,
-  Text,
-  TextProps,
+  StyleSheet,
   TextStyle,
 } from "react-native";
 
-import TextUnderlined from "@/react-multiversal/TextUnderlined";
+import TextUnderlined, {
+  TextUnderlinedProps,
+} from "@/react-multiversal/TextUnderlined";
 
-export type LinkTextProps = TextProps & {
-  ref?: React.RefObject<Text | null>;
+export type LinkTextProps = TextUnderlinedProps & {
+  href: string;
   activeStyle?: StyleProp<TextStyle>;
   children: React.ReactNode;
-  href: string;
   isActive?: (s: string, pathname: string) => boolean;
-  numberOfLines?: number;
-  style?: StyleProp<TextStyle>;
-  onPress?: (event: GestureResponderEvent) => void;
-  underline?: boolean;
-  underlineOnFocus?: boolean;
 };
 
 const defaultIsActive = (href: string, pathname: string) =>
@@ -32,6 +27,12 @@ const defaultIsActive = (href: string, pathname: string) =>
 
 const isInternalLink = (href: string) =>
   href.startsWith("/") || href.startsWith("#");
+
+const styles = StyleSheet.create({
+  nextLink: {
+    display: "contents",
+  },
+});
 
 export default function LinkText({
   activeStyle,
@@ -43,22 +44,19 @@ export default function LinkText({
   ...props
 }: LinkTextProps) {
   const pathname = usePathname();
-  const styles = [style, isActive(href, pathname!) ? activeStyle : undefined];
+  const textStyles = [
+    style,
+    isActive(href, pathname!) ? activeStyle : undefined,
+  ];
   return isInternalLink(href) ? (
-    <Link href={href} legacyBehavior={true} passHref={false}>
-      <TextUnderlined
-        role={role}
-        href={href}
-        style={styles}
-        onPress={onPress}
-        {...props}
-      />
+    <Link href={href} role={role} style={styles.nextLink}>
+      <TextUnderlined style={textStyles} onPress={onPress} {...props} />
     </Link>
   ) : (
     <TextUnderlined
       href={href}
       role={role}
-      style={styles}
+      style={textStyles}
       onPress={(event: GestureResponderEvent) => {
         if (onPress !== undefined) {
           onPress(event);

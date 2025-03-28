@@ -223,14 +223,14 @@ export default function ChatBot() {
         setMessages([
           {
             id: "1",
-            text: botResponses[0][0],
+            text: botResponses[0]![0] ?? "",
             isBot: true,
             groupId: "initial",
             isFullyDisplayed: false,
           },
           {
             id: "2",
-            text: botResponses[0][1],
+            text: botResponses[0]![1] ?? "",
             isBot: true,
             groupId: "initial",
             isFullyDisplayed: false,
@@ -269,7 +269,10 @@ export default function ChatBot() {
 
     setTimeout(() => {
       setIsTyping(false);
-      if (currentResponseIndex < botResponses.length) {
+      if (
+        currentResponseIndex < botResponses.length &&
+        botResponses[currentResponseIndex]
+      ) {
         const groupId = Date.now().toString();
         const botMessages = botResponses[currentResponseIndex].map(
           (response) => ({
@@ -291,7 +294,7 @@ export default function ChatBot() {
     let currentGroup: Message[] = [];
 
     messages.forEach((message, index) => {
-      if (index === 0 || messages[index - 1].isBot !== message.isBot) {
+      if (index === 0 || messages[index - 1]?.isBot !== message.isBot) {
         if (currentGroup.length > 0) {
           messageGroups.push(currentGroup);
         }
@@ -307,7 +310,7 @@ export default function ChatBot() {
     return (
       <>
         {messageGroups.map((group) => {
-          const isBot = group[0].isBot;
+          const isBot = group[0]?.isBot;
           const lastDisplayedIndex = group.findIndex(
             (msg) => !msg.isFullyDisplayed
           );
@@ -317,7 +320,7 @@ export default function ChatBot() {
               : group.slice(0, lastDisplayedIndex + 1);
 
           return (
-            <React.Fragment key={group[0].id}>
+            <React.Fragment key={group[0]?.id}>
               <View
                 style={{
                   flexDirection: "row",

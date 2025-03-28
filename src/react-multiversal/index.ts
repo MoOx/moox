@@ -54,19 +54,19 @@ export const size = (s?: Size): number => {
     .exhaustive();
 };
 
-export const squareStyle = (s?: AbsoluteSize) => {
+export const styleSquare = (s?: AbsoluteSize) => {
   const v = typeof s !== "number" ? size(s) : s;
   return { width: v, height: v };
 };
-export const spaceHorizontalStyle = (s?: Size) => {
+export const spaceStyleHorizontal = (s?: Size) => {
   const v = typeof s !== "number" ? size(s) : s;
   return v > 0 ? { paddingHorizontal: v } : { marginHorizontal: v };
 };
-export const spaceVerticalStyle = (s?: Size) => {
+export const spaceStyleVertical = (s?: Size) => {
   const v = typeof s !== "number" ? size(s) : s;
   return v > 0 ? { paddingVertical: v } : { marginVertical: v };
 };
-export const gapSpaceStyle = (s?: Size) => {
+export const spaceStyleGap = (s?: Size) => {
   const v = typeof s !== "number" ? size(s) : s;
   return { gap: v };
 };

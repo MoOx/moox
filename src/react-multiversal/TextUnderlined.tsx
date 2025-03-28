@@ -4,24 +4,28 @@ import type { TextProps } from "react-native";
 
 import { useFocus } from "@/react-multiversal/useFocus";
 
-export default function TextUnderlined({
-  ref,
-  href,
-  underline = false,
-  underlineOnFocus = false,
-  ...props
-}: TextProps & {
-  ref?: React.RefObject<Text | null>;
+export type TextUnderlinedProps = TextProps & {
+  ref?: React.RefObject<Text> | React.Ref<Text> | React.RefCallback<Text>;
   href?: string;
   underline?: boolean;
   underlineOnFocus?: boolean;
-}) {
+};
+
+export default function TextUnderlined({
+  ref,
+  underline = false,
+  underlineOnFocus = false,
+  style: _style,
+  ...props
+}: TextUnderlinedProps) {
   const internalRef = React.useRef<Text | null>(null);
   const setRefs = React.useCallback(
     (element: Text | null) => {
       internalRef.current = element;
       if (ref && "current" in ref) {
         (ref as React.RefObject<Text | null>).current = element;
+      } else if (ref && typeof ref === "function") {
+        ref(element);
       }
     },
     [ref]
@@ -29,13 +33,19 @@ export default function TextUnderlined({
 
   const [hasAnyFocus] = useFocus<Text>(internalRef);
 
-  const style = [
-    {
-      textDecorationLine:
-        underline || (underlineOnFocus && hasAnyFocus) ? "underline" : "none",
-    } as TextStyle,
-    props.style,
-  ];
-
-  return <Text ref={setRefs} href={href} {...props} style={style} />;
+  return (
+    <Text
+      ref={setRefs}
+      {...props}
+      style={[
+        {
+          textDecorationLine:
+            underline || (underlineOnFocus && hasAnyFocus)
+              ? "underline"
+              : "none",
+        } as TextStyle,
+        _style,
+      ]}
+    />
+  );
 }
