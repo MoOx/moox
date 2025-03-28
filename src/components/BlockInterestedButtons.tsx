@@ -16,7 +16,7 @@ export default function BlockInterestedButtons() {
     <Container>
       <SpacedView vertical="xxxl" gap="xl" style={{ alignItems: "center" }}>
         <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>
-          {"Interested with my profile ?"}
+          {"Wanna work with me ?"}
         </Text>
         <SpacedView
           style={{
