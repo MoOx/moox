@@ -1,6 +1,6 @@
 import { StyleProp, View, ViewStyle } from "react-native";
 
-import { AbsoluteSize, squareStyle } from "@/react-multiversal";
+import { AbsoluteSize, styleSquare } from "@/react-multiversal";
 
 const Spacer = ({
   size = "m",
@@ -8,6 +8,6 @@ const Spacer = ({
 }: {
   size?: AbsoluteSize;
   style?: StyleProp<ViewStyle>;
-}) => <View style={[squareStyle(size), style]} />;
+}) => <View style={[styleSquare(size), style]} />;
 
 export default Spacer;

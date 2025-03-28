@@ -1,17 +1,6 @@
 import { Platform, TextStyle } from "react-native";
 
-type weight =
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900";
-
-const weight: Record<string, weight> = {
+export const weight = {
   thin: "100",
   ultralight: "200",
   light: "300",
@@ -21,7 +10,9 @@ const weight: Record<string, weight> = {
   bold: "700",
   heavy: "800",
   black: "900",
-};
+} as const;
+
+export type weight = (typeof weight)[keyof typeof weight];
 
 const iosSpacing = (v: number) => (Platform.OS === "ios" ? v : 0);
 const androidLine = (v: number) => v * 1.2;

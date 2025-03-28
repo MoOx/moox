@@ -4,7 +4,7 @@ import * as ReactNativeWeb from "@types/react-native-web";
 
 declare module "react-native" {
   type role =
-    | ReactNativeWeb.AccessibilityProps["role"]
+    | ReactNativeWeb.TextProps["role"]
     | "article"
     | "banner"
     | "blockquote"
@@ -25,9 +25,9 @@ declare module "react-native" {
     | "region"
     | "strong";
 
-  interface AccessibilityProps extends ReactNativeWeb.AccessibilityProps {
-    role?: role;
-  }
+  // interface AccessibilityProps extends ReactNativeWeb.AccessibilityProps {
+  //   role?: role;
+  // }
   //   type displayTable =
   //     | "table"
   //     | "table-caption"
@@ -61,11 +61,11 @@ declare module "react-native" {
 
   // interface AccessibilityRole extends ReactNativeWeb
 
-  namespace AppRegistry {
-    export function getApplication(
-      appName: string
-    ): ReactNativeWeb.AppRegistry.Application;
-  }
+  // namespace AppRegistry {
+  //   export function getApplication(
+  //     appName: string
+  //   ): ReactNativeWeb.AppRegistry.Application;
+  // }
 }
 
 // declare module "react-native-web" {

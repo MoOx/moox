@@ -2,13 +2,13 @@ import * as React from "react";
 import { View, ViewProps } from "react-native";
 
 import {
-  gapSpaceStyle,
   Size,
-  spaceHorizontalStyle,
-  spaceVerticalStyle,
+  spaceStyleGap,
+  spaceStyleHorizontal,
+  spaceStyleVertical,
 } from "@/react-multiversal";
 
-const SpacedView = ({
+export default function SpacedView({
   vertical,
   horizontal,
   gap,
@@ -19,18 +19,18 @@ const SpacedView = ({
   vertical?: Size;
   horizontal?: Size;
   gap?: Size;
-}) => (
-  <View
-    {...props}
-    style={[
-      spaceVerticalStyle(vertical),
-      spaceHorizontalStyle(horizontal),
-      gapSpaceStyle(gap),
-      style,
-    ]}
-  >
-    {children}
-  </View>
-);
-
-export default SpacedView;
+}) {
+  return (
+    <View
+      {...props}
+      style={[
+        spaceStyleVertical(vertical),
+        spaceStyleHorizontal(horizontal),
+        spaceStyleGap(gap),
+        style,
+      ]}
+    >
+      {children}
+    </View>
+  );
+}
