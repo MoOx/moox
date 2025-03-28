@@ -53,6 +53,30 @@ const styles = StyleSheet.create({
   },
 });
 
+const getDurationText = (startDate: string, endDate: Date) => {
+  const durationInMonths = Math.floor(
+    differenceInCalendarMonths(endDate, new Date(startDate))
+  );
+  const durationYears = Math.floor(durationInMonths / 12);
+  const durationMonths = durationInMonths % 12;
+
+  const yearText =
+    durationYears === 0
+      ? ""
+      : durationYears === 1
+        ? "1 year"
+        : `${durationYears} years`;
+
+  const monthText =
+    durationMonths === 0
+      ? ""
+      : durationMonths === 1
+        ? "1 month"
+        : `${durationMonths} months`;
+
+  return yearText ? yearText + " " + monthText : monthText;
+};
+
 export const ResumeTimelineEntry = ({
   item,
   horizontal = "l",
@@ -67,6 +91,7 @@ export const ResumeTimelineEntry = ({
   disableLinks?: boolean;
 }) => {
   const theme = useTheme();
+
   return (
     <View
       style={[
@@ -144,39 +169,16 @@ export const ResumeTimelineEntry = ({
         {item.dateEnd ? (
           <>
             <Text style={[fontStyles.ios.footnote, theme.styles.textLight2]}>
-              {(() => {
-                const durationInMonths = Math.floor(
-                  differenceInCalendarMonths(
-                    new Date(item.dateEnd),
-                    new Date(item.dateStart)
-                  )
-                );
-                const durationYears = Math.floor(durationInMonths / 12);
-                const durationMonths = durationInMonths % 12;
-
-                const yearText =
-                  durationYears === 0
-                    ? ""
-                    : durationYears === 1
-                      ? "1 year "
-                      : `${durationYears} years `;
-
-                const monthText =
-                  durationMonths === 0
-                    ? ""
-                    : durationMonths === 1
-                      ? "1 month "
-                      : `${durationMonths} months `;
-
-                return yearText + monthText;
-              })()}
+              {getDurationText(item.dateStart, new Date(item.dateEnd))}
             </Text>
           </>
         ) : (
           <>
             <Spacer size="xxs" />
             <Text style={[fontStyles.ios.footnote, theme.styles.textLight2]}>
-              Work In Progress
+              {item.wip
+                ? "Work in Progress"
+                : `${getDurationText(item.dateStart, new Date())} and counting`}
             </Text>
           </>
         )}
