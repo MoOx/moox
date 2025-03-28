@@ -126,9 +126,10 @@ const MessageFragment = ({
 function AnimatedDot({ index }: { index: number }) {
   const theme = useTheme();
   const progress = useSharedValue(0);
-  const dotDuration = 350;
+  const height = 2;
+  const dotDuration = 500;
   const pauseDuration = 600;
-  const overlap = 0.4;
+  const overlap = 0.6;
   const singleDotSpacing = dotDuration * (1 - overlap);
   const cycleDuration = 3 * singleDotSpacing + pauseDuration;
 
@@ -166,7 +167,7 @@ function AnimatedDot({ index }: { index: number }) {
       opacity: 0.5 + Math.abs(progress.value) * 0.5,
       transform: [
         {
-          translateY: progress.value * -5,
+          translateY: progress.value * -height,
         },
       ],
     }),
@@ -199,7 +200,12 @@ function TypingIndicator() {
       vertical="s"
       style={[
         theme.styles.backMain,
-        { borderRadius: size("s"), flexDirection: "row", alignItems: "center" },
+        {
+          borderRadius: size("s"),
+          flexDirection: "row",
+          alignItems: "center",
+          alignSelf: "flex-start",
+        },
       ]}
     >
       {dots.map((i) => (
@@ -423,6 +429,7 @@ export default function ChatBot() {
             flex: 1,
             borderWidth: 1,
             borderColor: theme.dynamicColors.backAlt,
+            backgroundColor: theme.dynamicColors.backOnAlt,
             fontSize: size("m"),
             fontFamily: fontStyles.ios.body.fontFamily,
             color: theme.dynamicColors.text,
