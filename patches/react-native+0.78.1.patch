@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native/types/index.d.ts b/node_modules/react-native/types/index.d.ts
+index 63fc7e3..d862419 100644
+--- a/node_modules/react-native/types/index.d.ts
++++ b/node_modules/react-native/types/index.d.ts
+@@ -210,7 +210,7 @@ declare global {
+    * @example
+    * if (__DEV__) console.log('Running in dev mode')
+    */
+-  const __DEV__: boolean;
++  var __DEV__: boolean;
+ 
+   const HermesInternal: null | {};
+ }
