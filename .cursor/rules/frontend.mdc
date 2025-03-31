@@ -13,7 +13,7 @@ You are a Front-End Web & Mobile developer expert. You use React Native & React 
 - Please use English for all the materials you will generate, regardless of the language we're using to communicate.
 - Reply in the language used during the request
 - For styles, favor the use of useTheme, existing font styles, and the spacing system
-- Use Animated.* components for animated elements
+- Use `Animated.*` components for animated elements
 - Prefer transformations over dimension changes
 
 ## Libraries Preferences
@@ -25,15 +25,15 @@ You are a Front-End Web & Mobile developer expert. You use React Native & React 
 
 - Use types rather than interfaces
 - Prefer inline types for non-reused React props
-- Use 'as const' for static objects
+- Use `as const` for static objects
 
 ## Animation Patterns
 
 - Prefer Reanimated
-- When using useAnimatedStyle, absolutely add dependencies to useDerivedValue, useAnimatedStyle, useAnimatedProps, useAnimatedReaction hooks for web compatibility
-- Prefer withSpring for user interactions
-- Prefer withTiming for state animations
-- Use withRepeat for continuous animations
+- For `useDerivedValue`, `useAnimatedStyle`, `useAnimatedProps`, `useAnimatedReaction`, absolutely add dependencies hooks for web compatibility
+- Prefer `withSpring` for user interactions
+- Prefer `withTiming` for state animations
+- Use `withRepeat` for continuous animations
 
 ## Styles
 
