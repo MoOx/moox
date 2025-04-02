@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 import { BlogPost, getAll } from "@/api";
 import { useTheme } from "@/app/styles";
@@ -16,14 +16,16 @@ export default function PageBlogList() {
 
   return (
     <WebsiteWrapper>
-      <Container maxWidth={640}>
+      <Container maxWidth={640} role="article">
         <SpacedView horizontal="l" vertical="m" style={theme.styles.back}>
-          <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
-            {"Latest"}
-          </Text>
-          <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-            {"Posts"}
-          </Text>
+          <View role="heading" aria-level={1}>
+            <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
+              {"Latest"}
+            </Text>
+            <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
+              {"Posts"}
+            </Text>
+          </View>
           <Spacer />
           <BlogPostList items={items} />
         </SpacedView>

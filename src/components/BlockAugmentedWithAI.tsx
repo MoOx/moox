@@ -42,32 +42,49 @@ const circles = [
 
 export default function BlockAugmentedWithAI() {
   const theme = useTheme();
+
   return (
-    <Container>
+    <Container style={{ flexDirection: "row", flexWrap: "wrap-reverse" }}>
+      <View style={{ maxWidth: 400 }}>
+        <SpacedView
+          horizontal="xl"
+          vertical="xl"
+          style={[{ alignItems: "center" }]}
+        >
+          <AIPromptCircle size={250} circles={circles} />
+        </SpacedView>
+      </View>
       <SpacedView
         horizontal="xl"
-        vertical="xl"
         gap="m"
-        style={{
-          maxWidth: 1024,
-          flexDirection: "row",
-          alignItems: "center",
-        }}
+        style={[
+          {
+            maxWidth: 1024 * 0.6,
+            flexShrink: 1,
+          },
+        ]}
       >
-        <AIPromptCircle circles={circles} />
-        <View style={{ flex: 1 }}>
-          <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-            {"Augmented with AI."}
-          </Text>
-          <Text
-            style={[fontStyles.iosEm.body, theme.styles.text, { opacity: 0.6 }]}
-          >
-            {`Artificial Intelligence is already changing the world, and especially the way we build software.
-It's a revolution that will change the way we work profoundly and will have a huge impact on our lives. It will might be more important than the invention of the wheel or the Internet.
+        <Spacer size="xxl" />
+        <Text
+          style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
+          role="heading"
+          aria-level={2}
+        >
+          {"Augmented with AI."}
+        </Text>
+        <Text
+          style={[
+            fontStyles.iosEm.body,
+            theme.styles.textOnMain,
+            { opacity: 0.6 },
+          ]}
+          role="paragraph"
+        >
+          {`Artificial Intelligence is already changing the world, and especially the way we build software.
+It's a revolution that will change the way we work profoundly and will have a huge impact on our lives. It might be more important than the invention of the wheel or the Internet.
 The time it's saving us already allows me to create crafted apps with precision, with more attention to the details that make the difference between a good and a great app.`}
-          </Text>
-          <Spacer size="s" />
-        </View>
+        </Text>
+        <Spacer size="s" />
       </SpacedView>
     </Container>
   );

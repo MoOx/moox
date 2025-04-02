@@ -31,7 +31,11 @@ export default function BlockPassionated() {
           style={{ maxWidth: 1024 * 0.5, flexShrink: 1 }}
         >
           <Spacer size="xxl" />
-          <Text style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}>
+          <Text
+            style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
+            role="heading"
+            aria-level={2}
+          >
             {"Passionated and Curious."}
           </Text>
           <Text
@@ -40,6 +44,7 @@ export default function BlockPassionated() {
               theme.styles.textOnMain,
               { opacity: 0.6 },
             ]}
+            role="paragraph"
           >
             {`I made my first website in 1998, and fell in love with web development. Since then, I never stopped to learn things, especially now with the rise of AI.
 From Dreamweaver to Cursor, years passed, but not my appetite to always discover new tools and technics to made even more cool and performant interfaces.`}

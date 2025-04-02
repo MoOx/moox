@@ -32,11 +32,16 @@ export default function TalkView({ item }: { item: Talk }) {
 
   return (
     <SpacedView
+      role="article"
       horizontal="l"
       vertical="l"
       style={[styles.back, theme.styles.back]}
     >
-      <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
+      <Text
+        role="heading"
+        aria-level={1}
+        style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
+      >
         {item.title}
       </Text>
       {item.conference && (

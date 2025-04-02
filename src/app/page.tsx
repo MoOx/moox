@@ -1,4 +1,5 @@
 import * as React from "react";
+import { View } from "react-native";
 
 import { getAll, ResumeItem } from "@/api";
 import BlockAugmentedWithAI from "@/components/BlockAugmentedWithAI";
@@ -18,21 +19,23 @@ export default function Home() {
   );
   return (
     <WebsiteWrapper>
-      <BlockHey />
-      <BlockBuilder resumeEntry={resumeEntry} />
-      <Spacer size="xxxl" />
-      <Spacer size="m" />
-      <BlockFrontendArchitect />
-      <Spacer size="l" />
-      <BlockCompaniesTried />
-      <Spacer size="xl" />
-      <BlockPassionated />
-      <Spacer size="xxl" />
-      <BlockAugmentedWithAI />
-      <Spacer size="xxl" />
-      <BlockTestimonials />
-      <Spacer size="xl" />
-      <BlockCompaniesTrust />
+      <View role="article">
+        <BlockHey />
+        <BlockBuilder resumeEntry={resumeEntry} />
+        <Spacer size="xxxl" />
+        <Spacer size="m" />
+        <BlockFrontendArchitect />
+        <Spacer size="l" />
+        <BlockCompaniesTried />
+        <Spacer size="xl" />
+        <BlockPassionated />
+        <Spacer size="xxl" />
+        <BlockAugmentedWithAI />
+        <Spacer size="xxl" />
+        <BlockTestimonials />
+        <Spacer size="xl" />
+        <BlockCompaniesTrust />
+      </View>
     </WebsiteWrapper>
   );
 }

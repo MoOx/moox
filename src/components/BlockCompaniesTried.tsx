@@ -32,6 +32,8 @@ export default function BlockCompaniesTried() {
             theme.styles.textLight1,
             { textAlign: "center" },
           ]}
+          role="heading"
+          aria-level={2}
         >
           {"COMPANIES THAT TRIED TO HIRE ME"}
         </Text>

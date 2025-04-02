@@ -8,7 +8,7 @@
   "scripts": {
     "postinstall": "cd node_modules/react-native-web/packages/react-native-web && yarn install && yarn build && cp -r . ../../",
     "prepare": "patch-package && husky && npm run svg && npm run markdown",
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack -p 1337",
     "build": "npm run prepare && next build",
     "start": "next start",
     "lint": "next lint",

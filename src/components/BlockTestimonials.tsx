@@ -34,7 +34,7 @@ export const testimonials: Testimonial[] = [
         <Text style={{ fontWeight: "bold" }}>{"React expert"}</Text>
         <Text style={{ opacity: 0.6 }}>
           {
-            ". Whether it’s React Native or React.js, nothing stands in his way."
+            ". Whether it's React Native or React.js, nothing stands in his way."
           }
         </Text>
       </>
@@ -268,8 +268,10 @@ export default function BlockTestimonials() {
           <SpacedView gap="s">
             <Text
               style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
+              role="heading"
+              aria-level={2}
             >
-              {"Testimonials."}
+              {"What People Say About Me."}
             </Text>
             <Text
               style={[
@@ -277,8 +279,9 @@ export default function BlockTestimonials() {
                 theme.styles.textOnMain,
                 { opacity: 0.6 },
               ]}
+              role="paragraph"
             >
-              {`What coworkers say about me.`}
+              {`Real feedback from those who know my work.`}
             </Text>
           </SpacedView>
           <View>

@@ -95,6 +95,7 @@ export default function WebsiteMobileMenu() {
 
   return (
     <View
+      role="contentinfo"
       style={{
         zIndex: 1,
         position: "fixed",

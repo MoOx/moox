@@ -26,7 +26,11 @@ export default function BlockFrontendArchitect() {
             gap="m"
             style={{ flexBasis: 1024 / 2, flexShrink: 1 }}
           >
-            <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
+            <Text
+              style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
+              role="heading"
+              aria-level={2}
+            >
               {"Front-end Architect."}
             </Text>
             <Text
@@ -35,6 +39,7 @@ export default function BlockFrontendArchitect() {
                 theme.styles.text,
                 { opacity: 0.6 },
               ]}
+              role="paragraph"
             >
               {`My various experiences made me confident about the technologies & tools I use in order to help you & your team, whether you need some advices, training or help to boostrap your project so you can focus on the feature your user needs.
 Over the years, I refined my way to approach development, which allows me to confidently takes high-level design choices when building web & mobile apps, and selecting tools adapted to the user interface you need.`}

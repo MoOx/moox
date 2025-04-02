@@ -87,6 +87,7 @@ export default function WebsiteHeader() {
         stops={gradientFlashyStops(theme)}
       />
       <Container
+        role="banner"
         wrapperStyle={{
           position: "sticky",
           top: 0,

@@ -50,7 +50,11 @@ export default function BlockHey() {
               </React.unstable_ViewTransition>
             </Text>
           </View>
-          <View style={{ alignSelf: "flex-start" }}>
+          <View
+            style={{ alignSelf: "flex-start" }}
+            role="heading"
+            aria-level={1}
+          >
             <Text style={[fontStyles.ios.headline, theme.styles.textLight2]}>
               {"A Web & Mobile"}
             </Text>
@@ -95,6 +99,8 @@ export default function BlockHey() {
             >
               {"Augmented with AI."}
             </Text>
+          </View>
+          <View>
             <Spacer size="xxl" />
             <Text
               style={[
@@ -106,6 +112,7 @@ export default function BlockHey() {
                   fontWeight: weight.bold,
                 },
               ]}
+              role="paragraph"
             >
               {"I build "}
               <Text style={gradientTextFlashyStylesInv(theme, -4)}>

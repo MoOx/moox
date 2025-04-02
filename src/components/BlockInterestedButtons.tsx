@@ -14,9 +14,20 @@ export default function BlockInterestedButtons() {
 
   return (
     <Container>
-      <SpacedView vertical="xxxl" gap="xl" style={{ alignItems: "center" }}>
-        <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>
-          {"Wanna work with me ?"}
+      <SpacedView
+        vertical="xxxl"
+        horizontal="xxxl"
+        gap="xl"
+        style={{ alignItems: "center" }}
+      >
+        <Text
+          style={[
+            fontStyles.iosEm.title2,
+            theme.styles.text,
+            { textAlign: "center" },
+          ]}
+        >
+          {"Ready to build something awesome together?"}
         </Text>
         <SpacedView
           style={{

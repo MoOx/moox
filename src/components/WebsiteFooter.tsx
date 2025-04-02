@@ -30,7 +30,7 @@ export default function WebsiteFooter() {
   const theme = useTheme();
 
   return (
-    <>
+    <View role="contentinfo">
       <WebsiteFooterLandscape>
         <Parallax
           staticTransforms={[{ translateY: 20 }]}
@@ -265,6 +265,6 @@ export default function WebsiteFooter() {
           </LinkText>
         </View>
       </SpacedView>
-    </>
+    </View>
   );
 }

@@ -32,7 +32,7 @@ function TalkPreview({ item }: { item: Talk }) {
   );
 }
 
-export default function PostList({ items }: { items: Talk[] }) {
+export default function TalkList({ items }: { items: Talk[] }) {
   const theme = useTheme();
   const latestYear = React.useRef(String(new Date().getFullYear() + 1));
 

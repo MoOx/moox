@@ -31,6 +31,8 @@ export default function BlockCompaniesTrust() {
             theme.styles.textLight1,
             { textAlign: "center" },
           ]}
+          role="heading"
+          aria-level={2}
         >
           {"🇫🇷 COMPANIES THAT TRUSTED ME"}
         </Text>

@@ -12,9 +12,18 @@ export default function BlogPostView({ item }: { item: BlogPost }) {
   const theme = useTheme();
 
   return (
-    <SpacedView horizontal="l" vertical="l" style={theme.styles.back}>
+    <SpacedView
+      role="article"
+      horizontal="l"
+      vertical="l"
+      style={theme.styles.back}
+    >
       <SpacedView>
-        <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
+        <Text
+          role="heading"
+          aria-level={1}
+          style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
+        >
           {item.title}
         </Text>
         {item.date && (

@@ -20,7 +20,7 @@ export default function WebsiteWrapper({
   return (
     <View style={[theme.styles.back, { flex: 1 }]}>
       <WebsiteHeader />
-      {children}
+      <View role="main">{children}</View>
       <Spacer size="xxl" />
       <WebsiteFooter />
       <IfWindowWidthIs smallerThan={WindowWidth.s}>

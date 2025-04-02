@@ -45,6 +45,8 @@ export default function PageResume() {
               fontWeight: "900",
             },
           ]}
+          role="heading"
+          aria-level={1}
         >
           {"Front-End Developer."}
         </Text>
@@ -190,9 +192,10 @@ export default function PageResume() {
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              // theme.styles.text,
               gradientTextIndigoStylesInv(theme),
             ]}
+            role="heading"
+            aria-level={2}
           >
             {"Skills"}
           </Text>
@@ -213,6 +216,8 @@ export default function PageResume() {
               gradientTextFlashyStyles(theme),
               { alignSelf: "center" },
             ]}
+            role="heading"
+            aria-level={2}
           >
             {"Latest Experiences"}
           </Text>
