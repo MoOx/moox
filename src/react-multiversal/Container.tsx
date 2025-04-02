@@ -1,4 +1,11 @@
-import { Platform, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import {
+  Platform,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewProps,
+  ViewStyle,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
@@ -22,14 +29,15 @@ export default function Container({
   style,
   maxWidth = 1024,
   children,
-}: {
+  ...props
+}: ViewProps & {
   wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   maxWidth?: number;
   children: React.ReactNode;
 }) {
   return (
-    <View style={[styles.wrapper, wrapperStyle]}>
+    <View style={[styles.wrapper, wrapperStyle]} {...props}>
       {Platform.OS === "web" ? (
         <View
           style={[

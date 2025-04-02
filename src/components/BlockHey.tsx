@@ -14,6 +14,7 @@ import { fontStyles, weight } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import TextForReader from "@/react-multiversal/TextForReader";
 
 export default function BlockHey() {
   const theme = useTheme();
@@ -36,65 +37,77 @@ export default function BlockHey() {
             flexShrink: 1,
             flexBasis: 450,
           }}
+          // role="header"
         >
-          <View>
-            <Text style={[fontStyles.ios.headline, theme.styles.textLight2]}>
-              {"Hey,"}
-            </Text>
-            <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-              {"I'm "}
-              <React.unstable_ViewTransition name="text--max">
-                <Text style={gradientTextFlashyStyles(theme, -16)}>
-                  {"Max."}
-                </Text>
-              </React.unstable_ViewTransition>
+          <View style={{ flexDirection: "column-reverse" }}>
+            <View
+              style={{ alignSelf: "flex-start" }}
+              role="heading"
+              aria-level={1}
+            >
+              <Text style={[fontStyles.ios.headline, theme.styles.textLight2]}>
+                {"A Web & Mobile"}
+              </Text>
+              <IfWindowWidthIs largerThan={WindowWidth.m}>
+                <React.unstable_ViewTransition name="text--front-end-developer">
+                  <Text
+                    style={[
+                      fontStyles.iosEm.largeTitle,
+                      theme.styles.text,
+                      gradientTextFlashyStyles(theme, 176),
+                      { fontWeight: weight.black },
+                    ]}
+                  >
+                    {"Front-End Developer."}
+                  </Text>
+                </React.unstable_ViewTransition>
+              </IfWindowWidthIs>
+              <IfWindowWidthIs smallerThan={WindowWidth.m}>
+                <React.unstable_ViewTransition name="text--front-end-developer-m">
+                  <Text
+                    style={[
+                      fontStyles.iosEm.largeTitle,
+                      theme.styles.text,
+                      gradientTextFlashyStyles(theme, 0),
+                      { fontWeight: weight.black },
+                    ]}
+                  >
+                    {"Front-End Developer."}
+                  </Text>
+                </React.unstable_ViewTransition>
+              </IfWindowWidthIs>
+              <Text
+                style={[
+                  fontStyles.ios.headline,
+                  theme.styles.textLight2,
+                  {
+                    fontWeight: weight.regular,
+                    fontStyle: "italic",
+                    textAlign: "right",
+                  },
+                ]}
+              >
+                {"Augmented with AI."}
+              </Text>
+            </View>
+            <Text
+              role="paragraph"
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              <Text style={[fontStyles.ios.headline, theme.styles.textLight2]}>
+                {"Hey,"}
+              </Text>
+              <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
+                {"I'm "}
+                <React.unstable_ViewTransition name="text--max">
+                  <Text style={gradientTextFlashyStyles(theme, -16)}>
+                    {"Max."}
+                  </Text>
+                </React.unstable_ViewTransition>
+              </Text>
             </Text>
           </View>
-          <View style={{ alignSelf: "flex-start" }}>
-            <Text style={[fontStyles.ios.headline, theme.styles.textLight2]}>
-              {"A Web & Mobile"}
-            </Text>
-            <IfWindowWidthIs largerThan={WindowWidth.m}>
-              <React.unstable_ViewTransition name="text--front-end-developer">
-                <Text
-                  style={[
-                    fontStyles.iosEm.largeTitle,
-                    theme.styles.text,
-                    gradientTextFlashyStyles(theme, 176),
-                    { fontWeight: weight.black },
-                  ]}
-                >
-                  {"Front-End Developer."}
-                </Text>
-              </React.unstable_ViewTransition>
-            </IfWindowWidthIs>
-            <IfWindowWidthIs smallerThan={WindowWidth.m}>
-              <React.unstable_ViewTransition name="text--front-end-developer-m">
-                <Text
-                  style={[
-                    fontStyles.iosEm.largeTitle,
-                    theme.styles.text,
-                    gradientTextFlashyStyles(theme, 0),
-                    { fontWeight: weight.black },
-                  ]}
-                >
-                  {"Front-End Developer."}
-                </Text>
-              </React.unstable_ViewTransition>
-            </IfWindowWidthIs>
-            <Text
-              style={[
-                fontStyles.ios.headline,
-                theme.styles.textLight2,
-                {
-                  fontWeight: weight.regular,
-                  fontStyle: "italic",
-                  textAlign: "right",
-                },
-              ]}
-            >
-              {"Augmented with AI."}
-            </Text>
+          <View>
             <Spacer size="xxl" />
             <Text
               style={[
@@ -106,7 +119,13 @@ export default function BlockHey() {
                   fontWeight: weight.bold,
                 },
               ]}
+              role="paragraph"
             >
+              <TextForReader>
+                {
+                  "Hey, I am Max. I am a Front-End Developer crafting apps and websites. I am available as freelance.\n"
+                }
+              </TextForReader>
               {"I build "}
               <Text style={gradientTextFlashyStylesInv(theme, -4)}>
                 {"apps."}

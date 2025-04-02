@@ -111,7 +111,7 @@ export default function Me({
             __html: `
                 .userColorScheme-auto,
                 .userColorScheme-light {
-                  --maxMeBrightness: 110%
+                  --maxMeBrightness: 105%
                 }
                 .userColorScheme-dark {
                   --maxMeBrightness: 90%
@@ -125,15 +125,12 @@ export default function Me({
           }}
         />
         <Image
+          // hidden={true}
           src={src}
           alt="Picture of the Max"
           width={imgWidth}
           height={imgHeight}
-          style={{
-            // zIndex: 1,
-            // mixBlendMode: "luminosity",
-            filter: "brightness(var(--maxMeBrightness))",
-          }}
+          style={{ filter: "brightness(var(--maxMeBrightness))" }}
         />
       </View>
       {children}

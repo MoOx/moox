@@ -46,7 +46,7 @@ export default function DeviceiPhoneDynamicIsland({
       >
         {children}
       </View>
-      <View style={StyleSheet.absoluteFill} pointerEvents="none">
+      <View style={[StyleSheet.absoluteFill, { pointerEvents: "none" }]}>
         <SVGDeviceiPhoneDynamicIsland width={width} height={height} />
       </View>
     </Animated.View>

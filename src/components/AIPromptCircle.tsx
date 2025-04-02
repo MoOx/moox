@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import * as React from "react";
 import { StyleSheet, View } from "react-native";
 import Animated, {
   cancelAnimation,
@@ -399,6 +399,12 @@ const AIPromptCircle = ({
   size = 300,
   circles = [defaultCircleConfig],
 }: AIPromptCircleProps) => {
+  // used to avoid animatedProps unrecognized error on server
+  const [isMounted, setIsMounted] = React.useState(false);
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const centerX = size / 2;
   const centerY = size / 2;
   const containerRef = React.useRef<View>(null);
@@ -443,7 +449,7 @@ const AIPromptCircle = ({
   }, []);
 
   // Animate values
-  useEffect(() => {
+  React.useEffect(() => {
     const defaultDuration = defaultCircleConfig.duration ?? 3000;
 
     if (!isVisible) {
@@ -613,106 +619,117 @@ const AIPromptCircle = ({
       style={[styles.container, { width: size, height: size }]}
     >
       <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <Defs>
-          {circles.map((circle, i) => (
-            <LinearGradient
-              key={`gradient${i + 1}`}
-              id={`gradient${i + 1}`}
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <Stop offset="0%" stopColor={circle.colors[0]} />
-              <Stop offset="100%" stopColor={circle.colors[1]} />
-            </LinearGradient>
-          ))}
+        {!isMounted ? null : (
+          <>
+            <Defs>
+              {circles.map((circle, i) => (
+                <LinearGradient
+                  key={`gradient${i + 1}`}
+                  id={`gradient${i + 1}`}
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <Stop offset="0%" stopColor={circle.colors[0]} />
+                  <Stop offset="100%" stopColor={circle.colors[1]} />
+                </LinearGradient>
+              ))}
 
-          {/* Masks to create border effect for each circle */}
-          {circles.map((circle, i) => {
-            const circleInnerDeformations = innerDeformations[i];
-            const innerRotation = innerRotations[i];
-            if (!circleInnerDeformations || !innerRotation || !circle.hollow)
-              return null;
+              {/* Masks to create border effect for each circle */}
+              {circles.map((circle, i) => {
+                const circleInnerDeformations = innerDeformations[i];
+                const innerRotation = innerRotations[i];
+                if (
+                  !circleInnerDeformations ||
+                  !innerRotation ||
+                  !circle.hollow
+                )
+                  return null;
 
-            const baseRadius =
-              size *
-              (circle.radiusRatio ?? defaultCircleConfig.radiusRatio ?? 0.3);
-            const borderWidth =
-              circle.borderWidth ?? defaultCircleConfig.borderWidth ?? 8;
-            const deformationRatio =
-              circle.deformationRatio ??
-              defaultCircleConfig.deformationRatio ??
-              0.25;
+                const baseRadius =
+                  size *
+                  (circle.radiusRatio ??
+                    defaultCircleConfig.radiusRatio ??
+                    0.3);
+                const borderWidth =
+                  circle.borderWidth ?? defaultCircleConfig.borderWidth ?? 8;
+                const deformationRatio =
+                  circle.deformationRatio ??
+                  defaultCircleConfig.deformationRatio ??
+                  0.25;
 
-            // Calculate inner mask radius with safety margin
-            const safetyMargin = Math.max(3, borderWidth * 0.2); // Increased to 20% and minimum 3px
-            const rawInnerRadius = baseRadius - borderWidth - safetyMargin;
+                // Calculate inner mask radius with safety margin
+                const safetyMargin = Math.max(3, borderWidth * 0.2); // Increased to 20% and minimum 3px
+                const rawInnerRadius = baseRadius - borderWidth - safetyMargin;
 
-            // Reduce inner deformation amplitude
-            const radiusRatio = rawInnerRadius / baseRadius;
-            const innerDeformationRatio =
-              deformationRatio * Math.min(0.7, radiusRatio * 0.8);
+                // Reduce inner deformation amplitude
+                const radiusRatio = rawInnerRadius / baseRadius;
+                const innerDeformationRatio =
+                  deformationRatio * Math.min(0.7, radiusRatio * 0.8);
 
-            // Calculate maximum possible deformations
-            const outerMaxDeformation = baseRadius * deformationRatio;
-            const innerMaxDeformation = rawInnerRadius * innerDeformationRatio;
+                // Calculate maximum possible deformations
+                const outerMaxDeformation = baseRadius * deformationRatio;
+                const innerMaxDeformation =
+                  rawInnerRadius * innerDeformationRatio;
 
-            // Adjust inner radius with more conservative margin
-            const deformationDiff = Math.abs(
-              outerMaxDeformation - innerMaxDeformation
-            );
-            const safeInnerRadius = rawInnerRadius - deformationDiff * 0.75; // More conservative
+                // Adjust inner radius with more conservative margin
+                const deformationDiff = Math.abs(
+                  outerMaxDeformation - innerMaxDeformation
+                );
+                const safeInnerRadius = rawInnerRadius - deformationDiff * 0.75; // More conservative
 
-            return (
-              <Mask key={`mask${i + 1}`} id={`mask${i + 1}`}>
-                <Rect x="0" y="0" width={size} height={size} fill="white" />
+                return (
+                  <Mask key={`mask${i + 1}`} id={`mask${i + 1}`}>
+                    <Rect x="0" y="0" width={size} height={size} fill="white" />
+                    <MorphingCircle
+                      key={`innerMask${i + 1}`}
+                      radius={safeInnerRadius}
+                      centerX={centerX}
+                      centerY={centerY}
+                      deformations={circleInnerDeformations}
+                      rotation={innerRotation}
+                      gradientId={`gradient${i + 1}`}
+                      deformationRatio={innerDeformationRatio}
+                      opacity={1}
+                      fill="black"
+                    />
+                  </Mask>
+                );
+              })}
+            </Defs>
+
+            {/* Morphing circles */}
+            {circles.map((circle, i) => {
+              const circleDeformations = deformations[i];
+              const rotation = rotations[i];
+              if (!circleDeformations || !rotation) return null;
+
+              const baseRadius =
+                size *
+                (circle.radiusRatio ?? defaultCircleConfig.radiusRatio ?? 0.3);
+              const deformationRatio =
+                circle.deformationRatio ??
+                defaultCircleConfig.deformationRatio ??
+                0.25;
+
+              return (
                 <MorphingCircle
-                  key={`innerMask${i + 1}`}
-                  radius={safeInnerRadius}
+                  key={`circle${i + 1}`}
+                  radius={baseRadius}
                   centerX={centerX}
                   centerY={centerY}
-                  deformations={circleInnerDeformations}
-                  rotation={innerRotation}
+                  deformations={circleDeformations}
+                  rotation={rotation}
                   gradientId={`gradient${i + 1}`}
-                  deformationRatio={innerDeformationRatio}
-                  opacity={1}
-                  fill="black"
+                  deformationRatio={deformationRatio}
+                  opacity={circle.opacity ?? defaultCircleConfig.opacity ?? 0.8}
+                  mask={circle.hollow ? `url(#mask${i + 1})` : undefined}
                 />
-              </Mask>
-            );
-          })}
-        </Defs>
-
-        {/* Morphing circles */}
-        {circles.map((circle, i) => {
-          const circleDeformations = deformations[i];
-          const rotation = rotations[i];
-          if (!circleDeformations || !rotation) return null;
-
-          const baseRadius =
-            size *
-            (circle.radiusRatio ?? defaultCircleConfig.radiusRatio ?? 0.3);
-          const deformationRatio =
-            circle.deformationRatio ??
-            defaultCircleConfig.deformationRatio ??
-            0.25;
-
-          return (
-            <MorphingCircle
-              key={`circle${i + 1}`}
-              radius={baseRadius}
-              centerX={centerX}
-              centerY={centerY}
-              deformations={circleDeformations}
-              rotation={rotation}
-              gradientId={`gradient${i + 1}`}
-              deformationRatio={deformationRatio}
-              opacity={circle.opacity ?? defaultCircleConfig.opacity ?? 0.8}
-              mask={circle.hollow ? `url(#mask${i + 1})` : undefined}
-            />
-          );
-        })}
+              );
+            })}
+          </>
+        )}
       </Svg>
     </View>
   );

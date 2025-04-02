@@ -30,7 +30,7 @@ export default function WebsiteFooter() {
   const theme = useTheme();
 
   return (
-    <>
+    <View>
       <WebsiteFooterLandscape>
         <Parallax
           staticTransforms={[{ translateY: 20 }]}
@@ -43,11 +43,11 @@ export default function WebsiteFooter() {
         </Parallax>
       </WebsiteFooterLandscape>
       <View
-        style={[theme.styles.backAlt, { alignItems: "center" }]}
         id={footerAnchor}
+        role="contentinfo"
+        style={[theme.styles.backAlt, { alignItems: "center" }]}
       >
         <Spacer />
-
         <Container
           style={{
             flexDirection: "row",
@@ -265,6 +265,6 @@ export default function WebsiteFooter() {
           </LinkText>
         </View>
       </SpacedView>
-    </>
+    </View>
   );
 }

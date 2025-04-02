@@ -96,7 +96,7 @@ export default function BlockPassionated({
               transform: revertSkew,
             }}
           >
-            <View>
+            <View role="heading" aria-level={2}>
               <Text
                 style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
               >
@@ -114,6 +114,7 @@ export default function BlockPassionated({
                 theme.styles.textOnMain,
                 { opacity: 0.6 },
               ]}
+              role="paragraph"
             >
               {`I have the knowledge and skills to build the app you are dreaming about. My years of experience and my passion for building apps make me the perfect partner to help you bring your ideas to life.`}
             </Text>

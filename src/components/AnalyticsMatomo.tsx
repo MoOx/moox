@@ -37,6 +37,7 @@ const Matomo = () => {
 };
 
 export default function AnalyticsMatomo() {
+  if (process.env.NODE_ENV === "development") return null;
   return (
     <React.Suspense>
       <Matomo />

@@ -23,7 +23,9 @@ declare module "react-native" {
     | "navigation"
     | "paragraph"
     | "region"
-    | "strong";
+    | "strong"
+    // it's in the spec
+    | "img";
 
   // interface AccessibilityProps extends ReactNativeWeb.AccessibilityProps {
   //   role?: role;

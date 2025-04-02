@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -25,8 +26,19 @@ import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import TextForReader from "@/react-multiversal/TextForReader";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
+
+export const metadata: Metadata = {
+  title:
+    "Maxime Thirouin Résumé - Senior Front-End Developer, React & React Native Expert.",
+  description:
+    "Max is a Senior Front-End Developer, available as a Freelance Developer since 2013. He masters React & React Native and has a passion for building great products with a focus on user experience.",
+  pagination: {
+    next: "https://moox.io/resume",
+  },
+};
 
 export default function PageResume() {
   const theme = useTheme();
@@ -45,11 +57,17 @@ export default function PageResume() {
               fontWeight: "900",
             },
           ]}
+          role="heading"
+          aria-level={1}
         >
           {"Front-End Developer."}
         </Text>
       </React.unstable_ViewTransition>
-      <Text style={[fontStyles.ios.headline, theme.styles.textMainDark]}>
+      <Text
+        style={[fontStyles.ios.headline, theme.styles.textMainDark]}
+        role="heading"
+        aria-level={2}
+      >
         {"Freelance "}
         <Text
           style={[
@@ -101,6 +119,7 @@ export default function PageResume() {
           </IfWindowWidthIs>
           <React.unstable_ViewTransition name="text--max">
             <Text
+              role="paragraph"
               style={[
                 theme.styles.text,
                 gradientTextFlashyStylesInv(theme),
@@ -111,10 +130,15 @@ export default function PageResume() {
                 },
               ]}
             >
+              <TextForReader>{"Nickname :"}</TextForReader>
               {"Max."}
             </Text>
           </React.unstable_ViewTransition>
-          <View>
+          <Text
+            role="paragraph"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <TextForReader>{"Full name :"}</TextForReader>
             <Text
               style={[
                 theme.styles.textLight1,
@@ -140,7 +164,7 @@ export default function PageResume() {
             >
               {"Thirouin"}
             </Text>
-          </View>
+          </Text>
           <Spacer size="l" />
           <View>
             <LinkView
@@ -190,9 +214,10 @@ export default function PageResume() {
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              // theme.styles.text,
               gradientTextIndigoStylesInv(theme),
             ]}
+            role="heading"
+            aria-level={2}
           >
             {"Skills"}
           </Text>
@@ -213,6 +238,8 @@ export default function PageResume() {
               gradientTextFlashyStyles(theme),
               { alignSelf: "center" },
             ]}
+            role="heading"
+            aria-level={2}
           >
             {"Latest Experiences"}
           </Text>
@@ -222,47 +249,6 @@ export default function PageResume() {
         <Spacer />
       </Container>
       <Spacer size="xl" />
-      {/* <View
-        style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 1 }}
-      >
-        <SpacedView
-          horizontal="m"
-          vertical="m"
-          style={{ alignItems: "center" }}
-        >
-          <LinkView href="/contact/">
-            <SpacedView horizontal="xl" vertical="m">
-              <GradientLinear
-                style={[StyleSheet.absoluteFill, { borderRadius: 60 }]}
-                angle={180}
-                stops={gradientStops}
-              />
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Spacer />
-                <View>
-                  <Text
-                    style={[fontStyles.ios.headline, themeDark.styles.text]}
-                  >
-                    {"Get in touch"}
-                  </Text>
-                  <Text
-                    style={[fontStyles.ios.caption1, themeDark.styles.text]}
-                  >
-                    {"I am always listening"}
-                  </Text>
-                </View>
-                <Spacer />
-                <SVGChevronRight
-                  width={36}
-                  height={36}
-                  fill={themeDark.dynamicColors.text}
-                />
-              </View>
-            </SpacedView>
-          </LinkView>
-        </SpacedView>
-        <WebsiteMobileMenuPlaceholder />
-      </View> */}
     </WebsiteWrapper>
   );
 }

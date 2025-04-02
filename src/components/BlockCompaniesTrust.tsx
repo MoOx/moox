@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 import { useTheme } from "@/app/styles";
 import {
@@ -9,10 +9,11 @@ import {
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
+import TextForReader from "@/react-multiversal/TextForReader";
 import SVGCompanyAirbus from "@/svgs/components/SVGCompanyAirbus";
+import SVGCompanyFklg from "@/svgs/components/SVGCompanyFklg";
 import SVGCompanyHove from "@/svgs/components/SVGCompanyHove";
 import SVGCompanyMolotovTv from "@/svgs/components/SVGCompanyMolotovTv";
-import SVGCompanyViareport from "@/svgs/components/SVGCompanyViareport";
 
 export default function BlockCompaniesTrust() {
   const theme = useTheme();
@@ -29,10 +30,12 @@ export default function BlockCompaniesTrust() {
           style={[
             fontStyles.ios.headline,
             theme.styles.textLight1,
-            { textAlign: "center" },
+            { textAlign: "center", textTransform: "uppercase" },
           ]}
+          role="heading"
+          aria-level={2}
         >
-          {"🇫🇷 COMPANIES THAT TRUSTED ME"}
+          {"🇫🇷 Companies that trusted me"}
         </Text>
         <SpacedView
           gap="m"
@@ -42,27 +45,48 @@ export default function BlockCompaniesTrust() {
             flexWrap: "wrap",
             justifyContent: "center",
           }}
+          role="list"
         >
-          <SVGCompanyMolotovTv
-            width={companyIconWidth}
-            height={companyIconWidth * companyIconCoef}
-            style={companyIconStyle}
-          />
-          <SVGCompanyHove
-            width={companyIconWidth}
-            height={companyIconWidth * companyIconCoef}
-            style={companyIconStyle}
-          />
-          <SVGCompanyAirbus
-            width={companyIconWidth}
-            height={companyIconWidth * companyIconCoef}
-            style={companyIconStyle}
-          />
-          <SVGCompanyViareport
-            width={companyIconWidth}
-            height={companyIconWidth * companyIconCoef}
-            style={companyIconStyle}
-          />
+          <View role="listitem">
+            <TextForReader>{"FKLG"}</TextForReader>
+            <SVGCompanyFklg
+              role="img"
+              aria-label="FKLG"
+              width={companyIconWidth}
+              height={companyIconWidth * companyIconCoef}
+              style={companyIconStyle}
+            />
+          </View>
+          <View role="listitem">
+            <TextForReader>{"Molotov TV"}</TextForReader>
+            <SVGCompanyMolotovTv
+              role="img"
+              aria-label="Molotov TV"
+              width={companyIconWidth}
+              height={companyIconWidth * companyIconCoef}
+              style={companyIconStyle}
+            />
+          </View>
+          <View role="listitem">
+            <TextForReader>{"Hove"}</TextForReader>
+            <SVGCompanyHove
+              role="img"
+              aria-label="Hove"
+              width={companyIconWidth}
+              height={companyIconWidth * companyIconCoef}
+              style={companyIconStyle}
+            />
+          </View>
+          <View role="listitem">
+            <TextForReader>{"Airbus"}</TextForReader>
+            <SVGCompanyAirbus
+              role="img"
+              aria-label="Airbus"
+              width={companyIconWidth}
+              height={companyIconWidth * companyIconCoef}
+              style={companyIconStyle}
+            />
+          </View>
         </SpacedView>
       </SpacedView>
     </Container>

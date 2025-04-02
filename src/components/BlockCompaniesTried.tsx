@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 import { useTheme } from "@/app/styles";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
+import TextForReader from "@/react-multiversal/TextForReader";
 import SVGCompanyFacebook from "@/svgs/components/SVGCompanyFacebook";
 import SVGCompanyGoogle from "@/svgs/components/SVGCompanyGoogle";
 import SVGCompanyMicrosoft from "@/svgs/components/SVGCompanyMicrosoft";
@@ -30,10 +31,12 @@ export default function BlockCompaniesTried() {
           style={[
             fontStyles.ios.headline,
             theme.styles.textLight1,
-            { textAlign: "center" },
+            { textAlign: "center", textTransform: "uppercase" },
           ]}
+          role="heading"
+          aria-level={2}
         >
-          {"COMPANIES THAT TRIED TO HIRE ME"}
+          {"Companies that tried to hire me"}
         </Text>
         <SpacedView
           gap="m"
@@ -43,27 +46,48 @@ export default function BlockCompaniesTried() {
             flexWrap: "wrap",
             justifyContent: "center",
           }}
+          role="list"
         >
-          <SVGCompanyFacebook
-            width={companyIconWidth}
-            height={companyIconWidth * companyIconCoef}
-            style={companyIconStyle}
-          />
-          <SVGCompanyTwitter
-            width={companyIconWidth}
-            height={companyIconWidth * companyIconCoef}
-            style={companyIconStyle}
-          />
-          <SVGCompanyMicrosoft
-            width={companyIconWidth}
-            height={companyIconWidth * companyIconCoef}
-            style={companyIconStyle}
-          />
-          <SVGCompanyGoogle
-            width={companyIconWidth}
-            height={companyIconWidth * companyIconCoef}
-            style={companyIconStyle}
-          />
+          <View role="listitem">
+            <TextForReader>Microsoft</TextForReader>
+            <SVGCompanyMicrosoft
+              role="img"
+              aria-label="Microsoft"
+              width={companyIconWidth}
+              height={companyIconWidth * companyIconCoef}
+              style={companyIconStyle}
+            />
+          </View>
+          <View role="listitem">
+            <TextForReader>Google</TextForReader>
+            <SVGCompanyGoogle
+              role="img"
+              aria-label="Google"
+              width={companyIconWidth}
+              height={companyIconWidth * companyIconCoef}
+              style={companyIconStyle}
+            />
+          </View>
+          <View role="listitem">
+            <TextForReader>Facebook</TextForReader>
+            <SVGCompanyFacebook
+              role="img"
+              aria-label="Facebook"
+              width={companyIconWidth}
+              height={companyIconWidth * companyIconCoef}
+              style={companyIconStyle}
+            />
+          </View>
+          <View role="listitem">
+            <TextForReader>Twitter</TextForReader>
+            <SVGCompanyTwitter
+              role="img"
+              aria-label="Twitter"
+              width={companyIconWidth}
+              height={companyIconWidth * companyIconCoef}
+              style={companyIconStyle}
+            />
+          </View>
         </SpacedView>
       </SpacedView>
     </Container>

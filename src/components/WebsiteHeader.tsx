@@ -87,6 +87,7 @@ export default function WebsiteHeader() {
         stops={gradientFlashyStops(theme)}
       />
       <Container
+        role="banner"
         wrapperStyle={{
           position: "sticky",
           top: 0,
@@ -147,9 +148,7 @@ export default function WebsiteHeader() {
                   </svg>
                 </View>
               </LinkView>
-              <LinkView href="/contact">
-                <AvailabilityBadge showText={"on-focus"} />
-              </LinkView>
+              <AvailabilityBadge showText={"on-focus"} />
             </View>
             <IfWindowWidthIs
               smallerThan={WindowWidth.xxs}

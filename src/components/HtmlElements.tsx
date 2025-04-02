@@ -267,8 +267,8 @@ export const TextNode = ({
       role={role}
       style={[
         fontStyles.ios.body,
-        { lineHeight: 24 },
-        theme.styles.text,
+        { lineHeight: 26 },
+        theme.styles.textDark,
         style,
       ]}
     >

@@ -103,6 +103,7 @@ export const ResumeTimelineEntry = ({
           boxShadow: boxShadows.default,
         },
       ]}
+      role="article"
     >
       {disableLinks ? null : (
         <a id={item.slug} style={{ position: "relative", top: "-100px" }} />
@@ -140,7 +141,11 @@ export const ResumeTimelineEntry = ({
             // alignItems: "flex-start",
           }}
         >
-          <Text style={[fontStyles.iosEm.subhead, theme.styles.textLight2]}>
+          <Text
+            style={[fontStyles.iosEm.subhead, theme.styles.textLight2]}
+            role="heading"
+            aria-level={4}
+          >
             {item.title.toUpperCase()}
           </Text>
           {item.url && !disableLinks ? (
@@ -163,6 +168,7 @@ export const ResumeTimelineEntry = ({
             fontStyles.iosEm.title2,
             theme.styles.text,
           ]}
+          role="paragraph"
         >
           {item.description ?? null}
         </Text>

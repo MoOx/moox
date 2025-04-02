@@ -34,7 +34,7 @@ export const testimonials: Testimonial[] = [
         <Text style={{ fontWeight: "bold" }}>{"React expert"}</Text>
         <Text style={{ opacity: 0.6 }}>
           {
-            ". Whether it’s React Native or React.js, nothing stands in his way."
+            ". Whether it's React Native or React.js, nothing stands in his way."
           }
         </Text>
       </>
@@ -133,9 +133,14 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
           fill={theme.dynamicColors.text}
           style={{ zIndex: 1 }}
         />
-        <Text style={[fontStyles.ios.callout, theme.styles.text]}>
-          {item.content}
-        </Text>
+        <View role="blockquote">
+          <Text
+            role="paragraph"
+            style={[fontStyles.ios.callout, theme.styles.text]}
+          >
+            {item.content}
+          </Text>
+        </View>
         <SpacedView
           gap="xs"
           style={{
@@ -149,7 +154,10 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
             borderColor="#979797"
             uri={item.avatar}
           />
-          <View>
+          <Text
+            role="paragraph"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
             <Text
               style={[
                 fontStyles.iosEm.body,
@@ -168,7 +176,7 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
             >
               {item.title}
             </Text>
-          </View>
+          </Text>
         </SpacedView>
       </SpacedView>
     </BlurView>
@@ -268,8 +276,10 @@ export default function BlockTestimonials() {
           <SpacedView gap="s">
             <Text
               style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
+              role="heading"
+              aria-level={2}
             >
-              {"Testimonials."}
+              {"What People Say About Me."}
             </Text>
             <Text
               style={[
@@ -277,13 +287,13 @@ export default function BlockTestimonials() {
                 theme.styles.textOnMain,
                 { opacity: 0.6 },
               ]}
+              role="paragraph"
             >
-              {`What coworkers say about me.`}
+              {`Real feedback from those who know my work.`}
             </Text>
           </SpacedView>
           <View>
             <SpacedView
-              // horizontal="l"
               vertical="m"
               gap="xl"
               style={{ flexDirection: "row", flexWrap: "wrap" }}
@@ -293,7 +303,6 @@ export default function BlockTestimonials() {
               ))}
             </SpacedView>
             <SpacedView
-              // horizontal="l"
               vertical="m"
               gap="xl"
               style={{

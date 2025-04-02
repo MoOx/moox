@@ -7,6 +7,7 @@ import type { AnimatedStyle } from "react-native-reanimated";
 
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
+import LinkView from "@/react-multiversal/LinkView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useFocus } from "@/react-multiversal/useFocus";
 
@@ -39,64 +40,65 @@ export default function AvailabilityBadge({
   style?: StyleProp<ViewStyle>;
   showText: boolean | "on-focus";
 }) {
-  const ref = React.useRef<View>(null);
+  const ref = React.useRef<Text>(null);
   const [hasAnyFocus] = useFocus(ref, { debounceOff: 500 });
 
   return (
-    <Animated.View
-      ref={ref}
-      style={[
-        {
-          flexDirection: "row",
-          alignItems: "center",
-          borderRadius: 16,
-          backgroundColor: "rgba(40, 199, 128, 0.15)",
-          paddingHorizontal: size("xs"),
-          paddingVertical: size("xs"),
-        },
-        pulseAnimationStyle,
-        style,
-      ]}
-    >
-      <View
-        style={{
-          width: 8,
-          height: 8,
-          borderRadius: 8,
-          backgroundColor: "#28c780",
-        }}
-      />
-      {!showText ? null : (
-        <Animated.View
-          style={[
-            { flexDirection: "row" },
-            showText === "on-focus" && {
-              opacity: hasAnyFocus ? 1 : 0,
-              transform: [{ translateX: hasAnyFocus ? 0 : -20 }],
-              width: hasAnyFocus ? "auto" : 0,
-              height: hasAnyFocus ? "auto" : 0,
-              overflow: "hidden",
-              // transitionProperty: ["opacity", "transform", "width", "height"],
-              transitionDuration: "300ms",
-              transitionTimingFunction: "ease-in-out",
-            },
-          ]}
-        >
-          <Spacer size="xxs" />
-          <Text
+    <LinkView ref={ref} href="/contact">
+      <Animated.View
+        style={[
+          {
+            flexDirection: "row",
+            alignItems: "center",
+            borderRadius: 16,
+            backgroundColor: "rgba(40, 199, 128, 0.15)",
+            paddingHorizontal: size("xs"),
+            paddingVertical: size("xs"),
+          },
+          pulseAnimationStyle,
+          style,
+        ]}
+      >
+        <View
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: 8,
+            backgroundColor: "#28c780",
+          }}
+        />
+        {!showText ? null : (
+          <Animated.View
             style={[
-              fontStyles.iosEm.caption2,
-              {
-                lineHeight: fontStyles.iosEm.caption2.fontSize,
-                color: "#039754",
-                textTransform: "uppercase",
+              { flexDirection: "row" },
+              showText === "on-focus" && {
+                opacity: hasAnyFocus ? 1 : 0,
+                transform: [{ translateX: hasAnyFocus ? 0 : -20 }],
+                width: hasAnyFocus ? "auto" : 0,
+                height: hasAnyFocus ? "auto" : 0,
+                overflow: "hidden",
+                // transitionProperty: ["opacity", "transform", "width", "height"],
+                transitionDuration: "300ms",
+                transitionTimingFunction: "ease-in-out",
               },
             ]}
           >
-            {"Available for Work"}
-          </Text>
-        </Animated.View>
-      )}
-    </Animated.View>
+            <Spacer size="xxs" />
+            <Text
+              style={[
+                fontStyles.iosEm.caption2,
+                {
+                  lineHeight: fontStyles.iosEm.caption2.fontSize,
+                  color: "#039754",
+                  textTransform: "uppercase",
+                },
+              ]}
+            >
+              {"Available for Work"}
+            </Text>
+          </Animated.View>
+        )}
+      </Animated.View>
+    </LinkView>
   );
 }

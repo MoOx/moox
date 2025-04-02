@@ -79,9 +79,7 @@ export default function PageContact() {
                 {"What can I help with?"}
               </Text>
             </View>
-            <LinkView href="/contact">
-              <AvailabilityBadge showText={true} />
-            </LinkView>
+            <AvailabilityBadge showText={true} />
           </SpacedView>
           <Spacer size="xl" />
           <SpacedView>

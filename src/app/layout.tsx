@@ -3,7 +3,7 @@ import "@/app/styles.css";
 import "@/react-multiversal/react-native/Next.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Viewport } from "next";
+import { Metadata, Viewport } from "next";
 
 import { getWebHtmlClass, getWebStyleSheet } from "@/app/styles";
 import AnalyticsMatomo from "@/components/AnalyticsMatomo";
@@ -17,8 +17,35 @@ import {
 } from "@/react-multiversal/theme/colorScheme";
 import Next_UserColorSchemeInit from "@/react-multiversal/theme/Next_UserColorSchemeInit";
 
+export const metadata: Metadata = {
+  applicationName: "MoOx",
+  authors: [{ name: "Maxime Thirouin", url: "https://moox.io" }],
+  creator: "Maxime Thirouin",
+  icons: [
+    {
+      url: "/apple-touch-icon.png",
+      sizes: "180x180",
+      type: "image/png",
+    },
+    {
+      url: "/favicon-32x32.png",
+      sizes: "32x32",
+      type: "image/png",
+    },
+    {
+      url: "/favicon-16x16.png",
+      sizes: "16x16",
+      type: "image/png",
+    },
+  ],
+  manifest: "/site.webmanifest",
+  // @todo for fun
+  // appLinks
+};
+
 export const viewport: Viewport = {
   viewportFit: "cover",
+  themeColor: "#480D9B",
 };
 
 export default /*async*/ function RootLayout({
@@ -49,34 +76,9 @@ export default /*async*/ function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <meta charSet="utf-8" />
-
         {/* analytics */}
         <link rel="dns-prefetch" href="https://a.moox.fr" />
         <link rel="preconnect" href="https://a.moox.fr" />
-
-        {/* favicons & friends */}
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-        {/* <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000f2b" /> */}
-        <meta name="msapplication-TileColor" content="#01093C" />
-        <meta name="theme-color" content={"#480D9B"} />
 
         <Next_UserColorSchemeInit colorScheme={userColorScheme} />
         <Next_IfWindowWidthIs />

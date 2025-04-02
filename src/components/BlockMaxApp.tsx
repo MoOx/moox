@@ -141,9 +141,7 @@ export default function BlockMaxApp({
                 {"Developer"}
               </Text>
             </View>
-            <LinkView href="/contact">
-              <AvailabilityBadge showText={true} />
-            </LinkView>
+            <AvailabilityBadge showText={true} />
           </SpacedView>
           <Spacer size="m" />
           <View
@@ -152,6 +150,8 @@ export default function BlockMaxApp({
               alignItems: "center",
               justifyContent: "space-between",
             }}
+            role="heading"
+            aria-level={2}
           >
             <View style={{ flex: 1 }}>
               <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>

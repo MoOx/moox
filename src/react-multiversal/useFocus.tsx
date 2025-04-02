@@ -26,18 +26,18 @@ export function useFocus<T>(
     debounceOff?: number;
   } = {}
 ) {
-  const [pointerFocus, setPointerFocus] = React.useState(false);
-  const debouncePointerFocus = React.useRef<NodeJS.Timeout | null>(null);
-  const handlePointerFocusOn = React.useCallback(() => {
-    if (debouncePointerFocus.current)
-      clearTimeout(debouncePointerFocus.current);
+  const [pointerFocused, setPointerFocused] = React.useState(false);
+  const debouncePointerFocused = React.useRef<NodeJS.Timeout | null>(null);
+  const handlePointerFocusedOn = React.useCallback(() => {
+    if (debouncePointerFocused.current)
+      clearTimeout(debouncePointerFocused.current);
     onPointerFocus?.();
-    setPointerFocus(true);
+    setPointerFocused(true);
   }, [onPointerFocus]);
-  const handlePointerFocusOff = React.useCallback(() => {
+  const handlePointerFocusedOff = React.useCallback(() => {
     onPointerLeave?.();
-    debouncePointerFocus.current = setTimeout(
-      () => setPointerFocus(false),
+    debouncePointerFocused.current = setTimeout(
+      () => setPointerFocused(false),
       debounceOff
     );
   }, [debounceOff, onPointerLeave]);
@@ -55,8 +55,8 @@ export function useFocus<T>(
   }, [debounceOff, onBlur]);
 
   React.useEffect(() => {
-    if (debouncePointerFocus.current) {
-      clearTimeout(debouncePointerFocus.current);
+    if (debouncePointerFocused.current) {
+      clearTimeout(debouncePointerFocused.current);
     }
     if (debounceFocus.current) {
       clearTimeout(debounceFocus.current);
@@ -67,24 +67,24 @@ export function useFocus<T>(
     const n = ref?.current as HTMLElement;
     if (n?.nodeType === Node.ELEMENT_NODE) {
       const opts = { passive: true, capture: false };
-      n.addEventListener(POINTERENTER, handlePointerFocusOn, opts);
-      n.addEventListener(POINTERLEAVE, handlePointerFocusOff, opts);
+      n.addEventListener(POINTERENTER, handlePointerFocusedOn, opts);
+      n.addEventListener(POINTERLEAVE, handlePointerFocusedOff, opts);
       n.addEventListener(FOCUS, handleFocusOn, opts);
       n.addEventListener(BLUR, handleFocusOff, opts);
       return () => {
-        n.removeEventListener(POINTERENTER, handlePointerFocusOn, opts);
-        n.removeEventListener(POINTERLEAVE, handlePointerFocusOff, opts);
+        n.removeEventListener(POINTERENTER, handlePointerFocusedOn, opts);
+        n.removeEventListener(POINTERLEAVE, handlePointerFocusedOff, opts);
         n.removeEventListener(FOCUS, handleFocusOn, opts);
         n.removeEventListener(BLUR, handleFocusOff, opts);
       };
     }
   }, [
     ref,
-    handlePointerFocusOn,
-    handlePointerFocusOff,
+    handlePointerFocusedOn,
+    handlePointerFocusedOff,
     handleFocusOn,
     handleFocusOff,
   ]);
 
-  return [pointerFocus || focused, pointerFocus, focused] as const;
+  return [pointerFocused || focused, pointerFocused, focused] as const;
 }

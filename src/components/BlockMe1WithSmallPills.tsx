@@ -8,6 +8,7 @@ import Pill from "@/components/Pill";
 import { WindowWidth } from "@/react-multiversal";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import Parallax from "@/react-multiversal/Parallax";
+import TextForReader from "@/react-multiversal/TextForReader";
 import { pTransforms } from "@/utils.styles";
 
 export default function BlockMe1WithSmallPills() {
@@ -17,6 +18,7 @@ export default function BlockMe1WithSmallPills() {
         largerThan={WindowWidth.xs}
         style={[StyleSheet.absoluteFill, { alignItems: "center" }]}
       >
+        <TextForReader>{"I am building things for a long time."}</TextForReader>
         <Me>
           <Parallax
             style={{ position: "absolute", top: 150, left: 0 }}

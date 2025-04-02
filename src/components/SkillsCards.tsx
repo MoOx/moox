@@ -72,22 +72,41 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
               <SVGDevTypescript width={160} height={160} fill="#FFFFFF" />
             </View>
             {isMini ? (
-              <Text style={[textStyle, themeDark.styles.textLight1]}>
-                {["TypeScript", "Front-end", "Node.js", "HTML", "CSS"].join(
-                  "\n"
+              <View role="list">
+                {["TypeScript", "Front-end", "Node.js", "HTML", "CSS"].map(
+                  (l) => (
+                    <Text
+                      key={l}
+                      role="listitem"
+                      style={[textStyle, themeDark.styles.textLight1]}
+                    >
+                      {l}
+                    </Text>
+                  )
                 )}
-              </Text>
+              </View>
             ) : (
               <>
-                <Text style={[textStyle, themeDark.styles.textLight1]}>
+                <Text
+                  style={[textStyle, themeDark.styles.textLight1]}
+                  role="paragraph"
+                >
                   {
                     "I coded in JS in almost every browsers, with all engines, from SpiderMonkey to v8.\nI started with ES1 and I am now using TypeScript, since type safety feels like a requirement to offer a high level of condience."
                   }
                 </Text>
                 <Spacer size="xxl" style={{ flexGrow: 1 }} />
-                <Text style={[fontStyles.iosEm.subhead, themeDark.styles.text]}>
-                  {["TypeScript", "Node.js", "HTML", "CSS"].join("\n")}
-                </Text>
+                <View role="list">
+                  {["TypeScript", "Node.js", "HTML", "CSS"].map((l) => (
+                    <Text
+                      key={l}
+                      role="listitem"
+                      style={[fontStyles.iosEm.subhead, themeDark.styles.text]}
+                    >
+                      {l}
+                    </Text>
+                  ))}
+                </View>
               </>
             )}
           </>
@@ -122,24 +141,46 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
               <SVGReact width={160} height={160} fill="#FFFFFF" />
             </View>
             {isMini ? (
-              <Text style={[textStyle, themeDark.styles.textLight1]}>
-                {["Cross-platform", "Web & Native", "Next.js", "Expo"].join(
-                  "\n"
+              <View role="list">
+                {["Cross-platform", "Web & Native", "Next.js", "Expo"].map(
+                  (l) => (
+                    <Text
+                      key={l}
+                      role="listitem"
+                      style={[textStyle, themeDark.styles.textLight1]}
+                    >
+                      {l}
+                    </Text>
+                  )
                 )}
-              </Text>
+              </View>
             ) : (
               <>
-                <Text style={[textStyle, themeDark.styles.textLight1]}>
+                <Text
+                  style={[textStyle, themeDark.styles.textLight1]}
+                  role="paragraph"
+                >
                   {
                     "I started using React in 2014 and followed all of its evolutions.\nTo this day, I strongly believe that React & React Native are currently the best tools to produce fast & maintainable user-interfaces."
                   }
                 </Text>
                 <Spacer size="xxl" style={{ flexGrow: 1 }} />
-                <Text style={[fontStyles.iosEm.subhead, themeDark.styles.text]}>
-                  {["Web & Native", "Crossplatform", "Next.js", "Expo"].join(
-                    "\n"
+                <View role="list">
+                  {["Web & Native", "Crossplatform", "Next.js", "Expo"].map(
+                    (l) => (
+                      <Text
+                        key={l}
+                        role="listitem"
+                        style={[
+                          fontStyles.iosEm.subhead,
+                          themeDark.styles.text,
+                        ]}
+                      >
+                        {l}
+                      </Text>
+                    )
                   )}
-                </Text>
+                </View>
               </>
             )}
           </>
@@ -174,20 +215,39 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
               <SVGGraphql width={160} height={160} fill="#FFFFFF" />
             </View>
             {isMini ? (
-              <Text style={[textStyle, themeDark.styles.textLight1]}>
-                {["GraphQL", "Apollo", "REST"].join("\n")}
-              </Text>
+              <View role="list">
+                {["GraphQL", "Apollo", "REST"].map((l) => (
+                  <Text
+                    key={l}
+                    role="listitem"
+                    style={[textStyle, themeDark.styles.textLight1]}
+                  >
+                    {l}
+                  </Text>
+                ))}
+              </View>
             ) : (
               <>
-                <Text style={[textStyle, themeDark.styles.textLight1]}>
+                <Text
+                  style={[textStyle, themeDark.styles.textLight1]}
+                  role="paragraph"
+                >
                   {
                     "As a Front-End Developer, my job is to allow users to interact with various kind of data.\nThis means I must master all possible type of Back-end."
                   }
                 </Text>
                 <Spacer size="xxl" style={{ flexGrow: 1 }} />
-                <Text style={[fontStyles.iosEm.subhead, themeDark.styles.text]}>
-                  {["REST", "GraphQL", "Apollo"].join("\n")}
-                </Text>
+                <View role="list">
+                  {["REST", "GraphQL", "Apollo"].map((l) => (
+                    <Text
+                      key={l}
+                      role="listitem"
+                      style={[fontStyles.iosEm.subhead, themeDark.styles.text]}
+                    >
+                      {l}
+                    </Text>
+                  ))}
+                </View>
               </>
             )}
           </>
@@ -240,8 +300,11 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
                   </Text>
                 </SpacedView>
                 <Spacer size="xxl" style={{ flexGrow: 1 }} />
-                <SpacedView gap="xxs">
-                  <LinkView href="https://github.com/search?q=repo%3Afacebook%2Freact-native+author%3Amoox&type=commits">
+                <SpacedView gap="xxs" role="list">
+                  <LinkView
+                    role="listitem"
+                    href="https://github.com/search?q=repo%3Afacebook%2Freact-native+author%3Amoox&type=commits"
+                  >
                     <Text
                       style={[fontStyles.iosEm.caption1, themeDark.styles.text]}
                     >
@@ -256,7 +319,10 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
                       {"Various minor contributions."}
                     </Text>
                   </LinkView>
-                  <LinkView href="https://github.com/search?q=org%3Apostcss+author%3Amoox&type=commits&s=committer-date&o=desc">
+                  <LinkView
+                    role="listitem"
+                    href="https://github.com/search?q=org%3Apostcss+author%3Amoox&type=commits&s=committer-date&o=desc"
+                  >
                     <Text
                       style={[fontStyles.iosEm.caption1, themeDark.styles.text]}
                     >
@@ -271,7 +337,7 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
                       {"Creator of the PostCSS organization +500 commits"}
                     </Text>
                   </LinkView>
-                  <LinkView href="https://cssnext.github.io">
+                  <LinkView role="listitem" href="https://cssnext.github.io">
                     <Text
                       style={[fontStyles.iosEm.caption1, themeDark.styles.text]}
                     >
@@ -286,7 +352,10 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
                       {"The father of postcss-preset-env. +6M downloads/week."}
                     </Text>
                   </LinkView>
-                  <LinkView href="https://github.com/MoOx/phenomic">
+                  <LinkView
+                    role="listitem"
+                    href="https://github.com/MoOx/phenomic"
+                  >
                     <Text
                       style={[fontStyles.iosEm.caption1, themeDark.styles.text]}
                     >
@@ -301,7 +370,10 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
                       {"Precursor of Next.js static rendering."}
                     </Text>
                   </LinkView>
-                  <LinkView href="https://github.com/stylelint/stylelint/issues?q=is%3Aissue+author%3Amoox+is%3Aclosed+sort%3Acreated-asc">
+                  <LinkView
+                    role="listitem"
+                    href="https://github.com/stylelint/stylelint/issues?q=is%3Aissue+author%3Amoox+is%3Aclosed+sort%3Acreated-asc"
+                  >
                     <Text
                       style={[fontStyles.iosEm.caption1, themeDark.styles.text]}
                     >
@@ -336,6 +408,7 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
         justifyContent: isMini ? "flex-end" : "center",
         alignItems: isMini ? "flex-end" : undefined,
       }}
+      role="list"
     >
       {skills.map((item) => (
         <View
@@ -347,6 +420,7 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
             borderRadius,
             overflow: "hidden",
           }}
+          role="listitem"
         >
           <SpacedView
             horizontal={spacing}
@@ -376,7 +450,11 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
               }}
             >
               {item.icon}
-              <Text style={[titleStyle, themeDark.styles.textOnMain]}>
+              <Text
+                role="heading"
+                aria-level={3}
+                style={[titleStyle, themeDark.styles.textOnMain]}
+              >
                 {item.title}
               </Text>
             </SpacedView>

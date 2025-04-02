@@ -55,7 +55,7 @@ export const ResumeTimeline = ({ items }: { items: ResumeItem[] }) => {
         return (
           <React.Fragment key={item.slug}>
             {newYear ? (
-              <View>
+              <View role="heading" aria-level={3}>
                 <Text style={[fontStyles.iosEm.title1, theme.styles.text]}>
                   {year}
                 </Text>

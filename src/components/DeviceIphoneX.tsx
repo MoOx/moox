@@ -43,7 +43,7 @@ export default function DeviceIphone({
       >
         {children}
       </View>
-      <View style={StyleSheet.absoluteFill} pointerEvents="none">
+      <View style={[StyleSheet.absoluteFill, { pointerEvents: "none" }]}>
         <SVGDeviceIphoneX width={width} height={height} />
       </View>
     </Animated.View>
