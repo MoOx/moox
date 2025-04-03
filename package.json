@@ -6,7 +6,6 @@
     "node": "22.x"
   },
   "scripts": {
-    "postinstall": "cd node_modules/react-native-web/packages/react-native-web && yarn install && yarn build && cp -r . ../../",
     "prepare": "patch-package && husky && npm run svg && npm run markdown",
     "dev": "next dev --turbopack -p 1337",
     "build": "npm run prepare && next build",
@@ -54,7 +53,7 @@
     "react-native-reanimated": "^4.0.0-beta.3",
     "react-native-safe-area-context": "^4.14.0",
     "react-native-svg": "^15.10.1",
-    "react-native-web": "https://github.com/necolas/react-native-web.git#fcbe2d1e9225282671e39f9f639e2cb04c7e1e65",
+    "react-native-web": "^0.20.0",
     "react-native-worklets": "^0.1.0",
     "tinycolor2": "^1.6.0",
     "ts-pattern": "^5.5.0"
@@ -75,7 +74,7 @@
     "lint-staged": "^15.2.10",
     "patch-package": "^8.0.0",
     "prettier": "^3.3.3",
-    "react-from-svg": "^6.0.0",
+    "react-from-svg": "^7.0.1",
     "react-native": "^0.78",
     "string-replace-loader": "^3.1.0",
     "typescript": "^5.8"
