@@ -68,7 +68,7 @@ export default function Pill({
                     theme.styles.textLight1,
                     {
                       lineHeight: fontStyles.iosEm.caption2.fontSize,
-                      fontWeight: "300",
+                      fontWeight: "400",
                     },
                   ]}
                 >
@@ -114,7 +114,7 @@ export default function Pill({
                   pre ? theme.styles.textMain : theme.styles.text,
                   {
                     lineHeight: fontStyles.iosEm.caption2.fontSize,
-                    fontWeight: "300",
+                    fontWeight: "400",
                     textAlign: pre || detail ? "right" : "center",
                   },
                 ]}

@@ -227,7 +227,7 @@ export default function WebsiteFooter() {
       </View>
       <SpacedView
         horizontal="l"
-        vertical="l"
+        vertical="s"
         style={[
           theme.styles.back,
           {
@@ -247,7 +247,13 @@ export default function WebsiteFooter() {
             justifyContent: "center",
           }}
         >
-          <Text style={[fontStyles.ios.footnote, theme.styles.text]}>
+          <Text
+            style={[
+              fontStyles.ios.footnote,
+              theme.styles.text,
+              { display: "flex", flexDirection: "row", lineHeight: 36 },
+            ]}
+          >
             {"Website made with "}
             <LinkText href="https://reactnative.dev">{"React Native"}</LinkText>
             <LinkText href="https://necolas.github.io/react-native-web/">
@@ -258,7 +264,11 @@ export default function WebsiteFooter() {
             {". "}
           </Text>
           <LinkText
-            style={[fontStyles.ios.footnote, theme.styles.text]}
+            style={[
+              fontStyles.ios.footnote,
+              theme.styles.text,
+              { lineHeight: 36 },
+            ]}
             href="https://github.com/MoOx/moox"
           >
             {"100% Over-engineered source available on GitHub"}

@@ -39,7 +39,8 @@ export default function ResumeStats() {
               },
             ]}
           >
-            {"@MoOx"}
+            <Text style={{ opacity: 0.3 }}>{"@"}</Text>
+            {"MoOx"}
           </Text>
           <Text
             style={[

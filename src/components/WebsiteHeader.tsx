@@ -122,7 +122,11 @@ export default function WebsiteHeader() {
             }}
           >
             <View style={styles.menuGroup}>
-              <LinkView href="/" style={{ flexDirection: "row" }}>
+              <LinkView
+                href="/"
+                style={{ flexDirection: "row" }}
+                aria-label="Go to home page"
+              >
                 <Avatar size={32} borderWidth={2} borderColor="#000" />
                 <View
                   style={{
@@ -171,14 +175,20 @@ export default function WebsiteHeader() {
                 gap="m"
                 style={[styles.menuGroup, { justifyContent: "flex-end" }]}
               >
-                <LinkView href={socials.linkedin.value}>
+                <LinkView
+                  href={socials.linkedin.value}
+                  aria-label="@Max on LinkedIn"
+                >
                   <SVGSocialLinkedin
                     width={20}
                     height={20}
                     fill={theme.dynamicColors.text}
                   />
                 </LinkView>
-                <LinkView href={socials.github.value}>
+                <LinkView
+                  href={socials.github.value}
+                  aria-label="@MoOx on GitHub"
+                >
                   <SVGSocialGithub
                     width={20}
                     height={20}

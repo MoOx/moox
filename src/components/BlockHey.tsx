@@ -45,7 +45,7 @@ export default function BlockHey() {
               role="heading"
               aria-level={1}
             >
-              <Text style={[fontStyles.ios.headline, theme.styles.textLight2]}>
+              <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
                 {"A Web & Mobile"}
               </Text>
               <IfWindowWidthIs largerThan={WindowWidth.m}>
@@ -79,7 +79,7 @@ export default function BlockHey() {
               <Text
                 style={[
                   fontStyles.ios.headline,
-                  theme.styles.textLight2,
+                  theme.styles.textLight1,
                   {
                     fontWeight: weight.regular,
                     fontStyle: "italic",
@@ -94,7 +94,7 @@ export default function BlockHey() {
               role="paragraph"
               style={{ display: "flex", flexDirection: "column" }}
             >
-              <Text style={[fontStyles.ios.headline, theme.styles.textLight2]}>
+              <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
                 {"Hey,"}
               </Text>
               <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>

@@ -34,11 +34,7 @@ export default function BlockFrontendArchitect() {
               {"Front-end Architect."}
             </Text>
             <Text
-              style={[
-                fontStyles.iosEm.callout,
-                theme.styles.text,
-                { opacity: 0.6 },
-              ]}
+              style={[fontStyles.iosEm.callout, theme.styles.textLight1]}
               role="paragraph"
             >
               {`My various experiences made me confident about the technologies & tools I use in order to help you & your team, whether you need some advices, training or help to boostrap your project so you can focus on the feature your user needs.

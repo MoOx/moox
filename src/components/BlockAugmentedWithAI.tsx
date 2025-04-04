@@ -67,7 +67,7 @@ export default function BlockAugmentedWithAI() {
           {"Augmented with AI."}
         </Text>
         <Text
-          style={[fontStyles.iosEm.body, theme.styles.text, { opacity: 0.6 }]}
+          style={[fontStyles.iosEm.body, theme.styles.textLight1]}
           role="paragraph"
         >
           {`Artificial Intelligence is already changing the world, and especially the way we build software.
