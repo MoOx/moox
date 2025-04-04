@@ -18,22 +18,27 @@ type BotResponse = string[];
 
 const botResponses: BotResponse[] = [
   [
-    "Hello I am BotMax. Max is a front-end developer, so he didn't really build me as a smart assistant.",
-    "If you ask me anything, I will just answer you with a link so you can reach him.",
+    "Hello, I’m BotMax. Max is a front-end developer, so he didn’t really build me to be a smart assistant.",
+    "If you ask me anything, I’ll just tell you to click on the links above.",
   ],
   [
-    "I am not a real chatbot, I just display pre-written messages.",
-    "I don't understand what you're saying, I just show the next messages in my list.",
+    "I’m not a real chatbot, I just display pre-written messages.",
+    "So if you want to reach Max, just find a link above that works for you!",
   ],
   [
-    "See? I told you I was not smart.",
-    "I just keep showing you new messages, no matter what you say.",
+    "Seriously, I’m dumb. I don’t understand what you’re saying.",
+    "I just keep showing you new messages, no matter what you type.",
   ],
   [
-    "I hope you understand now that I am just a dumb bot.",
+    "See? I told you I wasn’t smart. Even the loading delay is fake.",
+    "To reach Max, you have plenty of options above.",
+  ],
+  [
+    "I hope you get it now—I’m just a fake bot.",
     "Maybe you should contact Max directly instead?",
-    "He's much smarter than me!",
+    "He’s much smarter than me! Links are above!",
   ],
+  ["Ok I guess you got it. That's my last message, you should reach Max now."],
 ];
 
 type Message = {
