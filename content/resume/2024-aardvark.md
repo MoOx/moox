@@ -13,7 +13,7 @@ hashtags:
   - React
   - React Native
   - React Native for Web
-#image: /resume/aarvark.jpg
+image: /resume/aardvark.jpg
 remote: true
 links:
   - title: Aardvark

@@ -116,8 +116,8 @@ export const ResumeTimelineEntry = ({
               width: "100%",
               height: "auto",
             }}
-            width={2160}
-            height={3840}
+            width={480}
+            height={360}
             priority={true}
             alt={""}
           />

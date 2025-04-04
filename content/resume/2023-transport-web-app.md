@@ -18,7 +18,7 @@ hashtags:
   - Maps
   - Location
   - Jawg
-#image: /resume/adm.jpg
+image: /resume/hove-web.jpg
 remote: true
 ---
 

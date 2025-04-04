@@ -10,7 +10,7 @@ hashtags:
   - TypeScript
   - JavaScript
   - React Native
-#image: /resume/aarvark.jpg
+image: /resume/enjoyapp.jpg
 remote: true
 links:
   - title: Enjoy App
