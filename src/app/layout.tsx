@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     },
   ],
   manifest: "/site.webmanifest",
+  openGraph: {
+    images: ["/preview-1200x630.jpg"],
+  },
   // @todo for fun
   // appLinks
 };
