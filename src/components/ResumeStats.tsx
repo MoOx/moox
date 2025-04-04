@@ -8,6 +8,7 @@ import {
 } from "@/app/styles";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import SpacedView from "@/react-multiversal/SpacedView";
+import Spacer from "@/react-multiversal/Spacer";
 
 const currentYear = new Date().getFullYear();
 
@@ -27,18 +28,18 @@ export default function ResumeStats() {
           alignItems: "flex-start",
         }}
       >
-        <SpacedView horizontal="s" vertical="s">
+        <SpacedView vertical="s">
           <Text
             style={[
               themeDark.styles.text,
               {
-                fontSize: 64,
-                lineHeight: 66,
+                fontSize: 49,
+                lineHeight: 50,
                 fontWeight: "700",
               },
             ]}
           >
-            MoOx
+            {"@MoOx"}
           </Text>
           <Text
             style={[
@@ -53,6 +54,7 @@ export default function ResumeStats() {
             Maxime Thirouin
           </Text>
         </SpacedView>
+        <Spacer />
         <SpacedView horizontal="m" vertical="l">
           <Text
             style={[
