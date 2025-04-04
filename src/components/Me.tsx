@@ -125,7 +125,7 @@ export default function Me({
           }}
         />
         <Image
-          // hidden={true}
+          priority={true}
           src={src}
           alt="Picture of the Max"
           width={imgWidth}
