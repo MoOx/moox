@@ -44,7 +44,7 @@ export default function LinkText({
   role = "link",
   style,
   activeStyle,
-  containerStyle = resetLinkStyle,
+  containerStyle,
   containerActiveStyle,
   href,
   isActive = defaultIsActive,
@@ -60,6 +60,7 @@ export default function LinkText({
   const containerStyles = React.useMemo(
     () =>
       StyleSheet.flatten([
+        resetLinkStyle,
         containerStyle,
         active ? containerActiveStyle : undefined,
       ]),

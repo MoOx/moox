@@ -119,6 +119,7 @@ export default function PageContact() {
             >
               <SpacedView horizontal="xs" style={styles.cardContainer}>
                 <LinkView
+                  containerStyle={styles.cardContainer}
                   style={styles.cardContainer}
                   href={!isClient ? "" : "sms:+33" + socials.text.value}
                 >
@@ -133,6 +134,7 @@ export default function PageContact() {
               </SpacedView>
               <SpacedView horizontal="xs" style={styles.cardContainer}>
                 <LinkView
+                  containerStyle={styles.cardContainer}
                   style={styles.cardContainer}
                   href={
                     !isClient
@@ -151,6 +153,7 @@ export default function PageContact() {
               </SpacedView>
               <SpacedView horizontal="xs" style={styles.cardContainer}>
                 <LinkView
+                  containerStyle={styles.cardContainer}
                   style={styles.cardContainer}
                   href={!isClient ? "" : "tel:+33" + socials.call.value}
                 >
@@ -191,6 +194,7 @@ export default function PageContact() {
             >
               <SpacedView horizontal="xs" style={styles.cardContainer}>
                 <LinkView
+                  containerStyle={styles.cardContainer}
                   style={styles.cardContainer}
                   href={socials.linkedin.value}
                 >
@@ -206,6 +210,7 @@ export default function PageContact() {
               </SpacedView>
               <SpacedView horizontal="xs" style={styles.cardContainer}>
                 <LinkView
+                  containerStyle={styles.cardContainer}
                   style={styles.cardContainer}
                   href={socials.github.value}
                 >
@@ -221,6 +226,7 @@ export default function PageContact() {
               </SpacedView>
               <SpacedView horizontal="xs" style={styles.cardContainer}>
                 <LinkView
+                  containerStyle={styles.cardContainer}
                   style={styles.cardContainer}
                   href={socials.bsky.value}
                 >
@@ -236,6 +242,7 @@ export default function PageContact() {
               </SpacedView>
               <SpacedView horizontal="xs" style={styles.cardContainer}>
                 <LinkView
+                  containerStyle={styles.cardContainer}
                   style={styles.cardContainer}
                   href={socials.dribbble.value}
                 >
@@ -250,7 +257,11 @@ export default function PageContact() {
                 </LinkView>
               </SpacedView>
               <SpacedView horizontal="xs" style={styles.cardContainer}>
-                <LinkView style={styles.cardContainer} href={socials.npm.value}>
+                <LinkView
+                  containerStyle={styles.cardContainer}
+                  style={styles.cardContainer}
+                  href={socials.npm.value}
+                >
                   <ContactCard
                     mode="outline"
                     Icon={SVGJavaScriptOutline}
@@ -262,7 +273,11 @@ export default function PageContact() {
                 </LinkView>
               </SpacedView>
               <SpacedView horizontal="xs" style={styles.cardContainer}>
-                <LinkView style={styles.cardContainer} href={socials.x.value}>
+                <LinkView
+                  containerStyle={styles.cardContainer}
+                  style={styles.cardContainer}
+                  href={socials.x.value}
+                >
                   <ContactCard
                     mode="outline"
                     Icon={SVGSocialX}

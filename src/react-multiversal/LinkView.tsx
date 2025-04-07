@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, TextStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import LinkText, { LinkTextProps } from "@/react-multiversal/LinkText";
 
@@ -10,6 +10,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function LinkView({ style, ...props }: LinkTextProps) {
-  return <LinkText style={[styles.linkView as TextStyle, style]} {...props} />;
+export default function LinkView({
+  style,
+  containerStyle,
+  ...props
+}: LinkTextProps) {
+  return (
+    <LinkText
+      containerStyle={[styles.linkView, containerStyle]}
+      style={[styles.linkView, style]}
+      {...props}
+    />
+  );
 }
