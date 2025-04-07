@@ -114,6 +114,7 @@ export default function WebsiteHeader() {
               borderWidth: 0.5,
               borderColor: alpha(colors.black, 0.15),
               backgroundColor: theme.dynamicColors.backAlpha85,
+              boxShadow: "rgba(0, 0, 0, 0.15) -1px 0px 4px 0px",
               borderRadius: 16,
               flexDirection: "row",
               flexWrap: "wrap",
