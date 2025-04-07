@@ -12,6 +12,7 @@ import {
   useTheme,
 } from "@/app/styles";
 import BlockMe2WithPills from "@/components/BlockMe2WithPills";
+import ButtonView from "@/components/ButtonView";
 import ResumeIntro from "@/components/ResumeIntro";
 import ResumeStats from "@/components/ResumeStats";
 import { ResumeTimeline } from "@/components/ResumeTimeline";
@@ -20,13 +21,14 @@ import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { socials, visualUrl } from "@/consts";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
-import { fontStyles } from "@/react-multiversal/font";
+import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import TextForReader from "@/react-multiversal/TextForReader";
+import SVGDownload from "@/svgs/components/SVGDownload";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 
@@ -198,6 +200,36 @@ export default function PageResume() {
                 {visualUrl(socials.linkedin.value)}
               </Text>
             </LinkView>
+            <Spacer size="l" />
+            <LinkView
+              href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
+              containerStyle={{ alignItems: "flex-start" }}
+            >
+              <ButtonView
+                mode="outline"
+                effect="subtle"
+                spaceGap="xs"
+                textColor={theme.dynamicColors.textFlashy1}
+                // colorAlt={theme.dynamicColors.textMain}
+              >
+                {({ color }) => (
+                  <>
+                    <SVGDownload width={16} height={16} fill={color} />
+                    <Text
+                      style={[
+                        {
+                          color,
+                          fontWeight: weight.bold,
+                        },
+                        gradientTextFlashyStyles(theme, 20),
+                      ]}
+                    >
+                      {"Download"}
+                    </Text>
+                  </>
+                )}
+              </ButtonView>
+            </LinkView>
           </View>
           <Spacer size="xl" />
           <View style={{ height: 3, width: "95%" }}>
@@ -209,6 +241,7 @@ export default function PageResume() {
         </SpacedView>
         <BlockMe2WithPills />
       </Container>
+
       <Container maxWidth={900}>
         <SpacedView horizontal="l">
           <Text
