@@ -89,14 +89,14 @@ function MessageBubble({
       horizontal="s"
       vertical="xxs"
       style={[
-        isBot ? theme.styles.backMain : theme.styles.backAlt,
+        isBot ? theme.styles.backAlt : theme.styles.backMain,
         { borderRadius: size("s") },
       ]}
     >
       <Text
         style={[
           fontStyles.ios.callout,
-          isBot ? theme.styles.textOnMain : theme.styles.text,
+          isBot ? theme.styles.textDark : theme.styles.textOnMain,
         ]}
       >
         {displayedText}
