@@ -35,7 +35,7 @@ export default function BlockCompaniesTrust() {
           role="heading"
           aria-level={2}
         >
-          {"🇫🇷 Companies that trusted me"}
+          {"🇫🇷 Trusted by"}
         </Text>
         <SpacedView
           gap="m"

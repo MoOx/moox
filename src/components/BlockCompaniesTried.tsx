@@ -36,7 +36,7 @@ export default function BlockCompaniesTried() {
           role="heading"
           aria-level={2}
         >
-          {"Companies that tried to hire me"}
+          {"They tried to hire me"}
         </Text>
         <SpacedView
           gap="m"
