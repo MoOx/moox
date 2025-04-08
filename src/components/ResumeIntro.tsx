@@ -2,21 +2,27 @@ import * as React from "react";
 import { StyleSheet, Text, View, ViewStyle } from "react-native";
 
 import { gradientTextIndigoStylesInv, useTheme } from "@/app/styles";
+import IconReact from "@/components/IconReact";
+import IconReactNative from "@/components/IconReactNative";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 import SVGActivityBike from "@/svgs/components/SVGActivityBike";
+import SVGActivityBricolage from "@/svgs/components/SVGActivityBricolage";
 import SVGActivityCrossfit from "@/svgs/components/SVGActivityCrossfit";
-import SVGActivityDiy from "@/svgs/components/SVGActivityDiy";
-import SVGActivityRunning from "@/svgs/components/SVGActivityRunning";
-import SVGApps from "@/svgs/components/SVGApps";
-import SVGDevices from "@/svgs/components/SVGDevices";
-import SVGDevTypescript from "@/svgs/components/SVGDevTypescript";
+import SVGActivityDj from "@/svgs/components/SVGActivityDj";
+import SVGActivityPekinExpress from "@/svgs/components/SVGActivityPekinExpress";
+import SVGActivityRun from "@/svgs/components/SVGActivityRun";
+import SVGActivityStandup from "@/svgs/components/SVGActivityStandup";
+import SVGCss from "@/svgs/components/SVGCss";
+import SVGExpo from "@/svgs/components/SVGExpo";
 import SVGGraphql from "@/svgs/components/SVGGraphql";
+import SVGJavaScript from "@/svgs/components/SVGJavaScript";
 import SVGMicrophone from "@/svgs/components/SVGMicrophone";
-import SVGReact from "@/svgs/components/SVGReact";
+import SVGNextjs from "@/svgs/components/SVGNextjs";
 import SVGSketch from "@/svgs/components/SVGSketch";
 import SVGTraining from "@/svgs/components/SVGTraining";
+import SVGTypescript from "@/svgs/components/SVGTypescript";
 
 const styles = StyleSheet.create({
   textStrong: {
@@ -39,10 +45,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     textAlign: "center",
-    fontSize: 12,
-    lineHeight: 14,
-    fontWeight: "300",
-    color: "#bbc",
   },
   activities: {
     flexDirection: "row",
@@ -56,7 +58,9 @@ const grayIconDomStyle = {
   flexDirection: "column",
   flexGrow: 1,
   flexShrink: 1,
-  filter: "grayscale(1) brightness(0.9) contrast(0.6) opacity(0.6)",
+  // borderRadius: 8,
+  overflow: "hidden",
+  // filter: "grayscale(1) brightness(0.9) contrast(0.6) opacity(0.6)",
 } as ViewStyle;
 
 export default function ResumeIntro() {
@@ -94,21 +98,33 @@ export default function ResumeIntro() {
               maxWidth: 310,
             }}
           >
-            <Text style={styles.nanoTitle}>THINGS I WORK WITH</Text>
+            <Text style={styles.nanoTitle}>{"Toolbox"}</Text>
             <View style={styles.activities}>
               {[
-                { Icon: SVGReact, text: "React" },
-                { Icon: SVGDevTypescript, text: "TypeScript" },
-                { Icon: SVGSketch, text: "Sketch" },
-                { Icon: SVGApps, text: "Mobile" },
+                { Icon: SVGJavaScript, text: "JavaScript" },
+                { Icon: SVGTypescript, text: "TypeScript" },
+                { Icon: SVGCss, text: "CSS" },
+                { Icon: IconReact, text: "React" },
+                { Icon: IconReactNative, text: "Native" },
                 { Icon: SVGGraphql, text: "Graphql" },
-                { Icon: SVGDevices, text: "Cross-platform" },
+                { Icon: SVGNextjs, text: "Next.js" },
+                { Icon: SVGExpo, text: "Expo" },
+                { Icon: SVGSketch, text: "Sketch" },
               ].map(({ Icon, text }) => (
                 <SpacedView key={text} horizontal="xs" vertical="s">
                   <View style={grayIconDomStyle}>
-                    <Icon fill="#bbb" width={48} height={48} />
+                    <Icon width={48} height={48} />
                   </View>
-                  <Text style={styles.iconText}>{text}</Text>
+                  <Text
+                    style={[
+                      fontStyles.ios.caption2,
+                      { lineHeight: fontStyles.ios.caption2.fontSize },
+                      theme.styles.textLight1,
+                      styles.iconText,
+                    ]}
+                  >
+                    {text}
+                  </Text>
                 </SpacedView>
               ))}
             </View>
@@ -141,15 +157,18 @@ export default function ResumeIntro() {
               maxWidth: 310,
             }}
           >
-            <Text style={styles.nanoTitle}>THINGS I LIKE TO DO</Text>
+            <Text style={styles.nanoTitle}>{"Multiverse"}</Text>
             <View style={styles.activities}>
               {[
                 { Icon: SVGActivityCrossfit, text: "Crossfit" },
-                { Icon: SVGActivityDiy, text: "Bricolage" },
+                { Icon: SVGActivityRun, text: "Running" },
                 { Icon: SVGActivityBike, text: "Bike" },
-                { Icon: SVGActivityRunning, text: "Running" },
+                { Icon: SVGActivityBricolage, text: "Bricolage" },
+                { Icon: SVGActivityDj, text: "DJ" },
+                { Icon: SVGActivityStandup, text: "Standup" },
                 { Icon: SVGMicrophone, text: "Podcast" },
                 { Icon: SVGTraining, text: "Teaching" },
+                { Icon: SVGActivityPekinExpress, text: "Pekin Express #20" },
               ].map(({ Icon, text }) => (
                 <SpacedView key={text} horizontal="xs" vertical="s">
                   <View style={grayIconDomStyle}>

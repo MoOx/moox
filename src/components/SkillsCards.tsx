@@ -11,11 +11,11 @@ import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
-import SVGDevTypescript from "@/svgs/components/SVGDevTypescript";
 import SVGGraphql from "@/svgs/components/SVGGraphql";
 import SVGJavaScript from "@/svgs/components/SVGJavaScript";
 import SVGReact from "@/svgs/components/SVGReact";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
+import SVGTypescript from "@/svgs/components/SVGTypescript";
 
 const styles = StyleSheet.create({
   bgIcon: {
@@ -69,7 +69,7 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
         child: (
           <>
             <View style={styles.bgIcon}>
-              <SVGDevTypescript width={160} height={160} fill="#FFFFFF" />
+              <SVGTypescript width={160} height={160} fill="#FFFFFF" />
             </View>
             {isMini ? (
               <View role="list">
