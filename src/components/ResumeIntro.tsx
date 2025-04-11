@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Text, View, ViewStyle } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { gradientTextIndigoStylesInv, useTheme } from "@/app/styles";
 import IconReact from "@/components/IconReact";
@@ -25,23 +25,9 @@ import SVGTraining from "@/svgs/components/SVGTraining";
 import SVGTypescript from "@/svgs/components/SVGTypescript";
 
 const styles = StyleSheet.create({
-  textStrong: {
-    fontSize: 32,
-    fontWeight: "800",
-  },
-  textLight: {
-    fontSize: 28,
-    fontWeight: "200",
-  },
-  nanoTitle: {
-    fontSize: 14,
-    fontWeight: "600",
-    textAlign: "center",
-    color: "#bbc",
-  },
   iconText: {
     position: "absolute",
-    top: 64,
+    top: 56,
     left: 0,
     right: 0,
     textAlign: "center",
@@ -53,15 +39,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
 });
-
-const grayIconDomStyle = {
-  flexDirection: "column",
-  flexGrow: 1,
-  flexShrink: 1,
-  // borderRadius: 8,
-  overflow: "hidden",
-  // filter: "grayscale(1) brightness(0.9) contrast(0.6) opacity(0.6)",
-} as ViewStyle;
 
 export default function ResumeIntro() {
   const theme = useTheme();
@@ -95,10 +72,12 @@ export default function ResumeIntro() {
               alignItems: "center",
               flex: 1,
               minWidth: 240,
-              maxWidth: 310,
+              maxWidth: 360,
             }}
           >
-            <Text style={styles.nanoTitle}>{"Toolbox"}</Text>
+            <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]}>
+              {"Toolbox"}
+            </Text>
             <View style={styles.activities}>
               {[
                 { Icon: SVGJavaScript, text: "JavaScript" },
@@ -112,9 +91,7 @@ export default function ResumeIntro() {
                 { Icon: SVGSketch, text: "Sketch" },
               ].map(({ Icon, text }) => (
                 <SpacedView key={text} horizontal="xs" vertical="s">
-                  <View style={grayIconDomStyle}>
-                    <Icon width={48} height={48} />
-                  </View>
+                  <Icon width={42} height={42} />
                   <Text
                     style={[
                       fontStyles.ios.caption2,
@@ -154,27 +131,36 @@ export default function ResumeIntro() {
               alignItems: "center",
               flex: 1,
               minWidth: 240,
-              maxWidth: 310,
+              maxWidth: 360,
             }}
           >
-            <Text style={styles.nanoTitle}>{"Multiverse"}</Text>
+            <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]}>
+              {"Multiverse"}
+            </Text>
             <View style={styles.activities}>
               {[
                 { Icon: SVGActivityCrossfit, text: "Crossfit" },
                 { Icon: SVGActivityRun, text: "Running" },
                 { Icon: SVGActivityBike, text: "Bike" },
-                { Icon: SVGActivityBricolage, text: "Bricolage" },
                 { Icon: SVGActivityDj, text: "DJ" },
+                { Icon: SVGActivityBricolage, text: "Bricolage" },
                 { Icon: SVGActivityStandup, text: "Standup" },
                 { Icon: SVGMicrophone, text: "Podcast" },
                 { Icon: SVGTraining, text: "Teaching" },
                 { Icon: SVGActivityPekinExpress, text: "Pekin Express #20" },
               ].map(({ Icon, text }) => (
                 <SpacedView key={text} horizontal="xs" vertical="s">
-                  <View style={grayIconDomStyle}>
-                    <Icon fill="#bbb" width={48} height={48} />
-                  </View>
-                  <Text style={styles.iconText}>{text}</Text>
+                  <Icon fill="#666" width={42} height={42} />
+                  <Text
+                    style={[
+                      fontStyles.ios.caption2,
+                      { lineHeight: fontStyles.ios.caption2.fontSize },
+                      theme.styles.textLight1,
+                      styles.iconText,
+                    ]}
+                  >
+                    {text}
+                  </Text>
                 </SpacedView>
               ))}
             </View>
