@@ -7,6 +7,7 @@ import IconReactNative from "@/components/IconReactNative";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
+import Spacer from "@/react-multiversal/Spacer";
 import SVGActivityBike from "@/svgs/components/SVGActivityBike";
 import SVGActivityBricolage from "@/svgs/components/SVGActivityBricolage";
 import SVGActivityCrossfit from "@/svgs/components/SVGActivityCrossfit";
@@ -45,19 +46,19 @@ export default function ResumeIntro() {
 
   return (
     <Container maxWidth={900} wrapperStyle={theme.styles.back}>
-      <SpacedView vertical="xl">
-        <SpacedView horizontal="l">
-          <Text
-            style={[
-              fontStyles.iosEm.largeTitle,
-              gradientTextIndigoStylesInv(theme),
-              { alignSelf: "center" },
-            ]}
-          >
-            {"About Me"}
-          </Text>
-        </SpacedView>
-        <View
+      <SpacedView vertical="xl" horizontal="l">
+        <Text
+          style={[
+            fontStyles.iosEm.largeTitle,
+            gradientTextIndigoStylesInv(theme),
+            // { alignSelf: "center" },
+          ]}
+        >
+          {"About Me"}
+        </Text>
+        <SpacedView
+          // vertical="l"
+          gap="xl"
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
@@ -65,79 +66,34 @@ export default function ResumeIntro() {
           }}
         >
           <SpacedView
-            horizontal="l"
-            vertical="l"
             style={{
-              justifyContent: "center",
-              alignItems: "center",
-              flex: 1,
-              minWidth: 240,
-              maxWidth: 360,
+              flexGrow: 1,
+              flexShrink: 1,
+              flexBasis: 300,
             }}
           >
-            <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]}>
-              {"Toolbox"}
-            </Text>
-            <View style={styles.activities}>
-              {[
-                { Icon: SVGJavaScript, text: "JavaScript" },
-                { Icon: SVGTypescript, text: "TypeScript" },
-                { Icon: SVGCss, text: "CSS" },
-                { Icon: IconReact, text: "React" },
-                { Icon: IconReactNative, text: "Native" },
-                { Icon: SVGGraphql, text: "Graphql" },
-                { Icon: SVGNextjs, text: "Next.js" },
-                { Icon: SVGExpo, text: "Expo" },
-                { Icon: SVGSketch, text: "Sketch" },
-              ].map(({ Icon, text }) => (
-                <SpacedView key={text} horizontal="xs" vertical="s">
-                  <Icon width={42} height={42} />
-                  <Text
-                    style={[
-                      fontStyles.ios.caption2,
-                      { lineHeight: fontStyles.ios.caption2.fontSize },
-                      theme.styles.textLight1,
-                      styles.iconText,
-                    ]}
-                  >
-                    {text}
-                  </Text>
-                </SpacedView>
-              ))}
-            </View>
-          </SpacedView>
-          <SpacedView
-            horizontal="l"
-            vertical="l"
-            style={{
-              justifyContent: "center",
-              flex: 1,
-              flexBasis: 240,
-            }}
-          >
-            <Text style={[fontStyles.ios.body, theme.styles.text]}>
-              Hi, I am Maxime Thirouin, also known as MoOx on the web. I live
-              near Toulouse, France. I am a software engineer specialized in
-              front-end development of mobile & web applications. I love to
-              design and develop UIs. I care about UX, responsiveness,
-              performance, maintainability and scalability.
+            <Spacer size="l" />
+            <Text style={[fontStyles.ios.callout, theme.styles.text]}>
+              {
+                "I am Maxime Thirouin, also known as MoOx on the web. I live near Toulouse, France. I am a software engineer specialized in front-end development of mobile & web applications. I love to design and develop UIs. I care about UX, responsiveness, performance, maintainability and scalability."
+              }
+              {"\n"}
+              {
+                "When I am not coding, I like spend my time with my life partner and friends, doing sports, mixing electronic music or doing some more fun stuff."
+              }
             </Text>
           </SpacedView>
-          <SpacedView
-            horizontal="l"
-            vertical="l"
+
+          <View
             style={{
-              justifyContent: "center",
               alignItems: "center",
-              flex: 1,
-              minWidth: 240,
-              maxWidth: 360,
+              flexBasis: 200,
             }}
           >
             <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]}>
               {"Multiverse"}
             </Text>
-            <View style={styles.activities}>
+            <SpacedView gap="xs" style={styles.activities}>
               {[
                 { Icon: SVGActivityCrossfit, text: "Crossfit" },
                 { Icon: SVGActivityRun, text: "Running" },
@@ -149,7 +105,7 @@ export default function ResumeIntro() {
                 { Icon: SVGTraining, text: "Teaching" },
                 { Icon: SVGActivityPekinExpress, text: "Pekin Express #20" },
               ].map(({ Icon, text }) => (
-                <SpacedView key={text} horizontal="xs" vertical="s">
+                <SpacedView key={text} horizontal="xxs" vertical="xs">
                   <Icon fill="#666" width={42} height={42} />
                   <Text
                     style={[
@@ -163,9 +119,46 @@ export default function ResumeIntro() {
                   </Text>
                 </SpacedView>
               ))}
-            </View>
-          </SpacedView>
-        </View>
+            </SpacedView>
+          </View>
+          <View
+            style={{
+              alignItems: "center",
+              flexBasis: 200,
+            }}
+          >
+            <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]}>
+              {"Toolbox"}
+            </Text>
+            <SpacedView gap="xs" style={styles.activities}>
+              {[
+                { Icon: SVGJavaScript, text: "JavaScript" },
+                { Icon: SVGTypescript, text: "TypeScript" },
+                { Icon: SVGCss, text: "CSS" },
+                { Icon: IconReact, text: "React" },
+                { Icon: IconReactNative, text: "Native" },
+                { Icon: SVGGraphql, text: "Graphql" },
+                { Icon: SVGNextjs, text: "Next.js" },
+                { Icon: SVGExpo, text: "Expo" },
+                { Icon: SVGSketch, text: "Sketch" },
+              ].map(({ Icon, text }) => (
+                <SpacedView key={text} horizontal="xs" vertical="xs">
+                  <Icon width={42} height={42} />
+                  <Text
+                    style={[
+                      fontStyles.ios.caption2,
+                      { lineHeight: fontStyles.ios.caption2.fontSize },
+                      theme.styles.textLight1,
+                      styles.iconText,
+                    ]}
+                  >
+                    {text}
+                  </Text>
+                </SpacedView>
+              ))}
+            </SpacedView>
+          </View>
+        </SpacedView>
       </SpacedView>
     </Container>
   );
