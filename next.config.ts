@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { WebpackConfigContext } from "next/dist/server/config-shared";
 
 import packageJson from "./package.json";
 
@@ -17,35 +18,27 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     viewTransition: true,
-
-    turbo: {
-      resolveAlias: {
-        "react-native": "react-native-web",
-      },
-      resolveExtensions: [
-        ".web.tsx",
-        ".web.ts",
-        ".web.jsx",
-        ".web.js",
-        ".tsx",
-        ".ts",
-        ".jsx",
-        ".js",
-        ".mjs",
-        ".json",
-      ],
+  },
+  turbopack: {
+    resolveAlias: {
+      "react-native": "react-native-web",
     },
+    resolveExtensions: [
+      ".web.tsx",
+      ".web.ts",
+      ".web.jsx",
+      ".web.js",
+      ".tsx",
+      ".ts",
+      ".jsx",
+      ".js",
+      ".mjs",
+      ".json",
+    ],
   },
 
-  webpack: (config, { webpack }) => {
+  webpack: (config: any, { webpack }: WebpackConfigContext) => {
     config.resolve.mainFields = ["module", "main"];
-
-    // react-native packages requires often global __DEV__ constant
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        __DEV__: process.env.NODE_ENV === "production" || true,
-      })
-    );
 
     // react-native-web
     config.resolve.alias = {
@@ -60,6 +53,13 @@ const nextConfig: NextConfig = {
       ".web.tsx",
       ...config.resolve.extensions,
     ];
+
+    // react-native packages requires often global __DEV__ constant
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        __DEV__: process.env.NODE_ENV === "production" || true,
+      })
+    );
 
     return config;
   },

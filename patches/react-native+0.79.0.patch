@@ -1,0 +1,38 @@
+diff --git a/node_modules/react-native/src/types/globals.d.ts b/node_modules/react-native/src/types/globals.d.ts
+index 9616f6d..2f670ee 100644
+--- a/node_modules/react-native/src/types/globals.d.ts
++++ b/node_modules/react-native/src/types/globals.d.ts
+@@ -7,7 +7,7 @@
+  * @format
+  */
+ 
+-import type {ErrorUtils} from '../../Libraries/vendor/core/ErrorUtils';
++import type { ErrorUtils } from '../../Libraries/vendor/core/ErrorUtils';
+ 
+ declare global {
+   interface NodeRequire {
+@@ -43,19 +43,19 @@ declare global {
+    *
+    * @see https://github.com/facebook/react-native/issues/934
+    */
+-  const originalXMLHttpRequest: any;
++  var originalXMLHttpRequest: any;
+ 
+-  const __BUNDLE_START_TIME__: number;
+-  const ErrorUtils: ErrorUtils;
++  var __BUNDLE_START_TIME__: number;
++  var ErrorUtils: ErrorUtils;
+ 
+   /**
+    * This variable is set to true when react-native is running in Dev mode
+    * @example
+    * if (__DEV__) console.log('Running in dev mode')
+    */
+-  const __DEV__: boolean;
++  var __DEV__: boolean;
+ 
+-  const HermesInternal: null | {};
++  var HermesInternal: null | {};
+ 
+   // #region Timer Functions
+ 

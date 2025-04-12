@@ -27,7 +27,7 @@ export function useFocus<T>(
   } = {}
 ) {
   const [pointerFocused, setPointerFocused] = React.useState(false);
-  const debouncePointerFocused = React.useRef<NodeJS.Timeout | null>(null);
+  const debouncePointerFocused = React.useRef<number | null>(null);
   const handlePointerFocusedOn = React.useCallback(() => {
     if (debouncePointerFocused.current)
       clearTimeout(debouncePointerFocused.current);
@@ -43,7 +43,7 @@ export function useFocus<T>(
   }, [debounceOff, onPointerLeave]);
 
   const [focused, setFocused] = React.useState(false);
-  const debounceFocus = React.useRef<NodeJS.Timeout | null>(null);
+  const debounceFocus = React.useRef<number | null>(null);
   const handleFocusOn = React.useCallback(() => {
     if (debounceFocus.current) clearTimeout(debounceFocus.current);
     onFocus?.();
