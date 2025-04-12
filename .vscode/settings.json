@@ -4,7 +4,8 @@
     "**/.next": true
   },
   "editor.codeActionsOnSave": {
-    "source.addMissingImports": "always",
+    "source.addMissingImports": "explicit",
+    "source.organizeImports": "explicit",
     "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
