@@ -1,4 +1,4 @@
-![I build apps.](./public/preview-1200x630.jpg)
+![I build apps.](./github.jpg)
 
 # Hey, I'm [Max](https://moox.io)
 
@@ -17,7 +17,7 @@ I build apps with:
   <img height="42"  alt="Let's talk" src="https://img.shields.io/badge/Let's%20talk-8A2BE2?style=plastic&logo=iMessage&logoColor=%23fff&logoSize=10" />
 </a>
 
-## 
+##
 
 [![GitHub followers](https://img.shields.io/github/followers/MoOx?style=social&label=Follow%20me)](https://github.com/MoOx)
 [![LinkedIn Follow](https://img.shields.io/badge/Follow%20Me-on%20LinkedIn-gray?style=social&logo=invision&logoColor=%230077B5)](https://www.linkedin.com/in/maxthirouin/)
