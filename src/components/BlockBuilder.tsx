@@ -1,14 +1,12 @@
 "use client";
 
-import * as React from "react";
 import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 
 import { ResumeItem } from "@/api";
-import { useTheme } from "@/app/styles";
-import { gradientStaticIndigoStyles } from "@/app/styles";
+import { gradientStaticIndigoStyles, useTheme } from "@/app/styles";
 import BlockMaxApp from "@/components/BlockMaxApp";
-import { size } from "@/react-multiversal";
-import { WindowWidth } from "@/react-multiversal";
+import LinkButton from "@/components/LinkButton";
+import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
@@ -33,7 +31,7 @@ export default function BlockPassionated({
   const device = (
     <View
       style={{
-        maxHeight: 320,
+        maxHeight: 340,
         maskImage: `url(/mask-gradient-noize.png)`,
         maskSize: "contain",
         maskPosition: "bottom",
@@ -118,9 +116,20 @@ export default function BlockPassionated({
             >
               {`I have the knowledge and skills to build the app you are dreaming about. My years of experience and my passion for building apps make me the perfect partner to help you bring your ideas to life.`}
             </Text>
+            <LinkButton
+              href="/resume/"
+              color={theme.dynamicColors.back}
+              textColor={theme.dynamicColors.text}
+              spaceHorizontal="m"
+              style={{ alignSelf: "flex-end" }}
+            >
+              <SpacedView horizontal="m">
+                <Text style={fontStyles.iosEm.callout}>{"More about me"}</Text>
+              </SpacedView>
+            </LinkButton>
             <Spacer size="m" />
             <IfWindowWidthIs largerThan={WindowWidth.m}>
-              <Spacer size="xl" />
+              <Spacer size="xs" />
             </IfWindowWidthIs>
           </SpacedView>
           <IfWindowWidthIs smallerThan={WindowWidth.m}>

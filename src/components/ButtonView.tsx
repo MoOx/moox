@@ -94,7 +94,6 @@ export type ButtonViewProps = Omit<ViewProps, "children"> & {
   spaceVertical?: Size;
   textColor?: string;
   textColorAlt?: string;
-  textColorOn?: string;
   theme?: UserColorScheme;
   effect?: "glass" | "subtle" | "none";
 };
@@ -116,7 +115,6 @@ const ButtonView = ({
   style,
   textColor: _textColor,
   textColorAlt: _textColorAlt,
-  textColorOn: _textColorOn,
   theme: _theme = "auto",
   ...props
 }: ButtonViewProps) => {
@@ -128,7 +126,7 @@ const ButtonView = ({
       ? !alt
         ? (_textColor ?? theme.dynamicColors.text)
         : (_textColorAlt ?? theme.dynamicColors.textMain)
-      : (_textColorOn ?? theme.dynamicColors.textOnMain);
+      : (_textColor ?? theme.dynamicColors.textOnMain);
   const borderColorAlt = _borderColorAlt ?? theme.dynamicColors.ultraLight;
   const childrenStyles = React.useMemo(() => {
     return {
@@ -164,7 +162,13 @@ const ButtonView = ({
   }, [mode, alt, color, colorAlt, borderColorAlt, style, effect]);
   const elementBackground =
     mode !== "gradient" ? null : (
-      <View style={StyleSheet.absoluteFill}>
+      <View
+        style={[
+          StyleSheet.absoluteFill,
+          styles.container,
+          { overflow: "hidden" },
+        ]}
+      >
         <GradientLinear
           stops={[
             {

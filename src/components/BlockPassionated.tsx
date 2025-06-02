@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { gradientFlashyStops, useTheme } from "@/app/styles";
+import LinkButton from "@/components/LinkButton";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
@@ -49,6 +49,19 @@ export default function BlockPassionated() {
             {`I made my first website in 1998, and fell in love with web development. Since then, I never stopped to learn things, especially now with the rise of AI.
 From Dreamweaver to Cursor, years passed, but not my appetite to always discover new tools and technics to made even more cool and performant interfaces.`}
           </Text>
+          <LinkButton
+            href="/resume/"
+            color={theme.dynamicColors.back}
+            textColor={theme.dynamicColors.text}
+            spaceHorizontal="m"
+            style={{ alignSelf: "flex-start" }}
+          >
+            <SpacedView horizontal="m">
+              <Text style={fontStyles.iosEm.callout}>
+                {"Discover my story"}
+              </Text>
+            </SpacedView>
+          </LinkButton>
         </SpacedView>
         <View>
           <Parallax

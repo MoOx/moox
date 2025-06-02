@@ -1,7 +1,7 @@
-import * as React from "react";
 import { Text, View } from "react-native";
 
 import { useTheme } from "@/app/styles";
+import LinkButton from "@/components/LinkButton";
 import SkillsCards from "@/components/SkillsCards";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -45,6 +45,18 @@ Over the years, I refined my way to approach development, which allows me to con
         <Spacer size="xxl" />
         <SpacedView horizontal="xl" gap="m">
           <SkillsCards />
+
+          <LinkButton
+            href="/resume/"
+            color={theme.dynamicColors.backAlt}
+            textColor={theme.dynamicColors.text}
+            spaceHorizontal="m"
+            style={{ alignSelf: "flex-end" }}
+          >
+            <SpacedView horizontal="m">
+              <Text style={fontStyles.iosEm.callout}>{"Check my resume"}</Text>
+            </SpacedView>
+          </LinkButton>
         </SpacedView>
       </Container>
     </View>
