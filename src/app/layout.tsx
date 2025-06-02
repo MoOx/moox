@@ -6,7 +6,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Metadata, Viewport } from "next";
 
 import { getWebHtmlClass, getWebStyleSheet } from "@/app/styles";
-import AnalyticsMatomo from "@/components/AnalyticsMatomo";
 import { WebsiteMobileMenuBackdropStyles } from "@/components/WebsiteMobileMenu";
 import { Next_IfWindowWidthIs } from "@/react-multiversal/IfWindowWidthIs";
 import { NextStyleSheetProvider } from "@/react-multiversal/react-native/NextStyleSheetProvider";
@@ -79,10 +78,6 @@ export default /*async*/ function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* analytics */}
-        <link rel="dns-prefetch" href="https://a.moox.fr" />
-        <link rel="preconnect" href="https://a.moox.fr" />
-
         <Next_UserColorSchemeInit colorScheme={userColorScheme} />
         <Next_IfWindowWidthIs />
         {getWebStyleSheet()}
@@ -94,7 +89,6 @@ export default /*async*/ function RootLayout({
         </NextStyleSheetProvider>
         <SpeedInsights />
         <Analytics />
-        <AnalyticsMatomo />
       </body>
     </html>
   );
