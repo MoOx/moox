@@ -39,7 +39,6 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@react-native-clipboard/clipboard": "^1.16.1",
-    "@socialgouv/matomo-next": "^1.9.2",
     "@tsconfig/next": "^2.0.3",
     "@types/react-native-web": "^0.19.0",
     "@types/tinycolor2": "^1.4.6",
