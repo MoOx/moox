@@ -26,3 +26,7 @@ Setup of a secured VOD streaming platform for Kyan Khojandi (a famous French
 entertaining content creator) for his stand-up comedy show (& more to come). I
 created this platfrom on his merchandising website https://unebonneboutique.com,
 using Shopify & Vimeo.
+
+---
+
+Mise en place d'une plateforme de streaming VOD sécurisée pour Kyan Khojandi (célèbre créateur de contenu divertissant français) pour son spectacle de stand-up (et d'autres à venir). J'ai créé cette plateforme sur son site marchand https://unebonneboutique.com, en utilisant Shopify et Vimeo.

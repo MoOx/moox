@@ -19,12 +19,3 @@ links:
   - title: "Télé Loisir"
     url: "https://www.programme-tv.net/biographie/4104636-maxime-et-helene-pekin-express-la-route-des-tribus-legendaires/"
 ---
-
-Revamp of fklg.fr, the production company website of Kyan Khojandi, a famous
-French entertaining content creator. I handle design using Sketch app &
-development using Wordpress & Gutenberg.
-
----
-
-Refonte de fklg.fr, le site de la société de production de Kyan Khojandi, célèbre créateur de contenu divertissant français.
-Je me suis occupé du design avec l’application Sketch et du développement avec WordPress et Gutenberg.
