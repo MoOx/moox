@@ -11,6 +11,10 @@ const transpilePackages = [
   ),
 ];
 const nextConfig: NextConfig = {
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
   transpilePackages,
 
   env: {

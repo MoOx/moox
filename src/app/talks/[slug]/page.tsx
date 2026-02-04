@@ -1,10 +1,17 @@
 import * as React from "react";
 
-import { getOne, Talk } from "@/api";
+import { getAll, getOne, Talk } from "@/api";
 import TalkView from "@/components/TalkView";
 import WebsiteError from "@/components/WebsiteError";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import Container from "@/react-multiversal/Container";
+
+export async function generateStaticParams() {
+  const talks = getAll<Talk>("talks");
+  return talks.map((talk) => ({
+    slug: talk.slug.replace("talks/", ""),
+  }));
+}
 
 export default async function PageTalkView({
   params,

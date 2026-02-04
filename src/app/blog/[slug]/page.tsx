@@ -1,10 +1,17 @@
 import * as React from "react";
 
-import { BlogPost, getOne } from "@/api";
+import { BlogPost, getAll, getOne } from "@/api";
 import BlogPostView from "@/components/BlogPostView";
 import WebsiteError from "@/components/WebsiteError";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import Container from "@/react-multiversal/Container";
+
+export async function generateStaticParams() {
+  const posts = getAll<BlogPost>("blog");
+  return posts.map((post) => ({
+    slug: post.slug.replace("blog/", ""),
+  }));
+}
 
 export default async function PageBlogPostView({
   params,
