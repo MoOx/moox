@@ -321,7 +321,7 @@ export default function BlockTestimonials() {
               spaceHorizontal="xl"
               spaceVertical="m"
               color="rgb(10, 102, 194)"
-              href={`${socials.linkedin}/details/recommendations/`}
+              href={`${socials.linkedin.value}/details/recommendations/`}
             >
               {() => (
                 <>

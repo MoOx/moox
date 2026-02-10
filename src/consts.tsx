@@ -24,7 +24,6 @@ export const visualUrl = (url: string) => {
 };
 export const sendStringAsMailString = (
   send: string,
-  visual: boolean = false
   visual: boolean = false,
 ) => {
   return visual ? send.replace("/", " @ ") : send.replace("/", "@");
@@ -275,7 +274,7 @@ export const menuBarLinks: LinksWithIcon = {
   ...internalLinks,
   // LinkedIn: {
   //   alt: "@Maxime on LinkedIn",
-  //   href: socials.linkedin,
+  //   href: socials.linkedin.value,
   //   icon: ({ style, size, color }: LinksIconProps) => (
   //     <SVGContact style={style} fill={color} width={size} height={size} />
   //   ),
