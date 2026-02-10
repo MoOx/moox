@@ -1,6 +1,5 @@
 import { differenceInCalendarMonths } from "date-fns";
 import Image from "next/image";
-import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { ResumeItem } from "@/api";
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
 
 const getDurationText = (startDate: string, endDate: Date) => {
   const durationInMonths = Math.floor(
-    differenceInCalendarMonths(endDate, new Date(startDate))
+    differenceInCalendarMonths(endDate, new Date(startDate)),
   );
   const durationYears = Math.floor(durationInMonths / 12);
   const durationMonths = durationInMonths % 12;
@@ -106,6 +105,7 @@ export const ResumeTimelineEntry = ({
       role="article"
     >
       {disableLinks ? null : (
+        // oxlint-disable-next-line jsx_a11y/anchor-has-content, jsx_a11y/anchor-is-valid
         <a id={item.slug} style={{ position: "relative", top: "-100px" }} />
       )}
       {item.image && (

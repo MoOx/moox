@@ -6,11 +6,14 @@
   "editor.codeActionsOnSave": {
     "source.addMissingImports": "explicit",
     "source.organizeImports": "explicit",
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "eslint.validate": ["javascript"],
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.tsserver.experimental.enableProjectDiagnostics": true
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "oxc.enable": true,
+  "oxc.typeAware": true,
+  "claudeCode.allowDangerouslySkipPermissions": true
 }

@@ -141,7 +141,6 @@ export const Image = ({
 }) => {
   if (Platform.OS === "web") {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={src ?? ""}
         className={className}

@@ -18,8 +18,8 @@ export default function Next_UserColorSchemeInit({
   const isServerInserted = React.useRef(false);
   React.useEffect(() => {
     if (window.localStorage) {
-      loadSavedColorScheme(
-        window.localStorage.getItem(userColorSchemeStorageKey)
+      void loadSavedColorScheme(
+        window.localStorage.getItem(userColorSchemeStorageKey),
       );
     }
   }, []);

@@ -10,14 +10,14 @@
     "dev": "next dev --turbopack -p 1337",
     "build": "npm run prepare && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "oxlint --type-aware && tsc --noEmit",
     "format": "prettier --write \"**/*.{js,json,ts,tsx,css,md}\" \"!package.json\"",
     "clean": "npm run svg:clean",
     "svg:clean": "rm -rf  src/svgs/components",
     "svg:web": "react-from-svg svgs src/svgs/components --with-native-for-typescript",
     "svg": "npm run svg:clean && npm run svg:web",
     "markdown": "markdown-to-json \"content/**/*.md\"",
-    "test": "npm run lint && tsc --noEmit && npm run build"
+    "test": "npm run lint && npm run build"
   },
   "overrides": {
     "react-native": {
@@ -58,18 +58,17 @@
     "ts-pattern": "^5.5.0"
   },
   "devDependencies": {
+    "@moox/eslint-plugin-react-strict-dom": "^0.1.1",
     "@moox/markdown-to-json": "^1.0.0",
     "@tsconfig/react-native": "^3.0.5",
     "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/react": "^19.1",
     "@types/react-dom": "^19.1",
-    "eslint": "^8",
-    "eslint-config-next": "15.3.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-unused-imports": "^4.1.4",
+    "eslint": "^9.39.2",
     "husky": "^9.1.7",
+    "oxlint": "^1.43.0",
+    "oxlint-tsgolint": "^0.11.5",
     "patch-package": "^8.0.0",
     "prettier": "^3.3.3",
     "react-from-svg": "^7.1.1",

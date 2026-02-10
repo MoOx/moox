@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Text } from "react-native";
 
 import { useTheme } from "@/app/styles";
@@ -41,6 +40,8 @@ export default function WebsiteError({ statusCode }: { statusCode: number }) {
               frameBorder="0"
               className="giphy-embed"
               allowFullScreen
+              sandbox="allow-scripts"
+              title="Error animation"
             ></iframe>
           </div>
           <Spacer size="l" />

@@ -1,21 +1,34 @@
 {
-  "extends": [
-    "@tsconfig/react-native/tsconfig.json",
-    // next need to be after react-native as it is more relevant for web usage
-    "@tsconfig/next/tsconfig.json"
-  ],
   "compilerOptions": {
+    "target": "es2022",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
     "strict": true,
-    // "skipLibCheck": false, // to debug types/*
-    "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolvePackageJsonImports": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "noUncheckedIndexedAccess": true,
+    "jsx": "preserve",
+    "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "@types/react-native-web",
@@ -23,5 +36,11 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "out",
+    "build"
   ]
 }

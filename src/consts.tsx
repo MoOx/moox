@@ -25,6 +25,7 @@ export const visualUrl = (url: string) => {
 export const sendStringAsMailString = (
   send: string,
   visual: boolean = false
+  visual: boolean = false,
 ) => {
   return visual ? send.replace("/", " @ ") : send.replace("/", "@");
 };

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { Talk } from "@/api";
@@ -62,6 +61,8 @@ export default function TalkView({ item }: { item: Talk }) {
               src={item.videoEmbed}
               style={styles.iframe}
               allowFullScreen
+              title="Video"
+              sandbox="allow-scripts"
             />
           </div>
           <Spacer />
@@ -74,6 +75,8 @@ export default function TalkView({ item }: { item: Talk }) {
               src={item.slidesEmbed}
               style={styles.iframe}
               allowFullScreen
+              title="Slides"
+              sandbox="allow-scripts"
             />
           </div>
           <Spacer />

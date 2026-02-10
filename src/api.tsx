@@ -45,7 +45,7 @@ export type Content<T> = T & {
 
 export const getOne = <T,>(
   filename: string,
-  contentType: ContentType
+  contentType: ContentType,
 ): Content<T> | null => {
   const fullPath = path.join(process.cwd(), "content", contentType, filename);
 
@@ -53,6 +53,7 @@ export const getOne = <T,>(
     const fileContents = fs.readFileSync(fullPath, "utf8");
     return {
       slug: contentType + "/" + filename.replace(/\.json$/, ""),
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion
       ...(JSON.parse(fileContents) as T),
     };
   } else {

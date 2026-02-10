@@ -23,7 +23,7 @@ const ColorSchemeToggle = dynamic(
   () => import("@/react-multiversal/ColorSchemeToggle"),
   {
     ssr: false,
-  }
+  },
 );
 
 const toggleThemes = {
@@ -85,10 +85,10 @@ export default function ThemeToggle({
       : userColorScheme;
   const handleChange = React.useCallback(
     (value: UserColorScheme) => {
-      AsyncStorage.setItem(userColorSchemeStorageKey, value);
-      setUserColorScheme(value);
+      void AsyncStorage.setItem(userColorSchemeStorageKey, value);
+      void setUserColorScheme(value);
     },
-    [setUserColorScheme]
+    [setUserColorScheme],
   );
 
   const [detailsVisible, setDetailsVisible] = React.useState(false);
