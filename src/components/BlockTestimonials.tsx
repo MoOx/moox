@@ -25,6 +25,22 @@ export type Testimonial = {
 };
 export const testimonials: Testimonial[] = [
   {
+    avatar: "/linkedin/linkedin-james.jpeg",
+    name: "James",
+    title: "Co-Founder, Aardvark Intelligence",
+    content: (
+      <>
+        <Text style={{ opacity: 0.6 }}>{"Max is one of those "}</Text>
+        <Text style={{ fontWeight: "bold" }}>{"really rare engineers"}</Text>
+        <Text style={{ opacity: 0.6 }}>
+          {
+            " who doesn't just work on a project but takes ownership of it as well."
+          }
+        </Text>
+      </>
+    ),
+  },
+  {
     avatar: "/linkedin/linkedin-aissa.jpeg",
     name: "Aissa",
     title: "CTO at Hove",
@@ -49,7 +65,7 @@ export const testimonials: Testimonial[] = [
         <Text style={{ fontWeight: "bold" }}>{"Max loves sharing"}</Text>
         <Text style={{ opacity: 0.6 }}>
           {
-            " his thirst for learning and his knowledge, which is a real driving force for a team."
+            " his thirst for learning and his knowledge, which is a real driving force for a team.\n "
           }
         </Text>
       </>
@@ -83,18 +99,32 @@ export const testimonials: Testimonial[] = [
           {"Max is an experienced developer with "}
         </Text>
         <Text style={{ fontWeight: "bold" }}>{"genuine human qualities"}</Text>
+        <Text style={{ opacity: 0.6 }}>{" who excels in communication."}</Text>
+      </>
+    ),
+  },
+  {
+    avatar: "/linkedin/linkedin-nicolas.jpeg",
+    name: "Nicolas",
+    title: "Engineering Manager, IT Architect",
+    content: (
+      <>
+        <Text style={{ opacity: 0.6 }}>{"A "}</Text>
+        <Text style={{ fontWeight: "bold" }}>
+          {"passionate and ambitious professional"}
+        </Text>
         <Text style={{ opacity: 0.6 }}>
-          {" who excels in communication.\n "}
+          {" in the solutions he implements.\n "}
         </Text>
       </>
     ),
   },
 ];
 
-const midpoint = Math.ceil(testimonials.length / 2);
-
-const testimonials1 = testimonials.slice(0, midpoint);
-const testimonials2 = testimonials.slice(midpoint);
+const testimonialRows: Testimonial[][] = [];
+for (let i = 0; i < testimonials.length; i += 2) {
+  testimonialRows.push(testimonials.slice(i, i + 2));
+}
 
 const TestimonialItem = ({ item }: { item: Testimonial }) => {
   const theme = useTheme("dark");
@@ -293,28 +323,23 @@ export default function BlockTestimonials() {
             </Text>
           </SpacedView>
           <View>
-            <SpacedView
-              vertical="m"
-              gap="xl"
-              style={{ flexDirection: "row", flexWrap: "wrap" }}
-            >
-              {testimonials1.map((item) => (
-                <TestimonialItem key={item.name} item={item} />
-              ))}
-            </SpacedView>
-            <SpacedView
-              vertical="m"
-              gap="xl"
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "flex-end",
-              }}
-            >
-              {testimonials2.map((item) => (
-                <TestimonialItem key={item.name} item={item} />
-              ))}
-            </SpacedView>
+            {testimonialRows.map((row, rowIndex) => (
+              <SpacedView
+                key={row.map((item) => item.name).join("-")}
+                vertical="m"
+                gap="xl"
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent:
+                    rowIndex % 2 === 0 ? "flex-start" : "flex-end",
+                }}
+              >
+                {row.map((item) => (
+                  <TestimonialItem key={item.name} item={item} />
+                ))}
+              </SpacedView>
+            ))}
           </View>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <LinkButton
