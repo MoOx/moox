@@ -82,7 +82,7 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
                     >
                       {l}
                     </Text>
-                  )
+                  ),
                 )}
               </View>
             ) : (
@@ -142,17 +142,20 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
             </View>
             {isMini ? (
               <View role="list">
-                {["Cross-platform", "Web & Native", "Next.js", "Expo"].map(
-                  (l) => (
-                    <Text
-                      key={l}
-                      role="listitem"
-                      style={[textStyle, themeDark.styles.textLight1]}
-                    >
-                      {l}
-                    </Text>
-                  )
-                )}
+                {[
+                  "Cross-platform",
+                  "Web & Native",
+                  "TanStack Start / Next.js",
+                  "Expo",
+                ].map((l) => (
+                  <Text
+                    key={l}
+                    role="listitem"
+                    style={[textStyle, themeDark.styles.textLight1]}
+                  >
+                    {l}
+                  </Text>
+                ))}
               </View>
             ) : (
               <>
@@ -166,20 +169,20 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
                 </Text>
                 <Spacer size="xxl" style={{ flexGrow: 1 }} />
                 <View role="list">
-                  {["Web & Native", "Crossplatform", "Next.js", "Expo"].map(
-                    (l) => (
-                      <Text
-                        key={l}
-                        role="listitem"
-                        style={[
-                          fontStyles.iosEm.subhead,
-                          themeDark.styles.text,
-                        ]}
-                      >
-                        {l}
-                      </Text>
-                    )
-                  )}
+                  {[
+                    "Web & Native",
+                    "Crossplatform",
+                    "TanStack Start / Next.js",
+                    "Expo",
+                  ].map((l) => (
+                    <Text
+                      key={l}
+                      role="listitem"
+                      style={[fontStyles.iosEm.subhead, themeDark.styles.text]}
+                    >
+                      {l}
+                    </Text>
+                  ))}
                 </View>
               </>
             )}
@@ -395,7 +398,7 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
         ),
       },
     ],
-    [isMini, iconSize, textStyle]
+    [isMini, iconSize, textStyle],
   );
 
   return (

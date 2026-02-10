@@ -9,7 +9,7 @@ I build apps with:
 
 - ⛑ JavaScript & **TypeScript** to feel confident,
 - ⚛️ **React** (with **React Native** if needed, for Web, iOS, Android, Windows, macOS) using [React Strict DOM](https://facebook.github.io/react-strict-dom/),
-- Tanstack Start, Expo, Next.js, depending on your need and preferences.
+- TanStack Start, Expo, Next.js, depending on your need and preferences.
 
 ## 💬 Want to hire me ?
 

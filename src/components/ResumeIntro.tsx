@@ -1,4 +1,3 @@
-import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { gradientTextIndigoStylesInv, useTheme } from "@/app/styles";
@@ -10,10 +9,10 @@ import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import SVGActivityBike from "@/svgs/components/SVGActivityBike";
 import SVGActivityBricolage from "@/svgs/components/SVGActivityBricolage";
+import SVGActivityClimbing from "@/svgs/components/SVGActivityClimbing";
 import SVGActivityCrossfit from "@/svgs/components/SVGActivityCrossfit";
 import SVGActivityDj from "@/svgs/components/SVGActivityDj";
 import SVGActivityPekinExpress from "@/svgs/components/SVGActivityPekinExpress";
-import SVGActivityRun from "@/svgs/components/SVGActivityRun";
 import SVGActivityStandup from "@/svgs/components/SVGActivityStandup";
 import SVGCss from "@/svgs/components/SVGCss";
 import SVGExpo from "@/svgs/components/SVGExpo";
@@ -96,7 +95,7 @@ export default function ResumeIntro() {
             <SpacedView gap="xs" style={styles.activities}>
               {[
                 { Icon: SVGActivityCrossfit, text: "Crossfit" },
-                { Icon: SVGActivityRun, text: "Running" },
+                { Icon: SVGActivityClimbing, text: "Climbing" },
                 { Icon: SVGActivityBike, text: "Bike" },
                 { Icon: SVGActivityDj, text: "DJ" },
                 { Icon: SVGActivityBricolage, text: "Bricolage" },
@@ -106,7 +105,11 @@ export default function ResumeIntro() {
                 { Icon: SVGActivityPekinExpress, text: "Pekin Express #20" },
               ].map(({ Icon, text }) => (
                 <SpacedView key={text} horizontal="xxs" vertical="xs">
-                  <Icon fill="#666" width={42} height={42} />
+                  <Icon
+                    style={{ color: "#666", fill: "#666" }}
+                    width={42}
+                    height={42}
+                  />
                   <Text
                     style={[
                       fontStyles.ios.caption2,

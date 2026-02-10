@@ -14,7 +14,7 @@
     "format": "prettier --write \"**/*.{js,json,ts,tsx,css,md}\" \"!package.json\"",
     "clean": "npm run svg:clean",
     "svg:clean": "rm -rf  src/svgs/components",
-    "svg:web": "react-from-svg svgs src/svgs/components --with-native-for-typescript",
+    "svg:web": "react-from-svg svgs src/svgs/components --with-native-for-typescript --allow-override-fill",
     "svg": "npm run svg:clean && npm run svg:web",
     "markdown": "markdown-to-json \"content/**/*.md\"",
     "test": "npm run lint && npm run build"
@@ -71,7 +71,7 @@
     "oxlint-tsgolint": "^0.11.5",
     "patch-package": "^8.0.0",
     "prettier": "^3.3.3",
-    "react-from-svg": "^7.1.1",
+    "react-from-svg": "^8.0.2",
     "react-native": "^0.79",
     "typescript": "^5.8"
   }
