@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import * as React from "react";
 import { Text, View } from "react-native";
 
 import { useTheme } from "@/app/styles";
@@ -247,22 +246,6 @@ export default function WebsiteFooter() {
             justifyContent: "center",
           }}
         >
-          <Text
-            style={[
-              fontStyles.ios.footnote,
-              theme.styles.text,
-              { display: "flex", flexDirection: "row", lineHeight: 36 },
-            ]}
-          >
-            {"Website made with "}
-            <LinkText href="https://reactnative.dev">{"React Native"}</LinkText>
-            <LinkText href="https://necolas.github.io/react-native-web/">
-              {" for Web"}
-            </LinkText>
-            {" and "}
-            <LinkText href="https://nextjs.org">{"Next.js"}</LinkText>
-            {". "}
-          </Text>
           <LinkText
             style={[
               fontStyles.ios.footnote,
@@ -271,7 +254,7 @@ export default function WebsiteFooter() {
             ]}
             href="https://github.com/MoOx/moox"
           >
-            {"100% Over-engineered source available on GitHub"}
+            {"100% Handcrafted & Over-engineered source available on GitHub"}
           </LinkText>
         </View>
       </SpacedView>
