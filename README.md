@@ -8,8 +8,8 @@ apps.
 I build apps with:
 
 - ⛑ JavaScript & **TypeScript** to feel confident,
-- ⚛️ **React** (with **React Native** if needed, for Web, iOS, Android, Windows, macOS),
-- Next.js and/or Expo depending on your need.
+- ⚛️ **React** (with **React Native** if needed, for Web, iOS, Android, Windows, macOS) using [React Strict DOM](https://facebook.github.io/react-strict-dom/),
+- Tanstack Start, Expo, Next.js, depending on your need and preferences.
 
 ## 💬 Want to hire me ?
 
@@ -24,28 +24,5 @@ I build apps with:
 [![LinkedIn Follow](https://img.shields.io/badge/LinkedIn-%20?style=social&logo=invision&logoColor=%230077B5)](https://www.linkedin.com/in/maxthirouin/)
 [![BlueSky Follow](https://img.shields.io/badge/BlueSky-%20?style=social&logo=bluesky)](https://bsky.app/profile/moox.io)
 [![X Follow](https://img.shields.io/twitter/follow/MoOx?style=social&label=)](https://x.com/MoOx)
-
-<picture>
-  <source
-    srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=MoOx&show_icons=true&theme=dark&layout=compact"
-    media="(prefers-color-scheme: dark)"
-  />
-  <source
-    srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=MoOx&show_icons=true&layout=compact"
-    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-  />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MoOx&show_icons=true&layout=compact" />
-</picture>
-<picture>
-  <source
-    srcset="https://github-readme-stats.vercel.app/api?username=MoOx&show_icons=true&theme=dark&layout=compact"
-    media="(prefers-color-scheme: dark)"
-  />
-  <source
-    srcset="https://github-readme-stats.vercel.app/api?username=MoOx&show_icons=true&layout=compact"
-    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-  />
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=MoOx&show_icons=true&layout=compact" />
-</picture>
 
 ## _Curious about me❓ **<https://moox.io>**._
