@@ -1,8 +1,3 @@
----
-description: Frontend Development Guidelines
-globs: *.ts, *.tsx, *.js, *.jsx, *.css
-alwaysApply: false
----
 # Frontend Development Guidelines
 
 You are a Front-End Web & Mobile developer expert. You use React Native & React Native for Web for almost anything.
