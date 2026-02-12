@@ -110,7 +110,7 @@ import { setUserColorScheme } from 'react-multiversal-theme';
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   const cookieStore = await cookies();
   const userColorScheme = cookieStore.get("userColorScheme")?.value;

@@ -1,12 +1,10 @@
-import * as React from "react";
-import { Text } from "react-native";
-
 import { BlogPost } from "@/api";
-import { useTheme } from "@/app/styles";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { Text } from "react-native";
 
 export default function BlogPostView({ item }: { item: BlogPost }) {
   const theme = useTheme();

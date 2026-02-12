@@ -1,5 +1,14 @@
-"use client";
-import * as React from "react";
+import { useScrollWindowOffset } from "@/react-multiversal/animate.utils";
+import { Portal } from "@/react-multiversal/Portal";
+import { ElementLayout } from "@/react-multiversal/positions.utils";
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import {
   MatrixTransform,
   MaximumOneOf,
@@ -28,12 +37,7 @@ import Animated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 import { SpringConfig } from "react-native-reanimated/lib/typescript/animation/springUtils";
-import { match } from "ts-pattern";
-import { P } from "ts-pattern";
-
-import { useScrollWindowOffset } from "@/react-multiversal/animate.utils";
-import { Portal } from "@/react-multiversal/Portal";
-import { ElementLayout } from "@/react-multiversal/positions.utils";
+import { match, P } from "ts-pattern";
 
 export type DegreeValue = number | `${number}deg`;
 
@@ -47,7 +51,7 @@ const parseDegreeValue = (value: DegreeValue): number => {
 export type PercentageValue = number | `${number}%`;
 
 const parsePercentageValue = (
-  value: PercentageValue
+  value: PercentageValue,
 ): { value: number; isPercentage: boolean } => {
   if (typeof value === "string") {
     return { value: parseFloat(value), isPercentage: true };
@@ -111,7 +115,7 @@ const getTransformValue = (
     | SkewY
     | Perspective,
   createInterpolation: (value: number, ratio?: number) => number,
-  layout?: ElementLayout
+  layout?: ElementLayout,
 ): TransformStyle => {
   return match(transform)
     .with({ translateX: P.select() }, (value) => {
@@ -167,7 +171,7 @@ function ParallaxDebugOverlay({
   layout: ElementLayout;
   getScrollViewHeight: () => number;
 }) {
-  const id = React.useId();
+  const id = useId();
   const windowDimensions = useWindowDimensions();
   const [start, end, maxScrollPosition] = layoutToRange({
     layout,
@@ -176,7 +180,7 @@ function ParallaxDebugOverlay({
   });
   const maxScroll = calculateMaxScrollPosition(
     windowDimensions,
-    getScrollViewHeight
+    getScrollViewHeight,
   );
   const isInTopViewport = layout.y < windowDimensions.height;
   const isInBottomViewport = layout.y + layout.height > maxScrollPosition;
@@ -242,7 +246,7 @@ function ParallaxDebugOverlay({
                   scrollViewHeight: getScrollViewHeight(),
                 },
                 null,
-                2
+                2,
               )}
             </Animated.Text>
           </Animated.View>
@@ -258,7 +262,7 @@ function ParallaxDebugOverlay({
  */
 const calculateMaxScrollPosition = (
   windowDimensions: ScaledSize,
-  getScrollViewHeight: () => number
+  getScrollViewHeight: () => number,
 ): number => {
   return Math.max(0, getScrollViewHeight() - windowDimensions.height);
 };
@@ -275,7 +279,7 @@ const layoutToRange = ({
   // Calculate the maximum possible scroll position
   const maxScrollPosition = calculateMaxScrollPosition(
     windowDimensions,
-    getScrollViewHeight
+    getScrollViewHeight,
   );
 
   // Check if element is in the top viewport (initially visible without scrolling)
@@ -288,7 +292,7 @@ const layoutToRange = ({
   // For other elements, start when they're about to enter the viewport
   const start = Math.max(
     0,
-    isInTopViewport ? 0 : layout.y - windowDimensions.height
+    isInTopViewport ? 0 : layout.y - windowDimensions.height,
   );
 
   // For elements in the bottom viewport, ensure they complete their animation
@@ -347,12 +351,12 @@ export default function Parallax({
         document.body.offsetHeight,
         document.documentElement.offsetHeight,
         document.body.clientHeight,
-        document.documentElement.clientHeight
+        document.documentElement.clientHeight,
       );
     }
     throw new Error(
       "Parallax: getScrollViewHeight() should be provided for this platform." +
-        "You should probably listen to <ScrollView> 'onContentSizeChange' prop and retrieve 'event.nativeEvent.layout.height' in a state."
+        "You should probably listen to <ScrollView> 'onContentSizeChange' prop and retrieve 'event.nativeEvent.layout.height' in a state.",
     );
   },
 }: {
@@ -360,7 +364,7 @@ export default function Parallax({
   contentStyle?: StyleProp<ViewStyle>;
   staticTransforms?: TransformStyle[];
   transforms?: ParallaxTransform[];
-  children?: React.ReactNode;
+  children?: ReactNode;
   disabled?: boolean;
   debug?: boolean;
   debugState?: "start" | "end";
@@ -370,13 +374,14 @@ export default function Parallax({
 }) {
   const [scrollOffsetAnimValue, getOffset] =
     useScrollWindowOffset(springOptions);
-  const targetRef = React.useRef<View>(null);
+  const targetRef = useRef<View>(null);
   const windowDimensions = useWindowDimensions();
-  const [layoutInWindow, setLayoutInWindow] =
-    React.useState<ElementLayout | null>(null);
-  const observerRef = React.useRef<IntersectionObserver | null>(null);
+  const [layoutInWindow, setLayoutInWindow] = useState<ElementLayout | null>(
+    null,
+  );
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const updateLayout = React.useCallback(() => {
+  const updateLayout = useCallback(() => {
     return requestAnimationFrame(() => {
       targetRef.current?.measureInWindow((x, y, width, height) => {
         if (x === 0 && y === 0 && width === 0 && height === 0) {
@@ -392,7 +397,7 @@ export default function Parallax({
     });
   }, [getOffset]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (Platform.OS === "web") {
       const animationFrames: number[] = [];
       const targetElement = targetRef.current as unknown as HTMLElement;
@@ -452,7 +457,7 @@ export default function Parallax({
         scrollOffsetAnimValue.get(),
         inputRange,
         [start, 0, end],
-        "clamp"
+        "clamp",
       );
     };
 
@@ -460,7 +465,7 @@ export default function Parallax({
       transform: [
         ...staticTransforms,
         ...transforms.map((transform) =>
-          getTransformValue(transform, createInterpolation, layoutInWindow)
+          getTransformValue(transform, createInterpolation, layoutInWindow),
         ),
       ],
     };

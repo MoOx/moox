@@ -1,13 +1,12 @@
-import * as React from "react";
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
-
-import { themeDark, useTheme } from "@/app/styles";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { themeDark, useTheme } from "@/styles";
+import { ComponentType } from "react";
+import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 
 const borderRadius = size("s");
 
@@ -20,7 +19,7 @@ export default function ContactCard({
   style,
   mode = "default",
 }: {
-  Icon: React.ComponentType<{
+  Icon: ComponentType<{
     width: number;
     height: number;
     fill: string;

@@ -1,11 +1,3 @@
-"use client";
-
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import dynamic from "next/dynamic";
-import * as React from "react";
-import { Text, useColorScheme, View } from "react-native";
-
-import { themedColors, useTheme } from "@/app/styles";
 import ThemePreview from "@/components/ThemePreview";
 import { AbsoluteSize, WindowWidth } from "@/react-multiversal";
 import { white } from "@/react-multiversal/colors";
@@ -17,13 +9,14 @@ import {
   userColorSchemeStorageKey,
 } from "@/react-multiversal/theme/colorScheme";
 import { useUserColorScheme } from "@/react-multiversal/theme/useUserColorScheme";
+import { themedColors, useTheme } from "@/styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lazy, useCallback, useState } from "react";
+import { Text, useColorScheme, View } from "react-native";
 
 // import ColorSchemeToggle from "@/shared/components/ColorSchemeToggle";
-const ColorSchemeToggle = dynamic(
+const ColorSchemeToggle = lazy(
   () => import("@/react-multiversal/ColorSchemeToggle"),
-  {
-    ssr: false,
-  },
 );
 
 const toggleThemes = {
@@ -83,7 +76,7 @@ export default function ThemeToggle({
         ? "dark"
         : "light"
       : userColorScheme;
-  const handleChange = React.useCallback(
+  const handleChange = useCallback(
     (value: UserColorScheme) => {
       void AsyncStorage.setItem(userColorSchemeStorageKey, value);
       void setUserColorScheme(value);
@@ -91,11 +84,11 @@ export default function ThemeToggle({
     [setUserColorScheme],
   );
 
-  const [detailsVisible, setDetailsVisible] = React.useState(false);
-  const handleFocus = React.useCallback(() => {
+  const [detailsVisible, setDetailsVisible] = useState(false);
+  const handleFocus = useCallback(() => {
     setDetailsVisible(true);
   }, [setDetailsVisible]);
-  const handleBlur = React.useCallback(() => {
+  const handleBlur = useCallback(() => {
     setDetailsVisible(false);
   }, [setDetailsVisible]);
 

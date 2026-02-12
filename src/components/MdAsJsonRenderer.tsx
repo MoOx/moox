@@ -1,5 +1,4 @@
-import * as React from "react";
-
+import { Fragment, ReactElement, ReactNode, createElement } from "react";
 import {
   A,
   BlockQuote,
@@ -81,15 +80,15 @@ const cleanupNewlines = (s: string): string => s.replace(/\n/g, " ");
 
 const optionalCleanString = (
   s: string,
-  keepNewlines: boolean
+  keepNewlines: boolean,
 ): string | null => {
   const sc = keepNewlines ? s : cleanupNewlines(s);
   return sc === "" || (sc === " " && s !== sc) ? null : sc;
 };
 
 const inlineBreakIfParentIsInline = (
-  parentTag: string
-): React.ReactElement | null => {
+  parentTag: string,
+): ReactElement | null => {
   switch (parentTag) {
     case "li":
       return <Br />;
@@ -102,19 +101,19 @@ const renderChild = (
   parentTag: string,
   index: number,
   child: MdAsJsonType,
-  keepNewlines: boolean = false
-): React.ReactNode => {
+  keepNewlines: boolean = false,
+): ReactNode => {
   // console.log("renderChild", parentTag, index, child);
   const key = index.toString();
 
   const renderChildren = (
     parentTag: string,
     children: MdAsJsonType[],
-    keepNewlines: boolean
+    keepNewlines: boolean,
   ) =>
     children.length > 0
       ? children.map((child, i) =>
-          renderChild(parentTag, i, child, keepNewlines)
+          renderChild(parentTag, i, child, keepNewlines),
         )
       : null;
 
@@ -190,10 +189,10 @@ const renderChild = (
         case "ol":
         case "ul":
           return (
-            <React.Fragment key={key}>
+            <Fragment key={key}>
               {inlineBreakIfParentIsInline(parentTag)}
               <Ul>{renderChildren(tag, children, keepNewlines)}</Ul>
-            </React.Fragment>
+            </Fragment>
           );
         case "li":
           return (
@@ -220,10 +219,10 @@ const renderChild = (
         case "hr":
           return <Hr key={key} />;
         default:
-          return React.createElement(
+          return createElement(
             tag,
             props,
-            renderChildren(tag, children, keepNewlines)
+            renderChildren(tag, children, keepNewlines),
           );
       }
     }

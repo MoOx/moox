@@ -1,10 +1,9 @@
-import Image from "next/image";
-import * as React from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
-
-import { useTheme } from "@/app/styles";
 import GradientBorderCircle from "@/components/GradientBorderCircle";
+import Image from "@/components/Image";
 import { GradientRadial } from "@/react-multiversal/GradientRadial";
+import { useTheme } from "@/styles";
+import { ReactNode } from "react";
+import { StyleProp, View, ViewStyle } from "react-native";
 
 export default function Me({
   src = "/max-1.png",
@@ -17,7 +16,7 @@ export default function Me({
   imgWidth?: number;
   imgHeight?: number;
   style?: StyleProp<ViewStyle>;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) {
   const theme = useTheme();
   return (

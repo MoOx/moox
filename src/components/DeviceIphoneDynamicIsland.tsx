@@ -1,10 +1,7 @@
-"use client";
-
-import * as React from "react";
+import SVGDeviceiPhoneDynamicIsland from "@/svgs/components/SVGDeviceiPhoneDynamicIsland";
+import { ReactNode } from "react";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import Animated from "react-native-reanimated";
-
-import SVGDeviceiPhoneDynamicIsland from "@/svgs/components/SVGDeviceiPhoneDynamicIsland";
 
 const deviceOriginalHeight = 388;
 const deviceOriginalWidth = 188;
@@ -18,7 +15,7 @@ export default function DeviceiPhoneDynamicIsland({
 }: {
   style?: StyleProp<ViewStyle>;
   width: number;
-  children: React.ReactNode;
+  children: ReactNode;
   backgroundColor?: string;
 }) {
   const height = width * deviceOriginalRatio;

@@ -1,8 +1,4 @@
-import Image from "next/image";
-import * as React from "react";
-import { StyleSheet, Text, View, ViewStyle } from "react-native";
-
-import { themeDark } from "@/app/styles";
+import Image from "@/components/Image";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
@@ -11,11 +7,14 @@ import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { themeDark } from "@/styles";
 import SVGGraphql from "@/svgs/components/SVGGraphql";
 import SVGJavaScript from "@/svgs/components/SVGJavaScript";
 import SVGReact from "@/svgs/components/SVGReact";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGTypescript from "@/svgs/components/SVGTypescript";
+import { ReactNode, useMemo } from "react";
+import { StyleSheet, Text, View, ViewStyle } from "react-native";
 
 const styles = StyleSheet.create({
   bgIcon: {
@@ -32,8 +31,8 @@ type SkillItem = {
   color: string;
   bg: string;
   bg2: string;
-  icon?: React.ReactNode;
-  child: React.ReactNode;
+  icon?: ReactNode;
+  child: ReactNode;
 };
 
 type SkillsCardsMode = "mini" | "default";
@@ -52,7 +51,7 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
   const titleStyle = isMini ? fontStyles.iosEm.title3 : fontStyles.iosEm.title2;
   const spacing = isMini ? "m" : "xl";
 
-  const skills: SkillItem[] = React.useMemo(
+  const skills: SkillItem[] = useMemo(
     () => [
       {
         title: "JavaScript",

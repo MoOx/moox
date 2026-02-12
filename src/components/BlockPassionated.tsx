@@ -1,9 +1,4 @@
-"use client";
-
-import Image from "next/image";
-import { StyleSheet, Text, View } from "react-native";
-
-import { gradientFlashyStops, useTheme } from "@/app/styles";
+import Image from "@/components/Image";
 import LinkButton from "@/components/LinkButton";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -11,6 +6,8 @@ import GradientLinear from "@/react-multiversal/GradientLinear";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { gradientFlashyStops, useTheme } from "@/styles";
+import { StyleSheet, Text, View } from "react-native";
 
 const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 

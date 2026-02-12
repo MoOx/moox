@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Edit",
+      "Glob",
+      "Grep",
+      "LS",
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_screenshot",
+      "MultiEdit",
+      "Read",
+      "Skill",
+      "WebFetch",
+      "Write"
+    ]
+  },
+  "enableAllProjectMcpServers": true
+}

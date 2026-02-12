@@ -1,6 +1,6 @@
 ---
 company: "M6"
-url: "https://www.m6.fr/pekin-express-p_945"
+url: "https://www.m6.fr/pekin-express-p_945/episode-1-partie-1-c_13108834"
 title: "Reality TV Race"
 description: "Pékin Express #20"
 dateStart: 2025-01-16
@@ -11,7 +11,7 @@ hashtags:
 image: /resume/pekinexpress-saison-20-max-et-helene.jpg
 links:
   - title: "Pékin Express / M6"
-    url: "https://www.m6.fr/pekin-express-p_945"
+    url: "https://www.m6.fr/pekin-express-p_945/episode-1-partie-1-c_13108834"
   - title: "Télé Star"
     url: "https://www.telestar.fr/tele_realite/interview-on-sest-demande-en-mariage-max-et-helene-pekin-express-2025-heureux-apres-leur-elimination-1709471"
   - title: "Diverto"

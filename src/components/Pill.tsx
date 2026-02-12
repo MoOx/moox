@@ -1,12 +1,11 @@
-import * as React from "react";
-import { StyleProp, Text, TextStyle, ViewStyle } from "react-native";
-
-import { alpha, useTheme } from "@/app/styles";
 import { AbsoluteSize } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import GlassView from "@/react-multiversal/GlassView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import TextForReader from "@/react-multiversal/TextForReader";
+import { alpha, useTheme } from "@/styles";
+import { useMemo } from "react";
+import { StyleProp, Text, TextStyle, ViewStyle } from "react-native";
 
 export default function Pill({
   style,
@@ -34,8 +33,8 @@ export default function Pill({
   transitionSize?: string;
 }) {
   const theme = useTheme();
-  const thisYear = React.useMemo(() => new Date().getFullYear(), []);
-  const transitionName =
+  const thisYear = useMemo(() => new Date().getFullYear(), []);
+  const viewTransitionName =
     "text--" +
     (title + pre + detail + year).replace(/[^a-z0-9/s]+/gi, "-") +
     transitionSize;
@@ -50,83 +49,85 @@ export default function Pill({
         style,
       ]}
     >
-      <React.unstable_ViewTransition name={transitionName}>
-        <SpacedView horizontal={pillSpace} vertical={pillSpace}>
-          <SpacedView
-            horizontal={spaceHorizontal}
-            vertical={spaceVertical}
-            style={[theme.styles.backAlt, { borderRadius: 100 }]}
+      <SpacedView
+        horizontal={pillSpace}
+        vertical={pillSpace}
+        style={{ viewTransitionName }}
+      >
+        <SpacedView
+          horizontal={spaceHorizontal}
+          vertical={spaceVertical}
+          style={[theme.styles.backAlt, { borderRadius: 100 }]}
+        >
+          <Text
+            role="paragraph"
+            style={{ display: "flex", flexDirection: "column" }}
           >
+            {!pre ? null : (
+              <Text
+                style={[
+                  fontStyles.iosEm.caption2,
+                  theme.styles.textLight1,
+                  {
+                    lineHeight: fontStyles.iosEm.caption2.fontSize,
+                    fontWeight: "400",
+                  },
+                ]}
+              >
+                {pre + " "}
+              </Text>
+            )}
             <Text
-              role="paragraph"
-              style={{ display: "flex", flexDirection: "column" }}
+              style={[
+                titleStyle || fontStyles.iosEm.caption1,
+                pre ? theme.styles.textMainDark : theme.styles.textMain,
+                {
+                  lineHeight: titleStyle
+                    ? undefined
+                    : fontStyles.iosEm.caption1.fontSize,
+                  fontWeight: "800",
+                },
+              ]}
             >
-              {!pre ? null : (
+              {title}
+              {!detail ? null : (
                 <Text
                   style={[
                     fontStyles.iosEm.caption2,
                     theme.styles.textLight1,
                     {
+                      position: "absolute",
+                      top: 12,
+                      left: 0,
                       lineHeight: fontStyles.iosEm.caption2.fontSize,
-                      fontWeight: "400",
+                      fontWeight: "300",
                     },
                   ]}
                 >
-                  {pre + " "}
+                  <TextForReader>{", "}</TextForReader>
+                  {detail}
                 </Text>
               )}
-              <Text
-                style={[
-                  titleStyle || fontStyles.iosEm.caption1,
-                  pre ? theme.styles.textMainDark : theme.styles.textMain,
-                  {
-                    lineHeight: titleStyle
-                      ? undefined
-                      : fontStyles.iosEm.caption1.fontSize,
-                    fontWeight: "800",
-                  },
-                ]}
-              >
-                {title}
-                {!detail ? null : (
-                  <Text
-                    style={[
-                      fontStyles.iosEm.caption2,
-                      theme.styles.textLight1,
-                      {
-                        position: "absolute",
-                        top: 12,
-                        left: 0,
-                        lineHeight: fontStyles.iosEm.caption2.fontSize,
-                        fontWeight: "300",
-                      },
-                    ]}
-                  >
-                    <TextForReader>{", "}</TextForReader>
-                    {detail}
-                  </Text>
-                )}
-              </Text>
-
-              <Text
-                style={[
-                  fontStyles.iosEm.caption2,
-                  pre ? theme.styles.textMain : theme.styles.text,
-                  {
-                    lineHeight: fontStyles.iosEm.caption2.fontSize,
-                    fontWeight: "400",
-                    textAlign: pre || detail ? "right" : "center",
-                  },
-                ]}
-              >
-                <TextForReader>{" " + (ago ? ": " : "for ")}</TextForReader>
-                {thisYear - year + " years" + (ago ? " ago" : "")}
-                <TextForReader>{"."}</TextForReader>
-              </Text>
             </Text>
-          </SpacedView>
+
+            <Text
+              style={[
+                fontStyles.iosEm.caption2,
+                pre ? theme.styles.textMain : theme.styles.text,
+                {
+                  lineHeight: fontStyles.iosEm.caption2.fontSize,
+                  fontWeight: "400",
+                  textAlign: pre || detail ? "right" : "center",
+                },
+              ]}
+            >
+              <TextForReader>{" " + (ago ? ": " : "for ")}</TextForReader>
+              {thisYear - year + " years" + (ago ? " ago" : "")}
+              <TextForReader>{"."}</TextForReader>
+            </Text>
+          </Text>
         </SpacedView>
-      </React.unstable_ViewTransition>
+      </SpacedView>
     </GlassView>
   );
 }

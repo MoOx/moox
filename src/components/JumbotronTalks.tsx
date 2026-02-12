@@ -1,11 +1,7 @@
-"use client";
-
-import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
-
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
+import { StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
   container: {

@@ -1,15 +1,14 @@
-import * as React from "react";
-import type { ViewProps } from "react-native";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { match } from "ts-pattern";
-
-import { alpha, colors, useTheme } from "@/app/styles";
 import { Size } from "@/react-multiversal";
 import BlurView from "@/react-multiversal/BlurView";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
+import { alpha, colors, useTheme } from "@/styles";
+import { ReactNode, useMemo } from "react";
+import type { ViewProps } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { match } from "ts-pattern";
 
 export type Mode = "outline" | "default" | "gradient";
 export type Indicator = "none" | "activity" | "success";
@@ -75,14 +74,8 @@ export type ButtonViewProps = Omit<ViewProps, "children"> & {
   blurAmount?: number;
   borderColorAlt?: string;
   children:
-    | React.ReactNode
-    | (({
-        color,
-        opacity,
-      }: {
-        color: string;
-        opacity: number;
-      }) => React.ReactNode)
+    | ReactNode
+    | (({ color, opacity }: { color: string; opacity: number }) => ReactNode)
     | undefined;
   color?: string;
   colorAlt?: string;
@@ -128,13 +121,13 @@ const ButtonView = ({
         : (_textColorAlt ?? theme.dynamicColors.textMain)
       : (_textColor ?? theme.dynamicColors.textOnMain);
   const borderColorAlt = _borderColorAlt ?? theme.dynamicColors.ultraLight;
-  const childrenStyles = React.useMemo(() => {
+  const childrenStyles = useMemo(() => {
     return {
       color: textColor,
       opacity: indicator !== "none" ? 0 : 1,
     };
   }, [textColor, indicator]);
-  const styleBtn = React.useMemo(() => {
+  const styleBtn = useMemo(() => {
     return [
       styles.container,
       match(mode)

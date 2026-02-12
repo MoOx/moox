@@ -1,14 +1,11 @@
-"use client";
-
-import * as React from "react";
-import { Text, View } from "react-native";
-
 import { BlogPost } from "@/api";
-import { useTheme } from "@/app/styles";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { useRef } from "react";
+import { Text, View } from "react-native";
 
 function BlogPostPreview({ item }: { item: BlogPost }) {
   const theme = useTheme();
@@ -29,7 +26,7 @@ function BlogPostPreview({ item }: { item: BlogPost }) {
 
 export default function PostList({ items }: { items: BlogPost[] }) {
   const theme = useTheme();
-  const latestYear = React.useRef(String(new Date().getFullYear() + 1));
+  const latestYear = useRef(String(new Date().getFullYear() + 1));
 
   return (
     <>

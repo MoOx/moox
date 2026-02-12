@@ -1,8 +1,3 @@
-"use client";
-
-import { Text } from "react-native";
-
-import { useTheme } from "@/app/styles";
 import ButtonView from "@/components/ButtonView";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import Container from "@/react-multiversal/Container";
@@ -10,6 +5,8 @@ import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { Text } from "react-native";
 
 export default function WebsiteError({ statusCode }: { statusCode: number }) {
   const theme = useTheme();

@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import {
   Platform,
   StyleProp,
@@ -34,7 +35,7 @@ export default function Container({
   wrapperStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   maxWidth?: number;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <View style={[styles.wrapper, wrapperStyle]} {...props}>

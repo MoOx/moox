@@ -1,15 +1,13 @@
-import * as React from "react";
-import { Text, View } from "react-native";
-
-import { useTheme } from "@/app/styles";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 import TextForReader from "@/react-multiversal/TextForReader";
+import { useTheme } from "@/styles";
 import SVGCompanyFacebook from "@/svgs/components/SVGCompanyFacebook";
 import SVGCompanyGoogle from "@/svgs/components/SVGCompanyGoogle";
 import SVGCompanyMicrosoft from "@/svgs/components/SVGCompanyMicrosoft";
 import SVGCompanyTwitter from "@/svgs/components/SVGCompanyTwitter";
+import { Text, View } from "react-native";
 
 export const companyIconWidth = 160;
 export const companyIconCoef = 12 / 32;

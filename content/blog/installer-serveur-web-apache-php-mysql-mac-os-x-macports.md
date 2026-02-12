@@ -78,7 +78,7 @@ Apache/PHP sont déjà présents (bien que la version ne soit pas à jour et les
 extensions présentes ne se bousculent pas), il faut utiliser d’autres sources…
 Donc je me suis simplement orienté vers **MacPorts** :
 
-> The MacPorts Project is an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the [Mac OS X](//www.apple.com/osx/) operating system. To that end we provide the command-line driven MacPorts software package under a [BSD License](//opensource.org/licenses/bsd-license.php), and through it easy access to thousands of ports that [greatly simplify](//guide.macports.org/#introduction) the task of [compiling and installing](//guide.macports.org/#using) open-source software on your Mac.
+> The MacPorts Project is an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the [Mac OS X](https://www.apple.com/osx/) operating system. To that end we provide the command-line driven MacPorts software package under a [BSD License](https://opensource.org/licenses/bsd-license.php), and through it easy access to thousands of ports that [greatly simplify](https://guide.macports.org/#introduction) the task of [compiling and installing](https://guide.macports.org/#using) open-source software on your Mac.
 
 Pour installer **MacPorts** rien de difficile : on se rend sur le site officiel
 du projet, on télécharge l’image disque puis on installe ça facilement

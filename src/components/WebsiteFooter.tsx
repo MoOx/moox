@@ -1,10 +1,5 @@
-"use client";
-
-import Image from "next/image";
-import { Text, View } from "react-native";
-
-import { useTheme } from "@/app/styles";
 import BlockInterestedButtons from "@/components/BlockInterestedButtons";
+import Image from "@/components/Image";
 import ThemeToggle from "@/components/ThemeToggle";
 import WebsiteFooterLandscape from "@/components/WebsiteFooterLandscape";
 import {
@@ -24,6 +19,8 @@ import LinkView from "@/react-multiversal/LinkView";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { Text, View } from "react-native";
 
 export default function WebsiteFooter() {
   const theme = useTheme();

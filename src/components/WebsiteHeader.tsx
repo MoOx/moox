@@ -1,15 +1,3 @@
-"use client";
-
-import * as React from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-
-import {
-  alpha,
-  boxShadows,
-  colors,
-  gradientFlashyStops,
-  useTheme,
-} from "@/app/styles";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import LinkButton from "@/components/LinkButton";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -24,9 +12,17 @@ import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
+import {
+  alpha,
+  boxShadows,
+  colors,
+  gradientFlashyStops,
+  useTheme,
+} from "@/styles";
 import SVGMoox from "@/svgs/components/SVGMoox";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
   menuGroup: {
@@ -60,7 +56,7 @@ export default function WebsiteHeader() {
 
   const contact = (
     <LinkButton
-      href="/contact"
+      href="/contact/"
       spaceHorizontal="m"
       spaceVertical="xs"
       effect="subtle"

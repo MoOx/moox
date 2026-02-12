@@ -1,18 +1,15 @@
-"use client";
-
-import * as React from "react";
-
 import {
   getColorScheme,
   setUserColorScheme,
   subscribeToColorScheme,
 } from "@/react-multiversal/theme/colorScheme";
+import { useSyncExternalStore } from "react";
 
 export const useUserColorScheme = () => {
-  const userColorScheme = React.useSyncExternalStore(
+  const userColorScheme = useSyncExternalStore(
     subscribeToColorScheme,
     getColorScheme,
-    getColorScheme
+    getColorScheme,
   );
   return [userColorScheme, setUserColorScheme] as const;
 };

@@ -1,8 +1,3 @@
-"use client";
-
-import * as React from "react";
-import { StyleSheet } from "react-native";
-
 import Me from "@/components/Me";
 import Pill from "@/components/Pill";
 import { WindowWidth } from "@/react-multiversal";
@@ -10,6 +5,7 @@ import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import Parallax from "@/react-multiversal/Parallax";
 import TextForReader from "@/react-multiversal/TextForReader";
 import { pTransforms } from "@/utils.styles";
+import { StyleSheet } from "react-native";
 
 export default function BlockMe1WithSmallPills() {
   return (

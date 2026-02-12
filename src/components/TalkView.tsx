@@ -1,12 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-
 import { Talk } from "@/api";
-import { useTheme } from "@/app/styles";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkText from "@/react-multiversal/LinkText";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
   back: {
@@ -14,8 +13,12 @@ const styles = StyleSheet.create({
   },
   videoContainer: {
     position: "relative",
-    overflow: "hidden",
-    paddingBottom: "56.25%", // 16:9 aspect ratio
+    aspectRatio: "16 / 9",
+    borderRadius: 7,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 0 3px rgb(0 0 0 / 10%)",
   },
   iframe: {
     position: "absolute",
@@ -23,6 +26,7 @@ const styles = StyleSheet.create({
     left: 0,
     width: "100%",
     height: "100%",
+    clipPath: `inset(0% 0% 0% 0% round 6px)`,
   },
 });
 
@@ -61,8 +65,11 @@ export default function TalkView({ item }: { item: Talk }) {
               src={item.videoEmbed}
               style={styles.iframe}
               allowFullScreen
+              frameBorder="0"
               title="Video"
-              sandbox="allow-scripts"
+              // youtube requires both allow-scripts and allow-same-origin to work properly
+              // oxlint-disable-next-line react/iframe-missing-sandbox
+              sandbox="allow-scripts allow-same-origin"
             />
           </div>
           <Spacer />
@@ -75,8 +82,11 @@ export default function TalkView({ item }: { item: Talk }) {
               src={item.slidesEmbed}
               style={styles.iframe}
               allowFullScreen
+              frameBorder="0"
               title="Slides"
-              sandbox="allow-scripts"
+              // slidedeck requires both allow-scripts and allow-same-origin to work properly
+              // oxlint-disable-next-line react/iframe-missing-sandbox
+              sandbox="allow-scripts allow-same-origin"
             />
           </div>
           <Spacer />

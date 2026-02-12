@@ -1,8 +1,8 @@
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import * as React from "react";
+import TextUnderlined, {
+  TextUnderlinedProps,
+} from "@/react-multiversal/TextUnderlined";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { MouseEvent, Ref, useCallback, useMemo } from "react";
 import {
   GestureResponderEvent,
   Linking,
@@ -12,10 +12,6 @@ import {
   TextStyle,
 } from "react-native";
 
-import TextUnderlined, {
-  TextUnderlinedProps,
-} from "@/react-multiversal/TextUnderlined";
-
 export type LinkTextProps = TextUnderlinedProps & {
   href: string;
   style?: StyleProp<TextStyle>;
@@ -24,7 +20,7 @@ export type LinkTextProps = TextUnderlinedProps & {
   containerActiveStyle?: StyleProp<TextStyle>;
   isActive?: (s: string, pathname: string) => boolean;
   onPress?: (
-    event: GestureResponderEvent | React.MouseEvent<HTMLAnchorElement>
+    event: GestureResponderEvent | MouseEvent<HTMLAnchorElement>,
   ) => void;
 };
 
@@ -51,31 +47,31 @@ export default function LinkText({
   onPress,
   ...props
 }: LinkTextProps) {
-  const pathname = usePathname();
-  const active = isActive(href, pathname!);
-  const textStyles = React.useMemo(
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const active = isActive(href, pathname);
+  const textStyles = useMemo(
     () => [style, active ? activeStyle : undefined],
-    [style, activeStyle, active]
+    [style, activeStyle, active],
   );
-  const containerStyles = React.useMemo(
+  const containerStyles = useMemo(
     () =>
       StyleSheet.flatten([
         resetLinkStyle,
         containerStyle,
         active ? containerActiveStyle : undefined,
       ]),
-    [containerStyle, containerActiveStyle, active]
+    [containerStyle, containerActiveStyle, active],
   );
 
-  const handleLinkPress = React.useCallback(
-    (event: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleLinkPress = useCallback(
+    (event: MouseEvent<HTMLAnchorElement>) => {
       if (onPress !== undefined) {
         onPress(event);
       }
     },
-    [onPress]
+    [onPress],
   );
-  const handleTextPress = React.useCallback(
+  const handleTextPress = useCallback(
     (event: GestureResponderEvent) => {
       if (onPress !== undefined) {
         onPress(event);
@@ -83,12 +79,12 @@ export default function LinkText({
       Linking.openURL(href).catch(console.error);
       event.preventDefault();
     },
-    [href, onPress]
+    [href, onPress],
   );
   return isInternalLink(href) ? (
     <Link
-      ref={ref as React.Ref<HTMLAnchorElement>}
-      href={href}
+      ref={ref as Ref<HTMLAnchorElement>}
+      to={href}
       role={role}
       style={containerStyles as any}
       onClick={handleLinkPress}

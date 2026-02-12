@@ -1,10 +1,11 @@
 {
   "search.exclude": {
     "**/node_modules": true,
-    "**/.next": true
+    "**/dist": true
   },
   "editor.codeActionsOnSave": {
     "source.addMissingImports": "explicit",
+    "source.sortImports": "explicit",
     "source.organizeImports": "explicit",
     "source.fixAll": "explicit"
   },

@@ -1,9 +1,4 @@
-"use client";
-
-import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
-
 import { ResumeItem } from "@/api";
-import { gradientStaticIndigoStyles, useTheme } from "@/app/styles";
 import BlockMaxApp from "@/components/BlockMaxApp";
 import LinkButton from "@/components/LinkButton";
 import { size, WindowWidth } from "@/react-multiversal";
@@ -14,6 +9,8 @@ import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { gradientStaticIndigoStyles, useTheme } from "@/styles";
+import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 
 const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 const revertSkew = [{ scaleY: 1 / 1.1 }, { skewY: "-1deg" }];

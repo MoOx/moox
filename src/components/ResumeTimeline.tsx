@@ -1,13 +1,10 @@
-"use client";
-
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-
 import { ResumeItem } from "@/api";
-import { alpha, colors, useTheme } from "@/app/styles";
 import { ResumeTimelineEntry } from "@/components/ResumeTimelineEntry";
 import { fontStyles } from "@/react-multiversal/font";
 import Spacer from "@/react-multiversal/Spacer";
+import { alpha, colors, useTheme } from "@/styles";
+import { Fragment, useRef } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
   item: {
@@ -33,7 +30,7 @@ export const ResumeTimeline = ({ items }: { items: ResumeItem[] }) => {
     return 0;
   });
 
-  const latestYear = React.useRef(String(new Date().getFullYear() + 1));
+  const latestYear = useRef(String(new Date().getFullYear() + 1));
 
   return (
     <>
@@ -53,7 +50,7 @@ export const ResumeTimeline = ({ items }: { items: ResumeItem[] }) => {
         latestYear.current = year;
 
         return (
-          <React.Fragment key={item.slug}>
+          <Fragment key={item.slug}>
             {newYear ? (
               <View role="heading" aria-level={3}>
                 <Text style={[fontStyles.iosEm.title1, theme.styles.text]}>
@@ -73,7 +70,7 @@ export const ResumeTimeline = ({ items }: { items: ResumeItem[] }) => {
               {i % 2 === 0 ? <Spacer size="xl" /> : null}
             </View>
             <Spacer size="l" />
-          </React.Fragment>
+          </Fragment>
         );
       })}
     </>

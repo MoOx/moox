@@ -1,8 +1,4 @@
-import { Metadata } from "next";
-import * as React from "react";
-import { View } from "react-native";
-
-import { getAll, ResumeItem } from "@/api";
+import { fetchAll } from "@/api";
 import BlockAugmentedWithAI from "@/components/BlockAugmentedWithAI";
 import BlockBuilder from "@/components/BlockBuilder";
 import BlockCompaniesTried from "@/components/BlockCompaniesTried";
@@ -13,21 +9,30 @@ import BlockPassionated from "@/components/BlockPassionated";
 import BlockTestimonials from "@/components/BlockTestimonials";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import Spacer from "@/react-multiversal/Spacer";
+import { createFileRoute } from "@tanstack/react-router";
+import { View } from "react-native";
 
-export const metadata: Metadata = {
-  title:
-    "MoOx, Freelance Front-End Senior Developer, React & React Native Expert.",
-  description:
-    "Max is a Freelance Front-End Developer based in France. He build websites, web apps and mobile apps mostly using React & React Native.",
-  pagination: {
-    next: "https://moox.io/resume",
-  },
-};
+export const Route = createFileRoute("/")({
+  loader: () => fetchAll({ data: "resume" }),
+  head: () => ({
+    meta: [
+      {
+        title:
+          "MoOx, Freelance Front-End Senior Developer, React & React Native Expert.",
+      },
+      {
+        name: "description",
+        content:
+          "Max is a Freelance Front-End Developer based in France. He build websites, web apps and mobile apps mostly using React & React Native.",
+      },
+    ],
+  }),
+  component: Home,
+});
 
-export default function Home() {
-  const resumeEntry = getAll<ResumeItem>("resume").find((item) =>
-    item.slug.includes("pekin")
-  );
+function Home() {
+  const items = Route.useLoaderData();
+  const resumeEntry = items.find((item) => item.slug.includes("pekin"));
   return (
     <WebsiteWrapper>
       <View role="article">

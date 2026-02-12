@@ -1,14 +1,10 @@
-"use client";
-
-import * as React from "react";
-import { Text, View } from "react-native";
-
-import { useTheme } from "@/app/styles";
 import AIPromptCircle from "@/components/AIPromptCircle";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { Text, View } from "react-native";
 
 const circles = [
   {

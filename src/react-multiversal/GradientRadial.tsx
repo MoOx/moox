@@ -1,4 +1,3 @@
-import * as React from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import { Defs, RadialGradient, Rect, Stop, Svg } from "react-native-svg";
 

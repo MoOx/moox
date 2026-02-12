@@ -1,11 +1,10 @@
-import * as React from "react";
-import { Text, TextStyle } from "react-native";
-import type { TextProps } from "react-native";
-
 import { useFocus } from "@/react-multiversal/useFocus";
+import { Ref, RefCallback, RefObject, useCallback, useRef } from "react";
+import type { TextProps } from "react-native";
+import { Text, TextStyle } from "react-native";
 
 export type TextUnderlinedProps = TextProps & {
-  ref?: React.RefObject<Text> | React.Ref<Text> | React.RefCallback<Text>;
+  ref?: RefObject<Text> | Ref<Text> | RefCallback<Text>;
   href?: string;
   underline?: boolean;
   underlineOnFocus?: boolean;
@@ -18,17 +17,17 @@ export default function TextUnderlined({
   style: _style,
   ...props
 }: TextUnderlinedProps) {
-  const internalRef = React.useRef<Text | null>(null);
-  const setRefs = React.useCallback(
+  const internalRef = useRef<Text | null>(null);
+  const setRefs = useCallback(
     (element: Text | null) => {
       internalRef.current = element;
       if (ref && "current" in ref) {
-        (ref as React.RefObject<Text | null>).current = element;
+        (ref as RefObject<Text | null>).current = element;
       } else if (ref && typeof ref === "function") {
         ref(element);
       }
     },
-    [ref]
+    [ref],
   );
 
   const [hasAnyFocus] = useFocus<Text>(internalRef);

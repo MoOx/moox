@@ -1,6 +1,6 @@
-"use client";
-
-import * as React from "react";
+import { WindowWidth } from "@/react-multiversal";
+import { Portal } from "@/react-multiversal/Portal";
+import { ReactNode, RefObject, useEffect, useRef } from "react";
 import {
   Platform,
   StyleProp,
@@ -8,9 +8,6 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-
-import { WindowWidth } from "@/react-multiversal";
-import { Portal } from "@/react-multiversal/Portal";
 
 export default function InPlaceOrPortal({
   id,
@@ -26,8 +23,8 @@ export default function InPlaceOrPortal({
   portalStyle?: StyleProp<ViewStyle>;
   breakpoint?: WindowWidth;
   onExit: () => void;
-  children: React.ReactNode;
-  skipRefs?: React.RefObject<any>[];
+  children: ReactNode;
+  skipRefs?: RefObject<any>[];
 }) {
   const windowWidth = useWindowDimensions().width;
   // force portal for native or small screen, for web only large screen
@@ -35,8 +32,8 @@ export default function InPlaceOrPortal({
 
   // ref forced as HTMLDivElement to be able to call ref.current.contains
   // that is actually existing on the web, but not in react-native
-  const ref = React.useRef<HTMLDivElement>(null);
-  React.useEffect(() => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
     if (isInPlace && document) {
       const listener = (event: MouseEvent) => {
         if (

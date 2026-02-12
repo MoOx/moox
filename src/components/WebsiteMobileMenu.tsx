@@ -1,9 +1,7 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import * as React from "react";
-import { Text, View } from "react-native";
-
+import { menuBarLinks } from "@/consts";
+import Container from "@/react-multiversal/Container";
+import LinkView from "@/react-multiversal/LinkView";
+import SpacedView from "@/react-multiversal/SpacedView";
 import {
   alpha,
   boxShadows,
@@ -11,11 +9,9 @@ import {
   themeDark,
   themeLight,
   useTheme,
-} from "@/app/styles";
-import { menuBarLinks } from "@/consts";
-import Container from "@/react-multiversal/Container";
-import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+} from "@/styles";
+import { useRouterState } from "@tanstack/react-router";
+import { Text, View } from "react-native";
 
 export const WebsiteMobileMenuPlaceholder = () => {
   return <View style={{ height: 60 }} />;
@@ -50,7 +46,7 @@ export const WebsiteMobileMenuBackdropStyles = () => {
 
 export const WebsiteMobileMenuLinks = () => {
   const theme = useTheme();
-  const pathname = usePathname();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <>
       {Object.entries(menuBarLinks).map(([text, { href, isActive, icon }]) => {

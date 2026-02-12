@@ -1,4 +1,3 @@
-import * as React from "react";
 import { View, type ViewProps } from "react-native";
 
 export type BlurViewProps = ViewProps & {

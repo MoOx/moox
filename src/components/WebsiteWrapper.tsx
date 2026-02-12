@@ -1,7 +1,3 @@
-import * as React from "react";
-import { View } from "react-native";
-
-import { useTheme } from "@/app/styles";
 import WebsiteFooter from "@/components/WebsiteFooter";
 import WebsiteHeader from "@/components/WebsiteHeader";
 import WebsiteMobileMenu, {
@@ -10,12 +6,11 @@ import WebsiteMobileMenu, {
 import { WindowWidth } from "@/react-multiversal";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { ReactNode } from "react";
+import { View } from "react-native";
 
-export default function WebsiteWrapper({
-  children,
-}: {
-  children?: React.ReactNode;
-}) {
+export default function WebsiteWrapper({ children }: { children?: ReactNode }) {
   const theme = useTheme();
   return (
     <View style={[theme.styles.back, { flex: 1 }]}>

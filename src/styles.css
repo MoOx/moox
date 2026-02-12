@@ -1,3 +1,9 @@
+/* view transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.2s;
+}
+
 /* code highlight */
 .hljs-operator {
   color: #a626a4;

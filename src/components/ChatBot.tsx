@@ -1,16 +1,22 @@
-import * as React from "react";
+import { size } from "@/react-multiversal";
+import { fontStyles } from "@/react-multiversal/font";
+import SpacedView from "@/react-multiversal/SpacedView";
+import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import SVGChevronRight from "@/svgs/components/SVGChevronRight";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
-
-import { useTheme } from "@/app/styles";
-import { size } from "@/react-multiversal";
-import { fontStyles } from "@/react-multiversal/font";
-import SpacedView from "@/react-multiversal/SpacedView";
-import Spacer from "@/react-multiversal/Spacer";
-import SVGChevronRight from "@/svgs/components/SVGChevronRight";
 
 const avatarSize = size("xxl");
 
@@ -59,13 +65,11 @@ function MessageBubble({
   const theme = useTheme();
   const { text, isFullyDisplayed, isBot } = message;
   const shouldAnimate = isBot;
-  const [displayedText, setDisplayedText] = React.useState(
-    shouldAnimate ? "" : text
-  );
-  const words = React.useMemo(() => text.split(" "), [text]);
-  const currentWordIndex = React.useRef(-1);
+  const [displayedText, setDisplayedText] = useState(shouldAnimate ? "" : text);
+  const words = useMemo(() => text.split(" "), [text]);
+  const currentWordIndex = useRef(-1);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isFullyDisplayed) {
       return;
     }
@@ -73,7 +77,7 @@ function MessageBubble({
       if (currentWordIndex.current < words.length - 1) {
         currentWordIndex.current += 1;
         setDisplayedText(
-          (prev) => prev + (prev ? " " : "") + words[currentWordIndex.current]
+          (prev) => prev + (prev ? " " : "") + words[currentWordIndex.current],
         );
       } else {
         clearInterval(timer);
@@ -116,9 +120,9 @@ const MessageFragment = ({
   length: number;
   handleMessageComplete: (messageId: string) => void;
 }) => {
-  const handleMsgComplete = React.useCallback(
+  const handleMsgComplete = useCallback(
     () => handleMessageComplete(message.id),
-    [handleMessageComplete, message.id]
+    [handleMessageComplete, message.id],
   );
   return (
     <>
@@ -138,7 +142,7 @@ function AnimatedDot({ index }: { index: number }) {
   const singleDotSpacing = dotDuration * (1 - overlap);
   const cycleDuration = 3 * singleDotSpacing + pauseDuration;
 
-  React.useEffect(() => {
+  useEffect(() => {
     const animate = () => {
       const now = Date.now();
       const cyclePosition = (now % cycleDuration) / cycleDuration;
@@ -176,7 +180,7 @@ function AnimatedDot({ index }: { index: number }) {
         },
       ],
     }),
-    [progress]
+    [progress],
   );
 
   return (
@@ -222,12 +226,12 @@ function TypingIndicator() {
 
 export default function ChatBot() {
   const theme = useTheme();
-  const [isTyping, setIsTyping] = React.useState(true);
-  const [messages, setMessages] = React.useState<Message[]>([]);
-  const [inputValue, setInputValue] = React.useState("");
-  const [currentResponseIndex, setCurrentResponseIndex] = React.useState(0);
+  const [isTyping, setIsTyping] = useState(true);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [currentResponseIndex, setCurrentResponseIndex] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isTyping) {
       const timer = setTimeout(() => {
         setIsTyping(false);
@@ -253,11 +257,11 @@ export default function ChatBot() {
     }
   }, [isTyping]);
 
-  const handleMessageComplete = React.useCallback((messageId: string) => {
+  const handleMessageComplete = useCallback((messageId: string) => {
     setMessages((prev) =>
       prev.map((msg) =>
-        msg.id === messageId ? { ...msg, isFullyDisplayed: true } : msg
-      )
+        msg.id === messageId ? { ...msg, isFullyDisplayed: true } : msg,
+      ),
     );
   }, []);
 
@@ -292,7 +296,7 @@ export default function ChatBot() {
             isBot: true,
             groupId,
             isFullyDisplayed: false,
-          })
+          }),
         );
         setMessages((prev) => [...prev, ...botMessages]);
         setCurrentResponseIndex((prev) => prev + 1);
@@ -323,7 +327,7 @@ export default function ChatBot() {
         {messageGroups.map((group) => {
           const isBot = group[0]?.isBot;
           const lastDisplayedIndex = group.findIndex(
-            (msg) => !msg.isFullyDisplayed
+            (msg) => !msg.isFullyDisplayed,
           );
           const visibleMessages =
             lastDisplayedIndex === -1
@@ -331,7 +335,7 @@ export default function ChatBot() {
               : group.slice(0, lastDisplayedIndex + 1);
 
           return (
-            <React.Fragment key={group[0]?.id}>
+            <Fragment key={group[0]?.id}>
               <View
                 style={{
                   flexDirection: "row",
@@ -370,7 +374,7 @@ export default function ChatBot() {
                   )}
                   {visibleMessages.map((message, index) => (
                     <MessageFragment
-                      key={index}
+                      key={message.id}
                       message={message}
                       index={index}
                       length={visibleMessages.length}
@@ -380,7 +384,7 @@ export default function ChatBot() {
                 </View>
               </View>
               <Spacer size="s" />
-            </React.Fragment>
+            </Fragment>
           );
         })}
         {isTyping && (
