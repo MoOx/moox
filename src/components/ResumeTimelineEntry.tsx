@@ -1,16 +1,15 @@
-import { differenceInCalendarMonths } from "date-fns";
-import Image from "next/image";
-import { StyleSheet, Text, View } from "react-native";
-
 import { ResumeItem } from "@/api";
-import { boxShadows, useTheme } from "@/app/styles";
 import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import LinkText from "@/react-multiversal/LinkText";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { boxShadows, useTheme } from "@/styles";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
+import { differenceInCalendarMonths } from "date-fns";
+import { StyleSheet, Text, View } from "react-native";
+import Image from "@/components/Image";
 
 const borderRadius = size("s");
 

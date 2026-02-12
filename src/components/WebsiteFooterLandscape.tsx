@@ -1,14 +1,11 @@
-"use client";
-
-import Image from "next/image";
-import * as React from "react";
-import { StyleSheet, View } from "react-native";
-
-import { useTheme } from "@/app/styles";
+import Image from "@/components/Image";
 import Avatar from "@/react-multiversal/Avatar";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import Parallax from "@/react-multiversal/Parallax";
+import { useTheme } from "@/styles";
 import SVGFlashyTriangle3 from "@/svgs/components/SVGFlashyTriangle3";
+import { ReactNode } from "react";
+import { StyleSheet, View } from "react-native";
 
 const skySize = 400;
 const floorHeight = 120;
@@ -16,7 +13,7 @@ const floorHeight = 120;
 export default function WebsiteFooterLandscape({
   children,
 }: {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) {
   const theme = useTheme();
 

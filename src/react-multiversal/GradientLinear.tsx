@@ -1,4 +1,3 @@
-import * as React from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import { Defs, LinearGradient, Rect, Stop, Svg } from "react-native-svg";
 
@@ -34,7 +33,7 @@ const roundNumberTo10DecimalsAsString = (number: number) => {
 };
 
 export function calculateGradientCoordinates(
-  angle: number
+  angle: number,
 ): GradientCoordinates {
   const radians = (angle * Math.PI) / 180;
   const x1 = 0.5 + 0.5 * Math.cos(radians + Math.PI);
@@ -97,7 +96,7 @@ export default function GradientLinear({
     stops
       .map(
         (stop) =>
-          `o:${stop.offset}c:${stop.stopColor}o:${stop.stopOpacity}:a${angle}`
+          `o:${stop.offset}c:${stop.stopColor}o:${stop.stopOpacity}:a${angle}`,
       )
       .join("::")
       .replace(/[^a-zA-Z0-9]/g, "_");

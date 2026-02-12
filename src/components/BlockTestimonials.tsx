@@ -1,6 +1,3 @@
-import { StyleSheet, Text, View } from "react-native";
-
-import { boxShadows, themeLight, useTheme } from "@/app/styles";
 import LinkButton from "@/components/LinkButton";
 import { socials } from "@/consts";
 import { size } from "@/react-multiversal";
@@ -14,14 +11,17 @@ import { GradientRadial } from "@/react-multiversal/GradientRadial";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { boxShadows, themeLight, useTheme } from "@/styles";
 import SVGQuote from "@/svgs/components/SVGQuote";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
+import { ReactNode } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 export type Testimonial = {
   avatar: string;
   name: string;
   title: string;
-  content: React.ReactNode;
+  content: ReactNode;
 };
 export const testimonials: Testimonial[] = [
   {
@@ -49,9 +49,7 @@ export const testimonials: Testimonial[] = [
         <Text style={{ opacity: 0.6 }}>{"Max is truly a top "}</Text>
         <Text style={{ fontWeight: "bold" }}>{"React expert"}</Text>
         <Text style={{ opacity: 0.6 }}>
-          {
-            ". Whether it's React Native or React.js, nothing stands in his way."
-          }
+          {". Whether it's React Native or js, nothing stands in his way."}
         </Text>
       </>
     ),

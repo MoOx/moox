@@ -1,12 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
-
-import { gradientTextIndigoStylesInv, useTheme } from "@/app/styles";
 import IconReact from "@/components/IconReact";
 import IconReactNative from "@/components/IconReactNative";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { gradientTextIndigoStylesInv, useTheme } from "@/styles";
 import SVGActivityBike from "@/svgs/components/SVGActivityBike";
 import SVGActivityBricolage from "@/svgs/components/SVGActivityBricolage";
 import SVGActivityClimbing from "@/svgs/components/SVGActivityClimbing";
@@ -23,6 +21,7 @@ import SVGNextjs from "@/svgs/components/SVGNextjs";
 import SVGSketch from "@/svgs/components/SVGSketch";
 import SVGTraining from "@/svgs/components/SVGTraining";
 import SVGTypescript from "@/svgs/components/SVGTypescript";
+import { StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
   iconText: {

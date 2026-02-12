@@ -1,19 +1,4 @@
-"use client";
-
-import Clipboard from "@react-native-clipboard/clipboard";
-import * as React from "react";
-import {
-  Pressable,
-  StyleProp,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-} from "react-native";
-import Animated from "react-native-reanimated";
-
 import { ResumeItem } from "@/api";
-import { alpha, boxShadows, colors, useTheme } from "@/app/styles";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import ButtonView from "@/components/ButtonView";
 import DeviceiPhoneDynamicIsland from "@/components/DeviceIphoneDynamicIsland";
@@ -31,26 +16,38 @@ import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { alpha, boxShadows, colors, useTheme } from "@/styles";
 import SVGChevronRight from "@/svgs/components/SVGChevronRight";
 import SVGEmail from "@/svgs/components/SVGEmail";
+import Clipboard from "@react-native-clipboard/clipboard";
+import { useEffect, useState } from "react";
+import {
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+} from "react-native";
+import Animated from "react-native-reanimated";
 
 const useCurrentTime = () => {
-  const [time, setTime] = React.useState<string>(
+  const [time, setTime] = useState<string>(
     new Date().toLocaleTimeString("en-US", {
       hour12: false,
       hour: "2-digit",
       minute: "2-digit",
-    })
+    }),
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setTime(
         new Date().toLocaleTimeString("en-US", {
           hour12: false,
           hour: "2-digit",
           minute: "2-digit",
-        })
+        }),
       );
     }, 1000);
 
@@ -71,7 +68,7 @@ export default function BlockMaxApp({
 }) {
   const theme = useTheme();
   const time = useCurrentTime();
-  const [copied, setCopied] = React.useState(false);
+  const [copied, setCopied] = useState(false);
   return (
     <DeviceiPhoneDynamicIsland
       width={width}
@@ -170,7 +167,7 @@ export default function BlockMaxApp({
           <Spacer />
           <View style={{ flexDirection: "row" }}>
             <LinkButton
-              href="/contact"
+              href="/contact/"
               spaceHorizontal="s"
               spaceVertical="xxs"
               spaceGap={"xxs"}

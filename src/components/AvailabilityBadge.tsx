@@ -1,15 +1,14 @@
 "use client";
 
-import * as React from "react";
-import { StyleProp, Text, View, ViewStyle } from "react-native";
-import Animated, { CSSAnimationKeyframes } from "react-native-reanimated";
-import type { AnimatedStyle } from "react-native-reanimated";
-
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useFocus } from "@/react-multiversal/useFocus";
+import { useRef } from "react";
+import { StyleProp, Text, View, ViewStyle } from "react-native";
+import type { AnimatedStyle } from "react-native-reanimated";
+import Animated, { CSSAnimationKeyframes } from "react-native-reanimated";
 
 const pulseAnimationFrames: CSSAnimationKeyframes = {
   "0%": {
@@ -40,7 +39,7 @@ export default function AvailabilityBadge({
   style?: StyleProp<ViewStyle>;
   showText: boolean | "on-focus";
 }) {
-  const ref = React.useRef<Text>(null);
+  const ref = useRef<Text>(null);
   const [hasAnyFocus] = useFocus(ref, { debounceOff: 500 });
 
   return (
@@ -48,6 +47,7 @@ export default function AvailabilityBadge({
       <Animated.View
         style={[
           {
+            display: "flex",
             flexDirection: "row",
             alignItems: "center",
             borderRadius: 16,
@@ -70,7 +70,7 @@ export default function AvailabilityBadge({
         {!showText ? null : (
           <Animated.View
             style={[
-              { flexDirection: "row" },
+              { display: "flex", flexDirection: "row" },
               showText === "on-focus" && {
                 opacity: hasAnyFocus ? 1 : 0,
                 transform: [{ translateX: hasAnyFocus ? 0 : -20 }],

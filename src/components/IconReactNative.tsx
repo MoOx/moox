@@ -1,7 +1,6 @@
+import SVGReact from "@/svgs/components/SVGReact";
 import { View } from "react-native";
 import { SvgProps } from "react-native-svg";
-
-import SVGReact from "@/svgs/components/SVGReact";
 
 export default function IconReactNative({
   width = 24,

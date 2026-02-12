@@ -1,25 +1,25 @@
-import * as React from "react";
+import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { Animated, LayoutChangeEvent, Pressable, View } from "react-native";
 
 export default function Accordion({
   pressable,
   children,
 }: {
-  pressable: (expanded: boolean) => React.ReactNode;
-  children: React.ReactNode;
+  pressable: (expanded: boolean) => ReactNode;
+  children: ReactNode;
 }) {
-  const [expanded, setExpanded] = React.useState(false);
-  const handlePress = React.useCallback(
+  const [expanded, setExpanded] = useState(false);
+  const handlePress = useCallback(
     () => setExpanded((expanded) => !expanded),
     [],
   );
 
-  const [maxHeight, setMaxHeight] = React.useState<number | null>(null);
-  const handleLayout = React.useCallback((event: LayoutChangeEvent) => {
+  const [maxHeight, setMaxHeight] = useState<number | null>(null);
+  const handleLayout = useCallback((event: LayoutChangeEvent) => {
     setMaxHeight(event.nativeEvent.layout.height);
   }, []);
-  const animatedHeightValue = React.useRef(new Animated.Value(0)).current;
-  React.useEffect(() => {
+  const animatedHeightValue = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
     if (maxHeight) {
       Animated.timing(animatedHeightValue, {
         toValue: expanded ? maxHeight : 0,

@@ -19,7 +19,7 @@ the interesting part).
 ## tl;dr
 
 ```js
-const Name = props => {
+const Name = (props) => {
   return <View style={props.style}>{props.children}></View>;
 };
 ```
@@ -111,7 +111,7 @@ const Name = ({
   another,
   andAnother,
   andAnotherMore,
-  andAnotherChild
+  andAnotherChild,
 }) => {
   const computedValue = defaultValue * 10 - 2;
   return (
@@ -126,7 +126,7 @@ const Name = ({
 In comparison, if you use `props` argument (could be `args` or `options`)
 
 ```js
-const Name = props => {
+const Name = (props) => {
   const computedValue = props.defaultValue * 10 - 2;
   return (
     <View
@@ -155,7 +155,7 @@ recommend flow (...if you have to do JavaScript - hello
 ```js
 type props = {|
   style: any,
-  children: React.Node
+  children: Node
 |};
 
 const Name = (props: props) => {
@@ -170,7 +170,7 @@ And if you avoid defining your type before, and inline it... And add to that
 destructuring... Well, hello repetition.
 
 ```js
-const Name = ({ style, children }: {| style: any, children: React.Node |}) => {
+const Name = ({ style, children }: {| style: any, children: Node |}) => {
   return <View style={style}>{children}></View>;
 };
 ```
@@ -183,7 +183,7 @@ I know, if you think `classes`, you think "stateful". But that's not an
 obligation.
 
 ```js
-class Name extends React.Component {
+class Name extends Component {
   render() {
     return <View style={this.props.style}>{this.props.children}</div>;
   }
@@ -196,7 +196,7 @@ avoid using `this` in JavaScript just because I like functional things.
 Well, you could do
 
 ```js
-class Name extends React.Component {
+class Name extends Component {
   render() {
     const { props } = this
     return <View style={props.style}>{props.children}</div>;
@@ -218,7 +218,7 @@ Now let’s take a look to the minimal example without any return statement.
 ## No `return`
 
 ```js
-const Name = props => <View style={props.style}>{props.children}></View>;
+const Name = (props) => <View style={props.style}>{props.children}></View>;
 ```
 
 Yeah that’s definitely shorter. Sometime I do that, but as soon as I have to
@@ -232,7 +232,7 @@ prefer to always have it. For consitency.
 I don’t really want to talk about this unnamed version
 
 ```js
-export default props => <View style={props.style}>{props.children}></View>;
+export default (props) => <View style={props.style}>{props.children}></View>;
 ```
 
 Clearly fun and concise, but not good for actual debugging for the same reasons
@@ -241,7 +241,7 @@ as the previous example.
 That’s why I like to end up with something like this:
 
 ```js
-const Name = props => {
+const Name = (props) => {
   return <View style={props.style}>{props.children}></View>;
 };
 ```

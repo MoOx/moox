@@ -1,10 +1,5 @@
-"use client";
-
-import { useServerInsertedHTML } from "next/navigation";
-import * as React from "react";
-import { StyleSheet, View, ViewProps } from "react-native";
-
 import { size, Size, WindowWidth } from "@/react-multiversal";
+import { StyleSheet, View, ViewProps } from "react-native";
 
 const cssKey = "IfWindowWidthIs";
 
@@ -20,12 +15,12 @@ const buildCssRules = (smallerThan?: Size, largerThan?: Size) => {
   if (smallerThan && largerThan) {
     rules.push(
       `@media (max-width: ${size(smallerThan) - 1}px), (min-width: ${size(
-        largerThan
+        largerThan,
       )}px) {
         [data-window-width-filter="${buildClass(smallerThan, largerThan)}"] {
           display: none !important;
         }
-      }`
+      }`,
     );
   } else if (smallerThan) {
     rules.push(
@@ -33,7 +28,7 @@ const buildCssRules = (smallerThan?: Size, largerThan?: Size) => {
         [data-window-width-filter="${buildClass(smallerThan)}"] {
           display: none !important;
         }
-      }`
+      }`,
     );
   } else if (largerThan) {
     rules.push(
@@ -41,7 +36,7 @@ const buildCssRules = (smallerThan?: Size, largerThan?: Size) => {
         [data-window-width-filter="${buildClass(undefined, largerThan)}"] {
           display: none !important;
         }
-      }`
+      }`,
     );
   }
 
@@ -70,25 +65,7 @@ const generateAllCssRules = () => {
 
   return Array.from(rules);
 };
-const cssRules = generateAllCssRules();
-
-export function Next_IfWindowWidthIs() {
-  const isServerInserted = React.useRef(false);
-  useServerInsertedHTML(() => {
-    if (!isServerInserted.current) {
-      isServerInserted.current = true;
-      return (
-        <style
-          id="react-multiversal--IfWindowWidthIs"
-          dangerouslySetInnerHTML={{
-            __html: cssRules.join("\n"),
-          }}
-        ></style>
-      );
-    }
-  });
-  return null;
-}
+export const cssRules = generateAllCssRules();
 
 const styles = StyleSheet.create({
   ifWrapper: { display: "contents" },
@@ -104,7 +81,7 @@ export default function IfWindowWidthIs({
 }) {
   if (smallerThan && largerThan && smallerThan >= largerThan) {
     throw new Error(
-      `[IfWindowWidthIs] Invalid props: "smallerThan" (${smallerThan}) must be smaller than "largerThan" (${largerThan}).`
+      `[IfWindowWidthIs] Invalid props: "smallerThan" (${smallerThan}) must be smaller than "largerThan" (${largerThan}).`,
     );
   }
 
@@ -118,34 +95,3 @@ export default function IfWindowWidthIs({
     />
   );
 }
-
-// Native
-/*
-export default function IfWindowWidthIs({
-  style,
-  smallerThan,
-  largerThan,
-  children,
-}: {
-  style?: StyleProp<ViewStyle>;
-  smallerThan?: Size;
-  largerThan?: Size;
-  children: React.ReactNode;
-}) {
-  const { width: windowWidth } = useWindowDimensions();
-
-  if (smallerThan && largerThan && smallerThan >= largerThan) {
-    throw new Error(
-      `[IfWindowWidthIs] Invalid props: "smallerThan" (${smallerThan}) must be smaller than "largerThan" (${largerThan}).`
-    );
-  }
-  const isVisible =
-    (!smallerThan || windowWidth > smallerThan) &&
-    (!largerThan || windowWidth < largerThan);
-  if (isVisible) {
-    return null;
-  }
-
-  return <View style={style}>{children}</View>;
-}
-*/

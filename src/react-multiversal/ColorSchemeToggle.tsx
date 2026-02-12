@@ -1,4 +1,8 @@
-import * as React from "react";
+import { supportsHover } from "@/react-multiversal/supports";
+import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
+import { useFocus } from "@/react-multiversal/useFocus";
+import { boxShadows } from "@/styles";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import Animated, {
   interpolateColor,
@@ -10,11 +14,6 @@ import Animated, {
   WithSpringConfig,
 } from "react-native-reanimated";
 import Svg, { Path } from "react-native-svg";
-
-import { boxShadows } from "@/app/styles";
-import { supportsHover } from "@/react-multiversal/supports";
-import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
-import { useFocus } from "@/react-multiversal/useFocus";
 
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
@@ -91,7 +90,7 @@ const useAnimatedIconStyle = (
   value: UserColorScheme,
   inactiveIconSize: number,
   iconSize: number,
-  iconSpringOptions: WithSpringConfig
+  iconSpringOptions: WithSpringConfig,
 ) =>
   useAnimatedStyle(() => {
     const isActive = value === iconValue;
@@ -103,7 +102,7 @@ const useAnimatedIconStyle = (
         {
           scale: withSpring(
             isActive ? 1 : inactiveIconSize / iconSize,
-            iconSpringOptions
+            iconSpringOptions,
           ),
         },
       ],
@@ -114,7 +113,7 @@ const useAnimatedColorProps = (
   iconValue: UserColorScheme,
   value: UserColorScheme,
   actualColor: SharedValue<number>,
-  activeTheme: ColorSchemeToggleTheme
+  activeTheme: ColorSchemeToggleTheme,
 ) =>
   useAnimatedProps(() => {
     const isActive = value === iconValue;
@@ -130,7 +129,7 @@ const useAnimatedColorProps = (
           : [
               activeTheme.light.inactiveIconColor,
               activeTheme.dark.inactiveIconColor,
-            ]
+            ],
       ),
     };
   }, [activeTheme, value, actualColor, iconValue]);
@@ -184,7 +183,7 @@ export default function ColorSchemeToggle({
   onBlur?: () => void;
   iconSpringOptions?: WithSpringConfig;
 }) {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
   const [hasAnyFocus] = useFocus(ref, {
     onPointerFocus,
     onPointerLeave,
@@ -194,7 +193,7 @@ export default function ColorSchemeToggle({
   const activeTheme = hasAnyFocus ? focusedTheme : theme;
   const value = supportsHover() ? (hasAnyFocus ? _value : actualValue) : _value;
 
-  const dynamicStyles = React.useMemo(
+  const dynamicStyles = useMemo(
     () =>
       StyleSheet.create({
         container: {
@@ -226,20 +225,20 @@ export default function ColorSchemeToggle({
           padding: (toggleSize - iconSize) / 2,
         },
       }),
-    [toggleSize, width, height, borderWidth, iconSize]
+    [toggleSize, width, height, borderWidth, iconSize],
   );
 
   const position = useSharedValue(
-    value === "light" ? 0 : value === "auto" ? 1 : 2
+    value === "light" ? 0 : value === "auto" ? 1 : 2,
   );
   const actualColor = useSharedValue(actualValue === "light" ? 0 : 1);
 
-  React.useEffect(() => {
+  useEffect(() => {
     position.set(withSpring(value === "light" ? 0 : value === "auto" ? 1 : 2));
     actualColor.set(withSpring(actualValue === "light" ? 0 : 1));
   }, [value, actualValue, actualColor, position]);
 
-  const handleToggle = React.useCallback(() => {
+  const handleToggle = useCallback(() => {
     const nextValue =
       // we loop from the opposite system color scheme to avoid unecessary click
       systemColorScheme === "light"
@@ -261,7 +260,7 @@ export default function ColorSchemeToggle({
       backgroundColor: interpolateColor(
         actualColor.get(),
         [0, 1],
-        [activeTheme.light.backgroundColor, activeTheme.dark.backgroundColor]
+        [activeTheme.light.backgroundColor, activeTheme.dark.backgroundColor],
       ),
       borderColor: interpolateColor(
         actualColor.get(),
@@ -269,10 +268,10 @@ export default function ColorSchemeToggle({
         [
           activeTheme.light.backgroundBorderColor,
           activeTheme.dark.backgroundBorderColor,
-        ]
+        ],
       ),
     }),
-    [activeTheme, actualColor]
+    [activeTheme, actualColor],
   );
 
   const animatedCircleStyle = useAnimatedStyle(
@@ -281,7 +280,7 @@ export default function ColorSchemeToggle({
       backgroundColor: interpolateColor(
         actualColor.get(),
         [0, 1],
-        [activeTheme.light.toggleColor, activeTheme.dark.toggleColor]
+        [activeTheme.light.toggleColor, activeTheme.dark.toggleColor],
       ),
       borderColor: interpolateColor(
         actualColor.get(),
@@ -289,10 +288,10 @@ export default function ColorSchemeToggle({
         [
           activeTheme.light.toggleBorderColor,
           activeTheme.dark.toggleBorderColor,
-        ]
+        ],
       ),
     }),
-    [activeTheme, actualColor, position, toggleSize, width]
+    [activeTheme, actualColor, position, toggleSize, width],
   );
 
   const animatedIconStyleLight = useAnimatedIconStyle(
@@ -300,39 +299,39 @@ export default function ColorSchemeToggle({
     value,
     inactiveIconSize,
     iconSize,
-    iconSpringOptions
+    iconSpringOptions,
   );
   const animatedIconStyleDark = useAnimatedIconStyle(
     "dark",
     value,
     inactiveIconSize,
     iconSize,
-    iconSpringOptions
+    iconSpringOptions,
   );
   const animatedIconStyleAuto = useAnimatedIconStyle(
     "auto",
     value,
     inactiveIconSize,
     iconSize,
-    iconSpringOptions
+    iconSpringOptions,
   );
   const animatedColorPropsLight = useAnimatedColorProps(
     "light",
     value,
     actualColor,
-    activeTheme
+    activeTheme,
   );
   const animatedColorPropsDark = useAnimatedColorProps(
     "dark",
     value,
     actualColor,
-    activeTheme
+    activeTheme,
   );
   const animatedColorPropsAuto = useAnimatedColorProps(
     "auto",
     value,
     actualColor,
-    activeTheme
+    activeTheme,
   );
 
   return (
@@ -397,7 +396,7 @@ export default function ColorSchemeToggle({
 
 /*
 const App = () => {
-  const [theme, setTheme] = React.useState<'light' | 'auto' | 'dark'>('dark');
+  const [theme, setTheme] = useState<'light' | 'auto' | 'dark'>('dark');
   const colorScheme = useColorScheme();
   const actualValue =
     theme === 'auto' ? (colorScheme === 'dark' ? 'dark' : 'light') : theme;

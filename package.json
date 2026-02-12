@@ -2,21 +2,22 @@
   "name": "moox.fr",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
   "scripts": {
     "prepare": "patch-package && husky && npm run svg && npm run markdown",
-    "dev": "next dev --turbopack -p 1337",
-    "build": "npm run prepare && next build",
-    "start": "next start",
+    "dev": "vite dev",
+    "build": "npm run prepare && vite build",
+    "preview": "npx serve dist/client",
     "lint": "oxlint --type-aware && tsc --noEmit",
     "format": "prettier --write \"**/*.{js,json,ts,tsx,css,md}\" \"!package.json\"",
     "clean": "npm run svg:clean",
     "svg:clean": "rm -rf  src/svgs/components",
     "svg:web": "react-from-svg svgs src/svgs/components --with-native-for-typescript --allow-override-fill",
     "svg": "npm run svg:clean && npm run svg:web",
-    "markdown": "markdown-to-json \"content/**/*.md\"",
+    "markdown": "markdown-to-json \"content/**/*.md\" public && node scripts/generate-content-indexes.mjs",
     "test": "npm run lint && npm run build"
   },
   "overrides": {
@@ -39,15 +40,14 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@react-native-clipboard/clipboard": "^1.16.1",
-    "@tsconfig/next": "^2.0.3",
+    "@tanstack/react-router": "^1.121.0",
+    "@tanstack/react-start": "^1.121.0",
     "@types/react-native-web": "^0.19.0",
     "@types/tinycolor2": "^1.4.6",
-    "@vercel/analytics": "^1.5.0",
-    "@vercel/speed-insights": "^1.1.0",
+    "buffer": "^6.0.3",
     "date-fns": "^4.1.0",
-    "next": "15.3.0",
-    "react": "^19.1",
-    "react-dom": "^19.1",
+    "react": "^19.2",
+    "react-dom": "^19.2",
     "react-native-gesture-handler": "^2.21.2",
     "react-native-reanimated": "4.0.0-beta.2",
     "react-native-safe-area-context": "^4.14.0",
@@ -62,9 +62,10 @@
     "@moox/markdown-to-json": "^1.0.0",
     "@tsconfig/react-native": "^3.0.5",
     "@types/jest": "^29.5.14",
-    "@types/node": "^20",
-    "@types/react": "^19.1",
-    "@types/react-dom": "^19.1",
+    "@types/node": "^22",
+    "@types/react": "^19.2",
+    "@types/react-dom": "^19.2",
+    "@vitejs/plugin-react": "^4.6.0",
     "eslint": "^9.39.2",
     "husky": "^9.1.7",
     "oxlint": "^1.43.0",
@@ -73,6 +74,10 @@
     "prettier": "^3.3.3",
     "react-from-svg": "^8.0.2",
     "react-native": "^0.79",
-    "typescript": "^5.8"
+    "typescript": "^5.8",
+    "vite": "^7.3.1",
+    "vite-plugin-cjs-interop": "^2.4.1",
+    "vite-plugin-react-native-web": "^2.7.1",
+    "vite-tsconfig-paths": "^5.1.0"
   }
 }

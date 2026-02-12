@@ -1,11 +1,7 @@
-"use client";
-
-import "@/__DEV__";
-import * as React from "react";
+import { PortalProvider } from "@/react-multiversal/Portal";
+import { ReactNode } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
-import { PortalProvider } from "@/react-multiversal/Portal";
 
 // Required for SSR
 // https://github.com/th3rdwave/react-native-safe-area-context#web-ssr
@@ -27,7 +23,7 @@ const initialMetrics = {
 export default function ReactNativeProviders({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <GestureHandlerRootView>

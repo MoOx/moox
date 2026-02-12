@@ -1,18 +1,22 @@
-import * as React from "react";
-import { Text, View } from "react-native";
-
-import { BlogPost, getAll } from "@/api";
-import { useTheme } from "@/app/styles";
-import BlogPostList from "@/components/BlogPostList";
+import { fetchAll } from "@/api";
+import TalkList from "@/components/TalkList";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { createFileRoute } from "@tanstack/react-router";
+import { Text, View } from "react-native";
 
-export default function PageBlogList() {
+export const Route = createFileRoute("/talks/")({
+  loader: () => fetchAll({ data: "talks" }),
+  component: PageTalkList,
+});
+
+function PageTalkList() {
   const theme = useTheme();
-  const items = getAll<BlogPost>("blog");
+  const items = Route.useLoaderData();
 
   return (
     <WebsiteWrapper>
@@ -23,11 +27,11 @@ export default function PageBlogList() {
               {"Latest"}
             </Text>
             <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-              {"Posts"}
+              {"Talks"}
             </Text>
           </View>
           <Spacer />
-          <BlogPostList items={items} />
+          <TalkList items={items} />
         </SpacedView>
       </Container>
     </WebsiteWrapper>

@@ -1,9 +1,8 @@
-import { TextStyle } from "react-native";
-import tinycolor from "tinycolor2";
-
 import { platformColors } from "@/react-multiversal/colors";
 import { GradientStop } from "@/react-multiversal/GradientLinear";
 import { makeTheme, Theme, ThemeColors } from "@/react-multiversal/theme";
+import { TextStyle } from "react-native";
+import tinycolor from "tinycolor2";
 
 export function alpha(color: string, value: number): string {
   return tinycolor(color).setAlpha(value).toHex8String();
@@ -141,13 +140,13 @@ const {
 } = makeTheme(themedColors);
 
 export {
-  themeLight,
-  themeDark,
-  styles,
-  dynamicStyles,
   dynamicColors,
-  getWebStyleSheet,
+  dynamicStyles,
   getWebHtmlClass,
+  getWebStyleSheet,
+  styles,
+  themeDark,
+  themeLight,
   useTheme,
 };
 
@@ -189,19 +188,19 @@ const makeGradientTextStyles = (stops: GradientStop[], angle: number = 90) =>
 
 export const gradientTextIndigoStyles = (
   theme: Theme<ThemedColors>,
-  angle?: number
+  angle?: number,
 ) => makeGradientTextStyles(gradientIndigoStops(theme), angle);
 export const gradientTextIndigoStylesInv = (
   theme: Theme<ThemedColors>,
-  angle?: number
+  angle?: number,
 ) => makeGradientTextStyles(gradientIndigoStopsInv(theme), angle);
 export const gradientTextFlashyStyles = (
   theme: Theme<ThemedColors>,
-  angle?: number
+  angle?: number,
 ) => makeGradientTextStyles(gradientFlashyStops(theme), angle);
 export const gradientTextFlashyStylesInv = (
   theme: Theme<ThemedColors>,
-  angle?: number
+  angle?: number,
 ) => makeGradientTextStyles(gradientFlashyStopsInv(theme), angle);
 
 export const gradientText = (theme: Theme<ThemedColors>) => [
@@ -210,5 +209,5 @@ export const gradientText = (theme: Theme<ThemedColors>) => [
 ];
 export const gradientTextStyles = (
   theme: Theme<ThemedColors>,
-  angle: number = 180
+  angle: number = 180,
 ) => makeGradientTextStyles(gradientText(theme), angle);

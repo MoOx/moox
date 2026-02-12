@@ -1,16 +1,10 @@
-import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
-
-import {
-  gradientStaticIndigoStyles,
-  themeDark,
-  themeLight,
-} from "@/app/styles";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import SpacedView from "@/react-multiversal/SpacedView";
+import { gradientStaticIndigoStyles, themeDark, themeLight } from "@/styles";
 import SVGMoox from "@/svgs/components/SVGMoox";
+import { StyleSheet, Text, View } from "react-native";
 
 const currentYear = new Date().getFullYear();
 

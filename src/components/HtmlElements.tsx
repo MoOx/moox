@@ -1,12 +1,11 @@
-import * as React from "react";
-import { Platform, StyleSheet, Text, TextProps, View } from "react-native";
-import { match } from "ts-pattern";
-
-import { useTheme } from "@/app/styles";
 import { Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkText from "@/react-multiversal/LinkText";
 import SpacedView from "@/react-multiversal/SpacedView";
+import { useTheme } from "@/styles";
+import { ReactNode } from "react";
+import { Platform, StyleSheet, Text, TextProps, View } from "react-native";
+import { match } from "ts-pattern";
 
 const styles = StyleSheet.create({
   blockQuote: {
@@ -55,7 +54,7 @@ export const A = ({
 }: {
   href?: string;
   style?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) => {
   const theme = useTheme();
   return (
@@ -73,7 +72,7 @@ type HeadingProps = {
   id?: string;
   style?: any;
   textStyle?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
   level?: number;
 };
 export const Heading = ({
@@ -121,7 +120,7 @@ export const P = ({
 }: {
   style?: any;
   textStyle?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) => (
   <SpacedView vertical="s" style={style}>
     <TextNode role="paragraph" style={textStyle}>
@@ -157,7 +156,7 @@ export const Ul = ({
   children,
 }: {
   style?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) => (
   <SpacedView role="list" vertical="l" style={style}>
     {children}
@@ -171,7 +170,7 @@ export const Li = ({
 }: {
   style?: any;
   bullet?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) => (
   <View role="listitem" style={styles.liWrapper}>
     <SpacedView horizontal="s">
@@ -188,7 +187,7 @@ export const BlockQuote = ({
 }: {
   style?: any;
   textStyle?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) => (
   <SpacedView
     role="blockquote"
@@ -204,7 +203,7 @@ export const Pre = ({
   children,
 }: {
   style?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) => (
   <SpacedView vertical="m" style={style}>
     <pre>{children}</pre>
@@ -216,7 +215,7 @@ export const CodeBlock = ({
   children,
 }: {
   style?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) => {
   const theme = useTheme();
   return (
@@ -233,7 +232,7 @@ export const Code = ({
   children,
 }: {
   style?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) => {
   const theme = useTheme();
   return (
@@ -256,7 +255,7 @@ export const TextNode = ({
   style,
   role,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   style?: any;
   role?: TextProps["role"];
 }) => {

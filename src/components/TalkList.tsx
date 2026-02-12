@@ -1,14 +1,11 @@
-"use client";
-
-import * as React from "react";
-import { Text, View } from "react-native";
-
 import { Talk } from "@/api";
-import { useTheme } from "@/app/styles";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { useRef } from "react";
+import { Text, View } from "react-native";
 
 function TalkPreview({ item }: { item: Talk }) {
   const theme = useTheme();
@@ -34,7 +31,7 @@ function TalkPreview({ item }: { item: Talk }) {
 
 export default function TalkList({ items }: { items: Talk[] }) {
   const theme = useTheme();
-  const latestYear = React.useRef(String(new Date().getFullYear() + 1));
+  const latestYear = useRef(String(new Date().getFullYear() + 1));
 
   return (
     <>

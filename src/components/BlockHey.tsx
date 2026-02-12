@@ -1,12 +1,3 @@
-import * as React from "react";
-import { Text, View } from "react-native";
-
-import {
-  gradientTextFlashyStyles,
-  gradientTextFlashyStylesInv,
-  gradientTextStyles,
-  useTheme,
-} from "@/app/styles";
 import BlockMe1WithSmallPills from "@/components/BlockMe1WithSmallPills";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
@@ -15,6 +6,13 @@ import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import TextForReader from "@/react-multiversal/TextForReader";
+import {
+  gradientTextFlashyStyles,
+  gradientTextFlashyStylesInv,
+  gradientTextStyles,
+  useTheme,
+} from "@/styles";
+import { Text, View } from "react-native";
 
 export default function BlockHey() {
   const theme = useTheme();
@@ -49,32 +47,34 @@ export default function BlockHey() {
                 {"A Web & Mobile"}
               </Text>
               <IfWindowWidthIs largerThan={WindowWidth.m}>
-                <React.unstable_ViewTransition name="text--front-end-developer">
-                  <Text
-                    style={[
-                      fontStyles.iosEm.largeTitle,
-                      theme.styles.text,
-                      gradientTextFlashyStyles(theme, 176),
-                      { fontWeight: weight.black },
-                    ]}
-                  >
-                    {"Front-End Developer."}
-                  </Text>
-                </React.unstable_ViewTransition>
+                <Text
+                  style={[
+                    fontStyles.iosEm.largeTitle,
+                    theme.styles.text,
+                    gradientTextFlashyStyles(theme, 176),
+                    {
+                      fontWeight: weight.black,
+                      viewTransitionName: "text--front-end-developer",
+                    },
+                  ]}
+                >
+                  {"Front-End Developer."}
+                </Text>
               </IfWindowWidthIs>
               <IfWindowWidthIs smallerThan={WindowWidth.m}>
-                <React.unstable_ViewTransition name="text--front-end-developer-m">
-                  <Text
-                    style={[
-                      fontStyles.iosEm.largeTitle,
-                      theme.styles.text,
-                      gradientTextFlashyStyles(theme, 0),
-                      { fontWeight: weight.black },
-                    ]}
-                  >
-                    {"Front-End Developer."}
-                  </Text>
-                </React.unstable_ViewTransition>
+                <Text
+                  style={[
+                    fontStyles.iosEm.largeTitle,
+                    theme.styles.text,
+                    gradientTextFlashyStyles(theme, 0),
+                    {
+                      fontWeight: weight.black,
+                      viewTransitionName: "text--front-end-developer-m",
+                    },
+                  ]}
+                >
+                  {"Front-End Developer."}
+                </Text>
               </IfWindowWidthIs>
               <Text
                 style={[
@@ -99,11 +99,14 @@ export default function BlockHey() {
               </Text>
               <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
                 {"I'm "}
-                <React.unstable_ViewTransition name="text--max">
-                  <Text style={gradientTextFlashyStyles(theme, -16)}>
-                    {"Max."}
-                  </Text>
-                </React.unstable_ViewTransition>
+                <Text
+                  style={[
+                    gradientTextFlashyStyles(theme, -16),
+                    { viewTransitionName: "text--max" },
+                  ]}
+                >
+                  {"Max."}
+                </Text>
               </Text>
             </Text>
           </View>

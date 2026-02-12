@@ -1,8 +1,3 @@
-"use client";
-
-import * as React from "react";
-import { StyleSheet, Text } from "react-native";
-
 import {
   A,
   BlockQuote,
@@ -24,6 +19,12 @@ import {
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import Container from "@/react-multiversal/Container";
 import SpacedView from "@/react-multiversal/SpacedView";
+import { createFileRoute } from "@tanstack/react-router";
+import { StyleSheet, Text } from "react-native";
+
+export const Route = createFileRoute("/design-system")({
+  component: DesignSystem,
+});
 
 const styles = StyleSheet.create({
   section: {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function DesignSystem() {
+function DesignSystem() {
   return (
     <WebsiteWrapper>
       <Container>

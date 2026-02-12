@@ -1,6 +1,3 @@
-import * as React from "react";
-import { StyleSheet, View } from "react-native";
-
 import Me from "@/components/Me";
 import Pill from "@/components/Pill";
 import { WindowWidth } from "@/react-multiversal";
@@ -8,6 +5,7 @@ import { fontStyles } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import Parallax from "@/react-multiversal/Parallax";
 import { pTransforms } from "@/utils.styles";
+import { StyleSheet, View } from "react-native";
 
 export default function BlockMe2WithPills() {
   return (

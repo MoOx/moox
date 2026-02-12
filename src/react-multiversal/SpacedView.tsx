@@ -1,12 +1,10 @@
-import * as React from "react";
-import { View, ViewProps } from "react-native";
-
 import {
   Size,
   spaceStyleGap,
   spaceStyleHorizontal,
   spaceStyleVertical,
 } from "@/react-multiversal";
+import { View, ViewProps } from "react-native";
 
 export default function SpacedView({
   vertical,

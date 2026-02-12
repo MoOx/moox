@@ -1,28 +1,31 @@
-import * as React from "react";
+import {
+  createContext,
+  Fragment,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface PortalContextType {
-  portals: { key: string; element: React.ReactNode }[];
-  addPortal: (key: string, element: React.ReactNode) => void;
+  portals: { key: string; element: ReactNode }[];
+  addPortal: (key: string, element: ReactNode) => void;
   removePortal: (key: string) => void;
 }
 
-const PortalContext = React.createContext<PortalContextType | undefined>(
-  undefined,
-);
+const PortalContext = createContext<PortalContextType | undefined>(undefined);
 
-export const PortalProvider = ({ children }: { children: React.ReactNode }) => {
-  const [portals, setPortals] = React.useState<
-    { key: string; element: React.ReactNode }[]
-  >([]);
-
-  const addPortal = React.useCallback(
-    (key: string, element: React.ReactNode) => {
-      setPortals((prevPortals) => [...prevPortals, { key, element }]);
-    },
+export const PortalProvider = ({ children }: { children: ReactNode }) => {
+  const [portals, setPortals] = useState<{ key: string; element: ReactNode }[]>(
     [],
   );
 
-  const removePortal = React.useCallback((key: string) => {
+  const addPortal = useCallback((key: string, element: ReactNode) => {
+    setPortals((prevPortals) => [...prevPortals, { key, element }]);
+  }, []);
+
+  const removePortal = useCallback((key: string) => {
     setPortals((prevPortals) =>
       prevPortals.filter((portal) => portal.key !== key),
     );
@@ -32,14 +35,14 @@ export const PortalProvider = ({ children }: { children: React.ReactNode }) => {
     <PortalContext.Provider value={{ portals, addPortal, removePortal }}>
       {children}
       {portals.map(({ key, element }) => (
-        <React.Fragment key={key}>{element}</React.Fragment>
+        <Fragment key={key}>{element}</Fragment>
       ))}
     </PortalContext.Provider>
   );
 };
 
 export const usePortal = (): PortalContextType => {
-  const context = React.useContext(PortalContext);
+  const context = useContext(PortalContext);
   if (context === undefined) {
     throw new Error("usePortal must be used within a PortalProvider");
   }
@@ -51,11 +54,11 @@ export const Portal = ({
   children,
 }: {
   id: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   const { addPortal, removePortal } = usePortal();
 
-  React.useEffect(() => {
+  useEffect(() => {
     addPortal(id, children);
     return () => removePortal(id);
   }, [id, children, addPortal, removePortal]);

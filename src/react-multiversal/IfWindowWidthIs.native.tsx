@@ -1,4 +1,5 @@
-import * as React from "react";
+import { size, Size } from "@/react-multiversal";
+import { ReactNode } from "react";
 import {
   StyleProp,
   StyleSheet,
@@ -6,8 +7,6 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-
-import { size, Size } from "@/react-multiversal";
 
 const styles = StyleSheet.create({
   ifWrapper: { display: "contents" },
@@ -22,13 +21,13 @@ export default function IfWindowWidthIs({
   style?: StyleProp<ViewStyle>;
   smallerThan?: Size;
   largerThan?: Size;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const { width: windowWidth } = useWindowDimensions();
 
   if (smallerThan && largerThan && smallerThan >= largerThan) {
     throw new Error(
-      `[IfWindowWidthIs] Invalid props: "smallerThan" (${smallerThan}) must be smaller than "largerThan" (${largerThan}).`
+      `[IfWindowWidthIs] Invalid props: "smallerThan" (${smallerThan}) must be smaller than "largerThan" (${largerThan}).`,
     );
   }
   const isVisible =

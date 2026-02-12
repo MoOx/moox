@@ -1,13 +1,11 @@
-import * as React from "react";
-import { Platform, StyleSheet, useColorScheme } from "react-native";
-import { match, P } from "ts-pattern";
-
 import {
   getColorScheme,
   getUserColorSchemeWebHtmlClass,
   UserColorScheme,
 } from "@/react-multiversal/theme/colorScheme";
 import { useUserColorScheme } from "@/react-multiversal/theme/useUserColorScheme";
+import { Platform, StyleSheet, useColorScheme } from "react-native";
+import { match, P } from "ts-pattern";
 
 export type t = "light" | "dark";
 
@@ -37,7 +35,7 @@ export type Theme<ThemeColorMap extends ThemeMinimalColorMap> = {
 };
 
 const generateStyles = <ThemeColorMap extends ThemeMinimalColorMap>(
-  colors: ThemeColorMap
+  colors: ThemeColorMap,
 ) =>
   Object.fromEntries(
     Object.entries(colors).map(([key, value]) => [
@@ -45,14 +43,14 @@ const generateStyles = <ThemeColorMap extends ThemeMinimalColorMap>(
       match(key)
         .with(
           P.when((k: string) => k.startsWith("back")),
-          () => ({ backgroundColor: value })
+          () => ({ backgroundColor: value }),
         )
         .otherwise(() => ({ color: value })),
-    ])
+    ]),
   ) as ThemeStyleSheet<ThemeColorMap>;
 
 export function makeTheme<ThemeColorMap extends ThemeMinimalColorMap>(
-  themedColors: ThemeColors<ThemeColorMap>
+  themedColors: ThemeColors<ThemeColorMap>,
 ) {
   const styles: ThemedStyleSheet<ThemeColorMap> = {
     light: generateStyles(themedColors.light),
@@ -87,7 +85,7 @@ export function makeTheme<ThemeColorMap extends ThemeMinimalColorMap>(
       Object.entries(themedColors.light).map(([key]) => [
         key,
         `var(${prefix}-${key})`,
-      ])
+      ]),
     ) as ThemeColorMap;
   }
   const dynamicStyles: ThemeStyleSheet<ThemeColorMap> =
@@ -119,19 +117,17 @@ export function makeTheme<ThemeColorMap extends ThemeMinimalColorMap>(
   function useTheme(_currentMode?: UserColorScheme): Theme<ThemeColorMap> {
     const [userColorScheme] = !isClient
       ? [getColorScheme()]
-      : // eslint-disable-next-line react-hooks/rules-of-hooks
-        useUserColorScheme();
+      : useUserColorScheme();
 
     const currentMode = _currentMode ?? userColorScheme ?? "auto";
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const colorScheme = !isClient ? undefined : useColorScheme();
 
     const mode = match<UserColorScheme, t>(currentMode)
       .with("auto", () =>
         match(colorScheme)
           .with("dark", (): t => "dark")
-          .otherwise((): t => "light")
+          .otherwise((): t => "light"),
       )
       .with("light", () => "light")
       .with("dark", () => "dark")

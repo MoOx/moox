@@ -1,16 +1,4 @@
-import { Metadata } from "next";
-import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
-
-import { getAll, ResumeItem } from "@/api";
-import {
-  gradientFlashyStops,
-  gradientTextFlashyStyles,
-  gradientTextFlashyStylesInv,
-  gradientTextIndigoStyles,
-  gradientTextIndigoStylesInv,
-  useTheme,
-} from "@/app/styles";
+import { fetchAll } from "@/api";
 import BlockMe2WithPills from "@/components/BlockMe2WithPills";
 import ButtonView from "@/components/ButtonView";
 import ResumeIntro from "@/components/ResumeIntro";
@@ -28,43 +16,60 @@ import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import TextForReader from "@/react-multiversal/TextForReader";
+import {
+  gradientFlashyStops,
+  gradientTextFlashyStyles,
+  gradientTextFlashyStylesInv,
+  gradientTextIndigoStyles,
+  gradientTextIndigoStylesInv,
+  useTheme,
+} from "@/styles";
 import SVGDownload from "@/svgs/components/SVGDownload";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
+import { createFileRoute } from "@tanstack/react-router";
+import { StyleSheet, Text, View } from "react-native";
 
-export const metadata: Metadata = {
-  title:
-    "Maxime Thirouin Résumé - Senior Front-End Developer, React & React Native Expert.",
-  description:
-    "Max is a Senior Front-End Developer, available as a Freelance Developer since 2013. He masters React & React Native and has a passion for building great products with a focus on user experience.",
-  pagination: {
-    next: "https://moox.io/resume",
-  },
-};
+export const Route = createFileRoute("/resume")({
+  loader: () => fetchAll({ data: "resume" }),
+  head: () => ({
+    meta: [
+      {
+        title:
+          "Maxime Thirouin Résumé - Senior Front-End Developer, React & React Native Expert.",
+      },
+      {
+        name: "description",
+        content:
+          "Max is a Senior Front-End Developer, available as a Freelance Developer since 2013. He masters React & React Native and has a passion for building great products with a focus on user experience.",
+      },
+    ],
+  }),
+  component: PageResume,
+});
 
-export default function PageResume() {
+function PageResume() {
   const theme = useTheme();
-  const items = getAll<ResumeItem>("resume");
+  const items = Route.useLoaderData();
 
-  const headline = (transitionName: string) => (
+  const headline = (viewTransitionName: string) => (
     <>
-      <React.unstable_ViewTransition name={transitionName}>
-        <Text
-          style={[
-            theme.styles.text,
-            gradientTextIndigoStyles(theme),
-            {
-              fontSize: 48,
-              lineHeight: 48,
-              fontWeight: "900",
-            },
-          ]}
-          role="heading"
-          aria-level={1}
-        >
-          {"Front-End Developer."}
-        </Text>
-      </React.unstable_ViewTransition>
+      <Text
+        style={[
+          theme.styles.text,
+          gradientTextIndigoStyles(theme),
+          {
+            fontSize: 48,
+            lineHeight: 48,
+            fontWeight: "900",
+            viewTransitionName,
+          },
+        ]}
+        role="heading"
+        aria-level={1}
+      >
+        {"Front-End Developer."}
+      </Text>
       <Text
         style={[fontStyles.ios.headline, theme.styles.textMainDark]}
         role="heading"
@@ -119,23 +124,22 @@ export default function PageResume() {
             {headline("text--front-end-developer-m")}
             <Spacer size="xl" />
           </IfWindowWidthIs>
-          <React.unstable_ViewTransition name="text--max">
-            <Text
-              role="paragraph"
-              style={[
-                theme.styles.text,
-                gradientTextFlashyStylesInv(theme),
-                {
-                  fontSize: 64,
-                  lineHeight: 64,
-                  fontWeight: "900",
-                },
-              ]}
-            >
-              <TextForReader>{"Nickname :"}</TextForReader>
-              {"Max."}
-            </Text>
-          </React.unstable_ViewTransition>
+          <Text
+            role="paragraph"
+            style={[
+              theme.styles.text,
+              gradientTextFlashyStylesInv(theme),
+              {
+                fontSize: 64,
+                lineHeight: 64,
+                fontWeight: "900",
+                viewTransitionName: "text--max",
+              },
+            ]}
+          >
+            <TextForReader>{"Nickname :"}</TextForReader>
+            {"Max."}
+          </Text>
           <Text
             role="paragraph"
             style={{ display: "flex", flexDirection: "column" }}
@@ -201,16 +205,21 @@ export default function PageResume() {
               </Text>
             </LinkView>
             <Spacer size="l" />
-            <LinkView
+            <a
               href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
-              containerStyle={{ alignItems: "flex-start" }}
+              download
+              style={{
+                alignItems: "flex-start",
+                display: "flex",
+                textDecoration: "none",
+                color: "inherit",
+              }}
             >
               <ButtonView
                 mode="outline"
                 effect="subtle"
                 spaceGap="xs"
                 textColor={theme.dynamicColors.textFlashy1}
-                // colorAlt={theme.dynamicColors.textMain}
               >
                 {({ color }) => (
                   <>
@@ -229,7 +238,7 @@ export default function PageResume() {
                   </>
                 )}
               </ButtonView>
-            </LinkView>
+            </a>
           </View>
           <Spacer size="xl" />
           <View style={{ height: 3, width: "95%" }}>

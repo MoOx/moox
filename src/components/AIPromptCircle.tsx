@@ -1,6 +1,4 @@
-"use client";
-
-import * as React from "react";
+import { useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Animated, {
   cancelAnimation,
@@ -104,7 +102,7 @@ const MorphingCircle = ({
 
     if (lastPoint && firstPoint) {
       pathData.push(
-        `M ${(lastPoint.x + firstPoint.x) / 2} ${(lastPoint.y + firstPoint.y) / 2}`
+        `M ${(lastPoint.x + firstPoint.x) / 2} ${(lastPoint.y + firstPoint.y) / 2}`,
       );
 
       // Draw quadratic curves between each point
@@ -115,7 +113,7 @@ const MorphingCircle = ({
 
         if (currentPoint && nextPoint) {
           pathData.push(
-            `Q ${currentPoint.x} ${currentPoint.y} ${(currentPoint.x + nextPoint.x) / 2} ${(currentPoint.y + nextPoint.y) / 2}`
+            `Q ${currentPoint.x} ${currentPoint.y} ${(currentPoint.x + nextPoint.x) / 2} ${(currentPoint.y + nextPoint.y) / 2}`,
           );
         }
       }
@@ -276,7 +274,7 @@ const useCircleAnimations = (numCircles: number) => {
 
   const deformations = [deform1, deform2, deform3, deform4, deform5].slice(
     0,
-    numCircles
+    numCircles,
   );
 
   // Inner Deformations - Circle 1
@@ -400,15 +398,15 @@ const AIPromptCircle = ({
   circles = [defaultCircleConfig],
 }: AIPromptCircleProps) => {
   // used to avoid animatedProps unrecognized error on server
-  const [isMounted, setIsMounted] = React.useState(false);
-  React.useEffect(() => {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
     setIsMounted(true);
   }, []);
 
   const centerX = size / 2;
   const centerY = size / 2;
-  const containerRef = React.useRef<View>(null);
-  const [isVisible, setIsVisible] = React.useState(false);
+  const containerRef = useRef<View>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Base animation
   const progress = useSharedValue(0);
@@ -418,7 +416,7 @@ const AIPromptCircle = ({
     useCircleAnimations(circles.length);
 
   // Observe intersection
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof window === "undefined") return;
 
     const observer = new IntersectionObserver(
@@ -431,7 +429,7 @@ const AIPromptCircle = ({
         root: null,
         rootMargin: "0px",
         threshold: 0.1, // 10% visibility is enough to start
-      }
+      },
     );
 
     const element = containerRef.current;
@@ -449,7 +447,7 @@ const AIPromptCircle = ({
   }, []);
 
   // Animate values
-  React.useEffect(() => {
+  useEffect(() => {
     const defaultDuration = defaultCircleConfig.duration ?? 3000;
 
     if (!isVisible) {
@@ -524,7 +522,7 @@ const AIPromptCircle = ({
           easing: Easing.linear,
         }),
         -1,
-        false
+        false,
       );
 
       // Animate each circle
@@ -555,7 +553,7 @@ const AIPromptCircle = ({
             easing: Easing.linear,
           }),
           -1,
-          false
+          false,
         );
 
         // Inner circle rotation
@@ -568,7 +566,7 @@ const AIPromptCircle = ({
             easing: Easing.linear,
           }),
           -1,
-          false
+          false,
         );
 
         // Outer circle deformations
@@ -580,7 +578,7 @@ const AIPromptCircle = ({
               easing: Easing.inOut(Easing.sin),
             }),
             -1,
-            true
+            true,
           );
         });
 
@@ -593,7 +591,7 @@ const AIPromptCircle = ({
               easing: Easing.inOut(Easing.sin),
             }),
             -1,
-            true
+            true,
           );
         });
       });
@@ -675,7 +673,7 @@ const AIPromptCircle = ({
 
                 // Adjust inner radius with more conservative margin
                 const deformationDiff = Math.abs(
-                  outerMaxDeformation - innerMaxDeformation
+                  outerMaxDeformation - innerMaxDeformation,
                 );
                 const safeInnerRadius = rawInnerRadius - deformationDiff * 0.75; // More conservative
 

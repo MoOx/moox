@@ -1,6 +1,3 @@
-import { Text, View } from "react-native";
-
-import { useTheme } from "@/app/styles";
 import {
   companyIconCoef,
   companyIconStyle,
@@ -10,10 +7,12 @@ import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 import TextForReader from "@/react-multiversal/TextForReader";
+import { useTheme } from "@/styles";
 import SVGCompanyAirbus from "@/svgs/components/SVGCompanyAirbus";
 import SVGCompanyFklg from "@/svgs/components/SVGCompanyFklg";
 import SVGCompanyHove from "@/svgs/components/SVGCompanyHove";
 import SVGCompanyMolotovTv from "@/svgs/components/SVGCompanyMolotovTv";
+import { Text, View } from "react-native";
 
 export default function BlockCompaniesTrust() {
   const theme = useTheme();

@@ -1,12 +1,8 @@
-"use client";
-
-import * as React from "react";
-import { View } from "react-native";
-
-import { themedColors, useTheme } from "@/app/styles";
 import { platformColors } from "@/react-multiversal/colors";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { themedColors, useTheme } from "@/styles";
+import { View } from "react-native";
 
 export default function ThemePreview({
   mode,

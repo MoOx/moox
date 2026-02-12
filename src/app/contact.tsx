@@ -1,10 +1,3 @@
-"use client";
-import "@/__DEV__";
-
-import * as React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-
-import { useTheme } from "@/app/styles";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import ChatBot from "@/components/ChatBot";
 import ContactCard from "@/components/ContactCard";
@@ -17,6 +10,7 @@ import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
 import SVGContact from "@/svgs/components/SVGContact";
 import SVGEmail from "@/svgs/components/SVGEmail";
 import SVGJavaScriptOutline from "@/svgs/components/SVGJavaScriptOutline";
@@ -27,6 +21,21 @@ import SVGSocialDribbble from "@/svgs/components/SVGSocialDribbble";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 import SVGSocialX from "@/svgs/components/SVGSocialX";
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+
+export const Route = createFileRoute("/contact")({
+  head: () => ({
+    meta: [
+      {
+        title:
+          "Contact Maxime Thirouin, Senior Front-End Developer, React & React Native Expert.",
+      },
+    ],
+  }),
+  component: PageContact,
+});
 
 const ind = "33";
 const sendStringAsMailString = (str: string) => str.replace("/", "@");
@@ -50,11 +59,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function PageContact() {
+function PageContact() {
   const theme = useTheme();
-  const [isClient, setIsClient] = React.useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsClient(true);
   }, []);
 

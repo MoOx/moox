@@ -1,13 +1,11 @@
-import * as React from "react";
-import { Text } from "react-native";
-
-import { alpha, colors, useTheme } from "@/app/styles";
 import LinkButton from "@/components/LinkButton";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
+import { alpha, colors, useTheme } from "@/styles";
 import SVGMenuContactFill from "@/svgs/components/SVGMenuContactFill";
 import SVGMenuResumeFill from "@/svgs/components/SVGMenuResumeFill";
+import { Text } from "react-native";
 
 export default function BlockInterestedButtons() {
   const theme = useTheme("dark");

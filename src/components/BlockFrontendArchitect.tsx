@@ -1,12 +1,11 @@
-import { Text, View } from "react-native";
-
-import { useTheme } from "@/app/styles";
 import LinkButton from "@/components/LinkButton";
 import SkillsCards from "@/components/SkillsCards";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
+import { useTheme } from "@/styles";
+import { Text, View } from "react-native";
 
 export default function BlockFrontendArchitect() {
   const theme = useTheme();

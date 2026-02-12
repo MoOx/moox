@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useId } from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg";
 
@@ -19,7 +19,7 @@ export default function GradientBorderCircle({
   style?: StyleProp<ViewStyle>;
   stops: StopData[];
 }) {
-  const id = React.useId();
+  const id = useId();
 
   return (
     <Svg

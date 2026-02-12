@@ -1,8 +1,5 @@
-"use client";
-
-import * as React from "react";
-
 import { supportsPointerEvent } from "@/react-multiversal/supports";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 
 const POINTERENTER = supportsPointerEvent() ? "pointerenter" : "mouseenter";
 const POINTERLEAVE = supportsPointerEvent() ? "pointerleave" : "mouseleave";
@@ -11,7 +8,7 @@ const FOCUS = "focus";
 const BLUR = "blur";
 
 export function useFocus<T>(
-  ref?: React.RefObject<T | null>,
+  ref?: RefObject<T | null>,
   {
     onPointerFocus,
     onPointerLeave,
@@ -24,37 +21,37 @@ export function useFocus<T>(
     onFocus?: () => void;
     onBlur?: () => void;
     debounceOff?: number;
-  } = {}
+  } = {},
 ) {
-  const [pointerFocused, setPointerFocused] = React.useState(false);
-  const debouncePointerFocused = React.useRef<number | null>(null);
-  const handlePointerFocusedOn = React.useCallback(() => {
+  const [pointerFocused, setPointerFocused] = useState(false);
+  const debouncePointerFocused = useRef<number | null>(null);
+  const handlePointerFocusedOn = useCallback(() => {
     if (debouncePointerFocused.current)
       clearTimeout(debouncePointerFocused.current);
     onPointerFocus?.();
     setPointerFocused(true);
   }, [onPointerFocus]);
-  const handlePointerFocusedOff = React.useCallback(() => {
+  const handlePointerFocusedOff = useCallback(() => {
     onPointerLeave?.();
     debouncePointerFocused.current = setTimeout(
       () => setPointerFocused(false),
-      debounceOff
+      debounceOff,
     );
   }, [debounceOff, onPointerLeave]);
 
-  const [focused, setFocused] = React.useState(false);
-  const debounceFocus = React.useRef<number | null>(null);
-  const handleFocusOn = React.useCallback(() => {
+  const [focused, setFocused] = useState(false);
+  const debounceFocus = useRef<number | null>(null);
+  const handleFocusOn = useCallback(() => {
     if (debounceFocus.current) clearTimeout(debounceFocus.current);
     onFocus?.();
     setFocused(true);
   }, [onFocus]);
-  const handleFocusOff = React.useCallback(() => {
+  const handleFocusOff = useCallback(() => {
     onBlur?.();
     debounceFocus.current = setTimeout(() => setFocused(false), debounceOff);
   }, [debounceOff, onBlur]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (debouncePointerFocused.current) {
       clearTimeout(debouncePointerFocused.current);
     }
@@ -63,7 +60,7 @@ export function useFocus<T>(
     }
   }, [debounceOff]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const n = ref?.current as HTMLElement;
     if (n?.nodeType === Node.ELEMENT_NODE) {
       const opts = { passive: true, capture: false };

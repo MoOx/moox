@@ -1,4 +1,5 @@
 import BlurView from "@/react-multiversal/BlurView";
+import { ReactNode } from "react";
 
 export type BoxShadowGlassProps = {
   borderWidth?: number;
@@ -32,7 +33,7 @@ export default function GlassView({
   ...boxShadowProps
 }: BoxShadowGlassProps & {
   style?: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
   blurAmount?: number;
 }) {
   return (

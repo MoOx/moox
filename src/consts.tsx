@@ -1,5 +1,3 @@
-import { StyleProp, ViewStyle } from "react-native";
-
 import SVGAppStoreNpm from "@/svgs/components/SVGAppStoreNpm";
 import SVGLine3Horizontal from "@/svgs/components/SVGLine3Horizontal";
 import SVGMenuBlog from "@/svgs/components/SVGMenuBlog";
@@ -16,6 +14,8 @@ import SVGSocialDribbble from "@/svgs/components/SVGSocialDribbble";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 import SVGSocialX from "@/svgs/components/SVGSocialX";
+import { ReactNode } from "react";
+import { StyleProp, ViewStyle } from "react-native";
 
 export const footerAnchor = "links";
 
@@ -100,7 +100,7 @@ export const socials = {
 type LinkWithIcon = {
   href: string;
   alt?: string;
-  icon: (props: LinksIconProps) => React.ReactNode;
+  icon: (props: LinksIconProps) => ReactNode;
   isActive?: (currentLink: string | null, link: string) => boolean;
 };
 type LinksWithIcon = {
@@ -130,7 +130,7 @@ export const internalLinks: LinksWithIcon = {
       currentLink === link,
   },
   Resume: {
-    href: "/resume",
+    href: "/resume/",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
         <SVGMenuResumeFill
@@ -178,13 +178,13 @@ export const internalLinks: LinksWithIcon = {
 
 export const internalLinks2: LinksWithIcon = {
   Blog: {
-    href: "/blog",
+    href: "/blog/",
     icon: ({ style, size, color }: LinksIconProps) => (
       <SVGMenuBlog style={style} width={size} height={size} fill={color} />
     ),
   },
   Talks: {
-    href: "/talks",
+    href: "/talks/",
     icon: ({ style, size, color }: LinksIconProps) => (
       <SVGMenuTalk style={style} fill={color} width={size} height={size} />
     ),

@@ -1,6 +1,4 @@
-"use client";
-
-import * as React from "react";
+import { useEffect, useRef } from "react";
 import { useSharedValue, withSpring } from "react-native-reanimated";
 import { SpringConfig } from "react-native-reanimated/lib/typescript/animation/springUtils";
 
@@ -18,13 +16,13 @@ const getWindowOffset = isClient ? () => window.scrollY : () => 0;
 
 export const useScrollWindowOffset = (
   sprintOptions?: SpringConfig,
-  getOffset = getWindowOffset
+  getOffset = getWindowOffset,
 ) => {
-  const requested = React.useRef(false);
+  const requested = useRef(false);
 
   const scrollOffset = useSharedValue(getOffset());
 
-  React.useEffect(() => {
+  useEffect(() => {
     const listener = () => {
       if (!requested.current) {
         requested.current = true;
