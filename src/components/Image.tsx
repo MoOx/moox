@@ -5,5 +5,12 @@ export default function Image({
   priority,
   ...props
 }: ImgHTMLAttributes<HTMLImageElement> & { priority?: boolean }) {
-  return <img alt={alt} {...props} loading={priority ? "eager" : "lazy"} />;
+  return (
+    <img
+      alt={alt}
+      {...props}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+    />
+  );
 }
