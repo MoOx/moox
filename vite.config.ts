@@ -38,6 +38,9 @@ export default defineConfig({
   server: {
     port: 1337,
   },
+  preview: {
+    host: "127.0.0.1",
+  },
   plugins: [
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart({
@@ -49,6 +52,8 @@ export default defineConfig({
         autoSubfolderIndex: true,
         crawlLinks: true,
         failOnError: true,
+        filter: (page) =>
+          !page.path.match(/\.(pdf|zip|vcf|xml|ico|txt|json)$/),
       },
     }),
     reactNativeWeb(),
