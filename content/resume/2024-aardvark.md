@@ -5,7 +5,7 @@ title: "AI Chatbot"
 description: >
   Generative AI solution for automating legal and financial data
 dateStart: 2024-04-03
-#dateEnd: 2024-01-31
+dateEnd: 2026-01-31
 hashtags:
   - TypeScript
   - UI Design
