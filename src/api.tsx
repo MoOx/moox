@@ -54,18 +54,8 @@ async function readJson<T>(urlPath: string): Promise<T> {
     // SSR/prerender: read from filesystem
     const fs = await import("node:fs");
     const path = await import("node:path");
-    // During prerender, built files are in dist/client/
-    // During dev, files are in public/
-    const candidates = [
-      path.join(process.cwd(), "dist", "client", urlPath),
-      path.join(process.cwd(), "public", urlPath),
-    ];
-    for (const filePath of candidates) {
-      if (fs.existsSync(filePath)) {
-        return JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
-      }
-    }
-    throw new Error(`Content not found: ${urlPath}`);
+    const filePath = path.join(process.cwd(), "public", urlPath);
+    return JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
   }
   // Client: fetch from static files
   const res = await fetch(urlPath);
