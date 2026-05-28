@@ -30,7 +30,7 @@ export const Route = createFileRoute("/contact")({
     meta: [
       {
         title:
-          "Contact Maxime Thirouin, Senior Front-End Developer, React & React Native Expert.",
+          "Contact Maxime Thirouin, Senior Front-End Architect, React & React Native Expert.",
       },
     ],
   }),

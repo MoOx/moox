@@ -36,12 +36,12 @@ export const Route = createFileRoute("/resume")({
     meta: [
       {
         title:
-          "Maxime Thirouin Résumé - Senior Front-End Developer, React & React Native Expert.",
+          "Maxime Thirouin Résumé - Senior Front-End Architect & Developer, React & React Native Expert.",
       },
       {
         name: "description",
         content:
-          "Max is a Senior Front-End Developer, available as a Freelance Developer since 2013. He masters React & React Native and has a passion for building great products with a focus on user experience.",
+          "Max is a Senior Front-End Architect & Developer, available as a Freelance since 2013. He masters React & React Native and has a passion for building great products with a focus on user experience.",
       },
     ],
   }),
@@ -68,7 +68,7 @@ function PageResume() {
         role="heading"
         aria-level={1}
       >
-        {"Front-End Developer."}
+        {"Front-End Architect."}
       </Text>
       <Text
         style={[fontStyles.ios.headline, theme.styles.textMainDark]}

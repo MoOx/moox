@@ -351,7 +351,9 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
                         themeDark.styles.textLight1,
                       ]}
                     >
-                      {"The father of postcss-preset-env. +6M downloads/week."}
+                      {
+                        "now deprecated, lived on as postcss-preset-env with +6M downloads/week."
+                      }
                     </Text>
                   </LinkView>
                   <LinkView
@@ -387,7 +389,7 @@ export default function SkillsCards({ mode = "default" }: SkillsCardsProps) {
                         themeDark.styles.textLight1,
                       ]}
                     >
-                      {"Creator of the project. +5M downloads/week."}
+                      {"Initiated the project. +5M downloads/week."}
                     </Text>
                   </LinkView>
                 </SpacedView>

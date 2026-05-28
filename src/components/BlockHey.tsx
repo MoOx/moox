@@ -58,7 +58,7 @@ export default function BlockHey() {
                     },
                   ]}
                 >
-                  {"Front-End Developer."}
+                  {"Front-End Architect."}
                 </Text>
               </IfWindowWidthIs>
               <IfWindowWidthIs smallerThan={WindowWidth.m}>
@@ -73,7 +73,7 @@ export default function BlockHey() {
                     },
                   ]}
                 >
-                  {"Front-End Developer."}
+                  {"Front-End Architect."}
                 </Text>
               </IfWindowWidthIs>
               <Text
@@ -87,7 +87,7 @@ export default function BlockHey() {
                   },
                 ]}
               >
-                {"Augmented with AI."}
+                {"React, React Native & cross-platform."}
               </Text>
             </View>
             <Text
@@ -126,7 +126,7 @@ export default function BlockHey() {
             >
               <TextForReader>
                 {
-                  "Hey, I am Max. I am a Front-End Developer crafting apps and websites. I am available as freelance.\n"
+                  "Hey, I am Max. I am a Senior Front-End Architect crafting apps and websites. I am available as freelance.\n"
                 }
               </TextForReader>
               {"I build "}

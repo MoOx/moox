@@ -95,12 +95,12 @@ export default function BlockPassionated({
               <Text
                 style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
               >
-                {"You dream it."}
+                {"I make complex front-ends."}
               </Text>
               <Text
                 style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
               >
-                {"I craft it."}
+                {"Boring."}
               </Text>
             </View>
             <Text
@@ -111,7 +111,7 @@ export default function BlockPassionated({
               ]}
               role="paragraph"
             >
-              {`I have the knowledge and skills to build the app you are dreaming about. My years of experience and my passion for building apps make me the perfect partner to help you bring your ideas to life.`}
+              {`Almost 2 decades turning tangled front-ends into systems a team can actually maintain — simpler architecture, less overhead, and devs who level up along the way. Web, iOS, Android, ideally from one codebase.`}
             </Text>
             <LinkButton
               href="/resume/"

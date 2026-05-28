@@ -18,12 +18,12 @@ export const Route = createFileRoute("/")({
     meta: [
       {
         title:
-          "MoOx, Freelance Front-End Senior Developer, React & React Native Expert.",
+          "MoOx, Senior Front-End Architect, React & React Native Expert. Freelance.",
       },
       {
         name: "description",
         content:
-          "Max is a Freelance Front-End Developer based in France. He build websites, web apps and mobile apps mostly using React & React Native.",
+          "Max is a Freelance Senior Front-End Architect based in France. He build websites, web apps and mobile apps mostly using React & React Native.",
       },
     ],
   }),
@@ -42,15 +42,15 @@ function Home() {
         <Spacer size="m" />
         <BlockFrontendArchitect />
         <Spacer size="l" />
-        <BlockCompaniesTried />
-        <Spacer size="xl" />
-        <BlockPassionated />
-        <Spacer size="xxl" />
-        <BlockAugmentedWithAI />
+        <BlockCompaniesTrust />
         <Spacer size="xxl" />
         <BlockTestimonials />
         <Spacer size="xl" />
-        <BlockCompaniesTrust />
+        <BlockCompaniesTried />
+        <Spacer size="xxl" />
+        <BlockPassionated />
+        <Spacer size="xxl" />
+        <BlockAugmentedWithAI />
       </View>
     </WebsiteWrapper>
   );

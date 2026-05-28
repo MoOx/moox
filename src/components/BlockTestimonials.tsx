@@ -25,6 +25,20 @@ export type Testimonial = {
 };
 export const testimonials: Testimonial[] = [
   {
+    avatar: "/linkedin/linkedin-aissa.jpeg",
+    name: "Aissa",
+    title: "CTO at Hove",
+    content: (
+      <>
+        <Text style={{ opacity: 0.6 }}>{"Max is truly a top "}</Text>
+        <Text style={{ fontWeight: "bold" }}>{"React expert"}</Text>
+        <Text style={{ opacity: 0.6 }}>
+          {". Whether it's React Native or js, nothing stands in his way.\n "}
+        </Text>
+      </>
+    ),
+  },
+  {
     avatar: "/linkedin/linkedin-james.jpeg",
     name: "James",
     title: "Co-Founder, Aardvark Intelligence",
@@ -36,20 +50,6 @@ export const testimonials: Testimonial[] = [
           {
             " who doesn't just work on a project but takes ownership of it as well."
           }
-        </Text>
-      </>
-    ),
-  },
-  {
-    avatar: "/linkedin/linkedin-aissa.jpeg",
-    name: "Aissa",
-    title: "CTO at Hove",
-    content: (
-      <>
-        <Text style={{ opacity: 0.6 }}>{"Max is truly a top "}</Text>
-        <Text style={{ fontWeight: "bold" }}>{"React expert"}</Text>
-        <Text style={{ opacity: 0.6 }}>
-          {". Whether it's React Native or js, nothing stands in his way."}
         </Text>
       </>
     ),

@@ -2,8 +2,7 @@
 
 # Hey, I'm [Max](https://moox.io)
 
-I am a [Freelance Front-End Developer](https://moox.io) making mobile, web & desktop
-apps.
+I am a [Senior Front-End Architect](https://moox.io) making mobile, web & desktop apps, available as Freelance.
 
 I build apps with:
 
@@ -14,7 +13,7 @@ I build apps with:
 ## 💬 Want to hire me ?
 
 <a href="https://moox.io/contact">
-  <img height="24"  alt="Let's talk" src="https://img.shields.io/badge/Let's%20talk-8A2BE2?style=plastic&logo=iMessage&logoColor=%23fff&logoSize=8" />
+  <img height="48"  alt="Let's talk" src="https://img.shields.io/badge/Let's%20talk-8A2BE2?style=plastic&logo=iMessage&logoColor=%23fff&logoSize=8" />
 </a>
 
 ##

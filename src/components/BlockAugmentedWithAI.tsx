@@ -42,7 +42,7 @@ export default function BlockAugmentedWithAI() {
   return (
     <Container style={{ flexDirection: "row", flexWrap: "wrap-reverse" }}>
       <View style={{ maxWidth: 400, justifyContent: "center" }}>
-        <AIPromptCircle size={250} circles={circles} />
+        <AIPromptCircle size={200} circles={circles} />
       </View>
       <SpacedView
         horizontal="xl"
@@ -66,9 +66,7 @@ export default function BlockAugmentedWithAI() {
           style={[fontStyles.iosEm.body, theme.styles.textLight1]}
           role="paragraph"
         >
-          {`Artificial Intelligence is already changing the world, and especially the way we build software.
-It's a revolution that will change the way we work profoundly and will have a huge impact on our lives. It might be more important than the invention of the wheel or the Internet.
-The time it's saving us already allows me to create crafted apps with precision, with more attention to the details that make the difference between a good and a great app.`}
+          {`AI writes code faster than I do. It just doesn't know what to build, or why — that's still my job.\n The time it saves, I put back into architecture and craft.`}
         </Text>
         <Spacer size="s" />
       </SpacedView>

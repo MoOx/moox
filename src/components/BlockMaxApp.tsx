@@ -155,7 +155,7 @@ export default function BlockMaxApp({
                 {"@MoOx"}
               </Text>
               <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-                {"Freelance Front-end Developer for Web and Mobile apps."}
+                {"Senior Front-end Architect for Web and Mobile apps."}
               </Text>
             </View>
             <Avatar
