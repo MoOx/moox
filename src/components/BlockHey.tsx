@@ -5,10 +5,8 @@ import { fontStyles, weight } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
-import TextForReader from "@/react-multiversal/TextForReader";
 import {
   gradientTextFlashyStyles,
-  gradientTextFlashyStylesInv,
   gradientTextStyles,
   useTheme,
 } from "@/styles";
@@ -43,22 +41,32 @@ export default function BlockHey() {
               role="heading"
               aria-level={1}
             >
-              <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
-                {"A Web & Mobile"}
+              <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
+                {"A Senior"}
               </Text>
               <IfWindowWidthIs largerThan={WindowWidth.m}>
                 <Text
                   style={[
                     fontStyles.iosEm.largeTitle,
                     theme.styles.text,
-                    gradientTextFlashyStyles(theme, 176),
+                    gradientTextStyles(theme, 176),
                     {
+                      fontSize: 48,
+                      lineHeight: 48,
                       fontWeight: weight.black,
-                      viewTransitionName: "text--front-end-developer",
+                      viewTransitionName: "text--front-end-architect",
                     },
                   ]}
                 >
-                  {"Front-End Architect."}
+                  {"Front-End "}
+                  <Text
+                    style={[
+                      theme.styles.text,
+                      gradientTextFlashyStyles(theme, 176),
+                    ]}
+                  >
+                    {"Architect."}
+                  </Text>
                 </Text>
               </IfWindowWidthIs>
               <IfWindowWidthIs smallerThan={WindowWidth.m}>
@@ -66,14 +74,17 @@ export default function BlockHey() {
                   style={[
                     fontStyles.iosEm.largeTitle,
                     theme.styles.text,
-                    gradientTextFlashyStyles(theme, 0),
+                    gradientTextStyles(theme, 176),
                     {
                       fontWeight: weight.black,
-                      viewTransitionName: "text--front-end-developer-m",
+                      viewTransitionName: "text--front-end-architect-m",
                     },
                   ]}
                 >
-                  {"Front-End Architect."}
+                  {"Front-End "}
+                  <Text style={gradientTextFlashyStyles(theme, 176)}>
+                    {"Architect."}
+                  </Text>
                 </Text>
               </IfWindowWidthIs>
               <Text
@@ -90,6 +101,7 @@ export default function BlockHey() {
                 {"React, React Native & cross-platform."}
               </Text>
             </View>
+            <Spacer size="l" />
             <Text
               role="paragraph"
               style={{ display: "flex", flexDirection: "column" }}
@@ -110,35 +122,9 @@ export default function BlockHey() {
               </Text>
             </Text>
           </View>
-          <View>
-            <Spacer size="xxl" />
-            <Text
-              style={[
-                theme.styles.text,
-                gradientTextStyles(theme, 180),
-                {
-                  fontSize: 64,
-                  lineHeight: 64,
-                  fontWeight: weight.bold,
-                },
-              ]}
-              role="paragraph"
-            >
-              <TextForReader>
-                {
-                  "Hey, I am Max. I am a Senior Front-End Architect crafting apps and websites. I am available as freelance.\n"
-                }
-              </TextForReader>
-              {"I build "}
-              <Text style={gradientTextFlashyStylesInv(theme, -4)}>
-                {"apps."}
-              </Text>
-            </Text>
-            <Spacer size="xl" />
-            <IfWindowWidthIs largerThan={WindowWidth.m}>
-              <Spacer size="xxxl" />
-            </IfWindowWidthIs>
-          </View>
+          <IfWindowWidthIs largerThan={WindowWidth.m}>
+            <Spacer size="xxxl" />
+          </IfWindowWidthIs>
         </SpacedView>
         <BlockMe1WithSmallPills />
       </Container>

@@ -20,7 +20,6 @@ import {
   gradientFlashyStops,
   gradientTextFlashyStyles,
   gradientTextFlashyStylesInv,
-  gradientTextIndigoStyles,
   gradientTextIndigoStylesInv,
   useTheme,
 } from "@/styles";
@@ -57,7 +56,7 @@ function PageResume() {
       <Text
         style={[
           theme.styles.text,
-          gradientTextIndigoStyles(theme),
+          gradientTextFlashyStyles(theme, 172),
           {
             fontSize: 48,
             lineHeight: 48,
@@ -116,12 +115,12 @@ function PageResume() {
               vertical="m"
               style={{ position: "absolute", top: 0, left: 0, right: -300 }}
             >
-              {headline("text--front-end-developer")}
+              {headline("text--front-end-architect")}
             </SpacedView>
             <Spacer size="xxxl" />
           </IfWindowWidthIs>
           <IfWindowWidthIs smallerThan={WindowWidth.m}>
-            {headline("text--front-end-developer-m")}
+            {headline("text--front-end-architect-m")}
             <Spacer size="xl" />
           </IfWindowWidthIs>
           <Text
