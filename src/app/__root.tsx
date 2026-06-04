@@ -25,7 +25,7 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
-      { name: "theme-color", content: "#480D9B" },
+      // { name: "theme-color", content: "#480D9B" },
       { name: "application-name", content: "MoOx" },
       { name: "author", content: "Maxime Thirouin" },
       { name: "creator", content: "Maxime Thirouin" },

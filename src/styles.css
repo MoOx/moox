@@ -1,3 +1,7 @@
+html {
+  background-color: var(--react-multiversal--theme--textFlashy4);
+}
+
 /* view transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {

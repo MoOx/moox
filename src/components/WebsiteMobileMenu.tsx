@@ -1,4 +1,5 @@
 import { menuBarLinks } from "@/consts";
+import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
@@ -18,24 +19,48 @@ export const WebsiteMobileMenuPlaceholder = () => {
 };
 
 export const WebsiteMobileMenuBackdropStyles = () => {
+  // Liquid-glass treatment grounded in Apple's material system:
+  // - translucent fill (vibrancy comes from saturation, not brightness)
+  // - saturate(180%) for vibrancy, ~12px blur (regular-material zone)
+  // - inset white highlight at the top edge = specular bezel (Safari-safe)
+  // - ambient drop shadow underneath for separation
+  const glassLight = `
+    background-color: ${alpha(themeLight.colors.back, 0.55)} !important;
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-color: ${alpha(colors.white, 0.5)} !important;
+    box-shadow:
+      inset 0.5px 0.25px 0.5px ${alpha(colors.white, 0.95)},
+      inset -0.5px -0.25px 1px ${alpha(colors.white, 0.95)},
+      inset -4px -6px 14px -8px ${alpha(colors.white, 0.2)},
+      0 4px 20px ${alpha(colors.black, 0.12)} !important;
+  `;
+  const glassDark = `
+    background-color: ${alpha(themeDark.colors.back, 0.35)} !important;
+    -webkit-backdrop-filter: saturate(180%) brightness(1.3) blur(12px);
+    backdrop-filter: saturate(180%) brightness(1.3) blur(12px);
+    border-color: ${alpha(colors.white, 0.18)} !important;
+    box-shadow:
+      inset 0.5px 0.25px 0.5px ${alpha(colors.white, 0.35)},
+      inset -0.5px -0.25px 1px ${alpha(colors.white, 0.25)},
+      inset 4px 6px 16px -8px ${alpha(colors.white, 0.2)},
+      0 4px 20px ${alpha(colors.black, 0.4)} !important;
+  `;
   return (
     <style
       dangerouslySetInnerHTML={{
         __html: `
-          @supports (backdrop-filter: none) {
+          @supports (backdrop-filter: none) or (-webkit-backdrop-filter: none) {
             .userColorScheme-auto [data-website-footer-backdrop="true"],
             .userColorScheme-light [data-website-footer-backdrop="true"] {
-              background-color: ${alpha(themeLight.colors.back, 0.85)} !important;
-              backdrop-filter: saturate(200%) brightness(200%) blur(24px);
+              ${glassLight}
             }
             .userColorScheme-dark [data-website-footer-backdrop="true"] {
-              background-color: ${alpha(themeDark.colors.back, 0.85)} !important;
-              backdrop-filter: saturate(200%) brightness(200%) blur(24px);
+              ${glassDark}
             }
             @media (prefers-color-scheme: dark) {
               .userColorScheme-auto [data-website-footer-backdrop="true"] {
-                background-color: ${alpha(themeDark.colors.back, 0.85)} !important;
-                backdrop-filter: saturate(200%) brightness(200%) blur(24px);
+                ${glassDark}
               }
             }
           }`,
@@ -51,17 +76,28 @@ export const WebsiteMobileMenuLinks = () => {
     <>
       {Object.entries(menuBarLinks).map(([text, { href, isActive, icon }]) => {
         const active = isActive?.(pathname, href);
-        const color = active
-          ? theme.dynamicColors.textMain
-          : theme.dynamicColors.text;
+        const color =
+          theme.mode === "light"
+            ? active
+              ? theme.dynamicColors.textMain
+              : theme.dynamicColors.text
+            : active
+              ? "hsl(230 90% 70%)"
+              : theme.dynamicColors.text;
         return (
           <LinkView key={href} href={href}>
             <SpacedView
-              horizontal="xxs"
+              horizontal={size("m") * 1.25}
               vertical="xxs"
               style={{
                 alignItems: "center",
                 justifyContent: "center",
+                borderRadius: 36,
+                backgroundColor: active
+                  ? theme.mode === "light"
+                    ? "rgba(0,0,0, 0.075)"
+                    : "rgba(255,255,255,0.15)"
+                  : "transparent",
               }}
             >
               {icon({
@@ -72,7 +108,7 @@ export const WebsiteMobileMenuLinks = () => {
               <Text
                 style={{
                   fontSize: 10,
-                  fontWeight: active ? "600" : "300",
+                  fontWeight: active ? "700" : "500",
                   color,
                 }}
               >
@@ -95,33 +131,40 @@ export default function WebsiteMobileMenu() {
       style={{
         zIndex: 1,
         position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
+        // +4xp to avoid safari liquid glass address bar solid background
+        bottom: "calc(env(safe-area-inset-bottom) + 4px)",
+        left: "env(safe-area-inset-left)",
+        right: "env(safe-area-inset-right)",
       }}
     >
-      <Container maxWidth={360}>
-        <SpacedView horizontal="xs" vertical="xs">
-          <SpacedView
-            dataSet={{ "website-footer-backdrop": "true" }}
-            horizontal="xl"
-            vertical="xxs"
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              alignItems: "center",
+      <Container
+        maxWidth={360}
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <SpacedView
+          dataSet={{ "website-footer-backdrop": "true" }}
+          horizontal="xxs"
+          vertical="xxs"
+          style={{
+            marginInline: size("s"),
+            marginBlock: size("xs"),
+            flexDirection: "row",
+            flexWrap: "wrap",
+            // justifyContent: "center",
+            alignItems: "center",
 
-              borderWidth: 0.5,
-              borderRadius: 18,
-              borderColor: alpha(colors.black, 0.25),
-              borderStyle: "solid",
-              backgroundColor: theme.dynamicColors.back,
-              boxShadow: boxShadows.default,
-            }}
-          >
-            <WebsiteMobileMenuLinks />
-          </SpacedView>
+            borderWidth: 0.5,
+            borderRadius: 999,
+            borderColor: alpha(colors.black, 0.15),
+            borderStyle: "solid",
+            backgroundColor: theme.dynamicColors.back,
+            boxShadow: boxShadows.moreVisible,
+          }}
+        >
+          <WebsiteMobileMenuLinks />
         </SpacedView>
       </Container>
     </View>

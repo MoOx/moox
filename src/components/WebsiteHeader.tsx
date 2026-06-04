@@ -82,6 +82,7 @@ export default function WebsiteHeader() {
           transform: [{ skewY: "1deg" }],
         }}
         stops={gradientFlashyStops(theme)}
+        angle={-80}
       />
       <Container
         role="banner"
