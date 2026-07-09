@@ -11,12 +11,15 @@ export default function Me({
   imgHeight = 835 / 2,
   style,
   children,
+  pdf = false,
 }: {
   src?: string;
   imgWidth?: number;
   imgHeight?: number;
   style?: StyleProp<ViewStyle>;
   children?: ReactNode;
+  /** PDF export: hide the decorative gradients that print as a solid block. */
+  pdf?: boolean;
 }) {
   const theme = useTheme();
   return (
@@ -33,6 +36,7 @@ export default function Me({
       ]}
     >
       <View>
+        {pdf ? null : (
         <View
           style={{
             position: "absolute",
@@ -105,6 +109,7 @@ export default function Me({
             style={{ position: "absolute", left: -10, bottom: -0 }}
           />
         </View>
+        )}
         <style
           dangerouslySetInnerHTML={{
             __html: `

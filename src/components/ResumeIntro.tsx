@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ResumeIntro() {
+export default function ResumeIntro({ pdf = false }: { pdf?: boolean }) {
   const theme = useTheme();
 
   return (
@@ -48,7 +48,7 @@ export default function ResumeIntro() {
         <Text
           style={[
             fontStyles.iosEm.largeTitle,
-            gradientTextIndigoStylesInv(theme),
+            gradientTextIndigoStylesInv(theme, undefined, pdf),
             // { alignSelf: "center" },
           ]}
         >
@@ -139,13 +139,24 @@ export default function ResumeIntro() {
                 { Icon: SVGCss, text: "CSS" },
                 { Icon: IconReact, text: "React" },
                 { Icon: IconReactNative, text: "Native" },
-                { Icon: SVGGraphql, text: "Graphql" },
+                { Icon: SVGGraphql, text: "Graphql", monochrome: true },
                 { Icon: SVGNextjs, text: "Next.js" },
-                { Icon: SVGExpo, text: "Expo" },
+                { Icon: SVGExpo, text: "Expo", monochrome: true },
                 { Icon: SVGSketch, text: "Sketch" },
-              ].map(({ Icon, text }) => (
+              ].map(({ Icon, text, monochrome }) => (
                 <SpacedView key={text} horizontal="xs" vertical="xs">
-                  <Icon width={42} height={42} />
+                  <View
+                    style={
+                      monochrome
+                        ? {
+                            filter:
+                              "drop-shadow(0px 0px 3px rgba(255,255,255,0.5))",
+                          }
+                        : undefined
+                    }
+                  >
+                    <Icon width={42} height={42} />
+                  </View>
                   <Text
                     style={[
                       fontStyles.ios.caption2,

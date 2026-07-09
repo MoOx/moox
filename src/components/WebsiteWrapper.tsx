@@ -10,18 +10,29 @@ import { useTheme } from "@/styles";
 import { ReactNode } from "react";
 import { View } from "react-native";
 
-export default function WebsiteWrapper({ children }: { children?: ReactNode }) {
+export default function WebsiteWrapper({
+  children,
+  bare = false,
+}: {
+  children?: ReactNode;
+  /** Bare layout (no header/footer/mobile menu), used for the PDF export. */
+  bare?: boolean;
+}) {
   const theme = useTheme();
   return (
     <View style={[theme.styles.back, { flex: 1 }]}>
-      <WebsiteHeader />
+      {bare ? null : <WebsiteHeader />}
       <View role="main">{children}</View>
-      <Spacer size="xxl" />
-      <WebsiteFooter />
-      <IfWindowWidthIs smallerThan={WindowWidth.s}>
-        <WebsiteMobileMenuPlaceholder />
-        <WebsiteMobileMenu />
-      </IfWindowWidthIs>
+      {bare ? null : (
+        <>
+          <Spacer size="xxl" />
+          <WebsiteFooter />
+          <IfWindowWidthIs smallerThan={WindowWidth.s}>
+            <WebsiteMobileMenuPlaceholder />
+            <WebsiteMobileMenu />
+          </IfWindowWidthIs>
+        </>
+      )}
     </View>
   );
 }

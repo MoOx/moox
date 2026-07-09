@@ -15,10 +15,13 @@ for (const type of contentTypes) {
     const data = JSON.parse(
       fs.readFileSync(path.join(dirPath, filename), "utf8"),
     );
-    // Strip body to keep index lightweight
+    // Keep the body inline for resume entries: it is rendered directly in the
+    // timeline. Other types fetch their full file on dedicated slug pages, so
+    // their index stays lightweight (body stripped).
     const { body: _body, ...meta } = data;
+    const fields = type === "resume" ? data : meta;
     return {
-      ...meta,
+      ...fields,
       slug: type + "/" + filename.replace(/\.json$/, ""),
     };
   });

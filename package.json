@@ -18,6 +18,7 @@
     "svg:web": "react-from-svg svgs src/svgs/components --with-native-for-typescript --allow-override-fill",
     "svg": "npm run svg:clean && npm run svg:web",
     "markdown": "markdown-to-json \"content/**/*.md\" public && node scripts/generate-content-indexes.mjs",
+    "resume:pdf": "node scripts/generate-resume-pdf.mjs -- --scale=0.75 --margin=0mm",
     "test": "npm run lint && npm run build"
   },
   "overrides": {
@@ -71,6 +72,7 @@
     "oxlint": "^1.43.0",
     "oxlint-tsgolint": "^0.11.5",
     "patch-package": "^8.0.0",
+    "playwright-core": "^1.61.1",
     "prettier": "^3.3.3",
     "react-from-svg": "^8.0.2",
     "react-native": "^0.79",

@@ -1,4 +1,6 @@
 import { ResumeItem } from "@/api";
+import Image from "@/components/Image";
+import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
 import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
@@ -9,7 +11,6 @@ import { boxShadows, useTheme } from "@/styles";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
 import { differenceInCalendarMonths } from "date-fns";
 import { StyleSheet, Text, View } from "react-native";
-import Image from "@/components/Image";
 
 const borderRadius = size("s");
 
@@ -51,6 +52,21 @@ const styles = StyleSheet.create({
   },
 });
 
+// Resume bodies are bilingual: English, then an `<hr>`, then French.
+// For the PDF export we keep only the English part (everything before the hr).
+//
+const bodyBeforeFirstHr = (body: any): any => {
+  if (!body || !Array.isArray(body.children)) return body;
+  const hrIndex = body.children.findIndex(
+    //
+    (child: any) =>
+      child != null && typeof child === "object" && child.tag === "hr",
+  );
+  return hrIndex === -1
+    ? body
+    : { ...body, children: body.children.slice(0, hrIndex) };
+};
+
 const getDurationText = (startDate: string, endDate: Date) => {
   const durationInMonths = Math.floor(
     differenceInCalendarMonths(endDate, new Date(startDate)),
@@ -81,12 +97,21 @@ export const ResumeTimelineEntry = ({
   vertical = "l",
   showDetails = true,
   disableLinks = false,
+  hideImage = false,
+  showBody = false,
+  flat = false,
 }: {
   item: ResumeItem;
   horizontal?: Size;
   vertical?: Size;
   showDetails?: boolean;
   disableLinks?: boolean;
+  /** Hide the entry illustration (used for the lightweight PDF export). */
+  hideImage?: boolean;
+  /** Render the full markdown body of the entry (used for the PDF export). */
+  showBody?: boolean;
+  /** Drop shadow + glass overlay (they print as gray blocks); PDF export. */
+  flat?: boolean;
 }) => {
   const theme = useTheme();
 
@@ -97,8 +122,10 @@ export const ResumeTimelineEntry = ({
         {
           borderRadius,
           flexShrink: 1,
-          flexBasis: 480,
-          boxShadow: boxShadows.default,
+          flexBasis: 640,
+          boxShadow: flat ? undefined : boxShadows.default,
+          borderWidth: flat ? 1 : 0,
+          borderColor: flat ? theme.dynamicColors.ultraLight : undefined,
         },
       ]}
       role="article"
@@ -107,7 +134,7 @@ export const ResumeTimelineEntry = ({
         // oxlint-disable-next-line jsx_a11y/anchor-has-content, jsx_a11y/anchor-is-valid
         <a id={item.slug} style={{ position: "relative", top: "-100px" }} />
       )}
-      {item.image && (
+      {item.image && !hideImage && (
         <View style={styles.imageWrapper}>
           <Image
             src={item.image}
@@ -122,12 +149,14 @@ export const ResumeTimelineEntry = ({
           />
         </View>
       )}
-      <View
-        style={[
-          StyleSheet.absoluteFill,
-          { borderRadius, boxShadow: boxShadowGlass() },
-        ]}
-      />
+      {flat ? null : (
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            { borderRadius, boxShadow: boxShadowGlass() },
+          ]}
+        />
+      )}
       <SpacedView
         style={{ flexGrow: 1 }}
         horizontal={horizontal}
@@ -187,6 +216,12 @@ export const ResumeTimelineEntry = ({
             </Text>
           </>
         )}
+        {item.body ? (
+          <>
+            <Spacer size="s" />
+            <MdAsJsonRenderer body={bodyBeforeFirstHr(item.body)} />
+          </>
+        ) : null}
         {!showDetails ? null : (
           <>
             <Spacer size="l" />

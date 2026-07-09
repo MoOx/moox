@@ -6,7 +6,7 @@ import ResumeStats from "@/components/ResumeStats";
 import { ResumeTimeline } from "@/components/ResumeTimeline";
 import SkillsCards from "@/components/SkillsCards";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
-import { socials, visualUrl } from "@/consts";
+import { ind, socials, visualUrl } from "@/consts";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
@@ -24,12 +24,29 @@ import {
   useTheme,
 } from "@/styles";
 import SVGDownload from "@/svgs/components/SVGDownload";
+import SVGExternalLink from "@/svgs/components/SVGExternalLink";
+import SVGPhone from "@/svgs/components/SVGPhone";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
+import Image from "@/components/Image";
+import {
+  getColorScheme,
+  setUserColorScheme,
+} from "@/react-multiversal/theme/colorScheme";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export const Route = createFileRoute("/resume")({
+  validateSearch: (search: Record<string, unknown>): { pdf?: boolean } => {
+    // `?pdf`, `?pdf=1`, `?pdf=true` → PDF export mode. Absent → clean URL.
+    const pdf =
+      search.pdf === "" ||
+      search.pdf === true ||
+      search.pdf === "true" ||
+      search.pdf === "1";
+    return pdf ? { pdf: true } : {};
+  },
   loader: () => fetchAll({ data: "resume" }),
   head: () => ({
     meta: [
@@ -47,16 +64,35 @@ export const Route = createFileRoute("/resume")({
   component: PageResume,
 });
 
+const website = "https://moox.io";
+const phoneHref = `tel:+${ind}${socials.call.value}`;
+const phoneDisplay = `+${ind} ${socials.call.value.replace(
+  /(\d)(\d{2})(\d{2})(\d{2})(\d{2})/,
+  "$1 $2 $3 $4 $5",
+)}`;
+
 function PageResume() {
+  const { pdf } = Route.useSearch();
   const theme = useTheme();
   const items = Route.useLoaderData();
+
+  // In PDF mode, force the light color scheme for a clean, ink-light print,
+  // and restore the visitor's previous choice when leaving the page.
+  useEffect(() => {
+    if (!pdf) return;
+    const previous = getColorScheme();
+    void setUserColorScheme("light");
+    return () => {
+      void setUserColorScheme(previous);
+    };
+  }, [pdf]);
 
   const headline = (viewTransitionName: string) => (
     <>
       <Text
         style={[
           theme.styles.text,
-          gradientTextFlashyStyles(theme, 172),
+          gradientTextFlashyStyles(theme, 172, pdf),
           {
             fontSize: 48,
             lineHeight: 48,
@@ -88,7 +124,22 @@ function PageResume() {
   );
 
   return (
-    <WebsiteWrapper>
+    <WebsiteWrapper bare={pdf}>
+      {pdf ? (
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              /* Neutralize the CSS page margin so the PDF export's --margin
+                 option (page.pdf) is the single source of truth; otherwise the
+                 two compound and margins can't be removed. */
+              @page { margin: 0; }
+              @media print {
+                html, body { background: #fff !important; }
+              }
+            `,
+          }}
+        />
+      ) : null}
       <Spacer size="m" />
       <Container
         wrapperStyle={{ zIndex: 1, overflow: "visible" }}
@@ -127,7 +178,7 @@ function PageResume() {
             role="paragraph"
             style={[
               theme.styles.text,
-              gradientTextFlashyStylesInv(theme),
+              gradientTextFlashyStylesInv(theme, undefined, pdf),
               {
                 fontSize: 64,
                 lineHeight: 64,
@@ -172,6 +223,26 @@ function PageResume() {
           </Text>
           <Spacer size="l" />
           <View>
+            {pdf ? (
+              <>
+                <LinkView
+                  href={website}
+                  underlineOnFocus={true}
+                  style={{ flexDirection: "row", alignItems: "center" }}
+                >
+                  <SVGExternalLink
+                    width={16}
+                    height={16}
+                    fill={theme.dynamicColors.textMainDark}
+                  />
+                  <Spacer size="xs" />
+                  <Text style={theme.styles.textLight1}>
+                    {visualUrl(website)}
+                  </Text>
+                </LinkView>
+                <Spacer size="s" />
+              </>
+            ) : null}
             <LinkView
               href={socials.github.value}
               underlineOnFocus={true}
@@ -203,41 +274,63 @@ function PageResume() {
                 {visualUrl(socials.linkedin.value)}
               </Text>
             </LinkView>
-            <Spacer size="l" />
-            <a
-              href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
-              download
-              style={{
-                alignItems: "flex-start",
-                display: "flex",
-                textDecoration: "none",
-                color: "inherit",
-              }}
-            >
-              <ButtonView
-                mode="outline"
-                effect="subtle"
-                spaceGap="xs"
-                textColor={theme.dynamicColors.textFlashy1}
-              >
-                {({ color }) => (
-                  <>
-                    <SVGDownload width={16} height={16} fill={color} />
-                    <Text
-                      style={[
-                        {
-                          color,
-                          fontWeight: weight.bold,
-                        },
-                        gradientTextFlashyStyles(theme, 20),
-                      ]}
-                    >
-                      {"Download"}
-                    </Text>
-                  </>
-                )}
-              </ButtonView>
-            </a>
+            {pdf ? (
+              <>
+                <Spacer size="s" />
+                <LinkView
+                  href={phoneHref}
+                  underlineOnFocus={true}
+                  style={{ flexDirection: "row", alignItems: "center" }}
+                >
+                  <SVGPhone
+                    width={16}
+                    height={16}
+                    fill={theme.dynamicColors.textMainDark}
+                  />
+                  <Spacer size="xs" />
+                  <Text style={theme.styles.textLight1}>{phoneDisplay}</Text>
+                </LinkView>
+              </>
+            ) : null}
+            {pdf ? null : (
+              <>
+                <Spacer size="l" />
+                <a
+                  href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
+                  download
+                  style={{
+                    alignItems: "flex-start",
+                    display: "flex",
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                >
+                  <ButtonView
+                    mode="outline"
+                    effect="subtle"
+                    spaceGap="xs"
+                    textColor={theme.dynamicColors.textFlashy1}
+                  >
+                    {({ color }) => (
+                      <>
+                        <SVGDownload width={16} height={16} fill={color} />
+                        <Text
+                          style={[
+                            {
+                              color,
+                              fontWeight: weight.bold,
+                            },
+                            gradientTextFlashyStyles(theme, 20),
+                          ]}
+                        >
+                          {"Download"}
+                        </Text>
+                      </>
+                    )}
+                  </ButtonView>
+                </a>
+              </>
+            )}
           </View>
           <Spacer size="xl" />
           <View style={{ height: 3, width: "95%" }}>
@@ -247,7 +340,7 @@ function PageResume() {
             />
           </View>
         </SpacedView>
-        <BlockMe2WithPills />
+        <BlockMe2WithPills pdf={pdf} />
       </Container>
 
       <Container maxWidth={900}>
@@ -255,7 +348,7 @@ function PageResume() {
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              gradientTextIndigoStylesInv(theme),
+              gradientTextIndigoStylesInv(theme, undefined, pdf),
             ]}
             role="heading"
             aria-level={2}
@@ -267,7 +360,7 @@ function PageResume() {
         </SpacedView>
       </Container>
       <Spacer size="xxl" />
-      <ResumeIntro />
+      <ResumeIntro pdf={pdf} />
       <Spacer size="xxl" />
       <ResumeStats />
       <Spacer size="xxl" />
@@ -276,7 +369,7 @@ function PageResume() {
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              gradientTextFlashyStyles(theme),
+              gradientTextFlashyStyles(theme, undefined, pdf),
               { alignSelf: "center" },
             ]}
             role="heading"
@@ -285,10 +378,52 @@ function PageResume() {
             {"Latest Experiences"}
           </Text>
           <Spacer size="l" />
-          <ResumeTimeline items={items} />
+          <ResumeTimeline items={items} pdf={pdf} />
         </SpacedView>
         <Spacer />
       </Container>
+      {pdf ? (
+        <>
+          <Spacer size="l" />
+          <Container maxWidth={840}>
+            <SpacedView horizontal="l">
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                  gap: 16,
+                }}
+              >
+                <View style={{ flexShrink: 1 }}>
+                  <Text style={[fontStyles.ios.callout, theme.styles.text]}>
+                    {"All my experiences are on LinkedIn and my website"}
+                  </Text>
+                  <Spacer size="xs" />
+                  <LinkView href={website} underlineOnFocus={true}>
+                    <Text
+                      style={[
+                        fontStyles.iosEm.title3,
+                        gradientTextIndigoStylesInv(theme, undefined, pdf),
+                      ]}
+                    >
+                      {visualUrl(website)}
+                    </Text>
+                  </LinkView>
+                </View>
+                <Image
+                  src="/qr-code.jpg"
+                  width={116}
+                  height={116}
+                  priority={true}
+                  alt={`QR code to ${website}`}
+                />
+              </View>
+            </SpacedView>
+          </Container>
+        </>
+      ) : null}
       <Spacer size="xl" />
     </WebsiteWrapper>
   );
