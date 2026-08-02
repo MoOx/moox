@@ -18,7 +18,7 @@
     "svg:web": "react-from-svg svgs src/svgs/components --with-native-for-typescript --allow-override-fill",
     "svg": "npm run svg:clean && npm run svg:web",
     "markdown": "markdown-to-json \"content/**/*.md\" public && node scripts/generate-content-indexes.mjs",
-    "resume:pdf": "node scripts/generate-resume-pdf.mjs -- --scale=0.75 --margin=0mm",
+    "pdf": "node scripts/generate-resume-pdf.mjs",
     "test": "npm run lint && npm run build"
   },
   "overrides": {

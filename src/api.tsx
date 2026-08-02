@@ -5,6 +5,20 @@ export type ContentItem = {
   body?: any;
 };
 
+/** A single headline figure, e.g. "125k+ Downloads / week". */
+export type ResumeStat = {
+  /** The value, e.g. "125k+", "10M", "82.3%". */
+  stat: string;
+  /** What it measures, e.g. "Downloads / week". */
+  label: string;
+  /** Optional eyebrow above the value, e.g. "Still", "Peak". */
+  title?: string;
+  /** Optional context line, e.g. "8 years after deprecating". */
+  comment?: string;
+  /** Optional source/proof link (npm, GitHub…). */
+  url?: string;
+};
+
 export type ResumeItem = ContentItem & {
   company: string;
   dateStart: string;
@@ -18,6 +32,31 @@ export type ResumeItem = ContentItem & {
     url: string;
   }>;
   url?: string;
+  // CV export (`/cv`) - curated fields authored in the markdown frontmatter.
+  highlight?: boolean;
+  education?: boolean;
+  openSource?: boolean;
+  /**
+   * Not a client engagement (Pékin Express…). Kept in the résumé data, but never
+   * listed as professional experience on the CV - a work-history parser would
+   * otherwise read it as a job.
+   */
+  personal?: boolean;
+  job_title?: string;
+  icon?: string;
+  /**
+   * Folds several markdown entries into a single CV row. Each mission stays its
+   * own file (the timeline needs them separate), but a CV lists the *client*,
+   * not the contracts: the row's date span is derived from the whole group, so
+   * nothing is hand-maintained.
+   */
+  cvGroup?: string;
+  /**
+   * The CV pitch for the whole group - not "description, but longer". It is
+   * written to cover every mission of the group at once.
+   */
+  cvPitch?: string;
+  stats?: ResumeStat[];
 };
 
 export type BlogPost = ContentItem & {

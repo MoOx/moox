@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './app/__root'
 import { Route as ResumeRouteImport } from './app/resume'
 import { Route as DesignSystemRouteImport } from './app/design-system'
+import { Route as CvRouteImport } from './app/cv'
 import { Route as ContactRouteImport } from './app/contact'
 import { Route as IndexRouteImport } from './app/index'
 import { Route as TalksIndexRouteImport } from './app/talks.index'
@@ -26,6 +27,11 @@ const ResumeRoute = ResumeRouteImport.update({
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CvRoute = CvRouteImport.update({
+  id: '/cv',
+  path: '/cv',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -62,6 +68,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
   '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
   '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
   '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/contact'
+    | '/cv'
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/contact'
+    | '/cv'
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/contact'
+    | '/cv'
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
@@ -126,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  CvRoute: typeof CvRoute
   DesignSystemRoute: typeof DesignSystemRoute
   ResumeRoute: typeof ResumeRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cv': {
+      id: '/cv'
+      path: '/cv'
+      fullPath: '/cv'
+      preLoaderRoute: typeof CvRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -198,6 +218,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  CvRoute: CvRoute,
   DesignSystemRoute: DesignSystemRoute,
   ResumeRoute: ResumeRoute,
   BlogSlugRoute: BlogSlugRoute,

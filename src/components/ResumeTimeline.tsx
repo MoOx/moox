@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
 
 export const ResumeTimeline = ({
   items,
-  pdf = false,
+  staticRendering = false,
 }: {
   items: ResumeItem[];
   /** PDF export mode: hide illustrations and show each entry's full text. */
-  pdf?: boolean;
+  staticRendering?: boolean;
 }) => {
   const theme = useTheme();
   const todayDateOnlyAsISOString = new Date().toISOString().slice(0, 10);
@@ -75,9 +75,9 @@ export const ResumeTimeline = ({
               {i % 2 === 1 ? <Spacer size="xl" /> : null}
               <ResumeTimelineEntry
                 item={item}
-                hideImage={pdf}
-                showBody={pdf}
-                flat={pdf}
+                hideImage={staticRendering}
+                showBody={staticRendering}
+                flat={staticRendering}
               />
               {i % 2 === 0 ? <Spacer size="xl" /> : null}
             </View>

@@ -7,11 +7,20 @@ import Parallax from "@/react-multiversal/Parallax";
 import { pTransforms } from "@/utils.styles";
 import { StyleSheet, View } from "react-native";
 
-export default function BlockMe2WithPills({ pdf = false }: { pdf?: boolean }) {
+export default function BlockMe2WithPills({
+  staticRendering = false,
+}: {
+  staticRendering?: boolean;
+}) {
   return (
     <>
       <IfWindowWidthIs largerThan={WindowWidth.s}>
-        <Me src="/max-2.png" imgWidth={512 / 2} imgHeight={890 / 2} pdf={pdf}>
+        <Me
+          src="/max-2.png"
+          imgWidth={512 / 2}
+          imgHeight={890 / 2}
+          staticRendering={staticRendering}
+        >
           <Parallax
             style={{ position: "absolute", top: 160, left: -120 }}
             transforms={pTransforms(5, -5, 0.05)}
@@ -44,7 +53,7 @@ export default function BlockMe2WithPills({ pdf = false }: { pdf?: boolean }) {
             style={{ position: "absolute", top: 60, right: 0 }}
             transforms={pTransforms(10, -5, -0.1)}
           >
-            <Pill title="First Website" year={1999} ago={true} />
+            <Pill title="First Website" year={1999} mode="ago" />
           </Parallax>
           <Parallax
             style={{ position: "absolute", top: 260, right: 20 }}
@@ -54,7 +63,7 @@ export default function BlockMe2WithPills({ pdf = false }: { pdf?: boolean }) {
               title="First Mobile Web App"
               detail="PalmOS"
               year={2006}
-              ago={true}
+              mode="ago"
             />
           </Parallax>
         </Me>
@@ -75,7 +84,12 @@ export default function BlockMe2WithPills({ pdf = false }: { pdf?: boolean }) {
               transform: [{ scale: 0.8 }],
             }}
           >
-            <Me src="/max-2.png" imgWidth={512 / 2} imgHeight={890 / 2} pdf={pdf}>
+            <Me
+              src="/max-2.png"
+              imgWidth={512 / 2}
+              imgHeight={890 / 2}
+              staticRendering={staticRendering}
+            >
               <Parallax
                 style={{ position: "absolute", top: 160, left: -60 }}
                 transforms={pTransforms(-10, -5, 0.15)}
@@ -110,7 +124,7 @@ export default function BlockMe2WithPills({ pdf = false }: { pdf?: boolean }) {
                 <Pill
                   title="First Website"
                   year={1999}
-                  ago={true}
+                  mode="ago"
                   transitionSize="s"
                 />
               </Parallax>
@@ -122,7 +136,7 @@ export default function BlockMe2WithPills({ pdf = false }: { pdf?: boolean }) {
                   title="First Mobile Web App"
                   detail="PalmOS"
                   year={2006}
-                  ago={true}
+                  mode="ago"
                   transitionSize="s"
                 />
               </Parallax>

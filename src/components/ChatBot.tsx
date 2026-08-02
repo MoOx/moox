@@ -40,7 +40,7 @@ const botResponses: BotResponse[] = [
     "To reach Max, you have plenty of options above.",
   ],
   [
-    "I hope you get it now—I’m just a fake bot.",
+    "I hope you get it now-I’m just a fake bot.",
     "Maybe you should contact Max directly instead?",
     "He’s much smarter than me! Links are above!",
   ],

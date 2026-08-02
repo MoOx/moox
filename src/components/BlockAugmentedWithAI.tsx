@@ -66,7 +66,7 @@ export default function BlockAugmentedWithAI() {
           style={[fontStyles.iosEm.body, theme.styles.textLight1]}
           role="paragraph"
         >
-          {`AI writes code faster than I do. It just doesn't know what to build, or why — that's still my job.\n The time it saves, I put back into architecture and craft.`}
+          {`AI writes code faster than I do. It just doesn't know what to build, or why - that's still my job.\n The time it saves, I put back into architecture and craft.`}
         </Text>
         <Spacer size="s" />
       </SpacedView>

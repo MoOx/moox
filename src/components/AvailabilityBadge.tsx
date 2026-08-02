@@ -35,9 +35,12 @@ const pulseAnimationStyle: AnimatedStyle<any> = {
 export default function AvailabilityBadge({
   style,
   showText,
+  text = "Available for Work",
 }: {
   style?: StyleProp<ViewStyle>;
   showText: boolean | "on-focus";
+  /** Label next to the dot - the CV says "Available now", the site says more. */
+  text?: string;
 }) {
   const ref = useRef<Text>(null);
   const [hasAnyFocus] = useFocus(ref, { debounceOff: 500 });
@@ -94,7 +97,7 @@ export default function AvailabilityBadge({
                 },
               ]}
             >
-              {"Available for Work"}
+              {text}
             </Text>
           </Animated.View>
         )}

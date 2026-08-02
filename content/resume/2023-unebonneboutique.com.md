@@ -2,6 +2,7 @@
 company: "FKLG Production"
 url: "https://fklg.art"
 title: "VOD Platform"
+cvGroup: fklg
 description: >
   VOD platform built with Shopify & Vimeo
 dateStart: 2023-11-01

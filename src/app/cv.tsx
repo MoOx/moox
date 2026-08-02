@@ -1,0 +1,1011 @@
+import { fetchAll, ResumeItem, ResumeStat, Talk } from "@/api";
+import AvailabilityBadge from "@/components/AvailabilityBadge";
+import {
+  currentLang,
+  cvTestimonials,
+  TestimonialContent,
+} from "@/components/BlockTestimonials";
+import CvOpenSourceCard from "@/components/CvOpenSourceCard";
+import CvSectionTitle from "@/components/CvSectionTitle";
+import CvSkillCard from "@/components/CvSkillCard";
+import CvStatTile from "@/components/CvStatTile";
+import GradientText from "@/components/GradientText";
+import IconReact from "@/components/IconReact";
+import IconReactNative from "@/components/IconReactNative";
+import Image from "@/components/Image";
+import Me from "@/components/Me";
+import WebsiteWrapper from "@/components/WebsiteWrapper";
+import {
+  cvAvailabilityDetail,
+  cvAvailabilityLabel,
+  cvFreelanceSince,
+  cvFullName,
+  cvGroupKey,
+  cvGroupPeriods,
+  cvJobSubtitle,
+  cvJobTitle,
+  cvJsonLd,
+  cvLanguages,
+  cvLocation,
+  cvMergeGroup,
+  cvMetaDescription,
+  cvMetaKeywords,
+  cvMetaSubject,
+  cvMetaTitle,
+  cvMonthRange,
+  cvNickname,
+  cvProfileStats,
+  cvPutaindecodeArticles,
+  cvRecommendationsUrl,
+  cvSkillsDomains,
+  cvSummary,
+  cvTagline,
+  cvTalksSelectedSlugs,
+  cvUpdatedOn,
+  cvYearRange,
+  ind,
+  lowerKeepingAcronyms,
+  sendStringAsMailString,
+  socials,
+  visualUrl,
+  website,
+} from "@/consts";
+import { size } from "@/react-multiversal";
+import { fontStyles, weight } from "@/react-multiversal/font";
+import LinkView from "@/react-multiversal/LinkView";
+import SpacedView from "@/react-multiversal/SpacedView";
+import {
+  getColorScheme,
+  setUserColorScheme,
+} from "@/react-multiversal/theme/colorScheme";
+import { alpha, colors, gradientTextIndigoStylesInv, useTheme } from "@/styles";
+import SVGActivityClimbing from "@/svgs/components/SVGActivityClimbing";
+import SVGActivityCrossfit from "@/svgs/components/SVGActivityCrossfit";
+import SVGActivityDj from "@/svgs/components/SVGActivityDj";
+import SVGActivityPekinExpress from "@/svgs/components/SVGActivityPekinExpress";
+import SVGActivityStandup from "@/svgs/components/SVGActivityStandup";
+import SVGClaude from "@/svgs/components/SVGClaude";
+import SVGCss from "@/svgs/components/SVGCss";
+import SVGDetox from "@/svgs/components/SVGDetox";
+import SVGEmail from "@/svgs/components/SVGEmail";
+import SVGExpo from "@/svgs/components/SVGExpo";
+import SVGExternalLink from "@/svgs/components/SVGExternalLink";
+import SVGJavaScript from "@/svgs/components/SVGJavaScript";
+import SVGNextjs from "@/svgs/components/SVGNextjs";
+import SVGPhone from "@/svgs/components/SVGPhone";
+import SVGPlaywright from "@/svgs/components/SVGPlaywright";
+import SVGPostcss from "@/svgs/components/SVGPostcss";
+import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
+import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
+import SVGStorybook from "@/svgs/components/SVGStorybook";
+import SVGTypescript from "@/svgs/components/SVGTypescript";
+import { createFileRoute } from "@tanstack/react-router";
+import { ComponentType, ReactNode, useEffect } from "react";
+import { Text, View } from "react-native";
+import Svg, { Defs, LinearGradient, Stop } from "react-native-svg";
+
+export const Route = createFileRoute("/cv")({
+  loader: async () => {
+    const [resume, talks, blog] = await Promise.all([
+      fetchAll({ data: "resume" }),
+      fetchAll({ data: "talks" }),
+      fetchAll({ data: "blog" }),
+    ]);
+    return { resume, talks, blog };
+  },
+  head: () => ({
+    meta: [
+      // The page keeps the title short for the eye; the keywords a crawler, an
+      // LLM or a job board matches on live here, where length is free. The PDF
+      // export reads these same tags back off the rendered page to fill the
+      // PDF's /Info dictionary, so this is the single source of truth.
+      { title: cvMetaTitle },
+      { name: "description", content: cvMetaDescription },
+      { name: "author", content: `${cvFullName} (${cvNickname})` },
+      { name: "keywords", content: cvMetaKeywords.join(", ") },
+      { name: "subject", content: cvMetaSubject },
+    ],
+  }),
+  component: PageCV,
+});
+
+const email = sendStringAsMailString(socials.send.value);
+const phoneHref = `tel:+${ind}${socials.call.value}`;
+const phoneDisplay = `+${ind} ${socials.call.value.replace(
+  /(\d)(\d{2})(\d{2})(\d{2})(\d{2})/,
+  "$1 $2 $3 $4 $5",
+)}`;
+
+const borderRadius = size("s");
+
+/** How many "More experience" rows before falling back to the "Earlier:" line. */
+const moreExperienceRows = 9;
+
+type IconType = ComponentType<{
+  width?: number;
+  height?: number;
+  fill?: string;
+  style?: object;
+}>;
+
+type Item = { label: string; Icon: IconType };
+/**
+ * Logos scan in a second, which no text card replaces - but each one has to
+ * earn its slot. GraphQL left: it is one line in the Languages card and it is
+ * not what anyone hires me for. The additions each anchor a claim the cards
+ * make but no logo backed: PostCSS the 200M downloads, Playwright/Detox/
+ * Storybook the testing & design-system work, Claude the AI workflow.
+ * `image` entries are for logos with no SVG component yet.
+ */
+const techs: Item[] = [
+  { Icon: SVGJavaScript, label: "JavaScript" },
+  { Icon: SVGTypescript, label: "TypeScript" },
+  { Icon: SVGCss, label: "CSS" },
+  { Icon: IconReact as IconType, label: "React" },
+  { Icon: IconReactNative as IconType, label: "Native" },
+  { Icon: SVGExpo, label: "Expo" },
+  { Icon: SVGNextjs, label: "Next.js" },
+  { Icon: SVGPostcss, label: "PostCSS" },
+  { Icon: SVGStorybook, label: "Storybook" },
+  { Icon: SVGPlaywright, label: "Playwright" },
+  { Icon: SVGDetox, label: "Detox" },
+  // No npm: a registry is not a skill, and PostCSS already anchors the 200M
+  // downloads tile that was the only reason to show it.
+  { Icon: SVGClaude, label: "Claude" },
+];
+
+const hobbies: (Item & { Icon: IconType })[] = [
+  { Icon: SVGActivityCrossfit, label: "CrossFit" },
+  { Icon: SVGActivityClimbing, label: "Climbing" },
+  { Icon: SVGActivityDj, label: "DJ" },
+  { Icon: SVGActivityStandup, label: "Standup" },
+  { Icon: SVGActivityPekinExpress, label: "Pekin Express #20" },
+];
+
+const byDateDesc = (a: ResumeItem, b: ResumeItem) =>
+  (b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1;
+
+/** "900M+ trips / year · 4M+ people served" - the entry's own frontmatter stats. */
+const statsLine = (stats: ResumeStat[] | undefined, max = 4) =>
+  (stats ?? [])
+    .slice(0, max)
+    .map((s) => `${s.stat} ${lowerKeepingAcronyms(s.label)}`)
+    .join(" · ");
+
+function PageCV() {
+  const theme = useTheme();
+  const { resume, talks, blog } = Route.useLoaderData();
+
+  // A CV row is a client, not a contract: an entry flagged `highlight` carries
+  // the copy, and `cvGroup` folds its sibling missions in so the date span (and
+  // therefore the sort key) is derived rather than hand-written.
+  const membersOf = (item: ResumeItem) =>
+    resume.filter((i) => cvGroupKey(i) === cvGroupKey(item));
+  const highlights = resume
+    .filter((i) => i.highlight)
+    .map((i) => cvMergeGroup(i, membersOf(i)))
+    .sort(byDateDesc);
+  const education = resume.filter((i) => i.education).sort(byDateDesc);
+  // Open source reads best as a story: oldest first (cssnext → stylelint → …).
+  const openSource = resume
+    .filter((i) => i.openSource)
+    .sort((a, b) => (a.dateStart > b.dateStart ? 1 : -1));
+  const profileStats = cvProfileStats(resume);
+
+  // Everything else worth naming - one row per group, so the missions already
+  // folded into a key experience never show up twice. Nothing flagged
+  // `personal`: Pékin Express is a great icebreaker under "Beyond Code", but
+  // listed here a parser would file it as a job.
+  const shownGroups = new Set(highlights.map(cvGroupKey));
+  const moreExperience = resume
+    .filter(
+      (i) =>
+        !i.openSource &&
+        !i.education &&
+        !i.personal &&
+        i.company &&
+        !shownGroups.has(cvGroupKey(i)),
+    )
+    .sort(byDateDesc)
+    .filter(
+      (i, idx, all) =>
+        all.findIndex((o) => cvGroupKey(o) === cvGroupKey(i)) === idx,
+    )
+    .map((i) => cvMergeGroup(i, membersOf(i)));
+  const moreExperienceShown = moreExperience.slice(0, moreExperienceRows);
+  const moreExperienceEarlier = moreExperience.slice(moreExperienceRows);
+
+  const talksSelected = cvTalksSelectedSlugs
+    .map((slug) => talks.find((t) => t.slug === slug))
+    .filter((t): t is Talk => Boolean(t));
+
+  // The CV is always rendered light (clean print / export).
+  useEffect(() => {
+    const previous = getColorScheme();
+    void setUserColorScheme("light");
+    return () => {
+      void setUserColorScheme(previous);
+    };
+  }, []);
+
+  const ContactRow = ({
+    Icon,
+    href,
+    children,
+  }: {
+    Icon: IconType;
+    href: string;
+    children: ReactNode;
+  }) => (
+    <LinkView
+      href={href}
+      underlineOnFocus={true}
+      style={{ flexDirection: "row", alignItems: "center", gap: size("xxs") }}
+    >
+      <Icon width={14} height={14} fill={theme.dynamicColors.textMainDark} />
+      <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
+        {children}
+      </Text>
+    </LinkView>
+  );
+
+  // pdf zoom to avoid having to resize everything
+  // this allows to keep using theme sizes easily
+  const zoom = 0.75;
+  const globalPagePadding = "xxl";
+  return (
+    <WebsiteWrapper bare={true}>
+      {/* Machine-readable twin of the page: removes every guess about which
+          string is the name, the title or an employer. Built from the rendered
+          data, so it cannot drift from what a human reads. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(cvJsonLd(resume)) }}
+      />
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            html { zoom: ${zoom} }
+            @page {
+              size: A4;
+              margin: 0mm;
+            }
+            @media print {
+              html, body { background: #fff !important; }
+              
+            }
+          `,
+        }}
+      />
+      {/* Shared violet gradient for icon fills (referenced via url(#cvGrad)) */}
+      <Svg width={0} height={0} style={{ position: "absolute" }}>
+        <Defs>
+          <LinearGradient id="cvGrad" x1="0" y1="0" x2="1" y2="1">
+            <Stop offset="0" stopColor={theme.dynamicColors.textFlashy1} />
+            <Stop offset="1" stopColor={theme.dynamicColors.textFlashy4} />
+          </LinearGradient>
+        </Defs>
+      </Svg>
+      {/* Per-page frame: position:fixed repeats on every printed page in Chrome,
+          so this border wraps every PDF page (sits just inside the @page margin). */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "fixed",
+          top: "0mm",
+          left: "0mm",
+          right: "0mm",
+          bottom: "0mm",
+          border: "2mm solid #5B2AA5",
+          borderImage: `linear-gradient(to top left,
+            ${theme.dynamicColors.textFlashy1} 0%,
+            ${theme.dynamicColors.textFlashy2} 25%,
+            ${theme.dynamicColors.textFlashy3} 75%,
+            ${theme.dynamicColors.textFlashy4} 100%)
+          1`,
+          pointerEvents: "none",
+        }}
+      />
+      <View
+        style={{
+          position: "relative",
+          width: (210 * 1) / zoom + "mm",
+          marginHorizontal: "auto",
+          paddingBlockStart: size(globalPagePadding),
+          paddingInline: size(globalPagePadding),
+        }}
+      >
+        {/* ========================================================== Header */}
+
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "flex-start",
+            flexWrap: "wrap",
+            gap: size("m"),
+          }}
+        >
+          <View
+            style={{
+              flexGrow: 1,
+              flexShrink: 1,
+              flexBasis: 380,
+              gap: size("xs"),
+            }}
+          >
+            <Text
+              style={[
+                fontStyles.iosEm.caption1,
+                theme.styles.textLight2,
+                { letterSpacing: 1.4, textTransform: "uppercase" },
+              ]}
+            >
+              {`Freelance since ${cvFreelanceSince} · ${cvLocation}`}
+            </Text>
+
+            <View>
+              <Text role="heading" aria-level={1}>
+                <GradientText
+                  style={{
+                    fontSize: 48,
+                    lineHeight: 48,
+                    fontWeight: weight.black,
+                  }}
+                  stops={[
+                    { offset: 0, color: theme.colors.textFlashy1 },
+                    { offset: 0.1, color: theme.colors.textFlashy2 },
+                    { offset: 0.5, color: theme.colors.textFlashy3 },
+                    { offset: 1, color: theme.colors.textFlashy4 },
+                  ]}
+                >
+                  {`${cvJobTitle}.`}
+                </GradientText>
+              </Text>
+              <Text
+                role="heading"
+                aria-level={2}
+                style={[
+                  fontStyles.ios.subhead,
+                  theme.styles.textLight1,
+                  { fontStyle: "italic", marginTop: size("xxs") },
+                ]}
+              >
+                {cvJobSubtitle}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: size("xs"),
+              }}
+            >
+              <AvailabilityBadge showText={true} text={cvAvailabilityLabel} />
+              <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
+                {cvAvailabilityDetail}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "flex-end",
+                gap: size("xs"),
+                marginTop: size("xxs"),
+              }}
+            >
+              <GradientText
+                style={{ fontSize: 46, lineHeight: 46, fontWeight: "900" }}
+                stops={[
+                  { offset: 0, color: theme.colors.textIndigoAlt2 },
+                  { offset: 1, color: theme.colors.textIndigoAlt },
+                ]}
+              >
+                {"Max."}
+              </GradientText>
+              <Text
+                style={[
+                  theme.styles.textLight1,
+                  { fontSize: 24, lineHeight: 26, fontWeight: "100" },
+                ]}
+              >
+                {"Maxime Thirouin"}
+              </Text>
+            </View>
+
+            <SpacedView vertical="s" gap="xxs">
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  columnGap: size("m"),
+                  rowGap: size("xxs"),
+                }}
+              >
+                <ContactRow Icon={SVGExternalLink} href={website}>
+                  {visualUrl(website)}
+                </ContactRow>
+                <ContactRow Icon={SVGSocialGithub} href={socials.github.value}>
+                  {visualUrl(socials.github.value)}
+                </ContactRow>
+                <ContactRow
+                  Icon={SVGSocialLinkedin}
+                  href={socials.linkedin.value}
+                >
+                  {visualUrl(socials.linkedin.value)}
+                </ContactRow>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: size("xs"),
+                }}
+              >
+                <ContactRow Icon={SVGEmail} href={`mailto:${email}`}>
+                  {email}
+                </ContactRow>
+                <ContactRow Icon={SVGPhone} href={phoneHref}>
+                  {phoneDisplay}
+                </ContactRow>
+                {cvLanguages.map((l) => (
+                  <Text
+                    key={l.label}
+                    style={[fontStyles.ios.footnote, theme.styles.textLight1]}
+                  >
+                    {`${l.flag} ${l.label} `}
+                    <Text style={theme.styles.text}>{l.level}</Text>
+                  </Text>
+                ))}
+              </View>
+            </SpacedView>
+          </View>
+
+          <Me width={280} />
+        </View>
+
+        <View nativeID="cv-content" style={{ gap: size("l") }}>
+          {/* ------------------------------------------------ Summary banner */}
+          <View
+            nativeID="cv-summary"
+            style={{
+              borderRadius,
+              overflow: "hidden",
+              backgroundImage: `linear-gradient(4deg,
+                ${theme.dynamicColors.textFlashy1} 0%,
+                ${theme.dynamicColors.textFlashy2} 25%,
+                ${theme.dynamicColors.textFlashy3} 75%,
+                ${theme.dynamicColors.textFlashy4} 100%)`,
+            }}
+          >
+            <SpacedView horizontal="l" vertical="m" gap="xxs">
+              <Text style={[fontStyles.iosEm.title3, { color: colors.white }]}>
+                {cvTagline}
+              </Text>
+              <Text
+                style={[
+                  fontStyles.ios.footnote,
+                  { color: alpha(colors.white, 0.92) },
+                ]}
+              >
+                {cvSummary}
+              </Text>
+            </SpacedView>
+          </View>
+
+          {/* --------------------------------------------- Profile stats */}
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "stretch",
+              gap: size("s"),
+            }}
+          >
+            {profileStats.map((stat) => (
+              <CvStatTile
+                key={stat.label}
+                stat={stat}
+                variant={stat.highlight ? "gradient" : "plain"}
+                flexBasis={110}
+              />
+            ))}
+          </View>
+
+          {/* -------------------------------------------------------- Skills */}
+          <View nativeID="cv-skills" style={{ gap: size("s") }}>
+            <CvSectionTitle>{"Skills"}</CvSectionTitle>
+
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "stretch",
+                gap: size("s"),
+              }}
+            >
+              {cvSkillsDomains
+                .filter((d) => d.feature)
+                .map((d) => (
+                  <CvSkillCard
+                    key={d.title}
+                    title={d.title}
+                    subtitle={d.subtitle}
+                    items={d.items}
+                    Icon={d.Icon}
+                    gradient={d.gradient}
+                    big={true}
+                    style={{ flexBasis: 300 }}
+                  />
+                ))}
+              <View style={{ flexGrow: 1, flexBasis: 300, gap: size("s") }}>
+                {cvSkillsDomains
+                  .filter((d) => !d.feature)
+                  .map((d) => (
+                    <CvSkillCard
+                      key={d.title}
+                      title={d.title}
+                      subtitle={d.subtitle}
+                      items={d.items}
+                      Icon={d.Icon}
+                      gradient={d.gradient}
+                    />
+                  ))}
+              </View>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                rowGap: size("xs"),
+              }}
+            >
+              {techs.map(({ Icon, label }) => (
+                <View key={label} style={{ alignItems: "center", width: 70 }}>
+                  {Icon ? <Icon width={40} height={40} /> : null}
+                  <Text
+                    style={[fontStyles.ios.caption2, theme.styles.textLight1]}
+                  >
+                    {label}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
+
+          {/* --------------------------------------------------- Experience */}
+          {/* Section titles an ATS matches against a dictionary use the
+              dictionary's words: "Experience", "Additional Experience",
+              "Testimonials". "Beyond Code" stays - no parser keys on it, and
+              "Interests" would trade the only line of personality on the page
+              for nothing. */}
+          <View style={{ gap: size("xs") }}>
+            <CvSectionTitle>{"Experience"}</CvSectionTitle>
+
+            {highlights.map((h, i) => (
+              <View
+                key={h.slug}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                  gap: size("s"),
+                  paddingBottom: size("xs"),
+                  borderBottomWidth: i === highlights.length - 1 ? 0 : 1,
+                  borderColor: theme.dynamicColors.ultraLight,
+                }}
+              >
+                {h.icon ? (
+                  <Image
+                    alt={h.company}
+                    src={h.icon}
+                    width={44}
+                    height={44}
+                    priority={true}
+                    style={{ borderRadius: 10 }}
+                  />
+                ) : null}
+                <View style={{ flexBasis: 168, flexGrow: 0, flexShrink: 0 }}>
+                  <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>
+                    {h.job_title ?? h.title}
+                  </Text>
+                  <Text
+                    style={[fontStyles.ios.footnote, theme.styles.textLight1]}
+                  >
+                    {h.company}
+                  </Text>
+                  <Text
+                    style={[fontStyles.ios.caption1, theme.styles.textLight2]}
+                  >
+                    {/* Stints, not one span: Hove is "2017 – 2018 · 2019 – 2023",
+                        which is what the pitch's "called back a year later"
+                        describes. A single range would contradict it. */}
+                    {(() => {
+                      const periods = cvGroupPeriods(membersOf(h));
+                      return periods.length > 1
+                        ? periods.join(" · ")
+                        : cvMonthRange(h);
+                    })()}
+                  </Text>
+                </View>
+                <View style={{ flex: 1, flexBasis: 220, gap: size("xxs") }}>
+                  <Text style={[fontStyles.ios.footnote, theme.styles.text]}>
+                    {h.cvPitch ?? h.description}
+                  </Text>
+                  {h.stats && h.stats.length > 0 ? (
+                    <Text
+                      style={[
+                        fontStyles.iosEm.caption1,
+                        { color: theme.dynamicColors.textFlashy3 },
+                      ]}
+                    >
+                      {statsLine(h.stats)}
+                    </Text>
+                  ) : null}
+                  {/* Plain terms, not hashtags: `#` forced the spaces and
+                      slashes out of the tag, so "React Native Web" became
+                      "#ReactNativeWeb" and "CI/CD" became "#CICD" - the exact
+                      strings a recruiter or an ATS searches for, destroyed by
+                      the decoration around them. */}
+                  <Text
+                    style={[fontStyles.ios.caption2, theme.styles.textLight2]}
+                  >
+                    {h.hashtags.slice(0, 6).join(" · ")}
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </View>
+
+          {/* ============================================== PAGE 2 - proof */}
+          <View
+            nativeID="cv-page2"
+            style={{
+              gap: size("l"),
+              marginBlockStart: size(globalPagePadding),
+              breakBefore: "page",
+            }}
+          >
+            {/* --------------------------------------------- Open Source */}
+            <View nativeID="cv-opensource">
+              <CvOpenSourceCard items={openSource} />
+            </View>
+
+            {/* ----------------------------------------- More experience */}
+            <View style={{ gap: size("xxs") }}>
+              <CvSectionTitle>{"Additional Experience"}</CvSectionTitle>
+
+              {moreExperienceShown.map((m) => (
+                <View
+                  key={m.slug}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "baseline",
+                    gap: size("s"),
+                  }}
+                >
+                  <Text
+                    style={[
+                      fontStyles.ios.caption1,
+                      theme.styles.textLight2,
+                      { flexBasis: 80, flexGrow: 0, flexShrink: 0 },
+                    ]}
+                  >
+                    {/* Years only: this is a compact table, and the month
+                        earns its space on key experiences, not here. */}
+                    {cvYearRange(m)}
+                  </Text>
+                  <Text
+                    style={[
+                      fontStyles.ios.footnote,
+                      { flexBasis: 300, flexGrow: 0, flexShrink: 0 },
+                    ]}
+                  >
+                    <Text
+                      style={[fontStyles.iosEm.footnote, theme.styles.text]}
+                    >
+                      {m.job_title ?? m.title}
+                    </Text>
+                    <Text style={theme.styles.textLight1}>
+                      {` · ${m.company}`}
+                    </Text>
+                  </Text>
+                  <Text
+                    style={[
+                      fontStyles.ios.footnote,
+                      theme.styles.textLight1,
+                      { flex: 1 },
+                    ]}
+                  >
+                    {(m.description ?? "").trim()}
+                  </Text>
+                </View>
+              ))}
+
+              {moreExperienceEarlier.length > 0 ? (
+                <Text
+                  style={[fontStyles.ios.caption1, theme.styles.textLight2]}
+                >
+                  {`Earlier: ${moreExperienceEarlier
+                    .map((m) => m.company)
+                    .join(" · ")}.`}
+                </Text>
+              ) : null}
+            </View>
+
+            {/* ---------------------------------- Testimonials & brands */}
+            <View nativeID="cv-testimonials" style={{ gap: size("s") }}>
+              <CvSectionTitle>{"Testimonials"}</CvSectionTitle>
+
+              {cvTestimonials.map((t, i) => (
+                <View
+                  key={t.name}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "flex-start",
+                    gap: size("s"),
+                    borderLeftWidth: 2,
+                    borderColor: [
+                      theme.dynamicColors.textFlashy2,
+                      theme.dynamicColors.textFlashy3,
+                      theme.dynamicColors.textFlashy4,
+                    ][i % 3],
+                    paddingLeft: size("s"),
+                  }}
+                >
+                  <Text
+                    style={[
+                      fontStyles.ios.footnote,
+                      theme.styles.text,
+                      { flex: 1 },
+                    ]}
+                    {...(t.originalLang !== currentLang
+                      ? { lang: currentLang }
+                      : null)}
+                  >
+                    {/* Dimmed less than on the site: this prints on paper. */}
+                    <TestimonialContent
+                      text={t.content[currentLang]}
+                      dim={0.85}
+                    />
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: size("xs"),
+                      flexBasis: 190,
+                      flexGrow: 0,
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Image
+                      src={t.avatar}
+                      alt={t.name}
+                      width={28}
+                      height={28}
+                      priority={true}
+                      style={{ borderRadius: 14 }}
+                    />
+                    <View>
+                      <Text
+                        style={[fontStyles.iosEm.caption1, theme.styles.text]}
+                      >
+                        {t.name}
+                      </Text>
+                      <Text
+                        style={[
+                          fontStyles.ios.caption2,
+                          theme.styles.textLight2,
+                        ]}
+                      >
+                        {t.title[currentLang]}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              ))}
+
+              <LinkView href={cvRecommendationsUrl} underlineOnFocus={true}>
+                <Text
+                  style={[fontStyles.ios.caption1, theme.styles.textLight2]}
+                >
+                  {"All recommendations on "}
+                  <Text
+                    style={[
+                      fontStyles.iosEm.caption1,
+                      { color: theme.dynamicColors.textFlashy3 },
+                    ]}
+                  >
+                    {visualUrl(socials.linkedin.value)}
+                  </Text>
+                </Text>
+              </LinkView>
+            </View>
+
+            {/* ------------------------------------- Talks & community */}
+            <View nativeID="cv-talks" style={{ gap: size("s") }}>
+              <CvSectionTitle>{"Talks & Community"}</CvSectionTitle>
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "stretch",
+                  gap: size("s"),
+                }}
+              >
+                {/* No year range: it would advertise the gap since 2019 more
+                    loudly than the 17 talks themselves. */}
+                <CvStatTile
+                  valueFontSize={22}
+                  stat={{
+                    stat: `${talks.length}`,
+                    label: "Conference talks",
+                    comment: "in French & English",
+                  }}
+                />
+                <CvStatTile
+                  valueFontSize={22}
+                  stat={{
+                    // blog.json only indexes moox.io; putaindecode.io is a
+                    // manual figure from consts (see STATS.md).
+                    stat: `${blog.length + cvPutaindecodeArticles}`,
+                    label: "Blog posts",
+                    comment: "on moox.io & putaindecode.io",
+                  }}
+                />
+                <CvStatTile
+                  valueFontSize={22}
+                  flexBasis={200}
+                  stat={{
+                    stat: "co-founder",
+                    label: visualUrl(socials.putaindecode.value),
+                    comment: "FR dev community, blog & podcast",
+                    url: socials.putaindecode.value,
+                  }}
+                />
+              </View>
+
+              {talksSelected.length > 0 ? (
+                <Text
+                  style={[fontStyles.ios.caption1, theme.styles.textLight1]}
+                >
+                  {"Selected: "}
+                  {talksSelected
+                    .map(
+                      (t) =>
+                        `“${t.title}”${t.conference ? ` - ${t.conference}` : ""}`,
+                    )
+                    .join(" · ")}
+                </Text>
+              ) : null}
+            </View>
+
+            {/* ------------------------------- Education & beyond code */}
+            <View
+              nativeID="cv-bottom"
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignItems: "flex-start",
+                gap: size("l"),
+              }}
+            >
+              <View style={{ flexGrow: 1, flexBasis: 280, gap: size("s") }}>
+                <CvSectionTitle fontSize={22}>{"Education"}</CvSectionTitle>
+                {education.map((e) => (
+                  <View
+                    key={e.slug}
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "flex-start",
+                      gap: size("s"),
+                    }}
+                  >
+                    {e.icon ? (
+                      <Image
+                        src={e.icon}
+                        width={36}
+                        height={36}
+                        priority={true}
+                        alt={e.company}
+                        style={{ borderRadius: 8 }}
+                      />
+                    ) : null}
+                    <View style={{ flex: 1 }}>
+                      <Text
+                        style={[fontStyles.iosEm.footnote, theme.styles.text]}
+                      >
+                        {e.job_title ?? e.title}
+                      </Text>
+                      <Text
+                        style={[
+                          fontStyles.ios.caption1,
+                          theme.styles.textLight1,
+                        ]}
+                      >
+                        {`${e.company} · ${cvYearRange(e)}`}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+
+              <View style={{ flexGrow: 1, flexBasis: 280, gap: size("s") }}>
+                <CvSectionTitle fontSize={22}>{"Beyond Code"}</CvSectionTitle>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    gap: size("m"),
+                  }}
+                >
+                  {hobbies.map(({ Icon, label }) => (
+                    <View key={label} style={{ alignItems: "center" }}>
+                      <Icon width={48} height={48} fill="url(#cvGrad)" />
+                      <Text
+                        style={[
+                          fontStyles.ios.callout,
+                          theme.styles.textLight1,
+                          { textAlign: "center", whiteSpace: "nowrap" },
+                        ]}
+                      >
+                        {label}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              </View>
+            </View>
+
+            {/* --------------------------------------------------- Footer */}
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: size("m"),
+                borderTopWidth: 1,
+                borderColor: theme.dynamicColors.ultraLight,
+                padding: size("s"),
+              }}
+            >
+              <View style={{ flexShrink: 1 }}>
+                {/* Dates the whole document, so a PDF that keeps circulating
+                    says how old it is instead of quietly going stale. */}
+                <Text
+                  style={[fontStyles.ios.caption2, theme.styles.textLight2]}
+                >
+                  {cvUpdatedOn()}
+                </Text>
+                <Text style={[fontStyles.ios.callout, theme.styles.text]}>
+                  {"Full history & all my experiences online:"}
+                </Text>
+                <LinkView href={website} underlineOnFocus={true}>
+                  <Text
+                    style={[
+                      fontStyles.iosEm.title3,
+                      gradientTextIndigoStylesInv(theme, undefined, true),
+                    ]}
+                  >
+                    {visualUrl(website)}
+                  </Text>
+                </LinkView>
+              </View>
+              <Image
+                src="/qr-code.jpg"
+                width={72}
+                height={72}
+                priority={true}
+                alt={`QR code to ${website}`}
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </WebsiteWrapper>
+  );
+}

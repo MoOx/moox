@@ -39,7 +39,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ResumeIntro({ pdf = false }: { pdf?: boolean }) {
+export default function ResumeIntro({
+  staticRendering = false,
+}: {
+  staticRendering?: boolean;
+}) {
   const theme = useTheme();
 
   return (
@@ -48,7 +52,7 @@ export default function ResumeIntro({ pdf = false }: { pdf?: boolean }) {
         <Text
           style={[
             fontStyles.iosEm.largeTitle,
-            gradientTextIndigoStylesInv(theme, undefined, pdf),
+            gradientTextIndigoStylesInv(theme, undefined, staticRendering),
             // { alignSelf: "center" },
           ]}
         >

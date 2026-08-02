@@ -7,7 +7,11 @@ import TextForReader from "@/react-multiversal/TextForReader";
 import { pTransforms } from "@/utils.styles";
 import { StyleSheet } from "react-native";
 
-export default function BlockMe1WithSmallPills() {
+export default function BlockMe1WithSmallPills({
+  staticRendering = false,
+}: {
+  staticRendering?: boolean;
+}) {
   return (
     <>
       <IfWindowWidthIs
@@ -15,7 +19,7 @@ export default function BlockMe1WithSmallPills() {
         style={[StyleSheet.absoluteFill, { alignItems: "center" }]}
       >
         <TextForReader>{"I am building things for a long time."}</TextForReader>
-        <Me>
+        <Me staticRendering={staticRendering}>
           <Parallax
             style={{ position: "absolute", top: 150, left: 0 }}
             transforms={pTransforms(5, -5, 0.1)}
@@ -32,7 +36,7 @@ export default function BlockMe1WithSmallPills() {
             style={{ position: "absolute", top: 200, right: 40 }}
             transforms={pTransforms(5, -5, -0.1)}
           >
-            <Pill title="First Website" year={1999} ago={true} />
+            <Pill title="First Website" year={1999} mode="ago" />
           </Parallax>
           <Parallax
             style={{ position: "absolute", top: 300, left: -60 }}
@@ -42,7 +46,7 @@ export default function BlockMe1WithSmallPills() {
               title="First Mobile Web App"
               detail="PalmOS"
               year={2006}
-              ago={true}
+              mode="ago"
             />
           </Parallax>
         </Me>
@@ -51,7 +55,7 @@ export default function BlockMe1WithSmallPills() {
         smallerThan={WindowWidth.xs}
         style={[StyleSheet.absoluteFill, { alignItems: "center" }]}
       >
-        <Me>
+        <Me staticRendering={staticRendering}>
           <Parallax
             style={{ position: "absolute", top: 150, right: 10 }}
             transforms={pTransforms(-5, -10, 0.1)}
@@ -81,7 +85,7 @@ export default function BlockMe1WithSmallPills() {
             <Pill
               title="First Website"
               year={1999}
-              ago={true}
+              mode="ago"
               transitionSize="s"
             />
           </Parallax>
@@ -93,7 +97,7 @@ export default function BlockMe1WithSmallPills() {
               title="First Mobile Web App"
               detail="PalmOS"
               year={2006}
-              ago={true}
+              mode="ago"
               transitionSize="s"
             />
           </Parallax>

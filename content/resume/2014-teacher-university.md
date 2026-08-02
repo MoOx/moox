@@ -1,5 +1,6 @@
 ---
 company: "IUT Blagnac"
+cvGroup: iut-blagnac
 url: "https://www.iut-blagnac.fr/"
 title: "University Teacher"
 description: >

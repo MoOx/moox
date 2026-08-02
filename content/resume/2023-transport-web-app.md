@@ -2,6 +2,7 @@
 company: "Hove"
 url: "https://hove.com/"
 title: "Transport Web App"
+cvGroup: hove
 description: >
   Web app built for cities and transport networks
 dateStart: 2023-01-01
@@ -10,7 +11,7 @@ hashtags:
   - JavaScript
   - React
   - ReactNative
-  - ReactNativeWeb
+  - React Native Web
   - TypeScript
   - Git
   - Lead

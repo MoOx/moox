@@ -111,7 +111,7 @@ export default function BlockPassionated({
               ]}
               role="paragraph"
             >
-              {`Almost 2 decades turning tangled front-ends into systems a team can actually maintain — simpler architecture, less overhead, and devs who level up along the way. Web, iOS, Android, ideally from one codebase.`}
+              {`Almost 2 decades turning tangled front-ends into systems a team can actually maintain - simpler architecture, less overhead, and devs who level up along the way. Web, iOS, Android, ideally from one codebase.`}
             </Text>
             <LinkButton
               href="/resume/"

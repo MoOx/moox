@@ -1,6 +1,7 @@
 ---
-company: "Kisio Digital"
-url: "http://www.kisio.com"
+company: "Hove"
+url: "https://hove.com/"
+cvGroup: hove
 title: "Transport Mobile App"
 description: >
   iOS / Android app built for cities and transport networks

@@ -6,7 +6,7 @@ import ResumeStats from "@/components/ResumeStats";
 import { ResumeTimeline } from "@/components/ResumeTimeline";
 import SkillsCards from "@/components/SkillsCards";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
-import { ind, socials, visualUrl } from "@/consts";
+import { ind, sendStringAsMailString, socials, visualUrl } from "@/consts";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
@@ -24,6 +24,7 @@ import {
   useTheme,
 } from "@/styles";
 import SVGDownload from "@/svgs/components/SVGDownload";
+import SVGEmail from "@/svgs/components/SVGEmail";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
 import SVGPhone from "@/svgs/components/SVGPhone";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
@@ -38,14 +39,16 @@ import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export const Route = createFileRoute("/resume")({
-  validateSearch: (search: Record<string, unknown>): { pdf?: boolean } => {
-    // `?pdf`, `?pdf=1`, `?pdf=true` → PDF export mode. Absent → clean URL.
-    const pdf =
-      search.pdf === "" ||
-      search.pdf === true ||
-      search.pdf === "true" ||
-      search.pdf === "1";
-    return pdf ? { pdf: true } : {};
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { staticRendering?: boolean } => {
+    // `?staticRendering`, `?staticRendering=1`, `?staticRendering=true` → PDF export mode. Absent → clean URL.
+    const staticRendering =
+      search.staticRendering === "" ||
+      search.staticRendering === true ||
+      search.staticRendering === "true" ||
+      search.staticRendering === "1";
+    return staticRendering ? { staticRendering: true } : {};
   },
   loader: () => fetchAll({ data: "resume" }),
   head: () => ({
@@ -65,6 +68,7 @@ export const Route = createFileRoute("/resume")({
 });
 
 const website = "https://moox.io";
+const email = sendStringAsMailString(socials.send.value);
 const phoneHref = `tel:+${ind}${socials.call.value}`;
 const phoneDisplay = `+${ind} ${socials.call.value.replace(
   /(\d)(\d{2})(\d{2})(\d{2})(\d{2})/,
@@ -72,27 +76,27 @@ const phoneDisplay = `+${ind} ${socials.call.value.replace(
 )}`;
 
 function PageResume() {
-  const { pdf } = Route.useSearch();
+  const { staticRendering } = Route.useSearch();
   const theme = useTheme();
   const items = Route.useLoaderData();
 
   // In PDF mode, force the light color scheme for a clean, ink-light print,
   // and restore the visitor's previous choice when leaving the page.
   useEffect(() => {
-    if (!pdf) return;
+    if (!staticRendering) return;
     const previous = getColorScheme();
     void setUserColorScheme("light");
     return () => {
       void setUserColorScheme(previous);
     };
-  }, [pdf]);
+  }, [staticRendering]);
 
   const headline = (viewTransitionName: string) => (
     <>
       <Text
         style={[
           theme.styles.text,
-          gradientTextFlashyStyles(theme, 172, pdf),
+          gradientTextFlashyStyles(theme, 172, staticRendering),
           {
             fontSize: 48,
             lineHeight: 48,
@@ -124,8 +128,8 @@ function PageResume() {
   );
 
   return (
-    <WebsiteWrapper bare={pdf}>
-      {pdf ? (
+    <WebsiteWrapper bare={staticRendering}>
+      {staticRendering ? (
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -178,7 +182,7 @@ function PageResume() {
             role="paragraph"
             style={[
               theme.styles.text,
-              gradientTextFlashyStylesInv(theme, undefined, pdf),
+              gradientTextFlashyStylesInv(theme, undefined, staticRendering),
               {
                 fontSize: 64,
                 lineHeight: 64,
@@ -223,7 +227,7 @@ function PageResume() {
           </Text>
           <Spacer size="l" />
           <View>
-            {pdf ? (
+            {staticRendering ? (
               <>
                 <LinkView
                   href={website}
@@ -274,7 +278,7 @@ function PageResume() {
                 {visualUrl(socials.linkedin.value)}
               </Text>
             </LinkView>
-            {pdf ? (
+            {staticRendering ? (
               <>
                 <Spacer size="s" />
                 <LinkView
@@ -290,9 +294,23 @@ function PageResume() {
                   <Spacer size="xs" />
                   <Text style={theme.styles.textLight1}>{phoneDisplay}</Text>
                 </LinkView>
+                <Spacer size="s" />
+                <LinkView
+                  href={`mailto:${email}`}
+                  underlineOnFocus={true}
+                  style={{ flexDirection: "row", alignItems: "center" }}
+                >
+                  <SVGEmail
+                    width={16}
+                    height={16}
+                    fill={theme.dynamicColors.textMainDark}
+                  />
+                  <Spacer size="xs" />
+                  <Text style={theme.styles.textLight1}>{email}</Text>
+                </LinkView>
               </>
             ) : null}
-            {pdf ? null : (
+            {staticRendering ? null : (
               <>
                 <Spacer size="l" />
                 <a
@@ -340,7 +358,7 @@ function PageResume() {
             />
           </View>
         </SpacedView>
-        <BlockMe2WithPills pdf={pdf} />
+        <BlockMe2WithPills staticRendering={staticRendering} />
       </Container>
 
       <Container maxWidth={900}>
@@ -348,7 +366,7 @@ function PageResume() {
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              gradientTextIndigoStylesInv(theme, undefined, pdf),
+              gradientTextIndigoStylesInv(theme, undefined, staticRendering),
             ]}
             role="heading"
             aria-level={2}
@@ -360,7 +378,7 @@ function PageResume() {
         </SpacedView>
       </Container>
       <Spacer size="xxl" />
-      <ResumeIntro pdf={pdf} />
+      <ResumeIntro staticRendering={staticRendering} />
       <Spacer size="xxl" />
       <ResumeStats />
       <Spacer size="xxl" />
@@ -369,7 +387,7 @@ function PageResume() {
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              gradientTextFlashyStyles(theme, undefined, pdf),
+              gradientTextFlashyStyles(theme, undefined, staticRendering),
               { alignSelf: "center" },
             ]}
             role="heading"
@@ -378,11 +396,11 @@ function PageResume() {
             {"Latest Experiences"}
           </Text>
           <Spacer size="l" />
-          <ResumeTimeline items={items} pdf={pdf} />
+          <ResumeTimeline items={items} staticRendering={staticRendering} />
         </SpacedView>
         <Spacer />
       </Container>
-      {pdf ? (
+      {staticRendering ? (
         <>
           <Spacer size="l" />
           <Container maxWidth={840}>
@@ -405,7 +423,11 @@ function PageResume() {
                     <Text
                       style={[
                         fontStyles.iosEm.title3,
-                        gradientTextIndigoStylesInv(theme, undefined, pdf),
+                        gradientTextIndigoStylesInv(
+                          theme,
+                          undefined,
+                          staticRendering,
+                        ),
                       ]}
                     >
                       {visualUrl(website)}
