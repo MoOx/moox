@@ -5,12 +5,12 @@ title: "Transport Mobile App"
 highlight: true
 job_title: "Lead Front-End Developer"
 icon: /resume/icons/hove.png
-cvGroup: hove
+group: hove
 # The accessibility sentence claims what happened and nothing more: the app was
 # tested by a disability users' association, which is third-party validation,
 # not an RGAA or WCAG conformance audit. "Fully accessible, validated by users"
 # is checkable; "RGAA compliant" would be a claim nobody ran the audit for.
-cvPitch: "Created the white-label iOS & Android transit app for cities and grew the team to 10 devs across 20 client networks. Called back by the CTO a year later to rescue it: I rebuilt it as a smaller, senior team, stabilized the product, and turned a full day of manual multi-client QA into a one-click Jenkins pipeline with Detox end-to-end tests for  critical paths. Made the app fully accessible, validated by a disability users' association."
+groupPitch: "Created the white-label iOS & Android transit app for cities and grew the team to 10 devs across 20 client networks. Called back by the CTO a year later to rescue it: I rebuilt it as a smaller, senior team, stabilized the product, and turned a full day of manual multi-client QA into a one-click Jenkins pipeline with Detox end-to-end tests for  critical paths. Made the app fully accessible, validated by a disability users' association."
 stats:
   - title: "Networks served"
     stat: "900M+"

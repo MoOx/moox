@@ -181,11 +181,12 @@ export const gradientStaticIndigoStyles = [
 const makeGradientTextStyles = (
   stops: GradientStop[],
   angle: number = 90,
-  // PDF export: `background-clip: text` + transparent fill is dropped when
-  // printing (notably Safari → invisible text), so fall back to a solid color.
-  staticRendering: boolean = false,
+  // Print/PDF option (used by `/cv`): `background-clip: text` + transparent
+  // fill is dropped when printing (notably Safari → invisible text), so fall
+  // back to a solid color.
+  print: boolean = false,
 ) =>
-  (staticRendering
+  (print
     ? {
         alignSelf: "flex-start",
         color: stops[Math.floor(stops.length / 2)]?.stopColor,
@@ -202,25 +203,23 @@ const makeGradientTextStyles = (
 export const gradientTextIndigoStyles = (
   theme: Theme<ThemedColors>,
   angle?: number,
-  staticRendering?: boolean,
-) => makeGradientTextStyles(gradientIndigoStops(theme), angle, staticRendering);
+  print?: boolean,
+) => makeGradientTextStyles(gradientIndigoStops(theme), angle, print);
 export const gradientTextIndigoStylesInv = (
   theme: Theme<ThemedColors>,
   angle?: number,
-  staticRendering?: boolean,
-) =>
-  makeGradientTextStyles(gradientIndigoStopsInv(theme), angle, staticRendering);
+  print?: boolean,
+) => makeGradientTextStyles(gradientIndigoStopsInv(theme), angle, print);
 export const gradientTextFlashyStyles = (
   theme: Theme<ThemedColors>,
   angle?: number,
-  staticRendering?: boolean,
-) => makeGradientTextStyles(gradientFlashyStops(theme), angle, staticRendering);
+  print?: boolean,
+) => makeGradientTextStyles(gradientFlashyStops(theme), angle, print);
 export const gradientTextFlashyStylesInv = (
   theme: Theme<ThemedColors>,
   angle?: number,
-  staticRendering?: boolean,
-) =>
-  makeGradientTextStyles(gradientFlashyStopsInv(theme), angle, staticRendering);
+  print?: boolean,
+) => makeGradientTextStyles(gradientFlashyStopsInv(theme), angle, print);
 
 export const gradientText = (theme: Theme<ThemedColors>) => [
   { offset: 0, stopColor: theme.dynamicColors.textAlt },
@@ -229,5 +228,5 @@ export const gradientText = (theme: Theme<ThemedColors>) => [
 export const gradientTextStyles = (
   theme: Theme<ThemedColors>,
   angle: number = 180,
-  staticRendering?: boolean,
-) => makeGradientTextStyles(gradientText(theme), angle, staticRendering);
+  print?: boolean,
+) => makeGradientTextStyles(gradientText(theme), angle, print);

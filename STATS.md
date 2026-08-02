@@ -39,7 +39,7 @@ console.log(clients.join(", "));
 ## 3. Talks & blog posts
 
 - **17 talks · 49 blog posts** = 27 on moox.io (counted) + **22 on
-  putaindecode.io** (manual, `cvPutaindecodeArticles` in `src/consts.tsx`).
+  putaindecode.io** (manual, `putaindecodeArticles` in `src/profile.tsx`).
   Source for the manual figure: <https://putaindecode.io/articles?search=moox>.
   (Secondary stats, not hero tiles.)
 - Source: `content/talks/*.md`, `content/blog/*.md`.
@@ -178,13 +178,13 @@ each entry's `stats:` frontmatter (`content/resume/*.md`).
   team of 3 - personal record.
 - **IUT** (`2020-teacher-university.md`): ~200 students = 1–2 classes of 20 over
   the taught years (estimate). **6 academic years, not 8** - the 2012–2020 span
-  has a 2015–2017 gap; count the `cvGroup: iut-blagnac` entries to recheck:
+  has a 2015–2017 gap; count the `group: iut-blagnac` entries to recheck:
   `ls content/resume/*teacher-university.md | wc -l`.
 
 ---
 
 ## 7. Where the numbers live in the code
 
-- Global profile stats → `src/consts.tsx` (`cvProfileStats`).
+- Global profile stats → `src/profile.tsx` (`profileStats`).
 - Per-entry stats → `content/resume/*.md` frontmatter (`stats:`), typed as
   `ResumeStat` in `src/api.tsx`.

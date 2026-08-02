@@ -7,11 +7,7 @@ import TextForReader from "@/react-multiversal/TextForReader";
 import { pTransforms } from "@/utils.styles";
 import { StyleSheet } from "react-native";
 
-export default function BlockMe1WithSmallPills({
-  staticRendering = false,
-}: {
-  staticRendering?: boolean;
-}) {
+export default function BlockMe1WithSmallPills() {
   return (
     <>
       <IfWindowWidthIs
@@ -19,7 +15,7 @@ export default function BlockMe1WithSmallPills({
         style={[StyleSheet.absoluteFill, { alignItems: "center" }]}
       >
         <TextForReader>{"I am building things for a long time."}</TextForReader>
-        <Me staticRendering={staticRendering}>
+        <Me>
           <Parallax
             style={{ position: "absolute", top: 150, left: 0 }}
             transforms={pTransforms(5, -5, 0.1)}
@@ -55,7 +51,7 @@ export default function BlockMe1WithSmallPills({
         smallerThan={WindowWidth.xs}
         style={[StyleSheet.absoluteFill, { alignItems: "center" }]}
       >
-        <Me staticRendering={staticRendering}>
+        <Me>
           <Parallax
             style={{ position: "absolute", top: 150, right: 10 }}
             transforms={pTransforms(-5, -10, 0.1)}

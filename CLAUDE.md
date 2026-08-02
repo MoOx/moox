@@ -6,13 +6,13 @@ content authored as markdown in `content/` and compiled to JSON by
 
 ## Where things are
 
-| What | Where |
-| --- | --- |
-| The CV page (source of the PDF) | `src/app/cv.tsx` |
-| CV copy, figures, derivations | `src/consts.tsx` (`cv*` exports) |
-| Missions / open source / education | `content/resume/*.md` frontmatter |
-| Testimonials | `src/components/BlockTestimonials.tsx` |
-| PDF export | `scripts/generate-resume-pdf.mjs` |
+| What                               | Where                                  |
+| ---------------------------------- | -------------------------------------- |
+| The CV page (source of the PDF)    | `src/app/cv.tsx`                       |
+| CV copy, figures, derivations      | `src/profile.tsx`                      |
+| Missions / open source / education | `content/resume/*.md` frontmatter      |
+| Testimonials                       | `src/components/BlockTestimonials.tsx` |
+| PDF export                         | `scripts/generate-resume-pdf.mjs`      |
 
 Longer context, only read when relevant:
 
@@ -25,7 +25,7 @@ Longer context, only read when relevant:
 **Never put Ghostscript back in the PDF pipeline.** `gs -sDEVICE=pdfwrite`
 rewrites the whole document, text included, and silently destroys the text
 layer — characters drop from the start of words (`Simpler` → `er`). The PDF
-still *looks* perfect, so nothing reveals it until an ATS or an LLM reads the
+still _looks_ perfect, so nothing reveals it until an ATS or an LLM reads the
 file. It shipped broken for months. Use qpdf (streams + images, text
 untouched), plus pngquant served through Playwright request interception so
 source assets are never degraded.
@@ -38,13 +38,13 @@ pdftotext public/maxime-thirouin-freelance-front-end-developer-resume.pdf - | he
 
 **Derive, never hand-write.** Every hand-authored value on this CV has drifted
 at some point (date spans, teaching years, blog counts). Dates come from the
-markdown via `cvGroup` / `cvGroupPeriods` / `cvMonthRange`; counts come from the
+markdown via `group` / `groupPeriods` / `monthRange` (`src/profile.tsx`); counts come from the
 generated JSON. If you find yourself typing a period or a total, look for the
 derivation instead. Manual figures that genuinely cannot be computed live in
-`consts.tsx` with a `STATS.md` reference.
+`profile.tsx` with a `STATS.md` reference.
 
 **Flags, not positions.** Selection and grouping are expressed as named
-frontmatter/data flags — `cvGroup`, `personal`, `highlight`, `feature`,
+frontmatter/data flags — `group`, `personal`, `highlight`, `feature`,
 `cv` — never as `slice(0, n)` or index arithmetic.
 
 **The job title is `Lead Front-End Developer`**, identical to the title of the

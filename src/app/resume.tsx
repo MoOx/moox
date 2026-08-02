@@ -1,22 +1,56 @@
-import { fetchAll } from "@/api";
+import { fetchAll, ResumeItem, Talk } from "@/api";
+import AvailabilityBadge from "@/components/AvailabilityBadge";
 import BlockMe2WithPills from "@/components/BlockMe2WithPills";
 import ButtonView from "@/components/ButtonView";
-import ResumeIntro from "@/components/ResumeIntro";
+import CvOpenSourceCard from "@/components/CvOpenSourceCard";
+import Image from "@/components/Image";
 import ResumeStats from "@/components/ResumeStats";
 import { ResumeTimeline } from "@/components/ResumeTimeline";
 import SkillsCards from "@/components/SkillsCards";
+import StatTile from "@/components/StatTile";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
-import { ind, sendStringAsMailString, socials, visualUrl } from "@/consts";
-import { WindowWidth } from "@/react-multiversal";
+import { socials, visualUrl } from "@/consts";
+import {
+  availabilityDetail,
+  availabilityLabel,
+  freelanceSince,
+  fullName,
+  groupKey,
+  groupPeriods,
+  hobbies,
+  jobSubtitle,
+  jobTitle,
+  keyExperiences,
+  languages,
+  metaDescription,
+  monthRange,
+  nickname,
+  personJsonLd,
+  profileStats,
+  putaindecodeArticles,
+  recommendationsUrl,
+  resumeEntryPath,
+  selectedTalksSlugs,
+  statsLine,
+  summary,
+  tagline,
+  techs,
+  workLocation,
+  yearRange,
+} from "@/profile";
+import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
+import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import TextForReader from "@/react-multiversal/TextForReader";
 import {
+  alpha,
+  colors,
   gradientFlashyStops,
   gradientTextFlashyStyles,
   gradientTextFlashyStylesInv,
@@ -24,79 +58,78 @@ import {
   useTheme,
 } from "@/styles";
 import SVGDownload from "@/svgs/components/SVGDownload";
-import SVGEmail from "@/svgs/components/SVGEmail";
-import SVGExternalLink from "@/svgs/components/SVGExternalLink";
-import SVGPhone from "@/svgs/components/SVGPhone";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
-import Image from "@/components/Image";
-import {
-  getColorScheme,
-  setUserColorScheme,
-} from "@/react-multiversal/theme/colorScheme";
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
 import { StyleSheet, Text, View } from "react-native";
+import Svg, { Defs, LinearGradient, Stop } from "react-native-svg";
 
 export const Route = createFileRoute("/resume")({
-  validateSearch: (
-    search: Record<string, unknown>,
-  ): { staticRendering?: boolean } => {
-    // `?staticRendering`, `?staticRendering=1`, `?staticRendering=true` → PDF export mode. Absent → clean URL.
-    const staticRendering =
-      search.staticRendering === "" ||
-      search.staticRendering === true ||
-      search.staticRendering === "true" ||
-      search.staticRendering === "1";
-    return staticRendering ? { staticRendering: true } : {};
+  loader: async () => {
+    const [resume, talks, blog] = await Promise.all([
+      fetchAll({ data: "resume" }),
+      fetchAll({ data: "talks" }),
+      fetchAll({ data: "blog" }),
+    ]);
+    return { resume, talks, blog };
   },
-  loader: () => fetchAll({ data: "resume" }),
   head: () => ({
     meta: [
+      // Same title vocabulary as `/` and `/cv` (see profile.tsx) - one job
+      // title site-wide, for humans and crawlers alike.
       {
-        title:
-          "Maxime Thirouin Résumé - Senior Front-End Architect & Developer, React & React Native Expert.",
+        title: `${fullName} (${nickname}) - Résumé & Experience Timeline - ${jobTitle}`,
       },
-      {
-        name: "description",
-        content:
-          "Max is a Senior Front-End Architect & Developer, available as a Freelance since 2013. He masters React & React Native and has a passion for building great products with a focus on user experience.",
-      },
+      { name: "description", content: metaDescription },
     ],
   }),
   component: PageResume,
 });
 
-const website = "https://moox.io";
-const email = sendStringAsMailString(socials.send.value);
-const phoneHref = `tel:+${ind}${socials.call.value}`;
-const phoneDisplay = `+${ind} ${socials.call.value.replace(
-  /(\d)(\d{2})(\d{2})(\d{2})(\d{2})/,
-  "$1 $2 $3 $4 $5",
-)}`;
-
+/**
+ * The web CV: same structure and content sources as `/cv`, without the
+ * two-page constraint. The condensed, CV-shaped read comes first; the full
+ * timeline (every experience, with detail modals) closes the page for the
+ * readers who scroll that far.
+ */
 function PageResume() {
-  const { staticRendering } = Route.useSearch();
   const theme = useTheme();
-  const items = Route.useLoaderData();
+  const { resume: items, talks, blog } = Route.useLoaderData();
+  // Slug of the entry whose detail modal is open (child route /resume/$slug).
+  const { slug: activeSlug } = useParams({ strict: false }) as {
+    slug?: string;
+  };
 
-  // In PDF mode, force the light color scheme for a clean, ink-light print,
-  // and restore the visitor's previous choice when leaving the page.
-  useEffect(() => {
-    if (!staticRendering) return;
-    const previous = getColorScheme();
-    void setUserColorScheme("light");
-    return () => {
-      void setUserColorScheme(previous);
-    };
-  }, [staticRendering]);
+  const highlights = keyExperiences(items);
+  const membersOf = (item: ResumeItem) =>
+    items.filter((i) => groupKey(i) === groupKey(item));
+  const education = items
+    .filter((i) => i.education)
+    .sort((a, b) => ((b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1));
+  // Open source reads best as a story: oldest first (cssnext → stylelint → …).
+  const openSource = items
+    .filter((i) => i.openSource)
+    .sort((a, b) => (a.dateStart > b.dateStart ? 1 : -1));
+
+  const talksSelected = selectedTalksSlugs
+    .map((slug) => talks.find((t) => t.slug === slug))
+    .filter((t): t is Talk => Boolean(t));
 
   const headline = (viewTransitionName: string) => (
     <>
       <Text
         style={[
+          fontStyles.iosEm.caption1,
+          theme.styles.textLight2,
+          { letterSpacing: 1.4, textTransform: "uppercase" },
+        ]}
+      >
+        {`Freelance since ${freelanceSince} · ${workLocation}`}
+      </Text>
+      <Text
+        style={[
           theme.styles.text,
-          gradientTextFlashyStyles(theme, 172, staticRendering),
+          gradientTextFlashyStyles(theme, 172),
           {
             fontSize: 48,
             lineHeight: 48,
@@ -107,44 +140,43 @@ function PageResume() {
         role="heading"
         aria-level={1}
       >
-        {"Front-End Architect."}
+        {`${jobTitle}.`}
       </Text>
       <Text
-        style={[fontStyles.ios.headline, theme.styles.textMainDark]}
+        style={[
+          fontStyles.ios.subhead,
+          theme.styles.textLight1,
+          { fontStyle: "italic" },
+        ]}
         role="heading"
         aria-level={2}
       >
-        {"Freelance "}
-        <Text
-          style={[
-            theme.styles.textLight2,
-            { fontStyle: "italic", fontWeight: "200" },
-          ]}
-        >
-          {"since 2013"}
-        </Text>
+        {jobSubtitle}
       </Text>
     </>
   );
 
   return (
-    <WebsiteWrapper bare={staticRendering}>
-      {staticRendering ? (
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              /* Neutralize the CSS page margin so the PDF export's --margin
-                 option (page.pdf) is the single source of truth; otherwise the
-                 two compound and margins can't be removed. */
-              @page { margin: 0; }
-              @media print {
-                html, body { background: #fff !important; }
-              }
-            `,
-          }}
-        />
-      ) : null}
+    <WebsiteWrapper>
+      {/* Machine-readable twin of the page, same data as / and /cv. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personJsonLd(items)),
+        }}
+      />
+      {/* Shared violet gradient for the Beyond Code icon fills. */}
+      <Svg width={0} height={0} style={{ position: "absolute" }}>
+        <Defs>
+          <LinearGradient id="profileGrad" x1="0" y1="0" x2="1" y2="1">
+            <Stop offset="0" stopColor={theme.dynamicColors.textFlashy1} />
+            <Stop offset="1" stopColor={theme.dynamicColors.textFlashy4} />
+          </LinearGradient>
+        </Defs>
+      </Svg>
       <Spacer size="m" />
+
+      {/* ============================================================ Hero */}
       <Container
         wrapperStyle={{ zIndex: 1, overflow: "visible" }}
         maxWidth={900}
@@ -173,6 +205,7 @@ function PageResume() {
               {headline("text--front-end-architect")}
             </SpacedView>
             <Spacer size="xxxl" />
+            <Spacer size="l" />
           </IfWindowWidthIs>
           <IfWindowWidthIs smallerThan={WindowWidth.m}>
             {headline("text--front-end-architect-m")}
@@ -182,7 +215,7 @@ function PageResume() {
             role="paragraph"
             style={[
               theme.styles.text,
-              gradientTextFlashyStylesInv(theme, undefined, staticRendering),
+              gradientTextFlashyStylesInv(theme),
               {
                 fontSize: 64,
                 lineHeight: 64,
@@ -226,129 +259,108 @@ function PageResume() {
             </Text>
           </Text>
           <Spacer size="l" />
-          <View>
-            {staticRendering ? (
-              <>
-                <LinkView
-                  href={website}
-                  underlineOnFocus={true}
-                  style={{ flexDirection: "row", alignItems: "center" }}
-                >
-                  <SVGExternalLink
-                    width={16}
-                    height={16}
-                    fill={theme.dynamicColors.textMainDark}
-                  />
-                  <Spacer size="xs" />
-                  <Text style={theme.styles.textLight1}>
-                    {visualUrl(website)}
-                  </Text>
-                </LinkView>
-                <Spacer size="s" />
-              </>
-            ) : null}
+          <View style={{ gap: size("s") }}>
             <LinkView
               href={socials.github.value}
               underlineOnFocus={true}
-              style={{ flexDirection: "row", alignItems: "center" }}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: size("xs"),
+              }}
             >
               <SVGSocialGithub
                 width={16}
                 height={16}
                 fill={theme.dynamicColors.textMainDark}
               />
-              <Spacer size="xs" />
               <Text style={theme.styles.textLight1}>
                 {visualUrl(socials.github.value)}
               </Text>
             </LinkView>
-            <Spacer size="s" />
             <LinkView
               href={socials.linkedin.value}
               underlineOnFocus={true}
-              style={{ flexDirection: "row", alignItems: "center" }}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: size("xs"),
+              }}
             >
               <SVGSocialLinkedin
                 width={16}
                 height={16}
                 fill={theme.dynamicColors.textMainDark}
               />
-              <Spacer size="xs" />
               <Text style={theme.styles.textLight1}>
                 {visualUrl(socials.linkedin.value)}
               </Text>
             </LinkView>
-            {staticRendering ? (
-              <>
-                <Spacer size="s" />
-                <LinkView
-                  href={phoneHref}
-                  underlineOnFocus={true}
-                  style={{ flexDirection: "row", alignItems: "center" }}
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: size("s"),
+              }}
+            >
+              {languages.map((l) => (
+                <Text
+                  key={l.label}
+                  style={[fontStyles.ios.footnote, theme.styles.textLight1]}
                 >
-                  <SVGPhone
-                    width={16}
-                    height={16}
-                    fill={theme.dynamicColors.textMainDark}
-                  />
-                  <Spacer size="xs" />
-                  <Text style={theme.styles.textLight1}>{phoneDisplay}</Text>
-                </LinkView>
-                <Spacer size="s" />
-                <LinkView
-                  href={`mailto:${email}`}
-                  underlineOnFocus={true}
-                  style={{ flexDirection: "row", alignItems: "center" }}
-                >
-                  <SVGEmail
-                    width={16}
-                    height={16}
-                    fill={theme.dynamicColors.textMainDark}
-                  />
-                  <Spacer size="xs" />
-                  <Text style={theme.styles.textLight1}>{email}</Text>
-                </LinkView>
-              </>
-            ) : null}
-            {staticRendering ? null : (
-              <>
-                <Spacer size="l" />
-                <a
-                  href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
-                  download
-                  style={{
-                    alignItems: "flex-start",
-                    display: "flex",
-                    textDecoration: "none",
-                    color: "inherit",
-                  }}
-                >
-                  <ButtonView
-                    mode="outline"
-                    effect="subtle"
-                    spaceGap="xs"
-                    textColor={theme.dynamicColors.textFlashy1}
-                  >
-                    {({ color }) => (
-                      <>
-                        <SVGDownload width={16} height={16} fill={color} />
-                        <Text
-                          style={[
-                            {
-                              color,
-                              fontWeight: weight.bold,
-                            },
-                            gradientTextFlashyStyles(theme, 20),
-                          ]}
-                        >
-                          {"Download"}
-                        </Text>
-                      </>
-                    )}
-                  </ButtonView>
-                </a>
-              </>
-            )}
+                  {`${l.flag} ${l.label} `}
+                  <Text style={theme.styles.text}>{l.level}</Text>
+                </Text>
+              ))}
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: size("xs"),
+              }}
+            >
+              <AvailabilityBadge showText={true} text={availabilityLabel} />
+              <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
+                {availabilityDetail}
+              </Text>
+            </View>
+            <Spacer size="s" />
+            <a
+              href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
+              download
+              style={{
+                alignItems: "flex-start",
+                display: "flex",
+                textDecoration: "none",
+                color: "inherit",
+              }}
+            >
+              <ButtonView
+                mode="outline"
+                effect="subtle"
+                spaceGap="xs"
+                textColor={theme.dynamicColors.textFlashy1}
+              >
+                {({ color }) => (
+                  <>
+                    <SVGDownload width={16} height={16} fill={color} />
+                    <Text
+                      style={[
+                        {
+                          color,
+                          fontWeight: weight.bold,
+                        },
+                        gradientTextFlashyStyles(theme, 20),
+                      ]}
+                    >
+                      {"Download"}
+                    </Text>
+                  </>
+                )}
+              </ButtonView>
+            </a>
           </View>
           <Spacer size="xl" />
           <View style={{ height: 3, width: "95%" }}>
@@ -358,95 +370,386 @@ function PageResume() {
             />
           </View>
         </SpacedView>
-        <BlockMe2WithPills staticRendering={staticRendering} />
+        <BlockMe2WithPills />
       </Container>
 
+      {/* ================================================== Summary banner */}
+      <Spacer size="l" />
       <Container maxWidth={900}>
         <SpacedView horizontal="l">
+          <View
+            style={{
+              borderRadius: size("s"),
+              overflow: "hidden",
+              backgroundImage: `linear-gradient(4deg,
+                ${theme.dynamicColors.textFlashy1} 0%,
+                ${theme.dynamicColors.textFlashy2} 25%,
+                ${theme.dynamicColors.textFlashy3} 75%,
+                ${theme.dynamicColors.textFlashy4} 100%)`,
+            }}
+          >
+            <SpacedView horizontal="l" vertical="m" gap="xs">
+              <Text style={[fontStyles.iosEm.title3, { color: colors.white }]}>
+                {tagline}
+              </Text>
+              <Text
+                style={[
+                  fontStyles.ios.callout,
+                  { color: alpha(colors.white, 0.92) },
+                ]}
+              >
+                {summary}
+              </Text>
+            </SpacedView>
+          </View>
+        </SpacedView>
+      </Container>
+
+      {/* ==================================================== Profile stats */}
+      <Spacer size="xl" />
+      <ResumeStats stats={profileStats(items)} />
+
+      {/* =========================================================== Skills */}
+      <Spacer size="xl" />
+      <Container maxWidth={900}>
+        <SpacedView horizontal="l" gap="l">
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              gradientTextIndigoStylesInv(theme, undefined, staticRendering),
+              gradientTextIndigoStylesInv(theme),
             ]}
             role="heading"
             aria-level={2}
           >
             {"Skills"}
           </Text>
-          <Spacer size="l" />
-          <SkillsCards mode="mini" />
+          <SkillsCards mode="full" />
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "flex-start",
+              justifyContent: "space-between",
+              rowGap: size("s"),
+            }}
+          >
+            {techs.map(({ Icon, label }) => (
+              <View key={label} style={{ alignItems: "center", width: 70 }}>
+                <Icon width={40} height={40} />
+                <Text
+                  style={[fontStyles.ios.caption2, theme.styles.textLight1]}
+                >
+                  {label}
+                </Text>
+              </View>
+            ))}
+          </View>
         </SpacedView>
       </Container>
+
+      {/* ======================================================= Experience */}
       <Spacer size="xxl" />
-      <ResumeIntro staticRendering={staticRendering} />
+      <Container maxWidth={900}>
+        <SpacedView horizontal="l" gap="m">
+          <Text
+            style={[
+              fontStyles.iosEm.largeTitle,
+              gradientTextFlashyStyles(theme),
+            ]}
+            role="heading"
+            aria-level={2}
+          >
+            {"Experience"}
+          </Text>
+          {highlights.map((h, i) => (
+            <View
+              key={h.slug}
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignItems: "flex-start",
+                gap: size("s"),
+                paddingBottom: size("m"),
+                borderBottomWidth: i === highlights.length - 1 ? 0 : 1,
+                borderColor: theme.dynamicColors.ultraLight,
+              }}
+            >
+              {h.icon ? (
+                <Image
+                  alt={h.company}
+                  src={h.icon}
+                  width={44}
+                  height={44}
+                  style={{ borderRadius: 10 }}
+                />
+              ) : null}
+              <View style={{ flexBasis: 190, flexGrow: 0, flexShrink: 0 }}>
+                <LinkText
+                  href={resumeEntryPath(h)}
+                  underlineOnFocus={true}
+                  style={[fontStyles.iosEm.subhead, theme.styles.text]}
+                >
+                  {h.job_title ?? h.title}
+                </LinkText>
+                <Text
+                  style={[fontStyles.ios.footnote, theme.styles.textLight1]}
+                >
+                  {h.company}
+                </Text>
+                <Text
+                  style={[fontStyles.ios.caption1, theme.styles.textLight2]}
+                >
+                  {(() => {
+                    const periods = groupPeriods(membersOf(h));
+                    return periods.length > 1
+                      ? periods.join(" · ")
+                      : monthRange(h);
+                  })()}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexGrow: 1,
+                  flexShrink: 1,
+                  flexBasis: 260,
+                  gap: size("xxs"),
+                }}
+              >
+                <Text style={[fontStyles.ios.footnote, theme.styles.text]}>
+                  {h.groupPitch ?? h.description}
+                </Text>
+                {h.stats && h.stats.length > 0 ? (
+                  <Text
+                    style={[
+                      fontStyles.iosEm.caption1,
+                      { color: theme.dynamicColors.textFlashy3 },
+                    ]}
+                  >
+                    {statsLine(h.stats)}
+                  </Text>
+                ) : null}
+                <Text
+                  style={[fontStyles.ios.caption2, theme.styles.textLight2]}
+                >
+                  {h.hashtags.join(" · ")}
+                </Text>
+              </View>
+            </View>
+          ))}
+        </SpacedView>
+      </Container>
+
+      {/* ====================================================== Open Source */}
       <Spacer size="xxl" />
-      <ResumeStats />
+      <Container maxWidth={900}>
+        <SpacedView horizontal="l">
+          <CvOpenSourceCard items={openSource} />
+        </SpacedView>
+      </Container>
+
+      {/* ================================================ Talks & Community */}
+      <Spacer size="xxl" />
+      <Container maxWidth={900}>
+        <SpacedView horizontal="l" gap="m">
+          <Text
+            style={[
+              fontStyles.iosEm.largeTitle,
+              gradientTextIndigoStylesInv(theme),
+            ]}
+            role="heading"
+            aria-level={2}
+          >
+            {"Talks & Community"}
+          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "stretch",
+              gap: size("s"),
+            }}
+          >
+            <StatTile
+              valueFontSize={22}
+              stat={{
+                stat: `${talks.length}`,
+                label: "Conference talks",
+                comment: "in French & English",
+              }}
+            />
+            <StatTile
+              valueFontSize={22}
+              stat={{
+                // blog.json only indexes moox.io; putaindecode.io is a manual
+                // figure from profile.tsx (see STATS.md).
+                stat: `${blog.length + putaindecodeArticles}`,
+                label: "Blog posts",
+                comment: "on moox.io & putaindecode.io",
+              }}
+            />
+            <StatTile
+              valueFontSize={22}
+              flexBasis={200}
+              stat={{
+                stat: "co-founder",
+                label: visualUrl(socials.putaindecode.value),
+                comment: "FR dev community, blog & podcast",
+                url: socials.putaindecode.value,
+              }}
+            />
+          </View>
+          {talksSelected.length > 0 ? (
+            <Text style={[fontStyles.ios.caption1, theme.styles.textLight1]}>
+              {"Selected: "}
+              {talksSelected
+                .map(
+                  (t) =>
+                    `“${t.title}”${t.conference ? ` - ${t.conference}` : ""}`,
+                )
+                .join(" · ")}
+            </Text>
+          ) : null}
+          <LinkView href={recommendationsUrl} underlineOnFocus={true}>
+            <Text style={[fontStyles.ios.callout, theme.styles.textLight1]}>
+              {"Testimonials: all recommendations on "}
+              <Text
+                style={[
+                  fontStyles.iosEm.callout,
+                  { color: theme.dynamicColors.textFlashy3 },
+                ]}
+              >
+                {visualUrl(socials.linkedin.value)}
+              </Text>
+            </Text>
+          </LinkView>
+        </SpacedView>
+      </Container>
+
+      {/* ========================================= Education & Beyond Code */}
+      <Spacer size="xxl" />
+      <Container maxWidth={900}>
+        <SpacedView
+          horizontal="l"
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "flex-start",
+            gap: size("xl"),
+          }}
+        >
+          <View style={{ flexGrow: 1, flexBasis: 280, gap: size("m") }}>
+            <Text
+              style={[fontStyles.iosEm.title1, gradientTextFlashyStyles(theme)]}
+              role="heading"
+              aria-level={2}
+            >
+              {"Education"}
+            </Text>
+            {education.map((e) => (
+              <View
+                key={e.slug}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                  gap: size("s"),
+                }}
+              >
+                {e.icon ? (
+                  <Image
+                    src={e.icon}
+                    width={36}
+                    height={36}
+                    alt={e.company}
+                    style={{ borderRadius: 8 }}
+                  />
+                ) : null}
+                <View style={{ flex: 1 }}>
+                  <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
+                    {e.job_title ?? e.title}
+                  </Text>
+                  <Text
+                    style={[fontStyles.ios.caption1, theme.styles.textLight1]}
+                  >
+                    {`${e.company} · ${yearRange(e)}`}
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </View>
+
+          <View style={{ flexGrow: 1, flexBasis: 280, gap: size("m") }}>
+            <Text
+              style={[
+                fontStyles.iosEm.title1,
+                gradientTextIndigoStylesInv(theme),
+              ]}
+              role="heading"
+              aria-level={2}
+            >
+              {"Beyond Code"}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+                gap: size("m"),
+              }}
+            >
+              {hobbies.map(({ Icon, label }) => (
+                <View key={label} style={{ alignItems: "center" }}>
+                  <Icon width={48} height={48} fill="url(#profileGrad)" />
+                  <Text
+                    style={[
+                      fontStyles.ios.caption1,
+                      theme.styles.textLight1,
+                      { textAlign: "center", whiteSpace: "nowrap" },
+                    ]}
+                  >
+                    {label}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        </SpacedView>
+      </Container>
+
+      {/* ===================================================== Full history */}
       <Spacer size="xxl" />
       <Container maxWidth={840}>
         <SpacedView horizontal="l">
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              gradientTextFlashyStyles(theme, undefined, staticRendering),
+              gradientTextFlashyStyles(theme),
               { alignSelf: "center" },
             ]}
             role="heading"
             aria-level={2}
           >
-            {"Latest Experiences"}
+            {"Full History"}
+          </Text>
+          <Spacer size="s" />
+          <Text
+            style={[
+              fontStyles.ios.callout,
+              theme.styles.textLight1,
+              { textAlign: "center" },
+            ]}
+          >
+            {
+              "Every experience since the beginning - click one for the full story."
+            }
           </Text>
           <Spacer size="l" />
-          <ResumeTimeline items={items} staticRendering={staticRendering} />
+          <ResumeTimeline items={items} activeSlug={activeSlug} />
         </SpacedView>
         <Spacer />
       </Container>
-      {staticRendering ? (
-        <>
-          <Spacer size="l" />
-          <Container maxWidth={840}>
-            <SpacedView horizontal="l">
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  flexWrap: "wrap",
-                  gap: 16,
-                }}
-              >
-                <View style={{ flexShrink: 1 }}>
-                  <Text style={[fontStyles.ios.callout, theme.styles.text]}>
-                    {"All my experiences are on LinkedIn and my website"}
-                  </Text>
-                  <Spacer size="xs" />
-                  <LinkView href={website} underlineOnFocus={true}>
-                    <Text
-                      style={[
-                        fontStyles.iosEm.title3,
-                        gradientTextIndigoStylesInv(
-                          theme,
-                          undefined,
-                          staticRendering,
-                        ),
-                      ]}
-                    >
-                      {visualUrl(website)}
-                    </Text>
-                  </LinkView>
-                </View>
-                <Image
-                  src="/qr-code.jpg"
-                  width={116}
-                  height={116}
-                  priority={true}
-                  alt={`QR code to ${website}`}
-                />
-              </View>
-            </SpacedView>
-          </Container>
-        </>
-      ) : null}
       <Spacer size="xl" />
+      {/* The /resume/$slug detail renders here, as a modal above the page. */}
+      <Outlet />
     </WebsiteWrapper>
   );
 }

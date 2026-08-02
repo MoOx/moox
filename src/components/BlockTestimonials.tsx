@@ -155,7 +155,7 @@ export const testimonials: Testimonial[] = [
 ];
 
 /** The CV's three, in the order they are authored above. */
-export const cvTestimonials = testimonials.filter((t) => t.cv);
+export const featuredTestimonials = testimonials.filter((t) => t.cv);
 
 /** Site & CV are English-only for now; swap when the FR version lands. */
 export const currentLang: Lang = "en";

@@ -2,14 +2,14 @@ import { ResumeItem } from "@/api";
 import Image from "@/components/Image";
 import {
   compactCount,
-  cvGithubFollowers,
-  cvGithubSince,
-  cvOpenSourceCredits,
-  cvOpenSourceIntro,
-  cvProjectName,
-  cvYearRange,
+  githubFollowers,
+  githubSince,
   lowerKeepingAcronyms,
-} from "@/consts";
+  openSourceCredits,
+  openSourceIntro,
+  projectName,
+  yearRange,
+} from "@/profile";
 import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
@@ -75,7 +75,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
               { color: alpha(colors.white, 0.72) },
             ]}
           >
-            {`${compactCount(cvGithubFollowers)} followers · on GitHub since ${cvGithubSince}`}
+            {`${compactCount(githubFollowers)} followers · on GitHub since ${githubSince}`}
           </Text>
         </View>
 
@@ -85,7 +85,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
             { color: alpha(colors.white, 0.85) },
           ]}
         >
-          {cvOpenSourceIntro}
+          {openSourceIntro}
         </Text>
 
         <View
@@ -127,7 +127,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
                           { color: colors.white, fontWeight: weight.bold },
                         ]}
                       >
-                        {cvProjectName(item)}
+                        {projectName(item)}
                       </Text>
                     </LinkView>
                     <Text
@@ -136,7 +136,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
                         { color: alpha(colors.white, 0.66) },
                       ]}
                     >
-                      {`${item.job_title ?? ""} · ${cvYearRange(item)}`}
+                      {`${item.job_title ?? ""} · ${yearRange(item)}`}
                     </Text>
                   </View>
 
@@ -210,7 +210,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
           ]}
         >
           {"Also: "}
-          {cvOpenSourceCredits.map((credit, i) => (
+          {openSourceCredits.map((credit, i) => (
             <Text key={credit.label}>
               {i > 0 ? " · " : ""}
               <Text

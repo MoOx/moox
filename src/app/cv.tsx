@@ -1,55 +1,57 @@
-import { fetchAll, ResumeItem, ResumeStat, Talk } from "@/api";
+import { fetchAll, ResumeItem, Talk } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import {
   currentLang,
-  cvTestimonials,
+  featuredTestimonials,
   TestimonialContent,
 } from "@/components/BlockTestimonials";
 import CvOpenSourceCard from "@/components/CvOpenSourceCard";
 import CvSectionTitle from "@/components/CvSectionTitle";
-import CvSkillCard from "@/components/CvSkillCard";
-import CvStatTile from "@/components/CvStatTile";
+import SkillCard from "@/components/SkillCard";
+import StatTile from "@/components/StatTile";
 import GradientText from "@/components/GradientText";
-import IconReact from "@/components/IconReact";
-import IconReactNative from "@/components/IconReactNative";
 import Image from "@/components/Image";
 import Me from "@/components/Me";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import {
-  cvAvailabilityDetail,
-  cvAvailabilityLabel,
-  cvFreelanceSince,
-  cvFullName,
-  cvGroupKey,
-  cvGroupPeriods,
-  cvJobSubtitle,
-  cvJobTitle,
-  cvJsonLd,
-  cvLanguages,
-  cvLocation,
-  cvMergeGroup,
-  cvMetaDescription,
-  cvMetaKeywords,
-  cvMetaSubject,
-  cvMetaTitle,
-  cvMonthRange,
-  cvNickname,
-  cvProfileStats,
-  cvPutaindecodeArticles,
-  cvRecommendationsUrl,
-  cvSkillsDomains,
-  cvSummary,
-  cvTagline,
-  cvTalksSelectedSlugs,
-  cvUpdatedOn,
-  cvYearRange,
   ind,
-  lowerKeepingAcronyms,
   sendStringAsMailString,
   socials,
   visualUrl,
   website,
 } from "@/consts";
+import {
+  availabilityDetail,
+  availabilityLabel,
+  freelanceSince,
+  fullName,
+  groupKey,
+  groupPeriods,
+  hobbies,
+  jobSubtitle,
+  jobTitle,
+  languages,
+  mergeGroup,
+  metaDescription,
+  metaKeywords,
+  metaSubject,
+  metaTitle,
+  monthRange,
+  nickname,
+  personJsonLd,
+  profileStats,
+  putaindecodeArticles,
+  recommendationsUrl,
+  selectedTalksSlugs,
+  skillsDomains,
+  statsLine,
+  summary,
+  tagline,
+  techs,
+  updatedOn,
+  workLocation,
+  yearRange,
+} from "@/profile";
 import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
@@ -59,26 +61,11 @@ import {
   setUserColorScheme,
 } from "@/react-multiversal/theme/colorScheme";
 import { alpha, colors, gradientTextIndigoStylesInv, useTheme } from "@/styles";
-import SVGActivityClimbing from "@/svgs/components/SVGActivityClimbing";
-import SVGActivityCrossfit from "@/svgs/components/SVGActivityCrossfit";
-import SVGActivityDj from "@/svgs/components/SVGActivityDj";
-import SVGActivityPekinExpress from "@/svgs/components/SVGActivityPekinExpress";
-import SVGActivityStandup from "@/svgs/components/SVGActivityStandup";
-import SVGClaude from "@/svgs/components/SVGClaude";
-import SVGCss from "@/svgs/components/SVGCss";
-import SVGDetox from "@/svgs/components/SVGDetox";
 import SVGEmail from "@/svgs/components/SVGEmail";
-import SVGExpo from "@/svgs/components/SVGExpo";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
-import SVGJavaScript from "@/svgs/components/SVGJavaScript";
-import SVGNextjs from "@/svgs/components/SVGNextjs";
 import SVGPhone from "@/svgs/components/SVGPhone";
-import SVGPlaywright from "@/svgs/components/SVGPlaywright";
-import SVGPostcss from "@/svgs/components/SVGPostcss";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
-import SVGStorybook from "@/svgs/components/SVGStorybook";
-import SVGTypescript from "@/svgs/components/SVGTypescript";
 import { createFileRoute } from "@tanstack/react-router";
 import { ComponentType, ReactNode, useEffect } from "react";
 import { Text, View } from "react-native";
@@ -99,11 +86,11 @@ export const Route = createFileRoute("/cv")({
       // LLM or a job board matches on live here, where length is free. The PDF
       // export reads these same tags back off the rendered page to fill the
       // PDF's /Info dictionary, so this is the single source of truth.
-      { title: cvMetaTitle },
-      { name: "description", content: cvMetaDescription },
-      { name: "author", content: `${cvFullName} (${cvNickname})` },
-      { name: "keywords", content: cvMetaKeywords.join(", ") },
-      { name: "subject", content: cvMetaSubject },
+      { title: metaTitle },
+      { name: "description", content: metaDescription },
+      { name: "author", content: `${fullName} (${nickname})` },
+      { name: "keywords", content: metaKeywords.join(", ") },
+      { name: "subject", content: metaSubject },
     ],
   }),
   component: PageCV,
@@ -128,75 +115,34 @@ type IconType = ComponentType<{
   style?: object;
 }>;
 
-type Item = { label: string; Icon: IconType };
-/**
- * Logos scan in a second, which no text card replaces - but each one has to
- * earn its slot. GraphQL left: it is one line in the Languages card and it is
- * not what anyone hires me for. The additions each anchor a claim the cards
- * make but no logo backed: PostCSS the 200M downloads, Playwright/Detox/
- * Storybook the testing & design-system work, Claude the AI workflow.
- * `image` entries are for logos with no SVG component yet.
- */
-const techs: Item[] = [
-  { Icon: SVGJavaScript, label: "JavaScript" },
-  { Icon: SVGTypescript, label: "TypeScript" },
-  { Icon: SVGCss, label: "CSS" },
-  { Icon: IconReact as IconType, label: "React" },
-  { Icon: IconReactNative as IconType, label: "Native" },
-  { Icon: SVGExpo, label: "Expo" },
-  { Icon: SVGNextjs, label: "Next.js" },
-  { Icon: SVGPostcss, label: "PostCSS" },
-  { Icon: SVGStorybook, label: "Storybook" },
-  { Icon: SVGPlaywright, label: "Playwright" },
-  { Icon: SVGDetox, label: "Detox" },
-  // No npm: a registry is not a skill, and PostCSS already anchors the 200M
-  // downloads tile that was the only reason to show it.
-  { Icon: SVGClaude, label: "Claude" },
-];
-
-const hobbies: (Item & { Icon: IconType })[] = [
-  { Icon: SVGActivityCrossfit, label: "CrossFit" },
-  { Icon: SVGActivityClimbing, label: "Climbing" },
-  { Icon: SVGActivityDj, label: "DJ" },
-  { Icon: SVGActivityStandup, label: "Standup" },
-  { Icon: SVGActivityPekinExpress, label: "Pekin Express #20" },
-];
-
 const byDateDesc = (a: ResumeItem, b: ResumeItem) =>
   (b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1;
-
-/** "900M+ trips / year · 4M+ people served" - the entry's own frontmatter stats. */
-const statsLine = (stats: ResumeStat[] | undefined, max = 4) =>
-  (stats ?? [])
-    .slice(0, max)
-    .map((s) => `${s.stat} ${lowerKeepingAcronyms(s.label)}`)
-    .join(" · ");
 
 function PageCV() {
   const theme = useTheme();
   const { resume, talks, blog } = Route.useLoaderData();
 
   // A CV row is a client, not a contract: an entry flagged `highlight` carries
-  // the copy, and `cvGroup` folds its sibling missions in so the date span (and
+  // the copy, and `group` folds its sibling missions in so the date span (and
   // therefore the sort key) is derived rather than hand-written.
   const membersOf = (item: ResumeItem) =>
-    resume.filter((i) => cvGroupKey(i) === cvGroupKey(item));
+    resume.filter((i) => groupKey(i) === groupKey(item));
   const highlights = resume
     .filter((i) => i.highlight)
-    .map((i) => cvMergeGroup(i, membersOf(i)))
+    .map((i) => mergeGroup(i, membersOf(i)))
     .sort(byDateDesc);
   const education = resume.filter((i) => i.education).sort(byDateDesc);
   // Open source reads best as a story: oldest first (cssnext → stylelint → …).
   const openSource = resume
     .filter((i) => i.openSource)
     .sort((a, b) => (a.dateStart > b.dateStart ? 1 : -1));
-  const profileStats = cvProfileStats(resume);
+  const stats = profileStats(resume);
 
   // Everything else worth naming - one row per group, so the missions already
   // folded into a key experience never show up twice. Nothing flagged
   // `personal`: Pékin Express is a great icebreaker under "Beyond Code", but
   // listed here a parser would file it as a job.
-  const shownGroups = new Set(highlights.map(cvGroupKey));
+  const shownGroups = new Set(highlights.map(groupKey));
   const moreExperience = resume
     .filter(
       (i) =>
@@ -204,18 +150,18 @@ function PageCV() {
         !i.education &&
         !i.personal &&
         i.company &&
-        !shownGroups.has(cvGroupKey(i)),
+        !shownGroups.has(groupKey(i)),
     )
     .sort(byDateDesc)
     .filter(
       (i, idx, all) =>
-        all.findIndex((o) => cvGroupKey(o) === cvGroupKey(i)) === idx,
+        all.findIndex((o) => groupKey(o) === groupKey(i)) === idx,
     )
-    .map((i) => cvMergeGroup(i, membersOf(i)));
+    .map((i) => mergeGroup(i, membersOf(i)));
   const moreExperienceShown = moreExperience.slice(0, moreExperienceRows);
   const moreExperienceEarlier = moreExperience.slice(moreExperienceRows);
 
-  const talksSelected = cvTalksSelectedSlugs
+  const talksSelected = selectedTalksSlugs
     .map((slug) => talks.find((t) => t.slug === slug))
     .filter((t): t is Talk => Boolean(t));
 
@@ -260,7 +206,9 @@ function PageCV() {
           data, so it cannot drift from what a human reads. */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(cvJsonLd(resume)) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personJsonLd(resume)),
+        }}
       />
       <style
         dangerouslySetInnerHTML={{
@@ -340,7 +288,7 @@ function PageCV() {
                 { letterSpacing: 1.4, textTransform: "uppercase" },
               ]}
             >
-              {`Freelance since ${cvFreelanceSince} · ${cvLocation}`}
+              {`Freelance since ${freelanceSince} · ${workLocation}`}
             </Text>
 
             <View>
@@ -358,7 +306,7 @@ function PageCV() {
                     { offset: 1, color: theme.colors.textFlashy4 },
                   ]}
                 >
-                  {`${cvJobTitle}.`}
+                  {`${jobTitle}.`}
                 </GradientText>
               </Text>
               <Text
@@ -370,7 +318,7 @@ function PageCV() {
                   { fontStyle: "italic", marginTop: size("xxs") },
                 ]}
               >
-                {cvJobSubtitle}
+                {jobSubtitle}
               </Text>
             </View>
             <View
@@ -380,9 +328,9 @@ function PageCV() {
                 gap: size("xs"),
               }}
             >
-              <AvailabilityBadge showText={true} text={cvAvailabilityLabel} />
+              <AvailabilityBadge showText={true} text={availabilityLabel} />
               <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-                {cvAvailabilityDetail}
+                {availabilityDetail}
               </Text>
             </View>
             <View
@@ -448,7 +396,7 @@ function PageCV() {
                 <ContactRow Icon={SVGPhone} href={phoneHref}>
                   {phoneDisplay}
                 </ContactRow>
-                {cvLanguages.map((l) => (
+                {languages.map((l) => (
                   <Text
                     key={l.label}
                     style={[fontStyles.ios.footnote, theme.styles.textLight1]}
@@ -480,7 +428,7 @@ function PageCV() {
           >
             <SpacedView horizontal="l" vertical="m" gap="xxs">
               <Text style={[fontStyles.iosEm.title3, { color: colors.white }]}>
-                {cvTagline}
+                {tagline}
               </Text>
               <Text
                 style={[
@@ -488,7 +436,7 @@ function PageCV() {
                   { color: alpha(colors.white, 0.92) },
                 ]}
               >
-                {cvSummary}
+                {summary}
               </Text>
             </SpacedView>
           </View>
@@ -502,8 +450,8 @@ function PageCV() {
               gap: size("s"),
             }}
           >
-            {profileStats.map((stat) => (
-              <CvStatTile
+            {stats.map((stat) => (
+              <StatTile
                 key={stat.label}
                 stat={stat}
                 variant={stat.highlight ? "gradient" : "plain"}
@@ -523,10 +471,10 @@ function PageCV() {
                 gap: size("s"),
               }}
             >
-              {cvSkillsDomains
+              {skillsDomains
                 .filter((d) => d.feature)
                 .map((d) => (
-                  <CvSkillCard
+                  <SkillCard
                     key={d.title}
                     title={d.title}
                     subtitle={d.subtitle}
@@ -538,10 +486,10 @@ function PageCV() {
                   />
                 ))}
               <View style={{ flexGrow: 1, flexBasis: 300, gap: size("s") }}>
-                {cvSkillsDomains
+                {skillsDomains
                   .filter((d) => !d.feature)
                   .map((d) => (
-                    <CvSkillCard
+                    <SkillCard
                       key={d.title}
                       title={d.title}
                       subtitle={d.subtitle}
@@ -622,16 +570,16 @@ function PageCV() {
                         which is what the pitch's "called back a year later"
                         describes. A single range would contradict it. */}
                     {(() => {
-                      const periods = cvGroupPeriods(membersOf(h));
+                      const periods = groupPeriods(membersOf(h));
                       return periods.length > 1
                         ? periods.join(" · ")
-                        : cvMonthRange(h);
+                        : monthRange(h);
                     })()}
                   </Text>
                 </View>
                 <View style={{ flex: 1, flexBasis: 220, gap: size("xxs") }}>
                   <Text style={[fontStyles.ios.footnote, theme.styles.text]}>
-                    {h.cvPitch ?? h.description}
+                    {h.groupPitch ?? h.description}
                   </Text>
                   {h.stats && h.stats.length > 0 ? (
                     <Text
@@ -694,7 +642,7 @@ function PageCV() {
                   >
                     {/* Years only: this is a compact table, and the month
                         earns its space on key experiences, not here. */}
-                    {cvYearRange(m)}
+                    {yearRange(m)}
                   </Text>
                   <Text
                     style={[
@@ -738,7 +686,7 @@ function PageCV() {
             <View nativeID="cv-testimonials" style={{ gap: size("s") }}>
               <CvSectionTitle>{"Testimonials"}</CvSectionTitle>
 
-              {cvTestimonials.map((t, i) => (
+              {featuredTestimonials.map((t, i) => (
                 <View
                   key={t.name}
                   style={{
@@ -807,7 +755,7 @@ function PageCV() {
                 </View>
               ))}
 
-              <LinkView href={cvRecommendationsUrl} underlineOnFocus={true}>
+              <LinkView href={recommendationsUrl} underlineOnFocus={true}>
                 <Text
                   style={[fontStyles.ios.caption1, theme.styles.textLight2]}
                 >
@@ -837,7 +785,7 @@ function PageCV() {
               >
                 {/* No year range: it would advertise the gap since 2019 more
                     loudly than the 17 talks themselves. */}
-                <CvStatTile
+                <StatTile
                   valueFontSize={22}
                   stat={{
                     stat: `${talks.length}`,
@@ -845,17 +793,17 @@ function PageCV() {
                     comment: "in French & English",
                   }}
                 />
-                <CvStatTile
+                <StatTile
                   valueFontSize={22}
                   stat={{
                     // blog.json only indexes moox.io; putaindecode.io is a
                     // manual figure from consts (see STATS.md).
-                    stat: `${blog.length + cvPutaindecodeArticles}`,
+                    stat: `${blog.length + putaindecodeArticles}`,
                     label: "Blog posts",
                     comment: "on moox.io & putaindecode.io",
                   }}
                 />
-                <CvStatTile
+                <StatTile
                   valueFontSize={22}
                   flexBasis={200}
                   stat={{
@@ -925,7 +873,7 @@ function PageCV() {
                           theme.styles.textLight1,
                         ]}
                       >
-                        {`${e.company} · ${cvYearRange(e)}`}
+                        {`${e.company} · ${yearRange(e)}`}
                       </Text>
                     </View>
                   </View>
@@ -942,20 +890,22 @@ function PageCV() {
                     gap: size("m"),
                   }}
                 >
-                  {hobbies.map(({ Icon, label }) => (
-                    <View key={label} style={{ alignItems: "center" }}>
-                      <Icon width={48} height={48} fill="url(#cvGrad)" />
-                      <Text
-                        style={[
-                          fontStyles.ios.callout,
-                          theme.styles.textLight1,
-                          { textAlign: "center", whiteSpace: "nowrap" },
-                        ]}
-                      >
-                        {label}
-                      </Text>
-                    </View>
-                  ))}
+                  {hobbies
+                    .filter((h) => h.cv)
+                    .map(({ Icon, label }) => (
+                      <View key={label} style={{ alignItems: "center" }}>
+                        <Icon width={48} height={48} fill="url(#cvGrad)" />
+                        <Text
+                          style={[
+                            fontStyles.ios.callout,
+                            theme.styles.textLight1,
+                            { textAlign: "center", whiteSpace: "nowrap" },
+                          ]}
+                        >
+                          {label}
+                        </Text>
+                      </View>
+                    ))}
                 </View>
               </View>
             </View>
@@ -979,7 +929,7 @@ function PageCV() {
                 <Text
                   style={[fontStyles.ios.caption2, theme.styles.textLight2]}
                 >
-                  {cvUpdatedOn()}
+                  {updatedOn()}
                 </Text>
                 <Text style={[fontStyles.ios.callout, theme.styles.text]}>
                   {"Full history & all my experiences online:"}

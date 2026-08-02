@@ -1,4 +1,4 @@
-import { CvStat } from "@/consts";
+import { ProfileStat } from "@/profile";
 import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
@@ -8,7 +8,7 @@ import { alpha, colors, useTheme } from "@/styles";
 import { ReactNode } from "react";
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 
-export type CvStatTileVariant =
+export type StatTileVariant =
   /** White card, hairline border - on the light bands. */
   | "plain"
   /** Filled gradient card - for the one figure that must pop. */
@@ -23,15 +23,15 @@ export type CvStatTileVariant =
  * - profile stat `{ stat, label, comment }` → LABEL / value / comment
  * - markdown stat `{ title, stat, label, comment }` → TITLE / value / label / comment
  */
-export default function CvStatTile({
+export default function StatTile({
   stat,
   variant = "plain",
   valueFontSize = 26,
   showComment = true,
   flexBasis = 100,
 }: {
-  stat: CvStat;
-  variant?: CvStatTileVariant;
+  stat: ProfileStat;
+  variant?: StatTileVariant;
   valueFontSize?: number;
   /** Drop the smallest line where vertical space is tight. */
   showComment?: boolean;

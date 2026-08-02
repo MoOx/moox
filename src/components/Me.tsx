@@ -14,7 +14,6 @@ export default function Me({
   imgHeight,
   style,
   children,
-  staticRendering = false,
 }: {
   src?: string;
   /** Overall width of the component; everything inside scales proportionally. */
@@ -23,8 +22,6 @@ export default function Me({
   imgHeight?: number;
   style?: StyleProp<ViewStyle>;
   children?: ReactNode;
-  /** PDF export: hide the decorative gradients that print as a solid block. */
-  staticRendering?: boolean;
 }) {
   const theme = useTheme();
   const scale = width / DEFAULT_WIDTH;
@@ -44,80 +41,78 @@ export default function Me({
       ]}
     >
       <View>
-        {staticRendering ? null : (
-          <View
+        <View
+          style={{
+            position: "absolute",
+            width: 420 * scale,
+            height: 420 * scale,
+            bottom: -40 * scale,
+            left: -80 * scale,
+          }}
+        >
+          <GradientBorderCircle
+            width={300 * scale}
+            borderWidth={1}
+            stops={[
+              {
+                offset: 0,
+                stopColor: theme.dynamicColors.textLight2,
+                stopOpacity: "0.3",
+              },
+              {
+                offset: 80,
+                stopColor: theme.dynamicColors.textLight1,
+                stopOpacity: "0",
+              },
+            ]}
+            style={{
+              margin: ((360 - 280) / 2) * scale,
+              position: "absolute",
+              transform: [
+                { translateX: 40 * scale },
+                { translateY: -10 * scale },
+                { rotate: "130deg" },
+              ],
+            }}
+          />
+          <GradientBorderCircle
+            width={420 * scale}
+            borderWidth={1}
+            stops={[
+              {
+                offset: 0,
+                stopColor: theme.dynamicColors.textLight2,
+                stopOpacity: "0.4",
+              },
+              {
+                offset: 80,
+                stopColor: theme.dynamicColors.textLight1,
+                stopOpacity: "0",
+              },
+            ]}
             style={{
               position: "absolute",
-              width: 420 * scale,
-              height: 420 * scale,
-              bottom: -40 * scale,
-              left: -80 * scale,
+              transform: [{ rotate: "-70deg" }],
             }}
-          >
-            <GradientBorderCircle
-              width={300 * scale}
-              borderWidth={1}
-              stops={[
-                {
-                  offset: 0,
-                  stopColor: theme.dynamicColors.textLight2,
-                  stopOpacity: "0.3",
-                },
-                {
-                  offset: 80,
-                  stopColor: theme.dynamicColors.textLight1,
-                  stopOpacity: "0",
-                },
-              ]}
-              style={{
-                margin: ((360 - 280) / 2) * scale,
-                position: "absolute",
-                transform: [
-                  { translateX: 40 * scale },
-                  { translateY: -10 * scale },
-                  { rotate: "130deg" },
-                ],
-              }}
-            />
-            <GradientBorderCircle
-              width={420 * scale}
-              borderWidth={1}
-              stops={[
-                {
-                  offset: 0,
-                  stopColor: theme.dynamicColors.textLight2,
-                  stopOpacity: "0.4",
-                },
-                {
-                  offset: 80,
-                  stopColor: theme.dynamicColors.textLight1,
-                  stopOpacity: "0",
-                },
-              ]}
-              style={{
-                position: "absolute",
-                transform: [{ rotate: "-70deg" }],
-              }}
-            />
-            <GradientRadial
-              width={400 * scale}
-              height={400 * scale}
-              stops={[
-                {
-                  offset: 0,
-                  stopColor: theme.colors.backMain,
-                  stopOpacity: "0.5",
-                },
-                {
-                  offset: 100,
-                  stopColor: theme.colors.backMain,
-                  stopOpacity: "0",
-                },
-              ]}
-              style={{ position: "absolute", left: -10 * scale, bottom: -0 }}
-            />
-          </View>
-        )}
+          />
+          <GradientRadial
+            width={400 * scale}
+            height={400 * scale}
+            stops={[
+              {
+                offset: 0,
+                stopColor: theme.colors.backMain,
+                stopOpacity: "0.5",
+              },
+              {
+                offset: 100,
+                stopColor: theme.colors.backMain,
+                stopOpacity: "0",
+              },
+            ]}
+            style={{ position: "absolute", left: -10 * scale, bottom: -0 }}
+          />
+        </View>
         <style
           dangerouslySetInnerHTML={{
             __html: `

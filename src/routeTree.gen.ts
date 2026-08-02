@@ -17,6 +17,7 @@ import { Route as IndexRouteImport } from './app/index'
 import { Route as TalksIndexRouteImport } from './app/talks.index'
 import { Route as BlogIndexRouteImport } from './app/blog.index'
 import { Route as TalksSlugRouteImport } from './app/talks.$slug'
+import { Route as ResumeSlugRouteImport } from './app/resume.$slug'
 import { Route as BlogSlugRouteImport } from './app/blog.$slug'
 
 const ResumeRoute = ResumeRouteImport.update({
@@ -59,6 +60,11 @@ const TalksSlugRoute = TalksSlugRouteImport.update({
   path: '/talks/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResumeSlugRoute = ResumeSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ResumeRoute,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
@@ -70,8 +76,9 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
-  '/resume': typeof ResumeRoute
+  '/resume': typeof ResumeRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/resume/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
@@ -81,8 +88,9 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
-  '/resume': typeof ResumeRoute
+  '/resume': typeof ResumeRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/resume/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/blog': typeof BlogIndexRoute
   '/talks': typeof TalksIndexRoute
@@ -93,8 +101,9 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
-  '/resume': typeof ResumeRoute
+  '/resume': typeof ResumeRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/resume/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
+    | '/resume/$slug'
     | '/talks/$slug'
     | '/blog/'
     | '/talks/'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
+    | '/resume/$slug'
     | '/talks/$slug'
     | '/blog'
     | '/talks'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
+    | '/resume/$slug'
     | '/talks/$slug'
     | '/blog/'
     | '/talks/'
@@ -140,7 +152,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CvRoute: typeof CvRoute
   DesignSystemRoute: typeof DesignSystemRoute
-  ResumeRoute: typeof ResumeRoute
+  ResumeRoute: typeof ResumeRouteWithChildren
   BlogSlugRoute: typeof BlogSlugRoute
   TalksSlugRoute: typeof TalksSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -205,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TalksSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resume/$slug': {
+      id: '/resume/$slug'
+      path: '/$slug'
+      fullPath: '/resume/$slug'
+      preLoaderRoute: typeof ResumeSlugRouteImport
+      parentRoute: typeof ResumeRoute
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/blog/$slug'
@@ -215,12 +234,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ResumeRouteChildren {
+  ResumeSlugRoute: typeof ResumeSlugRoute
+}
+
+const ResumeRouteChildren: ResumeRouteChildren = {
+  ResumeSlugRoute: ResumeSlugRoute,
+}
+
+const ResumeRouteWithChildren =
+  ResumeRoute._addFileChildren(ResumeRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   CvRoute: CvRoute,
   DesignSystemRoute: DesignSystemRoute,
-  ResumeRoute: ResumeRoute,
+  ResumeRoute: ResumeRouteWithChildren,
   BlogSlugRoute: BlogSlugRoute,
   TalksSlugRoute: TalksSlugRoute,
   BlogIndexRoute: BlogIndexRoute,

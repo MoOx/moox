@@ -50,12 +50,12 @@ export type ResumeItem = ContentItem & {
    * not the contracts: the row's date span is derived from the whole group, so
    * nothing is hand-maintained.
    */
-  cvGroup?: string;
+  group?: string;
   /**
    * The CV pitch for the whole group - not "description, but longer". It is
    * written to cover every mission of the group at once.
    */
-  cvPitch?: string;
+  groupPitch?: string;
   stats?: ResumeStat[];
 };
 

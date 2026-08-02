@@ -1,4 +1,11 @@
+import AvailabilityBadge from "@/components/AvailabilityBadge";
 import BlockMe1WithSmallPills from "@/components/BlockMe1WithSmallPills";
+import {
+  availabilityDetail,
+  availabilityLabel,
+  jobSubtitle,
+  jobTitleParts,
+} from "@/profile";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
@@ -42,8 +49,10 @@ export default function BlockHey() {
               aria-level={1}
             >
               <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
-                {"A Senior"}
+                {jobTitleParts[0]}
               </Text>
+              {/* "Front-End" carries the flashy gradient: it is the term
+                  clients search for, so it is the one the eye should catch. */}
               <IfWindowWidthIs largerThan={WindowWidth.m}>
                 <Text
                   style={[
@@ -58,15 +67,15 @@ export default function BlockHey() {
                     },
                   ]}
                 >
-                  {"Front-End "}
                   <Text
                     style={[
                       theme.styles.text,
                       gradientTextFlashyStyles(theme, 176),
                     ]}
                   >
-                    {"Architect."}
+                    {jobTitleParts[1]}
                   </Text>
+                  {` ${jobTitleParts[2]}.`}
                 </Text>
               </IfWindowWidthIs>
               <IfWindowWidthIs smallerThan={WindowWidth.m}>
@@ -81,10 +90,10 @@ export default function BlockHey() {
                     },
                   ]}
                 >
-                  {"Front-End "}
                   <Text style={gradientTextFlashyStyles(theme, 176)}>
-                    {"Architect."}
+                    {jobTitleParts[1]}
                   </Text>
+                  {` ${jobTitleParts[2]}.`}
                 </Text>
               </IfWindowWidthIs>
               <Text
@@ -98,7 +107,21 @@ export default function BlockHey() {
                   },
                 ]}
               >
-                {"React, React Native & cross-platform."}
+                {jobSubtitle}
+              </Text>
+            </View>
+            <Spacer size="m" />
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 8,
+                alignSelf: "flex-start",
+              }}
+            >
+              <AvailabilityBadge showText={true} text={availabilityLabel} />
+              <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
+                {availabilityDetail}
               </Text>
             </View>
             <Spacer size="l" />

@@ -1,7 +1,7 @@
 ---
 company: "Hove"
 url: "https://hove.com/"
-cvGroup: hove
+group: hove
 title: "Transport Mobile App"
 description: >
   iOS / Android app built for cities and transport networks

@@ -8,12 +8,12 @@ version of the CV.
 
 ## 0. Done already (on `/cv`)
 
-- **JSON-LD `Person`** — `cvJsonLd()` in `src/consts.tsx`, rendered in
+- **JSON-LD `Person`** — `personJsonLd()` in `src/profile.tsx`, rendered in
   `src/app/cv.tsx`. Built from the rendered data (`worksFor` deduplicates by
   `cvGroup` exactly like the visible rows), so it cannot drift.
 - **PDF `/Info` metadata** — `/Author`, `/Creator`, `/Subject`, `/Keywords`,
   scraped by the export script off the page's own `<head>`, which is itself fed
-  from `consts.tsx`. One source of truth, three consumers.
+  from `profile.tsx`. One source of truth, three consumers.
 
 ## 1. JSON-LD (`schema.org/Person`)
 
@@ -194,6 +194,6 @@ Other candidates for the same pass:
   `name` + `alternateName` removes the ambiguity for machines without touching
   the design.
 - **putaindecode.io** is a blog _and_ a podcast. Its 22 articles are a manual
-  figure in `cvPutaindecodeArticles` (`consts.tsx`), because `blog.json` only
+  figure in `putaindecodeArticles` (`profile.tsx`), because `blog.json` only
   indexes moox.io. A web version could fetch the real number from
   `https://putaindecode.io/articles?search=moox` instead.

@@ -1,38 +1,46 @@
 import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
+import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { alpha, colors } from "@/styles";
 import { ComponentType } from "react";
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 
-export type CvSkillCardIcon = ComponentType<{
+export type SkillCardIcon = ComponentType<{
   width?: number;
   height?: number;
   fill?: string;
 }>;
 
 /**
- * Dark gradient card of the CV skills mosaic: title, optional lead-in, then the
- * domain items. The tech logo sits behind as a faded watermark.
+ * Dark gradient card of the skills mosaic (shared by `/cv`, `/resume` and the
+ * home): title, optional lead-in, optional prose blurb, then the domain items.
+ * The tech logo sits behind as a faded watermark.
  */
-export default function CvSkillCard({
+export default function SkillCard({
   title,
   subtitle,
+  blurb,
   items,
   Icon,
   gradient,
   big = false,
+  glass = false,
   style,
 }: {
   title: string;
   subtitle?: string;
+  /** Teaser prose above the items (home cards); omitted on the dense views. */
+  blurb?: string;
   items: string[];
-  Icon?: CvSkillCardIcon;
+  Icon?: SkillCardIcon;
   /** [from, to] - dark brand colors, angled like the site's cards. */
   gradient: [string, string];
   /** Hero card of the mosaic: bigger title, items on their own lines. */
   big?: boolean;
+  /** Glassy inner-border sheen - screen only, it prints as a gray block. */
+  glass?: boolean;
   style?: StyleProp<ViewStyle>;
 }) {
   return (
@@ -55,6 +63,15 @@ export default function CvSkillCard({
         ]}
         style={StyleSheet.absoluteFill}
       />
+
+      {glass ? (
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            { borderRadius: size("s"), boxShadow: boxShadowGlass() },
+          ]}
+        />
+      ) : null}
 
       {Icon ? (
         // The small cards carry brand logos - round, symmetrical, they read
@@ -106,10 +123,21 @@ export default function CvSkillCard({
             </Text>
           ) : null}
         </View>
+        {blurb ? (
+          <Text
+            style={[
+              fontStyles.ios.subhead,
+              { color: alpha(colors.white, 0.85), flexGrow: 1 },
+            ]}
+          >
+            {blurb}
+          </Text>
+        ) : null}
         <Text
           style={[
             big ? fontStyles.ios.callout : fontStyles.ios.footnote,
-            { color: alpha(colors.white, 0.85) },
+            { color: alpha(colors.white, blurb ? 0.62 : 0.85) },
+            blurb ? fontStyles.iosEm.footnote : null,
           ]}
         >
           {items.join(big ? "\n" : " · ")}

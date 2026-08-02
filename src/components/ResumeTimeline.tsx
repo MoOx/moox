@@ -16,11 +16,15 @@ const styles = StyleSheet.create({
 
 export const ResumeTimeline = ({
   items,
-  staticRendering = false,
+  activeSlug,
 }: {
   items: ResumeItem[];
-  /** PDF export mode: hide illustrations and show each entry's full text. */
-  staticRendering?: boolean;
+  /**
+   * URL slug of the entry whose detail is currently open (modal above the
+   * timeline). That card must give up its view-transition name to the modal -
+   * duplicate names on one page make the browser skip the transition.
+   */
+  activeSlug?: string;
 }) => {
   const theme = useTheme();
   const todayDateOnlyAsISOString = new Date().toISOString().slice(0, 10);
@@ -75,9 +79,9 @@ export const ResumeTimeline = ({
               {i % 2 === 1 ? <Spacer size="xl" /> : null}
               <ResumeTimelineEntry
                 item={item}
-                hideImage={staticRendering}
-                showBody={staticRendering}
-                flat={staticRendering}
+                transitionEnabled={
+                  !activeSlug || !item.slug.endsWith(`/${activeSlug}`)
+                }
               />
               {i % 2 === 0 ? <Spacer size="xl" /> : null}
             </View>

@@ -1,6 +1,8 @@
 import { ResumeItem } from "@/api";
 import Image from "@/components/Image";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
+import StatTile from "@/components/StatTile";
+import { resumeEntryPath } from "@/profile";
 import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
@@ -53,7 +55,9 @@ const styles = StyleSheet.create({
 });
 
 // Resume bodies are bilingual: English, then an `<hr>`, then French.
-// For the PDF export we keep only the English part (everything before the hr).
+// The site is English-only for now, so keep only the part before the hr
+// (proper `body.en` / `body.fr` parsing comes with the i18n pass, see
+// WEB-REWORK.md).
 //
 const bodyBeforeFirstHr = (body: any): any => {
   if (!body || !Array.isArray(body.children)) return body;
@@ -91,27 +95,35 @@ const getDurationText = (startDate: string, endDate: Date) => {
   return yearText ? yearText + " " + monthText : monthText;
 };
 
+/** Shared view-transition name, so the detail "zooms" out of its card. */
+export const resumeEntryTransitionName = (item: ResumeItem) =>
+  `resume-entry--${item.slug.split("/").pop()}`;
+
 export const ResumeTimelineEntry = ({
   item,
   horizontal = "l",
   vertical = "l",
   showDetails = true,
   disableLinks = false,
-  hideImage = false,
-  showBody = false,
-  flat = false,
+  detail = false,
+  transitionEnabled = true,
 }: {
   item: ResumeItem;
   horizontal?: Size;
   vertical?: Size;
   showDetails?: boolean;
   disableLinks?: boolean;
-  /** Hide the entry illustration (used for the lightweight PDF export). */
-  hideImage?: boolean;
-  /** Render the full markdown body of the entry (used for the PDF export). */
-  showBody?: boolean;
-  /** Drop shadow + glass overlay (they print as gray blocks); PDF export. */
-  flat?: boolean;
+  /**
+   * Full record (detail page / modal): markdown body, per-mission stats and
+   * `groupPitch`. The timeline shows the teaser and links here instead.
+   */
+  detail?: boolean;
+  /**
+   * The card and its detail share a view-transition name (the "zoom" effect).
+   * Disabled on the timeline card whose detail is currently open - duplicate
+   * names on one page would make the browser skip the transition.
+   */
+  transitionEnabled?: boolean;
 }) => {
   const theme = useTheme();
 
@@ -123,18 +135,21 @@ export const ResumeTimelineEntry = ({
           borderRadius,
           flexShrink: 1,
           flexBasis: 640,
-          boxShadow: flat ? undefined : boxShadows.default,
-          borderWidth: flat ? 1 : 0,
-          borderColor: flat ? theme.dynamicColors.ultraLight : undefined,
+          boxShadow: boxShadows.default,
         },
+        transitionEnabled
+          ? { viewTransitionName: resumeEntryTransitionName(item) }
+          : null,
       ]}
       role="article"
     >
-      {disableLinks ? null : (
+      {/* No anchor in detail mode: the timeline card behind the modal already
+          carries this id, and duplicate ids are invalid HTML. */}
+      {disableLinks || detail ? null : (
         // oxlint-disable-next-line jsx_a11y/anchor-has-content, jsx_a11y/anchor-is-valid
         <a id={item.slug} style={{ position: "relative", top: "-100px" }} />
       )}
-      {item.image && !hideImage && (
+      {item.image && (
         <View style={styles.imageWrapper}>
           <Image
             src={item.image}
@@ -149,14 +164,12 @@ export const ResumeTimelineEntry = ({
           />
         </View>
       )}
-      {flat ? null : (
-        <View
-          style={[
-            StyleSheet.absoluteFill,
-            { borderRadius, boxShadow: boxShadowGlass() },
-          ]}
-        />
-      )}
+      <View
+        style={[
+          StyleSheet.absoluteFill,
+          { borderRadius, boxShadow: boxShadowGlass() },
+        ]}
+      />
       <SpacedView
         style={{ flexGrow: 1 }}
         horizontal={horizontal}
@@ -190,16 +203,30 @@ export const ResumeTimelineEntry = ({
             </Text>
           )}
         </View>
-        <Text
-          style={[
-            styles.description,
-            fontStyles.iosEm.title2,
-            theme.styles.text,
-          ]}
-          role="paragraph"
-        >
-          {item.description ?? null}
-        </Text>
+        {!detail && !disableLinks ? (
+          <LinkText
+            href={resumeEntryPath(item)}
+            underlineOnFocus={true}
+            style={[
+              styles.description,
+              fontStyles.iosEm.title2,
+              theme.styles.text,
+            ]}
+          >
+            {item.description ?? null}
+          </LinkText>
+        ) : (
+          <Text
+            style={[
+              styles.description,
+              fontStyles.iosEm.title2,
+              theme.styles.text,
+            ]}
+            role="paragraph"
+          >
+            {item.description ?? null}
+          </Text>
+        )}
         {item.dateEnd ? (
           <>
             <Text style={[fontStyles.ios.footnote, theme.styles.textLight2]}>
@@ -216,10 +243,35 @@ export const ResumeTimelineEntry = ({
             </Text>
           </>
         )}
-        {item.body ? (
+        {detail && item.groupPitch ? (
+          <>
+            <Spacer size="s" />
+            <Text style={[fontStyles.iosEm.callout, theme.styles.text]}>
+              {item.groupPitch}
+            </Text>
+          </>
+        ) : null}
+        {detail && item.body ? (
           <>
             <Spacer size="s" />
             <MdAsJsonRenderer body={bodyBeforeFirstHr(item.body)} />
+          </>
+        ) : null}
+        {detail && item.stats && item.stats.length > 0 ? (
+          <>
+            <Spacer size="m" />
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignItems: "stretch",
+                gap: size("s"),
+              }}
+            >
+              {item.stats.map((stat) => (
+                <StatTile key={stat.label} stat={stat} flexBasis={140} />
+              ))}
+            </View>
           </>
         ) : null}
         {!showDetails ? null : (

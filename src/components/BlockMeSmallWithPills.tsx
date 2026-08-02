@@ -3,13 +3,9 @@ import Pill from "@/components/Pill";
 import Parallax from "@/react-multiversal/Parallax";
 import { pTransforms } from "@/utils.styles";
 
-export default function BlockMeSmallWithPills({
-  staticRendering = false,
-}: {
-  staticRendering?: boolean;
-}) {
+export default function BlockMeSmallWithPills() {
   return (
-    <Me staticRendering={staticRendering} width={320}>
+    <Me width={320}>
       <Parallax
         style={{ position: "absolute", top: 150, left: -60 }}
         transforms={pTransforms(5, -5, 0.1)}
