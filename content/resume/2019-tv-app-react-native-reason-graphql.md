@@ -1,9 +1,8 @@
 ---
 company: "Loewe"
-title: "Media/TV Remote App"
+title: "TV/media remote app made with React Native, ReScript, GraphQL & Apollo"
+job_title: "Front-End Developer"
 url: "https://www.loewe.tv/"
-description: >
-  TV/media remote app made with React Native, ReScript, GraphQL & Apollo
 dateStart: 2019-02-25
 dateEnd: 2019-05-10
 hashtags:

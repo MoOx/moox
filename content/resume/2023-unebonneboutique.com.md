@@ -1,10 +1,10 @@
 ---
 company: "FKLG Production"
 url: "https://fklg.art"
-title: "VOD Platform"
+title: "VOD platform built with Shopify & Vimeo"
+job_title: "Full-Stack Developer"
+icon: /resume/icons/fklg.jpg
 group: fklg
-description: >
-  VOD platform built with Shopify & Vimeo
 dateStart: 2023-11-01
 dateEnd: 2023-12-31
 hashtags:

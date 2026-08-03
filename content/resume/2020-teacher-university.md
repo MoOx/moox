@@ -2,7 +2,7 @@
 company: "IUT Blagnac"
 group: iut-blagnac
 url: "https://www.iut-blagnac.fr/"
-title: "University Teacher"
+title: "Teaching Agile methodology to university students (2nd year)"
 highlight: true
 job_title: "University Lecturer"
 icon: /resume/icons/universite-toulouse.svg
@@ -16,8 +16,6 @@ stats:
   - stat: "6"
     label: "Years taught"
     comment: "2012–2015 & 2018–2020 · C · Web · Agile"
-description: >
-  Teaching Agile methodology to university students (2nd year)
 dateStart: 2020-09-01
 dateEnd: 2020-11-30
 # Order matters: the CV only renders the first 6, so the distinctive ones lead.

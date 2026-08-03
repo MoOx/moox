@@ -1,8 +1,7 @@
 ---
 company: "Social Share"
-title: "Feed UI"
-description: >
-  Social feed of online publications
+title: "Social feed of online publications"
+job_title: "Front-End Developer"
 dateStart: 2014-01-01
 dateEnd: 2014-03-01
 hashtags:

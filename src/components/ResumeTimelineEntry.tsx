@@ -2,7 +2,7 @@ import { ResumeItem } from "@/api";
 import Image from "@/components/Image";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
 import StatTile from "@/components/StatTile";
-import { resumeEntryPath } from "@/profile";
+import { pitchOf, resumeEntryPath } from "@/profile";
 import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
@@ -187,7 +187,7 @@ export const ResumeTimelineEntry = ({
             role="heading"
             aria-level={4}
           >
-            {item.title.toUpperCase()}
+            {(item.job_title ?? "").toUpperCase()}
           </Text>
           {item.url && !disableLinks ? (
             <LinkText
@@ -213,7 +213,7 @@ export const ResumeTimelineEntry = ({
               theme.styles.text,
             ]}
           >
-            {item.description ?? null}
+            {item.title}
           </LinkText>
         ) : (
           <Text
@@ -224,7 +224,7 @@ export const ResumeTimelineEntry = ({
             ]}
             role="paragraph"
           >
-            {item.description ?? null}
+            {item.title}
           </Text>
         )}
         {item.dateEnd ? (
@@ -243,11 +243,11 @@ export const ResumeTimelineEntry = ({
             </Text>
           </>
         )}
-        {detail && item.groupPitch ? (
+        {detail && pitchOf(item) ? (
           <>
             <Spacer size="s" />
             <Text style={[fontStyles.iosEm.callout, theme.styles.text]}>
-              {item.groupPitch}
+              {pitchOf(item)}
             </Text>
           </>
         ) : null}

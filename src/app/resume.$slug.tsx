@@ -1,7 +1,7 @@
 import { fetchAll, fetchOne } from "@/api";
 import { ResumeTimelineEntry } from "@/components/ResumeTimelineEntry";
 import WebsiteError from "@/components/WebsiteError";
-import { fullName, groupKey } from "@/profile";
+import { fullName, groupKey, pitchOf } from "@/profile";
 import { size } from "@/react-multiversal";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -37,11 +37,14 @@ export const Route = createFileRoute("/resume/$slug")({
     meta: loaderData?.item
       ? [
           {
-            title: `${loaderData.item.title} · ${loaderData.item.company} - ${fullName}`,
+            title: [loaderData.item.title, loaderData.item.company, fullName]
+              .filter(Boolean)
+              .join(" · "),
           },
-          ...(loaderData.item.description
-            ? [{ name: "description", content: loaderData.item.description }]
-            : []),
+          {
+            name: "description",
+            content: pitchOf(loaderData.item) ?? loaderData.item.title,
+          },
         ]
       : [],
   }),

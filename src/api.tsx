@@ -24,7 +24,6 @@ export type ResumeItem = ContentItem & {
   dateStart: string;
   dateEnd?: string;
   wip?: boolean;
-  description?: string;
   hashtags: string[];
   image?: string;
   links?: Array<{
@@ -52,8 +51,16 @@ export type ResumeItem = ContentItem & {
    */
   group?: string;
   /**
-   * The CV pitch for the whole group - not "description, but longer". It is
-   * written to cover every mission of the group at once.
+   * The condensed-view pitch of a single entry (CV key row, /resume key
+   * card, modal lead) - one paragraph, CV formula. Not "description, but
+   * longer": description says what it is, the pitch says what I did.
+   */
+  pitch?: string;
+  /**
+   * Same as `pitch`, but written to cover every mission of the group at
+   * once. Only meaningful on the `highlight` entry of a `group` - entries
+   * without a group use `pitch`. Condensed views read
+   * `groupPitch ?? pitch` (see `pitchOf` in profile.tsx).
    */
   groupPitch?: string;
   stats?: ResumeStat[];

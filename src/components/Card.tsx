@@ -14,11 +14,13 @@ import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 const borderRadius = size("s");
 
 /**
- * Low-level dark card, movie-poster style: optional background image with the
- * gradient laid over it (image readable at the top, text sitting on the solid
- * bottom); without an image the gradient IS the background, like the skill
- * cards. Slots have opinionated default positions - pretitle in small caps,
- * title big, subtitle, text, `children`, tags - pass only what the card
+ * Low-level dark card. Two backgrounds: "gradient" is the movie-poster style -
+ * optional background image with the gradient laid over it (image readable at
+ * the top, text sitting on the solid bottom); without an image the gradient IS
+ * the background, like the skill cards. "glass" is the translucent tile of the
+ * dark bands (same recipe as StatTile), for cards sitting on a gradient band.
+ * Slots have opinionated default positions - icon tile, pretitle in small
+ * caps, title big, subtitle, text, `children`, tags - pass only what the card
  * needs, or take over entirely with `children`.
  */
 export default function Card({
@@ -28,6 +30,8 @@ export default function Card({
   text,
   tags,
   image,
+  icon,
+  background = "gradient",
   infoHref,
   infoLabel,
   minHeight,
@@ -44,8 +48,10 @@ export default function Card({
   tags?: string[];
   /** Background illustration; the gradient keeps the text legible over it. */
   image?: string;
-  /** [from, to] - dark brand colors, same family as the skill cards. */
-  gradient?: [string, string];
+  /** App-icon-like tile (or anything) rendered above the pretitle. */
+  icon?: ReactNode;
+  /** "gradient" (default) or "glass" - the StatTile translucent recipe. */
+  background?: "gradient" | "glass";
   /** Renders the ⓘ button (top right), e.g. to the entry's detail modal. */
   infoHref?: string;
   /** Accessible name of the ⓘ button - required with `infoHref`. */
@@ -70,43 +76,61 @@ export default function Card({
       ]}
       role="article"
     >
-      <GradientLinear
-        style={StyleSheet.absoluteFill}
-        stops={gradientFlashyStops(theme)}
-      />
-      {image ? (
-        <Image
-          src={image}
-          alt=""
-          width={640}
-          height={480}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: 0.25,
-            // mixBlendMode: "luminosity",
-          }}
+      {background === "glass" ? (
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              borderRadius,
+              backgroundColor: alpha(colors.white, 0.12),
+              borderWidth: 1,
+              borderColor: alpha(colors.white, 0.18),
+            },
+          ]}
+        />
+      ) : (
+        <>
+          <GradientLinear
+            style={StyleSheet.absoluteFill}
+            stops={gradientFlashyStops(theme)}
+          />
+          {image ? (
+            <Image
+              src={image}
+              alt=""
+              width={640}
+              height={480}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                opacity: 0.25,
+                // mixBlendMode: "luminosity",
+              }}
+            />
+          ) : null}
+          <GradientLinear
+            angle={86}
+            stops={[
+              { offset: 0, stopColor: alpha("#000", 0.8) },
+              { offset: 50, stopColor: alpha("#000", 0) },
+              { offset: 100, stopColor: alpha("#000", 0.95) },
+            ]}
+            style={StyleSheet.absoluteFill}
+          />
+        </>
+      )}
+      {background === "gradient" ? (
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            { borderRadius, boxShadow: boxShadowGlass() },
+          ]}
         />
       ) : null}
-      <GradientLinear
-        angle={86}
-        stops={[
-          { offset: 0, stopColor: alpha("#000", 0.8) },
-          { offset: 50, stopColor: alpha("#000", 0) },
-          { offset: 100, stopColor: alpha("#000", 0.95) },
-        ]}
-        style={StyleSheet.absoluteFill}
-      />
-      <View
-        style={[
-          StyleSheet.absoluteFill,
-          { borderRadius, boxShadow: boxShadowGlass() },
-        ]}
-      />
       {infoHref ? (
         <LinkView
           href={infoHref}
@@ -132,6 +156,14 @@ export default function Card({
         style={{ flexGrow: 1, minHeight, justifyContent: "space-between" }}
       >
         <View>
+          {icon ? (
+            <View
+              aria-hidden={true}
+              style={{ alignSelf: "flex-start", marginBottom: size("s") }}
+            >
+              {icon}
+            </View>
+          ) : null}
           {pretitle ? (
             <Text
               style={[

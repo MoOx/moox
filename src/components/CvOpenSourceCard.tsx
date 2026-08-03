@@ -187,16 +187,14 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
                     </View>
                   ) : null}
 
-                  {item.description ? (
-                    <Text
-                      style={[
-                        fontStyles.ios.caption1,
-                        { color: alpha(colors.white, 0.82) },
-                      ]}
-                    >
-                      {item.description.trim()}
-                    </Text>
-                  ) : null}
+                  <Text
+                    style={[
+                      fontStyles.ios.caption1,
+                      { color: alpha(colors.white, 0.82) },
+                    ]}
+                  >
+                    {item.title.trim()}
+                  </Text>
                 </SpacedView>
               </View>
             );

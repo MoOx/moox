@@ -20,7 +20,8 @@ const borderRadius = size("s");
 const sideImageMask =
   "linear-gradient(100deg, transparent 10%, rgb(0, 0, 0) 90%)";
 // Narrow screens: image as a top band, fading down into the card.
-const topImageMask = "linear-gradient(160deg, #000 30%, transparent 92%)";
+const topImageMask =
+  "linear-gradient(180deg, rgb(0, 0, 0) 10%, transparent 95%)";
 
 /**
  * Full-width experience row: quiet themed surface (hairline border + faint
@@ -31,8 +32,10 @@ const topImageMask = "linear-gradient(160deg, #000 30%, transparent 92%)";
  * out horizontally.
  */
 export default function ExperienceCard({
+  icon,
   pretitle,
   title,
+  company,
   dates,
   text,
   stats,
@@ -42,10 +45,15 @@ export default function ExperienceCard({
   infoLabel,
   style,
 }: {
-  /** Small caps accent line above the company (the job title). */
+  /** Company icon, in the flow at the top left (like the CV rows). */
+  icon?: string;
+  /** Small caps accent line above the title (the job title). */
   pretitle?: string;
+  /** The headline of the card (the entry's description). */
   title: string;
-  /** Derived period(s), rendered on the title's baseline. */
+  /** Company name - quiet, on the dates line under the title. */
+  company?: string;
+  /** Derived period(s), rendered next to the company. */
   dates?: string;
   /** Body copy (the pitch). */
   text?: string;
@@ -136,7 +144,7 @@ export default function ExperienceCard({
           gap="s"
           style={{ flexGrow: 1, flexShrink: 1, flexBasis: 340, minWidth: 0 }}
         >
-          <View>
+          <SpacedView gap="xxs">
             {pretitle ? (
               <Text
                 style={[
@@ -154,31 +162,52 @@ export default function ExperienceCard({
             <View
               style={{
                 flexDirection: "row",
-                alignItems: "baseline",
-                flexWrap: "wrap",
-                columnGap: size("s"),
+                alignItems: "center",
+                gap: size("s"),
               }}
             >
-              <Text
-                role="heading"
-                aria-level={3}
-                style={[
-                  fontStyles.iosEm.title2,
-                  theme.styles.text,
-                  { fontWeight: weight.bold },
-                ]}
-              >
-                {title}
-              </Text>
-              {dates ? (
-                <Text
-                  style={[fontStyles.ios.caption1, theme.styles.textLight2]}
-                >
-                  {dates}
-                </Text>
+              {icon ? (
+                <Image
+                  src={icon}
+                  alt={company ?? ""}
+                  width={64}
+                  height={64}
+                  style={{ borderRadius: 10 }}
+                />
               ) : null}
+              <View style={{ flexGrow: 1, flexShrink: 1, minWidth: 0 }}>
+                <Text
+                  role="heading"
+                  aria-level={3}
+                  style={[
+                    fontStyles.iosEm.title2,
+                    theme.styles.text,
+                    { fontWeight: weight.bold },
+                  ]}
+                >
+                  {title}
+                </Text>
+                {company || dates ? (
+                  <Text
+                    style={[fontStyles.ios.caption1, theme.styles.textLight2]}
+                  >
+                    {company ? (
+                      <Text
+                        style={[
+                          fontStyles.iosEm.caption1,
+                          theme.styles.textLight1,
+                        ]}
+                      >
+                        {company}
+                      </Text>
+                    ) : null}
+                    {company && dates ? " · " : null}
+                    {dates}
+                  </Text>
+                ) : null}
+              </View>
             </View>
-          </View>
+          </SpacedView>
           {text ? (
             <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>
               {text}

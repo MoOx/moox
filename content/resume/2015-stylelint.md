@@ -2,11 +2,9 @@
 company: "Open Source"
 url: "https://github.com/stylelint/stylelint/issues/1"
 image: /resume/stylelint.jpg
-title: "Kicked off stylelint"
+title: "Opened the first issue that started stylelint, now the standard CSS linter"
 openSource: true
 job_title: "Originator"
-description: >
-  Opened the first issue that started stylelint, now the standard CSS linter.
 dateStart: 2015-08-01
 dateEnd: 2015-08-31
 hashtags:

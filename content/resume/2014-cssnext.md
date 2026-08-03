@@ -2,12 +2,10 @@
 company: "Open Source"
 url: "https://github.com/MoOx/postcss-cssnext"
 image: /resume/cssnext.jpg
-title: "CSS game changer in 2015"
+title: "Babel for CSS - write tomorrow's CSS today. My work lives on in postcss-preset-env."
 openSource: true
 job_title: "Creator & Maintainer"
-description: >
-  Babel for CSS - write tomorrow's CSS today. My work lives on in
-  postcss-preset-env.
+pitch: "A CSS game changer in 2015: it grew to millions of weekly downloads and lives on as postcss-preset-env, still maintained today."
 dateStart: 2014-01-01
 dateEnd: 2017-12-31
 hashtags:

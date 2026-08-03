@@ -39,6 +39,7 @@ import {
   monthRange,
   nickname,
   personJsonLd,
+  pitchOf,
   profileStats,
   putaindecodeArticles,
   recommendationsUrl,
@@ -556,7 +557,7 @@ function PageCV() {
                 ) : null}
                 <View style={{ flexBasis: 168, flexGrow: 0, flexShrink: 0 }}>
                   <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>
-                    {h.job_title ?? h.title}
+                    {h.job_title}
                   </Text>
                   <Text
                     style={[fontStyles.ios.footnote, theme.styles.textLight1]}
@@ -579,7 +580,7 @@ function PageCV() {
                 </View>
                 <View style={{ flex: 1, flexBasis: 220, gap: size("xxs") }}>
                   <Text style={[fontStyles.ios.footnote, theme.styles.text]}>
-                    {h.groupPitch ?? h.description}
+                    {pitchOf(h) ?? h.title}
                   </Text>
                   {h.stats && h.stats.length > 0 ? (
                     <Text
@@ -653,7 +654,7 @@ function PageCV() {
                     <Text
                       style={[fontStyles.iosEm.footnote, theme.styles.text]}
                     >
-                      {m.job_title ?? m.title}
+                      {m.job_title}
                     </Text>
                     <Text style={theme.styles.textLight1}>
                       {` · ${m.company}`}
@@ -666,7 +667,7 @@ function PageCV() {
                       { flex: 1 },
                     ]}
                   >
-                    {(m.description ?? "").trim()}
+                    {m.title.trim()}
                   </Text>
                 </View>
               ))}
@@ -865,7 +866,7 @@ function PageCV() {
                       <Text
                         style={[fontStyles.iosEm.footnote, theme.styles.text]}
                       >
-                        {e.job_title ?? e.title}
+                        {e.job_title}
                       </Text>
                       <Text
                         style={[

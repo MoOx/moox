@@ -20,14 +20,14 @@ export default function BlockMe2WithPills() {
               pre="Professional"
               title="Web Developer"
               year={2007}
-              titleStyle={[fontStyles.iosEm.title3, { fontWeight: "900" }]}
+              titleStyle={[fontStyles.iosEm.body, { fontWeight: "900" }]}
               pillSpace="s"
-              spaceHorizontal="xxl"
-              spaceVertical="xs"
+              spaceHorizontal="xl"
+              spaceVertical="xxs"
             />
           </Parallax>
           <Parallax
-            style={{ position: "absolute", top: 420, left: 80 }}
+            style={{ position: "absolute", top: 360, left: 20 }}
             transforms={pTransforms(-5, 5, 0.05)}
           >
             <Pill
@@ -47,7 +47,7 @@ export default function BlockMe2WithPills() {
             <Pill title="First Website" year={1999} mode="ago" />
           </Parallax>
           <Parallax
-            style={{ position: "absolute", top: 260, right: 20 }}
+            style={{ position: "absolute", top: 240, right: 20 }}
             transforms={pTransforms(-5, 5, -0.05)}
           >
             <Pill

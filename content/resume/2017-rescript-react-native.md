@@ -2,11 +2,9 @@
 company: "Open Source"
 url: "https://github.com/rescript-react-native"
 image: /resume/rescript-react-native.jpg
-title: "Type-safe React Native for ReScript"
+title: "Took over and grew the type-safe React Native bindings for ReasonML/ReScript"
 openSource: true
 job_title: "Maintainer"
-description: >
-  Took over and grew the type-safe React Native bindings for ReasonML/ReScript.
 dateStart: 2017-01-01
 dateEnd: 2022-06-30
 hashtags:

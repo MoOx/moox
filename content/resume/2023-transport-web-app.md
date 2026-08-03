@@ -1,10 +1,9 @@
 ---
 company: "Hove"
 url: "https://hove.com/"
-title: "Transport Web App"
+title: "Web app built for cities and transport networks"
+job_title: "Lead Front-End Developer"
 group: hove
-description: >
-  Web app built for cities and transport networks
 dateStart: 2023-01-01
 dateEnd: 2023-10-30
 hashtags:

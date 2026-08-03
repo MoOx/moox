@@ -1,9 +1,8 @@
 ---
 company: "Shopbot"
 url: "https://www.shopbot.com.au"
-title: "First focus on front-end"
-description: >
-  UI Development on high-trafic websites focused on Front-end.
+title: "First focus on front-end - UI development on high-traffic websites"
+job_title: "Lead Front-End Developer"
 dateStart: 2010-06-01
 dateEnd: 2012-03-01
 hashtags:

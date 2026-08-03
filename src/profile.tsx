@@ -84,7 +84,7 @@ export const jobSubtitle = "React, React Native & cross-platform.";
  * document instead of just this line.
  */
 export const availabilityLabel = "Available now";
-export const availabilityDetail = "full time or 3 days/week";
+export const availabilityDetail = "full time or less";
 
 /** "Updated August 2026" - stamped at generation, so it is never stale. */
 export const updatedOn = () =>
@@ -438,7 +438,7 @@ const monthNames = [
   "Dec",
 ];
 
-const monthYear = (iso: string) => {
+export const monthYear = (iso: string) => {
   const d = new Date(iso);
   return `${monthNames[d.getMonth()]} ${d.getFullYear()}`;
 };
@@ -533,6 +533,13 @@ export const groupPeriods = (members: ResumeItem[]): string[] => {
 export const groupKey = (item: ResumeItem) => item.group ?? item.slug;
 
 /**
+ * The paragraph a condensed view shows for an entry: the group-wide pitch
+ * when the entry carries one (highlight of a `group`), else its own `pitch`.
+ * Callers append their own last-resort fallback (`?? description` on the CV).
+ */
+export const pitchOf = (item: ResumeItem) => item.groupPitch ?? item.pitch;
+
+/**
  * The key-experience rows: one row per client - `highlight` entries with
  * their whole group folded in (dates derived, never hand-written), newest
  * first. Same derivation on `/cv` and `/resume`.
@@ -559,7 +566,7 @@ export const resumeEntryPath = (item: ResumeItem) => `/${item.slug}`;
 export const openSourceCredits = [
   {
     label: "PostCSS",
-    note: "org creator · 500+ commits",
+    note: "org creator, 500+ commits",
     url: "https://github.com/search?q=org%3Apostcss+author%3Amoox&type=commits",
   },
   {

@@ -1,4 +1,4 @@
-import { fetchAll, ResumeItem, Talk } from "@/api";
+import { fetchAll, ResumeItem } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import BlockMe2WithPills from "@/components/BlockMe2WithPills";
 import ButtonView from "@/components/ButtonView";
@@ -7,7 +7,7 @@ import ExperienceCard from "@/components/ExperienceCard";
 import Image from "@/components/Image";
 import ResumeStats from "@/components/ResumeStats";
 import { ResumeTimeline } from "@/components/ResumeTimeline";
-import SkillsCards from "@/components/SkillsCards";
+import SkillCard from "@/components/SkillCard";
 import StatTile from "@/components/StatTile";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { socials, visualUrl } from "@/consts";
@@ -33,14 +33,12 @@ import {
   openSourceCredits,
   openSourceIntro,
   personJsonLd,
+  pitchOf,
   profileStats,
   projectName,
   putaindecodeArticles,
-  putaindecodeArticlesUrl,
-  putaindecodePodcastsUrl,
-  recommendationsUrl,
   resumeEntryPath,
-  selectedTalksSlugs,
+  skillsDomains,
   summary,
   tagline,
   techs,
@@ -52,7 +50,6 @@ import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
-import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
@@ -66,10 +63,15 @@ import {
   gradientTextIndigoStylesInv,
   useTheme,
 } from "@/styles";
+import SVGCssnext from "@/svgs/components/SVGCssnext";
 import SVGDownload from "@/svgs/components/SVGDownload";
+import SVGPhenomic from "@/svgs/components/SVGPhenomic";
+import SVGRescriptReactNative from "@/svgs/components/SVGRescriptReactNative";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
+import SVGStylelint from "@/svgs/components/SVGStylelint";
 import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
+import { ReactNode } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Svg, { Defs, LinearGradient, Stop } from "react-native-svg";
 
@@ -117,10 +119,17 @@ function PageResume() {
   const openSource = items
     .filter((i) => i.openSource)
     .sort((a, b) => (a.dateStart > b.dateStart ? 1 : -1));
-
-  const talksSelected = selectedTalksSlugs
-    .map((slug) => talks.find((t) => t.slug === slug))
-    .filter((t): t is Talk => Boolean(t));
+  // Project logo for each open-source card, keyed by `projectName`. The
+  // rescript-react-native source is the white variant, so its fill is
+  // overridden with the ReScript brand red to stay visible on the white tile.
+  const openSourceLogos: Record<string, ReactNode> = {
+    cssnext: <SVGCssnext width={32} height={32} />,
+    stylelint: <SVGStylelint width={32} height={32} />,
+    phenomic: <SVGPhenomic width={32} height={32} />,
+    "rescript-react-native": (
+      <SVGRescriptReactNative width={32} height={32} fills={["#E6484F"]} />
+    ),
+  };
 
   const headline = (viewTransitionName: string) => (
     <>
@@ -138,8 +147,8 @@ function PageResume() {
           theme.styles.text,
           gradientTextFlashyStyles(theme, 172),
           {
-            fontSize: 48,
-            lineHeight: 48,
+            fontSize: 42,
+            lineHeight: 42,
             fontWeight: "900",
             viewTransitionName,
           },
@@ -325,49 +334,61 @@ function PageResume() {
               style={{
                 flexDirection: "row",
                 alignItems: "center",
-                gap: size("xs"),
+                flexWrap: "wrap",
+                gap: size("s"),
               }}
             >
-              <AvailabilityBadge showText={true} text={availabilityLabel} />
-              <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-                {availabilityDetail}
-              </Text>
-            </View>
-            <Spacer size="s" />
-            <a
-              href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
-              download
-              style={{
-                alignItems: "flex-start",
-                display: "flex",
-                textDecoration: "none",
-                color: "inherit",
-              }}
-            >
-              <ButtonView
-                mode="outline"
-                effect="subtle"
-                spaceGap="xs"
-                textColor={theme.dynamicColors.textFlashy1}
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: size("xs"),
+                }}
               >
-                {({ color }) => (
-                  <>
-                    <SVGDownload width={16} height={16} fill={color} />
-                    <Text
-                      style={[
-                        {
-                          color,
-                          fontWeight: weight.bold,
-                        },
-                        gradientTextFlashyStyles(theme, 20),
-                      ]}
-                    >
-                      {"Download"}
-                    </Text>
-                  </>
-                )}
-              </ButtonView>
-            </a>
+                <AvailabilityBadge showText={true} text={availabilityLabel} />
+                <Text
+                  style={[fontStyles.ios.footnote, theme.styles.textLight1]}
+                >
+                  {availabilityDetail}
+                </Text>
+              </View>
+              <a
+                href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
+                download
+                style={{
+                  alignItems: "flex-start",
+                  display: "flex",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <ButtonView
+                  mode="outline"
+                  effect="subtle"
+                  spaceGap="xs"
+                  spaceHorizontal="s"
+                  spaceVertical="xs"
+                  textColor={theme.dynamicColors.textFlashy1}
+                >
+                  {({ color }) => (
+                    <>
+                      <SVGDownload width={16} height={16} fill={color} />
+                      <Text
+                        style={[
+                          {
+                            color,
+                            fontWeight: weight.bold,
+                          },
+                          gradientTextFlashyStyles(theme, 20),
+                        ]}
+                      >
+                        {"Download"}
+                      </Text>
+                    </>
+                  )}
+                </ButtonView>
+              </a>
+            </View>
           </View>
           <Spacer size="xl" />
           <View style={{ height: 3, width: "95%" }}>
@@ -380,35 +401,25 @@ function PageResume() {
         <BlockMe2WithPills />
       </Container>
 
-      {/* ================================================== Summary banner */}
+      {/* ==================================================== Summary intro */}
+      {/* Same quiet style as the home's "Where I can help." block - the
+          gradient banner stays a /cv (print) thing. */}
       <Spacer size="l" />
       <Container maxWidth={900}>
-        <SpacedView horizontal="l">
-          <View
-            style={{
-              borderRadius: size("s"),
-              overflow: "hidden",
-              backgroundImage: `linear-gradient(4deg,
-                ${theme.dynamicColors.textFlashy1} 0%,
-                ${theme.dynamicColors.textFlashy2} 25%,
-                ${theme.dynamicColors.textFlashy3} 75%,
-                ${theme.dynamicColors.textFlashy4} 100%)`,
-            }}
+        <SpacedView horizontal="l" gap="m">
+          <Text
+            style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
+            role="heading"
+            aria-level={2}
           >
-            <SpacedView horizontal="l" vertical="m" gap="xs">
-              <Text style={[fontStyles.iosEm.title3, { color: colors.white }]}>
-                {tagline}
-              </Text>
-              <Text
-                style={[
-                  fontStyles.ios.callout,
-                  { color: alpha(colors.white, 0.92) },
-                ]}
-              >
-                {summary}
-              </Text>
-            </SpacedView>
-          </View>
+            {tagline}
+          </Text>
+          <Text
+            style={[fontStyles.iosEm.callout, theme.styles.textLight1]}
+            role="paragraph"
+          >
+            {summary}
+          </Text>
         </SpacedView>
       </Container>
 
@@ -430,7 +441,48 @@ function PageResume() {
           >
             {"Skills"}
           </Text>
-          <SkillsCards mode="full" />
+          {/* Same distribution as /cv: the feature card big on the left, the
+              other domains stacked in a column next to it - the flat mosaic
+              left the blocks unbalanced. */}
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "stretch",
+              gap: size("s"),
+            }}
+          >
+            {skillsDomains
+              .filter((d) => d.feature)
+              .map((d) => (
+                <SkillCard
+                  key={d.title}
+                  title={d.title}
+                  subtitle={d.subtitle}
+                  items={d.items}
+                  Icon={d.Icon}
+                  gradient={d.gradient}
+                  big={true}
+                  glass={true}
+                  style={{ flexBasis: 300 }}
+                />
+              ))}
+            <View style={{ flexGrow: 1, flexBasis: 300, gap: size("s") }}>
+              {skillsDomains
+                .filter((d) => !d.feature)
+                .map((d) => (
+                  <SkillCard
+                    key={d.title}
+                    title={d.title}
+                    subtitle={d.subtitle}
+                    items={d.items}
+                    Icon={d.Icon}
+                    gradient={d.gradient}
+                    glass={true}
+                  />
+                ))}
+            </View>
+          </View>
           <View
             style={{
               flexDirection: "row",
@@ -466,7 +518,7 @@ function PageResume() {
             role="heading"
             aria-level={2}
           >
-            {"Experience"}
+            {"Key Experience"}
           </Text>
           {/* Full-width rows: copy on the left, the illustration fading in
               from the right. The ⓘ opens the detail modal (the whole group's
@@ -476,15 +528,17 @@ function PageResume() {
               <ExperienceCard
                 key={h.slug}
                 image={h.image}
-                pretitle={h.job_title ?? h.title}
-                title={h.company}
+                icon={h.icon}
+                pretitle={h.job_title}
+                title={h.title}
+                company={h.company}
                 dates={(() => {
                   const periods = groupPeriods(membersOf(h));
                   return periods.length > 1
                     ? periods.join(" · ")
                     : monthRange(h);
                 })()}
-                text={h.groupPitch ?? h.description}
+                text={pitchOf(h)}
                 stats={h.stats}
                 tags={h.hashtags}
                 infoHref={resumeEntryPath(h)}
@@ -558,15 +612,31 @@ function PageResume() {
             >
               {openSource.map((item) => {
                 const [headline, ...rest] = item.stats ?? [];
+                const logo = openSourceLogos[projectName(item)];
                 return (
                   <Card
                     key={item.slug}
                     style={{ flexBasis: 380 }}
-                    gradient={["#0D0837", "#0F7CB7"]}
-                    image={item.image}
+                    background="glass"
+                    icon={
+                      logo ? (
+                        <View
+                          style={{
+                            width: 48,
+                            height: 48,
+                            borderRadius: 12,
+                            backgroundColor: colors.white,
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {logo}
+                        </View>
+                      ) : undefined
+                    }
                     pretitle={`${item.job_title ?? ""} · ${yearRange(item)}`}
                     title={projectName(item)}
-                    text={item.description?.trim()}
+                    text={item.title.trim()}
                     infoHref={resumeEntryPath(item)}
                     infoLabel={`All the details about ${projectName(item)}`}
                   >
@@ -643,105 +713,10 @@ function PageResume() {
         </Container>
       </SpacedView>
 
-      {/* ================================================ Talks & Community */}
-      <Spacer size="xxl" />
-      <Container maxWidth={900}>
-        <SpacedView horizontal="l" gap="m">
-          <Text
-            style={[
-              fontStyles.iosEm.largeTitle,
-              gradientTextIndigoStylesInv(theme),
-            ]}
-            role="heading"
-            aria-level={2}
-          >
-            {"Talks & Community"}
-          </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              alignItems: "stretch",
-              gap: size("s"),
-            }}
-          >
-            <StatTile
-              valueFontSize={22}
-              stat={{
-                stat: `${talks.length}`,
-                label: "Conference talks",
-                comment: "in French & English",
-                url: "/talks",
-              }}
-            />
-            <StatTile
-              valueFontSize={22}
-              stat={{
-                // blog.json only indexes moox.io; putaindecode.io is a manual
-                // figure from profile.tsx (see STATS.md).
-                stat: `${blog.length + putaindecodeArticles}`,
-                label: "Blog posts",
-                comment: "on moox.io & putaindecode.io",
-                url: "/blog",
-              }}
-            />
-            <StatTile
-              valueFontSize={22}
-              flexBasis={200}
-              stat={{
-                stat: "co-founder",
-                label: visualUrl(socials.putaindecode.value),
-                comment: "FR dev community, blog & podcast",
-                url: socials.putaindecode.value,
-              }}
-            />
-          </View>
-          {talksSelected.length > 0 ? (
-            <Text style={[fontStyles.ios.caption1, theme.styles.textLight1]}>
-              {"Selected: "}
-              {talksSelected
-                .map(
-                  (t) =>
-                    `“${t.title}”${t.conference ? ` - ${t.conference}` : ""}`,
-                )
-                .join(" · ")}
-            </Text>
-          ) : null}
-          <Text style={[fontStyles.ios.caption1, theme.styles.textLight1]}>
-            {"On putaindecode.io: "}
-            <LinkText
-              href={putaindecodeArticlesUrl}
-              underline={true}
-              style={[fontStyles.iosEm.caption1, theme.styles.textMain]}
-            >
-              {"my articles"}
-            </LinkText>
-            {" · "}
-            <LinkText
-              href={putaindecodePodcastsUrl}
-              underline={true}
-              style={[fontStyles.iosEm.caption1, theme.styles.textMain]}
-            >
-              {"the podcast"}
-            </LinkText>
-          </Text>
-          <LinkView href={recommendationsUrl} underlineOnFocus={true}>
-            <Text style={[fontStyles.ios.callout, theme.styles.textLight1]}>
-              {"Testimonials: all recommendations on "}
-              <Text
-                style={[
-                  fontStyles.iosEm.callout,
-                  { color: theme.dynamicColors.textFlashy3 },
-                ]}
-              >
-                {visualUrl(socials.linkedin.value)}
-              </Text>
-            </Text>
-          </LinkView>
-        </SpacedView>
-      </Container>
-
-      {/* ========================================= Education & Beyond Code */}
+      {/* ============= Talks & Community, Education & Beyond Code */}
+      {/* One wrapping row, three columns. The talk list itself lives in the
+          timeline below (talks are entries there), so this column only keeps
+          the community figures, stacked. */}
       <Spacer size="xxl" />
       <Container maxWidth={900}>
         <SpacedView
@@ -749,50 +724,10 @@ function PageResume() {
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
-            alignItems: "flex-start",
+            alignContent: "stretch",
             gap: size("xl"),
           }}
         >
-          <View style={{ flexGrow: 1, flexBasis: 280, gap: size("m") }}>
-            <Text
-              style={[fontStyles.iosEm.title1, gradientTextFlashyStyles(theme)]}
-              role="heading"
-              aria-level={2}
-            >
-              {"Education"}
-            </Text>
-            {education.map((e) => (
-              <View
-                key={e.slug}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "flex-start",
-                  gap: size("s"),
-                }}
-              >
-                {e.icon ? (
-                  <Image
-                    src={e.icon}
-                    width={36}
-                    height={36}
-                    alt={e.company}
-                    style={{ borderRadius: 8 }}
-                  />
-                ) : null}
-                <View style={{ flex: 1 }}>
-                  <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
-                    {e.job_title ?? e.title}
-                  </Text>
-                  <Text
-                    style={[fontStyles.ios.caption1, theme.styles.textLight1]}
-                  >
-                    {`${e.company} · ${yearRange(e)}`}
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </View>
-
           <View style={{ flexGrow: 1, flexBasis: 280, gap: size("m") }}>
             <Text
               style={[
@@ -802,29 +737,132 @@ function PageResume() {
               role="heading"
               aria-level={2}
             >
-              {"Beyond Code"}
+              {"Talks & Community"}
             </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-between",
-              }}
-            >
-              {hobbies.map(({ Icon, label }) => (
-                <View key={label} style={{ alignItems: "center" }}>
-                  <Icon width={48} height={48} fill="url(#profileGrad)" />
-                  <Text
-                    style={[
-                      fontStyles.ios.caption1,
-                      theme.styles.textLight1,
-                      { textAlign: "center" },
-                    ]}
-                  >
-                    {label}
-                  </Text>
+            <View style={{ gap: size("s") }}>
+              <View style={{ flexDirection: "row" }}>
+                <StatTile
+                  valueFontSize={22}
+                  stat={{
+                    stat: `${talks.length}`,
+                    label: "Conference talks",
+                    comment: "in French & English",
+                    url: "/talks",
+                  }}
+                />
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <StatTile
+                  valueFontSize={22}
+                  stat={{
+                    // blog.json only indexes moox.io; putaindecode.io is a
+                    // manual figure from profile.tsx (see STATS.md).
+                    stat: `${blog.length + putaindecodeArticles}`,
+                    label: "Blog posts",
+                    comment: "on moox.io & putaindecode.io",
+                    url: "/blog",
+                  }}
+                />
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <StatTile
+                  valueFontSize={22}
+                  stat={{
+                    stat: "co-founder",
+                    label: visualUrl(socials.putaindecode.value),
+                    comment: "FR dev community, blog & podcast",
+                    url: socials.putaindecode.value,
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+
+          <View
+            style={{
+              flexGrow: 1,
+              flexBasis: 280,
+              gap: size("m"),
+              justifyContent: "space-between",
+            }}
+          >
+            <View style={{ gap: size("m") }}>
+              <Text
+                style={[
+                  fontStyles.iosEm.title1,
+                  gradientTextFlashyStyles(theme),
+                ]}
+                role="heading"
+                aria-level={2}
+              >
+                {"Education"}
+              </Text>
+              {education.map((e) => (
+                <View
+                  key={e.slug}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "flex-start",
+                    gap: size("s"),
+                  }}
+                >
+                  {e.icon ? (
+                    <Image
+                      src={e.icon}
+                      width={36}
+                      height={36}
+                      alt={e.company}
+                      style={{ borderRadius: 8 }}
+                    />
+                  ) : null}
+                  <View style={{ flex: 1 }}>
+                    <Text
+                      style={[fontStyles.iosEm.footnote, theme.styles.text]}
+                    >
+                      {e.job_title}
+                    </Text>
+                    <Text
+                      style={[fontStyles.ios.caption1, theme.styles.textLight1]}
+                    >
+                      {`${e.company} · ${yearRange(e)}`}
+                    </Text>
+                  </View>
                 </View>
               ))}
+            </View>
+            <View style={{ gap: size("m") }}>
+              <Text
+                style={[
+                  fontStyles.iosEm.title1,
+                  gradientTextIndigoStylesInv(theme),
+                ]}
+                role="heading"
+                aria-level={2}
+              >
+                {"Beyond Code"}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                }}
+              >
+                {hobbies.map(({ Icon, label }) => (
+                  <View key={label} style={{ alignItems: "center" }}>
+                    <Icon width={48} height={48} fill="url(#profileGrad)" />
+                    <Text
+                      style={[
+                        fontStyles.ios.caption1,
+                        theme.styles.textLight1,
+                        { textAlign: "center" },
+                      ]}
+                    >
+                      {label}
+                    </Text>
+                  </View>
+                ))}
+              </View>
             </View>
           </View>
         </SpacedView>
@@ -832,35 +870,22 @@ function PageResume() {
 
       {/* ===================================================== Full history */}
       <Spacer size="xxl" />
-      <Container maxWidth={840}>
+      <Container maxWidth={900}>
         <SpacedView horizontal="l">
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
               gradientTextFlashyStyles(theme),
-              { alignSelf: "center" },
             ]}
             role="heading"
             aria-level={2}
           >
-            {"Full History"}
-          </Text>
-          <Spacer size="s" />
-          <Text
-            style={[
-              fontStyles.ios.callout,
-              theme.styles.textLight1,
-              { textAlign: "center" },
-            ]}
-          >
-            {
-              "Every experience since the beginning - click one for the full story."
-            }
+            {"All Experience"}
           </Text>
           <Spacer size="l" />
-          <ResumeTimeline items={items} activeSlug={activeSlug} />
+          <ResumeTimeline items={items} talks={talks} activeSlug={activeSlug} />
+          <Spacer />
         </SpacedView>
-        <Spacer />
       </Container>
       <Spacer size="xl" />
       {/* The /resume/$slug detail renders here, as a modal above the page. */}

@@ -2,11 +2,9 @@
 company: "Open Source"
 url: "https://github.com/MoOx/phenomic"
 image: /resume/phenomic.jpg
-title: "Static sites with React, before Next.js"
+title: "One of the first React static-site generators - a precursor of Next.js SSG"
 openSource: true
 job_title: "Creator & Maintainer"
-description: >
-  One of the first React static-site generators - a precursor of Next.js SSG.
 dateStart: 2015-09-01
 dateEnd: 2020-09-30
 hashtags:

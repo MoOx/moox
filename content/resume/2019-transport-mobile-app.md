@@ -1,7 +1,7 @@
 ---
 company: "Hove"
 url: "https://hove.com/"
-title: "Transport Mobile App"
+title: "iOS / Android app built for cities and transport networks"
 highlight: true
 job_title: "Lead Front-End Developer"
 icon: /resume/icons/hove.png
@@ -24,8 +24,6 @@ stats:
   - stat: "1 day → 1 click"
     label: "QA & release"
     comment: "manual multi-client builds → automated pipeline"
-description: >
-  iOS / Android app built for cities and transport networks
 dateStart: 2019-06-06
 dateEnd: 2022-12-31
 # Order matters: the CV only renders the first 6, so the distinctive ones lead.

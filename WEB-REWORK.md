@@ -7,7 +7,9 @@ resumable. Update checkboxes as work lands.
 
 Related docs: `CV-SPEC.md` (pre-decision skeleton), `CV-TO-WEB.md` (items
 parked during the PDF pass — several are picked up here), `STATS.md` (figure
-sources), `CV-REWORK-JOURNAL.md` (why everything is the way it is).
+sources), `CV-REWORK-JOURNAL.md` (why everything is the way it is),
+`CONTENT-NORMALIZATION.md` (frontmatter field contract + normalization
+worklist feeding phases 4–5).
 
 ---
 
