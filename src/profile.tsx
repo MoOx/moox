@@ -3,7 +3,6 @@ import IconReact from "@/components/IconReact";
 import IconReactNative from "@/components/IconReactNative";
 import type { SkillCardIcon } from "@/components/SkillCard";
 import { ind, sendStringAsMailString, socials, website } from "@/consts";
-import SVGActivityBike from "@/svgs/components/SVGActivityBike";
 import SVGActivityBricolage from "@/svgs/components/SVGActivityBricolage";
 import SVGActivityClimbing from "@/svgs/components/SVGActivityClimbing";
 import SVGActivityCrossfit from "@/svgs/components/SVGActivityCrossfit";
@@ -15,13 +14,11 @@ import SVGCss from "@/svgs/components/SVGCss";
 import SVGDetox from "@/svgs/components/SVGDetox";
 import SVGExpo from "@/svgs/components/SVGExpo";
 import SVGJavaScript from "@/svgs/components/SVGJavaScript";
-import SVGMicrophone from "@/svgs/components/SVGMicrophone";
 import SVGNextjs from "@/svgs/components/SVGNextjs";
 import SVGPlaywright from "@/svgs/components/SVGPlaywright";
 import SVGPostcss from "@/svgs/components/SVGPostcss";
 import SVGSquareStack3DUpFill from "@/svgs/components/SVGSquareStack3DUpFill";
 import SVGStorybook from "@/svgs/components/SVGStorybook";
-import SVGTraining from "@/svgs/components/SVGTraining";
 import SVGTypescript from "@/svgs/components/SVGTypescript";
 import type { ComponentType } from "react";
 
@@ -112,6 +109,9 @@ export const handle = "MoOx";
  * indexes moox.io. Source: https://putaindecode.io/articles?search=moox
  */
 export const putaindecodeArticles = 22;
+export const putaindecodeArticlesUrl =
+  "https://putaindecode.io/articles?search=moox";
+export const putaindecodePodcastsUrl = "https://putaindecode.io/podcasts";
 
 /**
  * The document's own metadata, authored once here and consumed three times:
@@ -286,13 +286,10 @@ export const techs: IconItem[] = [
 export const hobbies: IconItem[] = [
   { Icon: SVGActivityCrossfit, label: "CrossFit", cv: true },
   { Icon: SVGActivityClimbing, label: "Climbing", cv: true },
-  { Icon: SVGActivityBike, label: "Bike" },
   { Icon: SVGActivityDj, label: "DJ", cv: true },
-  { Icon: SVGActivityBricolage, label: "Bricolage" },
+  { Icon: SVGActivityBricolage, label: "Bricolage", cv: true },
   { Icon: SVGActivityStandup, label: "Standup", cv: true },
-  { Icon: SVGMicrophone, label: "Podcast" },
-  { Icon: SVGTraining, label: "Teaching" },
-  { Icon: SVGActivityPekinExpress, label: "Pekin Express #20", cv: true },
+  { Icon: SVGActivityPekinExpress, label: "Pekin Express\n#20", cv: true },
 ];
 
 /**

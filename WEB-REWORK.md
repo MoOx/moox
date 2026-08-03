@@ -94,6 +94,23 @@ sources), `CV-REWORK-JOURNAL.md` (why everything is the way it is).
   engagements). `/`, `/resume` and `/cv` all advertise "Lead Front-End
   Developer" in H1/meta and all carry `personJsonLd` — the CV-TO-WEB.md §1
   blocker is resolved.
+- **2026-08-02 — poster cards + OSS band + group modals.** New low-level
+  `Card` component (`src/components/Card.tsx`): dark movie-poster card -
+  background image with the brand gradient laid over it (solid gradient when
+  no image), slotted content (pretitle caps / title / subtitle / text /
+  children / tags) and an ⓘ button (`svgs/info.circle.svg` →
+  `SVGInfoCircle`) opening the detail modal. `/resume` Experience is now a
+  2-per-row (wrap) grid of these cards (job title as pretitle, company big,
+  pitch, stats line, hashtags); Open Source became a full-bleed band (same
+  gradient as the old card, opposite skew to the stats band) hosting the
+  intro + credits + the four entries as the same `Card`s -
+  `CvOpenSourceCard` is now CV-only. Grouped clients open ONE modal with
+  every mission of the group in sequence (`/resume/$slug` loader fetches the
+  group; only the visited entry keeps the view-transition name). Talks &
+  Community tiles now link to `/talks` and `/blog`, plus a line linking the
+  putaindecode articles (`?search=moox`) and podcasts. Max also curated
+  `hobbies` down to 6 items all flagged `cv: true` - the /cv render changes
+  (Bricolage added), to check when the PDF is regenerated.
 - **2026-08-02 — /resume restructured as the web CV.** Hero reworked
   (eyebrow before H1, `jobSubtitle` as subtitle, badge + languages moved next
   to the links); summary band placed like the CV; `ResumeStats` now hosts the
@@ -123,6 +140,16 @@ sources), `CV-REWORK-JOURNAL.md` (why everything is the way it is).
   card gives up its name (`activeSlug`) to keep names unique. Detail mode of
   `ResumeTimelineEntry` shows `groupPitch`, the markdown body (EN part) and
   per-mission `stats` tiles; the timeline itself no longer inlines bodies.
+- **2026-08-02 — Experience rows (`ExperienceCard`).** The 2-per-row poster
+  grid on `/resume` is replaced by full-width horizontal cards
+  (`src/components/ExperienceCard.tsx`): quiet themed surface (hairline
+  `ultraLight` border + `backMainAlpha05` tint, the StatTile "plain" family),
+  copy on the left, the illustration bleeding in from the right through an
+  angled CSS opacity mask (`mask-image: linear-gradient(105deg, …)`) — chosen
+  over a gradient overlay so the image dissolves into any background without
+  replicating its colors, in both themes. Stats render as accent pills
+  (`textFlashy2`), hashtags as the closing line. `Card` (poster) stays for the
+  Open Source band.
 - **2026-08-02 — `?staticRendering` removed.** Gone from `resume.tsx`
   (validateSearch, print styles, forced light scheme, PDF-only contact rows,
   QR footer), `ResumeTimeline`, `ResumeTimelineEntry`

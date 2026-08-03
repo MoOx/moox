@@ -2,7 +2,8 @@ import { fetchAll, ResumeItem, Talk } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import BlockMe2WithPills from "@/components/BlockMe2WithPills";
 import ButtonView from "@/components/ButtonView";
-import CvOpenSourceCard from "@/components/CvOpenSourceCard";
+import Card from "@/components/Card";
+import ExperienceCard from "@/components/ExperienceCard";
 import Image from "@/components/Image";
 import ResumeStats from "@/components/ResumeStats";
 import { ResumeTimeline } from "@/components/ResumeTimeline";
@@ -13,8 +14,11 @@ import { socials, visualUrl } from "@/consts";
 import {
   availabilityDetail,
   availabilityLabel,
+  compactCount,
   freelanceSince,
   fullName,
+  githubFollowers,
+  githubSince,
   groupKey,
   groupPeriods,
   hobbies,
@@ -22,16 +26,21 @@ import {
   jobTitle,
   keyExperiences,
   languages,
+  lowerKeepingAcronyms,
   metaDescription,
   monthRange,
   nickname,
+  openSourceCredits,
+  openSourceIntro,
   personJsonLd,
   profileStats,
+  projectName,
   putaindecodeArticles,
+  putaindecodeArticlesUrl,
+  putaindecodePodcastsUrl,
   recommendationsUrl,
   resumeEntryPath,
   selectedTalksSlugs,
-  statsLine,
   summary,
   tagline,
   techs,
@@ -96,9 +105,7 @@ function PageResume() {
   const theme = useTheme();
   const { resume: items, talks, blog } = Route.useLoaderData();
   // Slug of the entry whose detail modal is open (child route /resume/$slug).
-  const { slug: activeSlug } = useParams({ strict: false }) as {
-    slug?: string;
-  };
+  const { slug: activeSlug } = useParams({ strict: false });
 
   const highlights = keyExperiences(items);
   const membersOf = (item: ResumeItem) =>
@@ -461,91 +468,180 @@ function PageResume() {
           >
             {"Experience"}
           </Text>
-          {highlights.map((h, i) => (
-            <View
-              key={h.slug}
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                alignItems: "flex-start",
-                gap: size("s"),
-                paddingBottom: size("m"),
-                borderBottomWidth: i === highlights.length - 1 ? 0 : 1,
-                borderColor: theme.dynamicColors.ultraLight,
-              }}
-            >
-              {h.icon ? (
-                <Image
-                  alt={h.company}
-                  src={h.icon}
-                  width={44}
-                  height={44}
-                  style={{ borderRadius: 10 }}
-                />
-              ) : null}
-              <View style={{ flexBasis: 190, flexGrow: 0, flexShrink: 0 }}>
-                <LinkText
-                  href={resumeEntryPath(h)}
-                  underlineOnFocus={true}
-                  style={[fontStyles.iosEm.subhead, theme.styles.text]}
-                >
-                  {h.job_title ?? h.title}
-                </LinkText>
-                <Text
-                  style={[fontStyles.ios.footnote, theme.styles.textLight1]}
-                >
-                  {h.company}
-                </Text>
-                <Text
-                  style={[fontStyles.ios.caption1, theme.styles.textLight2]}
-                >
-                  {(() => {
-                    const periods = groupPeriods(membersOf(h));
-                    return periods.length > 1
-                      ? periods.join(" · ")
-                      : monthRange(h);
-                  })()}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexGrow: 1,
-                  flexShrink: 1,
-                  flexBasis: 260,
-                  gap: size("xxs"),
-                }}
-              >
-                <Text style={[fontStyles.ios.footnote, theme.styles.text]}>
-                  {h.groupPitch ?? h.description}
-                </Text>
-                {h.stats && h.stats.length > 0 ? (
-                  <Text
-                    style={[
-                      fontStyles.iosEm.caption1,
-                      { color: theme.dynamicColors.textFlashy3 },
-                    ]}
-                  >
-                    {statsLine(h.stats)}
-                  </Text>
-                ) : null}
-                <Text
-                  style={[fontStyles.ios.caption2, theme.styles.textLight2]}
-                >
-                  {h.hashtags.join(" · ")}
-                </Text>
-              </View>
-            </View>
-          ))}
+          {/* Full-width rows: copy on the left, the illustration fading in
+              from the right. The ⓘ opens the detail modal (the whole group's
+              missions for grouped clients). */}
+          <View style={{ gap: size("m") }}>
+            {highlights.map((h) => (
+              <ExperienceCard
+                key={h.slug}
+                image={h.image}
+                pretitle={h.job_title ?? h.title}
+                title={h.company}
+                dates={(() => {
+                  const periods = groupPeriods(membersOf(h));
+                  return periods.length > 1
+                    ? periods.join(" · ")
+                    : monthRange(h);
+                })()}
+                text={h.groupPitch ?? h.description}
+                stats={h.stats}
+                tags={h.hashtags}
+                infoHref={resumeEntryPath(h)}
+                infoLabel={`All the details about ${h.company}`}
+              />
+            ))}
+          </View>
         </SpacedView>
       </Container>
 
       {/* ====================================================== Open Source */}
+      {/* Full-bleed band like the stats one (opposite skew), so the entry
+          cards sit directly on it - no more card-in-a-card. */}
       <Spacer size="xxl" />
-      <Container maxWidth={900}>
-        <SpacedView horizontal="l">
-          <CvOpenSourceCard items={openSource} />
-        </SpacedView>
-      </Container>
+      <SpacedView vertical="xl">
+        <GradientLinear
+          angle={60}
+          stops={[
+            { offset: 10, stopColor: "#010244" },
+            { offset: 100, stopColor: "#0F7CB7" },
+          ]}
+          style={[StyleSheet.absoluteFill, { transform: [{ skewY: "-1deg" }] }]}
+        />
+        <Container maxWidth={900}>
+          <SpacedView horizontal="l" gap="m">
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: size("s"),
+              }}
+            >
+              <Image
+                src="/github-arctic-code-vault-contributor.png"
+                width={224 / 7}
+                height={254 / 7}
+                alt="GitHub Arctic Code Vault Contributor"
+              />
+              <Text
+                role="heading"
+                aria-level={2}
+                style={[fontStyles.iosEm.largeTitle, { color: colors.white }]}
+              >
+                {"Open Source"}
+              </Text>
+              <View style={{ flex: 1 }} />
+              <Text
+                style={[
+                  fontStyles.ios.caption1,
+                  { color: alpha(colors.white, 0.72) },
+                ]}
+              >
+                {`${compactCount(githubFollowers)} followers · on GitHub since ${githubSince}`}
+              </Text>
+            </View>
+            <Text
+              style={[
+                fontStyles.ios.callout,
+                { color: alpha(colors.white, 0.85) },
+              ]}
+            >
+              {openSourceIntro}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                gap: size("m"),
+              }}
+            >
+              {openSource.map((item) => {
+                const [headline, ...rest] = item.stats ?? [];
+                return (
+                  <Card
+                    key={item.slug}
+                    style={{ flexBasis: 380 }}
+                    gradient={["#0D0837", "#0F7CB7"]}
+                    image={item.image}
+                    pretitle={`${item.job_title ?? ""} · ${yearRange(item)}`}
+                    title={projectName(item)}
+                    text={item.description?.trim()}
+                    infoHref={resumeEntryPath(item)}
+                    infoLabel={`All the details about ${projectName(item)}`}
+                  >
+                    {headline ? (
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "flex-end",
+                          flexWrap: "wrap",
+                          gap: size("xs"),
+                        }}
+                      >
+                        <Text>
+                          <Text
+                            style={{
+                              fontSize: 22,
+                              lineHeight: 24,
+                              fontWeight: weight.black,
+                              color: colors.white,
+                            }}
+                          >
+                            {headline.stat}
+                          </Text>
+                          <Text
+                            style={[
+                              fontStyles.ios.caption1,
+                              { color: alpha(colors.white, 0.8) },
+                            ]}
+                          >
+                            {` ${headline.label}`}
+                          </Text>
+                        </Text>
+                        {rest.length > 0 ? (
+                          <Text
+                            style={[
+                              fontStyles.ios.caption2,
+                              { color: alpha(colors.white, 0.6) },
+                            ]}
+                          >
+                            {rest
+                              .map(
+                                (s) =>
+                                  `${s.stat} ${lowerKeepingAcronyms(s.label)}`,
+                              )
+                              .join(" · ")}
+                          </Text>
+                        ) : null}
+                      </View>
+                    ) : null}
+                  </Card>
+                );
+              })}
+            </View>
+            <Text
+              style={[
+                fontStyles.ios.caption1,
+                { color: alpha(colors.white, 0.72) },
+              ]}
+            >
+              {"Also: "}
+              {openSourceCredits.map((credit, i) => (
+                <Text key={credit.label}>
+                  {i > 0 ? " · " : ""}
+                  <Text
+                    style={{ color: colors.white, fontWeight: weight.semibold }}
+                  >
+                    {credit.label}
+                  </Text>
+                  {` ${credit.note}`}
+                </Text>
+              ))}
+            </Text>
+          </SpacedView>
+        </Container>
+      </SpacedView>
 
       {/* ================================================ Talks & Community */}
       <Spacer size="xxl" />
@@ -575,6 +671,7 @@ function PageResume() {
                 stat: `${talks.length}`,
                 label: "Conference talks",
                 comment: "in French & English",
+                url: "/talks",
               }}
             />
             <StatTile
@@ -585,6 +682,7 @@ function PageResume() {
                 stat: `${blog.length + putaindecodeArticles}`,
                 label: "Blog posts",
                 comment: "on moox.io & putaindecode.io",
+                url: "/blog",
               }}
             />
             <StatTile
@@ -609,6 +707,24 @@ function PageResume() {
                 .join(" · ")}
             </Text>
           ) : null}
+          <Text style={[fontStyles.ios.caption1, theme.styles.textLight1]}>
+            {"On putaindecode.io: "}
+            <LinkText
+              href={putaindecodeArticlesUrl}
+              underline={true}
+              style={[fontStyles.iosEm.caption1, theme.styles.textMain]}
+            >
+              {"my articles"}
+            </LinkText>
+            {" · "}
+            <LinkText
+              href={putaindecodePodcastsUrl}
+              underline={true}
+              style={[fontStyles.iosEm.caption1, theme.styles.textMain]}
+            >
+              {"the podcast"}
+            </LinkText>
+          </Text>
           <LinkView href={recommendationsUrl} underlineOnFocus={true}>
             <Text style={[fontStyles.ios.callout, theme.styles.textLight1]}>
               {"Testimonials: all recommendations on "}
@@ -693,7 +809,6 @@ function PageResume() {
                 flexDirection: "row",
                 flexWrap: "wrap",
                 justifyContent: "space-between",
-                gap: size("m"),
               }}
             >
               {hobbies.map(({ Icon, label }) => (
@@ -703,7 +818,7 @@ function PageResume() {
                     style={[
                       fontStyles.ios.caption1,
                       theme.styles.textLight1,
-                      { textAlign: "center", whiteSpace: "nowrap" },
+                      { textAlign: "center" },
                     ]}
                   >
                     {label}

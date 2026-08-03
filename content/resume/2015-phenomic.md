@@ -1,6 +1,7 @@
 ---
 company: "Open Source"
 url: "https://github.com/MoOx/phenomic"
+image: /resume/phenomic.jpg
 title: "Static sites with React, before Next.js"
 openSource: true
 job_title: "Creator & Maintainer"

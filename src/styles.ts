@@ -105,7 +105,7 @@ export const themedColors: ThemeColors<ThemedColors> = {
     backAlt: "#0c001b",
     backOnAlt: "#150030",
     backMain: colors.indigo,
-    backMainAlpha05: alpha(platformColors.ios.dark.gray6, 0.05),
+    backMainAlpha05: alpha(colors.indigo, 0.05),
     text: alpha(colors.white, 0.95),
     textAlt: colors.white,
     textDark: alpha(colors.white, 0.5),

@@ -7,11 +7,11 @@ import {
 } from "@/components/BlockTestimonials";
 import CvOpenSourceCard from "@/components/CvOpenSourceCard";
 import CvSectionTitle from "@/components/CvSectionTitle";
-import SkillCard from "@/components/SkillCard";
-import StatTile from "@/components/StatTile";
 import GradientText from "@/components/GradientText";
 import Image from "@/components/Image";
 import Me from "@/components/Me";
+import SkillCard from "@/components/SkillCard";
+import StatTile from "@/components/StatTile";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import {
   ind,
@@ -887,7 +887,6 @@ function PageCV() {
                     flexDirection: "row",
                     flexWrap: "wrap",
                     justifyContent: "space-between",
-                    gap: size("m"),
                   }}
                 >
                   {hobbies
@@ -899,7 +898,7 @@ function PageCV() {
                           style={[
                             fontStyles.ios.callout,
                             theme.styles.textLight1,
-                            { textAlign: "center", whiteSpace: "nowrap" },
+                            { textAlign: "center" },
                           ]}
                         >
                           {label}

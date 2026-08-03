@@ -1,9 +1,11 @@
-import { fetchOne } from "@/api";
+import { fetchAll, fetchOne } from "@/api";
 import { ResumeTimelineEntry } from "@/components/ResumeTimelineEntry";
 import WebsiteError from "@/components/WebsiteError";
-import { fullName } from "@/profile";
+import { fullName, groupKey } from "@/profile";
+import { size } from "@/react-multiversal";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { View } from "react-native";
 
 /**
  * Detail of one experience. A real, statically generated page (deep-linkable,
@@ -11,23 +13,34 @@ import { useEffect } from "react";
  * timeline: this route is a child of `/resume`, so the timeline is always
  * behind it - on client-side navigation the shared view-transition name makes
  * the card "zoom" into the modal.
+ *
+ * Grouped clients (several missions under one `group`) open as one modal with
+ * every mission of the group in sequence, newest first.
  */
 export const Route = createFileRoute("/resume/$slug")({
-  loader: ({ params }) =>
-    fetchOne({
-      data: {
-        filename: decodeURIComponent(params.slug) + ".json",
-        contentType: "resume",
-      },
-    }),
+  loader: async ({ params }) => {
+    const filename = decodeURIComponent(params.slug) + ".json";
+    const [item, all] = await Promise.all([
+      fetchOne({ data: { filename, contentType: "resume" } }),
+      fetchAll({ data: "resume" }),
+    ]);
+    const members = item
+      ? all
+          .filter((i) => groupKey(i) === groupKey(item))
+          .sort((a, b) =>
+            (b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1,
+          )
+      : [];
+    return { item, members };
+  },
   head: ({ loaderData }) => ({
-    meta: loaderData
+    meta: loaderData?.item
       ? [
           {
-            title: `${loaderData.title} · ${loaderData.company} - ${fullName}`,
+            title: `${loaderData.item.title} · ${loaderData.item.company} - ${fullName}`,
           },
-          ...(loaderData.description
-            ? [{ name: "description", content: loaderData.description }]
+          ...(loaderData.item.description
+            ? [{ name: "description", content: loaderData.item.description }]
             : []),
         ]
       : [],
@@ -36,7 +49,7 @@ export const Route = createFileRoute("/resume/$slug")({
 });
 
 function PageResumeEntry() {
-  const item = Route.useLoaderData();
+  const { item, members } = Route.useLoaderData();
   const navigate = useNavigate();
 
   // Escape closes (backdrop click and browser back also do).
@@ -99,7 +112,19 @@ function PageResumeEntry() {
           display: "flex",
         }}
       >
-        <ResumeTimelineEntry item={item} detail={true} disableLinks={false} />
+        <View style={{ flexGrow: 1, gap: size("m") }}>
+          {/* Only the visited entry carries the shared view-transition name:
+              the sibling missions' timeline cards are still visible behind
+              the modal, and duplicate names would kill the transition. */}
+          {members.map((member) => (
+            <ResumeTimelineEntry
+              key={member.slug}
+              item={member}
+              detail={true}
+              transitionEnabled={member.slug === item.slug}
+            />
+          ))}
+        </View>
       </div>
     </div>
   );

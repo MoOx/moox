@@ -1,6 +1,7 @@
 ---
 company: "Open Source"
 url: "https://github.com/rescript-react-native"
+image: /resume/rescript-react-native.jpg
 title: "Type-safe React Native for ReScript"
 openSource: true
 job_title: "Maintainer"
@@ -31,6 +32,6 @@ bindings for ReasonML - and grew it for years. That meant hand-mapping the
 entire React Native API and its ecosystem (navigation, paper, svg,
 async-storage…) into strongly-typed bindings.
 
-It also meant following the language's renames through bs-_ → reason-_ →
+It also meant following the language's renames through bs-_→ reason-_ →
 rescript-\*, each with its own organisation to keep in sync - a large, meticulous
 binding effort across dozens of packages, until I moved on from ReScript.

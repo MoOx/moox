@@ -1,6 +1,7 @@
 ---
 company: "Open Source"
 url: "https://github.com/stylelint/stylelint/issues/1"
+image: /resume/stylelint.jpg
 title: "Kicked off stylelint"
 openSource: true
 job_title: "Originator"

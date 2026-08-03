@@ -1,6 +1,7 @@
 ---
 company: "Open Source"
 url: "https://github.com/MoOx/postcss-cssnext"
+image: /resume/cssnext.jpg
 title: "CSS game changer in 2015"
 openSource: true
 job_title: "Creator & Maintainer"
