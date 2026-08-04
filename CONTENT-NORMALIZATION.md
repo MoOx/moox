@@ -117,31 +117,30 @@ text-verified with `pdftotext`):
 
 Still to do (cheap):
 
-- [ ] `2012-dashboard`: `company: "Jirafe"`, move "now part of SAP Hybris" to
-      the body.
-- [ ] OSS entries: `title` becomes the project name ("cssnext", "stylelint",
-      "phenomic", "rescript-react-native"); the current hooks move to `pitch`
-      ("CSS game changer in 2015" is a pitch opener, not a name). `/cv` is
-      untouched (`CvOpenSourceCard` renders `projectName(slug)`), and
-      `projectName` stays as the slug-derived fallback. **Pending Max's ok.**
-- [ ] Trailing periods off descriptions (`2008`, `2010`, `2024-enjoy`).
-- [ ] `1985` / `1995` / `1999` story entries: flag `personal: true` like
-      `2003` / `2006` — consistency, and future filters won't need the
-      "no company" heuristic.
+- [x] `2012-dashboard`: `company: "Jirafe"`, SAP (Hybris) note moved to the
+      body (EN + FR) — done 2026-08-03.
+- [x] ~~OSS entries: `title` becomes the project name~~ — dissolved by the
+      title collapse (§7): the display name stays `projectName(slug)`, the
+      hooks became pitch material.
+- [x] Trailing periods — enforced during the title collapse (§7).
+- [x] `1985` / `1995` / `1999` story entries flagged `personal: true` (done
+      2026-08-04) — consistency with `2003` / `2006`; no rendered change
+      (no `company`, they were already excluded from work-history filters).
 
 ## 5. Content pass (writing, needs Max)
 
 One file at a time, priority = what the timeline now shows first:
 
-- [ ] **Review the backfilled roles** (see §4) — "Full-Stack Developer" is a
-      default, not a memory. Also decide roles for the untouched entries:
-      Hove `2017` / `2023` (front-end, likely), Loewe `2019-tv-app`
-      (React Native), `2024-enjoy`, `2023-unebonneboutique`,
-      `2018-research-and-development`.
-- [ ] **Pitches for the timeline's top entries** that have none:
-      `2023-transport-web-app`, `2024-enjoy`, `2019-tv-app…` would benefit —
-      the modal shows the pitch above the body. Not every 2008 gig needs one;
-      recent + distinctive first.
+- [x] **Roles reviewed** — Max hand-tuned the 2007–2016 defaults
+      (Shopbot/Jirafe/ViaReport → Lead, Molotov → Senior Front-End
+      Consultant, One2Team → Lead Mobile Developer…) and the rest was
+      completed with him (teachers, Hove 2017/2023 → Lead, Loewe/Enjoy →
+      Front-End Developer, unebonneboutique → Full-Stack Developer).
+- [x] **Pitches for the timeline's top entries** — `2024-enjoy` and
+      `2019-tv-app` (Loewe) got theirs 2026-08-04, facts sourced from their
+      bodies (MVP→production; re-architecture + animations + Cocoapods
+      untangling). `2023-transport-web-app` is covered by the Hove group
+      modal. Not every 2008 gig needs one.
 - [x] **De-duplicate the ladder** — done 2026-08-03 on all five (exem,
       hove, aardvark, teacher, fklg). The rule that emerged: **the number
       lives in the stat pill, the what-it-is in the title; the pitch only
