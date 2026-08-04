@@ -50,6 +50,7 @@ import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
+import LinkText from "@/react-multiversal/LinkText";
 import { default as SpacedView } from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import TextForReader from "@/react-multiversal/TextForReader";
@@ -78,7 +79,9 @@ export const Route = createFileRoute("/resume")({
   // their real standalone URL in the address bar (see ResumeEntryModal). The
   // keys must stay optional in the returned type, or every Link to /resume
   // would be forced to pass a `search` prop.
-  validateSearch: (search: Record<string, unknown>): { detail?: string; group?: string } => ({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { detail?: string; group?: string } => ({
     ...(typeof search.detail === "string" ? { detail: search.detail } : {}),
     ...(typeof search.group === "string" ? { group: search.group } : {}),
   }),
@@ -116,23 +119,31 @@ function PageResume() {
   // Modal state: `detail` = one entry (timeline click), `group` = every
   // mission of a grouped client (key-experience card click).
   const { detail, group } = Route.useSearch();
-  const detailItem = detail ? items.find((i) => i.slug.endsWith(`/${detail}`)) : undefined;
+  const detailItem = detail
+    ? items.find((i) => i.slug.endsWith(`/${detail}`))
+    : undefined;
   const groupItems = group
     ? items
         .filter((i) => i.group === group)
-        .sort((a, b) => ((b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1))
+        .sort((a, b) =>
+          (b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1,
+        )
     : [];
   const modalItems = group ? groupItems : detailItem ? [detailItem] : [];
   // The entry whose timeline card yields its view-transition name to the
   // modal (for a group: its highlight entry, the one with a key card).
-  const activeEntry = detailItem ?? groupItems.find((i) => i.highlight) ?? groupItems[0];
+  const activeEntry =
+    detailItem ?? groupItems.find((i) => i.highlight) ?? groupItems[0];
   const activeSlug = activeEntry?.slug.split("/").pop();
 
   // The Next.js "intercepting routes" pattern, TanStack-style: the ⓘ links
   // keep their real href (crawlers and no-JS land on the standalone pages),
   // but a click is intercepted to open the modal over the page - URL masked
   // as the real one, so reload & share still get the standalone page.
-  const openEntry = (item: ResumeItem, event?: { preventDefault?: () => void }) => {
+  const openEntry = (
+    item: ResumeItem,
+    event?: { preventDefault?: () => void },
+  ) => {
     event?.preventDefault?.();
     const slug = item.slug.split("/").pop() ?? item.slug;
     void navigate({
@@ -148,7 +159,10 @@ function PageResume() {
   };
   // Grouped clients (key-experience cards): the whole group in one modal,
   // masked as /resume/group/<group>. Ungrouped ones fall back to the entry.
-  const openGroup = (item: ResumeItem, event?: { preventDefault?: () => void }) => {
+  const openGroup = (
+    item: ResumeItem,
+    event?: { preventDefault?: () => void },
+  ) => {
     if (!item.group) {
       openEntry(item, event);
       return;
@@ -167,7 +181,8 @@ function PageResume() {
   };
 
   const highlights = keyExperiences(items);
-  const membersOf = (item: ResumeItem) => items.filter((i) => groupKey(i) === groupKey(item));
+  const membersOf = (item: ResumeItem) =>
+    items.filter((i) => groupKey(i) === groupKey(item));
   const education = items
     .filter((i) => i.education)
     .sort((a, b) => ((b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1));
@@ -182,7 +197,9 @@ function PageResume() {
     cssnext: <SVGCssnext width={32} height={32} />,
     stylelint: <SVGStylelint width={32} height={32} />,
     phenomic: <SVGPhenomic width={32} height={32} />,
-    "rescript-react-native": <SVGRescriptReactNative width={32} height={32} fills={["#E6484F"]} />,
+    "rescript-react-native": (
+      <SVGRescriptReactNative width={32} height={32} fills={["#E6484F"]} />
+    ),
   };
 
   const headline = (viewTransitionName: string) => (
@@ -213,7 +230,11 @@ function PageResume() {
         {`${jobTitle}.`}
       </Text>
       <Text
-        style={[fontStyles.ios.subhead, theme.styles.textLight1, { fontStyle: "italic" }]}
+        style={[
+          fontStyles.ios.subhead,
+          theme.styles.textLight1,
+          { fontStyle: "italic" },
+        ]}
         role="heading"
         aria-level={2}
       >
@@ -301,7 +322,10 @@ function PageResume() {
                   <TextForReader>{"Nickname :"}</TextForReader>
                   {"Max."}
                 </Text>
-                <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
+                <Text
+                  role="paragraph"
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
                   <TextForReader>{"Full name :"}</TextForReader>
                   <Text
                     style={[
@@ -336,7 +360,10 @@ function PageResume() {
                 <TextForReader>{"Nickname :"}</TextForReader>
                 {"Max."}
               </Text>
-              <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
+              <Text
+                role="paragraph"
+                style={{ display: "flex", flexDirection: "column" }}
+              >
                 <TextForReader>{"Full name :"}</TextForReader>
                 <Text
                   style={[
@@ -433,7 +460,10 @@ function PageResume() {
         </SpacedView>
         <BlockMe2WithPills />
         <SpacedView horizontal="l" style={{ height: 3, width: "100%" }}>
-          <GradientLinear style={{ borderRadius: 4 }} stops={gradientFlashyStops(theme)} />
+          <GradientLinear
+            style={{ borderRadius: 4 }}
+            stops={gradientFlashyStops(theme)}
+          />
         </SpacedView>
       </Container>
 
@@ -447,7 +477,10 @@ function PageResume() {
           >
             {tagline}
           </Text>
-          <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]} role="paragraph">
+          <Text
+            style={[fontStyles.iosEm.callout, theme.styles.textLight1]}
+            role="paragraph"
+          >
             {summary}
           </Text>
         </SpacedView>
@@ -462,7 +495,10 @@ function PageResume() {
       <Container maxWidth={900}>
         <SpacedView horizontal="l" gap="l">
           <Text
-            style={[fontStyles.iosEm.largeTitle, gradientTextIndigoStylesInv(theme)]}
+            style={[
+              fontStyles.iosEm.largeTitle,
+              gradientTextIndigoStylesInv(theme),
+            ]}
             role="heading"
             aria-level={2}
           >
@@ -532,7 +568,11 @@ function PageResume() {
                 >
                   <Icon width={40} height={40} />
                 </View>
-                <Text style={[fontStyles.ios.caption2, theme.styles.textLight1]}>{label}</Text>
+                <Text
+                  style={[fontStyles.ios.caption2, theme.styles.textLight1]}
+                >
+                  {label}
+                </Text>
               </View>
             ))}
           </View>
@@ -544,7 +584,10 @@ function PageResume() {
       <Container maxWidth={900}>
         <SpacedView horizontal="l" gap="m">
           <Text
-            style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
+            style={[
+              fontStyles.iosEm.largeTitle,
+              gradientTextFlashyStyles(theme),
+            ]}
             role="heading"
             aria-level={2}
           >
@@ -564,12 +607,16 @@ function PageResume() {
                 company={h.company}
                 dates={(() => {
                   const periods = groupPeriods(membersOf(h));
-                  return periods.length > 1 ? periods.join(" · ") : monthRange(h);
+                  return periods.length > 1
+                    ? periods.join(" · ")
+                    : monthRange(h);
                 })()}
                 text={pitchOf(h)}
                 stats={h.stats}
                 tags={h.hashtags}
-                infoHref={h.group ? `/resume/group/${h.group}` : resumeEntryPath(h)}
+                infoHref={
+                  h.group ? `/resume/group/${h.group}` : resumeEntryPath(h)
+                }
                 infoLabel={`All the details about ${h.company}`}
                 infoOnPress={(event) => openGroup(h, event)}
               />
@@ -615,11 +662,21 @@ function PageResume() {
                 {"Open Source"}
               </Text>
               <View style={{ flex: 1 }} />
-              <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.72) }]}>
+              <Text
+                style={[
+                  fontStyles.ios.caption1,
+                  { color: alpha(colors.white, 0.72) },
+                ]}
+              >
                 {`${compactCount(githubFollowers)} followers · on GitHub since ${githubSince}`}
               </Text>
             </View>
-            <Text style={[fontStyles.ios.callout, { color: alpha(colors.white, 0.85) }]}>
+            <Text
+              style={[
+                fontStyles.ios.callout,
+                { color: alpha(colors.white, 0.85) },
+              ]}
+            >
               {openSourceIntro}
             </Text>
             <View
@@ -681,17 +738,26 @@ function PageResume() {
                             {headline.stat}
                           </Text>
                           <Text
-                            style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.8) }]}
+                            style={[
+                              fontStyles.ios.caption1,
+                              { color: alpha(colors.white, 0.8) },
+                            ]}
                           >
                             {` ${headline.label}`}
                           </Text>
                         </Text>
                         {rest.length > 0 ? (
                           <Text
-                            style={[fontStyles.ios.caption2, { color: alpha(colors.white, 0.6) }]}
+                            style={[
+                              fontStyles.ios.caption2,
+                              { color: alpha(colors.white, 0.6) },
+                            ]}
                           >
                             {rest
-                              .map((s) => `${s.stat} ${lowerKeepingAcronyms(s.label)}`)
+                              .map(
+                                (s) =>
+                                  `${s.stat} ${lowerKeepingAcronyms(s.label)}`,
+                              )
                               .join(" · ")}
                           </Text>
                         ) : null}
@@ -701,16 +767,27 @@ function PageResume() {
                 );
               })}
             </View>
-            <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.72) }]}>
+            <Text
+              style={[
+                fontStyles.ios.caption1,
+                { color: alpha(colors.white, 0.72) },
+              ]}
+            >
               {"Also: "}
               {openSourceCredits.map((credit, i) => (
-                <Text key={credit.label}>
+                <LinkText
+                  key={credit.label}
+                  href={credit.url}
+                  underlineOnFocus={true}
+                >
                   {i > 0 ? " · " : ""}
-                  <Text style={{ color: colors.white, fontWeight: weight.semibold }}>
+                  <Text
+                    style={{ color: colors.white, fontWeight: weight.semibold }}
+                  >
                     {credit.label}
                   </Text>
                   {` ${credit.note}`}
-                </Text>
+                </LinkText>
               ))}
             </Text>
           </SpacedView>
@@ -734,7 +811,10 @@ function PageResume() {
         >
           <View style={{ flexGrow: 1, flexBasis: 280, gap: size("m") }}>
             <Text
-              style={[fontStyles.iosEm.title1, gradientTextIndigoStylesInv(theme)]}
+              style={[
+                fontStyles.iosEm.title1,
+                gradientTextIndigoStylesInv(theme),
+              ]}
               role="heading"
               aria-level={2}
             >
@@ -789,7 +869,10 @@ function PageResume() {
           >
             <View style={{ gap: size("m") }}>
               <Text
-                style={[fontStyles.iosEm.title1, gradientTextFlashyStyles(theme)]}
+                style={[
+                  fontStyles.iosEm.title1,
+                  gradientTextFlashyStyles(theme),
+                ]}
                 role="heading"
                 aria-level={2}
               >
@@ -814,10 +897,14 @@ function PageResume() {
                     />
                   ) : null}
                   <View style={{ flex: 1 }}>
-                    <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
+                    <Text
+                      style={[fontStyles.iosEm.footnote, theme.styles.text]}
+                    >
                       {e.job_title}
                     </Text>
-                    <Text style={[fontStyles.ios.caption1, theme.styles.textLight1]}>
+                    <Text
+                      style={[fontStyles.ios.caption1, theme.styles.textLight1]}
+                    >
                       {`${e.company} · ${yearRange(e)}`}
                     </Text>
                   </View>
@@ -826,7 +913,10 @@ function PageResume() {
             </View>
             <View style={{ gap: size("m") }}>
               <Text
-                style={[fontStyles.iosEm.title1, gradientTextIndigoStylesInv(theme)]}
+                style={[
+                  fontStyles.iosEm.title1,
+                  gradientTextIndigoStylesInv(theme),
+                ]}
                 role="heading"
                 aria-level={2}
               >
@@ -864,7 +954,10 @@ function PageResume() {
       <Container maxWidth={900}>
         <SpacedView horizontal="l">
           <Text
-            style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
+            style={[
+              fontStyles.iosEm.largeTitle,
+              gradientTextFlashyStyles(theme),
+            ]}
             role="heading"
             aria-level={2}
           >
@@ -888,7 +981,9 @@ function PageResume() {
           items={modalItems}
           activeSlug={activeEntry?.slug}
           label={
-            group ? (activeEntry?.company ?? group) : (detailItem?.title ?? "Experience detail")
+            group
+              ? (activeEntry?.company ?? group)
+              : (detailItem?.title ?? "Experience detail")
           }
         />
       ) : null}

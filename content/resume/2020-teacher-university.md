@@ -1,6 +1,6 @@
 ---
 company: "IUT Blagnac"
-group: iut-blagnac
+image: /resume/speaking.jpg
 url: "https://www.iut-blagnac.fr/"
 title: "Teaching Agile methodology to university students (2nd year)"
 groupTitle: "Teaching C, web fundamentals & Agile methodology to university students"

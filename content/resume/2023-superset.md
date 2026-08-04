@@ -1,7 +1,8 @@
 ---
 company: "Superset Productions"
+image: /resume/superset.jpg
 title: "Association organizing stand-up comedy shows in Toulouse"
-job_title: "Association President"
+job_title: "Association President & Organizer"
 # Not a dev job: candidate for "Beyond Code" like Pékin Express - flag to be
 # confirmed during the editorial pass.
 personal: true

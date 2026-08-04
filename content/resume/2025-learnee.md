@@ -1,5 +1,7 @@
 ---
 company: "Learnee"
+image: /resume/learnee.jpg
+icon: /resume/icons/learnee.png
 # The product no longer exists: learnee.fr now hosts the founder's consulting
 # business, so the url points to an archived snapshot of the platform era.
 url: "https://web.archive.org/web/20251010182648/https://learnee.fr/"
