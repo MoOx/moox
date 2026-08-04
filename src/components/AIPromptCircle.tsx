@@ -9,14 +9,7 @@ import Animated, {
   withRepeat,
   withTiming,
 } from "react-native-reanimated";
-import Svg, {
-  Defs,
-  LinearGradient,
-  Mask,
-  Path,
-  Rect,
-  Stop,
-} from "react-native-svg";
+import Svg, { Defs, LinearGradient, Mask, Path, Rect, Stop } from "react-native-svg";
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
@@ -101,9 +94,7 @@ const MorphingCircle = ({
     const firstPoint = points[0];
 
     if (lastPoint && firstPoint) {
-      pathData.push(
-        `M ${(lastPoint.x + firstPoint.x) / 2} ${(lastPoint.y + firstPoint.y) / 2}`,
-      );
+      pathData.push(`M ${(lastPoint.x + firstPoint.x) / 2} ${(lastPoint.y + firstPoint.y) / 2}`);
 
       // Draw quadratic curves between each point
       for (let i = 0; i < points.length; i++) {
@@ -150,13 +141,7 @@ const useCircleAnimations = (numCircles: number) => {
   const rotation3 = useSharedValue(0);
   const rotation4 = useSharedValue(0);
   const rotation5 = useSharedValue(0);
-  const rotations = [
-    rotation1,
-    rotation2,
-    rotation3,
-    rotation4,
-    rotation5,
-  ].slice(0, numCircles);
+  const rotations = [rotation1, rotation2, rotation3, rotation4, rotation5].slice(0, numCircles);
 
   // Inner Rotations
   const innerRotation1 = useSharedValue(0);
@@ -272,10 +257,7 @@ const useCircleAnimations = (numCircles: number) => {
     deform5_8,
   ];
 
-  const deformations = [deform1, deform2, deform3, deform4, deform5].slice(
-    0,
-    numCircles,
-  );
+  const deformations = [deform1, deform2, deform3, deform4, deform5].slice(0, numCircles);
 
   // Inner Deformations - Circle 1
   const innerDeform1_1 = useSharedValue(0);
@@ -393,10 +375,7 @@ const useCircleAnimations = (numCircles: number) => {
   };
 };
 
-const AIPromptCircle = ({
-  size = 300,
-  circles = [defaultCircleConfig],
-}: AIPromptCircleProps) => {
+const AIPromptCircle = ({ size = 300, circles = [defaultCircleConfig] }: AIPromptCircleProps) => {
   // used to avoid animatedProps unrecognized error on server
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
@@ -412,8 +391,9 @@ const AIPromptCircle = ({
   const progress = useSharedValue(0);
 
   // Create SharedValues for all circles
-  const { rotations, innerRotations, deformations, innerDeformations } =
-    useCircleAnimations(circles.length);
+  const { rotations, innerRotations, deformations, innerDeformations } = useCircleAnimations(
+    circles.length,
+  );
 
   // Observe intersection
   useEffect(() => {
@@ -534,12 +514,7 @@ const AIPromptCircle = ({
         const circleDeformations = deformations[i];
         const circleInnerDeformations = innerDeformations[i];
 
-        if (
-          !rotation ||
-          !innerRotation ||
-          !circleDeformations ||
-          !circleInnerDeformations
-        ) {
+        if (!rotation || !innerRotation || !circleDeformations || !circleInnerDeformations) {
           return;
         }
 
@@ -601,21 +576,10 @@ const AIPromptCircle = ({
     return () => {
       clearTimeout(startMainAnimations);
     };
-  }, [
-    isVisible,
-    progress,
-    circles,
-    rotations,
-    innerRotations,
-    deformations,
-    innerDeformations,
-  ]);
+  }, [isVisible, progress, circles, rotations, innerRotations, deformations, innerDeformations]);
 
   return (
-    <View
-      ref={containerRef}
-      style={[styles.container, { width: size, height: size }]}
-    >
+    <View ref={containerRef} style={[styles.container, { width: size, height: size }]}>
       <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {!isMounted ? null : (
           <>
@@ -638,24 +602,13 @@ const AIPromptCircle = ({
               {circles.map((circle, i) => {
                 const circleInnerDeformations = innerDeformations[i];
                 const innerRotation = innerRotations[i];
-                if (
-                  !circleInnerDeformations ||
-                  !innerRotation ||
-                  !circle.hollow
-                )
-                  return null;
+                if (!circleInnerDeformations || !innerRotation || !circle.hollow) return null;
 
                 const baseRadius =
-                  size *
-                  (circle.radiusRatio ??
-                    defaultCircleConfig.radiusRatio ??
-                    0.3);
-                const borderWidth =
-                  circle.borderWidth ?? defaultCircleConfig.borderWidth ?? 8;
+                  size * (circle.radiusRatio ?? defaultCircleConfig.radiusRatio ?? 0.3);
+                const borderWidth = circle.borderWidth ?? defaultCircleConfig.borderWidth ?? 8;
                 const deformationRatio =
-                  circle.deformationRatio ??
-                  defaultCircleConfig.deformationRatio ??
-                  0.25;
+                  circle.deformationRatio ?? defaultCircleConfig.deformationRatio ?? 0.25;
 
                 // Calculate inner mask radius with safety margin
                 const safetyMargin = Math.max(3, borderWidth * 0.2); // Increased to 20% and minimum 3px
@@ -663,18 +616,14 @@ const AIPromptCircle = ({
 
                 // Reduce inner deformation amplitude
                 const radiusRatio = rawInnerRadius / baseRadius;
-                const innerDeformationRatio =
-                  deformationRatio * Math.min(0.7, radiusRatio * 0.8);
+                const innerDeformationRatio = deformationRatio * Math.min(0.7, radiusRatio * 0.8);
 
                 // Calculate maximum possible deformations
                 const outerMaxDeformation = baseRadius * deformationRatio;
-                const innerMaxDeformation =
-                  rawInnerRadius * innerDeformationRatio;
+                const innerMaxDeformation = rawInnerRadius * innerDeformationRatio;
 
                 // Adjust inner radius with more conservative margin
-                const deformationDiff = Math.abs(
-                  outerMaxDeformation - innerMaxDeformation,
-                );
+                const deformationDiff = Math.abs(outerMaxDeformation - innerMaxDeformation);
                 const safeInnerRadius = rawInnerRadius - deformationDiff * 0.75; // More conservative
 
                 return (
@@ -704,12 +653,9 @@ const AIPromptCircle = ({
               if (!circleDeformations || !rotation) return null;
 
               const baseRadius =
-                size *
-                (circle.radiusRatio ?? defaultCircleConfig.radiusRatio ?? 0.3);
+                size * (circle.radiusRatio ?? defaultCircleConfig.radiusRatio ?? 0.3);
               const deformationRatio =
-                circle.deformationRatio ??
-                defaultCircleConfig.deformationRatio ??
-                0.25;
+                circle.deformationRatio ?? defaultCircleConfig.deformationRatio ?? 0.25;
 
               return (
                 <MorphingCircle

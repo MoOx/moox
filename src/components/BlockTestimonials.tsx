@@ -47,13 +47,7 @@ export type Testimonial = {
  * a quote stays reviewable as text - it has to be translated, and compared with
  * what the person actually wrote.
  */
-export const TestimonialContent = ({
-  text,
-  dim = 0.6,
-}: {
-  text: string;
-  dim?: number;
-}) => (
+export const TestimonialContent = ({ text, dim = 0.6 }: { text: string; dim?: number }) => (
   <>
     {text
       .split(/(\*\*[^*]+\*\*)/g)
@@ -190,27 +184,17 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
         style={[StyleSheet.absoluteFill, { borderRadius: size("s") }]}
       />
       <View
-        style={[
-          StyleSheet.absoluteFill,
-          { borderRadius: size("s"), boxShadow: boxShadowGlass() },
-        ]}
+        style={[StyleSheet.absoluteFill, { borderRadius: size("s"), boxShadow: boxShadowGlass() }]}
       />
       <SpacedView key={item.name} horizontal="m" vertical="m" gap="s">
-        <SVGQuote
-          width={32}
-          height={32}
-          fill={theme.dynamicColors.text}
-          style={{ zIndex: 1 }}
-        />
+        <SVGQuote width={32} height={32} fill={theme.dynamicColors.text} style={{ zIndex: 1 }} />
         <View role="blockquote">
           <Text
             role="paragraph"
             style={[fontStyles.ios.callout, theme.styles.text]}
             // Flags a quote kept in its original language on a page written in
             // another one, so screen readers pronounce it right.
-            {...(item.originalLang !== currentLang
-              ? { lang: currentLang }
-              : null)}
+            {...(item.originalLang !== currentLang ? { lang: currentLang } : null)}
           >
             <TestimonialContent text={item.content[currentLang]} />
           </Text>
@@ -222,32 +206,12 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
             alignItems: "center",
           }}
         >
-          <Avatar
-            size={36}
-            borderWidth={1}
-            borderColor="#979797"
-            uri={item.avatar}
-          />
-          <Text
-            role="paragraph"
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <Text
-              style={[
-                fontStyles.iosEm.body,
-                theme.styles.text,
-                { opacity: 0.75 },
-              ]}
-            >
+          <Avatar size={36} borderWidth={1} borderColor="#979797" uri={item.avatar} />
+          <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
+            <Text style={[fontStyles.iosEm.body, theme.styles.text, { opacity: 0.75 }]}>
               {item.name}
             </Text>
-            <Text
-              style={[
-                fontStyles.ios.caption1,
-                theme.styles.text,
-                { opacity: 0.5 },
-              ]}
-            >
+            <Text style={[fontStyles.ios.caption1, theme.styles.text, { opacity: 0.5 }]}>
               {item.title[currentLang]}
             </Text>
           </Text>
@@ -356,11 +320,7 @@ export default function BlockTestimonials() {
               {"What People Say About Me."}
             </Text>
             <Text
-              style={[
-                fontStyles.iosEm.body,
-                theme.styles.textOnMain,
-                { opacity: 0.6 },
-              ]}
+              style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
               role="paragraph"
             >
               {`Real feedback from those who know my work.`}
@@ -375,8 +335,7 @@ export default function BlockTestimonials() {
                 style={{
                   flexDirection: "row",
                   flexWrap: "wrap",
-                  justifyContent:
-                    rowIndex % 2 === 0 ? "flex-start" : "flex-end",
+                  justifyContent: rowIndex % 2 === 0 ? "flex-start" : "flex-end",
                 }}
               >
                 {row.map((item) => (
@@ -394,9 +353,7 @@ export default function BlockTestimonials() {
             >
               {() => (
                 <>
-                  <Text
-                    style={[fontStyles.iosEm.title3, theme.styles.textOnMain]}
-                  >
+                  <Text style={[fontStyles.iosEm.title3, theme.styles.textOnMain]}>
                     {"Read all my Recommendations"}
                   </Text>
                   <SVGSocialLinkedin

@@ -4,10 +4,7 @@ import { white } from "@/react-multiversal/colors";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import InPlaceOrPortal from "@/react-multiversal/InPlaceOrPortal";
 import SpacedView from "@/react-multiversal/SpacedView";
-import {
-  UserColorScheme,
-  userColorSchemeStorageKey,
-} from "@/react-multiversal/theme/colorScheme";
+import { UserColorScheme, userColorSchemeStorageKey } from "@/react-multiversal/theme/colorScheme";
 import { useUserColorScheme } from "@/react-multiversal/theme/useUserColorScheme";
 import { themedColors, useTheme } from "@/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -15,9 +12,7 @@ import { lazy, useCallback, useState } from "react";
 import { Text, useColorScheme, View } from "react-native";
 
 // import ColorSchemeToggle from "@/shared/components/ColorSchemeToggle";
-const ColorSchemeToggle = lazy(
-  () => import("@/react-multiversal/ColorSchemeToggle"),
-);
+const ColorSchemeToggle = lazy(() => import("@/react-multiversal/ColorSchemeToggle"));
 
 const toggleThemes = {
   theme: {
@@ -71,11 +66,7 @@ export default function ThemeToggle({
   const [userColorScheme, setUserColorScheme] = useUserColorScheme();
   const theme = useTheme();
   const actualColorScheme =
-    userColorScheme === "auto"
-      ? colorScheme === "dark"
-        ? "dark"
-        : "light"
-      : userColorScheme;
+    userColorScheme === "auto" ? (colorScheme === "dark" ? "dark" : "light") : userColorScheme;
   const handleChange = useCallback(
     (value: UserColorScheme) => {
       void AsyncStorage.setItem(userColorSchemeStorageKey, value);
@@ -98,13 +89,11 @@ export default function ThemeToggle({
         toggleSize={32}
         iconSize={16}
         inactiveIconSize={12}
-        systemColorScheme={colorScheme ?? "light"}
+        systemColorScheme={colorScheme === "dark" ? "dark" : "light"}
         value={userColorScheme}
         actualValue={actualColorScheme}
         onChange={handleChange}
-        theme={
-          mode === "light" ? toggleThemes.theme : toggleThemes.focusedTheme
-        }
+        theme={mode === "light" ? toggleThemes.theme : toggleThemes.focusedTheme}
         focusedTheme={toggleThemes.focusedTheme}
         onPointerFocus={handleFocus}
         onPointerLeave={handleBlur}
@@ -157,17 +146,12 @@ export default function ThemeToggle({
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <SpacedView horizontal="s" vertical="s" gap="xs">
-              <ThemePreview
-                mode="light"
-                isActive={userColorScheme == "light"}
-              />
+              <ThemePreview mode="light" isActive={userColorScheme == "light"} />
               <Text
                 style={[
                   theme.styles.textLight1,
                   { fontSize: 10, textAlign: "center" },
-                  userColorScheme == "light"
-                    ? [theme.styles.textMain, { fontWeight: "800" }]
-                    : {},
+                  userColorScheme == "light" ? [theme.styles.textMain, { fontWeight: "800" }] : {},
                 ]}
               >
                 {"Light"}
@@ -175,10 +159,7 @@ export default function ThemeToggle({
             </SpacedView>
             <SpacedView horizontal="s" vertical="s" gap="xs">
               <View>
-                <ThemePreview
-                  mode="light"
-                  isActive={userColorScheme == "auto"}
-                />
+                <ThemePreview mode="light" isActive={userColorScheme == "auto"} />
                 <div
                   style={{
                     position: "absolute",
@@ -189,19 +170,14 @@ export default function ThemeToggle({
                     clipPath: "polygon(100% 100%, 100% 0, 0 100%)",
                   }}
                 >
-                  <ThemePreview
-                    mode="dark"
-                    isActive={userColorScheme == "auto"}
-                  />
+                  <ThemePreview mode="dark" isActive={userColorScheme == "auto"} />
                 </div>
               </View>
               <Text
                 style={[
                   theme.styles.textLight1,
                   { fontSize: 10, textAlign: "center" },
-                  userColorScheme == "auto"
-                    ? [theme.styles.textMain, { fontWeight: "800" }]
-                    : {},
+                  userColorScheme == "auto" ? [theme.styles.textMain, { fontWeight: "800" }] : {},
                 ]}
               >
                 {"Auto"}
@@ -213,9 +189,7 @@ export default function ThemeToggle({
                 style={[
                   theme.styles.textLight1,
                   { fontSize: 10, textAlign: "center" },
-                  userColorScheme == "dark"
-                    ? [theme.styles.textMain, { fontWeight: "800" }]
-                    : {},
+                  userColorScheme == "dark" ? [theme.styles.textMain, { fontWeight: "800" }] : {},
                 ]}
               >
                 {"Dark"}

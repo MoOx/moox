@@ -56,11 +56,7 @@ const jsonTreeToTs = (jsChild: string | MdJsonNode): MdAsJsonType => {
   }
 
   if (typeof jsChild === "object" && jsChild !== null) {
-    const {
-      class: className,
-      frameborder: frameBorder,
-      ...rest
-    } = jsChild.props ?? {};
+    const { class: className, frameborder: frameBorder, ...rest } = jsChild.props ?? {};
     return {
       type: "Element",
       tag: jsChild.tag,
@@ -78,17 +74,12 @@ const jsonTreeToTs = (jsChild: string | MdJsonNode): MdAsJsonType => {
 
 const cleanupNewlines = (s: string): string => s.replace(/\n/g, " ");
 
-const optionalCleanString = (
-  s: string,
-  keepNewlines: boolean,
-): string | null => {
+const optionalCleanString = (s: string, keepNewlines: boolean): string | null => {
   const sc = keepNewlines ? s : cleanupNewlines(s);
   return sc === "" || (sc === " " && s !== sc) ? null : sc;
 };
 
-const inlineBreakIfParentIsInline = (
-  parentTag: string,
-): ReactElement | null => {
+const inlineBreakIfParentIsInline = (parentTag: string): ReactElement | null => {
   switch (parentTag) {
     case "li":
       return <Br />;
@@ -106,15 +97,9 @@ const renderChild = (
   // console.log("renderChild", parentTag, index, child);
   const key = index.toString();
 
-  const renderChildren = (
-    parentTag: string,
-    children: MdAsJsonType[],
-    keepNewlines: boolean,
-  ) =>
+  const renderChildren = (parentTag: string, children: MdAsJsonType[], keepNewlines: boolean) =>
     children.length > 0
-      ? children.map((child, i) =>
-          renderChild(parentTag, i, child, keepNewlines),
-        )
+      ? children.map((child, i) => renderChild(parentTag, i, child, keepNewlines))
       : null;
 
   switch (child.type) {
@@ -183,9 +168,7 @@ const renderChild = (
         case "p":
           return <P key={key}>{renderChildren(tag, children, keepNewlines)}</P>;
         case "img":
-          return (
-            <Image key={key} src={props?.src} className={props?.class} alt="" />
-          );
+          return <Image key={key} src={props?.src} className={props?.class} alt="" />;
         case "ol":
         case "ul":
           return (
@@ -195,22 +178,14 @@ const renderChild = (
             </Fragment>
           );
         case "li":
-          return (
-            <Li key={key}>{renderChildren(tag, children, keepNewlines)}</Li>
-          );
+          return <Li key={key}>{renderChildren(tag, children, keepNewlines)}</Li>;
         case "blockquote":
-          return (
-            <BlockQuote key={key}>
-              {renderChildren(tag, children, keepNewlines)}
-            </BlockQuote>
-          );
+          return <BlockQuote key={key}>{renderChildren(tag, children, keepNewlines)}</BlockQuote>;
         case "pre":
           return <Pre key={key}>{renderChildren(tag, children, true)}</Pre>;
         case "code":
           return parentTag === "pre" ? (
-            <CodeBlock key={key}>
-              {renderChildren(tag, children, keepNewlines)}
-            </CodeBlock>
+            <CodeBlock key={key}>{renderChildren(tag, children, keepNewlines)}</CodeBlock>
           ) : (
             <Code key={key}>{renderChildren(tag, children, keepNewlines)}</Code>
           );
@@ -219,11 +194,7 @@ const renderChild = (
         case "hr":
           return <Hr key={key} />;
         default:
-          return createElement(
-            tag,
-            props,
-            renderChildren(tag, children, keepNewlines),
-          );
+          return createElement(tag, props, renderChildren(tag, children, keepNewlines));
       }
     }
 

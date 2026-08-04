@@ -14,9 +14,7 @@ export default function BlurView({
   ...props
 }: BlurViewProps) {
   const webBlur = `blur(${blurAmount}px)`;
-  const backdropFilter = webBackdropFilter
-    ? [webBackdropFilter, webBlur].join(" ")
-    : webBlur;
+  const backdropFilter = webBackdropFilter ? [webBackdropFilter, webBlur].join(" ") : webBlur;
   return (
     <View
       {...props}

@@ -1,11 +1,6 @@
 import { ResumeItem } from "@/api";
 import ExperienceCard from "@/components/ExperienceCard";
-import {
-  bodyBeforeFirstHr,
-  monthRange,
-  pitchOf,
-  resumeEntryTransitionName,
-} from "@/profile";
+import { bodyBeforeFirstHr, monthRange, pitchOf, resumeEntryTransitionName } from "@/profile";
 
 /**
  * One resume entry in detail: the `ExperienceCard` full mode fed from the
@@ -40,9 +35,7 @@ export default function ResumeEntryDetailCard({
       tags={item.hashtags}
       links={item.links}
       style={
-        transitionEnabled
-          ? { viewTransitionName: resumeEntryTransitionName(item) }
-          : undefined
+        transitionEnabled ? { viewTransitionName: resumeEntryTransitionName(item) } : undefined
       }
     />
   );

@@ -125,9 +125,7 @@ export default function ResumeEntryModal({
         {/* minWidth 0: without it the flex item inherits the intrinsic width
             of the entry images (min-width: auto) and blows the layout out to
             the image's natural size. */}
-        <View
-          style={{ flexGrow: 1, flexShrink: 1, minWidth: 0, gap: size("m") }}
-        >
+        <View style={{ flexGrow: 1, flexShrink: 1, minWidth: 0, gap: size("m") }}>
           {items.map((member) => (
             <ResumeEntryDetailCard
               key={member.slug}
@@ -142,7 +140,5 @@ export default function ResumeEntryModal({
 
   // SSR-safe: no document on the server (a direct `?detail` load), render in
   // place - the stacking issue only exists with the client's sticky header.
-  return typeof document === "undefined"
-    ? dialog
-    : createPortal(dialog, document.body);
+  return typeof document === "undefined" ? dialog : createPortal(dialog, document.body);
 }

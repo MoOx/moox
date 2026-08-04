@@ -36,15 +36,9 @@ export default function ThemePreview({
         horizontal="xxs"
         vertical="xxs"
         gap="xxs"
-        style={[
-          theme.styles.back,
-          { flexDirection: "row", justifyContent: "space-between" },
-        ]}
+        style={[theme.styles.back, { flexDirection: "row", justifyContent: "space-between" }]}
       >
-        <SpacedView
-          gap="xxs"
-          style={{ flexDirection: "row", alignItems: "center" }}
-        >
+        <SpacedView gap="xxs" style={{ flexDirection: "row", alignItems: "center" }}>
           <View
             style={{
               width: 6,

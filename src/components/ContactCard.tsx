@@ -70,12 +70,7 @@ export default function ContactCard({
             style={StyleSheet.absoluteFill}
           />
         )}
-        <View
-          style={[
-            StyleSheet.absoluteFill,
-            { borderRadius, boxShadow: boxShadowGlass() },
-          ]}
-        />
+        <View style={[StyleSheet.absoluteFill, { borderRadius, boxShadow: boxShadowGlass() }]} />
         <Icon
           width={48}
           height={48}
@@ -103,9 +98,7 @@ export default function ContactCard({
         <Text
           style={[
             fontStyles.ios.footnote,
-            mode === "default"
-              ? themeDark.styles.textOnMain
-              : theme.styles.textLight1,
+            mode === "default" ? themeDark.styles.textOnMain : theme.styles.textLight1,
           ]}
         >
           {subtitle}

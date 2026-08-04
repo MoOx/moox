@@ -13,11 +13,7 @@ import { View } from "react-native";
  * - `full` (`/resume`): the complete `items` lists, like the CV but with the
  *   web's room.
  */
-export default function SkillsCards({
-  mode = "full",
-}: {
-  mode?: "teaser" | "full";
-}) {
+export default function SkillsCards({ mode = "full" }: { mode?: "teaser" | "full" }) {
   const teaser = mode === "teaser";
   return (
     <SpacedView

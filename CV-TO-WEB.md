@@ -66,18 +66,9 @@ Sketch:
     "addressLocality": "Toulouse",
     "addressCountry": "FR",
   },
-  "sameAs": [
-    "https://github.com/MoOx",
-    "https://www.linkedin.com/in/MaxThirouin",
-  ],
+  "sameAs": ["https://github.com/MoOx", "https://www.linkedin.com/in/MaxThirouin"],
   "knowsLanguage": ["fr", "en"],
-  "knowsAbout": [
-    "React",
-    "React Native",
-    "TypeScript",
-    "Front-end architecture",
-    "Design systems",
-  ],
+  "knowsAbout": ["React", "React Native", "TypeScript", "Front-end architecture", "Design systems"],
   "hasOccupation": {
     "@type": "Occupation",
     "name": "Lead Front-End Developer",

@@ -14,9 +14,7 @@ export default function WebsiteError({ statusCode }: { statusCode: number }) {
     <WebsiteWrapper>
       <SpacedView horizontal="l" vertical="xxxl">
         <Container>
-          <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-            Error {statusCode}
-          </Text>
+          <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>Error {statusCode}</Text>
           <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
             The page you are looking for does not exist.
           </Text>

@@ -52,8 +52,7 @@ export default defineConfig({
         autoSubfolderIndex: true,
         crawlLinks: true,
         failOnError: true,
-        filter: (page) =>
-          !page.path.match(/\.(pdf|zip|vcf|xml|ico|txt|json)$/),
+        filter: (page) => !page.path.match(/\.(pdf|zip|vcf|xml|ico|txt|json)$/),
       },
     }),
     reactNativeWeb(),

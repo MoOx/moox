@@ -62,12 +62,7 @@ function PageResumeEntry() {
             hash={item.slug}
             style={{ textDecoration: "none", alignSelf: "flex-start" }}
           >
-            <Text
-              style={[
-                fontStyles.iosEm.callout,
-                { color: theme.dynamicColors.textFlashy3 },
-              ]}
-            >
+            <Text style={[fontStyles.iosEm.callout, { color: theme.dynamicColors.textFlashy3 }]}>
               {"← All experience - back to the timeline"}
             </Text>
           </Link>

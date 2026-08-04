@@ -3,17 +3,7 @@ import { match } from "ts-pattern";
 const baseSpace = 16;
 const space = baseSpace;
 
-export type AbsoluteSize =
-  | number
-  | "xxxl"
-  | "xxl"
-  | "xl"
-  | "l"
-  | "m"
-  | "s"
-  | "xs"
-  | "xxs"
-  | "xxxs";
+export type AbsoluteSize = number | "xxxl" | "xxl" | "xl" | "l" | "m" | "s" | "xs" | "xxs" | "xxxs";
 
 export type Size =
   | AbsoluteSize

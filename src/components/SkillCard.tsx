@@ -86,19 +86,11 @@ export default function SkillCard({
             opacity: 0.1,
           }}
         >
-          <Icon
-            width={big ? 190 : 100}
-            height={big ? 190 : 100}
-            fill={colors.white}
-          />
+          <Icon width={big ? 190 : 100} height={big ? 190 : 100} fill={colors.white} />
         </View>
       ) : null}
 
-      <SpacedView
-        horizontal={big ? "l" : "m"}
-        vertical={big ? "l" : "m"}
-        gap={big ? "l" : "xs"}
-      >
+      <SpacedView horizontal={big ? "l" : "m"} vertical={big ? "l" : "m"} gap={big ? "l" : "xs"}>
         <View>
           {/* The whole feature card moves up one step together: its items are
               a `callout` where the small cards use `footnote`, so title and
@@ -124,12 +116,7 @@ export default function SkillCard({
           ) : null}
         </View>
         {blurb ? (
-          <Text
-            style={[
-              fontStyles.ios.subhead,
-              { color: alpha(colors.white, 0.85), flexGrow: 1 },
-            ]}
-          >
+          <Text style={[fontStyles.ios.subhead, { color: alpha(colors.white, 0.85), flexGrow: 1 }]}>
             {blurb}
           </Text>
         ) : null}

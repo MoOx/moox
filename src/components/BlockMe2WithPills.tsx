@@ -10,12 +10,7 @@ export default function BlockMe2WithPills() {
         <Me width={300} imgWidth={512 / 3} imgHeight={835 / 3} />
       </IfWindowWidthIs>
       <IfWindowWidthIs smallerThan={WindowWidth.m}>
-        <View
-          style={[
-            StyleSheet.absoluteFill,
-            { pointerEvents: "none", overflow: "hidden" },
-          ]}
-        >
+        <View style={[StyleSheet.absoluteFill, { pointerEvents: "none", overflow: "hidden" }]}>
           <View
             style={{
               position: "absolute",
@@ -25,12 +20,7 @@ export default function BlockMe2WithPills() {
               left: "60%",
             }}
           >
-            <Me
-              src="/max-2.png"
-              width={260}
-              imgWidth={512 / 2.5}
-              imgHeight={890 / 2.5}
-            />
+            <Me src="/max-2.png" width={260} imgWidth={512 / 2.5} imgHeight={890 / 2.5} />
           </View>
         </View>
       </IfWindowWidthIs>

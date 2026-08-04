@@ -9,10 +9,7 @@ export default function Accordion({
   children: ReactNode;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const handlePress = useCallback(
-    () => setExpanded((expanded) => !expanded),
-    [],
-  );
+  const handlePress = useCallback(() => setExpanded((expanded) => !expanded), []);
 
   const [maxHeight, setMaxHeight] = useState<number | null>(null);
   const handleLayout = useCallback((event: LayoutChangeEvent) => {
@@ -32,11 +29,7 @@ export default function Accordion({
   return (
     <>
       <Pressable onPress={handlePress}>{pressable(expanded)}</Pressable>
-      <Animated.View
-        style={
-          maxHeight ? { height: animatedHeightValue, overflow: "hidden" } : {}
-        }
-      >
+      <Animated.View style={maxHeight ? { height: animatedHeightValue, overflow: "hidden" } : {}}>
         <View onLayout={handleLayout}>{children}</View>
       </Animated.View>
     </>

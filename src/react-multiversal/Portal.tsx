@@ -17,18 +17,14 @@ interface PortalContextType {
 const PortalContext = createContext<PortalContextType | undefined>(undefined);
 
 export const PortalProvider = ({ children }: { children: ReactNode }) => {
-  const [portals, setPortals] = useState<{ key: string; element: ReactNode }[]>(
-    [],
-  );
+  const [portals, setPortals] = useState<{ key: string; element: ReactNode }[]>([]);
 
   const addPortal = useCallback((key: string, element: ReactNode) => {
     setPortals((prevPortals) => [...prevPortals, { key, element }]);
   }, []);
 
   const removePortal = useCallback((key: string) => {
-    setPortals((prevPortals) =>
-      prevPortals.filter((portal) => portal.key !== key),
-    );
+    setPortals((prevPortals) => prevPortals.filter((portal) => portal.key !== key));
   }, []);
 
   return (
@@ -49,13 +45,7 @@ export const usePortal = (): PortalContextType => {
   return context;
 };
 
-export const Portal = ({
-  id,
-  children,
-}: {
-  id: string;
-  children: ReactNode;
-}) => {
+export const Portal = ({ id, children }: { id: string; children: ReactNode }) => {
   const { addPortal, removePortal } = usePortal();
 
   useEffect(() => {

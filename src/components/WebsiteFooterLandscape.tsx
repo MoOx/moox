@@ -10,11 +10,7 @@ import { StyleSheet, View } from "react-native";
 const skySize = 400;
 const floorHeight = 120;
 
-export default function WebsiteFooterLandscape({
-  children,
-}: {
-  children?: ReactNode;
-}) {
+export default function WebsiteFooterLandscape({ children }: { children?: ReactNode }) {
   const theme = useTheme();
 
   return (
@@ -29,7 +25,11 @@ export default function WebsiteFooterLandscape({
         />
         <div
           style={{
-            ...StyleSheet.absoluteFillObject,
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
             background: "url(/_/stars.png) repeat 0% 0% / 400px 300px",
           }}
         />
@@ -46,10 +46,7 @@ export default function WebsiteFooterLandscape({
             width: "50%",
             height: skySize + floorHeight + 40,
           }}
-          contentStyle={[
-            StyleSheet.absoluteFill,
-            { transformOrigin: "bottom center" },
-          ]}
+          contentStyle={[StyleSheet.absoluteFill, { transformOrigin: "bottom center" }]}
         >
           <View
             style={[
@@ -98,7 +95,11 @@ export default function WebsiteFooterLandscape({
             height: skySize,
           }}
           contentStyle={{
-            ...StyleSheet.absoluteFillObject,
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
             alignItems: "center",
             justifyContent: "flex-end",
             transformOrigin: "bottom center",
@@ -160,9 +161,7 @@ export default function WebsiteFooterLandscape({
       </View>
 
       {/* Max */}
-      <View
-        style={{ position: "absolute", top: -40, left: "10%", right: "50%" }}
-      >
+      <View style={{ position: "absolute", top: -40, left: "10%", right: "50%" }}>
         <Image
           src="/_/paintbrush-fast-turquoise.svg"
           alt=""

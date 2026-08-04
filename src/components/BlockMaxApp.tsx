@@ -8,12 +8,7 @@ import {
   WebsiteMobileMenuLinks,
   WebsiteMobileMenuLinksContainer,
 } from "@/components/WebsiteMobileMenu";
-import {
-  sendStringAsMailString,
-  socialLinks,
-  socialLinks2,
-  socials,
-} from "@/consts";
+import { sendStringAsMailString, socialLinks, socialLinks2, socials } from "@/consts";
 import Avatar from "@/react-multiversal/Avatar";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
@@ -24,14 +19,7 @@ import SVGChevronRight from "@/svgs/components/SVGChevronRight";
 import SVGEmail from "@/svgs/components/SVGEmail";
 import Clipboard from "@react-native-clipboard/clipboard";
 import { useEffect, useState } from "react";
-import {
-  Pressable,
-  StyleProp,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-} from "react-native";
+import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 import Animated from "react-native-reanimated";
 
 const useCurrentTime = () => {
@@ -100,9 +88,7 @@ export default function BlockMaxApp({
         >
           {time}
         </Text>
-        <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
-          {"Max Pro"}
-        </Text>
+        <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>{"Max Pro"}</Text>
       </SpacedView>
       <Spacer size="xl" />
       <Spacer size="xxs" />
@@ -137,9 +123,7 @@ export default function BlockMaxApp({
                 }}
               />
               <Spacer size="xxs" />
-              <Text style={[fontStyles.iosEm.body, theme.styles.textLight1]}>
-                {"Developer"}
-              </Text>
+              <Text style={[fontStyles.iosEm.body, theme.styles.textLight1]}>{"Developer"}</Text>
             </View>
             <AvailabilityBadge showText={true} />
           </SpacedView>
@@ -154,18 +138,12 @@ export default function BlockMaxApp({
             aria-level={2}
           >
             <View style={{ flex: 1 }}>
-              <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>
-                {"@MoOx"}
-              </Text>
+              <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>{"@MoOx"}</Text>
               <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
                 {"Senior Front-end Architect for Web and Mobile apps."}
               </Text>
             </View>
-            <Avatar
-              size={64}
-              borderWidth={8}
-              borderColor={"rgba(0, 0, 0, 0.05)"}
-            />
+            <Avatar size={64} borderWidth={8} borderColor={"rgba(0, 0, 0, 0.05)"} />
           </View>
           <Spacer />
           <View style={{ flexDirection: "row" }}>
@@ -184,9 +162,7 @@ export default function BlockMaxApp({
                     fill={textStyles.color}
                     style={{ opacity: 0.4 }}
                   />
-                  <Text style={[textStyles, fontStyles.iosEm.caption1]}>
-                    {"Hire Me"}
-                  </Text>
+                  <Text style={[textStyles, fontStyles.iosEm.caption1]}>{"Hire Me"}</Text>
                 </>
               )}
             </LinkButton>
@@ -224,9 +200,7 @@ export default function BlockMaxApp({
                             transitionDuration: "250ms",
                             transitionTimingFunction: "ease-in-out",
                           },
-                          copied
-                            ? { opacity: 0, transform: [{ translateX: -6 }] }
-                            : {},
+                          copied ? { opacity: 0, transform: [{ translateX: -6 }] } : {},
                         ]}
                       >
                         {"Copy Email"}
@@ -261,9 +235,7 @@ export default function BlockMaxApp({
             gap="s"
             style={[theme.styles.backAlt, { borderRadius: 12 }]}
           >
-            <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>
-              {"Follow me"}
-            </Text>
+            <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>{"Follow me"}</Text>
             <SpacedView
               style={{
                 flexDirection: "row",

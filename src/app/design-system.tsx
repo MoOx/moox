@@ -44,10 +44,7 @@ function DesignSystem() {
       <Container>
         <SpacedView gap="m">
           <H1>Design System</H1>
-          <P>
-            This page showcases all available HTML components and their
-            variations.
-          </P>
+          <P>This page showcases all available HTML components and their variations.</P>
 
           <H2>Typography</H2>
 
@@ -84,10 +81,9 @@ function DesignSystem() {
           <SpacedView style={styles.section}>
             <Text style={styles.componentName}>{"<P />"}</Text>
             <P>
-              This is a paragraph component. It can contain multiple lines of
-              text and will maintain proper spacing. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua.
+              This is a paragraph component. It can contain multiple lines of text and will maintain
+              proper spacing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </P>
           </SpacedView>
 
@@ -96,8 +92,8 @@ function DesignSystem() {
           <SpacedView style={styles.section}>
             <Text style={styles.componentName}>{"<A />"}</Text>
             <P>
-              This is a paragraph with a{" "}
-              <A href="https://example.com">link to example.com</A> in it.
+              This is a paragraph with a <A href="https://example.com">link to example.com</A> in
+              it.
             </P>
           </SpacedView>
 
@@ -120,8 +116,8 @@ function DesignSystem() {
           <SpacedView style={styles.section}>
             <Text style={styles.componentName}>{"<BlockQuote />"}</Text>
             <BlockQuote>
-              This is a blockquote. It can contain multiple lines and will be
-              styled appropriately with a left border and different typography.
+              This is a blockquote. It can contain multiple lines and will be styled appropriately
+              with a left border and different typography.
             </BlockQuote>
           </SpacedView>
 
