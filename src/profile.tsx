@@ -19,6 +19,7 @@ import SVGPlaywright from "@/svgs/components/SVGPlaywright";
 import SVGPostcss from "@/svgs/components/SVGPostcss";
 import SVGSquareStack3DUpFill from "@/svgs/components/SVGSquareStack3DUpFill";
 import SVGStorybook from "@/svgs/components/SVGStorybook";
+import SVGTanstack from "@/svgs/components/SVGTanstack";
 import SVGTypescript from "@/svgs/components/SVGTypescript";
 import type { ComponentType } from "react";
 
@@ -283,6 +284,7 @@ export const techs: IconItem[] = [
   { Icon: IconReact as ProfileIcon, label: "React" },
   { Icon: IconReactNative as ProfileIcon, label: "Native" },
   { Icon: SVGExpo, label: "Expo" },
+  { Icon: SVGTanstack, label: "TanStack" },
   { Icon: SVGNextjs, label: "Next.js" },
   { Icon: SVGPostcss, label: "PostCSS" },
   { Icon: SVGStorybook, label: "Storybook" },

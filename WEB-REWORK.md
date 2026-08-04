@@ -69,6 +69,18 @@ worklist feeding phases 4–5).
 
 ## Done
 
+- **2026-08-04 — modal ↔ standalone split (route masking).** Decision 4
+  amended: `/resume/$slug` is now a root route (`resume_.$slug.tsx`), a
+  standalone page carrying only the entry + its group siblings (own meta,
+  back-link to the timeline anchor) — what crawlers, reloads and shared URLs
+  get, so the detail is no longer drowned by the whole résumé rendered
+  behind a modal. From `/resume`, ⓘ clicks keep their real crawlable href
+  but are intercepted (`infoOnPress`) and open `ResumeEntryModal` via
+  `?detail=<slug>` masked as `/resume/<slug>` (TanStack route masking — the
+  Next.js intercepting-routes equivalent). The page behind stays mounted, so
+  timeline scroll survives open/close for free. Remaining modal polish:
+  focus trap + restoration, close button, reduced motion.
+
 - **2026-08-02 — `cv*` → `src/profile.tsx`.** All profile/CV content moved
   out of `consts.tsx` into `src/profile.tsx`, prefix dropped. Notable
   renames: `cvJsonLd` → `personJsonLd`, `cvLocation` → `workLocation`

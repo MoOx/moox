@@ -1,4 +1,4 @@
-import { fetchAll, ResumeItem, Talk } from "@/api";
+import { fetchAll, ResumeItem } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import {
   currentLang,
@@ -43,7 +43,6 @@ import {
   profileStats,
   putaindecodeArticles,
   recommendationsUrl,
-  selectedTalksSlugs,
   skillsDomains,
   statsLine,
   summary,
@@ -139,7 +138,7 @@ function PageCV() {
   // Open source reads best as a story: oldest first (cssnext → stylelint → …).
   const openSource = resume
     .filter((i) => i.openSource)
-    .sort((a, b) => (a.dateStart > b.dateStart ? 1 : -1));
+    .sort((a, b) => (a.dateStart < b.dateStart ? 1 : -1));
   const stats = profileStats(resume);
 
   // Everything else worth naming - one row per group, so the missions already
@@ -164,10 +163,6 @@ function PageCV() {
     .map((i) => mergeGroup(i, membersOf(i)));
   const moreExperienceShown = moreExperience.slice(0, moreExperienceRows);
   const moreExperienceEarlier = moreExperience.slice(moreExperienceRows);
-
-  const talksSelected = selectedTalksSlugs
-    .map((slug) => talks.find((t) => t.slug === slug))
-    .filter((t): t is Talk => Boolean(t));
 
   // The CV is always rendered light (clean print / export).
   useEffect(() => {
@@ -581,7 +576,9 @@ function PageCV() {
                   <Text
                     style={[fontStyles.ios.footnote, theme.styles.textLight1]}
                   >
-                    <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
+                    <Text
+                      style={[fontStyles.iosEm.footnote, theme.styles.text]}
+                    >
                       {`${titleOf(h)}.`}
                     </Text>
                     {pitchOf(h) ? ` ${pitchOf(h)}` : null}
@@ -819,20 +816,6 @@ function PageCV() {
                   }}
                 />
               </View>
-
-              {talksSelected.length > 0 ? (
-                <Text
-                  style={[fontStyles.ios.caption1, theme.styles.textLight1]}
-                >
-                  {"Selected: "}
-                  {talksSelected
-                    .map(
-                      (t) =>
-                        `“${t.title}”${t.conference ? ` - ${t.conference}` : ""}`,
-                    )
-                    .join(" · ")}
-                </Text>
-              ) : null}
             </View>
 
             {/* ------------------------------- Education & beyond code */}

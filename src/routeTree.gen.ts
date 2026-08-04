@@ -17,7 +17,7 @@ import { Route as IndexRouteImport } from './app/index'
 import { Route as TalksIndexRouteImport } from './app/talks.index'
 import { Route as BlogIndexRouteImport } from './app/blog.index'
 import { Route as TalksSlugRouteImport } from './app/talks.$slug'
-import { Route as ResumeSlugRouteImport } from './app/resume.$slug'
+import { Route as ResumeSlugRouteImport } from './app/resume_.$slug'
 import { Route as BlogSlugRouteImport } from './app/blog.$slug'
 
 const ResumeRoute = ResumeRouteImport.update({
@@ -61,9 +61,9 @@ const TalksSlugRoute = TalksSlugRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResumeSlugRoute = ResumeSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => ResumeRoute,
+  id: '/resume_/$slug',
+  path: '/resume/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
@@ -76,7 +76,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
-  '/resume': typeof ResumeRouteWithChildren
+  '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/resume/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
@@ -88,7 +88,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
-  '/resume': typeof ResumeRouteWithChildren
+  '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/resume/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
@@ -101,9 +101,9 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
-  '/resume': typeof ResumeRouteWithChildren
+  '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/resume/$slug': typeof ResumeSlugRoute
+  '/resume_/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
@@ -141,7 +141,7 @@ export interface FileRouteTypes {
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
-    | '/resume/$slug'
+    | '/resume_/$slug'
     | '/talks/$slug'
     | '/blog/'
     | '/talks/'
@@ -152,8 +152,9 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CvRoute: typeof CvRoute
   DesignSystemRoute: typeof DesignSystemRoute
-  ResumeRoute: typeof ResumeRouteWithChildren
+  ResumeRoute: typeof ResumeRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  ResumeSlugRoute: typeof ResumeSlugRoute
   TalksSlugRoute: typeof TalksSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   TalksIndexRoute: typeof TalksIndexRoute
@@ -217,12 +218,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TalksSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resume/$slug': {
-      id: '/resume/$slug'
-      path: '/$slug'
+    '/resume_/$slug': {
+      id: '/resume_/$slug'
+      path: '/resume/$slug'
       fullPath: '/resume/$slug'
       preLoaderRoute: typeof ResumeSlugRouteImport
-      parentRoute: typeof ResumeRoute
+      parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
       id: '/blog/$slug'
@@ -234,24 +235,14 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface ResumeRouteChildren {
-  ResumeSlugRoute: typeof ResumeSlugRoute
-}
-
-const ResumeRouteChildren: ResumeRouteChildren = {
-  ResumeSlugRoute: ResumeSlugRoute,
-}
-
-const ResumeRouteWithChildren =
-  ResumeRoute._addFileChildren(ResumeRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   CvRoute: CvRoute,
   DesignSystemRoute: DesignSystemRoute,
-  ResumeRoute: ResumeRouteWithChildren,
+  ResumeRoute: ResumeRoute,
   BlogSlugRoute: BlogSlugRoute,
+  ResumeSlugRoute: ResumeSlugRoute,
   TalksSlugRoute: TalksSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   TalksIndexRoute: TalksIndexRoute,

@@ -3,6 +3,7 @@ import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
+import { LinkTextProps } from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import TextForReader from "@/react-multiversal/TextForReader";
@@ -34,6 +35,7 @@ export default function Card({
   background = "gradient",
   infoHref,
   infoLabel,
+  infoOnPress,
   minHeight,
   children,
   style,
@@ -56,6 +58,12 @@ export default function Card({
   infoHref?: string;
   /** Accessible name of the ⓘ button - required with `infoHref`. */
   infoLabel?: string;
+  /**
+   * Intercepts the ⓘ click (e.g. to open the detail as a modal with a masked
+   * URL while `infoHref` stays the real, crawlable page). Call
+   * `preventDefault()` inside to stop the href navigation.
+   */
+  infoOnPress?: LinkTextProps["onPress"];
   minHeight?: number;
   children?: ReactNode;
   style?: StyleProp<ViewStyle>;
@@ -107,6 +115,7 @@ export default function Card({
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                objectPosition: "top",
                 opacity: 0.25,
                 // mixBlendMode: "luminosity",
               }}
@@ -134,7 +143,11 @@ export default function Card({
       {infoHref ? (
         <LinkView
           href={infoHref}
-          style={{
+          onPress={infoOnPress}
+          // containerStyle, not style: this must position/size the <a>
+          // itself - on the inner text node the anchor collapses to a
+          // 0-height strip and only the overflowing icon stays clickable.
+          containerStyle={{
             position: "absolute",
             top: size("s"),
             right: size("s"),

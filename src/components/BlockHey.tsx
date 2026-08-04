@@ -1,11 +1,5 @@
-import AvailabilityBadge from "@/components/AvailabilityBadge";
 import BlockMe1WithSmallPills from "@/components/BlockMe1WithSmallPills";
-import {
-  availabilityDetail,
-  availabilityLabel,
-  jobSubtitle,
-  jobTitleParts,
-} from "@/profile";
+import { jobSubtitle, jobTitleParts } from "@/profile";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
@@ -108,20 +102,6 @@ export default function BlockHey() {
                 ]}
               >
                 {jobSubtitle}
-              </Text>
-            </View>
-            <Spacer size="m" />
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 8,
-                alignSelf: "flex-start",
-              }}
-            >
-              <AvailabilityBadge showText={true} text={availabilityLabel} />
-              <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-                {availabilityDetail}
               </Text>
             </View>
             <Spacer size="l" />

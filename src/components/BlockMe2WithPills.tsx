@@ -6,10 +6,10 @@ import { StyleSheet, View } from "react-native";
 export default function BlockMe2WithPills() {
   return (
     <>
-      <IfWindowWidthIs largerThan={WindowWidth.s}>
+      <IfWindowWidthIs largerThan={WindowWidth.m}>
         <Me width={300} imgWidth={512 / 3} imgHeight={835 / 3} />
       </IfWindowWidthIs>
-      <IfWindowWidthIs smallerThan={WindowWidth.s}>
+      <IfWindowWidthIs smallerThan={WindowWidth.m}>
         <View
           style={[
             StyleSheet.absoluteFill,

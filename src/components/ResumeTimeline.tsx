@@ -22,6 +22,7 @@ export const ResumeTimeline = ({
   items,
   talks = [],
   activeSlug,
+  onOpenEntry,
 }: {
   items: ResumeItem[];
   /** Interleaved at their date, as lighter cards (no icon, no image). */
@@ -32,6 +33,14 @@ export const ResumeTimeline = ({
    * duplicate names on one page make the browser skip the transition.
    */
   activeSlug?: string;
+  /**
+   * Intercepts the ⓘ click of resume entries (opens the detail as a modal
+   * with a masked URL); the href stays the real, crawlable page.
+   */
+  onOpenEntry?: (
+    item: ResumeItem,
+    event?: { preventDefault?: () => void },
+  ) => void;
 }) => {
   const theme = useTheme();
   const todayDateOnlyAsISOString = new Date().toISOString().slice(0, 10);
@@ -92,6 +101,11 @@ export const ResumeTimeline = ({
                   infoLabel={`All the details about ${
                     entry.item.company || entry.item.title
                   }`}
+                  infoOnPress={
+                    onOpenEntry
+                      ? (event) => onOpenEntry(entry.item, event)
+                      : undefined
+                  }
                   style={
                     // The card and its detail share a view-transition name
                     // (the "zoom" effect) - except the card whose detail is

@@ -1,65 +1,33 @@
-import { fetchAll, fetchOne } from "@/api";
+import { ResumeItem } from "@/api";
 import { ResumeTimelineEntry } from "@/components/ResumeTimelineEntry";
-import WebsiteError from "@/components/WebsiteError";
-import { fullName, groupKey, pitchOf } from "@/profile";
 import { size } from "@/react-multiversal";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { View } from "react-native";
 
 /**
- * Detail of one experience. A real, statically generated page (deep-linkable,
- * one URL per experience for crawlers) that renders as a modal above the
- * timeline: this route is a child of `/resume`, so the timeline is always
- * behind it - on client-side navigation the shared view-transition name makes
- * the card "zoom" into the modal.
+ * The experience detail as a modal above `/resume`. Only reached by
+ * client-side navigation (`?detail=<slug>` masked as `/resume/<slug>`): the
+ * page behind stays mounted, scroll intact. A reload or a shared URL lands on
+ * the standalone `/resume/$slug` page instead - see `resume_.$slug.tsx`.
  *
  * Grouped clients (several missions under one `group`) open as one modal with
  * every mission of the group in sequence, newest first.
  */
-export const Route = createFileRoute("/resume/$slug")({
-  loader: async ({ params }) => {
-    const filename = decodeURIComponent(params.slug) + ".json";
-    const [item, all] = await Promise.all([
-      fetchOne({ data: { filename, contentType: "resume" } }),
-      fetchAll({ data: "resume" }),
-    ]);
-    const members = item
-      ? all
-          .filter((i) => groupKey(i) === groupKey(item))
-          .sort((a, b) =>
-            (b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1,
-          )
-      : [];
-    return { item, members };
-  },
-  head: ({ loaderData }) => ({
-    meta: loaderData?.item
-      ? [
-          {
-            title: [loaderData.item.title, loaderData.item.company, fullName]
-              .filter(Boolean)
-              .join(" · "),
-          },
-          {
-            name: "description",
-            content: pitchOf(loaderData.item) ?? loaderData.item.title,
-          },
-        ]
-      : [],
-  }),
-  component: PageResumeEntry,
-});
-
-function PageResumeEntry() {
-  const { item, members } = Route.useLoaderData();
+export default function ResumeEntryModal({
+  item,
+  members,
+}: {
+  item: ResumeItem;
+  members: ResumeItem[];
+}) {
   const navigate = useNavigate();
 
   // Escape closes (backdrop click and browser back also do).
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        void navigate({ to: "/resume" });
+        void navigate({ to: "/resume", search: {}, resetScroll: false });
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -74,10 +42,6 @@ function PageResumeEntry() {
       document.body.style.overflow = previous;
     };
   }, []);
-
-  if (!item) {
-    return <WebsiteError statusCode={404} />;
-  }
 
   return (
     <div
@@ -96,6 +60,8 @@ function PageResumeEntry() {
     >
       <Link
         to="/resume"
+        search={{}}
+        resetScroll={false}
         aria-label="Close"
         style={{
           position: "absolute",

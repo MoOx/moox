@@ -5,6 +5,7 @@ import ButtonView from "@/components/ButtonView";
 import Card from "@/components/Card";
 import ExperienceCard from "@/components/ExperienceCard";
 import Image from "@/components/Image";
+import ResumeEntryModal from "@/components/ResumeEntryModal";
 import ResumeStats from "@/components/ResumeStats";
 import { ResumeTimeline } from "@/components/ResumeTimeline";
 import SkillCard from "@/components/SkillCard";
@@ -66,12 +67,18 @@ import SVGDownload from "@/svgs/components/SVGDownload";
 import SVGPhenomic from "@/svgs/components/SVGPhenomic";
 import SVGRescriptReactNative from "@/svgs/components/SVGRescriptReactNative";
 import SVGStylelint from "@/svgs/components/SVGStylelint";
-import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ReactNode } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Svg, { Defs, LinearGradient, Stop } from "react-native-svg";
 
 export const Route = createFileRoute("/resume")({
+  // `?detail=<short-slug>` opens the entry modal above the page (masked as
+  // /resume/<slug> in the address bar - see ResumeEntryModal). The key must
+  // stay optional in the returned type, or every Link to /resume would be
+  // forced to pass a `search` prop.
+  validateSearch: (search: Record<string, unknown>): { detail?: string } =>
+    typeof search.detail === "string" ? { detail: search.detail } : {},
   loader: async () => {
     const [resume, talks, blog] = await Promise.all([
       fetchAll({ data: "resume" }),
@@ -102,8 +109,43 @@ export const Route = createFileRoute("/resume")({
 function PageResume() {
   const theme = useTheme();
   const { resume: items, talks, blog } = Route.useLoaderData();
-  // Slug of the entry whose detail modal is open (child route /resume/$slug).
-  const { slug: activeSlug } = useParams({ strict: false });
+  const navigate = useNavigate();
+  // Short slug of the entry whose detail modal is open (?detail=… search
+  // param, URL masked as /resume/<slug>).
+  const { detail: activeSlug } = Route.useSearch();
+  const detailItem = activeSlug
+    ? items.find((i) => i.slug.endsWith(`/${activeSlug}`))
+    : undefined;
+  const detailMembers = detailItem
+    ? items
+        .filter((i) => groupKey(i) === groupKey(detailItem))
+        .sort((a, b) =>
+          (b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1,
+        )
+    : [];
+
+  // The Next.js "intercepting routes" pattern, TanStack-style: the ⓘ links
+  // keep their real /resume/<slug> href (crawlers and no-JS land on the
+  // standalone page), but a click is intercepted to open the modal over the
+  // page - URL masked as the real one, so reload & share still get the
+  // standalone page.
+  const openDetail = (
+    item: ResumeItem,
+    event?: { preventDefault?: () => void },
+  ) => {
+    event?.preventDefault?.();
+    const slug = item.slug.split("/").pop() ?? item.slug;
+    void navigate({
+      to: "/resume",
+      search: { detail: slug },
+      // The page stays where it is - the modal opens over it.
+      resetScroll: false,
+      // On reload, load the masked URL for real → the standalone page
+      // (without this the router restores the masked state from history and
+      // re-opens the modal).
+      mask: { to: "/resume/$slug", params: { slug }, unmaskOnReload: true },
+    });
+  };
 
   const highlights = keyExperiences(items);
   const membersOf = (item: ResumeItem) =>
@@ -114,7 +156,7 @@ function PageResume() {
   // Open source reads best as a story: oldest first (cssnext → stylelint → …).
   const openSource = items
     .filter((i) => i.openSource)
-    .sort((a, b) => (a.dateStart > b.dateStart ? 1 : -1));
+    .sort((a, b) => (a.dateStart < b.dateStart ? 1 : -1));
   // Project logo for each open-source card, keyed by `projectName`. The
   // rescript-react-native source is the white variant, so its fill is
   // overridden with the ReScript brand red to stay visible on the white tile.
@@ -477,12 +519,22 @@ function PageResume() {
               flexWrap: "wrap",
               alignItems: "flex-start",
               justifyContent: "space-between",
-              rowGap: size("s"),
+              gap: size("s"),
             }}
           >
             {techs.map(({ Icon, label }) => (
-              <View key={label} style={{ alignItems: "center", width: 70 }}>
-                <Icon width={40} height={40} />
+              <View key={label} style={{ alignItems: "center" }}>
+                <View
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 3,
+                    overflow: "hidden",
+                    color: theme.dynamicColors.text,
+                  }}
+                >
+                  <Icon width={40} height={40} />
+                </View>
                 <Text
                   style={[fontStyles.ios.caption2, theme.styles.textLight1]}
                 >
@@ -531,6 +583,7 @@ function PageResume() {
                 tags={h.hashtags}
                 infoHref={resumeEntryPath(h)}
                 infoLabel={`All the details about ${h.company}`}
+                infoOnPress={(event) => openDetail(h, event)}
               />
             ))}
           </View>
@@ -541,7 +594,7 @@ function PageResume() {
       {/* Full-bleed band like the stats one (opposite skew), so the entry
           cards sit directly on it - no more card-in-a-card. */}
       <Spacer size="xxl" />
-      <SpacedView vertical="xl">
+      <SpacedView vertical="xxxl">
         <GradientLinear
           angle={60}
           stops={[
@@ -627,6 +680,7 @@ function PageResume() {
                     text={item.title.trim()}
                     infoHref={resumeEntryPath(item)}
                     infoLabel={`All the details about ${projectName(item)}`}
+                    infoOnPress={(event) => openDetail(item, event)}
                   >
                     {headline ? (
                       <View
@@ -871,13 +925,21 @@ function PageResume() {
             {"All Experience"}
           </Text>
           <Spacer size="l" />
-          <ResumeTimeline items={items} talks={talks} activeSlug={activeSlug} />
+          <ResumeTimeline
+            items={items}
+            talks={talks}
+            activeSlug={activeSlug}
+            onOpenEntry={openDetail}
+          />
           <Spacer />
         </SpacedView>
       </Container>
       <Spacer size="xl" />
-      {/* The /resume/$slug detail renders here, as a modal above the page. */}
-      <Outlet />
+      {/* The entry detail as a modal above the page (?detail=…, masked as
+          /resume/<slug>). Direct loads of that URL get the standalone page. */}
+      {detailItem ? (
+        <ResumeEntryModal item={detailItem} members={detailMembers} />
+      ) : null}
     </WebsiteWrapper>
   );
 }
