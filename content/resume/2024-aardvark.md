@@ -39,9 +39,24 @@ links:
     url: https://www.aardvarkintel.com
 ---
 
-Front-end development of user interfaces for an AI-driven solution specializing
-in automating legal and financial data, enhancing data visualization to help
-businesses maximize revenue and streamline decision-making.
+Aardvark automates legal and financial data with generative AI. The models
+produce the data; my job was the surface where people verify and correct it —
+at a scale where a regular table gives up: tens of thousands of rows, all
+editable, in the browser.
+
+Spreadsheet-grade editing means spreadsheet-grade details: units, dates and
+long text cells each needed their own editing behavior, and filtering started
+client-side then moved to the backend once the datasets outgrew the browser.
+Performance at that scale erodes silently, one innocent PR at a time — the
+Playwright performance tests in CI exist precisely for that, with a fully
+automated pipeline holding a two-week release cadence for almost two years.
+
+Sole front-end in a three-person product team, I also took over design after
+the designer's first drafts — up to a complete redesign once the product had
+outgrown them, dark mode included — sparing the company a dedicated design
+position. Built with React Native Web
+and TypeScript: a solid abstraction for web-only today, with the door open to
+native apps tomorrow.
 
 ---
 

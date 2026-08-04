@@ -29,3 +29,19 @@ hashtags:
   - HTML
   - university
 ---
+
+Three courses at the IUT de Blagnac (DUT Informatique), spread over six years
+of teaching alongside client work — 2012–2015, then 2018–2020.
+
+C, for first-year students, meant teaching the very first steps of
+programming to people who had never written a line of code. Web (HTML, CSS,
+JavaScript) came next: a classic project course, this time for students who
+already knew how to code. Agile, for second-years, was the closest to my day
+job: each group took over an existing project and had to ship it the Scrum
+way — tickets, planning poker — while the lectures were built on what
+companies actually do, straight from mission experience, which is exactly
+what the university had asked for.
+
+The format was hands-on throughout: two-hour sessions, semester-long lab
+work, every assignment reviewed and graded — one or two classes of twenty
+students a year.
