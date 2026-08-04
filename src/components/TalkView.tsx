@@ -34,23 +34,12 @@ export default function TalkView({ item }: { item: Talk }) {
   const theme = useTheme();
 
   return (
-    <SpacedView
-      role="article"
-      horizontal="l"
-      vertical="l"
-      style={[styles.back, theme.styles.back]}
-    >
-      <Text
-        role="heading"
-        aria-level={1}
-        style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
-      >
+    <SpacedView role="article" horizontal="l" vertical="l" style={[styles.back, theme.styles.back]}>
+      <Text role="heading" aria-level={1} style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
         {item.title}
       </Text>
       {item.conference && (
-        <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
-          {item.conference}
-        </Text>
+        <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>{item.conference}</Text>
       )}
       {item.date && (
         <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
@@ -93,11 +82,7 @@ export default function TalkView({ item }: { item: Talk }) {
         </View>
       )}
       {item.slides && (
-        <LinkText
-          href={item.slides}
-          underlineOnFocus={true}
-          style={theme.styles.textMainDark}
-        >
+        <LinkText href={item.slides} underlineOnFocus={true} style={theme.styles.textMainDark}>
           {item.slides}
         </LinkText>
       )}

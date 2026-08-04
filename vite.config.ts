@@ -1,8 +1,8 @@
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { cjsInterop } from "vite-plugin-cjs-interop";
 import reactNativeWeb from "vite-plugin-react-native-web";
-import tsConfigPaths from "vite-tsconfig-paths";
 
 const rnwWebExtensions = [
   ".web.mjs",
@@ -18,19 +18,19 @@ const rnwWebExtensions = [
   ".json",
 ];
 
-// Esbuild plugin to stub react-native/Libraries/* deep imports
+const RN_STUB_ID = "\0rn-stub";
+
+// Rolldown plugin to stub react-native/Libraries/* deep imports
 // These are native-only and don't exist in react-native-web
 const stubReactNativeInternals = {
   name: "stub-react-native-internals",
-  setup(build: { onResolve: Function; onLoad: Function }) {
-    build.onResolve({ filter: /^react-native\/Libraries\// }, () => ({
-      path: "rn-stub",
-      namespace: "rn-stub",
-    }));
-    build.onLoad({ filter: /.*/, namespace: "rn-stub" }, () => ({
-      contents: "export default undefined; export {}",
-      loader: "js" as const,
-    }));
+  resolveId: {
+    filter: { id: /^react-native\/Libraries\// },
+    handler: () => RN_STUB_ID,
+  },
+  load: {
+    filter: { id: new RegExp(`^${RN_STUB_ID}$`) },
+    handler: () => "export default undefined; export {}",
   },
 };
 
@@ -41,8 +41,10 @@ export default defineConfig({
   preview: {
     host: "127.0.0.1",
   },
+  resolve: {
+    tsconfigPaths: true,
+  },
   plugins: [
-    tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart({
       srcDirectory: "src",
       router: { routesDirectory: "app" },
@@ -52,10 +54,10 @@ export default defineConfig({
         autoSubfolderIndex: true,
         crawlLinks: true,
         failOnError: true,
-        filter: (page) =>
-          !page.path.match(/\.(pdf|zip|vcf|xml|ico|txt|json)$/),
+        filter: (page) => !page.path.match(/\.(pdf|zip|vcf|xml|ico|txt|json)$/),
       },
     }),
+    viteReact(),
     reactNativeWeb(),
     cjsInterop({
       dependencies: ["inline-style-prefixer", "inline-style-prefixer/**"],
@@ -84,9 +86,11 @@ export default defineConfig({
         "@react-native-clipboard/clipboard",
         "@react-native-async-storage/async-storage",
       ],
-      esbuildOptions: {
-        mainFields: ["module", "main"],
-        resolveExtensions: rnwWebExtensions,
+      rolldownOptions: {
+        resolve: {
+          mainFields: ["module", "main"],
+          extensions: rnwWebExtensions,
+        },
         plugins: [stubReactNativeInternals],
       },
     },

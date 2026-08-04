@@ -10,12 +10,7 @@ export default function BlogPostView({ item }: { item: BlogPost }) {
   const theme = useTheme();
 
   return (
-    <SpacedView
-      role="article"
-      horizontal="l"
-      vertical="l"
-      style={theme.styles.back}
-    >
+    <SpacedView role="article" horizontal="l" vertical="l" style={theme.styles.back}>
       <SpacedView>
         <Text
           role="heading"

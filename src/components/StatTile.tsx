@@ -52,9 +52,7 @@ export default function StatTile({
   const outerStyle = { flexGrow: 1, flexShrink: 1, flexBasis };
   const frameStyle: StyleProp<ViewStyle> = [
     { borderRadius: size("xs"), overflow: "hidden", flexGrow: 1 },
-    variant === "plain"
-      ? { borderWidth: 1, borderColor: theme.dynamicColors.ultraLight }
-      : null,
+    variant === "plain" ? { borderWidth: 1, borderColor: theme.dynamicColors.ultraLight } : null,
     variant === "glass"
       ? {
           backgroundColor: alpha(colors.white, 0.12),
@@ -85,9 +83,7 @@ export default function StatTile({
               fontWeight: weight.bold,
               letterSpacing: 0.6,
               textTransform: "uppercase",
-              color: onDark
-                ? alpha(colors.white, 0.82)
-                : theme.dynamicColors.textLight2,
+              color: onDark ? alpha(colors.white, 0.82) : theme.dynamicColors.textLight2,
             },
           ]}
         >
@@ -110,9 +106,7 @@ export default function StatTile({
             style={[
               fontStyles.ios.caption2,
               {
-                color: onDark
-                  ? alpha(colors.white, 0.78)
-                  : theme.dynamicColors.textLight1,
+                color: onDark ? alpha(colors.white, 0.78) : theme.dynamicColors.textLight1,
               },
             ]}
           >
@@ -125,9 +119,7 @@ export default function StatTile({
             style={[
               fontStyles.ios.caption2,
               {
-                color: onDark
-                  ? alpha(colors.white, 0.6)
-                  : theme.dynamicColors.textLight2,
+                color: onDark ? alpha(colors.white, 0.6) : theme.dynamicColors.textLight2,
               },
             ]}
           >

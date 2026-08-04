@@ -8,11 +8,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function LinkView({
-  style,
-  containerStyle,
-  ...props
-}: LinkTextProps) {
+export default function LinkView({ style, containerStyle, ...props }: LinkTextProps) {
   return (
     <LinkText
       containerStyle={[styles.linkView, containerStyle]}

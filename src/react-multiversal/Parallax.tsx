@@ -1,14 +1,7 @@
 import { useScrollWindowOffset } from "@/react-multiversal/animate.utils";
 import { Portal } from "@/react-multiversal/Portal";
 import { ElementLayout } from "@/react-multiversal/positions.utils";
-import {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { ReactNode, useCallback, useEffect, useId, useRef, useState } from "react";
 import {
   MatrixTransform,
   MaximumOneOf,
@@ -35,8 +28,8 @@ import {
 import Animated, {
   interpolate,
   useAnimatedStyle,
+  type WithSpringConfig,
 } from "react-native-reanimated";
-import { SpringConfig } from "react-native-reanimated/lib/typescript/animation/springUtils";
 import { match, P } from "ts-pattern";
 
 export type DegreeValue = number | `${number}deg`;
@@ -50,9 +43,7 @@ const parseDegreeValue = (value: DegreeValue): number => {
 
 export type PercentageValue = number | `${number}%`;
 
-const parsePercentageValue = (
-  value: PercentageValue,
-): { value: number; isPercentage: boolean } => {
+const parsePercentageValue = (value: PercentageValue): { value: number; isPercentage: boolean } => {
   if (typeof value === "string") {
     return { value: parseFloat(value), isPercentage: true };
   }
@@ -178,10 +169,7 @@ function ParallaxDebugOverlay({
     windowDimensions,
     getScrollViewHeight,
   });
-  const maxScroll = calculateMaxScrollPosition(
-    windowDimensions,
-    getScrollViewHeight,
-  );
+  const maxScroll = calculateMaxScrollPosition(windowDimensions, getScrollViewHeight);
   const isInTopViewport = layout.y < windowDimensions.height;
   const isInBottomViewport = layout.y + layout.height > maxScrollPosition;
 
@@ -277,10 +265,7 @@ const layoutToRange = ({
   getScrollViewHeight: () => number;
 }): [number, number, number] => {
   // Calculate the maximum possible scroll position
-  const maxScrollPosition = calculateMaxScrollPosition(
-    windowDimensions,
-    getScrollViewHeight,
-  );
+  const maxScrollPosition = calculateMaxScrollPosition(windowDimensions, getScrollViewHeight);
 
   // Check if element is in the top viewport (initially visible without scrolling)
   const isInTopViewport = layout.y < windowDimensions.height;
@@ -290,10 +275,7 @@ const layoutToRange = ({
 
   // For elements in the top viewport, start at 0
   // For other elements, start when they're about to enter the viewport
-  const start = Math.max(
-    0,
-    isInTopViewport ? 0 : layout.y - windowDimensions.height,
-  );
+  const start = Math.max(0, isInTopViewport ? 0 : layout.y - windowDimensions.height);
 
   // For elements in the bottom viewport, ensure they complete their animation
   // by setting the end to the max scroll position
@@ -368,17 +350,14 @@ export default function Parallax({
   disabled?: boolean;
   debug?: boolean;
   debugState?: "start" | "end";
-  springOptions?: SpringConfig;
+  springOptions?: WithSpringConfig;
   reverse?: boolean;
   getScrollViewHeight?: () => number;
 }) {
-  const [scrollOffsetAnimValue, getOffset] =
-    useScrollWindowOffset(springOptions);
+  const [scrollOffsetAnimValue, getOffset] = useScrollWindowOffset(springOptions);
   const targetRef = useRef<View>(null);
   const windowDimensions = useWindowDimensions();
-  const [layoutInWindow, setLayoutInWindow] = useState<ElementLayout | null>(
-    null,
-  );
+  const [layoutInWindow, setLayoutInWindow] = useState<ElementLayout | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   const updateLayout = useCallback(() => {
@@ -453,12 +432,7 @@ export default function Parallax({
         return end;
       }
 
-      return interpolate(
-        scrollOffsetAnimValue.get(),
-        inputRange,
-        [start, 0, end],
-        "clamp",
-      );
+      return interpolate(scrollOffsetAnimValue.get(), inputRange, [start, 0, end], "clamp");
     };
 
     return {
@@ -483,18 +457,12 @@ export default function Parallax({
   return (
     <View ref={targetRef} style={style}>
       <Animated.View
-        style={[
-          contentStyle,
-          disabled ? { transform: staticTransforms } : animatedStyles,
-        ]}
+        style={[contentStyle, disabled ? { transform: staticTransforms } : animatedStyles]}
       >
         {children}
       </Animated.View>
       {debug && layoutInWindow ? (
-        <ParallaxDebugOverlay
-          layout={layoutInWindow}
-          getScrollViewHeight={getScrollViewHeight}
-        />
+        <ParallaxDebugOverlay layout={layoutInWindow} getScrollViewHeight={getScrollViewHeight} />
       ) : null}
     </View>
   );

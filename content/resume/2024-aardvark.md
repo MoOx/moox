@@ -54,9 +54,8 @@ automated pipeline holding a two-week release cadence for almost two years.
 Sole front-end in a three-person product team, I also took over design after
 the designer's first drafts — up to a complete redesign once the product had
 outgrown them, dark mode included — sparing the company a dedicated design
-position. Built with React Native Web
-and TypeScript: a solid abstraction for web-only today, with the door open to
-native apps tomorrow.
+position. Built with React Native Web and TypeScript: a solid abstraction for
+web-only today, with the door open to native apps tomorrow.
 
 ---
 

@@ -20,3 +20,9 @@ links:
   - title: "Télé Loisir"
     url: "https://www.programme-tv.net/biographie/4104636-maxime-et-helene-pekin-express-la-route-des-tribus-legendaires/"
 ---
+
+I went on a backpacking trip with Hélène and there were cameras.
+
+---
+
+J'ai fait un voyage en sac à dos avec Hélène et y'avait des caméras.

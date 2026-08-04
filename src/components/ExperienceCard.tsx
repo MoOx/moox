@@ -1,16 +1,20 @@
 import { ResumeStat } from "@/api";
 import Image from "@/components/Image";
+import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
+import StatTile from "@/components/StatTile";
 import { lowerKeepingAcronyms } from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GlassView from "@/react-multiversal/GlassView";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
-import { LinkTextProps } from "@/react-multiversal/LinkText";
+import LinkText, { LinkTextProps } from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import TextForReader from "@/react-multiversal/TextForReader";
 import { alpha, useTheme } from "@/styles";
+import SVGExternalLink from "@/svgs/components/SVGExternalLink";
 import SVGInfoCircle from "@/svgs/components/SVGInfoCircle";
+import { ComponentProps } from "react";
 import { StyleProp, Text, View, ViewStyle } from "react-native";
 
 const borderRadius = size("s");
@@ -33,20 +37,30 @@ const topImageMask =
  * out horizontally.
  */
 export default function ExperienceCard({
+  mode = "compact",
   icon,
   pretitle,
   title,
   company,
   dates,
   text,
+  body,
   stats,
   tags,
+  links,
   image,
   infoHref,
   infoLabel,
   infoOnPress,
   style,
 }: {
+  /**
+   * "compact" (default): the timeline/key-experience row - side image on
+   * wide screens, stats as pills. "full": the detail view (modal and
+   * standalone pages) - opaque surface, image always as the top band, the
+   * markdown `body`, stats as tiles and the entry `links`.
+   */
+  mode?: "compact" | "full";
   /** Company icon, in the flow at the top left (like the CV rows). */
   icon?: string;
   /** Small caps accent line above the title (the job title). */
@@ -59,10 +73,14 @@ export default function ExperienceCard({
   dates?: string;
   /** Body copy (the pitch). */
   text?: string;
-  /** Entry figures, one pill each ("900M+ trips / year"). */
+  /** Markdown-as-JSON body, rendered in `mode="full"` only. */
+  body?: ComponentProps<typeof MdAsJsonRenderer>["body"];
+  /** Entry figures - pills in compact, StatTiles in full. */
   stats?: ResumeStat[];
   /** Joined with dots on the last line. */
   tags?: string[];
+  /** External proof links, rendered in `mode="full"` only. */
+  links?: { title: string; url: string }[];
   /** Illustration fading in from the right edge. */
   image?: string;
   /** Renders the ⓘ button (top right), e.g. to the entry's detail modal. */
@@ -78,10 +96,11 @@ export default function ExperienceCard({
   style?: StyleProp<ViewStyle>;
 }) {
   const theme = useTheme();
+  const full = mode === "full";
 
   // Header block (pretitle, icon, title, company · dates). Rendered in the
-  // copy column on wide screens; on narrow screens with an image it overlays
-  // the image band instead (over the faded bottom of the mask).
+  // copy column on wide screens; on narrow screens with an image (always in
+  // full mode) it overlays the image band instead.
   const header = (
     <SpacedView gap="xxs">
       {pretitle ? (
@@ -111,7 +130,10 @@ export default function ExperienceCard({
             alt={company ?? ""}
             width={64}
             height={64}
-            style={{ borderRadius: 10 }}
+            style={{
+              borderRadius: 10,
+              backgroundColor: theme.dynamicColors.back,
+            }}
           />
         ) : null}
         <View style={{ flexGrow: 1, flexShrink: 1, minWidth: 0 }}>
@@ -151,40 +173,52 @@ export default function ExperienceCard({
         {
           borderRadius,
           overflow: "hidden",
-          backgroundColor: theme.dynamicColors.backMainAlpha05,
         },
+        // Full mode is a reading surface (modal / standalone page): opaque
+        // background; compact keeps the quiet translucent tint.
+        full
+          ? theme.styles.backOnAlt
+          : { backgroundColor: theme.dynamicColors.backMainAlpha05 },
         style,
       ]}
     >
-      {image ? (
-        <IfWindowWidthIs smallerThan={WindowWidth.m}>
-          {/* Image band with the header laid over it. The mask alone fades
-              too late for a tall header, so a scrim (transparent → theme
-              background) sits between image and text - the poster-card
-              recipe, theme-aware. */}
-          <View style={{ justifyContent: "flex-end", minHeight: 300 }}>
-            <Image
-              src={image}
-              alt=""
-              width={640}
-              height={480}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "top",
-                maskImage: topImageMask,
-                WebkitMaskImage: topImageMask,
-              }}
-            />
-            <SpacedView horizontal="l">{header}</SpacedView>
-          </View>
-        </IfWindowWidthIs>
-      ) : null}
-      {image ? (
+      {image
+        ? // Image band with the header laid over its faded bottom. Narrow
+          // screens in compact mode; every width in full mode (the side-image
+          // split would starve a long detail body of its width).
+          (() => {
+            const band = (
+              <View style={{ justifyContent: "flex-end", minHeight: 300 }}>
+                <Image
+                  src={image}
+                  alt=""
+                  width={640}
+                  height={480}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "top",
+                    maskImage: topImageMask,
+                    WebkitMaskImage: topImageMask,
+                  }}
+                />
+                <SpacedView horizontal="l">{header}</SpacedView>
+              </View>
+            );
+            return full ? (
+              band
+            ) : (
+              <IfWindowWidthIs smallerThan={WindowWidth.m}>
+                {band}
+              </IfWindowWidthIs>
+            );
+          })()
+        : null}
+      {image && !full ? (
         <IfWindowWidthIs largerThan={WindowWidth.m}>
           <Image
             src={image}
@@ -231,12 +265,15 @@ export default function ExperienceCard({
           gap="m"
           style={{ flexGrow: 1, flexShrink: 1, flexBasis: 340, minWidth: 0 }}
         >
-          {/* With an image, the mobile header lives inside the image band
-              above - only the wide layout keeps it in the copy column. */}
+          {/* With an image, the header lives inside the image band (narrow
+              compact screens, every width in full) - only the wide compact
+              layout keeps it in the copy column. */}
           {image ? (
-            <IfWindowWidthIs largerThan={WindowWidth.m}>
-              {header}
-            </IfWindowWidthIs>
+            full ? null : (
+              <IfWindowWidthIs largerThan={WindowWidth.m}>
+                {header}
+              </IfWindowWidthIs>
+            )
           ) : (
             header
           )}
@@ -246,46 +283,88 @@ export default function ExperienceCard({
                 {text}
               </Text>
             ) : null}
+            {full && body ? <MdAsJsonRenderer body={body} /> : null}
             {stats && stats.length > 0 ? (
-              <View
-                style={{
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  gap: size("xs"),
-                }}
-              >
-                {stats.map((s) => (
-                  <View
-                    key={s.label}
-                    style={{
-                      borderRadius: 100,
-                      borderWidth: 1,
-                      borderColor: alpha(theme.colors.textFlashy2, 0.35),
-                      backgroundColor: alpha(theme.colors.textFlashy2, 0.08),
-                    }}
-                  >
-                    <SpacedView horizontal="xs" vertical="xxs">
-                      <Text
-                        style={[
-                          fontStyles.iosEm.caption2,
-                          { color: theme.dynamicColors.textFlashy2 },
-                        ]}
-                      >
-                        {`${s.stat} ${lowerKeepingAcronyms(s.label)}`}
-                      </Text>
-                    </SpacedView>
-                  </View>
-                ))}
-              </View>
+              full ? (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    alignItems: "stretch",
+                    gap: size("s"),
+                  }}
+                >
+                  {stats.map((stat) => (
+                    <StatTile key={stat.label} stat={stat} flexBasis={140} />
+                  ))}
+                </View>
+              ) : (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    gap: size("xs"),
+                  }}
+                >
+                  {stats.map((s) => (
+                    <View
+                      key={s.label}
+                      style={{
+                        borderRadius: 100,
+                        borderWidth: 1,
+                        borderColor: alpha(theme.colors.textFlashy2, 0.35),
+                        backgroundColor: alpha(theme.colors.textFlashy2, 0.08),
+                      }}
+                    >
+                      <SpacedView horizontal="xs" vertical="xxs">
+                        <Text
+                          style={[
+                            fontStyles.iosEm.caption2,
+                            { color: theme.dynamicColors.textFlashy2 },
+                          ]}
+                        >
+                          {`${s.stat} ${lowerKeepingAcronyms(s.label)}`}
+                        </Text>
+                      </SpacedView>
+                    </View>
+                  ))}
+                </View>
+              )
             ) : null}
             {tags && tags.length > 0 ? (
               <Text style={[fontStyles.ios.caption2, theme.styles.textLight2]}>
                 {tags.join(" · ")}
               </Text>
             ) : null}
+            {full && links && links.length > 0 ? (
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  gap: size("xs"),
+                }}
+              >
+                <SVGExternalLink
+                  width={12}
+                  height={12}
+                  fill={theme.dynamicColors.textMain}
+                />
+                {links.map((link) => (
+                  <LinkText
+                    key={link.title}
+                    underline={true}
+                    href={link.url}
+                    style={[fontStyles.ios.footnote, theme.styles.textMain]}
+                  >
+                    {link.title}
+                  </LinkText>
+                ))}
+              </View>
+            ) : null}
           </SpacedView>
         </SpacedView>
-        {image ? (
+        {image && !full ? (
           // Reserved room so the copy never sits on the strong part of the
           // side image.
           <IfWindowWidthIs largerThan={WindowWidth.m}>

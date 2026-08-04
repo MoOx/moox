@@ -2,7 +2,7 @@ import { ResumeItem } from "@/api";
 import Image from "@/components/Image";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
 import StatTile from "@/components/StatTile";
-import { pitchOf, resumeEntryPath } from "@/profile";
+import { bodyBeforeFirstHr, pitchOf, resumeEntryPath, resumeEntryTransitionName } from "@/profile";
 import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
@@ -54,50 +54,19 @@ const styles = StyleSheet.create({
   },
 });
 
-// Resume bodies are bilingual: English, then an `<hr>`, then French.
-// The site is English-only for now, so keep only the part before the hr
-// (proper `body.en` / `body.fr` parsing comes with the i18n pass, see
-// WEB-REWORK.md).
-//
-const bodyBeforeFirstHr = (body: any): any => {
-  if (!body || !Array.isArray(body.children)) return body;
-  const hrIndex = body.children.findIndex(
-    //
-    (child: any) =>
-      child != null && typeof child === "object" && child.tag === "hr",
-  );
-  return hrIndex === -1
-    ? body
-    : { ...body, children: body.children.slice(0, hrIndex) };
-};
-
 const getDurationText = (startDate: string, endDate: Date) => {
-  const durationInMonths = Math.floor(
-    differenceInCalendarMonths(endDate, new Date(startDate)),
-  );
+  const durationInMonths = Math.floor(differenceInCalendarMonths(endDate, new Date(startDate)));
   const durationYears = Math.floor(durationInMonths / 12);
   const durationMonths = durationInMonths % 12;
 
   const yearText =
-    durationYears === 0
-      ? ""
-      : durationYears === 1
-        ? "1 year"
-        : `${durationYears} years`;
+    durationYears === 0 ? "" : durationYears === 1 ? "1 year" : `${durationYears} years`;
 
   const monthText =
-    durationMonths === 0
-      ? ""
-      : durationMonths === 1
-        ? "1 month"
-        : `${durationMonths} months`;
+    durationMonths === 0 ? "" : durationMonths === 1 ? "1 month" : `${durationMonths} months`;
 
   return yearText ? yearText + " " + monthText : monthText;
 };
-
-/** Shared view-transition name, so the detail "zooms" out of its card. */
-export const resumeEntryTransitionName = (item: ResumeItem) =>
-  `resume-entry--${item.slug.split("/").pop()}`;
 
 export const ResumeTimelineEntry = ({
   item,
@@ -137,9 +106,7 @@ export const ResumeTimelineEntry = ({
           flexBasis: 640,
           boxShadow: boxShadows.default,
         },
-        transitionEnabled
-          ? { viewTransitionName: resumeEntryTransitionName(item) }
-          : null,
+        transitionEnabled ? { viewTransitionName: resumeEntryTransitionName(item) } : null,
       ]}
       role="article"
     >
@@ -155,6 +122,7 @@ export const ResumeTimelineEntry = ({
             src={item.image}
             style={{
               width: "100%",
+              maxWidth: "100%",
               height: "auto",
             }}
             width={480}
@@ -164,17 +132,8 @@ export const ResumeTimelineEntry = ({
           />
         </View>
       )}
-      <View
-        style={[
-          StyleSheet.absoluteFill,
-          { borderRadius, boxShadow: boxShadowGlass() },
-        ]}
-      />
-      <SpacedView
-        style={{ flexGrow: 1 }}
-        horizontal={horizontal}
-        vertical={vertical}
-      >
+      <View style={[StyleSheet.absoluteFill, { borderRadius, boxShadow: boxShadowGlass() }]} />
+      <SpacedView style={{ flexGrow: 1 }} horizontal={horizontal} vertical={vertical}>
         <View
           style={{
             flexDirection: "row",
@@ -198,30 +157,20 @@ export const ResumeTimelineEntry = ({
               {item.company ?? ""}
             </LinkText>
           ) : (
-            <Text style={[styles.company, theme.styles.textLight1]}>
-              {item.company ?? ""}
-            </Text>
+            <Text style={[styles.company, theme.styles.textLight1]}>{item.company ?? ""}</Text>
           )}
         </View>
         {!detail && !disableLinks ? (
           <LinkText
             href={resumeEntryPath(item)}
             underlineOnFocus={true}
-            style={[
-              styles.description,
-              fontStyles.iosEm.title2,
-              theme.styles.text,
-            ]}
+            style={[styles.description, fontStyles.iosEm.title2, theme.styles.text]}
           >
             {item.title}
           </LinkText>
         ) : (
           <Text
-            style={[
-              styles.description,
-              fontStyles.iosEm.title2,
-              theme.styles.text,
-            ]}
+            style={[styles.description, fontStyles.iosEm.title2, theme.styles.text]}
             role="paragraph"
           >
             {item.title}
@@ -246,9 +195,7 @@ export const ResumeTimelineEntry = ({
         {detail && pitchOf(item) ? (
           <>
             <Spacer size="s" />
-            <Text style={[fontStyles.iosEm.callout, theme.styles.text]}>
-              {pitchOf(item)}
-            </Text>
+            <Text style={[fontStyles.iosEm.callout, theme.styles.text]}>{pitchOf(item)}</Text>
           </>
         ) : null}
         {detail && item.body ? (
@@ -289,21 +236,13 @@ export const ResumeTimelineEntry = ({
               <>
                 <Spacer size="xxs" />
                 <SpacedView gap="xxs" style={styles.links}>
-                  <SVGExternalLink
-                    width={12}
-                    height={12}
-                    fill={theme.dynamicColors.textMain}
-                  />
+                  <SVGExternalLink width={12} height={12} fill={theme.dynamicColors.textMain} />
                   {item.links.map((link) => (
                     <LinkText
                       key={link.title}
                       underline={true}
                       href={link.url}
-                      style={[
-                        styles.link,
-                        fontStyles.ios.footnote,
-                        theme.styles.textMain,
-                      ]}
+                      style={[styles.link, fontStyles.ios.footnote, theme.styles.textMain]}
                     >
                       {link.title}
                     </LinkText>

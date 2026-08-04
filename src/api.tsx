@@ -119,9 +119,7 @@ async function readJson<T>(urlPath: string): Promise<T> {
 export async function fetchAll<T extends ContentType>(opts: {
   data: T;
 }): Promise<ContentTypeMap[T][]> {
-  const items = await readJson<ContentTypeMap[T][]>(
-    `/content/${opts.data}.json`,
-  );
+  const items = await readJson<ContentTypeMap[T][]>(`/content/${opts.data}.json`);
   return sortByDate(items);
 }
 
@@ -132,8 +130,7 @@ export async function fetchOne<T extends ContentType>(opts: {
     const data = await readJson<ContentTypeMap[T]>(
       `/content/${opts.data.contentType}/${opts.data.filename}`,
     );
-    const slug =
-      opts.data.contentType + "/" + opts.data.filename.replace(/\.json$/, "");
+    const slug = opts.data.contentType + "/" + opts.data.filename.replace(/\.json$/, "");
     return { ...data, slug } as ContentTypeMap[T];
   } catch {
     return null;

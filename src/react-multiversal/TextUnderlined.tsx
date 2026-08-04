@@ -38,10 +38,7 @@ export default function TextUnderlined({
       {...props}
       style={[
         {
-          textDecorationLine:
-            underline || (underlineOnFocus && hasAnyFocus)
-              ? "underline"
-              : "none",
+          textDecorationLine: underline || (underlineOnFocus && hasAnyFocus) ? "underline" : "none",
         } as TextStyle,
         _style,
       ]}

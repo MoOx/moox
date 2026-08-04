@@ -32,9 +32,7 @@ const roundNumberTo10DecimalsAsString = (number: number) => {
   return number.toString().slice(0, 10);
 };
 
-export function calculateGradientCoordinates(
-  angle: number,
-): GradientCoordinates {
+export function calculateGradientCoordinates(angle: number): GradientCoordinates {
   const radians = (angle * Math.PI) / 180;
   const x1 = 0.5 + 0.5 * Math.cos(radians + Math.PI);
   const y1 = 0.5 + 0.5 * Math.sin(radians + Math.PI);
@@ -94,10 +92,7 @@ export default function GradientLinear({
   const id =
     idPrefix +
     stops
-      .map(
-        (stop) =>
-          `o:${stop.offset}c:${stop.stopColor}o:${stop.stopOpacity}:a${angle}`,
-      )
+      .map((stop) => `o:${stop.offset}c:${stop.stopColor}o:${stop.stopOpacity}:a${angle}`)
       .join("::")
       .replace(/[^a-zA-Z0-9]/g, "_");
 

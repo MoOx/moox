@@ -50,6 +50,7 @@ import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
+import LinkText from "@/react-multiversal/LinkText";
 import { default as SpacedView } from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import TextForReader from "@/react-multiversal/TextForReader";
@@ -73,12 +74,17 @@ import { StyleSheet, Text, View } from "react-native";
 import Svg, { Defs, LinearGradient, Stop } from "react-native-svg";
 
 export const Route = createFileRoute("/resume")({
-  // `?detail=<short-slug>` opens the entry modal above the page (masked as
-  // /resume/<slug> in the address bar - see ResumeEntryModal). The key must
-  // stay optional in the returned type, or every Link to /resume would be
-  // forced to pass a `search` prop.
-  validateSearch: (search: Record<string, unknown>): { detail?: string } =>
-    typeof search.detail === "string" ? { detail: search.detail } : {},
+  // `?detail=<short-slug>` opens one entry as a modal above the page,
+  // `?group=<group>` opens every mission of a grouped client - both masked as
+  // their real standalone URL in the address bar (see ResumeEntryModal). The
+  // keys must stay optional in the returned type, or every Link to /resume
+  // would be forced to pass a `search` prop.
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { detail?: string; group?: string } => ({
+    ...(typeof search.detail === "string" ? { detail: search.detail } : {}),
+    ...(typeof search.group === "string" ? { group: search.group } : {}),
+  }),
   loader: async () => {
     const [resume, talks, blog] = await Promise.all([
       fetchAll({ data: "resume" }),
@@ -110,26 +116,31 @@ function PageResume() {
   const theme = useTheme();
   const { resume: items, talks, blog } = Route.useLoaderData();
   const navigate = useNavigate();
-  // Short slug of the entry whose detail modal is open (?detail=… search
-  // param, URL masked as /resume/<slug>).
-  const { detail: activeSlug } = Route.useSearch();
-  const detailItem = activeSlug
-    ? items.find((i) => i.slug.endsWith(`/${activeSlug}`))
+  // Modal state: `detail` = one entry (timeline click), `group` = every
+  // mission of a grouped client (key-experience card click).
+  const { detail, group } = Route.useSearch();
+  const detailItem = detail
+    ? items.find((i) => i.slug.endsWith(`/${detail}`))
     : undefined;
-  const detailMembers = detailItem
+  const groupItems = group
     ? items
-        .filter((i) => groupKey(i) === groupKey(detailItem))
+        .filter((i) => i.group === group)
         .sort((a, b) =>
           (b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1,
         )
     : [];
+  const modalItems = group ? groupItems : detailItem ? [detailItem] : [];
+  // The entry whose timeline card yields its view-transition name to the
+  // modal (for a group: its highlight entry, the one with a key card).
+  const activeEntry =
+    detailItem ?? groupItems.find((i) => i.highlight) ?? groupItems[0];
+  const activeSlug = activeEntry?.slug.split("/").pop();
 
   // The Next.js "intercepting routes" pattern, TanStack-style: the ⓘ links
-  // keep their real /resume/<slug> href (crawlers and no-JS land on the
-  // standalone page), but a click is intercepted to open the modal over the
-  // page - URL masked as the real one, so reload & share still get the
-  // standalone page.
-  const openDetail = (
+  // keep their real href (crawlers and no-JS land on the standalone pages),
+  // but a click is intercepted to open the modal over the page - URL masked
+  // as the real one, so reload & share still get the standalone page.
+  const openEntry = (
     item: ResumeItem,
     event?: { preventDefault?: () => void },
   ) => {
@@ -144,6 +155,28 @@ function PageResume() {
       // (without this the router restores the masked state from history and
       // re-opens the modal).
       mask: { to: "/resume/$slug", params: { slug }, unmaskOnReload: true },
+    });
+  };
+  // Grouped clients (key-experience cards): the whole group in one modal,
+  // masked as /resume/group/<group>. Ungrouped ones fall back to the entry.
+  const openGroup = (
+    item: ResumeItem,
+    event?: { preventDefault?: () => void },
+  ) => {
+    if (!item.group) {
+      openEntry(item, event);
+      return;
+    }
+    event?.preventDefault?.();
+    void navigate({
+      to: "/resume",
+      search: { group: item.group },
+      resetScroll: false,
+      mask: {
+        to: "/resume/group/$group",
+        params: { group: item.group },
+        unmaskOnReload: true,
+      },
     });
   };
 
@@ -581,9 +614,11 @@ function PageResume() {
                 text={pitchOf(h)}
                 stats={h.stats}
                 tags={h.hashtags}
-                infoHref={resumeEntryPath(h)}
+                infoHref={
+                  h.group ? `/resume/group/${h.group}` : resumeEntryPath(h)
+                }
                 infoLabel={`All the details about ${h.company}`}
-                infoOnPress={(event) => openDetail(h, event)}
+                infoOnPress={(event) => openGroup(h, event)}
               />
             ))}
           </View>
@@ -680,7 +715,7 @@ function PageResume() {
                     text={item.title.trim()}
                     infoHref={resumeEntryPath(item)}
                     infoLabel={`All the details about ${projectName(item)}`}
-                    infoOnPress={(event) => openDetail(item, event)}
+                    infoOnPress={(event) => openEntry(item, event)}
                   >
                     {headline ? (
                       <View
@@ -740,7 +775,11 @@ function PageResume() {
             >
               {"Also: "}
               {openSourceCredits.map((credit, i) => (
-                <Text key={credit.label}>
+                <LinkText
+                  key={credit.label}
+                  href={credit.url}
+                  underlineOnFocus={true}
+                >
                   {i > 0 ? " · " : ""}
                   <Text
                     style={{ color: colors.white, fontWeight: weight.semibold }}
@@ -748,7 +787,7 @@ function PageResume() {
                     {credit.label}
                   </Text>
                   {` ${credit.note}`}
-                </Text>
+                </LinkText>
               ))}
             </Text>
           </SpacedView>
@@ -929,7 +968,7 @@ function PageResume() {
             items={items}
             talks={talks}
             activeSlug={activeSlug}
-            onOpenEntry={openDetail}
+            onOpenEntry={openEntry}
           />
           <Spacer />
         </SpacedView>
@@ -937,8 +976,16 @@ function PageResume() {
       <Spacer size="xl" />
       {/* The entry detail as a modal above the page (?detail=…, masked as
           /resume/<slug>). Direct loads of that URL get the standalone page. */}
-      {detailItem ? (
-        <ResumeEntryModal item={detailItem} members={detailMembers} />
+      {modalItems.length > 0 ? (
+        <ResumeEntryModal
+          items={modalItems}
+          activeSlug={activeEntry?.slug}
+          label={
+            group
+              ? (activeEntry?.company ?? group)
+              : (detailItem?.title ?? "Experience detail")
+          }
+        />
       ) : null}
     </WebsiteWrapper>
   );

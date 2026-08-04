@@ -1,6 +1,6 @@
 import { ResumeItem, Talk } from "@/api";
 import ExperienceCard from "@/components/ExperienceCard";
-import { resumeEntryTransitionName } from "@/components/ResumeTimelineEntry";
+import { resumeEntryTransitionName } from "@/profile";
 import { monthRange, monthYear, resumeEntryPath } from "@/profile";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
@@ -37,10 +37,7 @@ export const ResumeTimeline = ({
    * Intercepts the ⓘ click of resume entries (opens the detail as a modal
    * with a masked URL); the href stays the real, crawlable page.
    */
-  onOpenEntry?: (
-    item: ResumeItem,
-    event?: { preventDefault?: () => void },
-  ) => void;
+  onOpenEntry?: (item: ResumeItem, event?: { preventDefault?: () => void }) => void;
 }) => {
   const theme = useTheme();
   const todayDateOnlyAsISOString = new Date().toISOString().slice(0, 10);
@@ -70,25 +67,18 @@ export const ResumeTimeline = ({
         latestYear = year;
 
         return (
-          <Fragment
-            key={entry.kind === "resume" ? entry.item.slug : entry.talk.slug}
-          >
+          <Fragment key={entry.kind === "resume" ? entry.item.slug : entry.talk.slug}>
             {newYear ? (
               <View role="heading" aria-level={3}>
                 <Spacer size="m" />
-                <Text style={[fontStyles.iosEm.title1, theme.styles.text]}>
-                  {year}
-                </Text>
+                <Text style={[fontStyles.iosEm.title1, theme.styles.text]}>{year}</Text>
               </View>
             ) : null}
             {entry.kind === "resume" ? (
               <View>
                 {/* Deep-link anchor, kept from the previous timeline. */}
                 {/* oxlint-disable-next-line jsx_a11y/anchor-has-content, jsx_a11y/anchor-is-valid */}
-                <a
-                  id={entry.item.slug}
-                  style={{ position: "relative", top: "-100px" }}
-                />
+                <a id={entry.item.slug} style={{ position: "relative", top: "-100px" }} />
                 <ExperienceCard
                   icon={entry.item.icon}
                   image={entry.item.image}
@@ -98,23 +88,15 @@ export const ResumeTimeline = ({
                   dates={monthRange(entry.item)}
                   tags={entry.item.hashtags}
                   infoHref={resumeEntryPath(entry.item)}
-                  infoLabel={`All the details about ${
-                    entry.item.company || entry.item.title
-                  }`}
-                  infoOnPress={
-                    onOpenEntry
-                      ? (event) => onOpenEntry(entry.item, event)
-                      : undefined
-                  }
+                  infoLabel={`All the details about ${entry.item.company || entry.item.title}`}
+                  infoOnPress={onOpenEntry ? (event) => onOpenEntry(entry.item, event) : undefined}
                   style={
                     // The card and its detail share a view-transition name
                     // (the "zoom" effect) - except the card whose detail is
                     // open: duplicate names would skip the transition.
                     !activeSlug || !entry.item.slug.endsWith(`/${activeSlug}`)
                       ? {
-                          viewTransitionName: resumeEntryTransitionName(
-                            entry.item,
-                          ),
+                          viewTransitionName: resumeEntryTransitionName(entry.item),
                         }
                       : undefined
                   }

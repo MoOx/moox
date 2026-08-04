@@ -41,10 +41,7 @@ import type { ComponentType } from "react";
 // simples. Le simple, c'est le plus dur."
 // Split in two parts so the home band can stack them as a two-line punch;
 // the one-line `tagline` is derived from the same value.
-export const taglineParts = [
-  "I make front-ends simple.",
-  "Simple is the hard part.",
-] as const;
+export const taglineParts = ["I make front-ends simple.", "Simple is the hard part."] as const;
 export const tagline = taglineParts.join(" ");
 
 // Scope, not headcount. "I'm a one-person front-end team" said the right thing
@@ -110,8 +107,7 @@ export const handle = "MoOx";
  * indexes moox.io. Source: https://putaindecode.io/articles?search=moox
  */
 export const putaindecodeArticles = 22;
-export const putaindecodeArticlesUrl =
-  "https://putaindecode.io/articles?search=moox";
+export const putaindecodeArticlesUrl = "https://putaindecode.io/articles?search=moox";
 export const putaindecodePodcastsUrl = "https://putaindecode.io/podcasts";
 
 /**
@@ -217,18 +213,8 @@ export const skillsDomains: SkillDomain[] = [
   },
   {
     title: "Web / Native / Cross-platform",
-    items: [
-      "React",
-      "React Native",
-      "Expo",
-      "Web",
-      "iOS",
-      "Android",
-      "TanStack",
-      "Next.js",
-    ],
-    blurb:
-      "One React codebase for web, iOS and Android - each platform still feeling like itself.",
+    items: ["React", "React Native", "Expo", "Web", "iOS", "Android", "TanStack", "Next.js"],
+    blurb: "One React codebase for web, iOS and Android - each platform still feeling like itself.",
     keywords: ["React", "React Native", "Expo"],
     Icon: SVGExpo as SkillCardIcon,
     gradient: ["#0D0837", "#087EA4"],
@@ -350,8 +336,7 @@ export const compactCount = (n: number) =>
   n < 1000 ? `${n}` : `${(n / 1000).toFixed(1).replace(/\.0$/, "")}K`;
 
 /** Round down to the nearest `step`, then "+" - so a figure never overstates. */
-export const roundedDownCount = (n: number, step = 5) =>
-  `${Math.floor(n / step) * step}+`;
+export const roundedDownCount = (n: number, step = 5) => `${Math.floor(n / step) * step}+`;
 
 /**
  * Stat labels are authored in sentence case and joined lowercase into a running
@@ -384,11 +369,7 @@ export function profileStats(items: ResumeItem[]): ProfileStat[] {
   // teaching year is its own contract, so those count too; OSS side projects
   // and my own education don't).
   const projects = items.filter(
-    (i) =>
-      i.dateStart &&
-      i.dateStart >= `${freelanceSince}-01-01` &&
-      !i.openSource &&
-      !i.education,
+    (i) => i.dateStart && i.dateStart >= `${freelanceSince}-01-01` && !i.openSource && !i.education,
   );
   const clients = new Set(projects.map((i) => i.company).filter(Boolean));
   return [
@@ -425,14 +406,8 @@ export function profileStats(items: ResumeItem[]): ProfileStat[] {
 
 /** "2014 – 2017". */
 export const yearRange = (item: ResumeItem) => {
-  const start = item.dateStart
-    ? new Date(item.dateStart).getFullYear()
-    : undefined;
-  const end = item.wip
-    ? "now"
-    : item.dateEnd
-      ? new Date(item.dateEnd).getFullYear()
-      : "now";
+  const start = item.dateStart ? new Date(item.dateStart).getFullYear() : undefined;
+  const end = item.wip ? "now" : item.dateEnd ? new Date(item.dateEnd).getFullYear() : "now";
   if (!start) return `${end}`;
   return `${start}` === `${end}` ? `${start}` : `${start} – ${end}`;
 };
@@ -469,8 +444,7 @@ export const monthRange = (item: ResumeItem) => {
   if (!item.dateStart) return yearRange(item);
   const end = item.wip ? undefined : item.dateEnd;
   const years =
-    (new Date(end ?? new Date()).getTime() -
-      new Date(item.dateStart).getTime()) /
+    (new Date(end ?? new Date()).getTime() - new Date(item.dateStart).getTime()) /
     (365.25 * 24 * 3600 * 1000);
   if (years > monthPrecisionMaxYears) return yearRange(item);
   const startLabel = monthYear(item.dateStart);
@@ -485,10 +459,7 @@ export const monthRange = (item: ResumeItem) => {
  * copy, icon and stats of the entry flagged `highlight`. Missions stay separate
  * files; only the condensed views fold them.
  */
-export const mergeGroup = (
-  lead: ResumeItem,
-  members: ResumeItem[],
-): ResumeItem => {
+export const mergeGroup = (lead: ResumeItem, members: ResumeItem[]): ResumeItem => {
   // ISO dates sort lexicographically.
   const asc = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
   const isSet = (d: string | undefined): d is string => Boolean(d);
@@ -522,14 +493,11 @@ type Stint = { start: string; end: string };
 /** "2017 – 2018 · 2019 – 2023" - the group's actual stints, gaps included. */
 export const groupPeriods = (members: ResumeItem[]): string[] => {
   const ranges: Stint[] = members
-    .filter((m): m is ResumeItem & { dateStart: string } =>
-      Boolean(m.dateStart),
-    )
+    .filter((m): m is ResumeItem & { dateStart: string } => Boolean(m.dateStart))
     .map((m) => ({ start: m.dateStart, end: m.dateEnd ?? m.dateStart }))
     .sort((a, b) => (a.start < b.start ? -1 : 1));
   const months = (from: string, to: string) =>
-    (new Date(to).getTime() - new Date(from).getTime()) /
-    (30.44 * 24 * 3600 * 1000);
+    (new Date(to).getTime() - new Date(from).getTime()) / (30.44 * 24 * 3600 * 1000);
   const stints: Stint[] = [];
   for (const r of ranges) {
     const last = stints.at(-1);
@@ -541,9 +509,7 @@ export const groupPeriods = (members: ResumeItem[]): string[] => {
   }
   const year = (d: string) => new Date(d).getFullYear();
   return stints.map((s) =>
-    year(s.start) === year(s.end)
-      ? `${year(s.start)}`
-      : `${year(s.start)} – ${year(s.end)}`,
+    year(s.start) === year(s.end) ? `${year(s.start)}` : `${year(s.start)} – ${year(s.end)}`,
   );
 };
 
@@ -586,6 +552,23 @@ export const projectName = (item: ResumeItem) =>
 
 /** The detail page of an entry: the slug is already `resume/<name>`. */
 export const resumeEntryPath = (item: ResumeItem) => `/${item.slug}`;
+
+/** Shared view-transition name, so the detail "zooms" out of its card. */
+export const resumeEntryTransitionName = (item: ResumeItem) =>
+  `resume-entry--${item.slug.split("/").pop()}`;
+
+// Resume bodies are bilingual: English, then an `<hr>`, then French. The site
+// is English-only for now, so keep only the part before the hr (proper
+// `body.en` / `body.fr` parsing comes with the i18n pass, see WEB-REWORK.md).
+//
+export const bodyBeforeFirstHr = (body: any): any => {
+  if (!body || !Array.isArray(body.children)) return body;
+  const hrIndex = body.children.findIndex(
+    //
+    (child: any) => child != null && typeof child === "object" && child.tag === "hr",
+  );
+  return hrIndex === -1 ? body : { ...body, children: body.children.slice(0, hrIndex) };
+};
 
 /** OSS credentials with no résumé entry of their own. */
 export const openSourceCredits = [
@@ -644,9 +627,7 @@ export const personJsonLd = (items: ResumeItem[]) => ({
   worksFor: [
     ...new Map(
       items
-        .filter(
-          (i) => i.company && !i.openSource && !i.education && !i.personal,
-        )
+        .filter((i) => i.company && !i.openSource && !i.education && !i.personal)
         .map((i) => [
           groupKey(i),
           {

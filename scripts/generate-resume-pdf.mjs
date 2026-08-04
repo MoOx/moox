@@ -91,9 +91,7 @@ async function startServer() {
     };
     child.stdout.on("data", onData);
     child.stderr.on("data", onData);
-    child.on("exit", (code) =>
-      reject(new Error(`Dev server exited early (code ${code})`)),
-    );
+    child.on("exit", (code) => reject(new Error(`Dev server exited early (code ${code})`)));
   });
 
   const stop = () => {
@@ -118,9 +116,7 @@ function quantizePng(buffer) {
     const chunks = [];
     p.stdout.on("data", (c) => chunks.push(c));
     p.on("error", () => resolve(null));
-    p.on("close", (code) =>
-      resolve(code === 0 && chunks.length ? Buffer.concat(chunks) : null),
-    );
+    p.on("close", (code) => resolve(code === 0 && chunks.length ? Buffer.concat(chunks) : null));
     p.stdin.on("error", () => resolve(null));
     p.stdin.end(buffer);
   });
@@ -146,9 +142,7 @@ async function routeQuantizedImages(page) {
     }
     if (!cache.has(file)) cache.set(file, await quantizePng(fs.readFileSync(file)));
     const body = cache.get(file);
-    return body
-      ? route.fulfill({ contentType: "image/png", body })
-      : route.fallback();
+    return body ? route.fulfill({ contentType: "image/png", body }) : route.fallback();
   });
 }
 
@@ -257,9 +251,7 @@ function optimizeWithQpdf(rawPath, outPath) {
         fs.rmSync(rawPath, { force: true });
         resolve(true);
       } else {
-        console.warn(
-          `[resume:pdf] qpdf exited with code ${code}; keeping unoptimized PDF.`,
-        );
+        console.warn(`[resume:pdf] qpdf exited with code ${code}; keeping unoptimized PDF.`);
         fs.renameSync(rawPath, outPath);
         resolve(false);
       }
@@ -270,15 +262,11 @@ function optimizeWithQpdf(rawPath, outPath) {
 // --- Generate -------------------------------------------------------------
 async function main() {
   if (!VALID_QUALITY.includes(quality)) {
-    throw new Error(
-      `Invalid --optimize=${quality}. Use one of: ${VALID_QUALITY.join(", ")}`,
-    );
+    throw new Error(`Invalid --optimize=${quality}. Use one of: ${VALID_QUALITY.join(", ")}`);
   }
   const before = fs.existsSync(out) ? fs.statSync(out).size : 0;
   const raw = out.replace(/\.pdf$/, ".raw.pdf");
-  console.log(
-    `[resume:pdf] scale=${scale} format=${format} margin=${margin} optimize=${quality}`,
-  );
+  console.log(`[resume:pdf] scale=${scale} format=${format} margin=${margin} optimize=${quality}`);
 
   const { baseUrl, stop } = await startServer();
   let browser;
@@ -295,9 +283,7 @@ async function main() {
     await page.goto(target, { waitUntil: "networkidle", timeout: 60_000 });
     // Confirm we are in PDF mode (Download button removed, body text rendered).
     await page.waitForFunction(
-      () =>
-        !document.querySelector("a[download]") &&
-        document.body.innerText.length > 500,
+      () => !document.querySelector("a[download]") && document.body.innerText.length > 500,
       { timeout: 30_000 },
     );
     // Ensure every image is fully loaded AND decoded before snapshotting -

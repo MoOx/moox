@@ -363,12 +363,7 @@ const keepStyles = (styles: PlatformStyles): TextStyle => {
   };
 };
 const keepStylesEm = (styles: PlatformStyles): TextStyle => {
-  const {
-    fontSize,
-    lineHeight,
-    letterSpacing,
-    fontWeightEm: fontWeight,
-  } = styles;
+  const { fontSize, lineHeight, letterSpacing, fontWeightEm: fontWeight } = styles;
   return {
     fontSize,
     lineHeight,
@@ -379,16 +374,16 @@ const keepStylesEm = (styles: PlatformStyles): TextStyle => {
 
 export const fontStyles = {
   ios: Object.fromEntries(
-    Object.entries(sizes.ios).map(([key, s]) => [key, keepStyles(s)])
+    Object.entries(sizes.ios).map(([key, s]) => [key, keepStyles(s)]),
   ) as Record<keyof (typeof platform)["ios"], TextStyle>,
   iosEm: Object.fromEntries(
-    Object.entries(sizes.ios).map(([key, s]) => [key, keepStylesEm(s)])
+    Object.entries(sizes.ios).map(([key, s]) => [key, keepStylesEm(s)]),
   ) as Record<keyof (typeof platform)["ios"], TextStyle>,
   android: Object.fromEntries(
-    Object.entries(sizes.android).map(([key, s]) => [key, keepStyles(s)])
+    Object.entries(sizes.android).map(([key, s]) => [key, keepStyles(s)]),
   ) as Record<keyof (typeof platform)["android"], TextStyle>,
   androidEm: Object.fromEntries(
-    Object.entries(sizes.android).map(([key, s]) => [key, keepStylesEm(s)])
+    Object.entries(sizes.android).map(([key, s]) => [key, keepStylesEm(s)]),
   ) as Record<keyof (typeof platform)["android"], TextStyle>,
 };
 // @todo for the web, we should use this

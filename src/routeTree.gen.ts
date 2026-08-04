@@ -9,30 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './app/__root'
-import { Route as ResumeRouteImport } from './app/resume'
-import { Route as DesignSystemRouteImport } from './app/design-system'
-import { Route as CvRouteImport } from './app/cv'
-import { Route as ContactRouteImport } from './app/contact'
 import { Route as IndexRouteImport } from './app/index'
-import { Route as TalksIndexRouteImport } from './app/talks.index'
+import { Route as ContactRouteImport } from './app/contact'
+import { Route as CvRouteImport } from './app/cv'
+import { Route as DesignSystemRouteImport } from './app/design-system'
+import { Route as ResumeRouteImport } from './app/resume'
 import { Route as BlogIndexRouteImport } from './app/blog.index'
-import { Route as TalksSlugRouteImport } from './app/talks.$slug'
-import { Route as ResumeSlugRouteImport } from './app/resume_.$slug'
 import { Route as BlogSlugRouteImport } from './app/blog.$slug'
+import { Route as ResumeSlugRouteImport } from './app/resume_.$slug'
+import { Route as TalksIndexRouteImport } from './app/talks.index'
+import { Route as TalksSlugRouteImport } from './app/talks.$slug'
+import { Route as ResumeGroupGroupRouteImport } from './app/resume_.group.$group'
 
-const ResumeRoute = ResumeRouteImport.update({
-  id: '/resume',
-  path: '/resume',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DesignSystemRoute = DesignSystemRouteImport.update({
-  id: '/design-system',
-  path: '/design-system',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CvRoute = CvRouteImport.update({
-  id: '/cv',
-  path: '/cv',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -40,14 +31,19 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const CvRoute = CvRouteImport.update({
+  id: '/cv',
+  path: '/cv',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TalksIndexRoute = TalksIndexRouteImport.update({
-  id: '/talks/',
-  path: '/talks/',
+const DesignSystemRoute = DesignSystemRouteImport.update({
+  id: '/design-system',
+  path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeRoute = ResumeRouteImport.update({
+  id: '/resume',
+  path: '/resume',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -55,9 +51,9 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TalksSlugRoute = TalksSlugRouteImport.update({
-  id: '/talks/$slug',
-  path: '/talks/$slug',
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResumeSlugRoute = ResumeSlugRouteImport.update({
@@ -65,9 +61,19 @@ const ResumeSlugRoute = ResumeSlugRouteImport.update({
   path: '/resume/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/blog/$slug',
-  path: '/blog/$slug',
+const TalksIndexRoute = TalksIndexRouteImport.update({
+  id: '/talks/',
+  path: '/talks/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalksSlugRoute = TalksSlugRouteImport.update({
+  id: '/talks/$slug',
+  path: '/talks/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeGroupGroupRoute = ResumeGroupGroupRouteImport.update({
+  id: '/resume_/group/$group',
+  path: '/resume/group/$group',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/talks/$slug': typeof TalksSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
+  '/resume/group/$group': typeof ResumeGroupGroupRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/talks/$slug': typeof TalksSlugRoute
   '/blog': typeof BlogIndexRoute
   '/talks': typeof TalksIndexRoute
+  '/resume/group/$group': typeof ResumeGroupGroupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/talks/$slug': typeof TalksSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
+  '/resume_/group/$group': typeof ResumeGroupGroupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/talks/$slug'
     | '/blog/'
     | '/talks/'
+    | '/resume/group/$group'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/talks/$slug'
     | '/blog'
     | '/talks'
+    | '/resume/group/$group'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/talks/$slug'
     | '/blog/'
     | '/talks/'
+    | '/resume_/group/$group'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,29 +170,16 @@ export interface RootRouteChildren {
   TalksSlugRoute: typeof TalksSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   TalksIndexRoute: typeof TalksIndexRoute
+  ResumeGroupGroupRoute: typeof ResumeGroupGroupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/resume': {
-      id: '/resume'
-      path: '/resume'
-      fullPath: '/resume'
-      preLoaderRoute: typeof ResumeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/design-system': {
-      id: '/design-system'
-      path: '/design-system'
-      fullPath: '/design-system'
-      preLoaderRoute: typeof DesignSystemRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cv': {
-      id: '/cv'
-      path: '/cv'
-      fullPath: '/cv'
-      preLoaderRoute: typeof CvRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -190,18 +189,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/cv': {
+      id: '/cv'
+      path: '/cv'
+      fullPath: '/cv'
+      preLoaderRoute: typeof CvRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/talks/': {
-      id: '/talks/'
-      path: '/talks'
-      fullPath: '/talks/'
-      preLoaderRoute: typeof TalksIndexRouteImport
+    '/design-system': {
+      id: '/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resume': {
+      id: '/resume'
+      path: '/resume'
+      fullPath: '/resume'
+      preLoaderRoute: typeof ResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -211,11 +217,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/talks/$slug': {
-      id: '/talks/$slug'
-      path: '/talks/$slug'
-      fullPath: '/talks/$slug'
-      preLoaderRoute: typeof TalksSlugRouteImport
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resume_/$slug': {
@@ -225,11 +231,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResumeSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/blog/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
+    '/talks/': {
+      id: '/talks/'
+      path: '/talks'
+      fullPath: '/talks/'
+      preLoaderRoute: typeof TalksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talks/$slug': {
+      id: '/talks/$slug'
+      path: '/talks/$slug'
+      fullPath: '/talks/$slug'
+      preLoaderRoute: typeof TalksSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resume_/group/$group': {
+      id: '/resume_/group/$group'
+      path: '/resume/group/$group'
+      fullPath: '/resume/group/$group'
+      preLoaderRoute: typeof ResumeGroupGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -246,6 +266,7 @@ const rootRouteChildren: RootRouteChildren = {
   TalksSlugRoute: TalksSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   TalksIndexRoute: TalksIndexRoute,
+  ResumeGroupGroupRoute: ResumeGroupGroupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

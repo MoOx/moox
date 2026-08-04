@@ -3,14 +3,7 @@ import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
-import {
-  alpha,
-  boxShadows,
-  colors,
-  themeDark,
-  themeLight,
-  useTheme,
-} from "@/styles";
+import { alpha, boxShadows, colors, themeDark, themeLight, useTheme } from "@/styles";
 import { useRouterState } from "@tanstack/react-router";
 import { Text, View } from "react-native";
 
@@ -122,11 +115,7 @@ export const WebsiteMobileMenuLinks = () => {
   );
 };
 
-export const WebsiteMobileMenuLinksContainer = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const WebsiteMobileMenuLinksContainer = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
   return (
     <Container
