@@ -11,7 +11,7 @@ function BlogPostPreview({ item }: { item: BlogPost }) {
   const theme = useTheme();
 
   return (
-    <LinkView href={`/${item.slug}`}>
+    <LinkView href={`/${item.slug}/`}>
       <SpacedView vertical="s">
         <Text style={[fontStyles.ios.title3, theme.styles.text]}>
           {item.title}

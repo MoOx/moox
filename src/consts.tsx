@@ -17,6 +17,8 @@ import SVGSocialX from "@/svgs/components/SVGSocialX";
 import { ReactNode } from "react";
 import { StyleProp, ViewStyle } from "react-native";
 
+export const website = "https://moox.io";
+
 export const footerAnchor = "links";
 
 export const visualUrl = (url: string) => {

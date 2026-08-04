@@ -1,8 +1,9 @@
 ---
 company: "M6"
 url: "https://www.m6.fr/pekin-express-p_945/episode-1-partie-1-c_13108834"
-title: "Reality TV Race"
-description: "Pékin Express #20"
+title: "Reality TV race - Pékin Express #20"
+# Not a job: lives in "Beyond Code" on the CV, never in the work history.
+personal: true
 dateStart: 2025-01-16
 dateEnd: 2025-02-15
 hashtags:
@@ -19,3 +20,9 @@ links:
   - title: "Télé Loisir"
     url: "https://www.programme-tv.net/biographie/4104636-maxime-et-helene-pekin-express-la-route-des-tribus-legendaires/"
 ---
+
+I went on a backpacking trip with Hélène and there were cameras.
+
+---
+
+J'ai fait un voyage en sac à dos avec Hélène et y'avait des caméras.

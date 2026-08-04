@@ -14,7 +14,7 @@ export default function Pill({
   titleStyle,
   detail,
   year,
-  ago = false,
+  mode = "default",
   pillSpace = "xs",
   spaceHorizontal = "l",
   spaceVertical = "xs",
@@ -26,7 +26,7 @@ export default function Pill({
   titleStyle?: StyleProp<TextStyle>;
   detail?: string;
   year: number;
-  ago?: boolean;
+  mode?: "default" | "ago" | "year";
   pillSpace?: AbsoluteSize;
   spaceHorizontal?: AbsoluteSize;
   spaceVertical?: AbsoluteSize;
@@ -121,9 +121,17 @@ export default function Pill({
                 },
               ]}
             >
-              <TextForReader>{" " + (ago ? ": " : "for ")}</TextForReader>
-              {thisYear - year + " years" + (ago ? " ago" : "")}
-              <TextForReader>{"."}</TextForReader>
+              {mode === "year" ? (
+                year
+              ) : (
+                <>
+                  <TextForReader>
+                    {" " + (mode === "ago" ? ": " : "for ")}
+                  </TextForReader>
+                  {thisYear - year + " years" + (mode === "ago" ? " ago" : "")}
+                  <TextForReader>{"."}</TextForReader>
+                </>
+              )}
             </Text>
           </Text>
         </SpacedView>

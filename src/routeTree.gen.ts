@@ -11,12 +11,15 @@
 import { Route as rootRouteImport } from './app/__root'
 import { Route as ResumeRouteImport } from './app/resume'
 import { Route as DesignSystemRouteImport } from './app/design-system'
+import { Route as CvRouteImport } from './app/cv'
 import { Route as ContactRouteImport } from './app/contact'
 import { Route as IndexRouteImport } from './app/index'
 import { Route as TalksIndexRouteImport } from './app/talks.index'
 import { Route as BlogIndexRouteImport } from './app/blog.index'
 import { Route as TalksSlugRouteImport } from './app/talks.$slug'
+import { Route as ResumeSlugRouteImport } from './app/resume_.$slug'
 import { Route as BlogSlugRouteImport } from './app/blog.$slug'
+import { Route as ResumeGroupGroupRouteImport } from './app/resume_.group.$group'
 
 const ResumeRoute = ResumeRouteImport.update({
   id: '/resume',
@@ -26,6 +29,11 @@ const ResumeRoute = ResumeRouteImport.update({
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CvRoute = CvRouteImport.update({
+  id: '/cv',
+  path: '/cv',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -53,85 +61,116 @@ const TalksSlugRoute = TalksSlugRouteImport.update({
   path: '/talks/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResumeSlugRoute = ResumeSlugRouteImport.update({
+  id: '/resume_/$slug',
+  path: '/resume/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeGroupGroupRoute = ResumeGroupGroupRouteImport.update({
+  id: '/resume_/group/$group',
+  path: '/resume/group/$group',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
   '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/resume/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
+  '/resume/group/$group': typeof ResumeGroupGroupRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
   '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/resume/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/blog': typeof BlogIndexRoute
   '/talks': typeof TalksIndexRoute
+  '/resume/group/$group': typeof ResumeGroupGroupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
   '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/resume_/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
+  '/resume_/group/$group': typeof ResumeGroupGroupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/contact'
+    | '/cv'
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
+    | '/resume/$slug'
     | '/talks/$slug'
     | '/blog/'
     | '/talks/'
+    | '/resume/group/$group'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contact'
+    | '/cv'
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
+    | '/resume/$slug'
     | '/talks/$slug'
     | '/blog'
     | '/talks'
+    | '/resume/group/$group'
   id:
     | '__root__'
     | '/'
     | '/contact'
+    | '/cv'
     | '/design-system'
     | '/resume'
     | '/blog/$slug'
+    | '/resume_/$slug'
     | '/talks/$slug'
     | '/blog/'
     | '/talks/'
+    | '/resume_/group/$group'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  CvRoute: typeof CvRoute
   DesignSystemRoute: typeof DesignSystemRoute
   ResumeRoute: typeof ResumeRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  ResumeSlugRoute: typeof ResumeSlugRoute
   TalksSlugRoute: typeof TalksSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   TalksIndexRoute: typeof TalksIndexRoute
+  ResumeGroupGroupRoute: typeof ResumeGroupGroupRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -148,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cv': {
+      id: '/cv'
+      path: '/cv'
+      fullPath: '/cv'
+      preLoaderRoute: typeof CvRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -185,11 +231,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TalksSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resume_/$slug': {
+      id: '/resume_/$slug'
+      path: '/resume/$slug'
+      fullPath: '/resume/$slug'
+      preLoaderRoute: typeof ResumeSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resume_/group/$group': {
+      id: '/resume_/group/$group'
+      path: '/resume/group/$group'
+      fullPath: '/resume/group/$group'
+      preLoaderRoute: typeof ResumeGroupGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -198,12 +258,15 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  CvRoute: CvRoute,
   DesignSystemRoute: DesignSystemRoute,
   ResumeRoute: ResumeRoute,
   BlogSlugRoute: BlogSlugRoute,
+  ResumeSlugRoute: ResumeSlugRoute,
   TalksSlugRoute: TalksSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   TalksIndexRoute: TalksIndexRoute,
+  ResumeGroupGroupRoute: ResumeGroupGroupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

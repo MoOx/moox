@@ -122,9 +122,47 @@ export const WebsiteMobileMenuLinks = () => {
   );
 };
 
-export default function WebsiteMobileMenu() {
+export const WebsiteMobileMenuLinksContainer = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const theme = useTheme();
+  return (
+    <Container
+      maxWidth={360}
+      style={{
+        flexDirection: "row",
+        justifyContent: "center",
+      }}
+    >
+      <SpacedView
+        dataSet={{ "website-footer-backdrop": "true" }}
+        horizontal="xxs"
+        vertical="xxs"
+        style={{
+          marginInline: size("s"),
+          marginBlock: size("xs"),
+          flexDirection: "row",
+          flexWrap: "wrap",
+          // justifyContent: "center",
+          alignItems: "center",
 
+          borderWidth: 0.5,
+          borderRadius: 999,
+          borderColor: alpha(colors.black, 0.15),
+          borderStyle: "solid",
+          backgroundColor: theme.dynamicColors.back,
+          boxShadow: boxShadows.moreVisible,
+        }}
+      >
+        {children}
+      </SpacedView>
+    </Container>
+  );
+};
+
+export default function WebsiteMobileMenu() {
   return (
     <View
       role="contentinfo"
@@ -137,36 +175,9 @@ export default function WebsiteMobileMenu() {
         right: "env(safe-area-inset-right)",
       }}
     >
-      <Container
-        maxWidth={360}
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-      >
-        <SpacedView
-          dataSet={{ "website-footer-backdrop": "true" }}
-          horizontal="xxs"
-          vertical="xxs"
-          style={{
-            marginInline: size("s"),
-            marginBlock: size("xs"),
-            flexDirection: "row",
-            flexWrap: "wrap",
-            // justifyContent: "center",
-            alignItems: "center",
-
-            borderWidth: 0.5,
-            borderRadius: 999,
-            borderColor: alpha(colors.black, 0.15),
-            borderStyle: "solid",
-            backgroundColor: theme.dynamicColors.back,
-            boxShadow: boxShadows.moreVisible,
-          }}
-        >
-          <WebsiteMobileMenuLinks />
-        </SpacedView>
-      </Container>
+      <WebsiteMobileMenuLinksContainer>
+        <WebsiteMobileMenuLinks />
+      </WebsiteMobileMenuLinksContainer>
     </View>
   );
 }

@@ -1,9 +1,9 @@
 ---
-company: "Kisio Digital"
-url: "http://www.kisio.com"
-title: "Transport Mobile App"
-description: >
-  iOS / Android app built for cities and transport networks
+company: "Hove"
+url: "https://hove.com/"
+group: hove
+title: "iOS / Android app built for cities and transport networks"
+job_title: "Lead Front-End Developer"
 dateStart: 2017-03-01
 dateEnd: 2018-06-01
 hashtags:

@@ -5,114 +5,121 @@ import { useTheme } from "@/styles";
 import { ReactNode } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 
+const DEFAULT_WIDTH = 450;
+
 export default function Me({
   src = "/max-1.png",
-  imgWidth = 512 / 2,
-  imgHeight = 835 / 2,
+  width = DEFAULT_WIDTH,
+  imgWidth,
+  imgHeight,
   style,
   children,
-  pdf = false,
 }: {
   src?: string;
+  /** Overall width of the component; everything inside scales proportionally. */
+  width?: number;
   imgWidth?: number;
   imgHeight?: number;
   style?: StyleProp<ViewStyle>;
   children?: ReactNode;
-  /** PDF export: hide the decorative gradients that print as a solid block. */
-  pdf?: boolean;
 }) {
   const theme = useTheme();
+  const scale = width / DEFAULT_WIDTH;
+  const resolvedImgWidth = (imgWidth ?? (512 / 2) * scale).toFixed(3);
+  const resolvedImgHeight = (imgHeight ?? (835 / 2) * scale).toFixed(3);
   return (
     <View
       style={[
         {
           flexGrow: 1,
           flexShrink: 1,
-          flexBasis: 450,
-          maxWidth: 450,
+          flexBasis: width,
+          maxWidth: width,
           alignItems: "center",
         },
         style,
       ]}
     >
-      <View>
-        {pdf ? null : (
-        <View
+      <View
+        style={{
+          position: "absolute",
+          // width: 420 * scale,
+          // height: 420 * scale,
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          // top: -40 * scale,
+          // right: -40 * scale,
+          // bottom: -40 * scale,
+          // left: -80 * scale,
+        }}
+      >
+        <GradientBorderCircle
+          width={300 * scale}
+          borderWidth={1}
+          stops={[
+            {
+              offset: 0,
+              stopColor: theme.dynamicColors.textLight2,
+              stopOpacity: "0.3",
+            },
+            {
+              offset: 80,
+              stopColor: theme.dynamicColors.textLight1,
+              stopOpacity: "0",
+            },
+          ]}
+          style={{
+            margin: ((360 - 280) / 2) * scale,
+            position: "absolute",
+            transform: [
+              { translateX: 40 * scale },
+              { translateY: -10 * scale },
+              { rotate: "130deg" },
+            ],
+          }}
+        />
+        <GradientBorderCircle
+          width={420 * scale}
+          borderWidth={1}
+          stops={[
+            {
+              offset: 0,
+              stopColor: theme.dynamicColors.textLight2,
+              stopOpacity: "0.4",
+            },
+            {
+              offset: 80,
+              stopColor: theme.dynamicColors.textLight1,
+              stopOpacity: "0",
+            },
+          ]}
           style={{
             position: "absolute",
-            width: 420,
-            height: 420,
-            bottom: -40,
-            left: -80,
+            transform: [{ rotate: "-70deg" }],
           }}
-        >
-          <GradientBorderCircle
-            width={300}
-            borderWidth={1}
-            stops={[
-              {
-                offset: 0,
-                stopColor: theme.dynamicColors.textLight2,
-                stopOpacity: "0.3",
-              },
-              {
-                offset: 80,
-                stopColor: theme.dynamicColors.textLight1,
-                stopOpacity: "0",
-              },
-            ]}
-            style={{
-              margin: (360 - 280) / 2,
-              position: "absolute",
-              transform: [
-                { translateX: 40 },
-                { translateY: -10 },
-                { rotate: "130deg" },
-              ],
-            }}
-          />
-          <GradientBorderCircle
-            width={420}
-            borderWidth={1}
-            stops={[
-              {
-                offset: 0,
-                stopColor: theme.dynamicColors.textLight2,
-                stopOpacity: "0.4",
-              },
-              {
-                offset: 80,
-                stopColor: theme.dynamicColors.textLight1,
-                stopOpacity: "0",
-              },
-            ]}
-            style={{
-              position: "absolute",
-              transform: [{ rotate: "-70deg" }],
-            }}
-          />
-          <GradientRadial
-            width={400}
-            height={400}
-            stops={[
-              {
-                offset: 0,
-                stopColor: theme.colors.backMain,
-                stopOpacity: "0.5",
-              },
-              {
-                offset: 100,
-                stopColor: theme.colors.backMain,
-                stopOpacity: "0",
-              },
-            ]}
-            style={{ position: "absolute", left: -10, bottom: -0 }}
-          />
-        </View>
-        )}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
+        />
+        <GradientRadial
+          width={400 * scale}
+          height={400 * scale}
+          stops={[
+            {
+              offset: 0,
+              stopColor: theme.colors.backMain,
+              stopOpacity: "0.25",
+            },
+            {
+              offset: 100,
+              stopColor: theme.colors.backMain,
+              stopOpacity: "0",
+            },
+          ]}
+          style={{ position: "absolute", left: -10 * scale, bottom: -0 }}
+        />
+      </View>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
                 .userColorScheme-auto,
                 .userColorScheme-light {
                   --maxMeBrightness: 105%
@@ -126,17 +133,16 @@ export default function Me({
                   }
                 }
                 `,
-          }}
-        />
-        <Image
-          priority={true}
-          src={src}
-          alt="Picture of the Max"
-          width={imgWidth}
-          height={imgHeight}
-          style={{ filter: "brightness(var(--maxMeBrightness))" }}
-        />
-      </View>
+        }}
+      />
+      <Image
+        priority={true}
+        src={src}
+        alt="Picture of the Max"
+        width={resolvedImgWidth}
+        height={resolvedImgHeight}
+        style={{ filter: "brightness(var(--maxMeBrightness))" }}
+      />
       {children}
     </View>
   );

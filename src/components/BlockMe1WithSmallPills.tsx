@@ -32,7 +32,7 @@ export default function BlockMe1WithSmallPills() {
             style={{ position: "absolute", top: 200, right: 40 }}
             transforms={pTransforms(5, -5, -0.1)}
           >
-            <Pill title="First Website" year={1999} ago={true} />
+            <Pill title="First Website" year={1999} mode="year" />
           </Parallax>
           <Parallax
             style={{ position: "absolute", top: 300, left: -60 }}
@@ -42,7 +42,7 @@ export default function BlockMe1WithSmallPills() {
               title="First Mobile Web App"
               detail="PalmOS"
               year={2006}
-              ago={true}
+              mode="ago"
             />
           </Parallax>
         </Me>
@@ -81,7 +81,7 @@ export default function BlockMe1WithSmallPills() {
             <Pill
               title="First Website"
               year={1999}
-              ago={true}
+              mode="ago"
               transitionSize="s"
             />
           </Parallax>
@@ -93,7 +93,7 @@ export default function BlockMe1WithSmallPills() {
               title="First Mobile Web App"
               detail="PalmOS"
               year={2006}
-              ago={true}
+              mode="ago"
               transitionSize="s"
             />
           </Parallax>

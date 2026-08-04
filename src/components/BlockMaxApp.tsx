@@ -4,7 +4,10 @@ import ButtonView from "@/components/ButtonView";
 import DeviceiPhoneDynamicIsland from "@/components/DeviceIphoneDynamicIsland";
 import LinkButton from "@/components/LinkButton";
 import { ResumeTimelineEntry } from "@/components/ResumeTimelineEntry";
-import { WebsiteMobileMenuLinks } from "@/components/WebsiteMobileMenu";
+import {
+  WebsiteMobileMenuLinks,
+  WebsiteMobileMenuLinksContainer,
+} from "@/components/WebsiteMobileMenu";
 import {
   sendStringAsMailString,
   socialLinks,
@@ -16,7 +19,7 @@ import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
-import { alpha, boxShadows, colors, useTheme } from "@/styles";
+import { boxShadows, useTheme } from "@/styles";
 import SVGChevronRight from "@/svgs/components/SVGChevronRight";
 import SVGEmail from "@/svgs/components/SVGEmail";
 import Clipboard from "@react-native-clipboard/clipboard";
@@ -325,34 +328,19 @@ export default function BlockMaxApp({
         )}
       </SpacedView>
       <SpacedView
-        dataSet={{ "website-footer-backdrop": "true" }}
-        horizontal="m"
-        vertical="xxs"
+        horizontal="xxs"
+        vertical="xs"
         style={{
           zIndex: 1,
           position: "absolute",
           bottom: 0,
           left: 0,
           right: 0,
-          borderTopWidth: 0.5,
-          borderStyle: "solid",
-          borderColor: alpha(colors.black, 0.1),
-          backgroundColor: theme.dynamicColors.back,
-          boxShadow: boxShadows.default,
         }}
       >
-        <SpacedView
-          horizontal="m"
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <WebsiteMobileMenuLinksContainer>
           <WebsiteMobileMenuLinks />
-        </SpacedView>
-        <Spacer size="m" />
+        </WebsiteMobileMenuLinksContainer>
       </SpacedView>
     </DeviceiPhoneDynamicIsland>
   );

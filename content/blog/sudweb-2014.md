@@ -27,7 +27,7 @@ Pour résumer, voici une citation qui résume bien (une partie de) SudWeb.
 <blockquote>
   <p>SudWeb, c’est les vacances du travail.</p>
   <footer>
-    <cite>— Lionel</cite>
+    <cite>- Lionel</cite>
   </footer>
 </blockquote>
 

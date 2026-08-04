@@ -11,7 +11,7 @@ function TalkPreview({ item }: { item: Talk }) {
   const theme = useTheme();
 
   return (
-    <LinkView href={`/${item.slug}`}>
+    <LinkView href={`/${item.slug}/`}>
       <SpacedView vertical="s">
         <Text style={[fontStyles.iosEm.title3, theme.styles.text]}>
           {item.title}

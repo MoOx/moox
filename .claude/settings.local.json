@@ -12,7 +12,8 @@
       "Read",
       "Skill",
       "WebFetch",
-      "Write"
+      "Write",
+      "WebSearch"
     ]
   },
   "enableAllProjectMcpServers": true
