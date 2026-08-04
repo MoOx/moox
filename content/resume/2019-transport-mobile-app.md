@@ -57,26 +57,21 @@ image: /resume/adm.jpg
 remote: true
 ---
 
-Development of a mobile app to ease urban transportation, sell to cities &
-transportation networks as a white-label app.
+A year after my first Hove mission ended, the CTO called me back: the app I
+had created needed rescuing. The team had grown to ten and the product had
+grown fragile — my job was to tighten both. I rebuilt the team as a smaller,
+senior one, stabilized the app and simplified the code it had accumulated.
 
-- Stabilisation of the app and simplification of the source code.
-- Great simplification of the deployment process for each client
-- Great reduction of build and deployment time for client data synchronisation
-  (from several days to a few hours to integrate a modification in production,
-  including QA)
-- Setup of an "all-in-one" build that contains data of all clients and that
-  allows to swap between clients without having to restart the app (to ease QA
-  workflow)
-- Rebuilding the team as a smaller, senior one to stabilize the product
-- Daily code review to raise the team skills (most developers where new to
-  modern JavaScript & React & React Native)
-- Development of features with polished animations that need to work on low-end
-  devices
-- Integration of native code & dependencies for iOS & Android & creation of
-  bridges for React Native usage
-- Management of several React Native upgrade during the mission
-- Making changes to the iOS/Android app to run on the web using React Native Web
+The biggest win was operational. Shipping a change used to cost days per
+client network — builds, installs, QA for every declination. This second
+phase pushed the Fastlane automation to an "all-in-one" build embedding
+every client's data, so QA switches networks in-app without rebuilding:
+integrating a modification, QA included, went from several days to a few
+hours, and releases became one click.
+
+Under the hood the product work continued: polished animations for low-end
+devices, native code and bridges for both platforms, several React Native
+upgrades — and the app was brought to the web with React Native Web.
 
 ---
 

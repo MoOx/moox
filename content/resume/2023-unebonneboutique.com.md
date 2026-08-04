@@ -23,9 +23,19 @@ links:
     url: "https://unebonneboutique.com/collections/une-bonne-soiree"
 ---
 
-Setup of a secured VOD streaming platform for Kyan Khojandi (a famous French entertaining content creator) for his stand-up comedy show (& more to come).
-I created this platfrom on his merchandising website <https://unebonneboutique.com>, using Shopify & Vimeo.
-Also handling various design, web development & e-commerce tasks for his different websites.
+Kyan Khojandi sells his stand-up show "Une Bonne Soirée" in VOD — not on a
+dedicated streaming service, but directly on
+[unebonneboutique.com](https://unebonneboutique.com), his existing
+merchandising shop.
+
+That was the point: rather than building and running a custom video backend,
+I assembled the platform from parts the studio already operates — Shopify for
+the store and checkout, Vimeo for the secured streaming, Liquid and Gempages
+to shape the storefront. One shop to manage, one place for fans to buy, and
+room for the next shows to land on the same shelf.
+
+Around the platform, I also handled assorted design, web development and
+e-commerce tasks across his different websites.
 
 ---
 
