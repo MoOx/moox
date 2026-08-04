@@ -12,7 +12,6 @@ import StatTile from "@/components/StatTile";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { socials, visualUrl } from "@/consts";
 import {
-  availabilityDetail,
   availabilityLabel,
   compactCount,
   freelanceSince,
@@ -25,7 +24,6 @@ import {
   jobSubtitle,
   jobTitle,
   keyExperiences,
-  languages,
   lowerKeepingAcronyms,
   metaDescription,
   monthRange,
@@ -42,6 +40,7 @@ import {
   summary,
   tagline,
   techs,
+  titleOf,
   workLocation,
   yearRange,
 } from "@/profile";
@@ -50,8 +49,7 @@ import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
-import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import { default as SpacedView } from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import TextForReader from "@/react-multiversal/TextForReader";
 import {
@@ -67,8 +65,6 @@ import SVGCssnext from "@/svgs/components/SVGCssnext";
 import SVGDownload from "@/svgs/components/SVGDownload";
 import SVGPhenomic from "@/svgs/components/SVGPhenomic";
 import SVGRescriptReactNative from "@/svgs/components/SVGRescriptReactNative";
-import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
-import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 import SVGStylelint from "@/svgs/components/SVGStylelint";
 import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
 import { ReactNode } from "react";
@@ -190,7 +186,6 @@ function PageResume() {
           </LinearGradient>
         </Defs>
       </Svg>
-      <Spacer size="m" />
 
       {/* ============================================================ Hero */}
       <Container
@@ -205,11 +200,12 @@ function PageResume() {
         <SpacedView
           horizontal="l"
           vertical="m"
+          gap="xl"
           style={{
             flexGrow: 1,
             flexShrink: 1,
             flexBasis: 300,
-            justifyContent: "center",
+            zIndex: 1,
           }}
         >
           <IfWindowWidthIs largerThan={WindowWidth.m}>
@@ -221,192 +217,184 @@ function PageResume() {
               {headline("text--front-end-architect")}
             </SpacedView>
             <Spacer size="xxxl" />
-            <Spacer size="l" />
           </IfWindowWidthIs>
           <IfWindowWidthIs smallerThan={WindowWidth.m}>
-            {headline("text--front-end-architect-m")}
-            <Spacer size="xl" />
+            <View>{headline("text--front-end-architect-m")}</View>
           </IfWindowWidthIs>
-          <Text
-            role="paragraph"
-            style={[
-              theme.styles.text,
-              gradientTextFlashyStylesInv(theme),
-              {
-                fontSize: 64,
-                lineHeight: 64,
-                fontWeight: "900",
-                viewTransitionName: "text--max",
-              },
-            ]}
-          >
-            <TextForReader>{"Nickname :"}</TextForReader>
-            {"Max."}
-          </Text>
-          <Text
-            role="paragraph"
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <TextForReader>{"Full name :"}</TextForReader>
-            <Text
-              style={[
-                theme.styles.textLight1,
-                {
-                  fontSize: 44,
-                  lineHeight: 44,
-                  fontWeight: "100",
-                  letterSpacing: 1,
-                },
-              ]}
-            >
-              {"Maxime"}
-            </Text>
-            <Text
-              style={[
-                theme.styles.textLight1,
-                {
-                  fontSize: 44,
-                  lineHeight: 44,
-                  fontWeight: "100",
-                },
-              ]}
-            >
-              {"Thirouin"}
-            </Text>
-          </Text>
-          <Spacer size="l" />
-          <View style={{ gap: size("s") }}>
-            <LinkView
-              href={socials.github.value}
-              underlineOnFocus={true}
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: size("xs"),
-              }}
-            >
-              <SVGSocialGithub
-                width={16}
-                height={16}
-                fill={theme.dynamicColors.textMainDark}
-              />
-              <Text style={theme.styles.textLight1}>
-                {visualUrl(socials.github.value)}
-              </Text>
-            </LinkView>
-            <LinkView
-              href={socials.linkedin.value}
-              underlineOnFocus={true}
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: size("xs"),
-              }}
-            >
-              <SVGSocialLinkedin
-                width={16}
-                height={16}
-                fill={theme.dynamicColors.textMainDark}
-              />
-              <Text style={theme.styles.textLight1}>
-                {visualUrl(socials.linkedin.value)}
-              </Text>
-            </LinkView>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                flexWrap: "wrap",
-                gap: size("s"),
-              }}
-            >
-              {languages.map((l) => (
+          <View>
+            <IfWindowWidthIs largerThan={WindowWidth.m}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  gap: size("s"),
+                  flexWrap: "wrap",
+                  alignItems: "flex-end",
+                }}
+              >
                 <Text
-                  key={l.label}
-                  style={[fontStyles.ios.footnote, theme.styles.textLight1]}
+                  role="paragraph"
+                  style={[
+                    theme.styles.text,
+                    gradientTextFlashyStylesInv(theme),
+                    {
+                      fontSize: 64,
+                      lineHeight: 64,
+                      fontWeight: "900",
+                      viewTransitionName: "text--max",
+                    },
+                  ]}
                 >
-                  {`${l.flag} ${l.label} `}
-                  <Text style={theme.styles.text}>{l.level}</Text>
+                  <TextForReader>{"Nickname :"}</TextForReader>
+                  {"Max."}
                 </Text>
-              ))}
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                flexWrap: "wrap",
-                gap: size("s"),
-              }}
-            >
+                <Text
+                  role="paragraph"
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  <TextForReader>{"Full name :"}</TextForReader>
+                  <Text
+                    style={[
+                      theme.styles.textLight1,
+                      {
+                        fontSize: 28,
+                        lineHeight: 28 * 1.25,
+                        fontWeight: "100",
+                        letterSpacing: 1,
+                      },
+                    ]}
+                  >
+                    {"Maxime Thirouin"}
+                  </Text>
+                </Text>
+              </View>
+            </IfWindowWidthIs>
+            <IfWindowWidthIs smallerThan={WindowWidth.m}>
+              <Text
+                role="paragraph"
+                style={[
+                  theme.styles.text,
+                  gradientTextFlashyStylesInv(theme),
+                  {
+                    fontSize: 64,
+                    lineHeight: 64,
+                    fontWeight: "900",
+                    viewTransitionName: "text--max",
+                  },
+                ]}
+              >
+                <TextForReader>{"Nickname :"}</TextForReader>
+                {"Max."}
+              </Text>
+              <Text
+                role="paragraph"
+                style={{ display: "flex", flexDirection: "column" }}
+              >
+                <TextForReader>{"Full name :"}</TextForReader>
+                <Text
+                  style={[
+                    theme.styles.textLight1,
+                    {
+                      fontSize: 44,
+                      lineHeight: 44,
+                      fontWeight: "100",
+                      letterSpacing: 1,
+                    },
+                  ]}
+                >
+                  {"Maxime"}
+                </Text>
+                <Text
+                  style={[
+                    theme.styles.textLight1,
+                    {
+                      fontSize: 44,
+                      lineHeight: 44,
+                      fontWeight: "100",
+                    },
+                  ]}
+                >
+                  {"Thirouin"}
+                </Text>
+              </Text>
+            </IfWindowWidthIs>
+            <Spacer size="s" />
+            <View style={{ gap: size("s") }}>
               <View
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  gap: size("xs"),
+                  flexWrap: "wrap",
+                  gap: size("s"),
                 }}
               >
-                <AvailabilityBadge showText={true} text={availabilityLabel} />
-                <Text
+                <View
+                  style={{
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    gap: size("xs"),
+                  }}
+                >
+                  <AvailabilityBadge showText={true} text={availabilityLabel} />
+                  {/* <Text
                   style={[fontStyles.ios.footnote, theme.styles.textLight1]}
                 >
                   {availabilityDetail}
-                </Text>
-              </View>
-              <a
-                href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
-                download
-                style={{
-                  alignItems: "flex-start",
-                  display: "flex",
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
-              >
-                <ButtonView
-                  mode="outline"
-                  effect="subtle"
-                  spaceGap="xs"
-                  spaceHorizontal="s"
-                  spaceVertical="xs"
-                  textColor={theme.dynamicColors.textFlashy1}
+                </Text> */}
+                </View>
+                <a
+                  href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
+                  download
+                  style={{
+                    alignItems: "flex-start",
+                    display: "flex",
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
                 >
-                  {({ color }) => (
-                    <>
-                      <SVGDownload width={16} height={16} fill={color} />
-                      <Text
-                        style={[
-                          {
-                            color,
-                            fontWeight: weight.bold,
-                          },
-                          gradientTextFlashyStyles(theme, 20),
-                        ]}
-                      >
-                        {"Download"}
-                      </Text>
-                    </>
-                  )}
-                </ButtonView>
-              </a>
+                  <ButtonView
+                    mode="outline"
+                    effect="subtle"
+                    spaceGap="xs"
+                    spaceHorizontal="s"
+                    spaceVertical="xs"
+                    textColor={theme.dynamicColors.textFlashy1}
+                    style={{ backgroundColor: theme.dynamicColors.back }}
+                  >
+                    {({ color }) => (
+                      <>
+                        <SVGDownload width={16} height={16} fill={color} />
+                        <Text
+                          style={[
+                            {
+                              color,
+                              fontWeight: weight.bold,
+                            },
+                            gradientTextFlashyStyles(theme, 20),
+                          ]}
+                        >
+                          {"Download PDF"}
+                        </Text>
+                      </>
+                    )}
+                  </ButtonView>
+                </a>
+              </View>
             </View>
-          </View>
-          <Spacer size="xl" />
-          <View style={{ height: 3, width: "95%" }}>
-            <GradientLinear
-              style={[StyleSheet.absoluteFill, { borderRadius: 4 }]}
-              stops={gradientFlashyStops(theme)}
-            />
           </View>
         </SpacedView>
         <BlockMe2WithPills />
+        <SpacedView horizontal="l" style={{ height: 3, width: "100%" }}>
+          <GradientLinear
+            style={{ borderRadius: 4 }}
+            stops={gradientFlashyStops(theme)}
+          />
+        </SpacedView>
       </Container>
 
       {/* ==================================================== Summary intro */}
-      {/* Same quiet style as the home's "Where I can help." block - the
-          gradient banner stays a /cv (print) thing. */}
-      <Spacer size="l" />
       <Container maxWidth={900}>
-        <SpacedView horizontal="l" gap="m">
+        <SpacedView horizontal="l" vertical="l" gap="m">
           <Text
             style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
             role="heading"
@@ -530,7 +518,7 @@ function PageResume() {
                 image={h.image}
                 icon={h.icon}
                 pretitle={h.job_title}
-                title={h.title}
+                title={titleOf(h)}
                 company={h.company}
                 dates={(() => {
                   const periods = groupPeriods(membersOf(h));

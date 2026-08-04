@@ -32,7 +32,7 @@ export default function BlockMe1WithSmallPills() {
             style={{ position: "absolute", top: 200, right: 40 }}
             transforms={pTransforms(5, -5, -0.1)}
           >
-            <Pill title="First Website" year={1999} mode="ago" />
+            <Pill title="First Website" year={1999} mode="year" />
           </Parallax>
           <Parallax
             style={{ position: "absolute", top: 300, left: -60 }}

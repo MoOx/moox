@@ -5,7 +5,7 @@ title: "Generative AI solution for automating legal and financial data"
 highlight: true
 job_title: "Lead Front-End Developer"
 icon: /resume/icons/aardvark.png
-pitch: "A generative-AI product turning legal & financial documents into structured data - with a UI that had to stay instant on 50,000+ rows. I was the entire front-end: built the virtualized spreadsheet-like editor, then made Playwright guard its performance in CI, so a 2-week release train never shipped a regression."
+pitch: "Built the virtualized spreadsheet-like editor that keeps the UI instant on tens of thousands of rows, then made Playwright guard its performance in CI - so the release train never shipped a regression."
 stats:
   - stat: "50k+"
     label: "Rows"

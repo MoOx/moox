@@ -189,21 +189,24 @@ export const skillsDomains: SkillDomain[] = [
     blurb:
       "The structure that lets a team ship fast without breaking things - design systems, performance budgets, accessibility and release automation.",
     keywords: ["Design systems", "Performance", "Accessibility"],
-    // Not the React logo: this card claims modernization, design systems,
-    // performance, release automation and mentoring, and a framework mark
-    // relabels all of it "React" - which is also the fourth React mark in this
-    // block already (watermark, the Cross-platform items, and two logos in the
-    // row below). A composition glyph says "structure" without naming a stack.
     Icon: SVGSquareStack3DUpFill as SkillCardIcon,
     gradient: ["#0D0837", "#4421A7"],
   },
   {
     title: "Languages & Tooling",
     items: [
-      "TypeScript · JavaScript · Node.js",
-      "HTML / CSS · REST · GraphQL",
-      "Playwright · Detox · Storybook",
-      "CI/CD · Jenkins · Fastlane",
+      "TypeScript",
+      "JavaScript",
+      "Node.js",
+      "HTML / CSS",
+      "REST",
+      "GraphQL",
+      "Playwright",
+      "Detox",
+      "Storybook",
+      "CI/CD",
+      "Jenkins",
+      "Fastlane",
     ],
     blurb:
       "Strict TypeScript end to end, with Playwright, Detox and CI as the safety net - so refactors stay cheap and releases stay boring.",
@@ -212,8 +215,17 @@ export const skillsDomains: SkillDomain[] = [
     gradient: ["#0D0837", "#3178C6"],
   },
   {
-    title: "Cross-platform",
-    items: ["React", "React Native", "Expo", "Web · iOS · Android"],
+    title: "Web / Native / Cross-platform",
+    items: [
+      "React",
+      "React Native",
+      "Expo",
+      "Web",
+      "iOS",
+      "Android",
+      "TanStack",
+      "Next.js",
+    ],
     blurb:
       "One React codebase for web, iOS and Android - each platform still feeling like itself.",
     keywords: ["React", "React Native", "Expo"],
@@ -459,7 +471,11 @@ export const monthRange = (item: ResumeItem) => {
       new Date(item.dateStart).getTime()) /
     (365.25 * 24 * 3600 * 1000);
   if (years > monthPrecisionMaxYears) return yearRange(item);
-  return `${monthYear(item.dateStart)} – ${end ? monthYear(end) : "now"}`;
+  const startLabel = monthYear(item.dateStart);
+  const endLabel = end ? monthYear(end) : "now";
+  // Same month on both ends ("Jul 2026 – Jul 2026", fklg): one label is
+  // enough - same collapse yearRange does for identical years.
+  return startLabel === endLabel ? startLabel : `${startLabel} – ${endLabel}`;
 };
 
 /**
@@ -538,6 +554,13 @@ export const groupKey = (item: ResumeItem) => item.group ?? item.slug;
  * Callers append their own last-resort fallback (`?? description` on the CV).
  */
 export const pitchOf = (item: ResumeItem) => item.groupPitch ?? item.pitch;
+
+/**
+ * The one-liner a condensed view shows for an entry: the group-wide
+ * `groupTitle` when the entry carries one (highlight of a `group`), else its
+ * own `title`. Timeline and modal keep per-mission titles on purpose.
+ */
+export const titleOf = (item: ResumeItem) => item.groupTitle ?? item.title;
 
 /**
  * The key-experience rows: one row per client - `highlight` entries with

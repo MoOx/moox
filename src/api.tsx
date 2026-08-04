@@ -63,6 +63,13 @@ export type ResumeItem = ContentItem & {
    * `groupPitch ?? pitch` (see `pitchOf` in profile.tsx).
    */
   groupPitch?: string;
+  /**
+   * Same as `title`, but covering the whole group ("iOS / Android & web
+   * apps…" where the highlight mission's title only names one app). Same
+   * rule as `groupPitch`: only on the `highlight` entry of a `group`.
+   * Condensed views read `groupTitle ?? title` (see `titleOf`).
+   */
+  groupTitle?: string;
   stats?: ResumeStat[];
 };
 

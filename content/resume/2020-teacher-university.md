@@ -3,10 +3,11 @@ company: "IUT Blagnac"
 group: iut-blagnac
 url: "https://www.iut-blagnac.fr/"
 title: "Teaching Agile methodology to university students (2nd year)"
+groupTitle: "Teaching C, web fundamentals & Agile methodology to university students"
 highlight: true
 job_title: "University Lecturer"
 icon: /resume/icons/universite-toulouse.svg
-groupPitch: "Teaching alongside my missions: C programming & web fundamentals (HTML/CSS/JS) to 1st-years, then Agile methodology to 2nd-years. The habit stuck: reviewing code to level up a team is the part of the job I like most."
+groupPitch: "Taught alongside client missions - and the habit stuck: reviewing code to level up a team is the part of the job I like most."
 stats:
   - stat: "200+"
     label: "Students taught"

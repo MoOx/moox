@@ -48,20 +48,25 @@ import {
   statsLine,
   summary,
   tagline,
-  techs,
+  titleOf,
   updatedOn,
   workLocation,
   yearRange,
 } from "@/profile";
 import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
+import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import {
   getColorScheme,
   setUserColorScheme,
 } from "@/react-multiversal/theme/colorScheme";
-import { alpha, colors, gradientTextIndigoStylesInv, useTheme } from "@/styles";
+import {
+  gradientFlashyStops,
+  gradientTextIndigoStylesInv,
+  useTheme,
+} from "@/styles";
 import SVGEmail from "@/svgs/components/SVGEmail";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
 import SVGPhone from "@/svgs/components/SVGPhone";
@@ -69,7 +74,7 @@ import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 import { createFileRoute } from "@tanstack/react-router";
 import { ComponentType, ReactNode, useEffect } from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Svg, { Defs, LinearGradient, Stop } from "react-native-svg";
 
 export const Route = createFileRoute("/cv")({
@@ -103,8 +108,6 @@ const phoneDisplay = `+${ind} ${socials.call.value.replace(
   /(\d)(\d{2})(\d{2})(\d{2})(\d{2})/,
   "$1 $2 $3 $4 $5",
 )}`;
-
-const borderRadius = size("s");
 
 /** How many "More experience" rows before falling back to the "Earlier:" line. */
 const moreExperienceRows = 9;
@@ -176,7 +179,7 @@ function PageCV() {
   }, []);
 
   const ContactRow = ({
-    Icon,
+    // Icon,
     href,
     children,
   }: {
@@ -189,7 +192,7 @@ function PageCV() {
       underlineOnFocus={true}
       style={{ flexDirection: "row", alignItems: "center", gap: size("xxs") }}
     >
-      <Icon width={14} height={14} fill={theme.dynamicColors.textMainDark} />
+      {/* <Icon width={16} height={16} fill={theme.dynamicColors.textLight1} /> */}
       <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
         {children}
       </Text>
@@ -245,7 +248,7 @@ function PageCV() {
           left: "0mm",
           right: "0mm",
           bottom: "0mm",
-          border: "2mm solid #5B2AA5",
+          borderTop: "3mm solid #5B2AA5",
           borderImage: `linear-gradient(to top left,
             ${theme.dynamicColors.textFlashy1} 0%,
             ${theme.dynamicColors.textFlashy2} 25%,
@@ -360,16 +363,68 @@ function PageCV() {
                 {"Maxime Thirouin"}
               </Text>
             </View>
+          </View>
+
+          <Me width={240} />
+        </View>
+        <View style={{ height: 3 }}>
+          <GradientLinear
+            style={[StyleSheet.absoluteFill, { borderRadius: 4 }]}
+            stops={gradientFlashyStops(theme)}
+          />
+        </View>
+        <SpacedView vertical="l" gap="m">
+          <Text
+            style={[fontStyles.iosEm.title2, theme.styles.text]}
+            role="heading"
+            aria-level={2}
+          >
+            {tagline}
+          </Text>
+          <Text
+            style={[fontStyles.ios.callout, theme.styles.textLight1]}
+            role="paragraph"
+          >
+            {summary}
+          </Text>
+        </SpacedView>
+
+        <View nativeID="cv-content" style={{ gap: size("l") }}>
+          <View>
+            {/* --------------------------------------------- Profile stats */}
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignItems: "stretch",
+                gap: size("s"),
+              }}
+            >
+              {stats.map((stat) => (
+                <StatTile
+                  key={stat.label}
+                  stat={stat}
+                  variant={stat.highlight ? "gradient" : "plain"}
+                  flexBasis={110}
+                />
+              ))}
+            </View>
 
             <SpacedView vertical="s" gap="xxs">
               <View
                 style={{
                   flexDirection: "row",
                   flexWrap: "wrap",
-                  columnGap: size("m"),
-                  rowGap: size("xxs"),
+                  gap: size("m"),
+                  justifyContent: "space-between",
                 }}
               >
+                <SVGExternalLink
+                  width={16}
+                  height={16}
+                  fill={theme.dynamicColors.textLight1}
+                />
+
                 <ContactRow Icon={SVGExternalLink} href={website}>
                   {visualUrl(website)}
                 </ContactRow>
@@ -382,15 +437,7 @@ function PageCV() {
                 >
                   {visualUrl(socials.linkedin.value)}
                 </ContactRow>
-              </View>
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  gap: size("xs"),
-                }}
-              >
                 <ContactRow Icon={SVGEmail} href={`mailto:${email}`}>
                   {email}
                 </ContactRow>
@@ -408,57 +455,6 @@ function PageCV() {
                 ))}
               </View>
             </SpacedView>
-          </View>
-
-          <Me width={280} />
-        </View>
-
-        <View nativeID="cv-content" style={{ gap: size("l") }}>
-          {/* ------------------------------------------------ Summary banner */}
-          <View
-            nativeID="cv-summary"
-            style={{
-              borderRadius,
-              overflow: "hidden",
-              backgroundImage: `linear-gradient(4deg,
-                ${theme.dynamicColors.textFlashy1} 0%,
-                ${theme.dynamicColors.textFlashy2} 25%,
-                ${theme.dynamicColors.textFlashy3} 75%,
-                ${theme.dynamicColors.textFlashy4} 100%)`,
-            }}
-          >
-            <SpacedView horizontal="l" vertical="m" gap="xxs">
-              <Text style={[fontStyles.iosEm.title3, { color: colors.white }]}>
-                {tagline}
-              </Text>
-              <Text
-                style={[
-                  fontStyles.ios.footnote,
-                  { color: alpha(colors.white, 0.92) },
-                ]}
-              >
-                {summary}
-              </Text>
-            </SpacedView>
-          </View>
-
-          {/* --------------------------------------------- Profile stats */}
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              alignItems: "stretch",
-              gap: size("s"),
-            }}
-          >
-            {stats.map((stat) => (
-              <StatTile
-                key={stat.label}
-                stat={stat}
-                variant={stat.highlight ? "gradient" : "plain"}
-                flexBasis={110}
-              />
-            ))}
           </View>
 
           {/* -------------------------------------------------------- Skills */}
@@ -502,7 +498,7 @@ function PageCV() {
               </View>
             </View>
 
-            <View
+            {/* <View
               style={{
                 flexDirection: "row",
                 flexWrap: "wrap",
@@ -521,7 +517,7 @@ function PageCV() {
                   </Text>
                 </View>
               ))}
-            </View>
+            </View> */}
           </View>
 
           {/* --------------------------------------------------- Experience */}
@@ -579,8 +575,16 @@ function PageCV() {
                   </Text>
                 </View>
                 <View style={{ flex: 1, flexBasis: 220, gap: size("xxs") }}>
-                  <Text style={[fontStyles.ios.footnote, theme.styles.text]}>
-                    {pitchOf(h) ?? h.title}
+                  {/* The what-it-is lead-in: the pitches deliberately stop
+                      saying it (dedup rule - see CONTENT-NORMALIZATION.md),
+                      so the row must. Inline, not stacked - page 1 is tight. */}
+                  <Text
+                    style={[fontStyles.ios.footnote, theme.styles.textLight1]}
+                  >
+                    <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
+                      {`${titleOf(h)}.`}
+                    </Text>
+                    {pitchOf(h) ? ` ${pitchOf(h)}` : null}
                   </Text>
                   {h.stats && h.stats.length > 0 ? (
                     <Text
@@ -667,7 +671,7 @@ function PageCV() {
                       { flex: 1 },
                     ]}
                   >
-                    {m.title.trim()}
+                    {titleOf(m).trim()}
                   </Text>
                 </View>
               ))}

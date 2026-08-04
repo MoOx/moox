@@ -127,21 +127,18 @@ export default function ExperienceCard({
             top: size("s"),
             right: size("s"),
             zIndex: 1,
+            filter: "drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5))",
           }}
         >
           <TextForReader>{infoLabel ?? "Details"}</TextForReader>
-          <SVGInfoCircle
-            width={24}
-            height={24}
-            color={alpha(theme.colors.text, 0.5)}
-          />
+          <SVGInfoCircle width={24} height={24} color={alpha("#fff", 0.85)} />
         </LinkView>
       ) : null}
       <View style={{ flexDirection: "row" }}>
         <SpacedView
           horizontal="l"
           vertical="l"
-          gap="s"
+          gap="xxl"
           style={{ flexGrow: 1, flexShrink: 1, flexBasis: 340, minWidth: 0 }}
         >
           <SpacedView gap="xxs">
@@ -208,48 +205,50 @@ export default function ExperienceCard({
               </View>
             </View>
           </SpacedView>
-          {text ? (
-            <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>
-              {text}
-            </Text>
-          ) : null}
-          {stats && stats.length > 0 ? (
-            <View
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                gap: size("xs"),
-              }}
-            >
-              {stats.map((s) => (
-                <View
-                  key={s.label}
-                  style={{
-                    borderRadius: 100,
-                    borderWidth: 1,
-                    borderColor: alpha(theme.colors.textFlashy2, 0.35),
-                    backgroundColor: alpha(theme.colors.textFlashy2, 0.08),
-                  }}
-                >
-                  <SpacedView horizontal="xs" vertical="xxs">
-                    <Text
-                      style={[
-                        fontStyles.iosEm.caption2,
-                        { color: theme.dynamicColors.textFlashy2 },
-                      ]}
-                    >
-                      {`${s.stat} ${lowerKeepingAcronyms(s.label)}`}
-                    </Text>
-                  </SpacedView>
-                </View>
-              ))}
-            </View>
-          ) : null}
-          {tags && tags.length > 0 ? (
-            <Text style={[fontStyles.ios.caption2, theme.styles.textLight2]}>
-              {tags.join(" · ")}
-            </Text>
-          ) : null}
+          <SpacedView gap="s">
+            {text ? (
+              <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>
+                {text}
+              </Text>
+            ) : null}
+            {stats && stats.length > 0 ? (
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: size("xs"),
+                }}
+              >
+                {stats.map((s) => (
+                  <View
+                    key={s.label}
+                    style={{
+                      borderRadius: 100,
+                      borderWidth: 1,
+                      borderColor: alpha(theme.colors.textFlashy2, 0.35),
+                      backgroundColor: alpha(theme.colors.textFlashy2, 0.08),
+                    }}
+                  >
+                    <SpacedView horizontal="xs" vertical="xxs">
+                      <Text
+                        style={[
+                          fontStyles.iosEm.caption2,
+                          { color: theme.dynamicColors.textFlashy2 },
+                        ]}
+                      >
+                        {`${s.stat} ${lowerKeepingAcronyms(s.label)}`}
+                      </Text>
+                    </SpacedView>
+                  </View>
+                ))}
+              </View>
+            ) : null}
+            {tags && tags.length > 0 ? (
+              <Text style={[fontStyles.ios.caption2, theme.styles.textLight2]}>
+                {tags.join(" · ")}
+              </Text>
+            ) : null}
+          </SpacedView>
         </SpacedView>
         {image ? (
           // Reserved room so the copy never sits on the strong part of the

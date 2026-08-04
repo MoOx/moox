@@ -142,10 +142,15 @@ One file at a time, priority = what the timeline now shows first:
       `2023-transport-web-app`, `2024-enjoy`, `2019-tv-app…` would benefit —
       the modal shows the pitch above the body. Not every 2008 gig needs one;
       recent + distinctive first.
-- [ ] **De-duplicate the ladder** on the entries that have all levels
-      (aardvark, exem, hove, teacher, fklg): title says what it is, pitch
-      says what I did, body tells the story — no sentence appears twice.
-      `2025-exem` is the template offender to fix first.
+- [x] **De-duplicate the ladder** — done 2026-08-03 on all five (exem,
+      hove, aardvark, teacher, fklg). The rule that emerged: **the number
+      lives in the stat pill, the what-it-is in the title; the pitch only
+      keeps decisions and hard parts** — ≤ 3 sentences, verb-first with the
+      implied "I" (US resume register; never drop articles off noun subjects,
+      that's headlinese). Consequence: `/cv` key rows now render `titleOf(h)`
+      above the pitch — the pitches stopped saying what the project is, so
+      the row must. Pitches shrank 25–40% (fklg grew: its old pitch was a
+      title duplicate and said nothing Max did).
 - [x] ~~`title` register pass~~ — superseded: the field was collapsed
       entirely, see §7.
 - [ ] Then phase 4 as planned (bodies, CV formula, EN then FR).
@@ -173,7 +178,15 @@ The final model, one register per field, no fallbacks:
 
 - `job_title` — the role (absent only on story/personal entries and the 2018
   R&D entry; there the pretitle slot stays empty by design).
-- `title` — the one-liner (ex-`description`), headline everywhere.
+- `title` / `groupTitle` — the one-liner (ex-`description`), headline
+  everywhere. `groupTitle` mirrors `groupPitch`: the group-wide line, only on
+  the `highlight` entry of a `group`, read via `titleOf()` — because the
+  highlight mission's own title only names one project ("iOS / Android app…"
+  where Hove also shipped a web app). Timeline and modal keep per-mission
+  titles on purpose. Today: Hove ("iOS / Android & web apps built for cities
+  and transport networks") and IUT ("Teaching C, web fundamentals & Agile
+  methodology to university students"); the FKLG lead's own title already
+  covers its group.
 - `pitch` / `groupPitch` — the condensed paragraph (`pitchOf`).
 - `body` — the full story.
 
