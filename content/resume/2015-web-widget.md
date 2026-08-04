@@ -1,9 +1,8 @@
 ---
 company: "BeOp"
 url: "https://beop.io"
-title: "Web Widget"
-description: >
-  Third-party widget for brands and publishers
+title: "Third-party widget for brands and publishers"
+job_title: "Front-End Developer"
 dateStart: 2015-03-01
 dateEnd: 2015-09-01
 hashtags:

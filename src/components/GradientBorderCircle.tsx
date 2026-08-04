@@ -22,12 +22,7 @@ export default function GradientBorderCircle({
   const id = useId();
 
   return (
-    <Svg
-      width={width}
-      height={width}
-      viewBox={`0 0 ${width} ${width}`}
-      style={style}
-    >
+    <Svg width={width} height={width} viewBox={`0 0 ${width} ${width}`} style={style}>
       <Defs>
         <LinearGradient id={id} x1="0%" y1="0%" x2="100%" y2="0%">
           {stops.map((stop) => (

@@ -19,12 +19,9 @@ export default function JumbotronTalks() {
     <View style={styles.container}>
       <Container>
         <SpacedView horizontal="xl">
-          <Text style={[fontStyles.iosEm.largeTitle, styles.text]}>
-            Public Speaking
-          </Text>
+          <Text style={[fontStyles.iosEm.largeTitle, styles.text]}>Public Speaking</Text>
           <Text style={[fontStyles.ios.body, styles.text, { opacity: 0.8 }]}>
-            I occasionally speak at conferences about React, React Native, and
-            Frontend Development
+            I occasionally speak at conferences about React, React Native, and Frontend Development
           </Text>
         </SpacedView>
       </Container>

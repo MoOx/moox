@@ -12,13 +12,7 @@ import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
-import {
-  alpha,
-  boxShadows,
-  colors,
-  gradientFlashyStops,
-  useTheme,
-} from "@/styles";
+import { alpha, boxShadows, colors, gradientFlashyStops, useTheme } from "@/styles";
 import SVGMoox from "@/svgs/components/SVGMoox";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
@@ -55,12 +49,7 @@ export default function WebsiteHeader() {
   ));
 
   const contact = (
-    <LinkButton
-      href="/contact/"
-      spaceHorizontal="m"
-      spaceVertical="xs"
-      effect="subtle"
-    >
+    <LinkButton href="/contact/" spaceHorizontal="m" spaceVertical="xs" effect="subtle">
       <Text
         numberOfLines={1}
         style={[theme.styles.textOnMain, { fontSize: 16, fontWeight: "300" }]}
@@ -121,11 +110,7 @@ export default function WebsiteHeader() {
             }}
           >
             <View style={styles.menuGroup}>
-              <LinkView
-                href="/"
-                style={{ flexDirection: "row" }}
-                aria-label="Go to home page"
-              >
+              <LinkView href="/" style={{ flexDirection: "row" }} aria-label="Go to home page">
                 <Avatar size={32} borderWidth={2} borderColor="#000" />
                 <View
                   style={{
@@ -148,39 +133,16 @@ export default function WebsiteHeader() {
             >
               {contact}
             </IfWindowWidthIs>
-            <IfWindowWidthIs
-              largerThan={WindowWidth.s}
-              style={[styles.menuGroup, { flex: 2 }]}
-            >
-              <SpacedView
-                gap="m"
-                style={[styles.menuGroup, { justifyContent: "center" }]}
-              >
+            <IfWindowWidthIs largerThan={WindowWidth.s} style={[styles.menuGroup, { flex: 2 }]}>
+              <SpacedView gap="m" style={[styles.menuGroup, { justifyContent: "center" }]}>
                 {links}
               </SpacedView>
-              <SpacedView
-                gap="m"
-                style={[styles.menuGroup, { justifyContent: "flex-end" }]}
-              >
-                <LinkView
-                  href={socials.linkedin.value}
-                  aria-label="@Max on LinkedIn"
-                >
-                  <SVGSocialLinkedin
-                    width={20}
-                    height={20}
-                    fill={theme.dynamicColors.text}
-                  />
+              <SpacedView gap="m" style={[styles.menuGroup, { justifyContent: "flex-end" }]}>
+                <LinkView href={socials.linkedin.value} aria-label="@Max on LinkedIn">
+                  <SVGSocialLinkedin width={20} height={20} fill={theme.dynamicColors.text} />
                 </LinkView>
-                <LinkView
-                  href={socials.github.value}
-                  aria-label="@MoOx on GitHub"
-                >
-                  <SVGSocialGithub
-                    width={20}
-                    height={20}
-                    fill={theme.dynamicColors.text}
-                  />
+                <LinkView href={socials.github.value} aria-label="@MoOx on GitHub">
+                  <SVGSocialGithub width={20} height={20} fill={theme.dynamicColors.text} />
                 </LinkView>
                 {contact}
               </SpacedView>
@@ -197,8 +159,7 @@ export default function WebsiteHeader() {
                     top: 72,
                   },
                   {
-                    right:
-                      Platform.OS === "web" ? "env(safe-area-inset-right)" : 0,
+                    right: Platform.OS === "web" ? "env(safe-area-inset-right)" : 0,
                   },
                 ]}
               >

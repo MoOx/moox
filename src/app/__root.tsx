@@ -62,19 +62,14 @@ function RootShell({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (window.localStorage) {
-      void loadSavedColorScheme(
-        window.localStorage.getItem(userColorSchemeStorageKey),
-      );
+      void loadSavedColorScheme(window.localStorage.getItem(userColorSchemeStorageKey));
     }
   }, []);
 
   return (
     <html
       lang="en"
-      className={[
-        getUserColorSchemeWebHtmlClass(userColorScheme),
-        getWebHtmlClass(),
-      ].join(" ")}
+      className={[getUserColorSchemeWebHtmlClass(userColorScheme), getWebHtmlClass()].join(" ")}
       suppressHydrationWarning
     >
       <head>

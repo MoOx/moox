@@ -1,9 +1,8 @@
 ---
 company: "Fittingbox"
 url: "https://www.fittingbox.com/"
-title: "E-commerce website"
-description: >
-  Technical manager of a sunglasses e-shop with a virtual try-on solution
+title: "Technical manager of a sunglasses e-shop with a virtual try-on solution"
+job_title: "Full-Stack Developer"
 dateStart: 2009-06-01
 dateEnd: 2010-07-01
 hashtags:

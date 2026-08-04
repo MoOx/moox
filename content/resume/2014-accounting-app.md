@@ -1,10 +1,8 @@
 ---
 company: ViaReport
 url: "https://insightsoftware.com/viareport/"
-title: "Accounting app"
-role: "Front-end Developer"
-description: >
-  Modernize a legacy bulky UI into an accessible one with modern techs
+title: "Modernize a legacy bulky UI into an accessible one with modern techs"
+job_title: "Lead Front-End Developer"
 dateStart: 2014-07-01
 dateEnd: 2015-03-01
 hashtags:

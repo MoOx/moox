@@ -1,6 +1,7 @@
 import { ResumeItem } from "@/api";
 import BlockMaxApp from "@/components/BlockMaxApp";
 import LinkButton from "@/components/LinkButton";
+import { summary, taglineParts } from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -15,11 +16,7 @@ import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 const revertSkew = [{ scaleY: 1 / 1.1 }, { skewY: "-1deg" }];
 
-export default function BlockPassionated({
-  resumeEntry,
-}: {
-  resumeEntry?: ResumeItem;
-}) {
+export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem }) {
   const theme = useTheme();
   const deviceWidth = 360;
   // const deviceRatio = 1;
@@ -91,27 +88,20 @@ export default function BlockPassionated({
               transform: revertSkew,
             }}
           >
+            {/* The CV's tagline + summary, single source in profile.tsx -
+                this indigo band is the home's main pitch. */}
             <View role="heading" aria-level={2}>
-              <Text
-                style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
-              >
-                {"I make complex front-ends."}
-              </Text>
-              <Text
-                style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
-              >
-                {"Boring."}
-              </Text>
+              {taglineParts.map((part) => (
+                <Text key={part} style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}>
+                  {part}
+                </Text>
+              ))}
             </View>
             <Text
-              style={[
-                fontStyles.iosEm.body,
-                theme.styles.textOnMain,
-                { opacity: 0.6 },
-              ]}
+              style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
               role="paragraph"
             >
-              {`Almost 2 decades turning tangled front-ends into systems a team can actually maintain — simpler architecture, less overhead, and devs who level up along the way. Web, iOS, Android, ideally from one codebase.`}
+              {summary}
             </Text>
             <LinkButton
               href="/resume/"
@@ -129,9 +119,7 @@ export default function BlockPassionated({
               <Spacer size="xs" />
             </IfWindowWidthIs>
           </SpacedView>
-          <IfWindowWidthIs smallerThan={WindowWidth.m}>
-            {device}
-          </IfWindowWidthIs>
+          <IfWindowWidthIs smallerThan={WindowWidth.m}>{device}</IfWindowWidthIs>
         </Container>
       </View>
     </View>

@@ -1,9 +1,9 @@
 ---
 company: "Enjoy App"
 url: "https://enjoyapp.io"
-title: "Restaurant Finder"
-description: >
-  Mobile app to find food and drinks near you.
+title: "Mobile app to find food and drinks near you"
+job_title: "Front-End Developer"
+pitch: "Took the app's UI and UX from MVP to production in React Native - shipping new features and fixing bugs along the way."
 dateStart: 2024-06-17
 dateEnd: 2024-08-12
 hashtags:

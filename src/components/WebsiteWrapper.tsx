@@ -1,8 +1,6 @@
 import WebsiteFooter from "@/components/WebsiteFooter";
 import WebsiteHeader from "@/components/WebsiteHeader";
-import WebsiteMobileMenu, {
-  WebsiteMobileMenuPlaceholder,
-} from "@/components/WebsiteMobileMenu";
+import WebsiteMobileMenu, { WebsiteMobileMenuPlaceholder } from "@/components/WebsiteMobileMenu";
 import { WindowWidth } from "@/react-multiversal";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import Spacer from "@/react-multiversal/Spacer";
@@ -20,7 +18,10 @@ export default function WebsiteWrapper({
 }) {
   const theme = useTheme();
   return (
-    <View style={[theme.styles.back, { flex: 1 }]}>
+    // minHeight: the html background is the flashy purple (overscroll); on
+    // short pages (e.g. /resume/<slug>) the wrapper must still cover the
+    // whole viewport or the purple shows below the content.
+    <View style={[theme.styles.back, { flex: 1, minHeight: "100vh" }]}>
       {bare ? null : <WebsiteHeader />}
       <View role="main">{children}</View>
       {bare ? null : (

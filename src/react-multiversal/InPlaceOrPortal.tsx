@@ -1,13 +1,7 @@
 import { WindowWidth } from "@/react-multiversal";
 import { Portal } from "@/react-multiversal/Portal";
 import { ReactNode, RefObject, useEffect, useRef } from "react";
-import {
-  Platform,
-  StyleProp,
-  useWindowDimensions,
-  View,
-  ViewStyle,
-} from "react-native";
+import { Platform, StyleProp, useWindowDimensions, View, ViewStyle } from "react-native";
 
 export default function InPlaceOrPortal({
   id,

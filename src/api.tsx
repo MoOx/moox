@@ -5,12 +5,25 @@ export type ContentItem = {
   body?: any;
 };
 
+/** A single headline figure, e.g. "125k+ Downloads / week". */
+export type ResumeStat = {
+  /** The value, e.g. "125k+", "10M", "82.3%". */
+  stat: string;
+  /** What it measures, e.g. "Downloads / week". */
+  label: string;
+  /** Optional eyebrow above the value, e.g. "Still", "Peak". */
+  title?: string;
+  /** Optional context line, e.g. "8 years after deprecating". */
+  comment?: string;
+  /** Optional source/proof link (npm, GitHub…). */
+  url?: string;
+};
+
 export type ResumeItem = ContentItem & {
   company: string;
   dateStart: string;
   dateEnd?: string;
   wip?: boolean;
-  description?: string;
   hashtags: string[];
   image?: string;
   links?: Array<{
@@ -18,6 +31,46 @@ export type ResumeItem = ContentItem & {
     url: string;
   }>;
   url?: string;
+  // CV export (`/cv`) - curated fields authored in the markdown frontmatter.
+  highlight?: boolean;
+  education?: boolean;
+  openSource?: boolean;
+  /**
+   * Not a client engagement (Pékin Express…). Kept in the résumé data, but never
+   * listed as professional experience on the CV - a work-history parser would
+   * otherwise read it as a job.
+   */
+  personal?: boolean;
+  job_title?: string;
+  icon?: string;
+  /**
+   * Folds several markdown entries into a single CV row. Each mission stays its
+   * own file (the timeline needs them separate), but a CV lists the *client*,
+   * not the contracts: the row's date span is derived from the whole group, so
+   * nothing is hand-maintained.
+   */
+  group?: string;
+  /**
+   * The condensed-view pitch of a single entry (CV key row, /resume key
+   * card, modal lead) - one paragraph, CV formula. Not "description, but
+   * longer": description says what it is, the pitch says what I did.
+   */
+  pitch?: string;
+  /**
+   * Same as `pitch`, but written to cover every mission of the group at
+   * once. Only meaningful on the `highlight` entry of a `group` - entries
+   * without a group use `pitch`. Condensed views read
+   * `groupPitch ?? pitch` (see `pitchOf` in profile.tsx).
+   */
+  groupPitch?: string;
+  /**
+   * Same as `title`, but covering the whole group ("iOS / Android & web
+   * apps…" where the highlight mission's title only names one app). Same
+   * rule as `groupPitch`: only on the `highlight` entry of a `group`.
+   * Condensed views read `groupTitle ?? title` (see `titleOf`).
+   */
+  groupTitle?: string;
+  stats?: ResumeStat[];
 };
 
 export type BlogPost = ContentItem & {
@@ -66,9 +119,7 @@ async function readJson<T>(urlPath: string): Promise<T> {
 export async function fetchAll<T extends ContentType>(opts: {
   data: T;
 }): Promise<ContentTypeMap[T][]> {
-  const items = await readJson<ContentTypeMap[T][]>(
-    `/content/${opts.data}.json`,
-  );
+  const items = await readJson<ContentTypeMap[T][]>(`/content/${opts.data}.json`);
   return sortByDate(items);
 }
 
@@ -79,8 +130,7 @@ export async function fetchOne<T extends ContentType>(opts: {
     const data = await readJson<ContentTypeMap[T]>(
       `/content/${opts.data.contentType}/${opts.data.filename}`,
     );
-    const slug =
-      opts.data.contentType + "/" + opts.data.filename.replace(/\.json$/, "");
+    const slug = opts.data.contentType + "/" + opts.data.filename.replace(/\.json$/, "");
     return { ...data, slug } as ContentTypeMap[T];
   } catch {
     return null;

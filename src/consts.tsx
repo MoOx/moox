@@ -17,15 +17,14 @@ import SVGSocialX from "@/svgs/components/SVGSocialX";
 import { ReactNode } from "react";
 import { StyleProp, ViewStyle } from "react-native";
 
+export const website = "https://moox.io";
+
 export const footerAnchor = "links";
 
 export const visualUrl = (url: string) => {
   return url.replace(/^(?:https?:\/\/(www\.)?)/i, "");
 };
-export const sendStringAsMailString = (
-  send: string,
-  visual: boolean = false,
-) => {
+export const sendStringAsMailString = (send: string, visual: boolean = false) => {
   return visual ? send.replace("/", " @ ") : send.replace("/", "@");
 };
 
@@ -117,62 +116,38 @@ export const internalLinks: LinksWithIcon = {
     href: "/",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
-        <SVGMenuHomeFill
-          style={style}
-          width={size}
-          height={size}
-          fill={color}
-        />
+        <SVGMenuHomeFill style={style} width={size} height={size} fill={color} />
       ) : (
         <SVGMenuHome style={style} width={size} height={size} fill={color} />
       ),
-    isActive: (currentLink: string | null, link: string) =>
-      currentLink === link,
+    isActive: (currentLink: string | null, link: string) => currentLink === link,
   },
   Resume: {
     href: "/resume",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
-        <SVGMenuResumeFill
-          style={style}
-          width={size}
-          height={size}
-          fill={color}
-        />
+        <SVGMenuResumeFill style={style} width={size} height={size} fill={color} />
       ) : (
         <SVGMenuResume style={style} width={size} height={size} fill={color} />
       ),
-    isActive: (currentLink: string | null, link: string) =>
-      currentLink === link,
+    isActive: (currentLink: string | null, link: string) => currentLink === link,
   },
   Contact: {
     href: "/contact",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
-        <SVGMenuContactFill
-          style={style}
-          width={size}
-          height={size}
-          fill={color}
-        />
+        <SVGMenuContactFill style={style} width={size} height={size} fill={color} />
       ) : (
         <SVGMenuContact style={style} width={size} height={size} fill={color} />
       ),
-    isActive: (currentLink: string | null, link: string) =>
-      currentLink === link,
+    isActive: (currentLink: string | null, link: string) => currentLink === link,
   },
   More: {
     href: "#" + footerAnchor,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGLine3Horizontal
-        style={style}
-        width={size}
-        height={size}
-        fill={color}
-      />
+      <SVGLine3Horizontal style={style} width={size} height={size} fill={color} />
     ),
-    isActive: (currentLink: string | null, link: string) =>
-      currentLink === link,
+    isActive: (currentLink: string | null, link: string) => currentLink === link,
   },
 };
 
@@ -199,12 +174,7 @@ export const socialLinks: LinksWithIcon = {
     alt: "@Max on LinkedIn",
     href: socials.linkedin.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGSocialLinkedin
-        style={style}
-        fill={color}
-        width={size}
-        height={size}
-      />
+      <SVGSocialLinkedin style={style} fill={color} width={size} height={size} />
     ),
   },
   GitHub: {
@@ -234,12 +204,7 @@ export const socialLinks2 = {
     alt: "@MoOx on Dribbble",
     href: socials.dribbble.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGSocialDribbble
-        style={style}
-        fill={color}
-        width={size}
-        height={size}
-      />
+      <SVGSocialDribbble style={style} fill={color} width={size} height={size} />
     ),
   },
   /*

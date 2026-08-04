@@ -1,6 +1,8 @@
 import { ResumeItem } from "@/api";
 import Image from "@/components/Image";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
+import StatTile from "@/components/StatTile";
+import { bodyBeforeFirstHr, pitchOf, resumeEntryPath, resumeEntryTransitionName } from "@/profile";
 import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
@@ -52,41 +54,16 @@ const styles = StyleSheet.create({
   },
 });
 
-// Resume bodies are bilingual: English, then an `<hr>`, then French.
-// For the PDF export we keep only the English part (everything before the hr).
-//
-const bodyBeforeFirstHr = (body: any): any => {
-  if (!body || !Array.isArray(body.children)) return body;
-  const hrIndex = body.children.findIndex(
-    //
-    (child: any) =>
-      child != null && typeof child === "object" && child.tag === "hr",
-  );
-  return hrIndex === -1
-    ? body
-    : { ...body, children: body.children.slice(0, hrIndex) };
-};
-
 const getDurationText = (startDate: string, endDate: Date) => {
-  const durationInMonths = Math.floor(
-    differenceInCalendarMonths(endDate, new Date(startDate)),
-  );
+  const durationInMonths = Math.floor(differenceInCalendarMonths(endDate, new Date(startDate)));
   const durationYears = Math.floor(durationInMonths / 12);
   const durationMonths = durationInMonths % 12;
 
   const yearText =
-    durationYears === 0
-      ? ""
-      : durationYears === 1
-        ? "1 year"
-        : `${durationYears} years`;
+    durationYears === 0 ? "" : durationYears === 1 ? "1 year" : `${durationYears} years`;
 
   const monthText =
-    durationMonths === 0
-      ? ""
-      : durationMonths === 1
-        ? "1 month"
-        : `${durationMonths} months`;
+    durationMonths === 0 ? "" : durationMonths === 1 ? "1 month" : `${durationMonths} months`;
 
   return yearText ? yearText + " " + monthText : monthText;
 };
@@ -97,21 +74,25 @@ export const ResumeTimelineEntry = ({
   vertical = "l",
   showDetails = true,
   disableLinks = false,
-  hideImage = false,
-  showBody = false,
-  flat = false,
+  detail = false,
+  transitionEnabled = true,
 }: {
   item: ResumeItem;
   horizontal?: Size;
   vertical?: Size;
   showDetails?: boolean;
   disableLinks?: boolean;
-  /** Hide the entry illustration (used for the lightweight PDF export). */
-  hideImage?: boolean;
-  /** Render the full markdown body of the entry (used for the PDF export). */
-  showBody?: boolean;
-  /** Drop shadow + glass overlay (they print as gray blocks); PDF export. */
-  flat?: boolean;
+  /**
+   * Full record (detail page / modal): markdown body, per-mission stats and
+   * `groupPitch`. The timeline shows the teaser and links here instead.
+   */
+  detail?: boolean;
+  /**
+   * The card and its detail share a view-transition name (the "zoom" effect).
+   * Disabled on the timeline card whose detail is currently open - duplicate
+   * names on one page would make the browser skip the transition.
+   */
+  transitionEnabled?: boolean;
 }) => {
   const theme = useTheme();
 
@@ -123,23 +104,25 @@ export const ResumeTimelineEntry = ({
           borderRadius,
           flexShrink: 1,
           flexBasis: 640,
-          boxShadow: flat ? undefined : boxShadows.default,
-          borderWidth: flat ? 1 : 0,
-          borderColor: flat ? theme.dynamicColors.ultraLight : undefined,
+          boxShadow: boxShadows.default,
         },
+        transitionEnabled ? { viewTransitionName: resumeEntryTransitionName(item) } : null,
       ]}
       role="article"
     >
-      {disableLinks ? null : (
+      {/* No anchor in detail mode: the timeline card behind the modal already
+          carries this id, and duplicate ids are invalid HTML. */}
+      {disableLinks || detail ? null : (
         // oxlint-disable-next-line jsx_a11y/anchor-has-content, jsx_a11y/anchor-is-valid
         <a id={item.slug} style={{ position: "relative", top: "-100px" }} />
       )}
-      {item.image && !hideImage && (
+      {item.image && (
         <View style={styles.imageWrapper}>
           <Image
             src={item.image}
             style={{
               width: "100%",
+              maxWidth: "100%",
               height: "auto",
             }}
             width={480}
@@ -149,19 +132,8 @@ export const ResumeTimelineEntry = ({
           />
         </View>
       )}
-      {flat ? null : (
-        <View
-          style={[
-            StyleSheet.absoluteFill,
-            { borderRadius, boxShadow: boxShadowGlass() },
-          ]}
-        />
-      )}
-      <SpacedView
-        style={{ flexGrow: 1 }}
-        horizontal={horizontal}
-        vertical={vertical}
-      >
+      <View style={[StyleSheet.absoluteFill, { borderRadius, boxShadow: boxShadowGlass() }]} />
+      <SpacedView style={{ flexGrow: 1 }} horizontal={horizontal} vertical={vertical}>
         <View
           style={{
             flexDirection: "row",
@@ -174,7 +146,7 @@ export const ResumeTimelineEntry = ({
             role="heading"
             aria-level={4}
           >
-            {item.title.toUpperCase()}
+            {(item.job_title ?? "").toUpperCase()}
           </Text>
           {item.url && !disableLinks ? (
             <LinkText
@@ -185,21 +157,25 @@ export const ResumeTimelineEntry = ({
               {item.company ?? ""}
             </LinkText>
           ) : (
-            <Text style={[styles.company, theme.styles.textLight1]}>
-              {item.company ?? ""}
-            </Text>
+            <Text style={[styles.company, theme.styles.textLight1]}>{item.company ?? ""}</Text>
           )}
         </View>
-        <Text
-          style={[
-            styles.description,
-            fontStyles.iosEm.title2,
-            theme.styles.text,
-          ]}
-          role="paragraph"
-        >
-          {item.description ?? null}
-        </Text>
+        {!detail && !disableLinks ? (
+          <LinkText
+            href={resumeEntryPath(item)}
+            underlineOnFocus={true}
+            style={[styles.description, fontStyles.iosEm.title2, theme.styles.text]}
+          >
+            {item.title}
+          </LinkText>
+        ) : (
+          <Text
+            style={[styles.description, fontStyles.iosEm.title2, theme.styles.text]}
+            role="paragraph"
+          >
+            {item.title}
+          </Text>
+        )}
         {item.dateEnd ? (
           <>
             <Text style={[fontStyles.ios.footnote, theme.styles.textLight2]}>
@@ -216,10 +192,33 @@ export const ResumeTimelineEntry = ({
             </Text>
           </>
         )}
-        {item.body ? (
+        {detail && pitchOf(item) ? (
+          <>
+            <Spacer size="s" />
+            <Text style={[fontStyles.iosEm.callout, theme.styles.text]}>{pitchOf(item)}</Text>
+          </>
+        ) : null}
+        {detail && item.body ? (
           <>
             <Spacer size="s" />
             <MdAsJsonRenderer body={bodyBeforeFirstHr(item.body)} />
+          </>
+        ) : null}
+        {detail && item.stats && item.stats.length > 0 ? (
+          <>
+            <Spacer size="m" />
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignItems: "stretch",
+                gap: size("s"),
+              }}
+            >
+              {item.stats.map((stat) => (
+                <StatTile key={stat.label} stat={stat} flexBasis={140} />
+              ))}
+            </View>
           </>
         ) : null}
         {!showDetails ? null : (
@@ -237,21 +236,13 @@ export const ResumeTimelineEntry = ({
               <>
                 <Spacer size="xxs" />
                 <SpacedView gap="xxs" style={styles.links}>
-                  <SVGExternalLink
-                    width={12}
-                    height={12}
-                    fill={theme.dynamicColors.textMain}
-                  />
+                  <SVGExternalLink width={12} height={12} fill={theme.dynamicColors.textMain} />
                   {item.links.map((link) => (
                     <LinkText
                       key={link.title}
                       underline={true}
                       href={link.url}
-                      style={[
-                        styles.link,
-                        fontStyles.ios.footnote,
-                        theme.styles.textMain,
-                      ]}
+                      style={[styles.link, fontStyles.ios.footnote, theme.styles.textMain]}
                     >
                       {link.title}
                     </LinkText>

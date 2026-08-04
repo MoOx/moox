@@ -14,7 +14,7 @@ export default function Pill({
   titleStyle,
   detail,
   year,
-  ago = false,
+  mode = "default",
   pillSpace = "xs",
   spaceHorizontal = "l",
   spaceVertical = "xs",
@@ -26,7 +26,7 @@ export default function Pill({
   titleStyle?: StyleProp<TextStyle>;
   detail?: string;
   year: number;
-  ago?: boolean;
+  mode?: "default" | "ago" | "year";
   pillSpace?: AbsoluteSize;
   spaceHorizontal?: AbsoluteSize;
   spaceVertical?: AbsoluteSize;
@@ -35,9 +35,7 @@ export default function Pill({
   const theme = useTheme();
   const thisYear = useMemo(() => new Date().getFullYear(), []);
   const viewTransitionName =
-    "text--" +
-    (title + pre + detail + year).replace(/[^a-z0-9/s]+/gi, "-") +
-    transitionSize;
+    "text--" + (title + pre + detail + year).replace(/[^a-z0-9/s]+/gi, "-") + transitionSize;
   return (
     <GlassView
       borderWidth={0.5}
@@ -49,20 +47,13 @@ export default function Pill({
         style,
       ]}
     >
-      <SpacedView
-        horizontal={pillSpace}
-        vertical={pillSpace}
-        style={{ viewTransitionName }}
-      >
+      <SpacedView horizontal={pillSpace} vertical={pillSpace} style={{ viewTransitionName }}>
         <SpacedView
           horizontal={spaceHorizontal}
           vertical={spaceVertical}
           style={[theme.styles.backAlt, { borderRadius: 100 }]}
         >
-          <Text
-            role="paragraph"
-            style={{ display: "flex", flexDirection: "column" }}
-          >
+          <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
             {!pre ? null : (
               <Text
                 style={[
@@ -82,9 +73,7 @@ export default function Pill({
                 titleStyle || fontStyles.iosEm.caption1,
                 pre ? theme.styles.textMainDark : theme.styles.textMain,
                 {
-                  lineHeight: titleStyle
-                    ? undefined
-                    : fontStyles.iosEm.caption1.fontSize,
+                  lineHeight: titleStyle ? undefined : fontStyles.iosEm.caption1.fontSize,
                   fontWeight: "800",
                 },
               ]}
@@ -121,9 +110,15 @@ export default function Pill({
                 },
               ]}
             >
-              <TextForReader>{" " + (ago ? ": " : "for ")}</TextForReader>
-              {thisYear - year + " years" + (ago ? " ago" : "")}
-              <TextForReader>{"."}</TextForReader>
+              {mode === "year" ? (
+                year
+              ) : (
+                <>
+                  <TextForReader>{" " + (mode === "ago" ? ": " : "for ")}</TextForReader>
+                  {thisYear - year + " years" + (mode === "ago" ? " ago" : "")}
+                  <TextForReader>{"."}</TextForReader>
+                </>
+              )}
             </Text>
           </Text>
         </SpacedView>

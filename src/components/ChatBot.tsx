@@ -4,19 +4,9 @@ import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import SVGChevronRight from "@/svgs/components/SVGChevronRight";
-import {
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-} from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 
 const avatarSize = size("xxl");
 
@@ -40,7 +30,7 @@ const botResponses: BotResponse[] = [
     "To reach Max, you have plenty of options above.",
   ],
   [
-    "I hope you get it now—I’m just a fake bot.",
+    "I hope you get it now-I’m just a fake bot.",
     "Maybe you should contact Max directly instead?",
     "He’s much smarter than me! Links are above!",
   ],
@@ -55,13 +45,7 @@ type Message = {
   isFullyDisplayed?: boolean;
 };
 
-function MessageBubble({
-  message,
-  onComplete,
-}: {
-  message: Message;
-  onComplete: () => void;
-}) {
+function MessageBubble({ message, onComplete }: { message: Message; onComplete: () => void }) {
   const theme = useTheme();
   const { text, isFullyDisplayed, isBot } = message;
   const shouldAnimate = isBot;
@@ -76,9 +60,7 @@ function MessageBubble({
     const timer = setInterval(() => {
       if (currentWordIndex.current < words.length - 1) {
         currentWordIndex.current += 1;
-        setDisplayedText(
-          (prev) => prev + (prev ? " " : "") + words[currentWordIndex.current],
-        );
+        setDisplayedText((prev) => prev + (prev ? " " : "") + words[currentWordIndex.current]);
       } else {
         clearInterval(timer);
         onComplete();
@@ -92,16 +74,10 @@ function MessageBubble({
     <SpacedView
       horizontal="s"
       vertical="xxs"
-      style={[
-        isBot ? theme.styles.backAlt : theme.styles.backMain,
-        { borderRadius: size("s") },
-      ]}
+      style={[isBot ? theme.styles.backAlt : theme.styles.backMain, { borderRadius: size("s") }]}
     >
       <Text
-        style={[
-          fontStyles.ios.callout,
-          isBot ? theme.styles.textDark : theme.styles.textOnMain,
-        ]}
+        style={[fontStyles.ios.callout, isBot ? theme.styles.textDark : theme.styles.textOnMain]}
       >
         {displayedText}
       </Text>
@@ -150,17 +126,14 @@ function AnimatedDot({ index }: { index: number }) {
       const dotEnd = dotStart + dotDuration / cycleDuration;
 
       if (cyclePosition >= dotStart && cyclePosition < dotEnd) {
-        const dotProgress =
-          (cyclePosition - dotStart) / (dotDuration / cycleDuration);
+        const dotProgress = (cyclePosition - dotStart) / (dotDuration / cycleDuration);
         // Main wave for the basic up/down movement
         const mainWave = Math.sin(dotProgress * Math.PI);
         // Secondary wave that creates a slight overshoot at the end
         const bounceWave = Math.sin(dotProgress * Math.PI * 2);
         // Combine waves with a slight negative value at the end
         progress.value =
-          mainWave +
-          (mainWave > 0.5 ? bounceWave * 0.2 : 0) -
-          (mainWave < 0.2 ? 0.2 : 0);
+          mainWave + (mainWave > 0.5 ? bounceWave * 0.2 : 0) - (mainWave < 0.2 ? 0.2 : 0);
       } else {
         progress.value = 0;
       }
@@ -259,9 +232,7 @@ export default function ChatBot() {
 
   const handleMessageComplete = useCallback((messageId: string) => {
     setMessages((prev) =>
-      prev.map((msg) =>
-        msg.id === messageId ? { ...msg, isFullyDisplayed: true } : msg,
-      ),
+      prev.map((msg) => (msg.id === messageId ? { ...msg, isFullyDisplayed: true } : msg)),
     );
   }, []);
 
@@ -284,20 +255,15 @@ export default function ChatBot() {
 
     setTimeout(() => {
       setIsTyping(false);
-      if (
-        currentResponseIndex < botResponses.length &&
-        botResponses[currentResponseIndex]
-      ) {
+      if (currentResponseIndex < botResponses.length && botResponses[currentResponseIndex]) {
         const groupId = Date.now().toString();
-        const botMessages = botResponses[currentResponseIndex].map(
-          (response) => ({
-            id: Date.now().toString() + Math.random(),
-            text: response,
-            isBot: true,
-            groupId,
-            isFullyDisplayed: false,
-          }),
-        );
+        const botMessages = botResponses[currentResponseIndex].map((response) => ({
+          id: Date.now().toString() + Math.random(),
+          text: response,
+          isBot: true,
+          groupId,
+          isFullyDisplayed: false,
+        }));
         setMessages((prev) => [...prev, ...botMessages]);
         setCurrentResponseIndex((prev) => prev + 1);
       }
@@ -326,13 +292,9 @@ export default function ChatBot() {
       <>
         {messageGroups.map((group) => {
           const isBot = group[0]?.isBot;
-          const lastDisplayedIndex = group.findIndex(
-            (msg) => !msg.isFullyDisplayed,
-          );
+          const lastDisplayedIndex = group.findIndex((msg) => !msg.isFullyDisplayed);
           const visibleMessages =
-            lastDisplayedIndex === -1
-              ? group
-              : group.slice(0, lastDisplayedIndex + 1);
+            lastDisplayedIndex === -1 ? group : group.slice(0, lastDisplayedIndex + 1);
 
           return (
             <Fragment key={group[0]?.id}>
@@ -361,12 +323,7 @@ export default function ChatBot() {
                 >
                   {isBot && (
                     <>
-                      <Text
-                        style={[
-                          fontStyles.ios.footnote,
-                          theme.styles.textLight1,
-                        ]}
-                      >
+                      <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
                         {"BotMax"}
                       </Text>
                       <Spacer size="xxs" />
@@ -401,9 +358,7 @@ export default function ChatBot() {
             />
             <Spacer size="s" />
             <View>
-              <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-                {"BotMax"}
-              </Text>
+              <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>{"BotMax"}</Text>
               <Spacer size="xxs" />
               <TypingIndicator />
             </View>

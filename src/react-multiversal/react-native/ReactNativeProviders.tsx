@@ -20,17 +20,11 @@ const initialMetrics = {
   },
 };
 
-export default function ReactNativeProviders({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function ReactNativeProviders({ children }: { children: ReactNode }) {
   return (
     <GestureHandlerRootView>
       <PortalProvider>
-        <SafeAreaProvider initialMetrics={initialMetrics}>
-          {children}
-        </SafeAreaProvider>
+        <SafeAreaProvider initialMetrics={initialMetrics}>{children}</SafeAreaProvider>
       </PortalProvider>
     </GestureHandlerRootView>
   );

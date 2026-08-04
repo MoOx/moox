@@ -11,7 +11,7 @@ function BlogPostPreview({ item }: { item: BlogPost }) {
   const theme = useTheme();
 
   return (
-    <LinkView href={`/${item.slug}`}>
+    <LinkView href={`/${item.slug}/`}>
       <SpacedView vertical="s">
         <Text style={[fontStyles.ios.title3, theme.styles.text]}>
           {item.title}
@@ -40,9 +40,7 @@ export default function PostList({ items }: { items: BlogPost[] }) {
             {newYear && (
               <View style={{ alignItems: "center" }}>
                 <Spacer size="l" />
-                <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>
-                  {year}
-                </Text>
+                <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>{year}</Text>
               </View>
             )}
             <BlogPostPreview item={item} />

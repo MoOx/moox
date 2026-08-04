@@ -116,9 +116,8 @@ export function calculateOptimalPosition({
             ? referenceItem.y
             : referenceItem.y > (window.height * 2) / 3
               ? referenceItem.y + referenceItem.height - itemToPlace.height
-              : referenceItem.y +
-                (referenceItem.height - itemToPlace.height) / 2
-        )
+              : referenceItem.y + (referenceItem.height - itemToPlace.height) / 2,
+        ),
       ),
     },
     "left-auto": {
@@ -131,9 +130,8 @@ export function calculateOptimalPosition({
             ? referenceItem.y
             : referenceItem.y > (window.height * 2) / 3
               ? referenceItem.y + referenceItem.height - itemToPlace.height
-              : referenceItem.y +
-                (referenceItem.height - itemToPlace.height) / 2
-        )
+              : referenceItem.y + (referenceItem.height - itemToPlace.height) / 2,
+        ),
       ),
     },
     "top-auto": {
@@ -145,8 +143,8 @@ export function calculateOptimalPosition({
             ? referenceItem.x
             : referenceItem.x > (window.width * 2) / 3
               ? referenceItem.x + referenceItem.width - itemToPlace.width
-              : referenceItem.x + (referenceItem.width - itemToPlace.width) / 2
-        )
+              : referenceItem.x + (referenceItem.width - itemToPlace.width) / 2,
+        ),
       ),
       y: referenceItem.y - itemToPlace.height,
     },
@@ -159,8 +157,8 @@ export function calculateOptimalPosition({
             ? referenceItem.x
             : referenceItem.x > (window.width * 2) / 3
               ? referenceItem.x + referenceItem.width - itemToPlace.width
-              : referenceItem.x + (referenceItem.width - itemToPlace.width) / 2
-        )
+              : referenceItem.x + (referenceItem.width - itemToPlace.width) / 2,
+        ),
       ),
       y: referenceItem.y + referenceItem.height,
     },
@@ -181,10 +179,8 @@ export function calculateOptimalPosition({
   // if no one is available, try all positions, with the best score
 
   const calculateVisibleArea = (x: number, y: number): number => {
-    const visibleWidth =
-      Math.min(x + itemToPlace.width, window.width) - Math.max(x, 0);
-    const visibleHeight =
-      Math.min(y + itemToPlace.height, window.height) - Math.max(y, 0);
+    const visibleWidth = Math.min(x + itemToPlace.width, window.width) - Math.max(x, 0);
+    const visibleHeight = Math.min(y + itemToPlace.height, window.height) - Math.max(y, 0);
     return Math.max(visibleWidth, 0) * Math.max(visibleHeight, 0);
   };
   const calculateCenteringScore = (x: number, y: number): number => {
@@ -220,10 +216,7 @@ export function calculateOptimalPosition({
 
   if (!isInViewport(final, window)) {
     final.x = Math.max(0, Math.min(final.x, window.width - itemToPlace.width));
-    final.y = Math.max(
-      0,
-      Math.min(final.y, window.height - itemToPlace.height)
-    );
+    final.y = Math.max(0, Math.min(final.y, window.height - itemToPlace.height));
 
     if (!isInViewport(final, window)) {
       final.width = Math.min(itemToPlace.width, window.width - final.x);
@@ -242,8 +235,8 @@ export function getArrowStyle({
 }: {
   position: PositionName;
   color: string;
-  arrowSize: number;
-  arrowOffset: number;
+  arrowSize?: number;
+  arrowOffset?: number;
 }): ViewStyle {
   const baseStyle: ViewStyle = {
     width: 0,
@@ -401,10 +394,7 @@ export function getArrowStyle({
   };
 }
 
-export function isInViewport(
-  item: ElementLayout,
-  window: ElementDimensions
-): boolean {
+export function isInViewport(item: ElementLayout, window: ElementDimensions): boolean {
   return (
     item.x >= 0 &&
     item.y >= 0 &&
@@ -413,10 +403,7 @@ export function isInViewport(
   );
 }
 
-export function isPartiallyInViewport(
-  item: ElementLayout,
-  window: ElementDimensions
-): boolean {
+export function isPartiallyInViewport(item: ElementLayout, window: ElementDimensions): boolean {
   return (
     item.x < window.width &&
     item.y < window.height &&

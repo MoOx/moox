@@ -1,9 +1,8 @@
 ---
 company: "Molotov.tv"
 url: "https://www.molotov.tv"
-title: "TV Web app"
-description: >
-  Audit for Molotov.tv fresh React codebase for desktop website
+title: "Audit for Molotov.tv fresh React codebase for desktop website"
+job_title: "Senior Front-End Consultant"
 dateStart: 2015-10-01
 dateEnd: 2015-11-01
 hashtags:

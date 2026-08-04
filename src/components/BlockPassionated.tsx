@@ -36,11 +36,7 @@ export default function BlockPassionated() {
             {"Passionated and Curious."}
           </Text>
           <Text
-            style={[
-              fontStyles.iosEm.body,
-              theme.styles.textOnMain,
-              { opacity: 0.6 },
-            ]}
+            style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
             role="paragraph"
           >
             {`I made my first website in 1998, and fell in love with web development. Since then, I never stopped to learn things, especially now with the rise of AI.
@@ -54,9 +50,7 @@ From Dreamweaver to Cursor, years passed, but not my appetite to always discover
             style={{ alignSelf: "flex-start" }}
           >
             <SpacedView horizontal="m">
-              <Text style={fontStyles.iosEm.callout}>
-                {"Discover my story"}
-              </Text>
+              <Text style={fontStyles.iosEm.callout}>{"Discover my story"}</Text>
             </SpacedView>
           </LinkButton>
         </SpacedView>
@@ -93,10 +87,7 @@ From Dreamweaver to Cursor, years passed, but not my appetite to always discover
                 <Parallax
                   staticTransforms={[{ scale: 1.6 }]}
                   transforms={[{ rotate: "-180deg" }]}
-                  style={[
-                    StyleSheet.absoluteFill,
-                    { transformOrigin: "50% 50%" },
-                  ]}
+                  style={[StyleSheet.absoluteFill, { transformOrigin: "50% 50%" }]}
                   contentStyle={StyleSheet.absoluteFill}
                 >
                   <GradientLinear
@@ -216,10 +207,7 @@ From Dreamweaver to Cursor, years passed, but not my appetite to always discover
               >
                 <Parallax
                   transforms={[{ rotate: "-200deg" }]}
-                  style={[
-                    StyleSheet.absoluteFill,
-                    { transformOrigin: "50% 50%" },
-                  ]}
+                  style={[StyleSheet.absoluteFill, { transformOrigin: "50% 50%" }]}
                   contentStyle={StyleSheet.absoluteFill}
                 >
                   <GradientLinear

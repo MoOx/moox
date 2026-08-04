@@ -26,8 +26,7 @@ const styles = StyleSheet.create({
   },
   codeBlockText: {
     whiteSpace: "pre",
-    fontFamily:
-      "SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace",
+    fontFamily: "SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace",
   },
   codeText: {
     backgroundColor: "rgba(128,128,128,0.05)",
@@ -58,11 +57,7 @@ export const A = ({
 }) => {
   const theme = useTheme();
   return (
-    <LinkText
-      href={href ?? ""}
-      underlineOnFocus={true}
-      style={[theme.styles.textMainDark, style]}
-    >
+    <LinkText href={href ?? ""} underlineOnFocus={true} style={[theme.styles.textMainDark, style]}>
       {children}
     </LinkText>
   );
@@ -75,13 +70,7 @@ type HeadingProps = {
   children?: ReactNode;
   level?: number;
 };
-export const Heading = ({
-  id,
-  style,
-  textStyle,
-  children,
-  level = 1,
-}: HeadingProps) => {
+export const Heading = ({ id, style, textStyle, children, level = 1 }: HeadingProps) => {
   const theme = useTheme();
   return (
     <SpacedView
@@ -99,9 +88,7 @@ export const Heading = ({
       }
       style={style}
     >
-      <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text, textStyle]}>
-        {children}
-      </Text>
+      <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text, textStyle]}>{children}</Text>
     </SpacedView>
   );
 };
@@ -140,24 +127,13 @@ export const Image = ({
 }) => {
   if (Platform.OS === "web") {
     return (
-      <img
-        src={src ?? ""}
-        className={className}
-        alt={alt ?? ""}
-        style={{ maxWidth: "100%" }}
-      />
+      <img src={src ?? ""} className={className} alt={alt ?? ""} style={{ maxWidth: "100%" }} />
     );
   }
   return null;
 };
 
-export const Ul = ({
-  style,
-  children,
-}: {
-  style?: any;
-  children?: ReactNode;
-}) => (
+export const Ul = ({ style, children }: { style?: any; children?: ReactNode }) => (
   <SpacedView role="list" vertical="l" style={style}>
     {children}
   </SpacedView>
@@ -189,34 +165,18 @@ export const BlockQuote = ({
   textStyle?: any;
   children?: ReactNode;
 }) => (
-  <SpacedView
-    role="blockquote"
-    horizontal="l"
-    style={[styles.blockQuote, style]}
-  >
+  <SpacedView role="blockquote" horizontal="l" style={[styles.blockQuote, style]}>
     <Text style={[styles.blockQuoteText, textStyle]}>{children}</Text>
   </SpacedView>
 );
 
-export const Pre = ({
-  style,
-  children,
-}: {
-  style?: any;
-  children?: ReactNode;
-}) => (
+export const Pre = ({ style, children }: { style?: any; children?: ReactNode }) => (
   <SpacedView vertical="m" style={style}>
     <pre>{children}</pre>
   </SpacedView>
 );
 
-export const CodeBlock = ({
-  style,
-  children,
-}: {
-  style?: any;
-  children?: ReactNode;
-}) => {
+export const CodeBlock = ({ style, children }: { style?: any; children?: ReactNode }) => {
   const theme = useTheme();
   return (
     <SpacedView horizontal="m" vertical="m" style={[styles.codeBlock, style]}>
@@ -227,13 +187,7 @@ export const CodeBlock = ({
   );
 };
 
-export const Code = ({
-  style,
-  children,
-}: {
-  style?: any;
-  children?: ReactNode;
-}) => {
+export const Code = ({ style, children }: { style?: any; children?: ReactNode }) => {
   const theme = useTheme();
   return (
     <Text role="code" style={[styles.codeText, theme.styles.text, style]}>
@@ -263,12 +217,7 @@ export const TextNode = ({
   return (
     <Text
       role={role}
-      style={[
-        fontStyles.ios.body,
-        { lineHeight: 26 },
-        theme.styles.textDark,
-        style,
-      ]}
+      style={[fontStyles.ios.body, { lineHeight: 26 }, theme.styles.textDark, style]}
     >
       {children}
     </Text>

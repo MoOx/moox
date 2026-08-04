@@ -1,6 +1,4 @@
-import TextUnderlined, {
-  TextUnderlinedProps,
-} from "@/react-multiversal/TextUnderlined";
+import TextUnderlined, { TextUnderlinedProps } from "@/react-multiversal/TextUnderlined";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { MouseEvent, Ref, useCallback, useMemo } from "react";
 import {
@@ -19,16 +17,13 @@ export type LinkTextProps = TextUnderlinedProps & {
   containerStyle?: StyleProp<TextStyle>;
   containerActiveStyle?: StyleProp<TextStyle>;
   isActive?: (s: string, pathname: string) => boolean;
-  onPress?: (
-    event: GestureResponderEvent | MouseEvent<HTMLAnchorElement>,
-  ) => void;
+  onPress?: (event: GestureResponderEvent | MouseEvent<HTMLAnchorElement>) => void;
 };
 
 const defaultIsActive = (href: string, pathname: string) =>
   pathname === href || pathname + "/" === href;
 
-const isInternalLink = (href: string) =>
-  href.startsWith("/") || href.startsWith("#");
+const isInternalLink = (href: string) => href.startsWith("/") || href.startsWith("#");
 
 const resetLinkStyle = {
   color: "inherit",
@@ -92,13 +87,7 @@ export default function LinkText({
       <TextUnderlined ref={ref} style={textStyles} {...props} />
     </Link>
   ) : (
-    <Text
-      ref={ref}
-      href={href}
-      role={role}
-      style={containerStyles}
-      onPress={handleTextPress}
-    >
+    <Text ref={ref} href={href} role={role} style={containerStyles} onPress={handleTextPress}>
       <TextUnderlined style={textStyles} {...props} />
     </Text>
   );

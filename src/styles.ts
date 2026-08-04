@@ -105,7 +105,7 @@ export const themedColors: ThemeColors<ThemedColors> = {
     backAlt: "#0c001b",
     backOnAlt: "#150030",
     backMain: colors.indigo,
-    backMainAlpha05: alpha(platformColors.ios.dark.gray6, 0.05),
+    backMainAlpha05: alpha(colors.indigo, 0.05),
     text: alpha(colors.white, 0.95),
     textAlt: colors.white,
     textDark: alpha(colors.white, 0.5),
@@ -181,11 +181,12 @@ export const gradientStaticIndigoStyles = [
 const makeGradientTextStyles = (
   stops: GradientStop[],
   angle: number = 90,
-  // PDF export: `background-clip: text` + transparent fill is dropped when
-  // printing (notably Safari → invisible text), so fall back to a solid color.
-  pdf: boolean = false,
+  // Print/PDF option (used by `/cv`): `background-clip: text` + transparent
+  // fill is dropped when printing (notably Safari → invisible text), so fall
+  // back to a solid color.
+  print: boolean = false,
 ) =>
-  (pdf
+  (print
     ? {
         alignSelf: "flex-start",
         color: stops[Math.floor(stops.length / 2)]?.stopColor,
@@ -193,30 +194,32 @@ const makeGradientTextStyles = (
     : {
         alignSelf: "flex-start",
         backgroundClip: "text",
+        WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
         backgroundImage: `linear-gradient(${angle}deg, ${stops.map((s) => `${s.stopColor} ${s.offset}%`).join(", ")})`,
+        printColorAdjust: "exact",
       }) as TextStyle;
 
 export const gradientTextIndigoStyles = (
   theme: Theme<ThemedColors>,
   angle?: number,
-  pdf?: boolean,
-) => makeGradientTextStyles(gradientIndigoStops(theme), angle, pdf);
+  print?: boolean,
+) => makeGradientTextStyles(gradientIndigoStops(theme), angle, print);
 export const gradientTextIndigoStylesInv = (
   theme: Theme<ThemedColors>,
   angle?: number,
-  pdf?: boolean,
-) => makeGradientTextStyles(gradientIndigoStopsInv(theme), angle, pdf);
+  print?: boolean,
+) => makeGradientTextStyles(gradientIndigoStopsInv(theme), angle, print);
 export const gradientTextFlashyStyles = (
   theme: Theme<ThemedColors>,
   angle?: number,
-  pdf?: boolean,
-) => makeGradientTextStyles(gradientFlashyStops(theme), angle, pdf);
+  print?: boolean,
+) => makeGradientTextStyles(gradientFlashyStops(theme), angle, print);
 export const gradientTextFlashyStylesInv = (
   theme: Theme<ThemedColors>,
   angle?: number,
-  pdf?: boolean,
-) => makeGradientTextStyles(gradientFlashyStopsInv(theme), angle, pdf);
+  print?: boolean,
+) => makeGradientTextStyles(gradientFlashyStopsInv(theme), angle, print);
 
 export const gradientText = (theme: Theme<ThemedColors>) => [
   { offset: 0, stopColor: theme.dynamicColors.textAlt },
@@ -225,5 +228,5 @@ export const gradientText = (theme: Theme<ThemedColors>) => [
 export const gradientTextStyles = (
   theme: Theme<ThemedColors>,
   angle: number = 180,
-  pdf?: boolean,
-) => makeGradientTextStyles(gradientText(theme), angle, pdf);
+  print?: boolean,
+) => makeGradientTextStyles(gradientText(theme), angle, print);

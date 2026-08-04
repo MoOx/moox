@@ -34,9 +34,7 @@ export type Theme<ThemeColorMap extends ThemeMinimalColorMap> = {
   dynamicColors: ThemeColorMap;
 };
 
-const generateStyles = <ThemeColorMap extends ThemeMinimalColorMap>(
-  colors: ThemeColorMap,
-) =>
+const generateStyles = <ThemeColorMap extends ThemeMinimalColorMap>(colors: ThemeColorMap) =>
   Object.fromEntries(
     Object.entries(colors).map(([key, value]) => [
       key,
@@ -82,14 +80,10 @@ export function makeTheme<ThemeColorMap extends ThemeMinimalColorMap>(
         .${htmlClass} { ${webCssDark} }
       }`;
     dynamicColors = Object.fromEntries(
-      Object.entries(themedColors.light).map(([key]) => [
-        key,
-        `var(${prefix}-${key})`,
-      ]),
+      Object.entries(themedColors.light).map(([key]) => [key, `var(${prefix}-${key})`]),
     ) as ThemeColorMap;
   }
-  const dynamicStyles: ThemeStyleSheet<ThemeColorMap> =
-    generateStyles(dynamicColors);
+  const dynamicStyles: ThemeStyleSheet<ThemeColorMap> = generateStyles(dynamicColors);
 
   const themeLight: Theme<ThemeColorMap> = {
     mode: "light" as t,
@@ -105,19 +99,13 @@ export function makeTheme<ThemeColorMap extends ThemeMinimalColorMap>(
   };
 
   const getWebStyleSheet = () => (
-    <style
-      key={htmlStyleId}
-      id={htmlStyleId}
-      dangerouslySetInnerHTML={{ __html: webCss }}
-    />
+    <style key={htmlStyleId} id={htmlStyleId} dangerouslySetInnerHTML={{ __html: webCss }} />
   );
   const getWebHtmlClass = () => htmlClass;
 
   const isClient = typeof window !== "undefined";
   function useTheme(_currentMode?: UserColorScheme): Theme<ThemeColorMap> {
-    const [userColorScheme] = !isClient
-      ? [getColorScheme()]
-      : useUserColorScheme();
+    const [userColorScheme] = !isClient ? [getColorScheme()] : useUserColorScheme();
 
     const currentMode = _currentMode ?? userColorScheme ?? "auto";
 

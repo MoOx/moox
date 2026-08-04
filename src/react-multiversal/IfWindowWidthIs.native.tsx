@@ -1,12 +1,6 @@
 import { size, Size } from "@/react-multiversal";
 import { ReactNode } from "react";
-import {
-  StyleProp,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-  ViewStyle,
-} from "react-native";
+import { StyleProp, StyleSheet, useWindowDimensions, View, ViewStyle } from "react-native";
 
 const styles = StyleSheet.create({
   ifWrapper: { display: "contents" },

@@ -1,16 +1,16 @@
 ---
 company: "Hove"
 url: "https://hove.com/"
-title: "Transport Web App"
-description: >
-  Web app built for cities and transport networks
+title: "Web app built for cities and transport networks"
+job_title: "Lead Front-End Developer"
+group: hove
 dateStart: 2023-01-01
 dateEnd: 2023-10-30
 hashtags:
   - JavaScript
   - React
   - ReactNative
-  - ReactNativeWeb
+  - React Native Web
   - TypeScript
   - Git
   - Lead

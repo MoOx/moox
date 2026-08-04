@@ -1,9 +1,9 @@
 ---
-company: "Kisio Digital"
-url: "http://www.kisio.com"
-title: "Transport Mobile App"
-description: >
-  iOS / Android app built for cities and transport networks
+company: "Hove"
+url: "https://hove.com/"
+group: hove
+title: "iOS / Android app built for cities and transport networks"
+job_title: "Lead Front-End Developer"
 dateStart: 2017-03-01
 dateEnd: 2018-06-01
 hashtags:
@@ -30,38 +30,25 @@ image: /resume/adm.jpg
 remote: true
 ---
 
-Development of a mobile app to ease urban transportation, sell to cities &
-transportation networks as a white-label app.
+The white-label transit app for cities and transport networks started here:
+I architected the React Native codebase for iOS and Android, developed half
+of the app myself, and built the team around it. Most developers were new to
+modern JavaScript, React and React Native, so training was part of the
+mission from day one — daily code reviews, and a safety net wired in early:
+Flow for static typing, Jest with Storybook snapshots for day-to-day work,
+Detox end-to-end tests running on a local Jenkins CI.
 
-- Bootstrapping of the project & creation of a team
-- Development of half of the app
-- Architecture of the mobile app codebase using React Native.
-- Integration of Flow, a static type checker, to improve code quality of the
-  codebase
-- Integration of Jest coupled with Storybooks with snapshots to ease day-to-day
-  development & automate testing
-- Integration of Detox, a End-to-End Testing and Automation Framework, on local
-  CI system built with Jenkins
-- Training of the team, new to React, modern JavaScript, React Native, Jest &
-  Detox
-- Management of the white-label customization part via a specific admin
-  interface
-- Management of the declination built system with a custom script coupled with
-  Fastlane, an automation tool for deployement & release,
-- Remotely leading a team with several developers with different skills &
-  profiles
-- Daily code review to raise the team skills (most developers where new to
-  modern JavaScript & React & React Native)
-- Development of features with polished animations that need to work on low-end
-  devices
-- Transformation of Photoshop designs into React components with management of
-  issues not anticipated because of the static aspect of mockups.
-- Integration of native code & dependencies for iOS & Android & creation of
-  bridges for React Native usage
-- Migration of part of the iOS .xcodeproj mess (hand linked libraries, some
-  copy/pasted) into a Cocoapods Podfile to ease React Native updates
-- Management of several React Native upgrade during the mission
-- And I probably forgot some others stuff :)
+White-label is the defining constraint: every client network gets its own
+declination of the app, customized through a dedicated admin interface, with
+the per-client builds automated by a custom script on top of Fastlane.
+
+The rest was the daily reality of React Native at scale: polished animations
+that had to stay smooth on low-end devices, Photoshop designs turned into
+components with all the cases a static mockup never anticipates, native code
+and bridges for both platforms, and a hand-linked .xcodeproj mess migrated
+to Cocoapods so that React Native upgrades — several over the mission —
+stopped hurting. All of it remote, leading developers with very different
+profiles and levels.
 
 ---
 

@@ -26,17 +26,13 @@ export function useFocus<T>(
   const [pointerFocused, setPointerFocused] = useState(false);
   const debouncePointerFocused = useRef<number | null>(null);
   const handlePointerFocusedOn = useCallback(() => {
-    if (debouncePointerFocused.current)
-      clearTimeout(debouncePointerFocused.current);
+    if (debouncePointerFocused.current) clearTimeout(debouncePointerFocused.current);
     onPointerFocus?.();
     setPointerFocused(true);
   }, [onPointerFocus]);
   const handlePointerFocusedOff = useCallback(() => {
     onPointerLeave?.();
-    debouncePointerFocused.current = setTimeout(
-      () => setPointerFocused(false),
-      debounceOff,
-    );
+    debouncePointerFocused.current = setTimeout(() => setPointerFocused(false), debounceOff);
   }, [debounceOff, onPointerLeave]);
 
   const [focused, setFocused] = useState(false);
@@ -75,13 +71,7 @@ export function useFocus<T>(
         n.removeEventListener(BLUR, handleFocusOff, opts);
       };
     }
-  }, [
-    ref,
-    handlePointerFocusedOn,
-    handlePointerFocusedOff,
-    handleFocusOn,
-    handleFocusOff,
-  ]);
+  }, [ref, handlePointerFocusedOn, handlePointerFocusedOff, handleFocusOn, handleFocusOff]);
 
   return [pointerFocused || focused, pointerFocused, focused] as const;
 }

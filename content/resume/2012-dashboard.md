@@ -1,9 +1,8 @@
 ---
-company: "Jirafe (now part of SAP Hybris)"
+company: "Jirafe"
 url: "http://twitter.com/jirafe"
-title: "Analytics dashboard"
-description: >
-  Dashboard with different kinds of widgets for Jirafe analytics
+title: "Dashboard with different kinds of widgets for Jirafe analytics"
+job_title: "Lead Front-End Developer"
 dateStart: 2012-11-01
 dateEnd: 2013-11-01
 hashtags:
@@ -24,6 +23,8 @@ The entire front-end process use a well crafted Gruntfile to compile our
 JavaScript files, icons as webfonts, Sass stylesheets, & to generate a
 styleguide.
 
+Jirafe was later acquired by SAP (Hybris).
+
 ---
 
 Développement d'une nouvelle architecture application pour un dashboard en
@@ -38,3 +39,5 @@ Back-End.
 L'architecture était basé sur un fichier de tâches gérer par Grunt, qui
 s'occupait de compiler les JavaScript, polices d'icones, feuilles de styles
 générées avec Sass, ainsi que la génération d'un Styleguide.
+
+Jirafe a par la suite été racheté par SAP (Hybris).

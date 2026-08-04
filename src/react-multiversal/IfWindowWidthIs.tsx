@@ -14,9 +14,7 @@ const buildCssRules = (smallerThan?: Size, largerThan?: Size) => {
 
   if (smallerThan && largerThan) {
     rules.push(
-      `@media (max-width: ${size(smallerThan) - 1}px), (min-width: ${size(
-        largerThan,
-      )}px) {
+      `@media (max-width: ${size(smallerThan) - 1}px), (min-width: ${size(largerThan)}px) {
         [data-window-width-filter="${buildClass(smallerThan, largerThan)}"] {
           display: none !important;
         }

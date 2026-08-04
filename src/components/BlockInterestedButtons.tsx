@@ -12,19 +12,8 @@ export default function BlockInterestedButtons() {
 
   return (
     <Container>
-      <SpacedView
-        vertical="xxxl"
-        horizontal="xxxl"
-        gap="xl"
-        style={{ alignItems: "center" }}
-      >
-        <Text
-          style={[
-            fontStyles.iosEm.title2,
-            theme.styles.text,
-            { textAlign: "center" },
-          ]}
-        >
+      <SpacedView vertical="xxxl" horizontal="xxxl" gap="xl" style={{ alignItems: "center" }}>
+        <Text style={[fontStyles.iosEm.title2, theme.styles.text, { textAlign: "center" }]}>
           {"Ready to build something awesome together?"}
         </Text>
         <SpacedView
@@ -45,28 +34,16 @@ export default function BlockInterestedButtons() {
           >
             {(textStyles) => (
               <>
-                <SVGMenuResumeFill
-                  width={36}
-                  height={36}
-                  fill={theme.dynamicColors.textOnMain}
-                />
-                <Text style={[textStyles, fontStyles.iosEm.title3]}>
-                  {"More about me"}
-                </Text>
+                <SVGMenuResumeFill width={36} height={36} fill={theme.dynamicColors.textOnMain} />
+                <Text style={[textStyles, fontStyles.iosEm.title3]}>{"More about me"}</Text>
               </>
             )}
           </LinkButton>
           <LinkButton href="/contact/" spaceHorizontal="xl" spaceVertical="m">
             {(textStyles) => (
               <>
-                <SVGMenuContactFill
-                  width={36}
-                  height={36}
-                  fill={theme.dynamicColors.textOnMain}
-                />
-                <Text style={[textStyles, fontStyles.iosEm.title3]}>
-                  {"Hire me"}
-                </Text>
+                <SVGMenuContactFill width={36} height={36} fill={theme.dynamicColors.textOnMain} />
+                <Text style={[textStyles, fontStyles.iosEm.title3]}>{"Hire me"}</Text>
               </>
             )}
           </LinkButton>

@@ -11,7 +11,7 @@ function TalkPreview({ item }: { item: Talk }) {
   const theme = useTheme();
 
   return (
-    <LinkView href={`/${item.slug}`}>
+    <LinkView href={`/${item.slug}/`}>
       <SpacedView vertical="s">
         <Text style={[fontStyles.iosEm.title3, theme.styles.text]}>
           {item.title}
@@ -20,9 +20,7 @@ function TalkPreview({ item }: { item: Talk }) {
           </Text>
         </Text>
         {item.conference && (
-          <Text style={[fontStyles.ios.footnote, theme.styles.text]}>
-            {item.conference}
-          </Text>
+          <Text style={[fontStyles.ios.footnote, theme.styles.text]}>{item.conference}</Text>
         )}
       </SpacedView>
     </LinkView>
@@ -45,9 +43,7 @@ export default function TalkList({ items }: { items: Talk[] }) {
             {newYear && (
               <View style={{ alignItems: "center" }}>
                 <Spacer size="l" />
-                <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>
-                  {year}
-                </Text>
+                <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>{year}</Text>
               </View>
             )}
             <TalkPreview item={item} />

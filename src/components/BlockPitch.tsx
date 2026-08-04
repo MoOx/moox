@@ -1,5 +1,6 @@
 import LinkButton from "@/components/LinkButton";
 import SkillsCards from "@/components/SkillsCards";
+import { skillsPitch, skillsPitchTitle } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
@@ -7,7 +8,12 @@ import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { Text, View } from "react-native";
 
-export default function BlockFrontendArchitect() {
+/**
+ * Intro to the skills teaser cards. The main pitch (tagline + summary) lives
+ * higher on the page, in `BlockBuilder`'s indigo band - this block answers
+ * the next question: in what shape does the help come. Detail on `/resume`.
+ */
+export default function BlockPitch() {
   const theme = useTheme();
 
   return (
@@ -20,30 +26,22 @@ export default function BlockFrontendArchitect() {
             alignItems: "center",
           }}
         >
-          <SpacedView
-            horizontal="xl"
-            gap="m"
-            style={{ flexBasis: 1024 / 2, flexShrink: 1 }}
-          >
+          <SpacedView horizontal="xl" gap="m" style={{ flexBasis: 1024 / 2, flexShrink: 1 }}>
             <Text
               style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
               role="heading"
               aria-level={2}
             >
-              {"Front-end Architect."}
+              {skillsPitchTitle}
             </Text>
-            <Text
-              style={[fontStyles.iosEm.callout, theme.styles.textLight1]}
-              role="paragraph"
-            >
-              {`My various experiences made me confident about the technologies & tools I use in order to help you & your team, whether you need some advices, training or help to boostrap your project so you can focus on the feature your user needs.
-Over the years, I refined my way to approach development, which allows me to confidently takes high-level design choices when building web & mobile apps, and selecting tools adapted to the user interface you need.`}
+            <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]} role="paragraph">
+              {skillsPitch}
             </Text>
           </SpacedView>
         </View>
         <Spacer size="xxl" />
         <SpacedView horizontal="xl" gap="m">
-          <SkillsCards />
+          <SkillsCards mode="teaser" />
 
           <LinkButton
             href="/resume/"

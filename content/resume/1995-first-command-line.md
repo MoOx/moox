@@ -1,7 +1,7 @@
 ---
-title: "First command line"
-description: >
-  Command line with MS-DOS to launch Worms video game
+title: "First command line - MS-DOS, to launch the Worms video game"
+# Origin-story beat, not a job - never listed as work history.
+personal: true
 dateStart: 1995-07-01
 dateEnd: 1995-07-01
 hashtags:

@@ -12,9 +12,7 @@ for (const type of contentTypes) {
     .sort();
 
   const items = files.map((filename) => {
-    const data = JSON.parse(
-      fs.readFileSync(path.join(dirPath, filename), "utf8"),
-    );
+    const data = JSON.parse(fs.readFileSync(path.join(dirPath, filename), "utf8"));
     // Keep the body inline for resume entries: it is rendered directly in the
     // timeline. Other types fetch their full file on dedicated slug pages, so
     // their index stays lightweight (body stripped).

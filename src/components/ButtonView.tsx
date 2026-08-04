@@ -155,13 +155,7 @@ const ButtonView = ({
   }, [mode, alt, color, colorAlt, borderColorAlt, style, effect]);
   const elementBackground =
     mode !== "gradient" ? null : (
-      <View
-        style={[
-          StyleSheet.absoluteFill,
-          styles.container,
-          { overflow: "hidden" },
-        ]}
-      >
+      <View style={[StyleSheet.absoluteFill, styles.container, { overflow: "hidden" }]}>
         <GradientLinear
           stops={[
             {
@@ -179,13 +173,9 @@ const ButtonView = ({
       </View>
     );
   const elementIndicator = match(indicator)
-    .with("activity", () => (
-      <ActivityIndicator size={indicatorSize} color={textColor} />
-    ))
+    .with("activity", () => <ActivityIndicator size={indicatorSize} color={textColor} />)
     .with("success", () => (
-      <Text style={[{ fontSize: indicatorSize, color: textColor }]}>
-        {"✔"}
-      </Text>
+      <Text style={[{ fontSize: indicatorSize, color: textColor }]}>{"✔"}</Text>
     ))
     .with("none", () => null)
     .exhaustive();

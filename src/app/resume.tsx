@@ -1,101 +1,225 @@
-import { fetchAll } from "@/api";
+import { fetchAll, ResumeItem } from "@/api";
+import AvailabilityBadge from "@/components/AvailabilityBadge";
 import BlockMe2WithPills from "@/components/BlockMe2WithPills";
 import ButtonView from "@/components/ButtonView";
-import ResumeIntro from "@/components/ResumeIntro";
+import Card from "@/components/Card";
+import ExperienceCard from "@/components/ExperienceCard";
+import Image from "@/components/Image";
+import ResumeEntryModal from "@/components/ResumeEntryModal";
 import ResumeStats from "@/components/ResumeStats";
 import { ResumeTimeline } from "@/components/ResumeTimeline";
-import SkillsCards from "@/components/SkillsCards";
+import SkillCard from "@/components/SkillCard";
+import StatTile from "@/components/StatTile";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
-import { ind, socials, visualUrl } from "@/consts";
-import { WindowWidth } from "@/react-multiversal";
+import { socials, visualUrl } from "@/consts";
+import {
+  availabilityLabel,
+  compactCount,
+  freelanceSince,
+  fullName,
+  githubFollowers,
+  githubSince,
+  groupKey,
+  groupPeriods,
+  hobbies,
+  jobSubtitle,
+  jobTitle,
+  keyExperiences,
+  lowerKeepingAcronyms,
+  metaDescription,
+  monthRange,
+  nickname,
+  openSourceCredits,
+  openSourceIntro,
+  personJsonLd,
+  pitchOf,
+  profileStats,
+  projectName,
+  putaindecodeArticles,
+  resumeEntryPath,
+  skillsDomains,
+  summary,
+  tagline,
+  techs,
+  titleOf,
+  workLocation,
+  yearRange,
+} from "@/profile";
+import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
-import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import LinkText from "@/react-multiversal/LinkText";
+import { default as SpacedView } from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import TextForReader from "@/react-multiversal/TextForReader";
 import {
+  alpha,
+  colors,
   gradientFlashyStops,
   gradientTextFlashyStyles,
   gradientTextFlashyStylesInv,
   gradientTextIndigoStylesInv,
   useTheme,
 } from "@/styles";
+import SVGCssnext from "@/svgs/components/SVGCssnext";
 import SVGDownload from "@/svgs/components/SVGDownload";
-import SVGExternalLink from "@/svgs/components/SVGExternalLink";
-import SVGPhone from "@/svgs/components/SVGPhone";
-import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
-import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
-import Image from "@/components/Image";
-import {
-  getColorScheme,
-  setUserColorScheme,
-} from "@/react-multiversal/theme/colorScheme";
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import SVGPhenomic from "@/svgs/components/SVGPhenomic";
+import SVGRescriptReactNative from "@/svgs/components/SVGRescriptReactNative";
+import SVGStylelint from "@/svgs/components/SVGStylelint";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { ReactNode } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Svg, { Defs, LinearGradient, Stop } from "react-native-svg";
 
 export const Route = createFileRoute("/resume")({
-  validateSearch: (search: Record<string, unknown>): { pdf?: boolean } => {
-    // `?pdf`, `?pdf=1`, `?pdf=true` → PDF export mode. Absent → clean URL.
-    const pdf =
-      search.pdf === "" ||
-      search.pdf === true ||
-      search.pdf === "true" ||
-      search.pdf === "1";
-    return pdf ? { pdf: true } : {};
+  // `?detail=<short-slug>` opens one entry as a modal above the page,
+  // `?group=<group>` opens every mission of a grouped client - both masked as
+  // their real standalone URL in the address bar (see ResumeEntryModal). The
+  // keys must stay optional in the returned type, or every Link to /resume
+  // would be forced to pass a `search` prop.
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { detail?: string; group?: string } => ({
+    ...(typeof search.detail === "string" ? { detail: search.detail } : {}),
+    ...(typeof search.group === "string" ? { group: search.group } : {}),
+  }),
+  loader: async () => {
+    const [resume, talks, blog] = await Promise.all([
+      fetchAll({ data: "resume" }),
+      fetchAll({ data: "talks" }),
+      fetchAll({ data: "blog" }),
+    ]);
+    return { resume, talks, blog };
   },
-  loader: () => fetchAll({ data: "resume" }),
   head: () => ({
     meta: [
+      // Same title vocabulary as `/` and `/cv` (see profile.tsx) - one job
+      // title site-wide, for humans and crawlers alike.
       {
-        title:
-          "Maxime Thirouin Résumé - Senior Front-End Architect & Developer, React & React Native Expert.",
+        title: `${fullName} (${nickname}) - Résumé & Experience Timeline - ${jobTitle}`,
       },
-      {
-        name: "description",
-        content:
-          "Max is a Senior Front-End Architect & Developer, available as a Freelance since 2013. He masters React & React Native and has a passion for building great products with a focus on user experience.",
-      },
+      { name: "description", content: metaDescription },
     ],
   }),
   component: PageResume,
 });
 
-const website = "https://moox.io";
-const phoneHref = `tel:+${ind}${socials.call.value}`;
-const phoneDisplay = `+${ind} ${socials.call.value.replace(
-  /(\d)(\d{2})(\d{2})(\d{2})(\d{2})/,
-  "$1 $2 $3 $4 $5",
-)}`;
-
+/**
+ * The web CV: same structure and content sources as `/cv`, without the
+ * two-page constraint. The condensed, CV-shaped read comes first; the full
+ * timeline (every experience, with detail modals) closes the page for the
+ * readers who scroll that far.
+ */
 function PageResume() {
-  const { pdf } = Route.useSearch();
   const theme = useTheme();
-  const items = Route.useLoaderData();
+  const { resume: items, talks, blog } = Route.useLoaderData();
+  const navigate = useNavigate();
+  // Modal state: `detail` = one entry (timeline click), `group` = every
+  // mission of a grouped client (key-experience card click).
+  const { detail, group } = Route.useSearch();
+  const detailItem = detail
+    ? items.find((i) => i.slug.endsWith(`/${detail}`))
+    : undefined;
+  const groupItems = group
+    ? items
+        .filter((i) => i.group === group)
+        .sort((a, b) =>
+          (b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1,
+        )
+    : [];
+  const modalItems = group ? groupItems : detailItem ? [detailItem] : [];
+  // The entry whose timeline card yields its view-transition name to the
+  // modal (for a group: its highlight entry, the one with a key card).
+  const activeEntry =
+    detailItem ?? groupItems.find((i) => i.highlight) ?? groupItems[0];
+  const activeSlug = activeEntry?.slug.split("/").pop();
 
-  // In PDF mode, force the light color scheme for a clean, ink-light print,
-  // and restore the visitor's previous choice when leaving the page.
-  useEffect(() => {
-    if (!pdf) return;
-    const previous = getColorScheme();
-    void setUserColorScheme("light");
-    return () => {
-      void setUserColorScheme(previous);
-    };
-  }, [pdf]);
+  // The Next.js "intercepting routes" pattern, TanStack-style: the ⓘ links
+  // keep their real href (crawlers and no-JS land on the standalone pages),
+  // but a click is intercepted to open the modal over the page - URL masked
+  // as the real one, so reload & share still get the standalone page.
+  const openEntry = (
+    item: ResumeItem,
+    event?: { preventDefault?: () => void },
+  ) => {
+    event?.preventDefault?.();
+    const slug = item.slug.split("/").pop() ?? item.slug;
+    void navigate({
+      to: "/resume",
+      search: { detail: slug },
+      // The page stays where it is - the modal opens over it.
+      resetScroll: false,
+      // On reload, load the masked URL for real → the standalone page
+      // (without this the router restores the masked state from history and
+      // re-opens the modal).
+      mask: { to: "/resume/$slug", params: { slug }, unmaskOnReload: true },
+    });
+  };
+  // Grouped clients (key-experience cards): the whole group in one modal,
+  // masked as /resume/group/<group>. Ungrouped ones fall back to the entry.
+  const openGroup = (
+    item: ResumeItem,
+    event?: { preventDefault?: () => void },
+  ) => {
+    if (!item.group) {
+      openEntry(item, event);
+      return;
+    }
+    event?.preventDefault?.();
+    void navigate({
+      to: "/resume",
+      search: { group: item.group },
+      resetScroll: false,
+      mask: {
+        to: "/resume/group/$group",
+        params: { group: item.group },
+        unmaskOnReload: true,
+      },
+    });
+  };
+
+  const highlights = keyExperiences(items);
+  const membersOf = (item: ResumeItem) =>
+    items.filter((i) => groupKey(i) === groupKey(item));
+  const education = items
+    .filter((i) => i.education)
+    .sort((a, b) => ((b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1));
+  // Open source reads best as a story: oldest first (cssnext → stylelint → …).
+  const openSource = items
+    .filter((i) => i.openSource)
+    .sort((a, b) => (a.dateStart < b.dateStart ? 1 : -1));
+  // Project logo for each open-source card, keyed by `projectName`. The
+  // rescript-react-native source is the white variant, so its fill is
+  // overridden with the ReScript brand red to stay visible on the white tile.
+  const openSourceLogos: Record<string, ReactNode> = {
+    cssnext: <SVGCssnext width={32} height={32} />,
+    stylelint: <SVGStylelint width={32} height={32} />,
+    phenomic: <SVGPhenomic width={32} height={32} />,
+    "rescript-react-native": (
+      <SVGRescriptReactNative width={32} height={32} fills={["#E6484F"]} />
+    ),
+  };
 
   const headline = (viewTransitionName: string) => (
     <>
       <Text
         style={[
+          fontStyles.iosEm.caption1,
+          theme.styles.textLight2,
+          { letterSpacing: 1.4, textTransform: "uppercase" },
+        ]}
+      >
+        {`Freelance since ${freelanceSince} · ${workLocation}`}
+      </Text>
+      <Text
+        style={[
           theme.styles.text,
-          gradientTextFlashyStyles(theme, 172, pdf),
+          gradientTextFlashyStyles(theme, 172),
           {
-            fontSize: 48,
-            lineHeight: 48,
+            fontSize: 42,
+            lineHeight: 42,
             fontWeight: "900",
             viewTransitionName,
           },
@@ -103,44 +227,42 @@ function PageResume() {
         role="heading"
         aria-level={1}
       >
-        {"Front-End Architect."}
+        {`${jobTitle}.`}
       </Text>
       <Text
-        style={[fontStyles.ios.headline, theme.styles.textMainDark]}
+        style={[
+          fontStyles.ios.subhead,
+          theme.styles.textLight1,
+          { fontStyle: "italic" },
+        ]}
         role="heading"
         aria-level={2}
       >
-        {"Freelance "}
-        <Text
-          style={[
-            theme.styles.textLight2,
-            { fontStyle: "italic", fontWeight: "200" },
-          ]}
-        >
-          {"since 2013"}
-        </Text>
+        {jobSubtitle}
       </Text>
     </>
   );
 
   return (
-    <WebsiteWrapper bare={pdf}>
-      {pdf ? (
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              /* Neutralize the CSS page margin so the PDF export's --margin
-                 option (page.pdf) is the single source of truth; otherwise the
-                 two compound and margins can't be removed. */
-              @page { margin: 0; }
-              @media print {
-                html, body { background: #fff !important; }
-              }
-            `,
-          }}
-        />
-      ) : null}
-      <Spacer size="m" />
+    <WebsiteWrapper>
+      {/* Machine-readable twin of the page, same data as / and /cv. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personJsonLd(items)),
+        }}
+      />
+      {/* Shared violet gradient for the Beyond Code icon fills. */}
+      <Svg width={0} height={0} style={{ position: "absolute" }}>
+        <Defs>
+          <LinearGradient id="profileGrad" x1="0" y1="0" x2="1" y2="1">
+            <Stop offset="0" stopColor={theme.dynamicColors.textFlashy1} />
+            <Stop offset="1" stopColor={theme.dynamicColors.textFlashy4} />
+          </LinearGradient>
+        </Defs>
+      </Svg>
+
+      {/* ============================================================ Hero */}
       <Container
         wrapperStyle={{ zIndex: 1, overflow: "visible" }}
         maxWidth={900}
@@ -153,11 +275,12 @@ function PageResume() {
         <SpacedView
           horizontal="l"
           vertical="m"
+          gap="xl"
           style={{
             flexGrow: 1,
             flexShrink: 1,
             flexBasis: 300,
-            justifyContent: "center",
+            zIndex: 1,
           }}
         >
           <IfWindowWidthIs largerThan={WindowWidth.m}>
@@ -171,130 +294,129 @@ function PageResume() {
             <Spacer size="xxxl" />
           </IfWindowWidthIs>
           <IfWindowWidthIs smallerThan={WindowWidth.m}>
-            {headline("text--front-end-architect-m")}
-            <Spacer size="xl" />
+            <View>{headline("text--front-end-architect-m")}</View>
           </IfWindowWidthIs>
-          <Text
-            role="paragraph"
-            style={[
-              theme.styles.text,
-              gradientTextFlashyStylesInv(theme, undefined, pdf),
-              {
-                fontSize: 64,
-                lineHeight: 64,
-                fontWeight: "900",
-                viewTransitionName: "text--max",
-              },
-            ]}
-          >
-            <TextForReader>{"Nickname :"}</TextForReader>
-            {"Max."}
-          </Text>
-          <Text
-            role="paragraph"
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <TextForReader>{"Full name :"}</TextForReader>
-            <Text
-              style={[
-                theme.styles.textLight1,
-                {
-                  fontSize: 44,
-                  lineHeight: 44,
-                  fontWeight: "100",
-                  letterSpacing: 1,
-                },
-              ]}
-            >
-              {"Maxime"}
-            </Text>
-            <Text
-              style={[
-                theme.styles.textLight1,
-                {
-                  fontSize: 44,
-                  lineHeight: 44,
-                  fontWeight: "100",
-                },
-              ]}
-            >
-              {"Thirouin"}
-            </Text>
-          </Text>
-          <Spacer size="l" />
           <View>
-            {pdf ? (
-              <>
-                <LinkView
-                  href={website}
-                  underlineOnFocus={true}
-                  style={{ flexDirection: "row", alignItems: "center" }}
+            <IfWindowWidthIs largerThan={WindowWidth.m}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  gap: size("s"),
+                  flexWrap: "wrap",
+                  alignItems: "flex-end",
+                }}
+              >
+                <Text
+                  role="paragraph"
+                  style={[
+                    theme.styles.text,
+                    gradientTextFlashyStylesInv(theme),
+                    {
+                      fontSize: 64,
+                      lineHeight: 64,
+                      fontWeight: "900",
+                      viewTransitionName: "text--max",
+                    },
+                  ]}
                 >
-                  <SVGExternalLink
-                    width={16}
-                    height={16}
-                    fill={theme.dynamicColors.textMainDark}
-                  />
-                  <Spacer size="xs" />
-                  <Text style={theme.styles.textLight1}>
-                    {visualUrl(website)}
+                  <TextForReader>{"Nickname :"}</TextForReader>
+                  {"Max."}
+                </Text>
+                <Text
+                  role="paragraph"
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  <TextForReader>{"Full name :"}</TextForReader>
+                  <Text
+                    style={[
+                      theme.styles.textLight1,
+                      {
+                        fontSize: 28,
+                        lineHeight: 28 * 1.25,
+                        fontWeight: "100",
+                        letterSpacing: 1,
+                      },
+                    ]}
+                  >
+                    {"Maxime Thirouin"}
                   </Text>
-                </LinkView>
-                <Spacer size="s" />
-              </>
-            ) : null}
-            <LinkView
-              href={socials.github.value}
-              underlineOnFocus={true}
-              style={{ flexDirection: "row", alignItems: "center" }}
-            >
-              <SVGSocialGithub
-                width={16}
-                height={16}
-                fill={theme.dynamicColors.textMainDark}
-              />
-              <Spacer size="xs" />
-              <Text style={theme.styles.textLight1}>
-                {visualUrl(socials.github.value)}
+                </Text>
+              </View>
+            </IfWindowWidthIs>
+            <IfWindowWidthIs smallerThan={WindowWidth.m}>
+              <Text
+                role="paragraph"
+                style={[
+                  theme.styles.text,
+                  gradientTextFlashyStylesInv(theme),
+                  {
+                    fontSize: 64,
+                    lineHeight: 64,
+                    fontWeight: "900",
+                    viewTransitionName: "text--max",
+                  },
+                ]}
+              >
+                <TextForReader>{"Nickname :"}</TextForReader>
+                {"Max."}
               </Text>
-            </LinkView>
-            <Spacer size="s" />
-            <LinkView
-              href={socials.linkedin.value}
-              underlineOnFocus={true}
-              style={{ flexDirection: "row", alignItems: "center" }}
-            >
-              <SVGSocialLinkedin
-                width={16}
-                height={16}
-                fill={theme.dynamicColors.textMainDark}
-              />
-              <Spacer size="xs" />
-              <Text style={theme.styles.textLight1}>
-                {visualUrl(socials.linkedin.value)}
-              </Text>
-            </LinkView>
-            {pdf ? (
-              <>
-                <Spacer size="s" />
-                <LinkView
-                  href={phoneHref}
-                  underlineOnFocus={true}
-                  style={{ flexDirection: "row", alignItems: "center" }}
+              <Text
+                role="paragraph"
+                style={{ display: "flex", flexDirection: "column" }}
+              >
+                <TextForReader>{"Full name :"}</TextForReader>
+                <Text
+                  style={[
+                    theme.styles.textLight1,
+                    {
+                      fontSize: 44,
+                      lineHeight: 44,
+                      fontWeight: "100",
+                      letterSpacing: 1,
+                    },
+                  ]}
                 >
-                  <SVGPhone
-                    width={16}
-                    height={16}
-                    fill={theme.dynamicColors.textMainDark}
-                  />
-                  <Spacer size="xs" />
-                  <Text style={theme.styles.textLight1}>{phoneDisplay}</Text>
-                </LinkView>
-              </>
-            ) : null}
-            {pdf ? null : (
-              <>
-                <Spacer size="l" />
+                  {"Maxime"}
+                </Text>
+                <Text
+                  style={[
+                    theme.styles.textLight1,
+                    {
+                      fontSize: 44,
+                      lineHeight: 44,
+                      fontWeight: "100",
+                    },
+                  ]}
+                >
+                  {"Thirouin"}
+                </Text>
+              </Text>
+            </IfWindowWidthIs>
+            <Spacer size="s" />
+            <View style={{ gap: size("s") }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: size("s"),
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    gap: size("xs"),
+                  }}
+                >
+                  <AvailabilityBadge showText={true} text={availabilityLabel} />
+                  {/* <Text
+                  style={[fontStyles.ios.footnote, theme.styles.textLight1]}
+                >
+                  {availabilityDetail}
+                </Text> */}
+                </View>
                 <a
                   href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
                   download
@@ -309,7 +431,10 @@ function PageResume() {
                     mode="outline"
                     effect="subtle"
                     spaceGap="xs"
+                    spaceHorizontal="s"
+                    spaceVertical="xs"
                     textColor={theme.dynamicColors.textFlashy1}
+                    style={{ backgroundColor: theme.dynamicColors.back }}
                   >
                     {({ color }) => (
                       <>
@@ -323,108 +448,545 @@ function PageResume() {
                             gradientTextFlashyStyles(theme, 20),
                           ]}
                         >
-                          {"Download"}
+                          {"Download PDF"}
                         </Text>
                       </>
                     )}
                   </ButtonView>
                 </a>
-              </>
-            )}
-          </View>
-          <Spacer size="xl" />
-          <View style={{ height: 3, width: "95%" }}>
-            <GradientLinear
-              style={[StyleSheet.absoluteFill, { borderRadius: 4 }]}
-              stops={gradientFlashyStops(theme)}
-            />
+              </View>
+            </View>
           </View>
         </SpacedView>
-        <BlockMe2WithPills pdf={pdf} />
+        <BlockMe2WithPills />
+        <SpacedView horizontal="l" style={{ height: 3, width: "100%" }}>
+          <GradientLinear
+            style={{ borderRadius: 4 }}
+            stops={gradientFlashyStops(theme)}
+          />
+        </SpacedView>
       </Container>
 
+      {/* ==================================================== Summary intro */}
       <Container maxWidth={900}>
-        <SpacedView horizontal="l">
+        <SpacedView horizontal="l" vertical="l" gap="m">
+          <Text
+            style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
+            role="heading"
+            aria-level={2}
+          >
+            {tagline}
+          </Text>
+          <Text
+            style={[fontStyles.iosEm.callout, theme.styles.textLight1]}
+            role="paragraph"
+          >
+            {summary}
+          </Text>
+        </SpacedView>
+      </Container>
+
+      {/* ==================================================== Profile stats */}
+      <Spacer size="xl" />
+      <ResumeStats stats={profileStats(items)} />
+
+      {/* =========================================================== Skills */}
+      <Spacer size="xl" />
+      <Container maxWidth={900}>
+        <SpacedView horizontal="l" gap="l">
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              gradientTextIndigoStylesInv(theme, undefined, pdf),
+              gradientTextIndigoStylesInv(theme),
             ]}
             role="heading"
             aria-level={2}
           >
             {"Skills"}
           </Text>
-          <Spacer size="l" />
-          <SkillsCards mode="mini" />
+          {/* Same distribution as /cv: the feature card big on the left, the
+              other domains stacked in a column next to it - the flat mosaic
+              left the blocks unbalanced. */}
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "stretch",
+              gap: size("s"),
+            }}
+          >
+            {skillsDomains
+              .filter((d) => d.feature)
+              .map((d) => (
+                <SkillCard
+                  key={d.title}
+                  title={d.title}
+                  subtitle={d.subtitle}
+                  items={d.items}
+                  Icon={d.Icon}
+                  gradient={d.gradient}
+                  big={true}
+                  glass={true}
+                  style={{ flexBasis: 300 }}
+                />
+              ))}
+            <View style={{ flexGrow: 1, flexBasis: 300, gap: size("s") }}>
+              {skillsDomains
+                .filter((d) => !d.feature)
+                .map((d) => (
+                  <SkillCard
+                    key={d.title}
+                    title={d.title}
+                    subtitle={d.subtitle}
+                    items={d.items}
+                    Icon={d.Icon}
+                    gradient={d.gradient}
+                    glass={true}
+                  />
+                ))}
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "flex-start",
+              justifyContent: "space-between",
+              gap: size("s"),
+            }}
+          >
+            {techs.map(({ Icon, label }) => (
+              <View key={label} style={{ alignItems: "center" }}>
+                <View
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 3,
+                    overflow: "hidden",
+                    color: theme.dynamicColors.text,
+                  }}
+                >
+                  <Icon width={40} height={40} />
+                </View>
+                <Text
+                  style={[fontStyles.ios.caption2, theme.styles.textLight1]}
+                >
+                  {label}
+                </Text>
+              </View>
+            ))}
+          </View>
         </SpacedView>
       </Container>
+
+      {/* ======================================================= Experience */}
       <Spacer size="xxl" />
-      <ResumeIntro pdf={pdf} />
-      <Spacer size="xxl" />
-      <ResumeStats />
-      <Spacer size="xxl" />
-      <Container maxWidth={840}>
-        <SpacedView horizontal="l">
+      <Container maxWidth={900}>
+        <SpacedView horizontal="l" gap="m">
           <Text
             style={[
               fontStyles.iosEm.largeTitle,
-              gradientTextFlashyStyles(theme, undefined, pdf),
-              { alignSelf: "center" },
+              gradientTextFlashyStyles(theme),
             ]}
             role="heading"
             aria-level={2}
           >
-            {"Latest Experiences"}
+            {"Key Experience"}
           </Text>
-          <Spacer size="l" />
-          <ResumeTimeline items={items} pdf={pdf} />
+          {/* Full-width rows: copy on the left, the illustration fading in
+              from the right. The ⓘ opens the detail modal (the whole group's
+              missions for grouped clients). */}
+          <View style={{ gap: size("m") }}>
+            {highlights.map((h) => (
+              <ExperienceCard
+                key={h.slug}
+                image={h.image}
+                icon={h.icon}
+                pretitle={h.job_title}
+                title={titleOf(h)}
+                company={h.company}
+                dates={(() => {
+                  const periods = groupPeriods(membersOf(h));
+                  return periods.length > 1
+                    ? periods.join(" · ")
+                    : monthRange(h);
+                })()}
+                text={pitchOf(h)}
+                stats={h.stats}
+                tags={h.hashtags}
+                infoHref={
+                  h.group ? `/resume/group/${h.group}` : resumeEntryPath(h)
+                }
+                infoLabel={`All the details about ${h.company}`}
+                infoOnPress={(event) => openGroup(h, event)}
+              />
+            ))}
+          </View>
         </SpacedView>
-        <Spacer />
       </Container>
-      {pdf ? (
-        <>
-          <Spacer size="l" />
-          <Container maxWidth={840}>
-            <SpacedView horizontal="l">
+
+      {/* ====================================================== Open Source */}
+      {/* Full-bleed band like the stats one (opposite skew), so the entry
+          cards sit directly on it - no more card-in-a-card. */}
+      <Spacer size="xxl" />
+      <SpacedView vertical="xxxl">
+        <GradientLinear
+          angle={60}
+          stops={[
+            { offset: 10, stopColor: "#010244" },
+            { offset: 100, stopColor: "#0F7CB7" },
+          ]}
+          style={[StyleSheet.absoluteFill, { transform: [{ skewY: "-1deg" }] }]}
+        />
+        <Container maxWidth={900}>
+          <SpacedView horizontal="l" gap="m">
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: size("s"),
+              }}
+            >
+              <Image
+                src="/github-arctic-code-vault-contributor.png"
+                width={224 / 7}
+                height={254 / 7}
+                alt="GitHub Arctic Code Vault Contributor"
+              />
+              <Text
+                role="heading"
+                aria-level={2}
+                style={[fontStyles.iosEm.largeTitle, { color: colors.white }]}
+              >
+                {"Open Source"}
+              </Text>
+              <View style={{ flex: 1 }} />
+              <Text
+                style={[
+                  fontStyles.ios.caption1,
+                  { color: alpha(colors.white, 0.72) },
+                ]}
+              >
+                {`${compactCount(githubFollowers)} followers · on GitHub since ${githubSince}`}
+              </Text>
+            </View>
+            <Text
+              style={[
+                fontStyles.ios.callout,
+                { color: alpha(colors.white, 0.85) },
+              ]}
+            >
+              {openSourceIntro}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                gap: size("m"),
+              }}
+            >
+              {openSource.map((item) => {
+                const [headline, ...rest] = item.stats ?? [];
+                const logo = openSourceLogos[projectName(item)];
+                return (
+                  <Card
+                    key={item.slug}
+                    style={{ flexBasis: 380 }}
+                    background="glass"
+                    icon={
+                      logo ? (
+                        <View
+                          style={{
+                            width: 48,
+                            height: 48,
+                            borderRadius: 12,
+                            backgroundColor: colors.white,
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {logo}
+                        </View>
+                      ) : undefined
+                    }
+                    pretitle={`${item.job_title ?? ""} · ${yearRange(item)}`}
+                    title={projectName(item)}
+                    text={item.title.trim()}
+                    infoHref={resumeEntryPath(item)}
+                    infoLabel={`All the details about ${projectName(item)}`}
+                    infoOnPress={(event) => openEntry(item, event)}
+                  >
+                    {headline ? (
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "flex-end",
+                          flexWrap: "wrap",
+                          gap: size("xs"),
+                        }}
+                      >
+                        <Text>
+                          <Text
+                            style={{
+                              fontSize: 22,
+                              lineHeight: 24,
+                              fontWeight: weight.black,
+                              color: colors.white,
+                            }}
+                          >
+                            {headline.stat}
+                          </Text>
+                          <Text
+                            style={[
+                              fontStyles.ios.caption1,
+                              { color: alpha(colors.white, 0.8) },
+                            ]}
+                          >
+                            {` ${headline.label}`}
+                          </Text>
+                        </Text>
+                        {rest.length > 0 ? (
+                          <Text
+                            style={[
+                              fontStyles.ios.caption2,
+                              { color: alpha(colors.white, 0.6) },
+                            ]}
+                          >
+                            {rest
+                              .map(
+                                (s) =>
+                                  `${s.stat} ${lowerKeepingAcronyms(s.label)}`,
+                              )
+                              .join(" · ")}
+                          </Text>
+                        ) : null}
+                      </View>
+                    ) : null}
+                  </Card>
+                );
+              })}
+            </View>
+            <Text
+              style={[
+                fontStyles.ios.caption1,
+                { color: alpha(colors.white, 0.72) },
+              ]}
+            >
+              {"Also: "}
+              {openSourceCredits.map((credit, i) => (
+                <LinkText
+                  key={credit.label}
+                  href={credit.url}
+                  underlineOnFocus={true}
+                >
+                  {i > 0 ? " · " : ""}
+                  <Text
+                    style={{ color: colors.white, fontWeight: weight.semibold }}
+                  >
+                    {credit.label}
+                  </Text>
+                  {` ${credit.note}`}
+                </LinkText>
+              ))}
+            </Text>
+          </SpacedView>
+        </Container>
+      </SpacedView>
+
+      {/* ============= Talks & Community, Education & Beyond Code */}
+      {/* One wrapping row, three columns. The talk list itself lives in the
+          timeline below (talks are entries there), so this column only keeps
+          the community figures, stacked. */}
+      <Spacer size="xxl" />
+      <Container maxWidth={900}>
+        <SpacedView
+          horizontal="l"
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignContent: "stretch",
+            gap: size("xl"),
+          }}
+        >
+          <View style={{ flexGrow: 1, flexBasis: 280, gap: size("m") }}>
+            <Text
+              style={[
+                fontStyles.iosEm.title1,
+                gradientTextIndigoStylesInv(theme),
+              ]}
+              role="heading"
+              aria-level={2}
+            >
+              {"Talks & Community"}
+            </Text>
+            <View style={{ gap: size("s") }}>
+              <View style={{ flexDirection: "row" }}>
+                <StatTile
+                  valueFontSize={22}
+                  stat={{
+                    stat: `${talks.length}`,
+                    label: "Conference talks",
+                    comment: "in French & English",
+                    url: "/talks",
+                  }}
+                />
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <StatTile
+                  valueFontSize={22}
+                  stat={{
+                    // blog.json only indexes moox.io; putaindecode.io is a
+                    // manual figure from profile.tsx (see STATS.md).
+                    stat: `${blog.length + putaindecodeArticles}`,
+                    label: "Blog posts",
+                    comment: "on moox.io & putaindecode.io",
+                    url: "/blog",
+                  }}
+                />
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <StatTile
+                  valueFontSize={22}
+                  stat={{
+                    stat: "co-founder",
+                    label: visualUrl(socials.putaindecode.value),
+                    comment: "FR dev community, blog & podcast",
+                    url: socials.putaindecode.value,
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+
+          <View
+            style={{
+              flexGrow: 1,
+              flexBasis: 280,
+              gap: size("m"),
+              justifyContent: "space-between",
+            }}
+          >
+            <View style={{ gap: size("m") }}>
+              <Text
+                style={[
+                  fontStyles.iosEm.title1,
+                  gradientTextFlashyStyles(theme),
+                ]}
+                role="heading"
+                aria-level={2}
+              >
+                {"Education"}
+              </Text>
+              {education.map((e) => (
+                <View
+                  key={e.slug}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "flex-start",
+                    gap: size("s"),
+                  }}
+                >
+                  {e.icon ? (
+                    <Image
+                      src={e.icon}
+                      width={36}
+                      height={36}
+                      alt={e.company}
+                      style={{ borderRadius: 8 }}
+                    />
+                  ) : null}
+                  <View style={{ flex: 1 }}>
+                    <Text
+                      style={[fontStyles.iosEm.footnote, theme.styles.text]}
+                    >
+                      {e.job_title}
+                    </Text>
+                    <Text
+                      style={[fontStyles.ios.caption1, theme.styles.textLight1]}
+                    >
+                      {`${e.company} · ${yearRange(e)}`}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+            <View style={{ gap: size("m") }}>
+              <Text
+                style={[
+                  fontStyles.iosEm.title1,
+                  gradientTextIndigoStylesInv(theme),
+                ]}
+                role="heading"
+                aria-level={2}
+              >
+                {"Beyond Code"}
+              </Text>
               <View
                 style={{
                   flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
                   flexWrap: "wrap",
-                  gap: 16,
+                  justifyContent: "space-between",
                 }}
               >
-                <View style={{ flexShrink: 1 }}>
-                  <Text style={[fontStyles.ios.callout, theme.styles.text]}>
-                    {"All my experiences are on LinkedIn and my website"}
-                  </Text>
-                  <Spacer size="xs" />
-                  <LinkView href={website} underlineOnFocus={true}>
+                {hobbies.map(({ Icon, label }) => (
+                  <View key={label} style={{ alignItems: "center" }}>
+                    <Icon width={48} height={48} fill="url(#profileGrad)" />
                     <Text
                       style={[
-                        fontStyles.iosEm.title3,
-                        gradientTextIndigoStylesInv(theme, undefined, pdf),
+                        fontStyles.ios.caption1,
+                        theme.styles.textLight1,
+                        { textAlign: "center" },
                       ]}
                     >
-                      {visualUrl(website)}
+                      {label}
                     </Text>
-                  </LinkView>
-                </View>
-                <Image
-                  src="/qr-code.jpg"
-                  width={116}
-                  height={116}
-                  priority={true}
-                  alt={`QR code to ${website}`}
-                />
+                  </View>
+                ))}
               </View>
-            </SpacedView>
-          </Container>
-        </>
-      ) : null}
+            </View>
+          </View>
+        </SpacedView>
+      </Container>
+
+      {/* ===================================================== Full history */}
+      <Spacer size="xxl" />
+      <Container maxWidth={900}>
+        <SpacedView horizontal="l">
+          <Text
+            style={[
+              fontStyles.iosEm.largeTitle,
+              gradientTextFlashyStyles(theme),
+            ]}
+            role="heading"
+            aria-level={2}
+          >
+            {"All Experience"}
+          </Text>
+          <Spacer size="l" />
+          <ResumeTimeline
+            items={items}
+            talks={talks}
+            activeSlug={activeSlug}
+            onOpenEntry={openEntry}
+          />
+          <Spacer />
+        </SpacedView>
+      </Container>
       <Spacer size="xl" />
+      {/* The entry detail as a modal above the page (?detail=…, masked as
+          /resume/<slug>). Direct loads of that URL get the standalone page. */}
+      {modalItems.length > 0 ? (
+        <ResumeEntryModal
+          items={modalItems}
+          activeSlug={activeEntry?.slug}
+          label={
+            group
+              ? (activeEntry?.company ?? group)
+              : (detailItem?.title ?? "Experience detail")
+          }
+        />
+      ) : null}
     </WebsiteWrapper>
   );
 }
