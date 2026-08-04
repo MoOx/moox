@@ -23,12 +23,8 @@ function PageTalkList() {
       <Container maxWidth={640} role="article">
         <SpacedView horizontal="l" vertical="m" style={theme.styles.back}>
           <View role="heading" aria-level={1}>
-            <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
-              {"Latest"}
-            </Text>
-            <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-              {"Talks"}
-            </Text>
+            <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>{"Latest"}</Text>
+            <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>{"Talks"}</Text>
           </View>
           <Spacer />
           <TalkList items={items} />

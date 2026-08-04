@@ -11,7 +11,6 @@
     "nursery": "off"
   },
   "plugins": ["react", "import", "jsx-a11y", "typescript"],
-  "jsPlugins": ["@moox/eslint-plugin-react-strict-dom"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "import/no-unassigned-import": "off",

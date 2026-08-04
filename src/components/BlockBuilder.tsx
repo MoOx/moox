@@ -16,11 +16,7 @@ import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 const revertSkew = [{ scaleY: 1 / 1.1 }, { skewY: "-1deg" }];
 
-export default function BlockBuilder({
-  resumeEntry,
-}: {
-  resumeEntry?: ResumeItem;
-}) {
+export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem }) {
   const theme = useTheme();
   const deviceWidth = 360;
   // const deviceRatio = 1;
@@ -96,20 +92,13 @@ export default function BlockBuilder({
                 this indigo band is the home's main pitch. */}
             <View role="heading" aria-level={2}>
               {taglineParts.map((part) => (
-                <Text
-                  key={part}
-                  style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
-                >
+                <Text key={part} style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}>
                   {part}
                 </Text>
               ))}
             </View>
             <Text
-              style={[
-                fontStyles.iosEm.body,
-                theme.styles.textOnMain,
-                { opacity: 0.6 },
-              ]}
+              style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
               role="paragraph"
             >
               {summary}
@@ -130,9 +119,7 @@ export default function BlockBuilder({
               <Spacer size="xs" />
             </IfWindowWidthIs>
           </SpacedView>
-          <IfWindowWidthIs smallerThan={WindowWidth.m}>
-            {device}
-          </IfWindowWidthIs>
+          <IfWindowWidthIs smallerThan={WindowWidth.m}>{device}</IfWindowWidthIs>
         </Container>
       </View>
     </View>

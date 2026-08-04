@@ -1,8 +1,6 @@
 import WebsiteFooter from "@/components/WebsiteFooter";
 import WebsiteHeader from "@/components/WebsiteHeader";
-import WebsiteMobileMenu, {
-  WebsiteMobileMenuPlaceholder,
-} from "@/components/WebsiteMobileMenu";
+import WebsiteMobileMenu, { WebsiteMobileMenuPlaceholder } from "@/components/WebsiteMobileMenu";
 import { WindowWidth } from "@/react-multiversal";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import Spacer from "@/react-multiversal/Spacer";

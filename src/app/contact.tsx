@@ -29,8 +29,7 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       {
-        title:
-          "Contact Maxime Thirouin, Senior Front-End Architect, React & React Native Expert.",
+        title: "Contact Maxime Thirouin, Senior Front-End Architect, React & React Native Expert.",
       },
     ],
   }),
@@ -116,9 +115,7 @@ function PageContact() {
               ]}
               style={[styles.gradientEdge, styles.gradientRight]}
             />
-            <style>
-              {`#contact-scroll { scroll-padding-inline-start: ${size("m")}px }`}
-            </style>
+            <style>{`#contact-scroll { scroll-padding-inline-start: ${size("m")}px }`}</style>
             <ScrollView
               id="contact-scroll"
               horizontal
@@ -145,11 +142,7 @@ function PageContact() {
                 <LinkView
                   containerStyle={styles.cardContainer}
                   style={styles.cardContainer}
-                  href={
-                    !isClient
-                      ? ""
-                      : "mailto:" + sendStringAsMailString(socials.send.value)
-                  }
+                  href={!isClient ? "" : "mailto:" + sendStringAsMailString(socials.send.value)}
                 >
                   <ContactCard
                     Icon={SVGEmail}
@@ -191,9 +184,7 @@ function PageContact() {
               </SpacedView>
             </ScrollView>
             <Spacer size="m" />
-            <style>
-              {`#contact-scroll-2 { scroll-padding-inline-start: ${size("m")}px }`}
-            </style>
+            <style>{`#contact-scroll-2 { scroll-padding-inline-start: ${size("m")}px }`}</style>
             <ScrollView
               id="contact-scroll-2"
               horizontal

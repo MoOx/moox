@@ -94,16 +94,12 @@ const useAnimatedIconStyle = (
 ) =>
   useAnimatedStyle(() => {
     const isActive = value === iconValue;
-    const isVisible =
-      iconValue === "auto" ? value === "auto" : value !== "auto";
+    const isVisible = iconValue === "auto" ? value === "auto" : value !== "auto";
     return {
       opacity: withSpring(isVisible ? 1 : 0),
       transform: [
         {
-          scale: withSpring(
-            isActive ? 1 : inactiveIconSize / iconSize,
-            iconSpringOptions,
-          ),
+          scale: withSpring(isActive ? 1 : inactiveIconSize / iconSize, iconSpringOptions),
         },
       ],
     };
@@ -122,14 +118,8 @@ const useAnimatedColorProps = (
         actualColor.get(),
         [0, 1],
         isActive
-          ? [
-              activeTheme.light.toggleIconColor,
-              activeTheme.dark.toggleIconColor,
-            ]
-          : [
-              activeTheme.light.inactiveIconColor,
-              activeTheme.dark.inactiveIconColor,
-            ],
+          ? [activeTheme.light.toggleIconColor, activeTheme.dark.toggleIconColor]
+          : [activeTheme.light.inactiveIconColor, activeTheme.dark.inactiveIconColor],
       ),
     };
   }, [activeTheme, value, actualColor, iconValue]);
@@ -228,9 +218,7 @@ export default function ColorSchemeToggle({
     [toggleSize, width, height, borderWidth, iconSize],
   );
 
-  const position = useSharedValue(
-    value === "light" ? 0 : value === "auto" ? 1 : 2,
-  );
+  const position = useSharedValue(value === "light" ? 0 : value === "auto" ? 1 : 2);
   const actualColor = useSharedValue(actualValue === "light" ? 0 : 1);
 
   useEffect(() => {
@@ -265,10 +253,7 @@ export default function ColorSchemeToggle({
       borderColor: interpolateColor(
         actualColor.get(),
         [0, 1],
-        [
-          activeTheme.light.backgroundBorderColor,
-          activeTheme.dark.backgroundBorderColor,
-        ],
+        [activeTheme.light.backgroundBorderColor, activeTheme.dark.backgroundBorderColor],
       ),
     }),
     [activeTheme, actualColor],
@@ -285,10 +270,7 @@ export default function ColorSchemeToggle({
       borderColor: interpolateColor(
         actualColor.get(),
         [0, 1],
-        [
-          activeTheme.light.toggleBorderColor,
-          activeTheme.dark.toggleBorderColor,
-        ],
+        [activeTheme.light.toggleBorderColor, activeTheme.dark.toggleBorderColor],
       ),
     }),
     [activeTheme, actualColor, position, toggleSize, width],
@@ -315,37 +297,16 @@ export default function ColorSchemeToggle({
     iconSize,
     iconSpringOptions,
   );
-  const animatedColorPropsLight = useAnimatedColorProps(
-    "light",
-    value,
-    actualColor,
-    activeTheme,
-  );
-  const animatedColorPropsDark = useAnimatedColorProps(
-    "dark",
-    value,
-    actualColor,
-    activeTheme,
-  );
-  const animatedColorPropsAuto = useAnimatedColorProps(
-    "auto",
-    value,
-    actualColor,
-    activeTheme,
-  );
+  const animatedColorPropsLight = useAnimatedColorProps("light", value, actualColor, activeTheme);
+  const animatedColorPropsDark = useAnimatedColorProps("dark", value, actualColor, activeTheme);
+  const animatedColorPropsAuto = useAnimatedColorProps("auto", value, actualColor, activeTheme);
 
   return (
     <Pressable ref={ref} onPress={handleToggle}>
       <Animated.View style={dynamicStyles.container}>
+        <Animated.View style={[dynamicStyles.background, animatedBackgroundStyle]} />
         <Animated.View
-          style={[dynamicStyles.background, animatedBackgroundStyle]}
-        />
-        <Animated.View
-          style={[
-            dynamicStyles.icon,
-            { alignSelf: "flex-start" },
-            animatedIconStyleLight,
-          ]}
+          style={[dynamicStyles.icon, { alignSelf: "flex-start" }, animatedIconStyleLight]}
         >
           <AnimatedSvg
             width={iconSize}
@@ -356,13 +317,7 @@ export default function ColorSchemeToggle({
             <Path fill="currentColor" d={svgPaths.light} />
           </AnimatedSvg>
         </Animated.View>
-        <Animated.View
-          style={[
-            dynamicStyles.icon,
-            { alignSelf: "center" },
-            animatedIconStyleAuto,
-          ]}
-        >
+        <Animated.View style={[dynamicStyles.icon, { alignSelf: "center" }, animatedIconStyleAuto]}>
           <AnimatedSvg
             width={iconSize}
             height={iconSize}
@@ -373,11 +328,7 @@ export default function ColorSchemeToggle({
           </AnimatedSvg>
         </Animated.View>
         <Animated.View
-          style={[
-            dynamicStyles.icon,
-            { alignSelf: "flex-end" },
-            animatedIconStyleDark,
-          ]}
+          style={[dynamicStyles.icon, { alignSelf: "flex-end" }, animatedIconStyleDark]}
         >
           <AnimatedSvg
             width={iconSize}

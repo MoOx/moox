@@ -98,10 +98,7 @@ export default function Card({
         />
       ) : (
         <>
-          <GradientLinear
-            style={StyleSheet.absoluteFill}
-            stops={gradientFlashyStops(theme)}
-          />
+          <GradientLinear style={StyleSheet.absoluteFill} stops={gradientFlashyStops(theme)} />
           {image ? (
             <Image
               src={image}
@@ -133,12 +130,7 @@ export default function Card({
         </>
       )}
       {background === "gradient" ? (
-        <View
-          style={[
-            StyleSheet.absoluteFill,
-            { borderRadius, boxShadow: boxShadowGlass() },
-          ]}
-        />
+        <View style={[StyleSheet.absoluteFill, { borderRadius, boxShadow: boxShadowGlass() }]} />
       ) : null}
       {infoHref ? (
         <LinkView
@@ -155,11 +147,7 @@ export default function Card({
           }}
         >
           <TextForReader>{infoLabel ?? "Details"}</TextForReader>
-          <SVGInfoCircle
-            width={24}
-            height={24}
-            color={alpha(colors.white, 0.5)}
-          />
+          <SVGInfoCircle width={24} height={24} color={alpha(colors.white, 0.5)} />
         </LinkView>
       ) : null}
       <SpacedView
@@ -170,10 +158,7 @@ export default function Card({
       >
         <View>
           {icon ? (
-            <View
-              aria-hidden={true}
-              style={{ alignSelf: "flex-start", marginBottom: size("s") }}
-            >
+            <View aria-hidden={true} style={{ alignSelf: "flex-start", marginBottom: size("s") }}>
               {icon}
             </View>
           ) : null}
@@ -195,21 +180,13 @@ export default function Card({
             <Text
               role="heading"
               aria-level={3}
-              style={[
-                fontStyles.iosEm.title2,
-                { color: colors.white, fontWeight: weight.bold },
-              ]}
+              style={[fontStyles.iosEm.title2, { color: colors.white, fontWeight: weight.bold }]}
             >
               {title}
             </Text>
           ) : null}
           {subtitle ? (
-            <Text
-              style={[
-                fontStyles.ios.caption1,
-                { color: alpha(colors.white, 0.66) },
-              ]}
-            >
+            <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.66) }]}>
               {subtitle}
             </Text>
           ) : null}
@@ -217,10 +194,7 @@ export default function Card({
         <View>
           {text ? (
             <Text
-              style={[
-                fontStyles.ios.footnote,
-                { color: alpha(colors.white, 0.9) },
-              ]}
+              style={[fontStyles.ios.footnote, { color: alpha(colors.white, 0.9) }]}
               numberOfLines={2}
             >
               {text}
@@ -228,12 +202,7 @@ export default function Card({
           ) : null}
           {children}
           {tags && tags.length > 0 ? (
-            <Text
-              style={[
-                fontStyles.ios.caption2,
-                { color: alpha(colors.white, 0.55) },
-              ]}
-            >
+            <Text style={[fontStyles.ios.caption2, { color: alpha(colors.white, 0.55) }]}>
               {tags.join(" · ")}
             </Text>
           ) : null}

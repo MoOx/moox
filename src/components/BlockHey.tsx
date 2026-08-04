@@ -6,11 +6,7 @@ import { fontStyles, weight } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
-import {
-  gradientTextFlashyStyles,
-  gradientTextStyles,
-  useTheme,
-} from "@/styles";
+import { gradientTextFlashyStyles, gradientTextStyles, useTheme } from "@/styles";
 import { Text, View } from "react-native";
 
 export default function BlockHey() {
@@ -37,11 +33,7 @@ export default function BlockHey() {
           // role="header"
         >
           <View style={{ flexDirection: "column-reverse" }}>
-            <View
-              style={{ alignSelf: "flex-start" }}
-              role="heading"
-              aria-level={1}
-            >
+            <View style={{ alignSelf: "flex-start" }} role="heading" aria-level={1}>
               <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
                 {jobTitleParts[0]}
               </Text>
@@ -61,12 +53,7 @@ export default function BlockHey() {
                     },
                   ]}
                 >
-                  <Text
-                    style={[
-                      theme.styles.text,
-                      gradientTextFlashyStyles(theme, 176),
-                    ]}
-                  >
+                  <Text style={[theme.styles.text, gradientTextFlashyStyles(theme, 176)]}>
                     {jobTitleParts[1]}
                   </Text>
                   {` ${jobTitleParts[2]}.`}
@@ -84,9 +71,7 @@ export default function BlockHey() {
                     },
                   ]}
                 >
-                  <Text style={gradientTextFlashyStyles(theme, 176)}>
-                    {jobTitleParts[1]}
-                  </Text>
+                  <Text style={gradientTextFlashyStyles(theme, 176)}>{jobTitleParts[1]}</Text>
                   {` ${jobTitleParts[2]}.`}
                 </Text>
               </IfWindowWidthIs>
@@ -105,13 +90,8 @@ export default function BlockHey() {
               </Text>
             </View>
             <Spacer size="l" />
-            <Text
-              role="paragraph"
-              style={{ display: "flex", flexDirection: "column" }}
-            >
-              <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
-                {"Hey,"}
-              </Text>
+            <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
+              <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>{"Hey,"}</Text>
               <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
                 {"I'm "}
                 <Text

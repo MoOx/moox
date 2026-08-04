@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useSharedValue, withSpring } from "react-native-reanimated";
-import { SpringConfig } from "react-native-reanimated/lib/typescript/animation/springUtils";
+import { useSharedValue, withSpring, type WithSpringConfig } from "react-native-reanimated";
 
 const isClient = typeof window !== "undefined";
 
@@ -15,7 +14,7 @@ const isClient = typeof window !== "undefined";
 const getWindowOffset = isClient ? () => window.scrollY : () => 0;
 
 export const useScrollWindowOffset = (
-  sprintOptions?: SpringConfig,
+  sprintOptions?: WithSpringConfig,
   getOffset = getWindowOffset,
 ) => {
   const requested = useRef(false);

@@ -35,9 +35,7 @@ export default function Pill({
   const theme = useTheme();
   const thisYear = useMemo(() => new Date().getFullYear(), []);
   const viewTransitionName =
-    "text--" +
-    (title + pre + detail + year).replace(/[^a-z0-9/s]+/gi, "-") +
-    transitionSize;
+    "text--" + (title + pre + detail + year).replace(/[^a-z0-9/s]+/gi, "-") + transitionSize;
   return (
     <GlassView
       borderWidth={0.5}
@@ -49,20 +47,13 @@ export default function Pill({
         style,
       ]}
     >
-      <SpacedView
-        horizontal={pillSpace}
-        vertical={pillSpace}
-        style={{ viewTransitionName }}
-      >
+      <SpacedView horizontal={pillSpace} vertical={pillSpace} style={{ viewTransitionName }}>
         <SpacedView
           horizontal={spaceHorizontal}
           vertical={spaceVertical}
           style={[theme.styles.backAlt, { borderRadius: 100 }]}
         >
-          <Text
-            role="paragraph"
-            style={{ display: "flex", flexDirection: "column" }}
-          >
+          <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
             {!pre ? null : (
               <Text
                 style={[
@@ -82,9 +73,7 @@ export default function Pill({
                 titleStyle || fontStyles.iosEm.caption1,
                 pre ? theme.styles.textMainDark : theme.styles.textMain,
                 {
-                  lineHeight: titleStyle
-                    ? undefined
-                    : fontStyles.iosEm.caption1.fontSize,
+                  lineHeight: titleStyle ? undefined : fontStyles.iosEm.caption1.fontSize,
                   fontWeight: "800",
                 },
               ]}
@@ -125,9 +114,7 @@ export default function Pill({
                 year
               ) : (
                 <>
-                  <TextForReader>
-                    {" " + (mode === "ago" ? ": " : "for ")}
-                  </TextForReader>
+                  <TextForReader>{" " + (mode === "ago" ? ": " : "for ")}</TextForReader>
                   {thisYear - year + " years" + (mode === "ago" ? " ago" : "")}
                   <TextForReader>{"."}</TextForReader>
                 </>

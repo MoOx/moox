@@ -26,11 +26,7 @@ export default function BlockPitch() {
             alignItems: "center",
           }}
         >
-          <SpacedView
-            horizontal="xl"
-            gap="m"
-            style={{ flexBasis: 1024 / 2, flexShrink: 1 }}
-          >
+          <SpacedView horizontal="xl" gap="m" style={{ flexBasis: 1024 / 2, flexShrink: 1 }}>
             <Text
               style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
               role="heading"
@@ -38,10 +34,7 @@ export default function BlockPitch() {
             >
               {skillsPitchTitle}
             </Text>
-            <Text
-              style={[fontStyles.iosEm.callout, theme.styles.textLight1]}
-              role="paragraph"
-            >
+            <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]} role="paragraph">
               {skillsPitch}
             </Text>
           </SpacedView>
