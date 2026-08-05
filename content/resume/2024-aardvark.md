@@ -1,23 +1,43 @@
 ---
 company: "Aardvark Intelligence"
 url: "https://www.aardvarkintel.com"
-title: "Generative AI solution for automating legal and financial data"
+title:
+  en: "Generative AI solution for automating legal and financial data"
+  fr: "Solution d'IA générative pour l'automatisation de données juridiques et financières"
 highlight: true
 job_title: "Lead Front-End Developer"
 icon: /resume/icons/aardvark.png
-pitch: "Built the virtualized spreadsheet-like editor that keeps the UI instant on tens of thousands of rows, then made Playwright guard its performance in CI - so the release train never shipped a regression."
+pitch:
+  en: "Built the virtualized spreadsheet-like editor that keeps the UI instant on tens of thousands of rows, then made Playwright guard its performance in CI - so the release train never shipped a regression."
+  fr: "Éditeur de type tableur virtualisé, construit pour garder l'interface instantanée sur des dizaines de milliers de lignes, puis performance surveillée par Playwright en intégration continue - pour qu'aucune régression ne parte en production."
 stats:
   - stat: "50k+"
-    label: "Rows"
-    comment: "editable in-browser, lag-free (virtualized)"
-  - stat: "2 weeks"
-    label: "Release cadence"
-    comment: "fully automated CI (Playwright perf tests)"
+    label:
+      en: "Rows"
+      fr: "Lignes"
+    comment:
+      en: "editable in-browser, lag-free (virtualized)"
+      fr: "éditables dans le navigateur, sans latence (virtualisées)"
+  - stat:
+      en: "2 weeks"
+      fr: "2 semaines"
+    label:
+      en: "Release cadence"
+      fr: "Cadence de livraison"
+    comment:
+      en: "fully automated CI (Playwright perf tests)"
+      fr: "CI entièrement automatisée (tests de performance Playwright)"
   # Not "Solo": in bold right under the "Lead Front-End Developer" title it read
   # as a contradiction. Ownership is the point, headcount isn't.
-  - stat: "End-to-end"
-    label: "Front-end ownership"
-    comment: "sole front-end in a 3-person product team"
+  - stat:
+      en: "End-to-end"
+      fr: "De bout en bout"
+    label:
+      en: "Front-end ownership"
+      fr: "Front-end sous ma responsabilité"
+    comment:
+      en: "sole front-end in a 3-person product team"
+      fr: "seul front-end dans une équipe produit de trois personnes"
 dateStart: 2024-04-03
 dateEnd: 2026-01-31
 # Order matters: the CV only renders the first 6, so the distinctive ones lead.
@@ -59,7 +79,24 @@ web-only today, with the door open to native apps tomorrow.
 
 ---
 
-Développement d’interfaces utilisateurs pour une solution d’IA générative
-spécialisée dans l’automatisation des données juridiques et financières,
-optimisant la visualisation des données pour aider les entreprises à maximiser
-leurs revenus et simplifier la prise de décision.
+Aardvark automate le traitement de données juridiques et financières avec de
+l'IA générative. Les modèles produisent la donnée ; mon travail portait sur la
+surface où on la vérifie et la corrige — à une échelle où un tableau classique
+abandonne : des dizaines de milliers de lignes, toutes éditables, dans le
+navigateur.
+
+Une édition digne d'un tableur impose des détails dignes d'un tableur : unités,
+dates et cellules de texte long demandaient chacune leur propre comportement
+d'édition, et le filtrage, d'abord côté client, est passé côté serveur quand
+les jeux de données ont dépassé ce que le navigateur encaisse. À cette échelle,
+la performance s'érode en silence, une pull request anodine après l'autre — les
+tests de performance Playwright en intégration continue sont là exactement pour
+ça, dans une chaîne entièrement automatisée qui a tenu une livraison toutes les
+deux semaines pendant près de deux ans.
+
+Seul front-end d'une équipe produit de trois personnes, j'ai aussi repris le
+design après les premières maquettes — jusqu'à une refonte complète quand le
+produit les avait dépassées, mode sombre compris — épargnant à l'entreprise un
+poste de design dédié. Construit avec React Native Web et TypeScript : une
+abstraction solide pour un usage web aujourd'hui, la porte ouverte aux
+applications natives demain.

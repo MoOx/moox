@@ -3,6 +3,7 @@ import IconReact from "@/components/IconReact";
 import IconReactNative from "@/components/IconReactNative";
 import type { SkillCardIcon } from "@/components/SkillCard";
 import { ind, sendStringAsMailString, socials, website } from "@/consts";
+import { defaultLang, l, Lang, Localized } from "@/i18n";
 import SVGActivityBricolage from "@/svgs/components/SVGActivityBricolage";
 import SVGActivityClimbing from "@/svgs/components/SVGActivityClimbing";
 import SVGActivityCrossfit from "@/svgs/components/SVGActivityCrossfit";
@@ -41,8 +42,14 @@ import type { ComponentType } from "react";
 // simples. Le simple, c'est le plus dur."
 // Split in two parts so the home band can stack them as a two-line punch;
 // the one-line `tagline` is derived from the same value.
-export const taglineParts = ["I make front-ends simple.", "Simple is the hard part."] as const;
-export const tagline = taglineParts.join(" ");
+export const taglineParts: Localized<readonly string[]> = {
+  en: ["I make front-ends simple.", "Simple is the hard part."],
+  fr: ["Je rends les front-ends simples.", "Le simple, c'est le plus dur."],
+};
+export const tagline: Localized<string> = {
+  en: l(taglineParts, "en").join(" "),
+  fr: l(taglineParts, "fr").join(" "),
+};
 
 // Scope, not headcount. "I'm a one-person front-end team" said the right thing
 // with the wrong word: it excludes the team, three lines under a `Lead` title
@@ -50,14 +57,19 @@ export const tagline = taglineParts.join(" ");
 // whether it meant "very productive" or "works alone". And leading with the
 // speed AI buys is an invitation to negotiate the rate down, so AI appears here
 // as what makes the pace safe, not as what makes it cheap.
-export const summary =
-  "Almost two decades turning tangled front-ends into systems teams can actually maintain: simpler architecture, less overhead, and devs who level up along the way. Today I own the whole front-end, from architecture to release - strict types, end-to-end (E2E) tests and CI keep it safe at that pace.";
+export const summary: Localized<string> = {
+  en: "Almost two decades turning tangled front-ends into systems teams can actually maintain: simpler architecture, less overhead, and devs who level up along the way. Today I own the whole front-end, from architecture to release - strict types, end-to-end (E2E) tests and CI keep it safe at that pace.",
+  fr: "Presque deux décennies passées à transformer des front-ends emmêlés en systèmes qu'une équipe peut réellement maintenir : architecture plus simple, moins de frictions, et des devs qui montent en compétence en chemin. Aujourd'hui je prends en charge tout le front-end, de l'architecture à la mise en production - types stricts, tests end-to-end (E2E) et intégration continue sécurisent ce rythme.",
+};
 
 /**
  * Where I work from - recruiters and job boards filter on it.
  * Not named `location`: importing that would shadow `window.location`.
  */
-export const workLocation = "Toulouse, France · Remote";
+export const workLocation: Localized<string> = {
+  en: "Toulouse, France · Remote",
+  fr: "Toulouse, France · Télétravail",
+};
 
 /**
  * The headline: what a client searches for. It mirrors the job titles of the
@@ -73,7 +85,10 @@ export const jobTitle = jobTitleParts.join(" ");
  * Carries the platform reach the title deliberately leaves out - and does it
  * with the terms clients actually search for ("React Native" beats "mobile").
  */
-export const jobSubtitle = "React, React Native & cross-platform.";
+export const jobSubtitle: Localized<string> = {
+  en: "React, React Native & cross-platform.",
+  fr: "React, React Native & multiplateforme.",
+};
 
 /**
  * Availability, shown next to the pulsing badge. "Available now" on purpose: a
@@ -81,19 +96,35 @@ export const jobSubtitle = "React, React Native & cross-platform.";
  * PDF is handled by `updatedOn` in the CV footer, which dates the whole
  * document instead of just this line.
  */
-export const availabilityLabel = "Available now";
-export const availabilityDetail = "full time or less";
+export const availabilityLabel: Localized<string> = {
+  en: "Available now",
+  fr: "Disponible maintenant",
+};
+export const availabilityDetail: Localized<string> = {
+  en: "full time or less",
+  fr: "temps plein ou partiel",
+};
 
 /** "Updated August 2026" - stamped at generation, so it is never stale. */
-export const updatedOn = () =>
-  `Updated ${new Date().toLocaleDateString("en-US", {
+export const updatedOn = (lang: Lang = defaultLang) => {
+  const date = new Date().toLocaleDateString(lang === "fr" ? "fr-FR" : "en-US", {
     month: "long",
     year: "numeric",
-  })}`;
+  });
+  return lang === "fr" ? `Mis à jour en ${date}` : `Updated ${date}`;
+};
 
-export const languages = [
-  { flag: "🇫🇷", label: "French", level: "Native" },
-  { flag: "🇬🇧", label: "English", level: "Fluent" },
+export const languages: Array<{
+  flag: string;
+  label: Localized<string>;
+  level: Localized<string>;
+}> = [
+  {
+    flag: "🇫🇷",
+    label: { en: "French", fr: "Français" },
+    level: { en: "Native", fr: "Langue maternelle" },
+  },
+  { flag: "🇬🇧", label: { en: "English", fr: "Anglais" }, level: { en: "Fluent", fr: "Courant" } },
 ];
 
 /** Legal name, and the one everybody actually uses. */
@@ -116,37 +147,56 @@ export const putaindecodePodcastsUrl = "https://putaindecode.io/podcasts";
  * dictionary (the export script reads them back off the rendered page, so a
  * plain Node script needs no import of this TSX module).
  */
-export const metaKeywords = [
-  "React",
-  "React Native",
-  "TypeScript",
-  "front-end architecture",
-  "design systems",
-  "accessibility",
-  "cross-platform",
-  "freelance",
-  "remote",
-  "Toulouse",
-];
+/**
+ * Technology names are searched in English in both markets, so they are shared;
+ * the descriptive terms are the ones a French recruiter or job board actually
+ * types ("télétravail", not "remote"), and the English ones stay in the French
+ * list too - half the French job ads for this role are written in English.
+ */
+const sharedKeywords = ["React", "React Native", "TypeScript", "freelance", "Toulouse"];
 
-export const metaTitle = `${fullName} (${nickname}) - CV / Résumé - ${jobTitle}, Web & Mobile`;
+export const metaKeywords = (lang: Lang = defaultLang) =>
+  lang === "fr"
+    ? [
+        ...sharedKeywords,
+        "architecture front-end",
+        "développeur front-end",
+        "design system",
+        "accessibilité",
+        "multiplateforme",
+        "télétravail",
+        "remote",
+      ]
+    : [
+        ...sharedKeywords,
+        "front-end architecture",
+        "design systems",
+        "accessibility",
+        "cross-platform",
+        "remote",
+      ];
+
+export const metaTitle = (lang: Lang = defaultLang) =>
+  lang === "fr"
+    ? `${fullName} (${nickname}) - CV - ${jobTitle}, web & mobile`
+    : `${fullName} (${nickname}) - CV / Résumé - ${jobTitle}, Web & Mobile`;
 
 export type SkillDomain = {
-  title: string;
+  title: Localized<string>;
   /** Lead-in line, only read on the feature card. */
-  subtitle?: string;
-  items: string[];
+  subtitle?: Localized<string>;
+  items: Localized<string[]>;
   /**
    * One-sentence teaser for the home cards - the "why call him" of the domain
    * in prose, where `items` carry the detail on `/resume` and `/cv`.
    */
-  blurb?: string;
+  blurb?: Localized<string>;
   /**
    * The few terms the home teaser shows under the blurb. A curated field, not
    * `items.slice(0, n)`: the full items are phrased as engagements
    * ("Modernizing legacy React codebases"), too heavy for a teaser line.
    */
-  keywords?: string[];
+  keywords?: Localized<string[]>;
   /** The hero card of the mosaic: bigger, items on their own lines. */
   feature?: boolean;
   /**
@@ -163,34 +213,53 @@ export type SkillDomain = {
 
 export const skillsDomains: SkillDomain[] = [
   {
-    title: "Front-End Architecture",
-    subtitle: "Simpler systems, less overhead, teams that ship.",
+    title: { en: "Front-End Architecture", fr: "Architecture front-end" },
+    subtitle: {
+      en: "Simpler systems, less overhead, teams that ship.",
+      fr: "Des systèmes plus simples, moins de frictions, des équipes qui livrent.",
+    },
     feature: true,
     // Phrased as what I get hired for, not as abstract competences: this is the
     // first block a reader hits, and "why call him" is the question it has to
     // answer. The card has the room, so it carries the whole list.
     // No "Cross-platform from a single codebase" line: the card sitting right
     // next to this one is literally titled "Cross-platform" and says it better.
-    items: [
-      "Modernizing legacy React codebases",
-      "Design systems & component APIs",
-      "Performance & rendering budgets",
-      // Backed by the Hove pitch on page 1, which names who validated it. A
-      // skills card may only claim what an experience row can evidence, and
-      // "validated by disabled users" is the part almost no CV can show.
-      "Accessibility, validated by disabled users",
-      "Release automation & end-to-end (E2E) testing",
-      "Maintainability at scale",
-      "Mentoring & technical direction",
-    ],
-    blurb:
-      "The structure that lets a team ship fast without breaking things - design systems, performance budgets, accessibility and release automation.",
-    keywords: ["Design systems", "Performance", "Accessibility"],
+    items: {
+      en: [
+        "Modernizing legacy React codebases",
+        "Design systems & component APIs",
+        "Performance & rendering budgets",
+        // Backed by the Hove pitch on page 1, which names who validated it. A
+        // skills card may only claim what an experience row can evidence, and
+        // "validated by disabled users" is the part almost no CV can show.
+        "Accessibility, validated by disabled users",
+        "Release automation & end-to-end (E2E) testing",
+        "Maintainability at scale",
+        "Mentoring & technical direction",
+      ],
+      fr: [
+        "Modernisation de bases de code React vieillissantes",
+        "Design systems & API de composants",
+        "Performance & budgets de rendu",
+        "Accessibilité, validée par des personnes en situation de handicap",
+        "Automatisation des livraisons & tests end-to-end (E2E)",
+        "Maintenabilité à grande échelle",
+        "Mentorat & direction technique",
+      ],
+    },
+    blurb: {
+      en: "The structure that lets a team ship fast without breaking things - design systems, performance budgets, accessibility and release automation.",
+      fr: "La structure qui permet à une équipe d'aller vite sans rien casser - design systems, budgets de performance, accessibilité et livraisons automatisées.",
+    },
+    keywords: {
+      en: ["Design systems", "Performance", "Accessibility"],
+      fr: ["Design systems", "Performance", "Accessibilité"],
+    },
     Icon: SVGSquareStack3DUpFill as SkillCardIcon,
     gradient: ["#0D0837", "#4421A7"],
   },
   {
-    title: "Languages & Tooling",
+    title: { en: "Languages & Tooling", fr: "Langages & outillage" },
     items: [
       "TypeScript",
       "JavaScript",
@@ -205,16 +274,21 @@ export const skillsDomains: SkillDomain[] = [
       "Jenkins",
       "Fastlane",
     ],
-    blurb:
-      "Strict TypeScript end to end, with Playwright, Detox and CI as the safety net - so refactors stay cheap and releases stay boring.",
+    blurb: {
+      en: "Strict TypeScript end to end, with Playwright, Detox and CI as the safety net - so refactors stay cheap and releases stay boring.",
+      fr: "TypeScript strict de bout en bout, avec Playwright, Detox et l'intégration continue comme filet - pour que les refactorisations restent bon marché et les livraisons ennuyeuses.",
+    },
     keywords: ["TypeScript", "Playwright", "CI/CD"],
     Icon: SVGTypescript as SkillCardIcon,
     gradient: ["#0D0837", "#3178C6"],
   },
   {
-    title: "Web / Native / Cross-platform",
+    title: { en: "Web / Native / Cross-platform", fr: "Web / natif / multiplateforme" },
     items: ["React", "React Native", "Expo", "Web", "iOS", "Android", "TanStack", "Next.js"],
-    blurb: "One React codebase for web, iOS and Android - each platform still feeling like itself.",
+    blurb: {
+      en: "One React codebase for web, iOS and Android - each platform still feeling like itself.",
+      fr: "Une seule base de code React pour le web, iOS et Android - chaque plateforme gardant sa personnalité.",
+    },
     keywords: ["React", "React Native", "Expo"],
     Icon: SVGExpo as SkillCardIcon,
     gradient: ["#0D0837", "#087EA4"],
@@ -223,18 +297,30 @@ export const skillsDomains: SkillDomain[] = [
     // Not a tool I "know" - a way of working. The claim is about intent being
     // the bottleneck, not the model, which is what actually separates senior
     // usage from the "AI writes bugs" complaint.
-    title: "AI-assisted engineering",
+    title: { en: "AI-assisted engineering", fr: "Ingénierie assistée par IA" },
     // Category first, product in parentheses: "Claude Code" is what is searched
     // today and shows this is a practice rather than a buzzword, but the tool
     // will be renamed long before the way of working changes.
-    items: [
-      "AI coding agents (Claude Code), daily",
-      "Precise intent in, working code out",
-      "Strict types, end-to-end tests & CI as the safety net",
-    ],
-    blurb:
-      "AI coding agents daily: precise intent in, working code out - types, tests and CI keep the pace safe.",
-    keywords: ["Claude Code", "Agents", "Guardrails"],
+    items: {
+      en: [
+        "AI coding agents (Claude Code), daily",
+        "Precise intent in, working code out",
+        "Strict types, end-to-end tests & CI as the safety net",
+      ],
+      fr: [
+        "Agents de code IA (Claude Code), au quotidien",
+        "Une intention précise en entrée, du code qui marche en sortie",
+        "Types stricts, tests end-to-end & CI comme filet de sécurité",
+      ],
+    },
+    blurb: {
+      en: "AI coding agents daily: precise intent in, working code out - types, tests and CI keep the pace safe.",
+      fr: "Des agents de code IA au quotidien : une intention précise en entrée, du code qui marche en sortie - types, tests et CI sécurisent le rythme.",
+    },
+    keywords: {
+      en: ["Claude Code", "Agents", "Guardrails"],
+      fr: ["Claude Code", "Agents", "Garde-fous"],
+    },
     Icon: SVGClaude as SkillCardIcon,
     gradient: ["#0D0837", "#8C2C7B"],
   },
@@ -248,7 +334,7 @@ export type ProfileIcon = ComponentType<{
 }>;
 
 export type IconItem = {
-  label: string;
+  label: Localized<string>;
   Icon: ProfileIcon;
   /** Shown on the condensed print CV; the site renders the full list. */
   cv?: boolean;
@@ -285,11 +371,15 @@ export const techs: IconItem[] = [
  */
 export const hobbies: IconItem[] = [
   { Icon: SVGActivityCrossfit, label: "CrossFit", cv: true },
-  { Icon: SVGActivityClimbing, label: "Climbing", cv: true },
+  { Icon: SVGActivityClimbing, label: { en: "Climbing", fr: "Escalade" }, cv: true },
   { Icon: SVGActivityDj, label: "DJ", cv: true },
   { Icon: SVGActivityBricolage, label: "Bricolage", cv: true },
-  { Icon: SVGActivityStandup, label: "Standup", cv: true },
-  { Icon: SVGActivityPekinExpress, label: "Pekin Express\n#20", cv: true },
+  { Icon: SVGActivityStandup, label: { en: "Standup", fr: "Stand-up" }, cv: true },
+  {
+    Icon: SVGActivityPekinExpress,
+    label: { en: "Pekin Express\n#20", fr: "Pékin Express\n#20" },
+    cv: true,
+  },
 ];
 
 /**
@@ -298,14 +388,21 @@ export const hobbies: IconItem[] = [
  * (the indigo band); this block answers the next question: in what shape does
  * the help come.
  */
-export const skillsPitchTitle = "Where I can help.";
-export const skillsPitch =
-  "Years of shipping web & mobile apps made me confident in the high-level choices - architecture, stack, tooling - and in picking what fits the interface you actually need. Advice, training, or hands-on building: I help you and your team focus on what your users need.";
+export const skillsPitchTitle: Localized<string> = {
+  en: "Where I can help.",
+  fr: "Là où je peux aider.",
+};
+export const skillsPitch: Localized<string> = {
+  en: "Years of shipping web & mobile apps made me confident in the high-level choices - architecture, stack, tooling - and in picking what fits the interface you actually need. Advice, training, or hands-on building: I help you and your team focus on what your users need.",
+  fr: "Des années à livrer des applications web et mobiles m'ont donné de l'assurance sur les choix structurants - architecture, stack, outillage - et sur le choix de ce qui convient vraiment à l'interface dont vous avez besoin. Conseil, formation ou développement : j'aide votre équipe à se concentrer sur ce dont vos utilisateurs ont besoin.",
+};
 
 // Names the packages behind the "200M+ downloads / month" tile: without them the
 // headline figure is a number nobody can reconcile with the cards below it.
-export const openSourceIntro =
-  "Contributing to open source since the early days. The PostCSS plugins I created - postcss-calc, postcss-custom-properties, postcss-color-hex-alpha & co - are downloaded 200M+ times a month. GitHub Arctic Code Vault Contributor.";
+export const openSourceIntro: Localized<string> = {
+  en: "Contributing to open source since the early days. The PostCSS plugins I created - postcss-calc, postcss-custom-properties, postcss-color-hex-alpha & co - are downloaded 200M+ times a month. GitHub Arctic Code Vault Contributor.",
+  fr: "Contributeur open source depuis les débuts. Les plugins PostCSS que j'ai créés - postcss-calc, postcss-custom-properties, postcss-color-hex-alpha & co - sont téléchargés plus de 200 millions de fois par mois. GitHub Arctic Code Vault Contributor.",
+};
 
 // -------------------------------------------------------------------- Figures
 // Career origin years: every "N years" on the site is derived from these, so
@@ -315,9 +412,15 @@ export const freelanceSince = 2013;
 
 // Declared here rather than with the other meta strings above: they interpolate
 // `freelanceSince`, which is defined just above.
-export const metaDescription = `CV of ${fullName} (${nickname}), ${jobTitle} - Web & Mobile, freelance since ${freelanceSince}. React & React Native expert, available now.`;
+export const metaDescription = (lang: Lang = defaultLang) =>
+  lang === "fr"
+    ? `CV de ${fullName} (${nickname}), ${jobTitle} - web & mobile, freelance depuis ${freelanceSince}. Expert React & React Native, disponible maintenant.`
+    : `CV of ${fullName} (${nickname}), ${jobTitle} - Web & Mobile, freelance since ${freelanceSince}. React & React Native expert, available now.`;
 
-export const metaSubject = `${jobTitle} - Web & Mobile. Freelance since ${freelanceSince}. React & React Native.`;
+export const metaSubject = (lang: Lang = defaultLang) =>
+  lang === "fr"
+    ? `${jobTitle} - web & mobile. Freelance depuis ${freelanceSince}. React & React Native.`
+    : `${jobTitle} - Web & Mobile. Freelance since ${freelanceSince}. React & React Native.`;
 
 /**
  * Figures that can't be computed at build time (the static build makes no
@@ -363,7 +466,8 @@ export type ProfileStat = ResumeStat & { highlight?: boolean };
  * Global career stats ("player-card" tiles), computed from the résumé data where
  * possible so they stay fresh. Manual figures come from STATS.md.
  */
-export function profileStats(items: ResumeItem[]): ProfileStat[] {
+export function profileStats(items: ResumeItem[], lang: Lang = defaultLang): ProfileStat[] {
+  const fr = lang === "fr";
   const yearsPro = new Date().getFullYear() - proSince;
   // Missions since going freelance - same definition as STATS.md §2 (each
   // teaching year is its own contract, so those count too; OSS side projects
@@ -373,63 +477,74 @@ export function profileStats(items: ResumeItem[]): ProfileStat[] {
   );
   const clients = new Set(projects.map((i) => i.company).filter(Boolean));
   return [
-    { stat: `${yearsPro}`, label: "Years", comment: `pro since ${proSince}` },
+    {
+      stat: `${yearsPro}`,
+      label: fr ? "Années" : "Years",
+      comment: fr ? `en poste depuis ${proSince}` : `pro since ${proSince}`,
+    },
     {
       stat: roundedDownCount(projects.length),
-      label: "Projects",
-      comment: `freelance since ${freelanceSince}`,
+      label: fr ? "Projets" : "Projects",
+      comment: fr ? `en freelance depuis ${freelanceSince}` : `freelance since ${freelanceSince}`,
     },
     {
       stat: roundedDownCount(clients.size),
-      label: "Clients",
-      comment: "companies served",
+      label: fr ? "Clients" : "Clients",
+      comment: fr ? "entreprises accompagnées" : "companies served",
     },
     {
       stat: ossDownloadsPerMonth,
-      label: "Downloads / month",
+      label: fr ? "Téléchargements / mois" : "Downloads / month",
       // Names what earns the figure right where the figure is - "open source I
       // created" was a claim, "the PostCSS plugins I created" is checkable.
-      comment: "on OSS packages I created",
+      comment: fr ? "sur des paquets open source que j'ai créés" : "on OSS packages I created",
       url: socials.npm.value,
       highlight: true,
     },
     {
       stat: compactCount(githubStars),
-      label: "GitHub stars",
+      label: fr ? "Stars GitHub" : "GitHub stars",
       // The repo count makes the total reconcilable: without it, a reader adds
       // up the four cards on page 2 and wonders where the rest comes from.
-      comment: `across ${githubRepos} repos I own`,
+      comment: fr
+        ? `répartis sur ${githubRepos} dépôts que je possède`
+        : `across ${githubRepos} repos I own`,
       url: socials.github.value,
     },
   ];
 }
 
 /** "2014 – 2017". */
-export const yearRange = (item: ResumeItem) => {
+export const yearRange = (item: ResumeItem, lang: Lang = defaultLang) => {
+  const now = lang === "fr" ? "aujourd'hui" : "now";
   const start = item.dateStart ? new Date(item.dateStart).getFullYear() : undefined;
-  const end = item.wip ? "now" : item.dateEnd ? new Date(item.dateEnd).getFullYear() : "now";
+  const end = item.wip ? now : item.dateEnd ? new Date(item.dateEnd).getFullYear() : now;
   if (!start) return `${end}`;
   return `${start}` === `${end}` ? `${start}` : `${start} – ${end}`;
 };
 
-const monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+/** Three-letter months, so a date fits on a CV line in both languages. */
+const monthNames: Record<Lang, string[]> = {
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  fr: [
+    "janv.",
+    "févr.",
+    "mars",
+    "avr.",
+    "mai",
+    "juin",
+    "juil.",
+    "août",
+    "sept.",
+    "oct.",
+    "nov.",
+    "déc.",
+  ],
+};
 
-export const monthYear = (iso: string) => {
+export const monthYear = (iso: string, lang: Lang = defaultLang) => {
   const d = new Date(iso);
-  return `${monthNames[d.getMonth()]} ${d.getFullYear()}`;
+  return `${monthNames[lang][d.getMonth()]} ${d.getFullYear()}`;
 };
 
 /** Past this, months are noise: "2017 – 2023" beats "Mar 2017 – Oct 2023". */
@@ -440,15 +555,15 @@ const monthPrecisionMaxYears = 3;
  * "finished in January" and silently ages the whole CV. Long spans fall back to
  * years, where the month carries no information and just adds weight.
  */
-export const monthRange = (item: ResumeItem) => {
-  if (!item.dateStart) return yearRange(item);
+export const monthRange = (item: ResumeItem, lang: Lang = defaultLang) => {
+  if (!item.dateStart) return yearRange(item, lang);
   const end = item.wip ? undefined : item.dateEnd;
   const years =
     (new Date(end ?? new Date()).getTime() - new Date(item.dateStart).getTime()) /
     (365.25 * 24 * 3600 * 1000);
-  if (years > monthPrecisionMaxYears) return yearRange(item);
-  const startLabel = monthYear(item.dateStart);
-  const endLabel = end ? monthYear(end) : "now";
+  if (years > monthPrecisionMaxYears) return yearRange(item, lang);
+  const startLabel = monthYear(item.dateStart, lang);
+  const endLabel = end ? monthYear(end, lang) : lang === "fr" ? "aujourd'hui" : "now";
   // Same month on both ends ("Jul 2026 – Jul 2026", fklg): one label is
   // enough - same collapse yearRange does for identical years.
   return startLabel === endLabel ? startLabel : `${startLabel} – ${endLabel}`;
@@ -557,19 +672,6 @@ export const resumeEntryPath = (item: ResumeItem) => `/${item.slug}`;
 export const resumeEntryTransitionName = (item: ResumeItem) =>
   `resume-entry--${item.slug.split("/").pop()}`;
 
-// Resume bodies are bilingual: English, then an `<hr>`, then French. The site
-// is English-only for now, so keep only the part before the hr (proper
-// `body.en` / `body.fr` parsing comes with the i18n pass, see WEB-REWORK.md).
-//
-export const bodyBeforeFirstHr = (body: any): any => {
-  if (!body || !Array.isArray(body.children)) return body;
-  const hrIndex = body.children.findIndex(
-    //
-    (child: any) => child != null && typeof child === "object" && child.tag === "hr",
-  );
-  return hrIndex === -1 ? body : { ...body, children: body.children.slice(0, hrIndex) };
-};
-
 /** OSS credentials with no résumé entry of their own. */
 export const openSourceCredits = [
   {
@@ -583,6 +685,15 @@ export const openSourceCredits = [
     url: "https://github.com/search?q=repo%3Afacebook%2Freact-native+author%3Amoox&type=commits",
   },
 ];
+
+/**
+ * The exported CV, one file per language: the French one is the same name with
+ * a `.fr` suffix, so both sit next to each other and the English URL - the one
+ * already circulating - never changes. `scripts/generate-resume-pdf.mjs` writes
+ * exactly these paths; keep the two in sync.
+ */
+export const resumePdfPath = (lang: Lang = defaultLang) =>
+  `/maxime-thirouin-freelance-front-end-developer-resume${lang === defaultLang ? "" : `.${lang}`}.pdf`;
 
 /** Where the quotes come from - makes them checkable, which is the whole point. */
 export const recommendationsUrl =
@@ -598,13 +709,13 @@ export const recommendationsUrl =
  * HTML only: a PDF has no equivalent, its structured channel is the `/Info`
  * dictionary that the export script fills.
  */
-export const personJsonLd = (items: ResumeItem[]) => ({
+export const personJsonLd = (items: ResumeItem[], lang: Lang = defaultLang) => ({
   "@context": "https://schema.org",
   "@type": "Person",
   name: fullName,
   alternateName: nickname,
   jobTitle: jobTitle,
-  description: summary,
+  description: l(summary, lang),
   url: website,
   email: `mailto:${sendStringAsMailString(socials.send.value)}`,
   telephone: `+${ind}${socials.call.value}`,
@@ -620,8 +731,8 @@ export const personJsonLd = (items: ResumeItem[]) => ({
     socials.bsky.value,
     socials.x.value,
   ],
-  knowsLanguage: languages.map((l) => l.label),
-  knowsAbout: [...metaKeywords, ...skillsDomains.flatMap((d) => d.items)],
+  knowsLanguage: languages.map((language) => l(language.label, lang)),
+  knowsAbout: [...metaKeywords(lang), ...skillsDomains.flatMap((d) => l(d.items, lang))],
   // One entry per client, deduplicated by `group` exactly like the rendered
   // rows - so the structured data never lists a mission the page folded away.
   worksFor: [

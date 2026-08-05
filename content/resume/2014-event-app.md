@@ -1,7 +1,9 @@
 ---
 company: "Airbus"
 url: "http://airbus.com"
-title: "Companion web app for Airbus live events"
+title:
+  en: "Companion web app for Airbus live events"
+  fr: "Application web compagnon pour les événements Airbus"
 job_title: "Front-End Developer"
 dateStart: 2014-06-01
 dateEnd: 2014-07-01
@@ -18,9 +20,5 @@ event.
 
 ---
 
-Mission courte pour donner un coup de boost au développement d'une application
-dédié à de un évènement.
-
-- Gestion d'évènements en temps réelle
-- Gros refactoring
-- Gestion des bugs cross-browsers
+Courte mission pour donner un coup d'accélérateur au développement d'une
+application dédiée à un événement.

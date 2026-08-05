@@ -1,6 +1,8 @@
 ---
 company: "Social Share"
-title: "Social feed of online publications"
+title:
+  en: "Social feed of online publications"
+  fr: "Fil social de publications en ligne"
 job_title: "Front-End Developer"
 dateStart: 2014-01-01
 dateEnd: 2014-03-01
@@ -15,9 +17,4 @@ Development of a social feed interface.
 
 ---
 
-Développement d'un flux de tuiles générés à partir de publications sur réseaux
-sociaux.
-
-- Architecture du front-end
-- Création de plugins jQuery
-- Gestion des problématiques responsives
+Développement d'une interface de fil social.

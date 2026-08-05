@@ -1,5 +1,7 @@
 ---
-title: "Research & development - experiments and side-projects with ReScript, GraphQL (Apollo) & React (Native)"
+title:
+  en: "Research & development - experiments and side-projects with ReScript, GraphQL (Apollo) & React (Native)"
+  fr: "Recherche & développement - expérimentations et projets personnels avec ReScript, GraphQL (Apollo) et React (Native)"
 dateStart: 2018-08-01
 dateEnd: 2019-02-01
 hashtags:
@@ -26,6 +28,6 @@ Native ReScript open source bindings.
 
 ---
 
-R&D sur ReScript, Ocaml, GraphQL / Apollo, React Native + React Native Web et
-comment intégrer facilement toutes ces technologies ensemble avec une bonne
-synergie. Contribution open source aux bindings ReScript pour React Native.
+R&D sur ReScript, OCaml, GraphQL / Apollo, React Native et React Native Web, et
+sur la façon de faire fonctionner tout cela ensemble. Contributions actives aux
+bindings open source ReScript pour React Native.

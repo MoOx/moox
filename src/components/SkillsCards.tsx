@@ -1,3 +1,4 @@
+import { useT } from "@/i18n";
 import SkillCard from "@/components/SkillCard";
 import { skillsDomains } from "@/profile";
 import { size } from "@/react-multiversal";
@@ -14,6 +15,7 @@ import { View } from "react-native";
  *   web's room.
  */
 export default function SkillsCards({ mode = "full" }: { mode?: "teaser" | "full" }) {
+  const t = useT();
   const teaser = mode === "teaser";
   return (
     <SpacedView
@@ -28,7 +30,7 @@ export default function SkillsCards({ mode = "full" }: { mode?: "teaser" | "full
     >
       {skillsDomains.map((d) => (
         <View
-          key={d.title}
+          key={t(d.title)}
           style={{
             flexGrow: 1,
             flexBasis: teaser ? 240 : 220,
@@ -39,10 +41,10 @@ export default function SkillsCards({ mode = "full" }: { mode?: "teaser" | "full
           role="listitem"
         >
           <SkillCard
-            title={d.title}
-            subtitle={teaser ? undefined : d.subtitle}
-            blurb={teaser ? d.blurb : undefined}
-            items={teaser ? (d.keywords ?? []) : d.items}
+            title={t(d.title)}
+            subtitle={teaser ? undefined : t(d.subtitle)}
+            blurb={teaser ? t(d.blurb) : undefined}
+            items={teaser ? (t(d.keywords) ?? []) : t(d.items)}
             Icon={d.Icon}
             gradient={d.gradient}
             glass={true}

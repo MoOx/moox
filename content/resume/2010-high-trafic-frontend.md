@@ -1,7 +1,9 @@
 ---
 company: "Shopbot"
 url: "https://www.shopbot.com.au"
-title: "First focus on front-end - UI development on high-traffic websites"
+title:
+  en: "First focus on front-end - UI development on high-traffic websites"
+  fr: "Premier virage front-end - développement d'interfaces sur des sites à fort trafic"
 job_title: "Lead Front-End Developer"
 dateStart: 2010-06-01
 dateEnd: 2012-03-01
@@ -19,9 +21,5 @@ JavaScript (& jQuery).
 
 ---
 
-Développement de l'interface de sites à fort trafic.
-
-Développements concentrés sur le Front-end.
-
-Utilisation de PHP pour la restitution des données et d'HTML / CSS / Javascript
-(jQuery) pour l'interface. Utilisation dès que possible d'HTML5 / CSS 3.
+PHP pour la restitution des données. HTML5 / CSS3 côté client, avec beaucoup de
+JavaScript (et de jQuery).

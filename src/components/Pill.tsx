@@ -3,6 +3,7 @@ import { fontStyles } from "@/react-multiversal/font";
 import GlassView from "@/react-multiversal/GlassView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import TextForReader from "@/react-multiversal/TextForReader";
+import { l, Localized, useLang, useT } from "@/i18n";
 import { alpha, useTheme } from "@/styles";
 import { useMemo } from "react";
 import { StyleProp, Text, TextStyle, ViewStyle } from "react-native";
@@ -21,10 +22,10 @@ export default function Pill({
   transitionSize = "",
 }: {
   style?: StyleProp<ViewStyle>;
-  pre?: string;
-  title: string;
+  pre?: Localized<string>;
+  title: Localized<string>;
   titleStyle?: StyleProp<TextStyle>;
-  detail?: string;
+  detail?: Localized<string>;
   year: number;
   mode?: "default" | "ago" | "year";
   pillSpace?: AbsoluteSize;
@@ -33,9 +34,20 @@ export default function Pill({
   transitionSize?: string;
 }) {
   const theme = useTheme();
+  const t = useT();
+  const lang = useLang();
   const thisYear = useMemo(() => new Date().getFullYear(), []);
+  const years = thisYear - year;
+  // "19 years" / "19 ans", "20 years ago" / "il y a 20 ans" - French puts the
+  // "ago" in front, so the whole phrase is built per language, not glued.
+  const duration =
+    lang === "fr"
+      ? `${mode === "ago" ? "il y a " : ""}${years} an${years > 1 ? "s" : ""}`
+      : `${years} year${years > 1 ? "s" : ""}${mode === "ago" ? " ago" : ""}`;
   const viewTransitionName =
-    "text--" + (title + pre + detail + year).replace(/[^a-z0-9/s]+/gi, "-") + transitionSize;
+    "text--" +
+    (l(title, "en") + l(pre, "en") + l(detail, "en") + year).replace(/[^a-z0-9/s]+/gi, "-") +
+    transitionSize;
   return (
     <GlassView
       borderWidth={0.5}
@@ -65,7 +77,7 @@ export default function Pill({
                   },
                 ]}
               >
-                {pre + " "}
+                {t(pre) + " "}
               </Text>
             )}
             <Text
@@ -78,7 +90,7 @@ export default function Pill({
                 },
               ]}
             >
-              {title}
+              {t(title)}
               {!detail ? null : (
                 <Text
                   style={[
@@ -94,7 +106,7 @@ export default function Pill({
                   ]}
                 >
                   <TextForReader>{", "}</TextForReader>
-                  {detail}
+                  {t(detail)}
                 </Text>
               )}
             </Text>
@@ -114,8 +126,10 @@ export default function Pill({
                 year
               ) : (
                 <>
-                  <TextForReader>{" " + (mode === "ago" ? ": " : "for ")}</TextForReader>
-                  {thisYear - year + " years" + (mode === "ago" ? " ago" : "")}
+                  <TextForReader>
+                    {" " + (mode === "ago" ? ": " : lang === "fr" ? "depuis " : "for ")}
+                  </TextForReader>
+                  {duration}
                   <TextForReader>{"."}</TextForReader>
                 </>
               )}

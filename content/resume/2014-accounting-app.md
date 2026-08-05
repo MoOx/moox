@@ -1,7 +1,9 @@
 ---
 company: ViaReport
 url: "https://insightsoftware.com/viareport/"
-title: "Modernize a legacy bulky UI into an accessible one with modern techs"
+title:
+  en: "Modernize a legacy bulky UI into an accessible one with modern techs"
+  fr: "Modernisation d'une interface lourde et vieillissante en une interface accessible, avec des technos actuelles"
 job_title: "Lead Front-End Developer"
 dateStart: 2014-07-01
 dateEnd: 2015-03-01
@@ -25,10 +27,10 @@ of consolidated financial statements and auditing of consolidation operations..
 
 ---
 
-Développement d'une nouvelle architecture pour une interface complexe aidant à
-faciliter la consolidation financière ainsi que le processus de reporting de
-gestion consolidé
+Développement d'une nouvelle architecture front-end pour une interface complexe
+facilitant la consolidation financière et le processus de reporting de gestion
+consolidé.
 
-- Mise en place d'une application desktop web avec React
-- Mise en place d'un architecture avec Webpack et PostCSS
-- Formation d'un collègue, nouveau à React
+- Mise en place d'une application web desktop avec React
+- Architecture de la base de code avec Webpack et PostCSS
+- Formation d'un collègue qui découvrait React

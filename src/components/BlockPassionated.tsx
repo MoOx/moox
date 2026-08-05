@@ -1,3 +1,4 @@
+import { useHref, useT } from "@/i18n";
 import Image from "@/components/Image";
 import LinkButton from "@/components/LinkButton";
 import Container from "@/react-multiversal/Container";
@@ -12,6 +13,8 @@ import { StyleSheet, Text, View } from "react-native";
 const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 
 export default function BlockPassionated() {
+  const localizeHref = useHref();
+  const t = useT();
   const theme = useTheme();
   return (
     <View>
@@ -33,24 +36,30 @@ export default function BlockPassionated() {
             role="heading"
             aria-level={2}
           >
-            {"Passionated and Curious."}
+            {t({ en: "Passionated and Curious.", fr: "Passionné et curieux." })}
           </Text>
           <Text
             style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
             role="paragraph"
           >
-            {`I made my first website in 1998, and fell in love with web development. Since then, I never stopped to learn things, especially now with the rise of AI.
-From Dreamweaver to Cursor, years passed, but not my appetite to always discover new tools and technics to made even more cool and performant interfaces.`}
+            {t({
+              en: `I made my first website in 1998, and fell in love with web development. Since then, I never stopped to learn things, especially now with the rise of AI.
+From Dreamweaver to Cursor, years passed, but not my appetite to always discover new tools and technics to made even more cool and performant interfaces.`,
+              fr: `J'ai fait mon premier site web en 1998 et je suis tombé amoureux du développement web. Depuis, je n'ai jamais cessé d'apprendre, encore moins avec l'essor de l'IA.
+De Dreamweaver à Cursor, les années ont passé, mais pas mon appétit pour de nouveaux outils et de nouvelles techniques, au service d'interfaces toujours plus chouettes et plus rapides.`,
+            })}
           </Text>
           <LinkButton
-            href="/resume/"
+            href={localizeHref("/resume/")}
             color={theme.dynamicColors.back}
             textColor={theme.dynamicColors.text}
             spaceHorizontal="m"
             style={{ alignSelf: "flex-start" }}
           >
             <SpacedView horizontal="m">
-              <Text style={fontStyles.iosEm.callout}>{"Discover my story"}</Text>
+              <Text style={fontStyles.iosEm.callout}>
+                {t({ en: "Discover my story", fr: "Découvrir mon parcours" })}
+              </Text>
             </SpacedView>
           </LinkButton>
         </SpacedView>
@@ -128,7 +137,10 @@ From Dreamweaver to Cursor, years passed, but not my appetite to always discover
                       },
                     ]}
                   >
-                    {"Max about to discover Comic Sans"}
+                    {t({
+                      en: "Max about to discover Comic Sans",
+                      fr: "Max sur le point de découvrir Comic Sans",
+                    })}
                   </Text>
                   <Text
                     style={[
@@ -174,7 +186,7 @@ From Dreamweaver to Cursor, years passed, but not my appetite to always discover
                   },
                 ]}
               >
-                {"Not AI generated."}
+                {t({ en: "Not AI generated.", fr: "Pas généré par IA." })}
               </Text>
               <Text
                 style={[
@@ -190,7 +202,7 @@ From Dreamweaver to Cursor, years passed, but not my appetite to always discover
                   },
                 ]}
               >
-                {"Original photo."}
+                {t({ en: "Original photo.", fr: "Photo d'époque." })}
               </Text>
               <View
                 // @ts-ignore

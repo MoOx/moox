@@ -1,7 +1,9 @@
 ---
 company: "One2Team"
 url: "https://one2team.com"
-title: "Mobile (iOS / Android) app to manage customizable lists of configurable resources"
+title:
+  en: "Mobile (iOS / Android) app to manage customizable lists of configurable resources"
+  fr: "Application mobile (iOS / Android) de gestion de listes personnalisables de ressources configurables"
 job_title: "Lead Mobile Developer"
 dateStart: 2015-11-01
 dateEnd: 2016-03-01
@@ -37,14 +39,13 @@ customizable lists of configurable resources.
 
 ---
 
-Développement d'une application mobile React/Cordova spécifique de liste de
-resources dynamiques.
+Développement d'une application mobile React/Cordova de gestion de listes
+personnalisables de ressources configurables.
 
-- Mise en place d'une application web mobile avec React, packagé avec
-  Cordova/Phonegap
-- Mise en place d'un architecture avec Webpack et PostCSS
-- Formation de l'équipe à React
-- Développement de fonctionnalités avec animations optimisés pour bien
-  fonctionner sur des smartphones bas de gammes
-- Intégration à l'application de fonctionnalités natives (ex: utilisation de la
-  caméra et ajustements des clichés pris)
+- Architecture de la base de code mobile avec Cordova/Phonegap, React, Webpack
+  et PostCSS
+- Formation de l'équipe, qui découvrait React
+- Développement de fonctionnalités aux interactions soignées, qui devaient
+  rester fluides sur des appareils d'entrée de gamme
+- Intégration de fonctionnalités natives (appareil photo, retouche des clichés
+  avec pincer-pour-zoomer)

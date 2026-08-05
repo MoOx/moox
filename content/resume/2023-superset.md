@@ -1,8 +1,12 @@
 ---
 company: "Superset Productions"
 image: /resume/superset.jpg
-title: "Association organizing stand-up comedy shows in Toulouse"
-job_title: "Association President & Organizer"
+title:
+  en: "Association organizing stand-up comedy shows in Toulouse"
+  fr: "Association organisatrice de spectacles de stand-up à Toulouse"
+job_title:
+  en: "Association President & Organizer"
+  fr: "Président de l'association & organisateur"
 # Not a dev job: candidate for "Beyond Code" like Pékin Express - flag to be
 # confirmed during the editorial pass.
 personal: true
@@ -22,16 +26,7 @@ etc).
 
 ---
 
-Depuis que j'ai commencé le stand-up, je me suis investi dans ce milieu tout
-autant que j'ai pu m'investir dans le passé dans l'Open-Source en tant que
-développeur.
-
-J'ai donc créé une association accompagné d'autres artistes et ami·e·s, dont je
-suis maintenant président.
-
-Nous organisons des soirées pour offrir une ambiance comedy club aux
-toulousaines et toulousains. Cela implique beaucoup de logistique et
-d'organisation pour gérer l'accueil du public, les billetteries, la présence sur
-les réseaux sociaux (création de visuels, vidéos promotionnelles etc). Beaucoup
-de temps consacré à tout ça afin de pouvoir créer de bonnes conditions de jeu
-pour les artistes afin de développer l'art du Stand-up à Toulouse.
+Le stand-up est mon loisir. J'ai créé une association avec des ami·e·s pour
+organiser des soirées de stand-up dans différents lieux de Toulouse, et j'y
+assurais l'essentiel du travail de promotion (site, communication, billetterie,
+etc.).

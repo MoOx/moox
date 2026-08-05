@@ -1,3 +1,5 @@
+import { jobTitle } from "@/profile";
+import { useHref, useT } from "@/i18n";
 import { ResumeItem } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import ButtonView from "@/components/ButtonView";
@@ -58,6 +60,8 @@ export default function BlockMaxApp({
   width?: number;
 }) {
   const theme = useTheme();
+  const t = useT();
+  const localizeHref = useHref();
   const time = useCurrentTime();
   const [copied, setCopied] = useState(false);
   return (
@@ -123,7 +127,9 @@ export default function BlockMaxApp({
                 }}
               />
               <Spacer size="xxs" />
-              <Text style={[fontStyles.iosEm.body, theme.styles.textLight1]}>{"Developer"}</Text>
+              <Text style={[fontStyles.iosEm.body, theme.styles.textLight1]}>
+                {t({ en: "Developer", fr: "Développeur" })}
+              </Text>
             </View>
             <AvailabilityBadge showText={true} />
           </SpacedView>
@@ -140,7 +146,10 @@ export default function BlockMaxApp({
             <View style={{ flex: 1 }}>
               <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>{"@MoOx"}</Text>
               <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-                {"Senior Front-end Architect for Web and Mobile apps."}
+                {t({
+                  en: `${jobTitle} for web & mobile apps.`,
+                  fr: `${jobTitle} pour applications web & mobiles.`,
+                })}
               </Text>
             </View>
             <Avatar size={64} borderWidth={8} borderColor={"rgba(0, 0, 0, 0.05)"} />
@@ -148,7 +157,7 @@ export default function BlockMaxApp({
           <Spacer />
           <View style={{ flexDirection: "row" }}>
             <LinkButton
-              href="/contact/"
+              href={localizeHref("/contact/")}
               spaceHorizontal="s"
               spaceVertical="xxs"
               spaceGap={"xxs"}
@@ -162,7 +171,9 @@ export default function BlockMaxApp({
                     fill={textStyles.color}
                     style={{ opacity: 0.4 }}
                   />
-                  <Text style={[textStyles, fontStyles.iosEm.caption1]}>{"Hire Me"}</Text>
+                  <Text style={[textStyles, fontStyles.iosEm.caption1]}>
+                    {t({ en: "Hire Me", fr: "Me contacter" })}
+                  </Text>
                 </>
               )}
             </LinkButton>
@@ -203,7 +214,7 @@ export default function BlockMaxApp({
                           copied ? { opacity: 0, transform: [{ translateX: -6 }] } : {},
                         ]}
                       >
-                        {"Copy Email"}
+                        {t({ en: "Copy Email", fr: "Copier l'e-mail" })}
                       </Animated.Text>
                       <Animated.Text
                         style={[
@@ -220,7 +231,7 @@ export default function BlockMaxApp({
                             : { opacity: 0, transform: [{ translateX: 10 }] },
                         ]}
                       >
-                        {"Copied !"}
+                        {t({ en: "Copied !", fr: "Copié !" })}
                       </Animated.Text>
                     </View>
                   </>
@@ -235,7 +246,9 @@ export default function BlockMaxApp({
             gap="s"
             style={[theme.styles.backAlt, { borderRadius: 12 }]}
           >
-            <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>{"Follow me"}</Text>
+            <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>
+              {t({ en: "Follow me", fr: "Me suivre" })}
+            </Text>
             <SpacedView
               style={{
                 flexDirection: "row",
@@ -284,7 +297,7 @@ export default function BlockMaxApp({
         {!resumeEntry ? null : (
           <LinkView href={"/resume/#" + resumeEntry.slug}>
             <Text style={[fontStyles.iosEm.headline, theme.styles.text]}>
-              {"Latest Crazy Project"}
+              {t({ en: "Latest Crazy Project", fr: "Dernier projet un peu fou" })}
             </Text>
             <Spacer size="s" />
             <View style={{ flexDirection: "row" }}>

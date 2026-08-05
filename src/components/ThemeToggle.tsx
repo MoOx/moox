@@ -1,3 +1,4 @@
+import { useT } from "@/i18n";
 import ThemePreview from "@/components/ThemePreview";
 import { AbsoluteSize, WindowWidth } from "@/react-multiversal";
 import { white } from "@/react-multiversal/colors";
@@ -70,6 +71,7 @@ export default function ThemeToggle({
   const colorScheme = useColorScheme();
   const [userColorScheme, setUserColorScheme] = useUserColorScheme();
   const theme = useTheme();
+  const t = useT();
   const actualColorScheme =
     userColorScheme === "auto" ? (colorScheme === "dark" ? "dark" : "light") : userColorScheme;
   const handleChange = useCallback(
@@ -122,7 +124,7 @@ export default function ThemeToggle({
                 { fontSize: 12, lineHeight: 12 },
               ]}
             >
-              {"Appearance"}
+              {t({ en: "Appearance", fr: "Apparence" })}
             </Text>
             <Text
               style={[
@@ -159,7 +161,7 @@ export default function ThemeToggle({
                   userColorScheme == "light" ? [theme.styles.textMain, { fontWeight: "800" }] : {},
                 ]}
               >
-                {"Light"}
+                {t({ en: "Light", fr: "Clair" })}
               </Text>
             </SpacedView>
             <SpacedView horizontal="s" vertical="s" gap="xs">
@@ -185,7 +187,7 @@ export default function ThemeToggle({
                   userColorScheme == "auto" ? [theme.styles.textMain, { fontWeight: "800" }] : {},
                 ]}
               >
-                {"Auto"}
+                {t({ en: "Auto", fr: "Auto" })}
               </Text>
             </SpacedView>
             <SpacedView horizontal="s" vertical="s" gap="xs">
@@ -197,7 +199,7 @@ export default function ThemeToggle({
                   userColorScheme == "dark" ? [theme.styles.textMain, { fontWeight: "800" }] : {},
                 ]}
               >
-                {"Dark"}
+                {t({ en: "Dark", fr: "Sombre" })}
               </Text>
             </SpacedView>
           </View>

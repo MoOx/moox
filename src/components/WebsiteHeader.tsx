@@ -1,7 +1,9 @@
 import AvailabilityBadge from "@/components/AvailabilityBadge";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import LinkButton from "@/components/LinkButton";
 import ThemeToggle from "@/components/ThemeToggle";
 import { internalLinks, socials } from "@/consts";
+import { useHref, useT } from "@/i18n";
 import { size, WindowWidth } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
 import BlurView from "@/react-multiversal/BlurView";
@@ -35,26 +37,33 @@ const styles = StyleSheet.create({
 
 export default function WebsiteHeader() {
   const theme = useTheme();
+  const localizeHref = useHref();
+  const t = useT();
 
   const links = Object.entries(internalLinks).map(([text, link]) => (
     <LinkText
       key={link.href}
-      href={link.href}
+      href={localizeHref(link.href)}
       style={[theme.styles.text, styles.link]}
       activeStyle={styles.linkActive}
       underlineOnFocus={true}
     >
-      {text}
+      {t(link.label) ?? text}
     </LinkText>
   ));
 
   const contact = (
-    <LinkButton href="/contact/" spaceHorizontal="m" spaceVertical="xs" effect="subtle">
+    <LinkButton
+      href={localizeHref("/contact/")}
+      spaceHorizontal="m"
+      spaceVertical="xs"
+      effect="subtle"
+    >
       <Text
         numberOfLines={1}
         style={[theme.styles.textOnMain, { fontSize: 16, fontWeight: "300" }]}
       >
-        {"Let's talk"}
+        {t({ en: "Let's talk", fr: "Discutons" })}
       </Text>
     </LinkButton>
   );
@@ -110,7 +119,14 @@ export default function WebsiteHeader() {
             }}
           >
             <View style={styles.menuGroup}>
-              <LinkView href="/" style={{ flexDirection: "row" }} aria-label="Go to home page">
+              <LinkView
+                href={localizeHref("/")}
+                style={{ flexDirection: "row" }}
+                aria-label={t({
+                  en: "Go to home page",
+                  fr: "Aller à l'accueil",
+                })}
+              >
                 <Avatar size={32} borderWidth={2} borderColor="#000" />
                 <View
                   style={{
@@ -151,9 +167,10 @@ export default function WebsiteHeader() {
             <IfWindowWidthIs largerThan={WindowWidth.s}>
               <SpacedView
                 horizontal="m"
+                gap="xs"
                 style={[
                   {
-                    alignItems: "center",
+                    alignItems: "flex-end",
                     justifyContent: "center",
                     position: "absolute",
                     top: 72,
@@ -163,6 +180,7 @@ export default function WebsiteHeader() {
                   },
                 ]}
               >
+                <LanguageSwitcher />
                 <ThemeToggle />
               </SpacedView>
             </IfWindowWidthIs>

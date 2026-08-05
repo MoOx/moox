@@ -69,6 +69,99 @@ worklist feeding phases 4–5).
 
 ## Done
 
+- **2026-08-05 — the French PDF (closes phase 5).**
+  `scripts/generate-resume-pdf.mjs` now exports **one file per language**,
+  reusing a single dev server and a single browser: `/cv` →
+  `…-resume.pdf`, `/fr/cv` → `…-resume.fr.pdf`. The English URL is unchanged —
+  it is already circulating. `--lang=en|fr` renders just one. The site's
+  Download button reads `resumePdfPath(lang)` (`src/profile.tsx`), the single
+  source of those two paths — keep it in sync with the script. `/Info` is
+  scraped per language, so the French PDF is described in French, and
+  `metaKeywords` became language-aware (a French recruiter searches
+  "télétravail", not "remote"; English terms stay in the French list, since half
+  the French ads for this role are written in English).
+  **The French CV needs `scale: 0.97`**: French runs ~15% longer, page 1
+  overflowed and pushed the explicit `breakBefore: "page"` one page down — a
+  3-page CV. The scale is per-language in `SCALES`; recheck the page count
+  whenever the French copy grows. Verified: both files are **2 pages**, both
+  text layers extract cleanly (`pdftotext`), accents included.
+
+- **2026-08-05 — the chrome speaks French too.** Same contract as the content,
+  applied to the editorial strings: `profile.tsx` exports `Localized` values
+  (tagline, summary, jobSubtitle, availability, languages, skills domains with
+  their items/blurbs/keywords, skills pitch, open-source intro, hobbies) and
+  components read them through the new `useT()` hook — same overloads as `l()`,
+  so a value that is always defined stays defined and the JSX needs no `?? ""`.
+  Anything generated takes a `lang` instead: `metaTitle` / `metaDescription` /
+  `metaSubject`, `profileStats`, `updatedOn`, `personJsonLd`, and the date
+  helpers (`monthYear`, `monthRange`, `yearRange` — French months and
+  "aujourd'hui"), plus the timeline durations. Route `head()` functions run
+  outside React, so they read the language from `params.lang`. Menu labels moved
+  into `internalLinks` as `{ en, fr }` (the record key stays the English
+  fallback). Testimonials: `currentLang = "en"` is gone — the quotes were
+  already authored in both languages, and `originalLang` still drives the `lang`
+  attribute when a quote is read in the other one. Found and fixed on the way: the
+  Max-app card still advertised "Senior Front-end Architect", the title this
+  rework retired everywhere else — it now derives from `jobTitle`.
+
+- **2026-08-05 — the content speaks French.** The compiler
+  (`scripts/generate-content-indexes.mjs`) now splits each résumé body at its
+  `hr` into `body.en` / `body.fr` **at build time** — rewriting both the
+  per-entry JSON (what the standalone pages fetch) and the index — and drops
+  the body entirely for the ~12 entries that never had prose, instead of
+  emitting an empty block. `bodyBeforeFirstHr` is gone. In `api.tsx`,
+  `ResumeItemSource` describes an entry as authored (translatable fields may be
+  `{ en, fr }`) and `localizeResumeItem` resolves it to the plain-string
+  `ResumeItem` every component already consumes: **the language boundary is the
+  loader** (`fetchResume` / `fetchResumeEntry`), so no rendering code had to
+  learn about translations. Content translated: 42 titles, 9 pitches, 14 job
+  titles, 45 stat labels/comments and **all 30 bodies**. What stays English is
+  deliberate — figures (`50k+`), proper nouns (`Next.js`, `Issue #1`),
+  `company`, `hashtags`, and the tech job titles the French market uses in
+  English (`Lead Front-End Developer`, `Full-Stack Developer`); roles that are
+  not English in French were translated (`University Lecturer` → _Enseignant
+  vacataire_, `Creator & Maintainer` → _Créateur & mainteneur_). The French
+  blocks that predated the CV rework were rewritten from the current English,
+  not patched — and the ones that were still accurate were re-read and their
+  spelling fixed. Verified on the static build: 47 French pages carry French
+  bodies, the English pages are untouched, no cross-language leak.
+
+- **2026-08-05 — i18n plumbing: one route tree, two languages.** The pages in
+  scope moved under an **optional path segment**, `src/app/{-$lang}.*.tsx`
+  (TanStack Router ≥ 1.130), so `/resume` and `/fr/resume` are the same route
+  rendered twice — no duplicated route files, no `basepath` trick. Each route
+  guards the segment with `assertLangParam` (`/xx/resume` and `/en/resume` are
+  404s: English is the unprefixed default) and emits `alternateLinks` —
+  canonical + `hreflang` per language + `x-default`. `<html lang>` follows the
+  URL. New `src/i18n.ts` holds the whole contract: `Localized<T>` (a plain
+  value = English, or `{ en, fr }`), `l(value, lang)` with English fallback,
+  `useLang()`, and `localizedHref` / `useHref()` — the latter only prefixes
+  paths that actually exist in every language (`localizedPathPatterns`), so a
+  link to `/blog` from a French page stays English instead of 404ing. Internal
+  links are plain `href` strings here (`LinkText`/`LinkView`), so the ⓘ links
+  are localized once inside `Card` / `ExperienceCard` rather than at every call
+  site. `LanguageSwitcher` (header + footer) links to the current page in the
+  other language and hides itself on English-only sections. Verified: the modal
+  and its route masking work under `/fr` (URL masked as `/fr/resume/<slug>`,
+  scroll kept), and a full build prerenders **47 French pages** (index,
+  contact, resume, every entry and group). Not translated yet — French URLs
+  currently render the English copy, by design.
+
+- **2026-08-05 — modal a11y polish (closes phase 3).** `ResumeEntryModal`
+  focuses the dialog itself on open (`tabIndex={-1}`, so screen readers
+  announce the dialog label rather than the ✕), traps Tab / Shift+Tab inside
+  it (wrapping at both edges, tabbables recomputed on each key so the list
+  follows the rendered entry), and restores focus to the trigger on close —
+  every `focus()` call uses `preventScroll: true`, since the whole point of
+  the masked modal is that the page behind keeps its scroll position. Global
+  `prefers-reduced-motion: reduce` rule in `src/styles.css` kills the
+  animations of every view transition (root cross-fade, card→modal zoom, home
+  headings, pills): with no animation the transition ends on the next frame
+  and the new state is painted directly. Verified in the browser: focus
+  restored to the ⓘ, Tab confined to the dialog, scroll 2000 → 2000 across
+  open/close, and the modal renders clean with the reduced-motion rule forced
+  on (no frozen snapshot).
+
 - **2026-08-04 — modal ↔ standalone split (route masking).** Decision 4
   amended: `/resume/$slug` is now a root route (`resume_.$slug.tsx`), a
   standalone page carrying only the entry + its group siblings (own meta,
@@ -175,10 +268,11 @@ worklist feeding phases 4–5).
 
 ## Guardrails (from CLAUDE.md + the CV pass — they cost real damage)
 
-- **`src/app/cv.tsx` is done. Don't touch it** except mechanical renames from
-  the consts refactor and, later, the i18n field reads. Any visual/content
-  change there requires regenerating and re-verifying the PDF
-  (`pdftotext … | head -40`).
+- **`src/app/{-$lang}.cv.tsx` is done. Don't touch it** except mechanical
+  renames from the consts refactor and the i18n field reads (both have now
+  landed). Any visual/content change there requires regenerating and
+  re-verifying **both** PDFs — text layer _and_ page count, since the French
+  one only fits in two pages at `scale: 0.97`.
 - Derive, never hand-write (dates, counts). Flags, not positions.
 - Numbers must be checkable (`STATS.md`).
 - The title is **Lead Front-End Developer** — no "Architect" comeback.
@@ -248,9 +342,13 @@ Remaining for phase 3 (polish & sections):
 - [x] Open Source, Talks & Community, Education, Beyond Code sections on
       `/resume` (done 2026-08-02). Testimonials: link to LinkedIn
       recommendations instead of a section (decision 9).
-- [ ] Modal polish: focus trap + focus restoration, close button inside the
-      card, scroll restoration of the timeline position on close, reduced
-      motion for the zoom.
+- [x] Modal polish (done 2026-08-04/05): close button (✕, `SVGXmark`), scroll
+      of the page behind preserved on open/close (`resetScroll: false` + the
+      page stays mounted), focus moved into the dialog on open, Tab trapped
+      inside it, focus restored to the ⓘ that opened it on close (all
+      `preventScroll: true` so the trap never moves the page), and
+      `prefers-reduced-motion: reduce` disables every view transition
+      (`src/styles.css`).
 - [x] `techs` (and `hobbies`, `statsLine`, `keyExperiences`) moved to
       profile.tsx, shared by `/cv` and `/resume` (done 2026-08-02).
 
@@ -265,24 +363,44 @@ Remaining for phase 3 (polish & sections):
 
 ### Phase 5 — i18n plumbing
 
-- [ ] Markdown compiler: parse `{ en, fr }` frontmatter fields + split body
-      into `body.en`/`body.fr`; update `ResumeItem` types and every consumer
-      (EN fallback).
-- [ ] Translate consts strings (tagline, summary, skills items, labels…) —
-      same `{ en, fr }` shape or a light dictionary; decide at impl time.
-- [ ] `/fr` route prefix (TanStack Router), language switcher, `hreflang` +
-      `lang` attributes.
-- [ ] Later: FR PDF from `/fr/cv` (needs `cv.tsx` to read localized fields —
-      the one sanctioned `cv.tsx` change).
+Decisions taken 2026-08-05 with Max:
+
+- **Scope**: home, `/resume` (+ detail & group pages), `/cv`, `/contact` and
+  the site chrome (header, footer, mobile menu, error page). `/blog` and
+  `/talks` stay English-only — their posts already carry a per-item `lang`.
+- **Who writes the French**: drafted here, reviewed by Max.
+- **How a visitor gets French**: the switcher and `hreflang`, nothing else.
+  No `Accept-Language` redirection: a URL always serves the same language.
+
+Work:
+
+- [x] `/fr` route prefix, language switcher, `hreflang` + `lang` attributes
+      (done 2026-08-05, see Done above).
+- [x] Markdown compiler: `{ en, fr }` frontmatter fields + `body.en`/`body.fr`
+      (done 2026-08-05, see Done above).
+- [x] Write the French content: every frontmatter field and all 30 bodies
+      (done 2026-08-05, see Done above).
+- [x] Translate the editorial + UI strings (done 2026-08-05, see Done above).
+- [x] FR PDF from `/fr/cv` (done 2026-08-05, see Done above).
 
 ### Phase 6 — Documentation
 
-- [ ] Update `CV-REWORK-JOURNAL.md` with this pass (new sections).
-- [ ] Prune `CV-TO-WEB.md` items done here (title alignment, JSON-LD,
-      `/resume` fate); keep the still-parked ones (plain-text CV, Services
-      page, HTML semantics pass — note `GradientText` per-char spans still
-      need the `aria-label` fix, see its §5).
-- [ ] Update `CLAUDE.md` where-things-are table if files moved/renamed.
+- [x] `CV-REWORK-JOURNAL.md`: new §12 "Translation: what a second language
+      reveals" (the stale-translation drift and the word-count-ratio detector,
+      the retired job title translation surfaced, the loader as the language
+      boundary, A4 vs a 15%-longer language), plus two recurring lessons.
+      Errata renumbered §12 → §13.
+- [x] `CV-TO-WEB.md` pruned: §0 now lists what the web pass closed, §1
+      (JSON-LD) is marked done with the title-alignment blocker explained, the
+      intro no longer claims the web version is hypothetical. Still parked and
+      untouched: plain-text CV (§2, now next in line — two files, one per
+      language), Services page (§4), HTML semantics pass (§5, including the
+      `GradientText` per-character spans that still need `aria-label`).
+- [x] `CLAUDE.md`: where-things-are table updated ({-$lang} routes, `i18n.ts`,
+      two PDFs), the optional-language-segment routing explained, the PDF
+      verification snippet now covers both files **and the page count**, and two
+      new rules — translate at the boundary, and "a French string drifts like
+      any hand-written value" with the word-count audit.
 
 ---
 

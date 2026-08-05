@@ -1,3 +1,4 @@
+import { useHref, useT } from "@/i18n";
 import { menuBarLinks } from "@/consts";
 import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
@@ -65,9 +66,11 @@ export const WebsiteMobileMenuBackdropStyles = () => {
 export const WebsiteMobileMenuLinks = () => {
   const theme = useTheme();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const localizeHref = useHref();
+  const t = useT();
   return (
     <>
-      {Object.entries(menuBarLinks).map(([text, { href, isActive, icon }]) => {
+      {Object.entries(menuBarLinks).map(([text, { href, label, isActive, icon }]) => {
         const active = isActive?.(pathname, href);
         const color =
           theme.mode === "light"
@@ -78,7 +81,7 @@ export const WebsiteMobileMenuLinks = () => {
               ? "hsl(230 90% 70%)"
               : theme.dynamicColors.text;
         return (
-          <LinkView key={href} href={href}>
+          <LinkView key={href} href={localizeHref(href)}>
             <SpacedView
               horizontal={size("m") * 1.25}
               vertical="xxs"
@@ -105,7 +108,7 @@ export const WebsiteMobileMenuLinks = () => {
                   color,
                 }}
               >
-                {text}
+                {t(label) ?? text}
               </Text>
             </SpacedView>
           </LinkView>

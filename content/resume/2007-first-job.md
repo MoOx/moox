@@ -1,7 +1,9 @@
 ---
 company: "Kiweb"
 url: "http://web.archive.org/web/20121003174523/http://www.kiweb.fr/"
-title: "First job - real estate portal & online shops (Zend Framework)"
+title:
+  en: "First job - real estate portal & online shops (Zend Framework)"
+  fr: "Premier poste - portail immobilier et boutiques en ligne (Zend Framework)"
 job_title: "Full-Stack Developer"
 dateStart: 2007-07-01
 dateEnd: 2008-05-01
@@ -22,9 +24,7 @@ Magento.
 
 ---
 
-Développement d'un portail immobilier avec PHP et le Zend Framework.
+Développement d'un portail immobilier en PHP avec le Zend Framework.
 
-Également responsable du développement de plusieurs boutiques en ligne avec
+Également en charge du développement de plusieurs boutiques en ligne sous
 osCommerce, Prestashop et Magento.
-
-Contributions open source à Prestashop et Magento.

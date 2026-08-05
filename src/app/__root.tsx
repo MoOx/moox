@@ -10,6 +10,7 @@ import {
   UserColorScheme,
   userColorSchemeStorageKey,
 } from "@/react-multiversal/theme/colorScheme";
+import { useLang } from "@/i18n";
 import { getWebHtmlClass, getWebStyleSheet } from "@/styles";
 import appCss from "@/styles.css?url";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
@@ -59,6 +60,7 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: ReactNode }) {
   const userColorScheme = "auto" as UserColorScheme;
+  const lang = useLang();
 
   useEffect(() => {
     if (window.localStorage) {
@@ -68,7 +70,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
   return (
     <html
-      lang="en"
+      lang={lang}
       className={[getUserColorSchemeWebHtmlClass(userColorScheme), getWebHtmlClass()].join(" ")}
       suppressHydrationWarning
     >

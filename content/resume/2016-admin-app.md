@@ -1,7 +1,9 @@
 ---
 company: "Mphasis"
 url: "https://www.mphasis.com"
-title: "Web app built to manage dynamic resources with a complex database"
+title:
+  en: "Web app built to manage dynamic resources with a complex database"
+  fr: "Application web de gestion de ressources dynamiques sur une base de données complexe"
 job_title: "Lead Front-End Developer"
 dateStart: 2016-06-01
 dateEnd: 2017-03-01
@@ -33,18 +35,16 @@ database.
 
 ---
 
-Développement d'une application web avec React de gestion de resources dynamique
-lié à une base de données complexe.
+Développement avec React d'une application web de gestion de ressources
+dynamiques, adossée à une base de données complexe.
 
 - Démarrage du projet
-- Architecture de l'application en utilisant React Native Web
-- Intégration de Flow, un outil d'analyse statique pour améliorer fortement la
+- Architecture de la base de code avec React Native Web
+- Intégration de Flow, un analyseur statique de types, pour renforcer la
   qualité du code
 - Intégration de Jest avec des snapshots pour faciliter le développement au
-  quotidien & automatisé les tests
-- Formation de l'équipe en React, React Native Web, tests automatisés unitaires
-  avec Jest
-- Rôle de développeur Lead à distance d'un équipe de plusieurs développeurs avec
-  différents profils & niveaux (France et Inde).
-- Code review quotidiennes pour monter le niveau de l'équipe (la plupart des
-  membres étant nouveau au JavaScript moderne ainsi que React)
+  quotidien et automatiser les tests
+- Encadrement d'une équipe répartie entre la France et l'Inde
+- Formation de l'équipe, qui découvrait le JavaScript moderne, React, React
+  Native Web et Jest
+- Revue de code quotidienne pour faire monter l'équipe en compétence

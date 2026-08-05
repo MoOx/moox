@@ -1,3 +1,4 @@
+import { useT, useLang } from "@/i18n";
 import { ResumeItem } from "@/api";
 import Image from "@/components/Image";
 import {
@@ -24,6 +25,8 @@ import { StyleSheet, Text, View } from "react-native";
  * each with its headline figure - all of it read from the markdown frontmatter.
  */
 export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
+  const t = useT();
+  const lang = useLang();
   return (
     <View style={{ borderRadius: size("s"), overflow: "hidden" }}>
       <GradientLinear
@@ -75,7 +78,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
         </View>
 
         <Text style={[fontStyles.ios.footnote, { color: alpha(colors.white, 0.85) }]}>
-          {openSourceIntro}
+          {t(openSourceIntro)}
         </Text>
 
         <View
@@ -121,7 +124,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
                       </Text>
                     </LinkView>
                     <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.66) }]}>
-                      {`${item.job_title ?? ""} · ${yearRange(item)}`}
+                      {`${item.job_title ?? ""} · ${yearRange(item, lang)}`}
                     </Text>
                   </View>
 

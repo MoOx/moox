@@ -9,41 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './app/__root'
-import { Route as IndexRouteImport } from './app/index'
-import { Route as ContactRouteImport } from './app/contact'
-import { Route as CvRouteImport } from './app/cv'
 import { Route as DesignSystemRouteImport } from './app/design-system'
-import { Route as ResumeRouteImport } from './app/resume'
 import { Route as BlogIndexRouteImport } from './app/blog.index'
 import { Route as BlogSlugRouteImport } from './app/blog.$slug'
-import { Route as ResumeSlugRouteImport } from './app/resume_.$slug'
 import { Route as TalksIndexRouteImport } from './app/talks.index'
 import { Route as TalksSlugRouteImport } from './app/talks.$slug'
-import { Route as ResumeGroupGroupRouteImport } from './app/resume_.group.$group'
+import { Route as Char123LangChar125IndexRouteImport } from './app/{-$lang}.index'
+import { Route as Char123LangChar125ContactRouteImport } from './app/{-$lang}.contact'
+import { Route as Char123LangChar125CvRouteImport } from './app/{-$lang}.cv'
+import { Route as Char123LangChar125ResumeRouteImport } from './app/{-$lang}.resume'
+import { Route as Char123LangChar125ResumeSlugRouteImport } from './app/{-$lang}.resume_.$slug'
+import { Route as Char123LangChar125ResumeGroupGroupRouteImport } from './app/{-$lang}.resume_.group.$group'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CvRoute = CvRouteImport.update({
-  id: '/cv',
-  path: '/cv',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResumeRoute = ResumeRouteImport.update({
-  id: '/resume',
-  path: '/resume',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -56,11 +36,6 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResumeSlugRoute = ResumeSlugRouteImport.update({
-  id: '/resume_/$slug',
-  path: '/resume/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TalksIndexRoute = TalksIndexRouteImport.update({
   id: '/talks/',
   path: '/talks/',
@@ -71,143 +46,144 @@ const TalksSlugRoute = TalksSlugRouteImport.update({
   path: '/talks/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResumeGroupGroupRoute = ResumeGroupGroupRouteImport.update({
-  id: '/resume_/group/$group',
-  path: '/resume/group/$group',
+const Char123LangChar125IndexRoute = Char123LangChar125IndexRouteImport.update({
+  id: '/{-$lang}/',
+  path: '/{-$lang}/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char123LangChar125ContactRoute =
+  Char123LangChar125ContactRouteImport.update({
+    id: '/{-$lang}/contact',
+    path: '/{-$lang}/contact',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char123LangChar125CvRoute = Char123LangChar125CvRouteImport.update({
+  id: '/{-$lang}/cv',
+  path: '/{-$lang}/cv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Char123LangChar125ResumeRoute =
+  Char123LangChar125ResumeRouteImport.update({
+    id: '/{-$lang}/resume',
+    path: '/{-$lang}/resume',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char123LangChar125ResumeSlugRoute =
+  Char123LangChar125ResumeSlugRouteImport.update({
+    id: '/{-$lang}/resume_/$slug',
+    path: '/{-$lang}/resume/$slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char123LangChar125ResumeGroupGroupRoute =
+  Char123LangChar125ResumeGroupGroupRouteImport.update({
+    id: '/{-$lang}/resume_/group/$group',
+    path: '/{-$lang}/resume/group/$group',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/contact': typeof ContactRoute
-  '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
-  '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/resume/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
+  '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
+  '/{-$lang}/cv': typeof Char123LangChar125CvRoute
+  '/{-$lang}/resume': typeof Char123LangChar125ResumeRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
-  '/resume/group/$group': typeof ResumeGroupGroupRoute
+  '/{-$lang}/': typeof Char123LangChar125IndexRoute
+  '/{-$lang}/resume/$slug': typeof Char123LangChar125ResumeSlugRoute
+  '/{-$lang}/resume/group/$group': typeof Char123LangChar125ResumeGroupGroupRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/contact': typeof ContactRoute
-  '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
-  '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/resume/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
+  '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
+  '/{-$lang}/cv': typeof Char123LangChar125CvRoute
+  '/{-$lang}/resume': typeof Char123LangChar125ResumeRoute
   '/blog': typeof BlogIndexRoute
   '/talks': typeof TalksIndexRoute
-  '/resume/group/$group': typeof ResumeGroupGroupRoute
+  '/{-$lang}': typeof Char123LangChar125IndexRoute
+  '/{-$lang}/resume/$slug': typeof Char123LangChar125ResumeSlugRoute
+  '/{-$lang}/resume/group/$group': typeof Char123LangChar125ResumeGroupGroupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/contact': typeof ContactRoute
-  '/cv': typeof CvRoute
   '/design-system': typeof DesignSystemRoute
-  '/resume': typeof ResumeRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/resume_/$slug': typeof ResumeSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
+  '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
+  '/{-$lang}/cv': typeof Char123LangChar125CvRoute
+  '/{-$lang}/resume': typeof Char123LangChar125ResumeRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
-  '/resume_/group/$group': typeof ResumeGroupGroupRoute
+  '/{-$lang}/': typeof Char123LangChar125IndexRoute
+  '/{-$lang}/resume_/$slug': typeof Char123LangChar125ResumeSlugRoute
+  '/{-$lang}/resume_/group/$group': typeof Char123LangChar125ResumeGroupGroupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/contact'
-    | '/cv'
     | '/design-system'
-    | '/resume'
     | '/blog/$slug'
-    | '/resume/$slug'
     | '/talks/$slug'
+    | '/{-$lang}/contact'
+    | '/{-$lang}/cv'
+    | '/{-$lang}/resume'
     | '/blog/'
     | '/talks/'
-    | '/resume/group/$group'
+    | '/{-$lang}/'
+    | '/{-$lang}/resume/$slug'
+    | '/{-$lang}/resume/group/$group'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/contact'
-    | '/cv'
     | '/design-system'
-    | '/resume'
     | '/blog/$slug'
-    | '/resume/$slug'
     | '/talks/$slug'
+    | '/{-$lang}/contact'
+    | '/{-$lang}/cv'
+    | '/{-$lang}/resume'
     | '/blog'
     | '/talks'
-    | '/resume/group/$group'
+    | '/{-$lang}'
+    | '/{-$lang}/resume/$slug'
+    | '/{-$lang}/resume/group/$group'
   id:
     | '__root__'
-    | '/'
-    | '/contact'
-    | '/cv'
     | '/design-system'
-    | '/resume'
     | '/blog/$slug'
-    | '/resume_/$slug'
     | '/talks/$slug'
+    | '/{-$lang}/contact'
+    | '/{-$lang}/cv'
+    | '/{-$lang}/resume'
     | '/blog/'
     | '/talks/'
-    | '/resume_/group/$group'
+    | '/{-$lang}/'
+    | '/{-$lang}/resume_/$slug'
+    | '/{-$lang}/resume_/group/$group'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  ContactRoute: typeof ContactRoute
-  CvRoute: typeof CvRoute
   DesignSystemRoute: typeof DesignSystemRoute
-  ResumeRoute: typeof ResumeRoute
   BlogSlugRoute: typeof BlogSlugRoute
-  ResumeSlugRoute: typeof ResumeSlugRoute
   TalksSlugRoute: typeof TalksSlugRoute
+  Char123LangChar125ContactRoute: typeof Char123LangChar125ContactRoute
+  Char123LangChar125CvRoute: typeof Char123LangChar125CvRoute
+  Char123LangChar125ResumeRoute: typeof Char123LangChar125ResumeRoute
   BlogIndexRoute: typeof BlogIndexRoute
   TalksIndexRoute: typeof TalksIndexRoute
-  ResumeGroupGroupRoute: typeof ResumeGroupGroupRoute
+  Char123LangChar125IndexRoute: typeof Char123LangChar125IndexRoute
+  Char123LangChar125ResumeSlugRoute: typeof Char123LangChar125ResumeSlugRoute
+  Char123LangChar125ResumeGroupGroupRoute: typeof Char123LangChar125ResumeGroupGroupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cv': {
-      id: '/cv'
-      path: '/cv'
-      fullPath: '/cv'
-      preLoaderRoute: typeof CvRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/design-system': {
       id: '/design-system'
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/resume': {
-      id: '/resume'
-      path: '/resume'
-      fullPath: '/resume'
-      preLoaderRoute: typeof ResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -224,13 +200,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resume_/$slug': {
-      id: '/resume_/$slug'
-      path: '/resume/$slug'
-      fullPath: '/resume/$slug'
-      preLoaderRoute: typeof ResumeSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/talks/': {
       id: '/talks/'
       path: '/talks'
@@ -245,28 +214,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TalksSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resume_/group/$group': {
-      id: '/resume_/group/$group'
-      path: '/resume/group/$group'
-      fullPath: '/resume/group/$group'
-      preLoaderRoute: typeof ResumeGroupGroupRouteImport
+    '/{-$lang}/': {
+      id: '/{-$lang}/'
+      path: '/{-$lang}'
+      fullPath: '/{-$lang}/'
+      preLoaderRoute: typeof Char123LangChar125IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/{-$lang}/contact': {
+      id: '/{-$lang}/contact'
+      path: '/{-$lang}/contact'
+      fullPath: '/{-$lang}/contact'
+      preLoaderRoute: typeof Char123LangChar125ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/{-$lang}/cv': {
+      id: '/{-$lang}/cv'
+      path: '/{-$lang}/cv'
+      fullPath: '/{-$lang}/cv'
+      preLoaderRoute: typeof Char123LangChar125CvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/{-$lang}/resume': {
+      id: '/{-$lang}/resume'
+      path: '/{-$lang}/resume'
+      fullPath: '/{-$lang}/resume'
+      preLoaderRoute: typeof Char123LangChar125ResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/{-$lang}/resume_/$slug': {
+      id: '/{-$lang}/resume_/$slug'
+      path: '/{-$lang}/resume/$slug'
+      fullPath: '/{-$lang}/resume/$slug'
+      preLoaderRoute: typeof Char123LangChar125ResumeSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/{-$lang}/resume_/group/$group': {
+      id: '/{-$lang}/resume_/group/$group'
+      path: '/{-$lang}/resume/group/$group'
+      fullPath: '/{-$lang}/resume/group/$group'
+      preLoaderRoute: typeof Char123LangChar125ResumeGroupGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ContactRoute: ContactRoute,
-  CvRoute: CvRoute,
   DesignSystemRoute: DesignSystemRoute,
-  ResumeRoute: ResumeRoute,
   BlogSlugRoute: BlogSlugRoute,
-  ResumeSlugRoute: ResumeSlugRoute,
   TalksSlugRoute: TalksSlugRoute,
+  Char123LangChar125ContactRoute: Char123LangChar125ContactRoute,
+  Char123LangChar125CvRoute: Char123LangChar125CvRoute,
+  Char123LangChar125ResumeRoute: Char123LangChar125ResumeRoute,
   BlogIndexRoute: BlogIndexRoute,
   TalksIndexRoute: TalksIndexRoute,
-  ResumeGroupGroupRoute: ResumeGroupGroupRoute,
+  Char123LangChar125IndexRoute: Char123LangChar125IndexRoute,
+  Char123LangChar125ResumeSlugRoute: Char123LangChar125ResumeSlugRoute,
+  Char123LangChar125ResumeGroupGroupRoute:
+    Char123LangChar125ResumeGroupGroupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

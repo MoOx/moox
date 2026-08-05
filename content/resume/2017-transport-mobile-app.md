@@ -2,7 +2,9 @@
 company: "Hove"
 url: "https://hove.com/"
 group: hove
-title: "iOS / Android app built for cities and transport networks"
+title:
+  en: "iOS / Android app built for cities and transport networks"
+  fr: "Application iOS / Android pour les villes et les réseaux de transport"
 job_title: "Lead Front-End Developer"
 dateStart: 2017-03-01
 dateEnd: 2018-06-01
@@ -52,35 +54,26 @@ profiles and levels.
 
 ---
 
-Développement d'un projet d'application de transport urbain en marque blanche
-iOS/Android avec React Native.
+L'application de transport en marque blanche pour les villes et les réseaux de
+transport commence ici : j'ai conçu l'architecture de la base de code React
+Native pour iOS et Android, développé la moitié de l'application moi-même et
+construit l'équipe autour. La plupart des développeurs découvraient le
+JavaScript moderne, React et React Native : la formation faisait partie de la
+mission dès le premier jour — revues de code quotidiennes, et un filet de
+sécurité posé tôt : Flow pour le typage statique, Jest avec des snapshots
+Storybook pour le quotidien, des tests end-to-end Detox exécutés sur un Jenkins
+local.
 
-- Démarrage du projet et création d'une équipe
-- Développement d'une grosse partie de l'application
-- Architecture de l'application en utilisant React Native
-- Intégration de Flow, un outil d'analyse statique pour améliorer fortement la
-  qualité du code
-- Intégration de Jest couplé à Storybook avec des snapshots pour faciliter le
-  développement au quotidien & automatisé les tests
-- Intégration de Detox, un outil pour automatiser les tests fonctionnels, et
-  configuration associé sur le serveur local d'intégration continue avec Jenkins
-- Formation de l'équipe en React Native, tests automatisés unitaires avec Jest
-  et fonctionnels avec Detox
-- Gestion de l'aspect marque blanche de l'application avec système spécifique
-  mis en place, configurable dans une administration dédié
-- Gestion du système de déclinaison par client, avec un script spécifique
-  configuré avec Fastlane, un outil d'automatisation de compilation d'appli iOS
-  et Android
-- Rôle de développeur Lead à distance d'un équipe de plusieurs développeurs avec
-  différents profils & niveaux.
-- Code review quotidiennes pour monter le niveau de l'équipe (la plupart des
-  membres étant nouveau au JavaScript moderne ainsi que React)
-- Développement de fonctionnalités avec animations optimisés pour bien
-  fonctionner sur des smartphones bas de gammes
-- Transformation des designs Photoshop en composants React avec gestion des
-  problématiques non anticipé par le rendu statique des maquettes
-- Intégration de code et dépendances natives pour iOS et Android avec bridge
-  pour utilisation par React Native
-- Migration iOS d'une partie du .xcodeproj (librairies lié à la main) vers un
-  Podfile via Cocoapods pour faciliter les mises à jour de React Native
-- Gestion de plusieurs mises à jour de React Native au cours de la mission
+La marque blanche est la contrainte structurante : chaque réseau client reçoit
+sa propre déclinaison de l'application, personnalisée depuis une interface
+d'administration dédiée, avec des builds par client automatisés par un script
+maison au-dessus de Fastlane.
+
+Le reste, c'était le quotidien de React Native à l'échelle : des animations
+soignées qui devaient rester fluides sur des appareils d'entrée de gamme, des
+maquettes Photoshop transformées en composants avec tous les cas qu'un visuel
+figé n'anticipe jamais, du code natif et des ponts pour les deux plateformes,
+et un .xcodeproj lié à la main, migré vers Cocoapods pour que les montées de
+version de React Native — plusieurs sur la mission — cessent de faire mal. Le
+tout à distance, en encadrant des développeurs aux profils et aux niveaux très
+différents.

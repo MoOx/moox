@@ -1,3 +1,4 @@
+import { useHref } from "@/i18n";
 import { ResumeStat } from "@/api";
 import Image from "@/components/Image";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
@@ -22,11 +23,9 @@ const borderRadius = size("s");
 // Angled opacity masks: the illustration is at full strength on its outer
 // edge and dissolves toward the text - no hard seam with the card surface.
 // Wide screens: image on the right, fading toward the copy on the left.
-const sideImageMask =
-  "linear-gradient(100deg, transparent 10%, rgb(0, 0, 0) 90%)";
+const sideImageMask = "linear-gradient(100deg, transparent 10%, rgb(0, 0, 0) 90%)";
 // Narrow screens: image as a top band, fading down into the card.
-const topImageMask =
-  "linear-gradient(185deg, rgb(0, 0, 0) 0%, transparent 75%)";
+const topImageMask = "linear-gradient(185deg, rgb(0, 0, 0) 0%, transparent 75%)";
 
 /**
  * Full-width experience row: quiet themed surface (hairline border + faint
@@ -96,6 +95,7 @@ export default function ExperienceCard({
   style?: StyleProp<ViewStyle>;
 }) {
   const theme = useTheme();
+  const localizeHref = useHref();
   const full = mode === "full";
 
   // Header block (pretitle, icon, title, company · dates). Rendered in the
@@ -139,15 +139,11 @@ export default function ExperienceCard({
         <View style={{ flexGrow: 1, flexShrink: 1, minWidth: 0 }}>
           {infoHref ? (
             <LinkText
-              href={infoHref}
+              href={localizeHref(infoHref)}
               onPress={infoOnPress}
               role="heading"
               aria-level={3}
-              style={[
-                fontStyles.iosEm.title2,
-                theme.styles.text,
-                { fontWeight: weight.bold },
-              ]}
+              style={[fontStyles.iosEm.title2, theme.styles.text, { fontWeight: weight.bold }]}
             >
               {title}
             </LinkText>
@@ -155,11 +151,7 @@ export default function ExperienceCard({
             <Text
               role="heading"
               aria-level={3}
-              style={[
-                fontStyles.iosEm.title2,
-                theme.styles.text,
-                { fontWeight: weight.bold },
-              ]}
+              style={[fontStyles.iosEm.title2, theme.styles.text, { fontWeight: weight.bold }]}
             >
               {title}
             </Text>
@@ -167,11 +159,7 @@ export default function ExperienceCard({
           {company || dates ? (
             <Text style={[fontStyles.ios.caption1, theme.styles.textLight2]}>
               {company ? (
-                <Text
-                  style={[fontStyles.iosEm.caption1, theme.styles.textLight1]}
-                >
-                  {company}
-                </Text>
+                <Text style={[fontStyles.iosEm.caption1, theme.styles.textLight1]}>{company}</Text>
               ) : null}
               {company && dates ? " · " : null}
               {dates}
@@ -192,9 +180,7 @@ export default function ExperienceCard({
         },
         // Full mode is a reading surface (modal / standalone page): opaque
         // background; compact keeps the quiet translucent tint.
-        full
-          ? theme.styles.backOnAlt
-          : { backgroundColor: theme.dynamicColors.backMainAlpha05 },
+        full ? theme.styles.backOnAlt : { backgroundColor: theme.dynamicColors.backMainAlpha05 },
         style,
       ]}
     >
@@ -228,9 +214,7 @@ export default function ExperienceCard({
             return full ? (
               band
             ) : (
-              <IfWindowWidthIs smallerThan={WindowWidth.m}>
-                {band}
-              </IfWindowWidthIs>
+              <IfWindowWidthIs smallerThan={WindowWidth.m}>{band}</IfWindowWidthIs>
             );
           })()
         : null}
@@ -257,7 +241,7 @@ export default function ExperienceCard({
       ) : null}
       {infoHref ? (
         <LinkView
-          href={infoHref}
+          href={localizeHref(infoHref)}
           onPress={infoOnPress}
           // containerStyle, not style: this must position/size the <a>
           // itself - on the inner text node the anchor collapses to a
@@ -290,18 +274,14 @@ export default function ExperienceCard({
               layout keeps it in the copy column. */}
           {image ? (
             full ? null : (
-              <IfWindowWidthIs largerThan={WindowWidth.m}>
-                {header}
-              </IfWindowWidthIs>
+              <IfWindowWidthIs largerThan={WindowWidth.m}>{header}</IfWindowWidthIs>
             )
           ) : (
             header
           )}
           <SpacedView gap="s">
             {text ? (
-              <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>
-                {text}
-              </Text>
+              <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>{text}</Text>
             ) : null}
             {full && body ? <MdAsJsonRenderer body={body} /> : null}
             {stats && stats.length > 0 ? (
@@ -365,11 +345,7 @@ export default function ExperienceCard({
                   gap: size("xs"),
                 }}
               >
-                <SVGExternalLink
-                  width={12}
-                  height={12}
-                  fill={theme.dynamicColors.textMain}
-                />
+                <SVGExternalLink width={12} height={12} fill={theme.dynamicColors.textMain} />
                 {links.map((link) => (
                   <LinkText
                     key={link.title}

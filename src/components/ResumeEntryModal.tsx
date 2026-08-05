@@ -2,10 +2,22 @@ import { ResumeItem } from "@/api";
 import ResumeEntryDetailCard from "@/components/ResumeEntryDetailCard";
 import { size } from "@/react-multiversal";
 import SVGXmark from "@/svgs/components/SVGXmark";
+import { langToParam, useLang } from "@/i18n";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { View } from "react-native";
+
+const focusableSelector = "a[href], button, input, select, textarea, [tabindex]";
+
+/** Tabbable descendants, in DOM order (the backdrop link is tabIndex -1). */
+const tabbablesIn = (root: HTMLElement) =>
+  Array.from(root.querySelectorAll<HTMLElement>(focusableSelector)).filter(
+    (element) =>
+      element.tabIndex >= 0 &&
+      !element.hasAttribute("disabled") &&
+      element.getClientRects().length > 0,
+  );
 
 /**
  * Experience detail as a modal above `/resume`. Only reached by client-side
@@ -35,17 +47,54 @@ export default function ResumeEntryModal({
   label: string;
 }) {
   const navigate = useNavigate();
+  const lang = useLang();
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  // Focus management: move focus into the dialog on open, keep Tab cycling
+  // inside it while it is open, and give focus back to the ⓘ that opened it on
+  // close. `preventScroll` throughout: the page behind stays mounted and its
+  // scroll position is the whole point of the modal.
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    const previouslyFocused =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    dialog?.focus({ preventScroll: true });
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Tab" || !dialog) return;
+      const tabbables = tabbablesIn(dialog);
+      // Tabbing out of the last element wraps to the first (and back the other
+      // way with Shift), as does tabbing from anywhere outside the dialog.
+      const edge = event.shiftKey ? tabbables[0] : tabbables[tabbables.length - 1];
+      const wrapTo = event.shiftKey ? tabbables[tabbables.length - 1] : tabbables[0];
+      const active = document.activeElement;
+      if (active && dialog.contains(active) && active !== edge) return;
+      event.preventDefault();
+      wrapTo?.focus({ preventScroll: true });
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      previouslyFocused?.focus?.({ preventScroll: true });
+    };
+  }, []);
 
   // Escape closes (the ✕, backdrop click and browser back also do).
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        void navigate({ to: "/resume", search: {}, resetScroll: false });
+        void navigate({
+          to: "/{-$lang}/resume",
+          params: { lang: langToParam(lang) },
+          search: {},
+          resetScroll: false,
+        });
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [navigate]);
+  }, [navigate, lang]);
 
   // Lock the page scroll while the modal is open.
   useEffect(() => {
@@ -58,10 +107,13 @@ export default function ResumeEntryModal({
 
   const dialog = (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label={label}
+      tabIndex={-1}
       style={{
+        outline: "none",
         position: "fixed",
         inset: 0,
         zIndex: 100,
@@ -72,7 +124,8 @@ export default function ResumeEntryModal({
       }}
     >
       <Link
-        to="/resume"
+        to="/{-$lang}/resume"
+        params={{ lang: langToParam(lang) }}
         search={{}}
         resetScroll={false}
         aria-hidden="true"
@@ -85,7 +138,8 @@ export default function ResumeEntryModal({
         }}
       />
       <Link
-        to="/resume"
+        to="/{-$lang}/resume"
+        params={{ lang: langToParam(lang) }}
         search={{}}
         resetScroll={false}
         aria-label="Close"

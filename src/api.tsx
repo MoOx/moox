@@ -1,3 +1,5 @@
+import { l, Lang, Localized } from "@/i18n";
+
 export type ContentItem = {
   slug: string;
   title: string;
@@ -73,6 +75,57 @@ export type ResumeItem = ContentItem & {
   stats?: ResumeStat[];
 };
 
+/**
+ * A résumé entry as authored, before a language is picked: the editorial
+ * fields may carry `{ en, fr }` maps and the body is split per language by
+ * `scripts/generate-content-indexes.mjs`. Everything reaching a component goes
+ * through `localizeResumeItem` first, so `ResumeItem` above stays plain
+ * strings and no rendering code has to know about translations.
+ *
+ * Nothing else is translatable on purpose: `company` is a proper noun,
+ * `hashtags` are technologies, and dates, slugs and images are not prose.
+ */
+export type ResumeItemSource = Omit<
+  ResumeItem,
+  "title" | "groupTitle" | "pitch" | "groupPitch" | "job_title" | "stats" | "links" | "body"
+> & {
+  title: Localized<string>;
+  groupTitle?: Localized<string>;
+  pitch?: Localized<string>;
+  groupPitch?: Localized<string>;
+  job_title?: Localized<string>;
+  stats?: ResumeStatSource[];
+  links?: Array<{ title: Localized<string>; url: string }>;
+  /** `en` is always present; `fr` only once the entry has been translated. */
+  body?: { en: unknown; fr?: unknown };
+};
+
+export type ResumeStatSource = Omit<ResumeStat, "stat" | "label" | "title" | "comment"> & {
+  stat: Localized<string>;
+  label: Localized<string>;
+  title?: Localized<string>;
+  comment?: Localized<string>;
+};
+
+/** Resolves every translatable field of an entry to one language. */
+export const localizeResumeItem = (item: ResumeItemSource, lang: Lang): ResumeItem => ({
+  ...item,
+  title: l(item.title, lang),
+  groupTitle: l(item.groupTitle, lang),
+  pitch: l(item.pitch, lang),
+  groupPitch: l(item.groupPitch, lang),
+  job_title: l(item.job_title, lang),
+  stats: item.stats?.map((stat) => ({
+    ...stat,
+    stat: l(stat.stat, lang),
+    label: l(stat.label, lang),
+    title: l(stat.title, lang),
+    comment: l(stat.comment, lang),
+  })),
+  links: item.links?.map((link) => ({ ...link, title: l(link.title, lang) })),
+  body: item.body ? l(item.body as Localized<unknown>, lang) : undefined,
+});
+
 export type BlogPost = ContentItem & {
   lang?: string;
 };
@@ -90,11 +143,11 @@ export type ContentType = "blog" | "resume" | "talks";
 
 export type ContentTypeMap = {
   blog: BlogPost;
-  resume: ResumeItem;
+  resume: ResumeItemSource;
   talks: Talk;
 };
 
-function sortByDate<T extends ContentItem>(items: T[]): T[] {
+function sortByDate<T extends { date?: string }>(items: T[]): T[] {
   return [...items].sort((a, b) => {
     const dateA = a.date ? new Date(a.date).getTime() : 0;
     const dateB = b.date ? new Date(b.date).getTime() : 0;
@@ -135,4 +188,19 @@ export async function fetchOne<T extends ContentType>(opts: {
   } catch {
     return null;
   }
+}
+
+/**
+ * The résumé, resolved for one language - what every loader should use. The
+ * language boundary is here: past this point nothing carries `{ en, fr }`.
+ */
+export async function fetchResume(lang: Lang): Promise<ResumeItem[]> {
+  const items = await fetchAll({ data: "resume" });
+  return items.map((item) => localizeResumeItem(item, lang));
+}
+
+/** One résumé entry, resolved for one language. */
+export async function fetchResumeEntry(filename: string, lang: Lang): Promise<ResumeItem | null> {
+  const item = await fetchOne({ data: { filename, contentType: "resume" } });
+  return item && localizeResumeItem(item, lang);
 }

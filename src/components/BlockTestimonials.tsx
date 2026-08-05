@@ -1,3 +1,4 @@
+import { Lang, useLang, useT } from "@/i18n";
 import LinkButton from "@/components/LinkButton";
 import { socials } from "@/consts";
 import { size } from "@/react-multiversal";
@@ -16,15 +17,13 @@ import SVGQuote from "@/svgs/components/SVGQuote";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 import { StyleSheet, Text, View } from "react-native";
 
-export type Lang = "en" | "fr";
-
 /** Same text in both languages; one of them is the verbatim original. */
 export type Localized = Record<Lang, string>;
 
 export type Testimonial = {
   avatar: string;
   name: string;
-  title: Localized;
+  title: Record<Lang, string>;
   /**
    * The language the recommendation was actually written in - the other one is
    * a translation. Recorded because these are someone else's words: it says
@@ -33,7 +32,7 @@ export type Testimonial = {
    */
   originalLang: Lang;
   /** Excerpt, verbatim in `originalLang`. `**bold**` marks the emphasis. */
-  content: Localized;
+  content: Record<Lang, string>;
   /**
    * Picked for the CV. The three flagged ones answer three different fears, in
    * escalating order: is he good (a CTO says so), will he own it (a founder
@@ -151,8 +150,11 @@ export const testimonials: Testimonial[] = [
 /** The CV's three, in the order they are authored above. */
 export const featuredTestimonials = testimonials.filter((t) => t.cv);
 
-/** Site & CV are English-only for now; swap when the FR version lands. */
-export const currentLang: Lang = "en";
+/**
+ * Quotes are authored in both languages (`content`, `title`), and each one
+ * records the language it was originally written in: a quote read in another
+ * language is tagged with `lang` so screen readers pronounce it right.
+ */
 
 const testimonialRows: Testimonial[][] = [];
 for (let i = 0; i < testimonials.length; i += 2) {
@@ -161,6 +163,7 @@ for (let i = 0; i < testimonials.length; i += 2) {
 
 const TestimonialItem = ({ item }: { item: Testimonial }) => {
   const theme = useTheme("dark");
+  const lang = useLang();
   return (
     <BlurView
       blurAmount={48}
@@ -194,9 +197,9 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
             style={[fontStyles.ios.callout, theme.styles.text]}
             // Flags a quote kept in its original language on a page written in
             // another one, so screen readers pronounce it right.
-            {...(item.originalLang !== currentLang ? { lang: currentLang } : null)}
+            {...(item.originalLang !== lang ? { lang } : null)}
           >
-            <TestimonialContent text={item.content[currentLang]} />
+            <TestimonialContent text={item.content[lang]} />
           </Text>
         </View>
         <SpacedView
@@ -212,7 +215,7 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
               {item.name}
             </Text>
             <Text style={[fontStyles.ios.caption1, theme.styles.text, { opacity: 0.5 }]}>
-              {item.title[currentLang]}
+              {item.title[lang]}
             </Text>
           </Text>
         </SpacedView>
@@ -223,6 +226,7 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
 
 export default function BlockTestimonials() {
   const theme = useTheme();
+  const t = useT();
 
   return (
     <View>
@@ -317,13 +321,16 @@ export default function BlockTestimonials() {
               role="heading"
               aria-level={2}
             >
-              {"What People Say About Me."}
+              {t({ en: "What People Say About Me.", fr: "Ce qu'on dit de moi." })}
             </Text>
             <Text
               style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
               role="paragraph"
             >
-              {`Real feedback from those who know my work.`}
+              {t({
+                en: "Real feedback from those who know my work.",
+                fr: "De vrais retours de personnes qui connaissent mon travail.",
+              })}
             </Text>
           </SpacedView>
           <View>
@@ -354,7 +361,10 @@ export default function BlockTestimonials() {
               {() => (
                 <>
                   <Text style={[fontStyles.iosEm.title3, theme.styles.textOnMain]}>
-                    {"Read all my Recommendations"}
+                    {t({
+                      en: "Read all my Recommendations",
+                      fr: "Lire toutes mes recommandations",
+                    })}
                   </Text>
                   <SVGSocialLinkedin
                     width={28}

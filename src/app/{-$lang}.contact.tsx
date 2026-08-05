@@ -3,6 +3,7 @@ import ChatBot from "@/components/ChatBot";
 import ContactCard from "@/components/ContactCard";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { socials } from "@/consts";
+import { alternateLinks, assertLangParam, langFromParam, useT } from "@/i18n";
 import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -25,8 +26,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
-export const Route = createFileRoute("/contact")({
-  head: () => ({
+export const Route = createFileRoute("/{-$lang}/contact")({
+  beforeLoad: ({ params }) => assertLangParam(params.lang),
+  head: ({ params }) => ({
+    links: alternateLinks("/contact", langFromParam(params.lang)),
     meta: [
       {
         title: "Contact Maxime Thirouin, Senior Front-End Architect, React & React Native Expert.",
@@ -60,6 +63,7 @@ const styles = StyleSheet.create({
 
 function PageContact() {
   const theme = useTheme();
+  const t = useT();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -81,10 +85,10 @@ function PageContact() {
           >
             <View style={{ flexGrow: 1 }}>
               <Text style={[fontStyles.iosEm.subhead, theme.styles.textLight2]}>
-                {"Hey it's BotMax"}
+                {t({ en: "Hey it's BotMax", fr: "Hey, c'est BotMax" })}
               </Text>
               <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-                {"What can I help with?"}
+                {t({ en: "What can I help with?", fr: "Je peux vous aider ?" })}
               </Text>
             </View>
             <AvailabilityBadge showText={true} />
@@ -131,7 +135,7 @@ function PageContact() {
                 >
                   <ContactCard
                     Icon={SVGMenuContactFill}
-                    title={"Send Max a Message"}
+                    title={t({ en: "Send Max a Message", fr: "Envoyer un message à Max" })}
                     subtitle={"+" + ind + socials.text.value}
                     color={socials.text.color}
                     colorAlt={socials.text.colorAlt}
@@ -146,7 +150,7 @@ function PageContact() {
                 >
                   <ContactCard
                     Icon={SVGEmail}
-                    title={"Send Max\nan Email"}
+                    title={t({ en: "Send Max\nan Email", fr: "Envoyer un e-mail\nà Max" })}
                     subtitle={sendStringAsMailString(socials.send.value)}
                     color={socials.send.color}
                     colorAlt={socials.send.colorAlt}
@@ -201,7 +205,7 @@ function PageContact() {
                   <ContactCard
                     mode="outline"
                     Icon={SVGSocialLinkedin}
-                    title={"Connect\nwith Max"}
+                    title={t({ en: "Connect\nwith Max", fr: "Écrire\nà Max" })}
                     subtitle="On LinkedIn"
                     color={socials.linkedin.color}
                     colorAlt={socials.linkedin.colorAlt}
@@ -233,7 +237,7 @@ function PageContact() {
                   <ContactCard
                     mode="outline"
                     Icon={SVGSocialBsky}
-                    title={"Connect\nwith Max"}
+                    title={t({ en: "Connect\nwith Max", fr: "Écrire\nà Max" })}
                     subtitle="On Bluesky"
                     color={socials.bsky.color}
                     colorAlt={socials.bsky.colorAlt}

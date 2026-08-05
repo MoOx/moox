@@ -1,4 +1,4 @@
-import { fetchAll, ResumeItem } from "@/api";
+import { ResumeItem, fetchAll, fetchResume } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import BlockMe2WithPills from "@/components/BlockMe2WithPills";
 import ButtonView from "@/components/ButtonView";
@@ -44,7 +44,9 @@ import {
   titleOf,
   workLocation,
   yearRange,
+  resumePdfPath,
 } from "@/profile";
+import { alternateLinks, assertLangParam, langFromParam, useLang, useT } from "@/i18n";
 import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
@@ -73,34 +75,37 @@ import { ReactNode } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Svg, { Defs, LinearGradient, Stop } from "react-native-svg";
 
-export const Route = createFileRoute("/resume")({
+export const Route = createFileRoute("/{-$lang}/resume")({
+  beforeLoad: ({ params }) => assertLangParam(params.lang),
   // `?detail=<short-slug>` opens one entry as a modal above the page,
   // `?group=<group>` opens every mission of a grouped client - both masked as
   // their real standalone URL in the address bar (see ResumeEntryModal). The
   // keys must stay optional in the returned type, or every Link to /resume
   // would be forced to pass a `search` prop.
-  validateSearch: (
-    search: Record<string, unknown>,
-  ): { detail?: string; group?: string } => ({
+  validateSearch: (search: Record<string, unknown>): { detail?: string; group?: string } => ({
     ...(typeof search.detail === "string" ? { detail: search.detail } : {}),
     ...(typeof search.group === "string" ? { group: search.group } : {}),
   }),
-  loader: async () => {
+  loader: async ({ params }) => {
     const [resume, talks, blog] = await Promise.all([
-      fetchAll({ data: "resume" }),
+      fetchResume(langFromParam(params.lang)),
       fetchAll({ data: "talks" }),
       fetchAll({ data: "blog" }),
     ]);
     return { resume, talks, blog };
   },
-  head: () => ({
+  head: ({ params }) => ({
+    links: alternateLinks("/resume", langFromParam(params.lang)),
     meta: [
       // Same title vocabulary as `/` and `/cv` (see profile.tsx) - one job
       // title site-wide, for humans and crawlers alike.
       {
-        title: `${fullName} (${nickname}) - Résumé & Experience Timeline - ${jobTitle}`,
+        title:
+          langFromParam(params.lang) === "fr"
+            ? `${fullName} (${nickname}) - CV & parcours - ${jobTitle}`
+            : `${fullName} (${nickname}) - Résumé & Experience Timeline - ${jobTitle}`,
       },
-      { name: "description", content: metaDescription },
+      { name: "description", content: metaDescription(langFromParam(params.lang)) },
     ],
   }),
   component: PageResume,
@@ -114,75 +119,74 @@ export const Route = createFileRoute("/resume")({
  */
 function PageResume() {
   const theme = useTheme();
+  const t = useT();
+  const lang = useLang();
+  const freelanceLine = `${lang === "fr" ? "Freelance depuis" : "Freelance since"} ${freelanceSince} · ${t(workLocation)}`;
   const { resume: items, talks, blog } = Route.useLoaderData();
   const navigate = useNavigate();
+  // Every navigation from this page stays in the language it is served in.
+  const langParam = Route.useParams().lang;
   // Modal state: `detail` = one entry (timeline click), `group` = every
   // mission of a grouped client (key-experience card click).
   const { detail, group } = Route.useSearch();
-  const detailItem = detail
-    ? items.find((i) => i.slug.endsWith(`/${detail}`))
-    : undefined;
+  const detailItem = detail ? items.find((i) => i.slug.endsWith(`/${detail}`)) : undefined;
   const groupItems = group
     ? items
         .filter((i) => i.group === group)
-        .sort((a, b) =>
-          (b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1,
-        )
+        .sort((a, b) => ((b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1))
     : [];
   const modalItems = group ? groupItems : detailItem ? [detailItem] : [];
   // The entry whose timeline card yields its view-transition name to the
   // modal (for a group: its highlight entry, the one with a key card).
-  const activeEntry =
-    detailItem ?? groupItems.find((i) => i.highlight) ?? groupItems[0];
+  const activeEntry = detailItem ?? groupItems.find((i) => i.highlight) ?? groupItems[0];
   const activeSlug = activeEntry?.slug.split("/").pop();
 
   // The Next.js "intercepting routes" pattern, TanStack-style: the ⓘ links
   // keep their real href (crawlers and no-JS land on the standalone pages),
   // but a click is intercepted to open the modal over the page - URL masked
   // as the real one, so reload & share still get the standalone page.
-  const openEntry = (
-    item: ResumeItem,
-    event?: { preventDefault?: () => void },
-  ) => {
+  const openEntry = (item: ResumeItem, event?: { preventDefault?: () => void }) => {
     event?.preventDefault?.();
     const slug = item.slug.split("/").pop() ?? item.slug;
     void navigate({
-      to: "/resume",
+      to: "/{-$lang}/resume",
+      params: { lang: langParam },
       search: { detail: slug },
       // The page stays where it is - the modal opens over it.
       resetScroll: false,
       // On reload, load the masked URL for real → the standalone page
       // (without this the router restores the masked state from history and
       // re-opens the modal).
-      mask: { to: "/resume/$slug", params: { slug }, unmaskOnReload: true },
+      mask: {
+        to: "/{-$lang}/resume/$slug",
+        params: { lang: langParam, slug },
+        unmaskOnReload: true,
+      },
     });
   };
   // Grouped clients (key-experience cards): the whole group in one modal,
   // masked as /resume/group/<group>. Ungrouped ones fall back to the entry.
-  const openGroup = (
-    item: ResumeItem,
-    event?: { preventDefault?: () => void },
-  ) => {
+  const openGroup = (item: ResumeItem, event?: { preventDefault?: () => void }) => {
     if (!item.group) {
       openEntry(item, event);
       return;
     }
     event?.preventDefault?.();
     void navigate({
-      to: "/resume",
+      to: "/{-$lang}/resume",
+      params: { lang: langParam },
       search: { group: item.group },
       resetScroll: false,
       mask: {
-        to: "/resume/group/$group",
-        params: { group: item.group },
+        to: "/{-$lang}/resume/group/$group",
+        params: { lang: langParam, group: item.group },
         unmaskOnReload: true,
       },
     });
   };
 
   const highlights = keyExperiences(items);
-  const membersOf = (item: ResumeItem) =>
-    items.filter((i) => groupKey(i) === groupKey(item));
+  const membersOf = (item: ResumeItem) => items.filter((i) => groupKey(i) === groupKey(item));
   const education = items
     .filter((i) => i.education)
     .sort((a, b) => ((b.dateEnd || "9999") < (a.dateEnd || "9999") ? -1 : 1));
@@ -197,9 +201,7 @@ function PageResume() {
     cssnext: <SVGCssnext width={32} height={32} />,
     stylelint: <SVGStylelint width={32} height={32} />,
     phenomic: <SVGPhenomic width={32} height={32} />,
-    "rescript-react-native": (
-      <SVGRescriptReactNative width={32} height={32} fills={["#E6484F"]} />
-    ),
+    "rescript-react-native": <SVGRescriptReactNative width={32} height={32} fills={["#E6484F"]} />,
   };
 
   const headline = (viewTransitionName: string) => (
@@ -211,7 +213,7 @@ function PageResume() {
           { letterSpacing: 1.4, textTransform: "uppercase" },
         ]}
       >
-        {`Freelance since ${freelanceSince} · ${workLocation}`}
+        {freelanceLine}
       </Text>
       <Text
         style={[
@@ -230,15 +232,11 @@ function PageResume() {
         {`${jobTitle}.`}
       </Text>
       <Text
-        style={[
-          fontStyles.ios.subhead,
-          theme.styles.textLight1,
-          { fontStyle: "italic" },
-        ]}
+        style={[fontStyles.ios.subhead, theme.styles.textLight1, { fontStyle: "italic" }]}
         role="heading"
         aria-level={2}
       >
-        {jobSubtitle}
+        {t(jobSubtitle)}
       </Text>
     </>
   );
@@ -319,14 +317,11 @@ function PageResume() {
                     },
                   ]}
                 >
-                  <TextForReader>{"Nickname :"}</TextForReader>
+                  <TextForReader>{t({ en: "Nickname :", fr: "Surnom :" })}</TextForReader>
                   {"Max."}
                 </Text>
-                <Text
-                  role="paragraph"
-                  style={{ display: "flex", flexDirection: "column" }}
-                >
-                  <TextForReader>{"Full name :"}</TextForReader>
+                <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
+                  <TextForReader>{t({ en: "Full name :", fr: "Nom complet :" })}</TextForReader>
                   <Text
                     style={[
                       theme.styles.textLight1,
@@ -357,14 +352,11 @@ function PageResume() {
                   },
                 ]}
               >
-                <TextForReader>{"Nickname :"}</TextForReader>
+                <TextForReader>{t({ en: "Nickname :", fr: "Surnom :" })}</TextForReader>
                 {"Max."}
               </Text>
-              <Text
-                role="paragraph"
-                style={{ display: "flex", flexDirection: "column" }}
-              >
-                <TextForReader>{"Full name :"}</TextForReader>
+              <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
+                <TextForReader>{t({ en: "Full name :", fr: "Nom complet :" })}</TextForReader>
                 <Text
                   style={[
                     theme.styles.textLight1,
@@ -410,15 +402,15 @@ function PageResume() {
                     gap: size("xs"),
                   }}
                 >
-                  <AvailabilityBadge showText={true} text={availabilityLabel} />
+                  <AvailabilityBadge showText={true} text={t(availabilityLabel)} />
                   {/* <Text
                   style={[fontStyles.ios.footnote, theme.styles.textLight1]}
                 >
-                  {availabilityDetail}
+                  {t(availabilityDetail)}
                 </Text> */}
                 </View>
                 <a
-                  href="/maxime-thirouin-freelance-front-end-developer-resume.pdf"
+                  href={resumePdfPath(lang)}
                   download
                   style={{
                     alignItems: "flex-start",
@@ -448,7 +440,7 @@ function PageResume() {
                             gradientTextFlashyStyles(theme, 20),
                           ]}
                         >
-                          {"Download PDF"}
+                          {t({ en: "Download PDF", fr: "Télécharger le PDF" })}
                         </Text>
                       </>
                     )}
@@ -460,10 +452,7 @@ function PageResume() {
         </SpacedView>
         <BlockMe2WithPills />
         <SpacedView horizontal="l" style={{ height: 3, width: "100%" }}>
-          <GradientLinear
-            style={{ borderRadius: 4 }}
-            stops={gradientFlashyStops(theme)}
-          />
+          <GradientLinear style={{ borderRadius: 4 }} stops={gradientFlashyStops(theme)} />
         </SpacedView>
       </Container>
 
@@ -475,34 +464,28 @@ function PageResume() {
             role="heading"
             aria-level={2}
           >
-            {tagline}
+            {t(tagline)}
           </Text>
-          <Text
-            style={[fontStyles.iosEm.callout, theme.styles.textLight1]}
-            role="paragraph"
-          >
-            {summary}
+          <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]} role="paragraph">
+            {t(summary)}
           </Text>
         </SpacedView>
       </Container>
 
       {/* ==================================================== Profile stats */}
       <Spacer size="xl" />
-      <ResumeStats stats={profileStats(items)} />
+      <ResumeStats stats={profileStats(items, lang)} />
 
       {/* =========================================================== Skills */}
       <Spacer size="xl" />
       <Container maxWidth={900}>
         <SpacedView horizontal="l" gap="l">
           <Text
-            style={[
-              fontStyles.iosEm.largeTitle,
-              gradientTextIndigoStylesInv(theme),
-            ]}
+            style={[fontStyles.iosEm.largeTitle, gradientTextIndigoStylesInv(theme)]}
             role="heading"
             aria-level={2}
           >
-            {"Skills"}
+            {t({ en: "Skills", fr: "Compétences" })}
           </Text>
           {/* Same distribution as /cv: the feature card big on the left, the
               other domains stacked in a column next to it - the flat mosaic
@@ -519,10 +502,10 @@ function PageResume() {
               .filter((d) => d.feature)
               .map((d) => (
                 <SkillCard
-                  key={d.title}
-                  title={d.title}
-                  subtitle={d.subtitle}
-                  items={d.items}
+                  key={t(d.title)}
+                  title={t(d.title)}
+                  subtitle={t(d.subtitle)}
+                  items={t(d.items)}
                   Icon={d.Icon}
                   gradient={d.gradient}
                   big={true}
@@ -535,10 +518,10 @@ function PageResume() {
                 .filter((d) => !d.feature)
                 .map((d) => (
                   <SkillCard
-                    key={d.title}
-                    title={d.title}
-                    subtitle={d.subtitle}
-                    items={d.items}
+                    key={t(d.title)}
+                    title={t(d.title)}
+                    subtitle={t(d.subtitle)}
+                    items={t(d.items)}
                     Icon={d.Icon}
                     gradient={d.gradient}
                     glass={true}
@@ -556,7 +539,7 @@ function PageResume() {
             }}
           >
             {techs.map(({ Icon, label }) => (
-              <View key={label} style={{ alignItems: "center" }}>
+              <View key={t(label)} style={{ alignItems: "center" }}>
                 <View
                   style={{
                     width: 40,
@@ -568,11 +551,7 @@ function PageResume() {
                 >
                   <Icon width={40} height={40} />
                 </View>
-                <Text
-                  style={[fontStyles.ios.caption2, theme.styles.textLight1]}
-                >
-                  {label}
-                </Text>
+                <Text style={[fontStyles.ios.caption2, theme.styles.textLight1]}>{t(label)}</Text>
               </View>
             ))}
           </View>
@@ -584,14 +563,11 @@ function PageResume() {
       <Container maxWidth={900}>
         <SpacedView horizontal="l" gap="m">
           <Text
-            style={[
-              fontStyles.iosEm.largeTitle,
-              gradientTextFlashyStyles(theme),
-            ]}
+            style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
             role="heading"
             aria-level={2}
           >
-            {"Key Experience"}
+            {t({ en: "Key Experience", fr: "Expériences clés" })}
           </Text>
           {/* Full-width rows: copy on the left, the illustration fading in
               from the right. The ⓘ opens the detail modal (the whole group's
@@ -607,17 +583,13 @@ function PageResume() {
                 company={h.company}
                 dates={(() => {
                   const periods = groupPeriods(membersOf(h));
-                  return periods.length > 1
-                    ? periods.join(" · ")
-                    : monthRange(h);
+                  return periods.length > 1 ? periods.join(" · ") : monthRange(h, lang);
                 })()}
                 text={pitchOf(h)}
                 stats={h.stats}
                 tags={h.hashtags}
-                infoHref={
-                  h.group ? `/resume/group/${h.group}` : resumeEntryPath(h)
-                }
-                infoLabel={`All the details about ${h.company}`}
+                infoHref={h.group ? `/resume/group/${h.group}` : resumeEntryPath(h)}
+                infoLabel={`${t({ en: "All the details about", fr: "Tous les détails sur" })} ${h.company}`}
                 infoOnPress={(event) => openGroup(h, event)}
               />
             ))}
@@ -659,25 +631,15 @@ function PageResume() {
                 aria-level={2}
                 style={[fontStyles.iosEm.largeTitle, { color: colors.white }]}
               >
-                {"Open Source"}
+                {t({ en: "Open Source", fr: "Open source" })}
               </Text>
               <View style={{ flex: 1 }} />
-              <Text
-                style={[
-                  fontStyles.ios.caption1,
-                  { color: alpha(colors.white, 0.72) },
-                ]}
-              >
+              <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.72) }]}>
                 {`${compactCount(githubFollowers)} followers · on GitHub since ${githubSince}`}
               </Text>
             </View>
-            <Text
-              style={[
-                fontStyles.ios.callout,
-                { color: alpha(colors.white, 0.85) },
-              ]}
-            >
-              {openSourceIntro}
+            <Text style={[fontStyles.ios.callout, { color: alpha(colors.white, 0.85) }]}>
+              {t(openSourceIntro)}
             </Text>
             <View
               style={{
@@ -710,11 +672,11 @@ function PageResume() {
                         </View>
                       ) : undefined
                     }
-                    pretitle={`${item.job_title ?? ""} · ${yearRange(item)}`}
+                    pretitle={`${item.job_title ?? ""} · ${yearRange(item, lang)}`}
                     title={projectName(item)}
                     text={item.title.trim()}
                     infoHref={resumeEntryPath(item)}
-                    infoLabel={`All the details about ${projectName(item)}`}
+                    infoLabel={`${t({ en: "All the details about", fr: "Tous les détails sur" })} ${projectName(item)}`}
                     infoOnPress={(event) => openEntry(item, event)}
                   >
                     {headline ? (
@@ -738,26 +700,17 @@ function PageResume() {
                             {headline.stat}
                           </Text>
                           <Text
-                            style={[
-                              fontStyles.ios.caption1,
-                              { color: alpha(colors.white, 0.8) },
-                            ]}
+                            style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.8) }]}
                           >
                             {` ${headline.label}`}
                           </Text>
                         </Text>
                         {rest.length > 0 ? (
                           <Text
-                            style={[
-                              fontStyles.ios.caption2,
-                              { color: alpha(colors.white, 0.6) },
-                            ]}
+                            style={[fontStyles.ios.caption2, { color: alpha(colors.white, 0.6) }]}
                           >
                             {rest
-                              .map(
-                                (s) =>
-                                  `${s.stat} ${lowerKeepingAcronyms(s.label)}`,
-                              )
+                              .map((s) => `${s.stat} ${lowerKeepingAcronyms(s.label)}`)
                               .join(" · ")}
                           </Text>
                         ) : null}
@@ -767,23 +720,12 @@ function PageResume() {
                 );
               })}
             </View>
-            <Text
-              style={[
-                fontStyles.ios.caption1,
-                { color: alpha(colors.white, 0.72) },
-              ]}
-            >
-              {"Also: "}
+            <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.72) }]}>
+              {t({ en: "Also: ", fr: "Aussi : " })}
               {openSourceCredits.map((credit, i) => (
-                <LinkText
-                  key={credit.label}
-                  href={credit.url}
-                  underlineOnFocus={true}
-                >
+                <LinkText key={credit.label} href={credit.url} underlineOnFocus={true}>
                   {i > 0 ? " · " : ""}
-                  <Text
-                    style={{ color: colors.white, fontWeight: weight.semibold }}
-                  >
+                  <Text style={{ color: colors.white, fontWeight: weight.semibold }}>
                     {credit.label}
                   </Text>
                   {` ${credit.note}`}
@@ -811,14 +753,11 @@ function PageResume() {
         >
           <View style={{ flexGrow: 1, flexBasis: 280, gap: size("m") }}>
             <Text
-              style={[
-                fontStyles.iosEm.title1,
-                gradientTextIndigoStylesInv(theme),
-              ]}
+              style={[fontStyles.iosEm.title1, gradientTextIndigoStylesInv(theme)]}
               role="heading"
               aria-level={2}
             >
-              {"Talks & Community"}
+              {t({ en: "Talks & Community", fr: "Conférences & communauté" })}
             </Text>
             <View style={{ gap: size("s") }}>
               <View style={{ flexDirection: "row" }}>
@@ -826,7 +765,7 @@ function PageResume() {
                   valueFontSize={22}
                   stat={{
                     stat: `${talks.length}`,
-                    label: "Conference talks",
+                    label: t({ en: "Conference talks", fr: "Conférences données" }),
                     comment: "in French & English",
                     url: "/talks",
                   }}
@@ -839,7 +778,7 @@ function PageResume() {
                     // blog.json only indexes moox.io; putaindecode.io is a
                     // manual figure from profile.tsx (see STATS.md).
                     stat: `${blog.length + putaindecodeArticles}`,
-                    label: "Blog posts",
+                    label: t({ en: "Blog posts", fr: "Articles de blog" }),
                     comment: "on moox.io & putaindecode.io",
                     url: "/blog",
                   }}
@@ -851,7 +790,10 @@ function PageResume() {
                   stat={{
                     stat: "co-founder",
                     label: visualUrl(socials.putaindecode.value),
-                    comment: "FR dev community, blog & podcast",
+                    comment: t({
+                      en: "FR dev community, blog & podcast",
+                      fr: "communauté de devs FR, blog & podcast",
+                    }),
                     url: socials.putaindecode.value,
                   }}
                 />
@@ -869,14 +811,11 @@ function PageResume() {
           >
             <View style={{ gap: size("m") }}>
               <Text
-                style={[
-                  fontStyles.iosEm.title1,
-                  gradientTextFlashyStyles(theme),
-                ]}
+                style={[fontStyles.iosEm.title1, gradientTextFlashyStyles(theme)]}
                 role="heading"
                 aria-level={2}
               >
-                {"Education"}
+                {t({ en: "Education", fr: "Formation" })}
               </Text>
               {education.map((e) => (
                 <View
@@ -897,15 +836,11 @@ function PageResume() {
                     />
                   ) : null}
                   <View style={{ flex: 1 }}>
-                    <Text
-                      style={[fontStyles.iosEm.footnote, theme.styles.text]}
-                    >
+                    <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
                       {e.job_title}
                     </Text>
-                    <Text
-                      style={[fontStyles.ios.caption1, theme.styles.textLight1]}
-                    >
-                      {`${e.company} · ${yearRange(e)}`}
+                    <Text style={[fontStyles.ios.caption1, theme.styles.textLight1]}>
+                      {`${e.company} · ${yearRange(e, lang)}`}
                     </Text>
                   </View>
                 </View>
@@ -913,14 +848,11 @@ function PageResume() {
             </View>
             <View style={{ gap: size("m") }}>
               <Text
-                style={[
-                  fontStyles.iosEm.title1,
-                  gradientTextIndigoStylesInv(theme),
-                ]}
+                style={[fontStyles.iosEm.title1, gradientTextIndigoStylesInv(theme)]}
                 role="heading"
                 aria-level={2}
               >
-                {"Beyond Code"}
+                {t({ en: "Beyond Code", fr: "Au-delà du code" })}
               </Text>
               <View
                 style={{
@@ -930,7 +862,7 @@ function PageResume() {
                 }}
               >
                 {hobbies.map(({ Icon, label }) => (
-                  <View key={label} style={{ alignItems: "center" }}>
+                  <View key={t(label)} style={{ alignItems: "center" }}>
                     <Icon width={48} height={48} fill="url(#profileGrad)" />
                     <Text
                       style={[
@@ -939,7 +871,7 @@ function PageResume() {
                         { textAlign: "center" },
                       ]}
                     >
-                      {label}
+                      {t(label)}
                     </Text>
                   </View>
                 ))}
@@ -954,14 +886,11 @@ function PageResume() {
       <Container maxWidth={900}>
         <SpacedView horizontal="l">
           <Text
-            style={[
-              fontStyles.iosEm.largeTitle,
-              gradientTextFlashyStyles(theme),
-            ]}
+            style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
             role="heading"
             aria-level={2}
           >
-            {"All Experience"}
+            {t({ en: "All Experience", fr: "Tout le parcours" })}
           </Text>
           <Spacer size="l" />
           <ResumeTimeline
@@ -983,7 +912,7 @@ function PageResume() {
           label={
             group
               ? (activeEntry?.company ?? group)
-              : (detailItem?.title ?? "Experience detail")
+              : (detailItem?.title ?? t({ en: "Experience detail", fr: "Détail de l'expérience" }))
           }
         />
       ) : null}

@@ -1,7 +1,8 @@
-import { fetchOne } from "@/api";
+import { fetchResumeEntry } from "@/api";
 import ResumeEntryDetailCard from "@/components/ResumeEntryDetailCard";
 import WebsiteError from "@/components/WebsiteError";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
+import { alternateLinks, assertLangParam, langFromParam } from "@/i18n";
 import { fullName, pitchOf } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -18,13 +19,15 @@ import { Text } from "react-native";
  * TanStack equivalent of Next.js' intercepting routes. Grouped clients have
  * their own page listing every mission: `/resume/group/<group>`.
  */
-export const Route = createFileRoute("/resume_/$slug")({
+export const Route = createFileRoute("/{-$lang}/resume_/$slug")({
+  beforeLoad: ({ params }) => assertLangParam(params.lang),
   loader: async ({ params }) => {
     const filename = decodeURIComponent(params.slug) + ".json";
-    const item = await fetchOne({ data: { filename, contentType: "resume" } });
+    const item = await fetchResumeEntry(filename, langFromParam(params.lang));
     return { item };
   },
-  head: ({ loaderData }) => ({
+  head: ({ loaderData, params }) => ({
+    links: alternateLinks(`/resume/${params.slug}`, langFromParam(params.lang)),
     meta: loaderData?.item
       ? [
           {
@@ -44,6 +47,7 @@ export const Route = createFileRoute("/resume_/$slug")({
 
 function PageResumeEntry() {
   const { item } = Route.useLoaderData();
+  const { lang } = Route.useParams();
   const theme = useTheme();
 
   if (!item) {
@@ -58,7 +62,8 @@ function PageResumeEntry() {
           {/* The timeline cards carry `id={item.slug}` anchors, so this lands
               right back on the entry's card. */}
           <Link
-            to="/resume"
+            to="/{-$lang}/resume"
+            params={{ lang }}
             hash={item.slug}
             style={{ textDecoration: "none", alignSelf: "flex-start" }}
           >

@@ -1,5 +1,7 @@
+import { useHref, useT } from "@/i18n";
 import BlockInterestedButtons from "@/components/BlockInterestedButtons";
 import Image from "@/components/Image";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
 import WebsiteFooterLandscape from "@/components/WebsiteFooterLandscape";
 import {
@@ -24,6 +26,8 @@ import { Text, View } from "react-native";
 
 export default function WebsiteFooter() {
   const theme = useTheme();
+  const localizeHref = useHref();
+  const t = useT();
 
   return (
     <View>
@@ -59,10 +63,10 @@ export default function WebsiteFooter() {
             <View>
               {Object.entries(allInternalLinks)
                 .filter(([, l]) => l.href !== "#" + footerAnchor)
-                .map(([text, { href, icon }]) => (
+                .map(([text, { href, label, icon }]) => (
                   <LinkView
                     key={href}
-                    href={href}
+                    href={localizeHref(href)}
                     style={{ flexDirection: "row", alignItems: "center" }}
                   >
                     <Text style={{ opacity: 0.25 }}>
@@ -73,7 +77,9 @@ export default function WebsiteFooter() {
                       })}
                     </Text>
                     <SpacedView horizontal="xs" vertical="xs">
-                      <Text style={[fontStyles.iosEm.body, theme.styles.text]}>{text}</Text>
+                      <Text style={[fontStyles.iosEm.body, theme.styles.text]}>
+                        {t(label) ?? text}
+                      </Text>
                     </SpacedView>
                   </LinkView>
                 ))}
@@ -82,7 +88,7 @@ export default function WebsiteFooter() {
           <SpacedView horizontal="l" vertical="xl" gap="m" style={{ flexBasis: 190 }}>
             <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
               <Spacer size="m" />
-              {"Follow Me"}
+              {t({ en: "Follow Me", fr: "Me suivre" })}
             </Text>
             <View>
               {Object.entries(socialLinks).map(([text, { href, icon }]) => (
@@ -122,7 +128,7 @@ export default function WebsiteFooter() {
           <SpacedView horizontal="l" vertical="xl" gap="m" style={{ flexBasis: 190 }}>
             <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
               <Spacer size="m" />
-              {"More"}
+              {t({ en: "More", fr: "Plus" })}
             </Text>
             <View>
               {Object.entries(moreLinks).map(([text, { href, icon }]) => (
@@ -164,6 +170,7 @@ export default function WebsiteFooter() {
                 justifyContent: "center",
               }}
             >
+              <LanguageSwitcher />
               <ThemeToggle mode="default" showLabelFor={WindowWidth.xxxl} />
             </View>
           </SpacedView>

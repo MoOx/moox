@@ -1,6 +1,7 @@
+import { useLang } from "@/i18n";
 import { ResumeItem } from "@/api";
 import ExperienceCard from "@/components/ExperienceCard";
-import { bodyBeforeFirstHr, monthRange, pitchOf, resumeEntryTransitionName } from "@/profile";
+import { monthRange, pitchOf, resumeEntryTransitionName } from "@/profile";
 
 /**
  * One resume entry in detail: the `ExperienceCard` full mode fed from the
@@ -20,6 +21,7 @@ export default function ResumeEntryDetailCard({
    */
   transitionEnabled?: boolean;
 }) {
+  const lang = useLang();
   return (
     <ExperienceCard
       mode="full"
@@ -28,9 +30,9 @@ export default function ResumeEntryDetailCard({
       pretitle={item.job_title}
       title={item.title}
       company={item.company}
-      dates={monthRange(item)}
+      dates={monthRange(item, lang)}
       text={pitchOf(item)}
-      body={bodyBeforeFirstHr(item.body)}
+      body={item.body}
       stats={item.stats}
       tags={item.hashtags}
       links={item.links}

@@ -563,7 +563,64 @@ regression, but the number moved, so it's recorded here rather than left implyin
 
 ---
 
-## 12. Errata found and fixed
+## 12. Translation: what a second language reveals
+
+The site went bilingual (EN default, `/fr` prefix) in one pass. What is worth
+recording is not the plumbing — it is everything translation _found_.
+
+**A translated body drifts exactly like a hand-written number.** 25 of the 30
+résumé entries already carried a French half, written years ago. Every one of
+them translated the _pre-rework_ text: the French for Aardvark was 35 words
+against 175 in English, Exem 60 against 189. Nobody had lied; the English was
+rewritten (§3) and its translation silently stayed behind. Same failure as the
+hand-authored date spans of §10, in a place where derivation is impossible —
+so what replaced derivation was a **detector**: the FR/English word-count ratio
+per file. French normally runs 1.1–1.3× English; anything at 0.2 was stale, and
+anything at 2.7 meant the English had been _cut_ and the French not. That
+sorted 30 files into "rewrite" and "keep" in one command, with no judgement
+call.
+
+**Translation is a debt scanner.** Walking every user-visible string to
+translate it surfaced what reading the same files a dozen times had not: the
+home's app card still advertised **"Senior Front-end Architect"**, the exact
+title §1 retired everywhere else — the one string that had escaped the pass
+because it was hardcoded in a component rather than read from `profile.tsx`. It
+now derives from `jobTitle`. The old French copy also carried its own
+accumulated typos ("un architecture", "skelette", "dévelopment"), fixed on the
+way.
+
+**The language boundary is the loader, not the component.** The obvious design
+— every component asks for its language — would have touched every rendering
+file. Instead the résumé is resolved once, in the route loaders
+(`fetchResume(lang)`), so `ResumeItem` still holds plain strings and no
+rendering code learned that translations exist. Only the editorial strings that
+live in TypeScript need `useT()`. One boundary, not fifty.
+
+**A4 is a constraint the second language exposes.** French runs ~15%
+longer at equal meaning. Page 1 of the CV overflowed, which pushed the explicit
+`breakBefore: "page"` one page down: a **3-page CV**, the one thing this whole
+rework refuses. Measured rather than argued — `scale` 0.97 buys the overflow
+back, three percent, text still vector. Recorded as a per-language constant
+with the page-count check next to it, because the next paragraph of French will
+threaten it again.
+
+**What deliberately does not translate.** Figures (`50k+`), proper nouns
+(`Next.js`, `Issue #1`), company names, tech hashtags — and the job titles the
+French market itself uses in English (`Lead Front-End Developer`,
+`Full-Stack Developer`). Roles that are genuinely French _were_ translated
+(`University Lecturer` → _Enseignant vacataire_). The English fallback is the
+type's default: a value left as a plain string simply is English, so a missing
+translation degrades to English instead of rendering nothing.
+
+**And the line that was designed to survive it.** §1 chose "I make front-ends
+simple. Simple is the hard part." partly because the second sentence repeats
+the noun instead of pronominalizing it, so it would translate word for word.
+Two months later: "Je rends les front-ends simples. Le simple, c'est le plus
+dur." It did.
+
+---
+
+## 13. Errata found and fixed
 
 The CV's whole thesis is _checkable_, so the journal owes its own errata — both
 of these were caught reviewing this commit and fixed in the same pass:
@@ -612,3 +669,12 @@ checkable source, its own mistakes surface on review instead of shipping.
     checkable" held by discipline until `ResumeStat.url` made proof part of the
     data; "never overstate" held until `roundedDownCount` floored instead of
     rounded. Encode the principle where the value lives.
+11. **What cannot be derived needs a detector.** A translation can't be computed
+    from its source, so it drifts like any hand-written value (§12) — and
+    silently, because both versions still read fine on their own. The FR/EN
+    word-count ratio found every stale file in one command. When derivation is
+    impossible, find the cheap signal that makes drift visible.
+12. **Adding a second language is an audit.** It walks every user-visible
+    string, so it finds what re-reading the same files never does: a retired job
+    title still hardcoded in a component, old typos, and the layout assumptions
+    (A4, page breaks) that only hold for the language they were written in.

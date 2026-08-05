@@ -1,3 +1,4 @@
+import { useT } from "@/i18n";
 import AIPromptCircle from "@/components/AIPromptCircle";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -38,6 +39,7 @@ const circles = [
 
 export default function BlockAugmentedWithAI() {
   const theme = useTheme();
+  const t = useT();
 
   return (
     <Container style={{ flexDirection: "row", flexWrap: "wrap-reverse" }}>
@@ -60,10 +62,13 @@ export default function BlockAugmentedWithAI() {
           role="heading"
           aria-level={2}
         >
-          {"Augmented with AI."}
+          {t({ en: "Augmented with AI.", fr: "Augmenté par l'IA." })}
         </Text>
         <Text style={[fontStyles.iosEm.body, theme.styles.textLight1]} role="paragraph">
-          {`AI writes code faster than I do. It just doesn't know what to build, or why - that's still my job.\n The time it saves, I put back into architecture and craft.`}
+          {t({
+            en: `AI writes code faster than I do. It just doesn't know what to build, or why - that's still my job.\n The time it saves, I put back into architecture and craft.`,
+            fr: `L'IA écrit du code plus vite que moi. Elle ne sait simplement pas quoi construire, ni pourquoi - ça, c'est toujours mon travail.\n Le temps qu'elle me fait gagner, je le remets dans l'architecture et le soin du détail.`,
+          })}
         </Text>
         <Spacer size="s" />
       </SpacedView>

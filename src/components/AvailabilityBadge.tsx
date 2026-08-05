@@ -1,5 +1,6 @@
 "use client";
 
+import { useHref, useT } from "@/i18n";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
@@ -35,7 +36,7 @@ const pulseAnimationStyle: AnimatedStyle<any> = {
 export default function AvailabilityBadge({
   style,
   showText,
-  text = "Available for Work",
+  text,
 }: {
   style?: StyleProp<ViewStyle>;
   showText: boolean | "on-focus";
@@ -43,10 +44,13 @@ export default function AvailabilityBadge({
   text?: string;
 }) {
   const ref = useRef<Text>(null);
+  const localizeHref = useHref();
+  const t = useT();
+  const label = text ?? t({ en: "Available for Work", fr: "Disponible pour une mission" });
   const [hasAnyFocus] = useFocus(ref, { debounceOff: 500 });
 
   return (
-    <LinkView ref={ref} href="/contact">
+    <LinkView ref={ref} href={localizeHref("/contact")}>
       <Animated.View
         style={[
           {
@@ -97,7 +101,7 @@ export default function AvailabilityBadge({
                 },
               ]}
             >
-              {text}
+              {label}
             </Text>
           </Animated.View>
         )}

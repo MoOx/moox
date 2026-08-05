@@ -1,3 +1,4 @@
+import { useLang, useT } from "@/i18n";
 import { ResumeItem, Talk } from "@/api";
 import ExperienceCard from "@/components/ExperienceCard";
 import { resumeEntryTransitionName } from "@/profile";
@@ -40,6 +41,8 @@ export const ResumeTimeline = ({
   onOpenEntry?: (item: ResumeItem, event?: { preventDefault?: () => void }) => void;
 }) => {
   const theme = useTheme();
+  const t = useT();
+  const lang = useLang();
   const todayDateOnlyAsISOString = new Date().toISOString().slice(0, 10);
 
   // Ongoing entries sort at "today": the feed is ordered by when something
@@ -85,10 +88,10 @@ export const ResumeTimeline = ({
                   pretitle={entry.item.job_title}
                   title={entry.item.title}
                   company={entry.item.company}
-                  dates={monthRange(entry.item)}
+                  dates={monthRange(entry.item, lang)}
                   tags={entry.item.hashtags}
                   infoHref={resumeEntryPath(entry.item)}
-                  infoLabel={`All the details about ${entry.item.company || entry.item.title}`}
+                  infoLabel={`${t({ en: "All the details about", fr: "Tous les détails sur" })} ${entry.item.company || entry.item.title}`}
                   infoOnPress={onOpenEntry ? (event) => onOpenEntry(entry.item, event) : undefined}
                   style={
                     // The card and its detail share a view-transition name
@@ -109,9 +112,9 @@ export const ResumeTimeline = ({
                 }`}
                 title={entry.talk.title}
                 company={entry.talk.conference}
-                dates={entry.talk.date ? monthYear(entry.talk.date) : undefined}
+                dates={entry.talk.date ? monthYear(entry.talk.date, lang) : undefined}
                 infoHref={`/${entry.talk.slug}`}
-                infoLabel={`All the details about the talk “${entry.talk.title}”`}
+                infoLabel={`${t({ en: "All the details about the talk", fr: "Tous les détails sur la conférence" })} “${entry.talk.title}”`}
               />
             )}
           </Fragment>

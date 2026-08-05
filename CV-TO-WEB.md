@@ -1,81 +1,46 @@
 # CV → WEB — what to do once the PDF is done
 
-The PDF is the priority (2 pages, print-first). Everything here is deliberately
-**out of scope for the PDF** and belongs to a later pass on a dedicated web
-version of the CV.
+Written during the PDF pass, when everything here was out of scope for a
+two-page print document. The web pass has since happened (`WEB-REWORK.md`), so
+§0 records what it closed and the rest is what genuinely remains — mostly the
+plain-text version (§2, now unblocked), the Services page (§4) and the HTML
+semantics pass (§5).
 
 ---
 
-## 0. Done already (on `/cv`)
+## 0. Done already
 
-- **JSON-LD `Person`** — `personJsonLd()` in `src/profile.tsx`, rendered in
-  `src/app/cv.tsx`. Built from the rendered data (`worksFor` deduplicates by
-  `cvGroup` exactly like the visible rows), so it cannot drift.
+Everything here landed in the web pass — see `WEB-REWORK.md` for the how and
+the why. Kept as a list so this document says what is _left_.
+
+- **JSON-LD `Person`** — `personJsonLd()` in `src/profile.tsx`, now rendered on
+  **all three pages** (`/`, `/resume`, `/cv`), localized with the page. Built
+  from the rendered data (`worksFor` deduplicates by `group` exactly like the
+  visible rows), so it cannot drift. This closes §1 below.
+- **The job title is aligned** across `/`, `/resume`, `/cv`, their `<head>` and
+  the JSON-LD: `Lead Front-End Developer` everywhere, which is what §1 was
+  waiting for.
 - **PDF `/Info` metadata** — `/Author`, `/Creator`, `/Subject`, `/Keywords`,
   scraped by the export script off the page's own `<head>`, which is itself fed
-  from `profile.tsx`. One source of truth, three consumers.
+  from `profile.tsx`. One source of truth, three consumers — now per language.
+- **A real web CV** — `/resume` is the unconstrained version of the same
+  content (§ everything that was "later, on the web" in this file).
+- **French version** — `/fr/...` for home, résumé, CV and contact, plus a second
+  PDF (`…-resume.fr.pdf`). `hreflang` + canonical on every page.
 
-## 1. JSON-LD (`schema.org/Person`)
+## 1. JSON-LD (`schema.org/Person`) — **done**
 
-**What it is.** A `<script type="application/ld+json">` block in the HTML
-`<head>` holding the same facts as the page, but as data instead of layout.
+Shipped on `/`, `/resume` and `/cv` (`personJsonLd()` in `src/profile.tsx`),
+built from the rendered data and localized with the page. The blocker recorded
+here was that the three pages advertised three different job titles, which
+would have published a contradiction in machine-readable form; the web pass
+aligned them on **Lead Front-End Developer** first, then reused one builder.
+`/resume` survived the "keep it or redirect it?" question: it is now the
+unconstrained web CV, not a leftover.
 
-**Why it matters.** Search engines, LLM crawlers and job aggregators read it
-before they try to parse the rendered page. It removes every guess: which
-string is the name, which is the job title, which company goes with which
-dates. Today all of that has to be _inferred_ from a two-column React layout.
-
-**Why it is not in the PDF.** JSON-LD is an HTML mechanism. PDF has no
-equivalent; its only structured channel is the `/Info` dictionary (plus XMP),
-which `scripts/generate-resume-pdf.mjs` already fills with
-`/Author`, `/Subject` and `/Keywords`.
-
-**Should `/` and `/resume` get one too?** Yes — but **not before the job title
-is aligned across the three pages**. Right now they advertise three different
-ones:
-
-| Page                 | Title in `<head>`                                           |
-| -------------------- | ----------------------------------------------------------- |
-| `src/app/index.tsx`  | Senior Front-End **Architect**, React & React Native Expert |
-| `src/app/resume.tsx` | Senior Front-End **Architect & Developer**                  |
-| `src/app/cv.tsx`     | **Lead Front-End Developer**                                |
-
-For a human clicking around, that reads as sloppiness. For a crawler, three
-`Person` entities with the same `sameAs` links but conflicting `jobTitle` is
-worse than no structured data at all — it is a contradiction stated in machine
--readable form. Align the titles first (`cvJobTitle` already exists and should
-become the single source), then reuse `cvJsonLd()` on both pages.
-
-`resume.tsx` also still renders the H1 "Front-End Architect." and is the page
-the old PDF pipeline pointed at. Decide whether it survives at all, or becomes
-a redirect to `/cv`.
-
-Sketch:
-
-```jsonc
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Maxime Thirouin",
-  "alternateName": "Max",
-  "jobTitle": "Lead Front-End Developer",
-  "url": "https://moox.io",
-  "email": "hello@moox.io",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Toulouse",
-    "addressCountry": "FR",
-  },
-  "sameAs": ["https://github.com/MoOx", "https://www.linkedin.com/in/MaxThirouin"],
-  "knowsLanguage": ["fr", "en"],
-  "knowsAbout": ["React", "React Native", "TypeScript", "Front-end architecture", "Design systems"],
-  "hasOccupation": {
-    "@type": "Occupation",
-    "name": "Lead Front-End Developer",
-  },
-  "worksFor": [{ "@type": "Organization", "name": "…" }], // one per cvGroup
-}
-```
+Still true, and worth keeping: JSON-LD is an HTML mechanism. The PDF has no
+equivalent — its only structured channel is the `/Info` dictionary (plus XMP),
+which `scripts/generate-resume-pdf.mjs` fills per language.
 
 ## 2. A canonical plain-text version — **after** the web version, not before
 
@@ -89,7 +54,9 @@ human needs.
 **Which is why it comes last.** The PDF is constrained to two pages; the web
 version is not; the text version is derived from the _web_ version, not from
 the PDF. Writing it before the long-form web CV exists would mean writing the
-long-form content twice. Order: PDF → web → txt.
+long-form content twice. Order: PDF → web → txt — **the first two are done, so
+this one is next in line.** Two files now, one per language (`/cv.txt`,
+`/fr/cv.txt`), derived from the same localized content the pages read.
 
 Its second use is defensive: a canonical text version makes a broken PDF text
 layer detectable by diffing the two, instead of silently rotting — which is

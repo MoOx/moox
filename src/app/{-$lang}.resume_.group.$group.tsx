@@ -1,7 +1,8 @@
-import { fetchAll, ResumeItem } from "@/api";
+import { ResumeItem, fetchResume } from "@/api";
 import ResumeEntryDetailCard from "@/components/ResumeEntryDetailCard";
 import WebsiteError from "@/components/WebsiteError";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
+import { alternateLinks, assertLangParam, langFromParam } from "@/i18n";
 import { fullName, pitchOf, titleOf } from "@/profile";
 import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
@@ -20,16 +21,18 @@ const byDateDesc = (a: ResumeItem, b: ResumeItem) =>
  * mission of the group, newest first - what the key-experience cards link
  * to. Single entries live on `/resume/<slug>` instead.
  */
-export const Route = createFileRoute("/resume_/group/$group")({
+export const Route = createFileRoute("/{-$lang}/resume_/group/$group")({
+  beforeLoad: ({ params }) => assertLangParam(params.lang),
   loader: async ({ params }) => {
     const group = decodeURIComponent(params.group);
-    const all = await fetchAll({ data: "resume" });
+    const all = await fetchResume(langFromParam(params.lang));
     const members = all.filter((i) => i.group === group).sort(byDateDesc);
     // The highlight entry carries the group-wide copy (groupTitle/groupPitch).
     const lead = members.find((i) => i.highlight) ?? members[0];
     return { members, lead };
   },
-  head: ({ loaderData }) => ({
+  head: ({ loaderData, params }) => ({
+    links: alternateLinks(`/resume/group/${params.group}`, langFromParam(params.lang)),
     meta: loaderData?.lead
       ? [
           {
@@ -49,6 +52,7 @@ export const Route = createFileRoute("/resume_/group/$group")({
 
 function PageResumeGroup() {
   const { members, lead } = Route.useLoaderData();
+  const { lang } = Route.useParams();
   const theme = useTheme();
 
   if (!lead) {
@@ -61,7 +65,8 @@ function PageResumeGroup() {
       <Container maxWidth={720}>
         <SpacedView horizontal="l" gap="m">
           <Link
-            to="/resume"
+            to="/{-$lang}/resume"
+            params={{ lang }}
             hash={lead.slug}
             style={{ textDecoration: "none", alignSelf: "flex-start" }}
           >

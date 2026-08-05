@@ -1,3 +1,4 @@
+import type { Localized } from "@/i18n";
 import SVGAppStoreNpm from "@/svgs/components/SVGAppStoreNpm";
 import SVGLine3Horizontal from "@/svgs/components/SVGLine3Horizontal";
 import SVGMenuBlog from "@/svgs/components/SVGMenuBlog";
@@ -98,6 +99,8 @@ export const socials = {
 
 type LinkWithIcon = {
   href: string;
+  /** Localized menu label; the record key is the English fallback. */
+  label?: Localized<string>;
   alt?: string;
   icon: (props: LinksIconProps) => ReactNode;
   isActive?: (currentLink: string | null, link: string) => boolean;
@@ -113,6 +116,7 @@ type LinksIconProps = {
 };
 export const internalLinks: LinksWithIcon = {
   Home: {
+    label: { en: "Home", fr: "Accueil" },
     href: "/",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
@@ -123,6 +127,7 @@ export const internalLinks: LinksWithIcon = {
     isActive: (currentLink: string | null, link: string) => currentLink === link,
   },
   Resume: {
+    label: { en: "Resume", fr: "CV" },
     href: "/resume",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
@@ -133,6 +138,7 @@ export const internalLinks: LinksWithIcon = {
     isActive: (currentLink: string | null, link: string) => currentLink === link,
   },
   Contact: {
+    label: { en: "Contact", fr: "Contact" },
     href: "/contact",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
@@ -143,6 +149,7 @@ export const internalLinks: LinksWithIcon = {
     isActive: (currentLink: string | null, link: string) => currentLink === link,
   },
   More: {
+    label: { en: "More", fr: "Plus" },
     href: "#" + footerAnchor,
     icon: ({ style, size, color }: LinksIconProps) => (
       <SVGLine3Horizontal style={style} width={size} height={size} fill={color} />
@@ -153,12 +160,14 @@ export const internalLinks: LinksWithIcon = {
 
 export const internalLinks2: LinksWithIcon = {
   Blog: {
+    label: { en: "Blog", fr: "Blog" },
     href: "/blog",
     icon: ({ style, size, color }: LinksIconProps) => (
       <SVGMenuBlog style={style} width={size} height={size} fill={color} />
     ),
   },
   Talks: {
+    label: { en: "Talks", fr: "Conférences" },
     href: "/talks",
     icon: ({ style, size, color }: LinksIconProps) => (
       <SVGMenuTalk style={style} fill={color} width={size} height={size} />

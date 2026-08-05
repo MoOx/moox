@@ -1,10 +1,6 @@
-import { fetchAll, ResumeItem } from "@/api";
+import { ResumeItem, fetchAll, fetchResume } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
-import {
-  currentLang,
-  featuredTestimonials,
-  TestimonialContent,
-} from "@/components/BlockTestimonials";
+import { featuredTestimonials, TestimonialContent } from "@/components/BlockTestimonials";
 import CvOpenSourceCard from "@/components/CvOpenSourceCard";
 import CvSectionTitle from "@/components/CvSectionTitle";
 import GradientText from "@/components/GradientText";
@@ -46,6 +42,7 @@ import {
   workLocation,
   yearRange,
 } from "@/profile";
+import { alternateLinks, assertLangParam, langFromParam, useLang, useT } from "@/i18n";
 import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
@@ -63,26 +60,31 @@ import { ComponentType, ReactNode, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Svg, { Defs, LinearGradient, Stop } from "react-native-svg";
 
-export const Route = createFileRoute("/cv")({
-  loader: async () => {
+export const Route = createFileRoute("/{-$lang}/cv")({
+  beforeLoad: ({ params }) => assertLangParam(params.lang),
+  loader: async ({ params }) => {
     const [resume, talks, blog] = await Promise.all([
-      fetchAll({ data: "resume" }),
+      fetchResume(langFromParam(params.lang)),
       fetchAll({ data: "talks" }),
       fetchAll({ data: "blog" }),
     ]);
     return { resume, talks, blog };
   },
-  head: () => ({
+  head: ({ params }) => ({
+    links: alternateLinks("/cv", langFromParam(params.lang)),
     meta: [
       // The page keeps the title short for the eye; the keywords a crawler, an
       // LLM or a job board matches on live here, where length is free. The PDF
       // export reads these same tags back off the rendered page to fill the
       // PDF's /Info dictionary, so this is the single source of truth.
-      { title: metaTitle },
-      { name: "description", content: metaDescription },
+      { title: metaTitle(langFromParam(params.lang)) },
+      { name: "description", content: metaDescription(langFromParam(params.lang)) },
       { name: "author", content: `${fullName} (${nickname})` },
-      { name: "keywords", content: metaKeywords.join(", ") },
-      { name: "subject", content: metaSubject },
+      {
+        name: "keywords",
+        content: metaKeywords(langFromParam(params.lang)).join(", "),
+      },
+      { name: "subject", content: metaSubject(langFromParam(params.lang)) },
     ],
   }),
   component: PageCV,
@@ -110,6 +112,9 @@ const byDateDesc = (a: ResumeItem, b: ResumeItem) =>
 
 function PageCV() {
   const theme = useTheme();
+  const t = useT();
+  const lang = useLang();
+  const freelanceLine = `${lang === "fr" ? "Freelance depuis" : "Freelance since"} ${freelanceSince} · ${t(workLocation)}`;
   const { resume, talks, blog } = Route.useLoaderData();
 
   // A CV row is a client, not a contract: an entry flagged `highlight` carries
@@ -125,7 +130,7 @@ function PageCV() {
   const openSource = resume
     .filter((i) => i.openSource)
     .sort((a, b) => (a.dateStart < b.dateStart ? 1 : -1));
-  const stats = profileStats(resume);
+  const stats = profileStats(resume, lang);
 
   // Everything else worth naming - one row per group, so the missions already
   // folded into a key experience never show up twice. Nothing flagged
@@ -264,7 +269,7 @@ function PageCV() {
                 { letterSpacing: 1.4, textTransform: "uppercase" },
               ]}
             >
-              {`Freelance since ${freelanceSince} · ${workLocation}`}
+              {freelanceLine}
             </Text>
 
             <View>
@@ -294,7 +299,7 @@ function PageCV() {
                   { fontStyle: "italic", marginTop: size("xxs") },
                 ]}
               >
-                {jobSubtitle}
+                {t(jobSubtitle)}
               </Text>
             </View>
             <View
@@ -304,9 +309,9 @@ function PageCV() {
                 gap: size("xs"),
               }}
             >
-              <AvailabilityBadge showText={true} text={availabilityLabel} />
+              <AvailabilityBadge showText={true} text={t(availabilityLabel)} />
               <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-                {availabilityDetail}
+                {t(availabilityDetail)}
               </Text>
             </View>
             <View
@@ -347,10 +352,10 @@ function PageCV() {
         </View>
         <SpacedView vertical="l" gap="m">
           <Text style={[fontStyles.iosEm.title2, theme.styles.text]} role="heading" aria-level={2}>
-            {tagline}
+            {t(tagline)}
           </Text>
           <Text style={[fontStyles.ios.callout, theme.styles.textLight1]} role="paragraph">
-            {summary}
+            {t(summary)}
           </Text>
         </SpacedView>
 
@@ -402,10 +407,13 @@ function PageCV() {
                 <ContactRow Icon={SVGPhone} href={phoneHref}>
                   {phoneDisplay}
                 </ContactRow>
-                {languages.map((l) => (
-                  <Text key={l.label} style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-                    {`${l.flag} ${l.label} `}
-                    <Text style={theme.styles.text}>{l.level}</Text>
+                {languages.map((language) => (
+                  <Text
+                    key={t(language.label)}
+                    style={[fontStyles.ios.footnote, theme.styles.textLight1]}
+                  >
+                    {`${language.flag} ${t(language.label)} `}
+                    <Text style={theme.styles.text}>{t(language.level)}</Text>
                   </Text>
                 ))}
               </View>
@@ -414,7 +422,7 @@ function PageCV() {
 
           {/* -------------------------------------------------------- Skills */}
           <View nativeID="cv-skills" style={{ gap: size("s") }}>
-            <CvSectionTitle>{"Skills"}</CvSectionTitle>
+            <CvSectionTitle>{t({ en: "Skills", fr: "Compétences" })}</CvSectionTitle>
 
             <View
               style={{
@@ -427,10 +435,10 @@ function PageCV() {
                 .filter((d) => d.feature)
                 .map((d) => (
                   <SkillCard
-                    key={d.title}
-                    title={d.title}
-                    subtitle={d.subtitle}
-                    items={d.items}
+                    key={t(d.title)}
+                    title={t(d.title)}
+                    subtitle={t(d.subtitle)}
+                    items={t(d.items)}
                     Icon={d.Icon}
                     gradient={d.gradient}
                     big={true}
@@ -442,10 +450,10 @@ function PageCV() {
                   .filter((d) => !d.feature)
                   .map((d) => (
                     <SkillCard
-                      key={d.title}
-                      title={d.title}
-                      subtitle={d.subtitle}
-                      items={d.items}
+                      key={t(d.title)}
+                      title={t(d.title)}
+                      subtitle={t(d.subtitle)}
+                      items={t(d.items)}
                       Icon={d.Icon}
                       gradient={d.gradient}
                     />
@@ -468,7 +476,7 @@ function PageCV() {
                   <Text
                     style={[fontStyles.ios.caption2, theme.styles.textLight1]}
                   >
-                    {label}
+                    {t(label)}
                   </Text>
                 </View>
               ))}
@@ -517,7 +525,7 @@ function PageCV() {
                         describes. A single range would contradict it. */}
                     {(() => {
                       const periods = groupPeriods(membersOf(h));
-                      return periods.length > 1 ? periods.join(" · ") : monthRange(h);
+                      return periods.length > 1 ? periods.join(" · ") : monthRange(h, lang);
                     })()}
                   </Text>
                 </View>
@@ -590,7 +598,7 @@ function PageCV() {
                   >
                     {/* Years only: this is a compact table, and the month
                         earns its space on key experiences, not here. */}
-                    {yearRange(m)}
+                    {yearRange(m, lang)}
                   </Text>
                   <Text
                     style={[
@@ -620,9 +628,9 @@ function PageCV() {
             <View nativeID="cv-testimonials" style={{ gap: size("s") }}>
               <CvSectionTitle>{"Testimonials"}</CvSectionTitle>
 
-              {featuredTestimonials.map((t, i) => (
+              {featuredTestimonials.map((testimonial, i) => (
                 <View
-                  key={t.name}
+                  key={testimonial.name}
                   style={{
                     flexDirection: "row",
                     alignItems: "flex-start",
@@ -638,10 +646,10 @@ function PageCV() {
                 >
                   <Text
                     style={[fontStyles.ios.footnote, theme.styles.text, { flex: 1 }]}
-                    {...(t.originalLang !== currentLang ? { lang: currentLang } : null)}
+                    {...(testimonial.originalLang !== lang ? { lang } : null)}
                   >
                     {/* Dimmed less than on the site: this prints on paper. */}
-                    <TestimonialContent text={t.content[currentLang]} dim={0.85} />
+                    <TestimonialContent text={testimonial.content[lang]} dim={0.85} />
                   </Text>
                   <View
                     style={{
@@ -654,17 +662,19 @@ function PageCV() {
                     }}
                   >
                     <Image
-                      src={t.avatar}
-                      alt={t.name}
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
                       width={28}
                       height={28}
                       priority={true}
                       style={{ borderRadius: 14 }}
                     />
                     <View>
-                      <Text style={[fontStyles.iosEm.caption1, theme.styles.text]}>{t.name}</Text>
+                      <Text style={[fontStyles.iosEm.caption1, theme.styles.text]}>
+                        {testimonial.name}
+                      </Text>
                       <Text style={[fontStyles.ios.caption2, theme.styles.textLight2]}>
-                        {t.title[currentLang]}
+                        {testimonial.title[lang]}
                       </Text>
                     </View>
                   </View>
@@ -685,7 +695,9 @@ function PageCV() {
 
             {/* ------------------------------------- Talks & community */}
             <View nativeID="cv-talks" style={{ gap: size("s") }}>
-              <CvSectionTitle>{"Talks & Community"}</CvSectionTitle>
+              <CvSectionTitle>
+                {t({ en: "Talks & Community", fr: "Conférences & communauté" })}
+              </CvSectionTitle>
 
               <View
                 style={{
@@ -700,7 +712,7 @@ function PageCV() {
                   valueFontSize={22}
                   stat={{
                     stat: `${talks.length}`,
-                    label: "Conference talks",
+                    label: t({ en: "Conference talks", fr: "Conférences données" }),
                     comment: "in French & English",
                   }}
                 />
@@ -710,7 +722,7 @@ function PageCV() {
                     // blog.json only indexes moox.io; putaindecode.io is a
                     // manual figure from consts (see STATS.md).
                     stat: `${blog.length + putaindecodeArticles}`,
-                    label: "Blog posts",
+                    label: t({ en: "Blog posts", fr: "Articles de blog" }),
                     comment: "on moox.io & putaindecode.io",
                   }}
                 />
@@ -720,7 +732,10 @@ function PageCV() {
                   stat={{
                     stat: "co-founder",
                     label: visualUrl(socials.putaindecode.value),
-                    comment: "FR dev community, blog & podcast",
+                    comment: t({
+                      en: "FR dev community, blog & podcast",
+                      fr: "communauté de devs FR, blog & podcast",
+                    }),
                     url: socials.putaindecode.value,
                   }}
                 />
@@ -738,7 +753,9 @@ function PageCV() {
               }}
             >
               <View style={{ flexGrow: 1, flexBasis: 280, gap: size("s") }}>
-                <CvSectionTitle fontSize={22}>{"Education"}</CvSectionTitle>
+                <CvSectionTitle fontSize={22}>
+                  {t({ en: "Education", fr: "Formation" })}
+                </CvSectionTitle>
                 {education.map((e) => (
                   <View
                     key={e.slug}
@@ -763,7 +780,7 @@ function PageCV() {
                         {e.job_title}
                       </Text>
                       <Text style={[fontStyles.ios.caption1, theme.styles.textLight1]}>
-                        {`${e.company} · ${yearRange(e)}`}
+                        {`${e.company} · ${yearRange(e, lang)}`}
                       </Text>
                     </View>
                   </View>
@@ -771,7 +788,9 @@ function PageCV() {
               </View>
 
               <View style={{ flexGrow: 1, flexBasis: 280, gap: size("s") }}>
-                <CvSectionTitle fontSize={22}>{"Beyond Code"}</CvSectionTitle>
+                <CvSectionTitle fontSize={22}>
+                  {t({ en: "Beyond Code", fr: "Au-delà du code" })}
+                </CvSectionTitle>
                 <View
                   style={{
                     flexDirection: "row",
@@ -782,7 +801,7 @@ function PageCV() {
                   {hobbies
                     .filter((h) => h.cv)
                     .map(({ Icon, label }) => (
-                      <View key={label} style={{ alignItems: "center" }}>
+                      <View key={t(label)} style={{ alignItems: "center" }}>
                         <Icon width={48} height={48} fill="url(#cvGrad)" />
                         <Text
                           style={[
@@ -791,7 +810,7 @@ function PageCV() {
                             { textAlign: "center" },
                           ]}
                         >
-                          {label}
+                          {t(label)}
                         </Text>
                       </View>
                     ))}
@@ -816,7 +835,7 @@ function PageCV() {
                 {/* Dates the whole document, so a PDF that keeps circulating
                     says how old it is instead of quietly going stale. */}
                 <Text style={[fontStyles.ios.caption2, theme.styles.textLight2]}>
-                  {updatedOn()}
+                  {updatedOn(lang)}
                 </Text>
                 <Text style={[fontStyles.ios.callout, theme.styles.text]}>
                   {"Full history & all my experiences online:"}

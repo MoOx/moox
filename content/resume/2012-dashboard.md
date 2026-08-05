@@ -1,7 +1,9 @@
 ---
 company: "Jirafe"
 url: "http://twitter.com/jirafe"
-title: "Dashboard with different kinds of widgets for Jirafe analytics"
+title:
+  en: "Dashboard with different kinds of widgets for Jirafe analytics"
+  fr: "Tableau de bord à widgets pour la solution analytics Jirafe"
 job_title: "Lead Front-End Developer"
 dateStart: 2012-11-01
 dateEnd: 2013-11-01
@@ -27,17 +29,15 @@ Jirafe was later acquired by SAP (Hybris).
 
 ---
 
-Développement d'une nouvelle architecture application pour un dashboard en
-pleine évolution.
+Développement d'une nouvelle architecture front-end pour une interface de
+tableau de bord en croissance rapide.
 
-Afin d'éviter le cauchemar que devenait une architecture basé sur du PHP côté
-serveur couplé à du code JavaScript abusant de jQuery et de trop de plugins,
-j'ai pris l'initiative de démarrer une nouvelle version orienté en utilisant
-Backbone.js, avec une approche orienté composant et une API REST pour le
-Back-End.
+Pour éviter l'empilement ingérable « jQuery et ses plugins » couplé à un rendu
+PHP côté serveur, j'ai lancé une nouvelle version, en Backbone.js avec une
+approche par composants et une API sécurisée côté backend.
 
-L'architecture était basé sur un fichier de tâches gérer par Grunt, qui
-s'occupait de compiler les JavaScript, polices d'icones, feuilles de styles
-générées avec Sass, ainsi que la génération d'un Styleguide.
+Toute la chaîne front-end reposait sur un Gruntfile soigné : compilation des
+fichiers JavaScript, des icônes en webfonts, des feuilles de style Sass, et
+génération d'un styleguide.
 
-Jirafe a par la suite été racheté par SAP (Hybris).
+Jirafe a ensuite été racheté par SAP (Hybris).

@@ -1,7 +1,9 @@
 ---
 company: "M6"
 url: "https://www.m6.fr/pekin-express-p_945/episode-1-partie-1-c_13108834"
-title: "Reality TV race - Pékin Express #20"
+title:
+  en: "Reality TV race - Pékin Express #20"
+  fr: "Jeu d'aventure télévisé - Pékin Express #20"
 # Not a job: lives in "Beyond Code" on the CV, never in the work history.
 personal: true
 dateStart: 2025-01-16

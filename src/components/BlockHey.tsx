@@ -1,3 +1,4 @@
+import { useT } from "@/i18n";
 import BlockMe1WithSmallPills from "@/components/BlockMe1WithSmallPills";
 import { jobSubtitle, jobTitleParts } from "@/profile";
 import { WindowWidth } from "@/react-multiversal";
@@ -11,6 +12,7 @@ import { Text, View } from "react-native";
 
 export default function BlockHey() {
   const theme = useTheme();
+  const t = useT();
   return (
     <View style={{ zIndex: 1 }}>
       <Container
@@ -86,14 +88,16 @@ export default function BlockHey() {
                   },
                 ]}
               >
-                {jobSubtitle}
+                {t(jobSubtitle)}
               </Text>
             </View>
             <Spacer size="l" />
             <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
-              <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>{"Hey,"}</Text>
+              <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
+                {t({ en: "Hey,", fr: "Hey," })}
+              </Text>
               <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-                {"I'm "}
+                {t({ en: "I'm ", fr: "Moi c'est " })}
                 <Text
                   style={[
                     gradientTextFlashyStyles(theme, -16),

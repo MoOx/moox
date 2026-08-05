@@ -1,8 +1,9 @@
+import { useHref, defaultLang, Lang, useT, useLang } from "@/i18n";
 import { ResumeItem } from "@/api";
 import Image from "@/components/Image";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
 import StatTile from "@/components/StatTile";
-import { bodyBeforeFirstHr, pitchOf, resumeEntryPath, resumeEntryTransitionName } from "@/profile";
+import { pitchOf, resumeEntryPath, resumeEntryTransitionName } from "@/profile";
 import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
@@ -54,16 +55,25 @@ const styles = StyleSheet.create({
   },
 });
 
-const getDurationText = (startDate: string, endDate: Date) => {
+const getDurationText = (startDate: string, endDate: Date, lang: Lang = defaultLang) => {
   const durationInMonths = Math.floor(differenceInCalendarMonths(endDate, new Date(startDate)));
   const durationYears = Math.floor(durationInMonths / 12);
   const durationMonths = durationInMonths % 12;
 
+  const plural = (n: number, one: string, many: string) => (n === 1 ? `1 ${one}` : `${n} ${many}`);
   const yearText =
-    durationYears === 0 ? "" : durationYears === 1 ? "1 year" : `${durationYears} years`;
+    durationYears === 0
+      ? ""
+      : lang === "fr"
+        ? `${durationYears} an${durationYears > 1 ? "s" : ""}`
+        : plural(durationYears, "year", "years");
 
   const monthText =
-    durationMonths === 0 ? "" : durationMonths === 1 ? "1 month" : `${durationMonths} months`;
+    durationMonths === 0
+      ? ""
+      : lang === "fr"
+        ? `${durationMonths} mois`
+        : plural(durationMonths, "month", "months");
 
   return yearText ? yearText + " " + monthText : monthText;
 };
@@ -95,6 +105,9 @@ export const ResumeTimelineEntry = ({
   transitionEnabled?: boolean;
 }) => {
   const theme = useTheme();
+  const t = useT();
+  const lang = useLang();
+  const localizeHref = useHref();
 
   return (
     <View
@@ -162,7 +175,7 @@ export const ResumeTimelineEntry = ({
         </View>
         {!detail && !disableLinks ? (
           <LinkText
-            href={resumeEntryPath(item)}
+            href={localizeHref(resumeEntryPath(item))}
             underlineOnFocus={true}
             style={[styles.description, fontStyles.iosEm.title2, theme.styles.text]}
           >
@@ -179,7 +192,7 @@ export const ResumeTimelineEntry = ({
         {item.dateEnd ? (
           <>
             <Text style={[fontStyles.ios.footnote, theme.styles.textLight2]}>
-              {getDurationText(item.dateStart, new Date(item.dateEnd))}
+              {getDurationText(item.dateStart, new Date(item.dateEnd), lang)}
             </Text>
           </>
         ) : (
@@ -187,8 +200,8 @@ export const ResumeTimelineEntry = ({
             <Spacer size="xxs" />
             <Text style={[fontStyles.ios.footnote, theme.styles.textLight2]}>
               {item.wip
-                ? "Work in Progress"
-                : `${getDurationText(item.dateStart, new Date())} and counting`}
+                ? t({ en: "Work in Progress", fr: "En cours" })
+                : `${getDurationText(item.dateStart, new Date(), lang)} and counting`}
             </Text>
           </>
         )}
@@ -201,7 +214,7 @@ export const ResumeTimelineEntry = ({
         {detail && item.body ? (
           <>
             <Spacer size="s" />
-            <MdAsJsonRenderer body={bodyBeforeFirstHr(item.body)} />
+            <MdAsJsonRenderer body={item.body} />
           </>
         ) : null}
         {detail && item.stats && item.stats.length > 0 ? (

@@ -1,3 +1,4 @@
+import { useHref, useT } from "@/i18n";
 import ButtonView from "@/components/ButtonView";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import Container from "@/react-multiversal/Container";
@@ -9,6 +10,8 @@ import { useTheme } from "@/styles";
 import { Text } from "react-native";
 
 export default function WebsiteError({ statusCode }: { statusCode: number }) {
+  const localizeHref = useHref();
+  const t = useT();
   const theme = useTheme();
   return (
     <WebsiteWrapper>
@@ -41,7 +44,7 @@ export default function WebsiteError({ statusCode }: { statusCode: number }) {
           </div>
           <Spacer size="l" />
           <LinkView
-            href="/"
+            href={localizeHref("/")}
             onPress={() => {
               if (window.history.length > 1) {
                 window.history.back();
@@ -50,7 +53,7 @@ export default function WebsiteError({ statusCode }: { statusCode: number }) {
               }
             }}
           >
-            <ButtonView>{"Go back"}</ButtonView>
+            <ButtonView>{t({ en: "Go back", fr: "Retour" })}</ButtonView>
           </LinkView>
         </Container>
       </SpacedView>

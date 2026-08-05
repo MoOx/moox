@@ -1,7 +1,9 @@
 ---
 company: "BeOp"
 url: "https://beop.io"
-title: "Third-party widget for brands and publishers"
+title:
+  en: "Third-party widget for brands and publishers"
+  fr: "Widget tiers pour marques et éditeurs"
 job_title: "Front-End Developer"
 dateStart: 2015-03-01
 dateEnd: 2015-09-01
@@ -27,9 +29,11 @@ interactions.
 
 ---
 
-Développement avec React d'un widget dynamique pour générer un haut niveau
-d'interaction utilisateur.
+Développement avec React d'un widget embarquable, conçu pour générer un fort
+niveau d'interaction utilisateur.
 
-- Mise place d'un SDK pour intégration du widget
-- Mise en place d'un skelette applicatif avec React pour le widget
-- Evolution rapide de la codebase avec introduction de Redux et CSS-in-JS
+- Conception d'un SDK pour faciliter l'intégration du widget chez les
+  partenaires
+- Réalisation du squelette applicatif du widget avec React et son écosystème
+- Itérations rapides avec beaucoup de technologies nouvelles (Redux,
+  CSS-in-JS…)

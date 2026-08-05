@@ -8,6 +8,18 @@ html {
   animation-duration: 0.2s;
 }
 
+/* Reduced motion: skip every view transition (the root cross-fade and the
+   named zooms - resume cards to their detail modal, home headings, pills).
+   Removing the animations ends the transition on the next frame, so the new
+   state is painted directly instead of being animated into place. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* code highlight */
 .hljs-operator {
   color: #a626a4;

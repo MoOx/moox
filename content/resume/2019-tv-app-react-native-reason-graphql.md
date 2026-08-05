@@ -1,8 +1,12 @@
 ---
 company: "Loewe"
-title: "TV/media remote app made with React Native, ReScript, GraphQL & Apollo"
+title:
+  en: "TV/media remote app made with React Native, ReScript, GraphQL & Apollo"
+  fr: "Application télécommande TV/média en React Native, ReScript, GraphQL & Apollo"
 job_title: "Front-End Developer"
-pitch: "Re-architected the React Native + ReScript codebase to make contributing easy, and polished the UI with tons of animations so the app feels truly native - not half web, half native. Untangled the hand-linked Xcode project into a Cocoapods Podfile, so React Native updates stopped hurting."
+pitch:
+  en: "Re-architected the React Native + ReScript codebase to make contributing easy, and polished the UI with tons of animations so the app feels truly native - not half web, half native. Untangled the hand-linked Xcode project into a Cocoapods Podfile, so React Native updates stopped hurting."
+  fr: "Base de code React Native + ReScript ré-architecturée pour rendre les contributions faciles, et interface soignée à coups d'animations pour que l'app paraisse vraiment native - pas mi-web, mi-native. Projet Xcode lié à la main démêlé en un Podfile Cocoapods, pour que les mises à jour de React Native cessent de faire mal."
 url: "https://www.loewe.tv/"
 dateStart: 2019-02-25
 dateEnd: 2019-05-10
@@ -46,22 +50,20 @@ Native (with ReScript) & GraphQL (with Apollo).
 
 ---
 
-Mission courte pour booster le dévelopment d'un appli type télécommande TV /
-périphériques connectés, faite avec React Native (avec ReScript), ainsi que
-GraphQL (avec Apollo).
+Mission courte pour accélérer le développement d'une application télécommande
+TV / média, faite avec React Native (et ReScript) et GraphQL (avec Apollo).
 
-- Re-architecture de la codebase de l'app mobile faite avec React Native et
-  ReScript dans le but de simplifier les contributions.
-- Dévelopment de plusieurs composants React bas niveau pour simplifier le
-  dévelopment au quotidien development pour suivre l'évolution rapide des
-  mockups
-- Temps passé à affiner les détails de l'interface, avec intégration d'un
-  multitudes d'animations afin que l'application donne vraiment un feeling
-  natif, et non mi-web / mi-mobile
-- Transformation des designs Sketch en composants React avec gestion des
-  problématiques non anticipé par le rendu statique des maquettes
-- Contribution open source au projet bs-react-native permettant d'utiliser
-  React-native avec ReScript
-- Migration iOS d'une partie du .xcodeproj (librairies lié à la main, dont
-  certaines copié/collé) vers un Podfile via Cocoapods pour faciliter les mises
-  à jour de React Native
+- Ré-architecture de la base de code React Native + ReScript pour simplifier
+  les contributions
+- Développement de composants React bas niveau pour faciliter le travail
+  quotidien et suivre des maquettes qui évoluaient vite
+- Temps passé à affiner les détails de l'interface, avec une multitude
+  d'animations pour que l'application paraisse vraiment native, et non mi-web,
+  mi-native
+- Transformation des designs Sketch en composants React, avec la gestion de
+  tous les cas qu'une maquette statique n'anticipe pas
+- Contributions open source à bs-react-native, les bindings React Native pour
+  ReScript
+- Migration d'une partie du .xcodeproj iOS (bibliothèques liées à la main,
+  certaines copiées-collées) vers un Podfile Cocoapods, pour faciliter les
+  mises à jour de React Native

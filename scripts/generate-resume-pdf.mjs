@@ -16,8 +16,13 @@
 //   - /Info (/Author, /Creator… which Chrome leaves empty) is stamped via a qpdf
 //     JSON round-trip, from the <meta> tags read back off the rendered page.
 //
+// One file per language: `/cv` → …-resume.pdf, `/fr/cv` → …-resume.fr.pdf
+// (same names as `resumePdfPath` in src/profile.tsx, which the site's Download
+// button reads - keep the two in sync).
+//
 // Usage:
-//   npm run resume:pdf                    # A4, scale 1, qpdf pass
+//   npm run resume:pdf                    # both languages, A4, scale 1, qpdf pass
+//   npm run resume:pdf -- --lang=fr       # only one language
 //   npm run resume:pdf -- --scale=0.9     # global scale (0.1–2)
 //   npm run resume:pdf -- --optimize=none # skip the qpdf pass
 //   npm run resume:pdf -- --margin=8mm --format=A4 --out=public/foo.pdf
@@ -46,7 +51,17 @@ const args = Object.fromEntries(
     }),
 );
 
-const scale = Math.min(2, Math.max(0.1, Number(args.scale ?? "1")));
+/**
+ * Per-language print scale. French runs ~15% longer than English at equal
+ * meaning, which pushed the CV onto a third page: the page-1 content no longer
+ * fitted, so the explicit `breakBefore: "page"` of page 2 landed one page late.
+ * 0.97 buys back the overflow - three percent, invisible next to a reflow of
+ * the whole layout, and the text stays vector (selectable, extractable).
+ * Verified: page 1 still ends on the teaching row, page 2 still opens on Open
+ * Source. Recheck the page count whenever the French copy grows.
+ */
+const SCALES = { en: 1, fr: 0.97 };
+const scaleFor = (lang) => Math.min(2, Math.max(0.1, Number(args.scale ?? SCALES[lang] ?? 1)));
 const format = args.format ?? "A4";
 const margin = args.margin ?? "0mm";
 // Post-processing pass: "qpdf" (default) or "none". See optimizeWithQpdf below
@@ -55,10 +70,20 @@ const margin = args.margin ?? "0mm";
 //   pdftotext public/…-resume.pdf - | head -40
 const quality = args.optimize ?? args.quality ?? "qpdf";
 const VALID_QUALITY = ["qpdf", "none"];
-const out = path.resolve(
-  root,
-  args.out ?? "public/maxime-thirouin-freelance-front-end-developer-resume.pdf",
-);
+// The languages to export. English is the site's default and keeps the
+// unsuffixed filename - the URL already circulating must not change.
+const LANGS = ["en", "fr"];
+const langs = args.lang ? [args.lang] : LANGS;
+const outFor = (lang) =>
+  path.resolve(
+    root,
+    args.out ??
+      `public/maxime-thirouin-freelance-front-end-developer-resume${
+        lang === "en" ? "" : `.${lang}`
+      }.pdf`,
+  );
+/** `/cv` for the default language, `/fr/cv` for the others (see src/i18n.ts). */
+const pathFor = (lang) => (lang === "en" ? "/cv" : `/${lang}/cv`);
 const port = Number(args.port ?? "4319");
 const externalUrl = args.url; // if set, don't spawn a dev server
 
@@ -260,26 +285,21 @@ function optimizeWithQpdf(rawPath, outPath) {
 }
 
 // --- Generate -------------------------------------------------------------
-async function main() {
-  if (!VALID_QUALITY.includes(quality)) {
-    throw new Error(`Invalid --optimize=${quality}. Use one of: ${VALID_QUALITY.join(", ")}`);
-  }
+
+/** Renders one language into `out`, returns the sizes for the log line. */
+async function renderPdf(browser, baseUrl, lang, out) {
+  const scale = scaleFor(lang);
   const before = fs.existsSync(out) ? fs.statSync(out).size : 0;
   const raw = out.replace(/\.pdf$/, ".raw.pdf");
-  console.log(`[resume:pdf] scale=${scale} format=${format} margin=${margin} optimize=${quality}`);
-
-  const { baseUrl, stop } = await startServer();
-  let browser;
+  const context = await browser.newContext({ colorScheme: "light" });
+  const page = await context.newPage();
   let pageMeta = {};
   try {
-    browser = await chromium.launch({ channel: "chrome" });
-    const context = await browser.newContext({ colorScheme: "light" });
-    const page = await context.newPage();
     await page.emulateMedia({ media: "print" });
     if (quality !== "none") await routeQuantizedImages(page);
 
-    const target = `${baseUrl}/cv`;
-    console.log(`[resume:pdf] rendering ${target}`);
+    const target = `${baseUrl}${pathFor(lang)}`;
+    console.log(`[resume:pdf] rendering ${target} (scale ${scale})`);
     await page.goto(target, { waitUntil: "networkidle", timeout: 60_000 });
     // Confirm we are in PDF mode (Download button removed, body text rendered).
     await page.waitForFunction(
@@ -303,6 +323,8 @@ async function main() {
     );
 
     // Last one wins: the route's <head> overrides the root layout's defaults.
+    // Localized, like the page itself - the /Info dictionary of the French PDF
+    // must not describe it in English.
     pageMeta = await page.evaluate(() => {
       const content = (name) =>
         [...document.querySelectorAll(`meta[name="${name}"]`)]
@@ -324,8 +346,7 @@ async function main() {
       margin: { top: margin, right: margin, bottom: margin, left: margin },
     });
   } finally {
-    if (browser) await browser.close();
-    stop();
+    await context.close();
   }
 
   const rawSize = fs.statSync(raw).size;
@@ -333,12 +354,51 @@ async function main() {
   if (!(await stampMetadata(out, pageMeta))) {
     console.warn("[resume:pdf] could not stamp /Author & /Keywords metadata.");
   }
-  const after = fs.statSync(out).size;
-  const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
+  return { before, rawSize, after: fs.statSync(out).size, optimized };
+}
+
+async function main() {
+  if (!VALID_QUALITY.includes(quality)) {
+    throw new Error(`Invalid --optimize=${quality}. Use one of: ${VALID_QUALITY.join(", ")}`);
+  }
+  for (const lang of langs) {
+    if (!LANGS.includes(lang)) {
+      throw new Error(`Invalid --lang=${lang}. Use one of: ${LANGS.join(", ")}`);
+    }
+  }
+  if (args.out && langs.length > 1) {
+    throw new Error("--out writes a single file: pass --lang=en or --lang=fr with it.");
+  }
   console.log(
-    `[resume:pdf] wrote ${path.relative(root, out)} - ${kb(after)}` +
-      (optimized ? ` (raw ${kb(rawSize)} → ${quality})` : "") +
-      (before ? ` (previous ${kb(before)})` : ""),
+    `[resume:pdf] langs=${langs.join(",")} format=${format} ` +
+      `margin=${margin} optimize=${quality}`,
+  );
+
+  const { baseUrl, stop } = await startServer();
+  let browser;
+  const results = [];
+  try {
+    browser = await chromium.launch({ channel: "chrome" });
+    for (const lang of langs) {
+      const out = outFor(lang);
+      results.push({ lang, out, ...(await renderPdf(browser, baseUrl, lang, out)) });
+    }
+  } finally {
+    if (browser) await browser.close();
+    stop();
+  }
+
+  const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
+  for (const r of results) {
+    console.log(
+      `[resume:pdf] wrote ${path.relative(root, r.out)} - ${kb(r.after)}` +
+        (r.optimized ? ` (raw ${kb(r.rawSize)} → ${quality})` : "") +
+        (r.before ? ` (previous ${kb(r.before)})` : ""),
+    );
+  }
+  console.log(
+    "[resume:pdf] verify the text layer of each file:\n" +
+      results.map((r) => `  pdftotext ${path.relative(root, r.out)} - | head -40`).join("\n"),
   );
 }
 

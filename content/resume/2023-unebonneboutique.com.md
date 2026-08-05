@@ -1,7 +1,9 @@
 ---
 company: "FKLG Production"
 url: "https://fklg.art"
-title: "VOD platform built with Shopify & Vimeo"
+title:
+  en: "VOD platform built with Shopify & Vimeo"
+  fr: "Plateforme VOD construite avec Shopify & Vimeo"
 job_title: "Full-Stack Developer"
 icon: /resume/icons/fklg.jpg
 group: fklg
@@ -39,6 +41,17 @@ e-commerce tasks across his different websites.
 
 ---
 
-Mise en place d'une plateforme de streaming VOD sécurisée pour Kyan Khojandi (célèbre créateur de contenu divertissant français) pour son spectacle de stand-up (et d'autres à venir).
-J'ai créé cette plateforme sur son site marchand <https://unebonneboutique.com>, en utilisant Shopify et Vimeo.
-Je gère également diverses tâches de design, développement web et e-commerce pour ses différents sites.
+Kyan Khojandi vend son spectacle « Une Bonne Soirée » en VOD — pas sur un
+service de streaming dédié, mais directement sur
+[unebonneboutique.com](https://unebonneboutique.com), sa boutique de
+merchandising existante.
+
+C'était tout l'enjeu : plutôt que de construire et d'exploiter un backend vidéo
+sur mesure, j'ai assemblé la plateforme à partir de briques que le studio opère
+déjà — Shopify pour la boutique et le paiement, Vimeo pour le streaming
+sécurisé, Liquid et Gempages pour façonner la vitrine. Une seule boutique à
+gérer, un seul endroit où les fans achètent, et de la place pour que les
+prochains spectacles se posent sur la même étagère.
+
+Autour de la plateforme, j'ai aussi pris en charge diverses missions de design,
+de développement web et d'e-commerce sur ses différents sites.

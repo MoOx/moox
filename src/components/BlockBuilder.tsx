@@ -1,3 +1,5 @@
+import { useT } from "@/i18n";
+import { useHref } from "@/i18n";
 import { ResumeItem } from "@/api";
 import BlockMaxApp from "@/components/BlockMaxApp";
 import LinkButton from "@/components/LinkButton";
@@ -17,7 +19,9 @@ const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 const revertSkew = [{ scaleY: 1 / 1.1 }, { skewY: "-1deg" }];
 
 export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem }) {
+  const localizeHref = useHref();
   const theme = useTheme();
+  const t = useT();
   const deviceWidth = 360;
   // const deviceRatio = 1;
   const windowWidth = useWindowDimensions().width;
@@ -91,7 +95,7 @@ export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem
             {/* The CV's tagline + summary, single source in profile.tsx -
                 this indigo band is the home's main pitch. */}
             <View role="heading" aria-level={2}>
-              {taglineParts.map((part) => (
+              {t(taglineParts).map((part) => (
                 <Text key={part} style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}>
                   {part}
                 </Text>
@@ -101,17 +105,19 @@ export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem
               style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
               role="paragraph"
             >
-              {summary}
+              {t(summary)}
             </Text>
             <LinkButton
-              href="/resume/"
+              href={localizeHref("/resume/")}
               color={theme.dynamicColors.back}
               textColor={theme.dynamicColors.text}
               spaceHorizontal="m"
               style={{ alignSelf: "flex-end" }}
             >
               <SpacedView horizontal="m">
-                <Text style={fontStyles.iosEm.callout}>{"More about me"}</Text>
+                <Text style={fontStyles.iosEm.callout}>
+                  {t({ en: "More about me", fr: "En savoir plus sur moi" })}
+                </Text>
               </SpacedView>
             </LinkButton>
             <Spacer size="m" />

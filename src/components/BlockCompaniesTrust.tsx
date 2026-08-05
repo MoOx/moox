@@ -1,3 +1,4 @@
+import { useT } from "@/i18n";
 import {
   companyIconCoef,
   companyIconStyle,
@@ -16,6 +17,7 @@ import { Text, View } from "react-native";
 
 export default function BlockCompaniesTrust() {
   const theme = useTheme();
+  const t = useT();
 
   return (
     <Container>
@@ -34,7 +36,7 @@ export default function BlockCompaniesTrust() {
           role="heading"
           aria-level={2}
         >
-          {"🇫🇷 Trusted by"}
+          {t({ en: "🇫🇷 Trusted by", fr: "🇫🇷 Ils m'ont fait confiance" })}
         </Text>
         <SpacedView
           gap="m"

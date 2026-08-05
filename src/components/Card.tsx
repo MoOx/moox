@@ -1,3 +1,4 @@
+import { useHref } from "@/i18n";
 import Image from "@/components/Image";
 import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
@@ -69,6 +70,7 @@ export default function Card({
   style?: StyleProp<ViewStyle>;
 }) {
   const theme = useTheme();
+  const localizeHref = useHref();
   return (
     <View
       style={[
@@ -134,7 +136,7 @@ export default function Card({
       ) : null}
       {infoHref ? (
         <LinkView
-          href={infoHref}
+          href={localizeHref(infoHref)}
           onPress={infoOnPress}
           // containerStyle, not style: this must position/size the <a>
           // itself - on the inner text node the anchor collapses to a

@@ -1,7 +1,9 @@
 ---
 company: "Fittingbox"
 url: "https://www.fittingbox.com/"
-title: "Technical manager of a sunglasses e-shop with a virtual try-on solution"
+title:
+  en: "Technical manager of a sunglasses e-shop with a virtual try-on solution"
+  fr: "Responsable technique d'une boutique de lunettes de soleil avec essayage virtuel"
 job_title: "Full-Stack Developer"
 dateStart: 2009-06-01
 dateEnd: 2010-07-01
@@ -21,9 +23,5 @@ products) to a marketplace (several thousand products).
 
 ---
 
-Responsable technique d'une boutique en ligne avec essayage virtuel de lunettes
-de soleil, sous la plateforme e-commerce Magento.
-
-- Transformation de la boutique classique en marketplace de la lunettes de
-  soleil passant de 250 produits à plusieurs milliers.
-- Contribution à l'écosystème Open Source Magento
+Boutique sous Magento. Transformation d'une boutique classique (environ 250
+produits) en place de marché (plusieurs milliers de produits).

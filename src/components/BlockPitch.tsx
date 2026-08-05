@@ -1,3 +1,5 @@
+import { useT } from "@/i18n";
+import { useHref } from "@/i18n";
 import LinkButton from "@/components/LinkButton";
 import SkillsCards from "@/components/SkillsCards";
 import { skillsPitch, skillsPitchTitle } from "@/profile";
@@ -14,7 +16,9 @@ import { Text, View } from "react-native";
  * the next question: in what shape does the help come. Detail on `/resume`.
  */
 export default function BlockPitch() {
+  const localizeHref = useHref();
   const theme = useTheme();
+  const t = useT();
 
   return (
     <View style={theme.styles.back}>
@@ -32,10 +36,10 @@ export default function BlockPitch() {
               role="heading"
               aria-level={2}
             >
-              {skillsPitchTitle}
+              {t(skillsPitchTitle)}
             </Text>
             <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]} role="paragraph">
-              {skillsPitch}
+              {t(skillsPitch)}
             </Text>
           </SpacedView>
         </View>
@@ -44,14 +48,16 @@ export default function BlockPitch() {
           <SkillsCards mode="teaser" />
 
           <LinkButton
-            href="/resume/"
+            href={localizeHref("/resume/")}
             color={theme.dynamicColors.backAlt}
             textColor={theme.dynamicColors.text}
             spaceHorizontal="m"
             style={{ alignSelf: "flex-end" }}
           >
             <SpacedView horizontal="m">
-              <Text style={fontStyles.iosEm.callout}>{"Check my resume"}</Text>
+              <Text style={fontStyles.iosEm.callout}>
+                {t({ en: "Check my resume", fr: "Voir mon CV" })}
+              </Text>
             </SpacedView>
           </LinkButton>
         </SpacedView>

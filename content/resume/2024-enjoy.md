@@ -1,9 +1,13 @@
 ---
 company: "Enjoy App"
 url: "https://enjoyapp.io"
-title: "Mobile app to find food and drinks near you"
+title:
+  en: "Mobile app to find food and drinks near you"
+  fr: "Application mobile pour trouver à manger et à boire autour de soi"
 job_title: "Front-End Developer"
-pitch: "Took the app's UI and UX from MVP to production in React Native - shipping new features and fixing bugs along the way."
+pitch:
+  en: "Took the app's UI and UX from MVP to production in React Native - shipping new features and fixing bugs along the way."
+  fr: "Interface et expérience de l'app menées du MVP à la production en React Native - nouvelles fonctionnalités livrées et bugs corrigés en chemin."
 dateStart: 2024-06-17
 dateEnd: 2024-08-12
 hashtags:
@@ -23,8 +27,7 @@ on the app's UI and UX, integrating new features and fixing bugs.
 
 ---
 
-Développement frontend pour une application mobile qui vous aide à trouver de la
-nourriture et des boissons près de chez vous, l'opposé de Uber Eats &
-compagnies. Du MVP à la production, j'ai travaillé sur l'interface utilisateur
-et l'expérience utilisateur de l'application, intégrant de nouvelles
-fonctionnalités et corrigeant des bugs.
+Développement front-end d'une application mobile qui aide à trouver à manger et
+à boire autour de soi — l'exact opposé d'Uber Eats et consorts. Du MVP à la
+production, j'ai travaillé sur l'interface et l'expérience de l'application, en
+intégrant de nouvelles fonctionnalités et en corrigeant des bugs.

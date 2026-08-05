@@ -1,3 +1,4 @@
+import { useT } from "@/i18n";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
@@ -16,6 +17,7 @@ export const companyIconStyle = {
 };
 export default function BlockCompaniesTried() {
   const theme = useTheme();
+  const t = useT();
 
   return (
     <Container>
@@ -34,7 +36,7 @@ export default function BlockCompaniesTried() {
           role="heading"
           aria-level={2}
         >
-          {"They tried to hire me"}
+          {t({ en: "They tried to hire me", fr: "Ils ont essayé de me recruter" })}
         </Text>
         <SpacedView
           gap="m"

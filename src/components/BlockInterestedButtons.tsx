@@ -1,3 +1,4 @@
+import { useHref, useT } from "@/i18n";
 import LinkButton from "@/components/LinkButton";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -8,13 +9,18 @@ import SVGMenuResumeFill from "@/svgs/components/SVGMenuResumeFill";
 import { Text } from "react-native";
 
 export default function BlockInterestedButtons() {
+  const localizeHref = useHref();
+  const t = useT();
   const theme = useTheme("dark");
 
   return (
     <Container>
       <SpacedView vertical="xxxl" horizontal="xxxl" gap="xl" style={{ alignItems: "center" }}>
         <Text style={[fontStyles.iosEm.title2, theme.styles.text, { textAlign: "center" }]}>
-          {"Ready to build something awesome together?"}
+          {t({
+            en: "Ready to build something awesome together?",
+            fr: "Prêt·e à construire quelque chose de chouette ensemble ?",
+          })}
         </Text>
         <SpacedView
           style={{
@@ -25,7 +31,7 @@ export default function BlockInterestedButtons() {
           gap="l"
         >
           <LinkButton
-            href="/resume/"
+            href={localizeHref("/resume/")}
             blurAmount={16}
             color={alpha(colors.white, 0.15)}
             theme="dark"
@@ -35,15 +41,19 @@ export default function BlockInterestedButtons() {
             {(textStyles) => (
               <>
                 <SVGMenuResumeFill width={36} height={36} fill={theme.dynamicColors.textOnMain} />
-                <Text style={[textStyles, fontStyles.iosEm.title3]}>{"More about me"}</Text>
+                <Text style={[textStyles, fontStyles.iosEm.title3]}>
+                  {t({ en: "More about me", fr: "En savoir plus sur moi" })}
+                </Text>
               </>
             )}
           </LinkButton>
-          <LinkButton href="/contact/" spaceHorizontal="xl" spaceVertical="m">
+          <LinkButton href={localizeHref("/contact/")} spaceHorizontal="xl" spaceVertical="m">
             {(textStyles) => (
               <>
                 <SVGMenuContactFill width={36} height={36} fill={theme.dynamicColors.textOnMain} />
-                <Text style={[textStyles, fontStyles.iosEm.title3]}>{"Hire me"}</Text>
+                <Text style={[textStyles, fontStyles.iosEm.title3]}>
+                  {t({ en: "Hire me", fr: "Travailler avec moi" })}
+                </Text>
               </>
             )}
           </LinkButton>
