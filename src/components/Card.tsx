@@ -26,6 +26,7 @@ const borderRadius = size("s");
  * needs, or take over entirely with `children`.
  */
 export default function Card({
+  role = "article",
   pretitle,
   title,
   subtitle,
@@ -41,6 +42,11 @@ export default function Card({
   children,
   style,
 }: {
+  /**
+   * The card is an `article` by default; inside a `role="list"` it must be a
+   * `listitem` instead, or the <ul> has children that are not <li>.
+   */
+  role?: "article" | "listitem";
   /** Small caps line above the title (e.g. the job title). */
   pretitle?: string;
   title?: string;
@@ -84,7 +90,7 @@ export default function Card({
         },
         style,
       ]}
-      role="article"
+      role={role}
     >
       {background === "glass" ? (
         <View

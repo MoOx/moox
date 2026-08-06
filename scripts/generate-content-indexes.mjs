@@ -11,7 +11,7 @@ const isEmptyNode = (node) => !node || !Array.isArray(node.children) || node.chi
  *
  * A bilingual entry is authored as one markdown file, English first, then a
  * horizontal rule, then French - one file per experience, never two (see
- * WEB-REWORK.md decision 1). The split happens here, at compile time, so the
+ * CONTENT-NORMALIZATION.md). The split happens here, at compile time, so the
  * app reads `body.en` / `body.fr` instead of re-scanning the tree for an `hr`
  * on every render. English-only entries keep an `en` version and no `fr`,
  * which is exactly what the `l()` fallback expects.

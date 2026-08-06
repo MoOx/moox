@@ -39,7 +39,7 @@ export default function WebsiteError({ statusCode }: { statusCode: number }) {
               className="giphy-embed"
               allowFullScreen
               sandbox="allow-scripts"
-              title="Error animation"
+              title={t({ en: "Error animation", fr: "Animation d'erreur" })}
             ></iframe>
           </div>
           <Spacer size="l" />

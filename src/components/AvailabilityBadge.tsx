@@ -1,5 +1,6 @@
 "use client";
 
+import { useTheme } from "@/styles";
 import { useHref, useT } from "@/i18n";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
@@ -45,6 +46,7 @@ export default function AvailabilityBadge({
 }) {
   const ref = useRef<Text>(null);
   const localizeHref = useHref();
+  const theme = useTheme();
   const t = useT();
   const label = text ?? t({ en: "Available for Work", fr: "Disponible pour une mission" });
   const [hasAnyFocus] = useFocus(ref, { debounceOff: 500 });
@@ -96,7 +98,7 @@ export default function AvailabilityBadge({
                 fontStyles.iosEm.caption2,
                 {
                   lineHeight: fontStyles.iosEm.caption2.fontSize,
-                  color: "#039754",
+                  color: theme.dynamicColors.inkSuccess,
                   textTransform: "uppercase",
                 },
               ]}

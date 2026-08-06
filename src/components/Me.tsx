@@ -1,3 +1,4 @@
+import { useT } from "@/i18n";
 import GradientBorderCircle from "@/components/GradientBorderCircle";
 import Image from "@/components/Image";
 import { GradientRadial } from "@/react-multiversal/GradientRadial";
@@ -24,6 +25,7 @@ export default function Me({
   children?: ReactNode;
 }) {
   const theme = useTheme();
+  const t = useT();
   const scale = width / DEFAULT_WIDTH;
   const resolvedImgWidth = (imgWidth ?? (512 / 2) * scale).toFixed(3);
   const resolvedImgHeight = (imgHeight ?? (835 / 2) * scale).toFixed(3);
@@ -138,7 +140,7 @@ export default function Me({
       <Image
         priority={true}
         src={src}
-        alt="Picture of the Max"
+        alt={t({ en: "Picture of Max", fr: "Photo de Max" })}
         width={resolvedImgWidth}
         height={resolvedImgHeight}
         style={{ filter: "brightness(var(--maxMeBrightness))" }}

@@ -16,7 +16,7 @@ export default function ThemePreview({
     ? mode === "light"
       ? platformColors.ios.light.blue
       : platformColors.ios.dark.blue
-    : theme.dynamicColors.textLight2;
+    : theme.dynamicColors.ultraLight;
 
   return (
     <View
@@ -24,10 +24,10 @@ export default function ThemePreview({
         width: 64,
         height: 64,
         backgroundColor: theme.dynamicColors.back,
-        borderRadius: 4,
+        borderRadius: 8,
         overflow: "hidden",
         borderColor,
-        borderWidth: 4,
+        borderWidth: 3,
         borderStyle: "solid",
         opacity: isActive ? 1 : 0.5,
       }}
@@ -36,7 +36,14 @@ export default function ThemePreview({
         horizontal="xxs"
         vertical="xxs"
         gap="xxs"
-        style={[theme.styles.back, { flexDirection: "row", justifyContent: "space-between" }]}
+        style={[
+          theme.styles.back,
+          {
+            borderRadius: 8,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          },
+        ]}
       >
         <SpacedView gap="xxs" style={{ flexDirection: "row", alignItems: "center" }}>
           <View

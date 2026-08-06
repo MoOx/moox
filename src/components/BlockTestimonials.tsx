@@ -313,7 +313,11 @@ export default function BlockTestimonials() {
           />
         </Parallax>
       </View>
-      <Container wrapperStyle={{ zIndex: 1 }}>
+      <Container
+        role="region"
+        aria-label={t({ en: "Testimonials", fr: "Témoignages" })}
+        wrapperStyle={{ zIndex: 1 }}
+      >
         <SpacedView vertical="xl" horizontal="xl" gap="xl">
           <SpacedView gap="s">
             <Text

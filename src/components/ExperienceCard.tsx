@@ -108,7 +108,7 @@ export default function ExperienceCard({
           style={[
             fontStyles.iosEm.caption1,
             {
-              color: theme.dynamicColors.textFlashy2,
+              color: theme.dynamicColors.inkFlashy,
               letterSpacing: 1.2,
               textTransform: "uppercase",
             },
@@ -137,25 +137,28 @@ export default function ExperienceCard({
           />
         ) : null}
         <View style={{ flexGrow: 1, flexShrink: 1, minWidth: 0 }}>
-          {infoHref ? (
-            <LinkText
-              href={localizeHref(infoHref)}
-              onPress={infoOnPress}
-              role="heading"
-              aria-level={3}
-              style={[fontStyles.iosEm.title2, theme.styles.text, { fontWeight: weight.bold }]}
-            >
-              {title}
-            </LinkText>
-          ) : (
-            <Text
-              role="heading"
-              aria-level={3}
-              style={[fontStyles.iosEm.title2, theme.styles.text, { fontWeight: weight.bold }]}
-            >
-              {title}
-            </Text>
-          )}
+          {/* The heading wraps the link rather than being one: `role="heading"`
+              on a LinkText lands on the <a> itself, which then stops being a
+              link for a screen reader, while `aria-level` ends up on the inner
+              text node - an invalid ARIA attribute on a plain div. Wrapping
+              gives the real thing: <h3><a href>…</a></h3>. */}
+          <View role="heading" aria-level={3}>
+            {infoHref ? (
+              <LinkText
+                href={localizeHref(infoHref)}
+                onPress={infoOnPress}
+                style={[fontStyles.iosEm.title2, theme.styles.text, { fontWeight: weight.bold }]}
+              >
+                {title}
+              </LinkText>
+            ) : (
+              <Text
+                style={[fontStyles.iosEm.title2, theme.styles.text, { fontWeight: weight.bold }]}
+              >
+                {title}
+              </Text>
+            )}
+          </View>
           {company || dates ? (
             <Text style={[fontStyles.ios.caption1, theme.styles.textLight2]}>
               {company ? (
@@ -320,7 +323,7 @@ export default function ExperienceCard({
                         <Text
                           style={[
                             fontStyles.iosEm.caption2,
-                            { color: theme.dynamicColors.textFlashy2 },
+                            { color: theme.dynamicColors.inkFlashy },
                           ]}
                         >
                           {`${s.stat} ${lowerKeepingAcronyms(s.label)}`}

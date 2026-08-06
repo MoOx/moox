@@ -1,5 +1,6 @@
 import { useLang, useT } from "@/i18n";
 import { ResumeItem, Talk } from "@/api";
+import { DevCopyResumeEntry } from "@/components/DevCopyResumeEntry";
 import ExperienceCard from "@/components/ExperienceCard";
 import { resumeEntryTransitionName } from "@/profile";
 import { monthRange, monthYear, resumeEntryPath } from "@/profile";
@@ -78,10 +79,9 @@ export const ResumeTimeline = ({
               </View>
             ) : null}
             {entry.kind === "resume" ? (
-              <View>
-                {/* Deep-link anchor, kept from the previous timeline. */}
-                {/* oxlint-disable-next-line jsx_a11y/anchor-has-content, jsx_a11y/anchor-is-valid */}
-                <a id={entry.item.slug} style={{ position: "relative", top: "-100px" }} />
+              // Deep-link target: the id sits on the card, offset by
+              // `scroll-margin-top` (see styles.css).
+              <View nativeID={entry.item.slug} dataSet={{ "scroll-anchor": "true" }}>
                 <ExperienceCard
                   icon={entry.item.icon}
                   image={entry.item.image}

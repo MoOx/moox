@@ -122,13 +122,13 @@ export const ResumeTimelineEntry = ({
         transitionEnabled ? { viewTransitionName: resumeEntryTransitionName(item) } : null,
       ]}
       role="article"
+      // Deep-link target, offset by `scroll-margin-top` (see styles.css). Not
+      // in detail mode: the timeline card behind the modal already carries this
+      // id, and duplicate ids are invalid HTML.
+      {...(disableLinks || detail
+        ? null
+        : { nativeID: item.slug, dataSet: { "scroll-anchor": "true" } })}
     >
-      {/* No anchor in detail mode: the timeline card behind the modal already
-          carries this id, and duplicate ids are invalid HTML. */}
-      {disableLinks || detail ? null : (
-        // oxlint-disable-next-line jsx_a11y/anchor-has-content, jsx_a11y/anchor-is-valid
-        <a id={item.slug} style={{ position: "relative", top: "-100px" }} />
-      )}
       {item.image && (
         <View style={styles.imageWrapper}>
           <Image
@@ -154,10 +154,13 @@ export const ResumeTimelineEntry = ({
             // alignItems: "flex-start",
           }}
         >
+          {/* Only a heading when there is something to head: entries with no
+              `job_title` (the personal ones - Pékin Express & co) were emitting
+              an empty <h4>, which is a heading a screen reader announces with
+              nothing in it. */}
           <Text
             style={[fontStyles.iosEm.subhead, theme.styles.textLight2]}
-            role="heading"
-            aria-level={4}
+            {...(item.job_title ? { role: "heading" as const, "aria-level": 4 } : null)}
           >
             {(item.job_title ?? "").toUpperCase()}
           </Text>

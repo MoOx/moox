@@ -70,6 +70,8 @@ export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem
           style={StyleSheet.absoluteFill}
         />
         <Container
+          role="region"
+          aria-label={t({ en: "Pitch", fr: "Pitch" })}
           style={{
             flexDirection: "row",
             alignItems: "center",

@@ -22,13 +22,16 @@ default and carries no prefix. `/blog` and `/talks` are deliberately
 English-only, which is why `localizedHref` only prefixes the paths listed in
 `localizedPathPatterns`.
 
+**`TODO.md` is the only place with open items.** Everything else is history or
+contract — if a document grows a checkbox, it belongs there instead.
+
 Longer context, only read when relevant:
 
-- `CV-REWORK-JOURNAL.md` — everything that was wrong, changed, and why
-- `WEB-REWORK.md` — the pass that brought the CV to the site + i18n
-- `CONTENT-NORMALIZATION.md` — the frontmatter field contract
-- `CV-TO-WEB.md` — what is still deferred (plain-text CV, Services page, HTML
-  semantics)
+- `TODO.md` — what is left to do, what is parked, what was dropped
+- `CV-REWORK-JOURNAL.md` — everything that was wrong, changed, and why. §0–13
+  the CV and its PDF pipeline, §14–15 the site pass (structure, i18n, a11y)
+- `CONTENT-NORMALIZATION.md` — the frontmatter field contract (registers and
+  the ladder; the types themselves are commented in `src/api.tsx`)
 - `STATS.md` — the source and refresh command for every figure on the CV
 
 ## Rules that cost real damage when broken

@@ -2,7 +2,7 @@ import { fetchResumeEntry } from "@/api";
 import ResumeEntryDetailCard from "@/components/ResumeEntryDetailCard";
 import WebsiteError from "@/components/WebsiteError";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
-import { alternateLinks, assertLangParam, langFromParam } from "@/i18n";
+import { alternateLinks, assertLangParam, langFromParam, useT } from "@/i18n";
 import { fullName, pitchOf } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -49,6 +49,7 @@ function PageResumeEntry() {
   const { item } = Route.useLoaderData();
   const { lang } = Route.useParams();
   const theme = useTheme();
+  const t = useT();
 
   if (!item) {
     return <WebsiteError statusCode={404} />;
@@ -68,7 +69,10 @@ function PageResumeEntry() {
             style={{ textDecoration: "none", alignSelf: "flex-start" }}
           >
             <Text style={[fontStyles.iosEm.callout, { color: theme.dynamicColors.textFlashy3 }]}>
-              {"← All experience - back to the timeline"}
+              {t({
+                en: "← All experience - back to the timeline",
+                fr: "← Toutes les expériences - retour à la frise",
+              })}
             </Text>
           </Link>
           <ResumeEntryDetailCard item={item} />

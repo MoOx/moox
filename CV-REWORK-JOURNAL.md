@@ -1,8 +1,11 @@
-# CV rework — journal
+# CV & site rework — journal
 
 Raw material for a write-up. What was wrong, what changed, and _why_ — kept in
 the order the problems were actually found, because several of them only became
-visible once an earlier one was fixed.
+visible once an earlier one was fixed. §0–13 are the CV and its PDF pipeline;
+§14–15 are the pass that propagated the same model to the site (structure,
+bilingual routes, accessibility). What is still open lives in `TODO.md`, not
+here.
 
 > Section de tête rédigée en français (matière première pour l'article FR) ; le
 > reste du journal est en anglais.
@@ -379,7 +382,9 @@ A finding surfaced while wiring this up: the three pages of the site advertise
 **three different job titles** (Architect / Architect & Developer / Lead
 Developer). Publishing `Person` JSON-LD on all three would state that
 contradiction in machine-readable form — worse than no structured data. Parked
-in `CV-TO-WEB.md` until the titles are aligned.
+until the titles were aligned, which the site pass did (§14): `Person` is now
+published on `/`, `/resume` and `/cv`, localized with the page and built from
+the rendered data, so it cannot drift.
 
 ---
 
@@ -400,12 +405,13 @@ in `CV-TO-WEB.md` until the titles are aligned.
 
 ## 8. From spec to page: the CV stopped being a Word-shaped thing
 
-Up to here the work was content and pipeline on the _old_ `/resume` render. `CV-SPEC.md`
-is the seed of the next move — a text-only skeleton of a dedicated `/cv` page. It
-is worth keeping precisely because it is _pre-decision_: it still headlines
-**Senior Front-End Architect**, still asks "keep age (40)?", still lists "They
-tried to hire me". Everything §1 and §7 later resolved is visible in it as an
-open question. The spec is the before; the built page is the after.
+Up to here the work was content and pipeline on the _old_ `/resume` render. The
+next move started as `CV-SPEC.md`, a text-only skeleton of a dedicated `/cv`
+page (removed once built — it is in git history, and it was worth reading
+precisely because it was _pre-decision_: it still headlined **Senior Front-End
+Architect**, still asked "keep age (40)?", still listed "They tried to hire
+me"). Everything §1 and §7 later resolved is visible in it as an open question.
+The spec is the before; the built page is the after.
 
 The build made one decision that shaped all the others: **the CV is not a
 separate document, it is a route.** `/cv` (`cv.tsx`, ~1050 lines) renders with
@@ -638,6 +644,142 @@ checkable source, its own mistakes surface on review instead of shipping.
 
 ---
 
+## 14. The site catches up: one source, three densities
+
+The CV was rebuilt as a page (§8), which left the rest of the site describing a
+person who no longer existed: the home still opened on "Senior Front-End
+Architect", `/resume` was a timeline with an "About Me" block, and the two had
+their own copies of the prose. The web pass propagated the CV's content and
+model outwards. The interesting part is not what moved — it is the rule that
+decided _how_.
+
+**Three surfaces, one data set, three densities.** Home is the teaser,
+`/resume` the unconstrained version, `/cv` the two-page print. The failure mode
+to avoid was the obvious one: three hand-maintained content sets that agree on
+the day they are written. So the skills cards read one source
+(`profile.skillsDomains`) and render `teaser` (blurb + 3–4 curated keywords) or
+`full` (every item); the experience rows read the same markdown as the CV; the
+stat tiles read `profileStats`. Density is a rendering mode, never a second
+copy. `/resume` also mirrors the CV's _order_ — hero, summary band, stats,
+skills, key experiences, open source, talks, education — with the full
+chronological timeline demoted to last, because the reader who lands there
+wants the argument first and the archive after, exactly like the printed
+version.
+
+**A page-level mode is a fork; a parameter on the primitive is not.**
+`/resume?staticRendering` used to turn the page into a print document — a
+second behaviour for every component it touched, silently drifting from the
+normal one. It is gone. What survived is a single explicit `print` param on
+`gradientText*Styles` (a solid-colour fallback, because `background-clip: text`
+is dropped when printing): the one place where print genuinely differs, named
+at the level where the difference exists.
+
+**The modal question, resolved by giving the URL priority.** Clicking a mission
+should open a detail without losing the timeline's scroll position; a shared
+link to that same detail should not deliver a modal floating over a résumé
+nobody asked for. Both are true, so the answer is two renderings of one route:
+`/resume/<slug>` is a real, statically generated page (its own meta, the
+entry plus its group siblings, a back-link to the timeline anchor) — that is
+what crawlers, reloads and pasted links get. From `/resume`, the ⓘ keeps its
+real crawlable `href` but is intercepted and opens the same content as a
+dialog, via TanStack route masking (`?detail=<slug>` displayed as
+`/resume/<slug>`). The page behind stays mounted, so the scroll survives for
+free rather than being saved and restored.
+
+**One card rationale worth keeping.** Experience rows carry an illustration
+that bleeds in from the right through an angled CSS opacity mask
+(`mask-image: linear-gradient(105deg, …)`), not through a gradient overlay. An
+overlay has to replicate the surface colour underneath it, so it needs a
+variant per theme and breaks the moment a background changes; a mask removes
+the image instead of painting over it, and dissolves into whatever is behind —
+light, dark, or the next band. Same reflex as the print param: express the
+difference where it exists rather than duplicating the thing around it.
+
+**Grouping was already solved, so the modal inherited it.** A client with four
+contracts is one row on the CV (§5's `group` field). The same flag makes the
+modal open the whole group in sequence, and the group's own page carry all of
+it. No second notion of "related entries" was needed — the field that folds
+rows on paper folds them on screen.
+
+**One route tree, two languages.** The `/fr` prefix is an _optional path
+segment_ (`src/app/{-$lang}.resume.tsx`), so `/resume` and `/fr/resume` are the
+same route rendered twice: no duplicated route files, no second tree to keep in
+sync, and the guard that rejects `/en/resume` (English is unprefixed) lives in
+one helper. `localizedHref` only prefixes paths that exist in both languages,
+because `/blog` and `/talks` are deliberately English-only and a `/fr/blog`
+link would be a 404 shipped by a helper.
+
+---
+
+## 15. Accessibility: the second machine-readability pass
+
+§6 made the PDF machine-readable and §1 made the claims checkable. The site's
+own markup had never been looked at. `npm run a11y` (axe-core WCAG 2 A/AA plus
+a structural probe, both languages, both themes) returned **728 violation
+nodes across 6 pages**. It ended at **8**, and what it took is more interesting
+than the number.
+
+**The first baseline was half a baseline.** It only covered light mode — the
+site has two themes, so half the rendered states were unmeasured. Adding dark
+changed the count before a single fix landed. An audit that does not enumerate
+the states the product actually ships in is not measuring the product.
+
+**Three component bugs, ~90 elements.** Almost none of it was per-page markup.
+`LinkText` swallowed `role="heading"`, so every experience-card title rendered
+as an `<a>` that had stopped being a link, above a plain `div` carrying an
+orphan `aria-level` — invalid ARIA _and_ no headings on the page. The same
+component spread `aria-label` onto its inner text node instead of the `<a>`,
+which is why the logo, LinkedIn and GitHub links had no accessible name;
+`LinkButton` did it too, where the label is the _entire_ name of an icon-only
+button. Three fixes at the source, 90+ elements corrected, zero call sites
+touched. A shared component that drops a prop does not produce one bug — it
+produces one bug per usage, all of them looking like content mistakes.
+
+**Responsive variants duplicate the DOM.** The job title shipped twice in the
+HTML: desktop and mobile variants both rendered, both `<h1>`, and on the home
+they concatenated into a single heading reading
+`LeadFront-End Developer.Front-End Developer.React, React…`. What looks like
+one heading in the design is two nodes in the document. The fix was to stop
+duplicating rather than hide: the home's two type sizes became a fluid
+`clamp()` in the inline style (RNW writes `fontSize` inline anyway, so no
+stylesheet and no `!important`), and `/resume`'s variants differed only by
+layout, so only positioning moved to a media query.
+
+**Contrast is ink, not paint.** 230 nodes failed AA, which is a palette
+problem, not a markup one — and the palette is the brand. The distinction that
+unlocked it: the colours used as _text_ can move without the colours used as
+_surface_ moving. Greys were retuned against their worst actual background
+rather than against white, `textMain` was lifted in dark mode while `backMain`
+kept its exact brand value, and two ink-only colours (`inkFlashy`,
+`inkSuccess`) let every gradient stop stay where it was. The availability badge
+hardcoded one green for both themes: fixing light broke dark, and the next
+audit run caught it — which is the argument for a command over a review.
+
+**42 empty `<a id>`** existed only as scroll anchors. An `id` on the card plus
+`scroll-margin-top` does the same job with no fake links; verified that
+`/resume#resume/<slug>` still lands clear of the 96px sticky header.
+
+**The 8 that remain are one element**, and they are a design decision, not an
+oversight: the theme toggle's "Appearance / AUTO" label sits at
+`opacity: 0.25`, deliberately ghosted and lit on interaction. No colour passes
+AA at that opacity — conforming means raising the resting opacity. Parked
+knowingly, with the control due a rework anyway.
+
+|                                                 | before     | after                                            |
+| ----------------------------------------------- | ---------- | ------------------------------------------------ |
+| axe violations                                  | 728        | **8** (one element)                              |
+| `<section>` · `<nav>`                           | 0 · 0      | 7 per page · 2 per page                          |
+| real lists                                      | none       | `/resume` 3 ul / 23 li · `/contact` 2 ul / 10 li |
+| links with no accessible name                   | 19         | 0                                                |
+| empty headings · duplicated h1 · empty `<a id>` | 2 · 2 · 42 | 0                                                |
+
+The thesis holds one level down: a CV read by machines first has no business
+sitting on a site whose headings, lists and landmarks are `div` soup — 1590 of
+them on `/resume` alone. Same principle as §6, applied to the surface that
+actually gets crawled.
+
+---
+
 ## Recurring lessons
 
 1. **Invisible infrastructure needs an explicit check.** The PDF looked perfect
@@ -678,3 +820,20 @@ checkable source, its own mistakes surface on review instead of shipping.
     string, so it finds what re-reading the same files never does: a retired job
     title still hardcoded in a component, old typos, and the layout assumptions
     (A4, page breaks) that only hold for the language they were written in.
+13. **A shared component that drops a prop produces one bug per usage.** Three
+    of them accounted for 90+ accessibility errors that all looked like content
+    mistakes (§15). When the same defect appears on every page, stop fixing
+    pages.
+14. **A baseline that skips half the rendered states is not a baseline.** The
+    first audit only covered light mode; the count moved before any fix landed
+    (§15). Enumerate the states the product actually ships in — themes,
+    languages, breakpoints — or the number measures a subset and reads like a
+    total.
+15. **What looks like one element in the design can be two in the document.**
+    Responsive variants rendered both headings into the HTML (§15). The design
+    view hides duplication that machines see first — the same blind spot as the
+    flattened-image CV (§0), one layer up.
+16. **A mode forks a codebase; a parameter names a difference.**
+    `?staticRendering` gave every component a second silent behaviour; one
+    explicit `print` param on the one primitive that genuinely differs replaced
+    it (§14).

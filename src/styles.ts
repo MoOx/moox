@@ -37,6 +37,15 @@ type ThemedColors = {
   textFlashy2: string;
   textFlashy3: string;
   textFlashy4: string;
+  /**
+   * Ink versions of the flashy accents. `textFlashy*` are gradient stops -
+   * moving them repaints the header band and every gradient on the site - so
+   * the values used as *text* on a tinted surface live separately and are
+   * tuned for AA.
+   */
+  inkFlashy: string;
+  /** "Available now" - green on its own tinted pill, in both themes. */
+  inkSuccess: string;
   textIndigoAlt: string;
   textIndigoAlt2: string;
   ultraLight: string;
@@ -80,8 +89,11 @@ export const themedColors: ThemeColors<ThemedColors> = {
     textDark: "#111",
     textMain: colors.indigo,
     textMainDark: "#3A1E90",
-    textLight1: "#757575",
-    textLight2: "#808080",
+    // AA against backAlt (#f2f2f7), not just white: 4.13 → 4.50.
+    textLight1: "#6f6f6f",
+    // AA against the tinted card surfaces too (#f6f5ff), not just white:
+    // 3.95 → 4.51.
+    textLight2: "#717171",
     textOnDarkLight: alpha(colors.black, 0.5),
     textOnMain: colors.white,
     gradientLandscape1: "rgb(248, 205, 74, 0.75)",
@@ -93,6 +105,9 @@ export const themedColors: ThemeColors<ThemedColors> = {
     textFlashy4: "#2d129b",
     textIndigoAlt: "#792F93",
     textIndigoAlt2: "#2424a9",
+    // 4.55 on the palest card background (#f2e7f8); textFlashy2 itself is 3.79.
+    inkFlashy: "#ad3c95",
+    inkSuccess: "#037e46",
     // flashy1: "#f99b52",
     // flashy2: "#fba64b",
     // flashy3: "#ff5b8a",
@@ -109,10 +124,16 @@ export const themedColors: ThemeColors<ThemedColors> = {
     text: alpha(colors.white, 0.95),
     textAlt: colors.white,
     textDark: alpha(colors.white, 0.5),
-    textMain: colors.indigo,
-    textMainDark: "#7b4fff",
+    // Ink, not paint: the brand indigo (#4F3DFF) is 3.34 against this
+    // background. `backMain` above still paints with the exact brand colour -
+    // only the text variant is lifted to 4.55.
+    textMain: "#6d5eff",
+    textMainDark: "#8157ff",
     textLight1: platformColors.ios.dark.gray,
-    textLight2: platformColors.ios.dark.gray2,
+    // iOS' systemGray2 (#636366) is 3.40 on this background - dark mode needs
+    // a lighter grey than the system one, since the surface is darker too.
+    // Tuned against the lightest dark surface (#0f0326): 4.50.
+    textLight2: "#78787c",
     textOnDarkLight: alpha(colors.white, 0.5),
     textOnMain: alpha(colors.white, 0.98),
     gradientLandscape1: "rgb(215, 18, 255)",
@@ -124,6 +145,10 @@ export const themedColors: ThemeColors<ThemedColors> = {
     textFlashy4: "#5731ee",
     textIndigoAlt: "#c34bee",
     textIndigoAlt2: "#968ee0",
+    // Dark mode flips the requirement: the accents sit on a dark surface, so
+    // the ink has to be *lighter* than the brand value, not deeper.
+    inkFlashy: "#fa5bd7",
+    inkSuccess: "#049955",
     ultraLight: alpha(colors.white, 0.15),
   },
 };

@@ -20,7 +20,10 @@ export default function BlockCompaniesTried() {
   const t = useT();
 
   return (
-    <Container>
+    <Container
+      role="region"
+      aria-label={t({ en: "They tried to hire me", fr: "Ils ont essayé de me recruter" })}
+    >
       <SpacedView
         horizontal="l"
         vertical="xl"

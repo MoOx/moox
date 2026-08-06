@@ -42,7 +42,11 @@ export default function BlockAugmentedWithAI() {
   const t = useT();
 
   return (
-    <Container style={{ flexDirection: "row", flexWrap: "wrap-reverse" }}>
+    <Container
+      role="region"
+      aria-label={t({ en: "Augmented with AI", fr: "Augmenté par l'IA" })}
+      style={{ flexDirection: "row", flexWrap: "wrap-reverse" }}
+    >
       <View style={{ maxWidth: 400, justifyContent: "center" }}>
         <AIPromptCircle size={200} circles={circles} />
       </View>

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prepare": "patch-package && husky && npm run svg && npm run markdown",
-    "dev": "vite dev",
+    "dev": "vite dev --host",
     "build": "npm run prepare && vite build",
     "preview": "npx serve dist/client",
     "lint": "oxlint --type-aware && tsc --noEmit",
@@ -16,7 +16,8 @@
     "svg": "npm run svg:clean && npm run svg:web",
     "markdown": "markdown-to-json \"content/**/*.md\" public && node scripts/generate-content-indexes.mjs",
     "pdf": "node scripts/generate-resume-pdf.mjs",
-    "test": "npm run lint && npm run build"
+    "test": "npm run lint && npm run build",
+    "a11y": "node scripts/audit-a11y.mjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^3.1.1",
@@ -46,6 +47,7 @@
     "@types/react": "^19.2",
     "@types/react-dom": "^19.2",
     "@vitejs/plugin-react": "^6.0.5",
+    "axe-core": "^4.13.0",
     "husky": "^9.1.7",
     "oxfmt": "^0.62.0",
     "oxlint": "^1.77.0",

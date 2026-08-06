@@ -2,7 +2,7 @@
 
 # Hey, I'm [Max](https://moox.io)
 
-I am a [Senior Front-End Architect](https://moox.io) making mobile, web & desktop apps, available as Freelance.
+I am a [Lead Front-End Developer](https://moox.io) making mobile, web & desktop apps, available as Freelance.
 
 I build apps with:
 

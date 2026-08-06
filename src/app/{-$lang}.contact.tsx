@@ -1,3 +1,4 @@
+import { fullName, jobTitle } from "@/profile";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import ChatBot from "@/components/ChatBot";
 import ContactCard from "@/components/ContactCard";
@@ -32,7 +33,13 @@ export const Route = createFileRoute("/{-$lang}/contact")({
     links: alternateLinks("/contact", langFromParam(params.lang)),
     meta: [
       {
-        title: "Contact Maxime Thirouin, Senior Front-End Architect, React & React Native Expert.",
+        // Derived from `profile.tsx`, like every other page title: this one had
+        // been left behind on "Senior Front-End Architect", the title the CV
+        // rework retired everywhere else.
+        title:
+          langFromParam(params.lang) === "fr"
+            ? `Contacter ${fullName}, ${jobTitle}, expert React & React Native.`
+            : `Contact ${fullName}, ${jobTitle}, React & React Native Expert.`,
       },
     ],
   }),
@@ -165,7 +172,7 @@ function PageContact() {
                 >
                   <ContactCard
                     Icon={SVGPhone}
-                    title="Call Max"
+                    title={t({ en: "Call Max", fr: "Appeler Max" })}
                     subtitle={"+" + ind + socials.call.value}
                     color={socials.call.color}
                     colorAlt={socials.call.colorAlt}
@@ -179,8 +186,11 @@ function PageContact() {
                 >
                   <ContactCard
                     Icon={SVGContact}
-                    title="Download Max's Card"
-                    subtitle="Save his info for later"
+                    title={t({ en: "Download Max's Card", fr: "Télécharger sa fiche" })}
+                    subtitle={t({
+                      en: "Save his info for later",
+                      fr: "Ses coordonnées, pour plus tard",
+                    })}
                     color={socials.vcf.color}
                     colorAlt={socials.vcf.colorAlt}
                   />
@@ -206,7 +216,7 @@ function PageContact() {
                     mode="outline"
                     Icon={SVGSocialLinkedin}
                     title={t({ en: "Connect\nwith Max", fr: "Écrire\nà Max" })}
-                    subtitle="On LinkedIn"
+                    subtitle={t({ en: "On LinkedIn", fr: "Sur LinkedIn" })}
                     color={socials.linkedin.color}
                     colorAlt={socials.linkedin.colorAlt}
                   />
@@ -221,8 +231,8 @@ function PageContact() {
                   <ContactCard
                     mode="outline"
                     Icon={SVGSocialGithub}
-                    title="Checkout Max's Profile"
-                    subtitle="On GitHub"
+                    title={t({ en: "Checkout Max's Profile", fr: "Voir son profil" })}
+                    subtitle={t({ en: "On GitHub", fr: "Sur GitHub" })}
                     color={socials.github.color}
                     colorAlt={socials.github.colorAlt}
                   />
@@ -238,7 +248,7 @@ function PageContact() {
                     mode="outline"
                     Icon={SVGSocialBsky}
                     title={t({ en: "Connect\nwith Max", fr: "Écrire\nà Max" })}
-                    subtitle="On Bluesky"
+                    subtitle={t({ en: "On Bluesky", fr: "Sur Bluesky" })}
                     color={socials.bsky.color}
                     colorAlt={socials.bsky.colorAlt}
                   />
@@ -253,8 +263,8 @@ function PageContact() {
                   <ContactCard
                     mode="outline"
                     Icon={SVGSocialDribbble}
-                    title="Check pixels"
-                    subtitle="On Dribbble"
+                    title={t({ en: "Check pixels", fr: "Voir des pixels" })}
+                    subtitle={t({ en: "On Dribbble", fr: "Sur Dribbble" })}
                     color={socials.dribbble.color}
                     colorAlt={socials.dribbble.colorAlt}
                   />
@@ -270,7 +280,7 @@ function PageContact() {
                     mode="outline"
                     Icon={SVGJavaScriptOutline}
                     title="$ npm install"
-                    subtitle="@moox On NPM"
+                    subtitle={t({ en: "@moox On NPM", fr: "@moox sur npm" })}
                     color={socials.npm.color}
                     colorAlt={socials.npm.colorAlt}
                   />
@@ -285,8 +295,8 @@ function PageContact() {
                   <ContactCard
                     mode="outline"
                     Icon={SVGSocialX}
-                    title="Tweet to Max via DM"
-                    subtitle="On X"
+                    title={t({ en: "Tweet to Max via DM", fr: "Lui écrire en DM" })}
+                    subtitle={t({ en: "On X", fr: "Sur X" })}
                     color={socials.x.color}
                     colorAlt={socials.x.colorAlt}
                   />

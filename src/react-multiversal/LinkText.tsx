@@ -40,6 +40,11 @@ export default function LinkText({
   href,
   isActive = defaultIsActive,
   onPress,
+  // Pulled out of `...props`: spread onto the inner text node it would name
+  // that node, leaving the <a> itself without an accessible name - which is
+  // what a screen reader and an audit both read. The name of a link belongs
+  // on the link.
+  "aria-label": ariaLabel,
   ...props
 }: LinkTextProps) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -81,13 +86,21 @@ export default function LinkText({
       ref={ref as Ref<HTMLAnchorElement>}
       to={href}
       role={role}
+      aria-label={ariaLabel}
       style={containerStyles as any}
       onClick={handleLinkPress}
     >
       <TextUnderlined ref={ref} style={textStyles} {...props} />
     </Link>
   ) : (
-    <Text ref={ref} href={href} role={role} style={containerStyles} onPress={handleTextPress}>
+    <Text
+      ref={ref}
+      href={href}
+      role={role}
+      aria-label={ariaLabel}
+      style={containerStyles}
+      onPress={handleTextPress}
+    >
       <TextUnderlined style={textStyles} {...props} />
     </Text>
   );

@@ -20,6 +20,32 @@ html {
   }
 }
 
+/* `/resume` hero: one node in the HTML, two layouts.
+   Below the breakpoint it sits in the flow; above it, it is pulled out and
+   allowed to overrun the column on the right - which is the only thing that
+   differed between the two nodes this replaces. Same breakpoint as
+   WindowWidth.m (1024px). `!important` because react-native-web writes these
+   as inline styles. */
+@media (min-width: 1024px) {
+  [data-resume-hero="true"] {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: -300px !important;
+    /* SpacedView horizontal="l" vertical="m" - only needed once the block is
+       positioned; in the flow it would indent the hero past the name below. */
+    padding: 16px 24px !important;
+  }
+}
+
+/* Deep-linked cards (timeline entries) land under the sticky header.
+   This replaces the old trick of an empty <a id> pushed up by 100px - an
+   anchor with no content and no href, which is neither a link nor a target
+   worth exposing. The id now lives on the card itself. */
+[data-scroll-anchor="true"] {
+  scroll-margin-top: 100px;
+}
+
 /* code highlight */
 .hljs-operator {
   color: #a626a4;

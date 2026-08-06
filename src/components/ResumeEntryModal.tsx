@@ -2,7 +2,7 @@ import { ResumeItem } from "@/api";
 import ResumeEntryDetailCard from "@/components/ResumeEntryDetailCard";
 import { size } from "@/react-multiversal";
 import SVGXmark from "@/svgs/components/SVGXmark";
-import { langToParam, useLang } from "@/i18n";
+import { langToParam, useLang, useT } from "@/i18n";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
@@ -48,6 +48,7 @@ export default function ResumeEntryModal({
 }) {
   const navigate = useNavigate();
   const lang = useLang();
+  const t = useT();
   const dialogRef = useRef<HTMLDivElement>(null);
 
   // Focus management: move focus into the dialog on open, keep Tab cycling
@@ -142,7 +143,7 @@ export default function ResumeEntryModal({
         params={{ lang: langToParam(lang) }}
         search={{}}
         resetScroll={false}
-        aria-label="Close"
+        aria-label={t({ en: "Close", fr: "Fermer" })}
         style={{
           position: "absolute",
           top: 12,

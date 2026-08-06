@@ -1,4 +1,3 @@
-import { useHref, useT } from "@/i18n";
 import BlockInterestedButtons from "@/components/BlockInterestedButtons";
 import Image from "@/components/Image";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -12,7 +11,8 @@ import {
   socialLinks,
   socialLinks2,
 } from "@/consts";
-import { size, WindowWidth } from "@/react-multiversal";
+import { useHref, useT } from "@/i18n";
+import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
@@ -164,15 +164,12 @@ export default function WebsiteFooter() {
                 </LinkView>
               ))}
             </View>
-            <View
-              style={{
-                alignItems: "flex-end",
-                justifyContent: "center",
-              }}
-            >
-              <LanguageSwitcher />
-              <ThemeToggle mode="default" showLabelFor={WindowWidth.xxxl} />
-            </View>
+            <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
+              <Spacer size="m" />
+              {t({ en: "Options", fr: "Options" })}
+            </Text>
+            <LanguageSwitcher />
+            <ThemeToggle mode="default" />
           </SpacedView>
           <Spacer />
         </Container>

@@ -23,7 +23,11 @@ export default function BlockPassionated() {
         angle={190}
         style={[StyleSheet.absoluteFill, { transform: skew }]}
       />
-      <Container style={{ flexDirection: "row", flexWrap: "wrap" }}>
+      <Container
+        role="region"
+        aria-label={t({ en: "Passionated and Curious", fr: "Passionné et curieux" })}
+        style={{ flexDirection: "row", flexWrap: "wrap" }}
+      >
         <SpacedView
           horizontal="xl"
           gap="m"
@@ -154,7 +158,7 @@ De Dreamweaver à Cursor, les années ont passé, mais pas mon appétit pour de 
                       },
                     ]}
                   >
-                    {"Feb. 1996"}
+                    {t({ en: "Feb. 1996", fr: "févr. 1996" })}
                   </Text>
                 </SpacedView>
               </View>

@@ -20,7 +20,7 @@ export default function BlockCompaniesTrust() {
   const t = useT();
 
   return (
-    <Container>
+    <Container role="region" aria-label={t({ en: "Trusted by", fr: "Ils m'ont fait confiance" })}>
       <SpacedView
         horizontal="l"
         vertical="xl"

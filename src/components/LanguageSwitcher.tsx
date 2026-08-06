@@ -2,7 +2,9 @@ import { isLocalizedPath, Lang, langs, localizedHref, useLang } from "@/i18n";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
-import { alpha, colors, useTheme } from "@/styles";
+import SpacedView from "@/react-multiversal/SpacedView";
+import { useTheme } from "@/styles";
+import SVGTranslate from "@/svgs/components/SVGTranslate";
 import { useRouterState } from "@tanstack/react-router";
 import { Text, View } from "react-native";
 
@@ -12,16 +14,14 @@ const languageNames: Record<Lang, string> = {
   fr: "Français",
 };
 
-const shortNames: Record<Lang, string> = {
-  en: "EN",
-  fr: "FR",
-};
-
 /**
  * Switches between the language versions of the page being read - no automatic
  * redirection anywhere on the site, so a URL always serves the same language
- * (decision: WEB-REWORK.md phase 5). Renders nothing on the English-only
+ * (decision: CV-REWORK-JOURNAL.md §12). Renders nothing on the English-only
  * sections (`/blog`, `/talks`), where there is no counterpart to switch to.
+ *
+ * Laid out like the other footer entries, since that is where it lives: the
+ * header carries the same choice inside `WebsiteMenu`.
  */
 export default function LanguageSwitcher() {
   const theme = useTheme();
@@ -31,7 +31,7 @@ export default function LanguageSwitcher() {
   if (!isLocalizedPath(pathname)) return null;
 
   return (
-    <View style={{ flexDirection: "row", alignItems: "center", gap: size("xxs") }}>
+    <View>
       {langs.map((alternate) => {
         const current = alternate === lang;
         return (
@@ -42,21 +42,21 @@ export default function LanguageSwitcher() {
             // visitor looking for French must not have to read English first.
             aria-label={languageNames[alternate]}
             aria-current={current ? "page" : undefined}
-            style={{
-              paddingHorizontal: size("xxs"),
-              paddingVertical: 2,
-              borderRadius: 6,
-              backgroundColor: current ? alpha(colors.black, 0.08) : "transparent",
-            }}
+            style={{ flexDirection: "row", alignItems: "center" }}
           >
-            <Text
-              style={[
-                fontStyles.ios.caption1,
-                current ? theme.styles.text : theme.styles.textLight1,
-              ]}
-            >
-              {shortNames[alternate]}
-            </Text>
+            <SVGTranslate
+              width={size("m")}
+              height={size("m")}
+              fill={theme.dynamicColors.text}
+              style={{ flexShrink: 0, opacity: current ? 1 : 0.25 }}
+            />
+            <SpacedView horizontal="xs" vertical="xs">
+              <Text
+                style={[current ? fontStyles.iosEm.body : fontStyles.ios.body, theme.styles.text]}
+              >
+                {languageNames[alternate]}
+              </Text>
+            </SpacedView>
           </LinkView>
         );
       })}

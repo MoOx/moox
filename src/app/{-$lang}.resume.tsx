@@ -281,18 +281,16 @@ function PageResume() {
             zIndex: 1,
           }}
         >
+          {/* One node, two layouts. The two `IfWindowWidthIs` variants this
+              replaces both rendered `headline()`, so the page shipped two <h1>
+              and two <h2> - the same text twice for anything reading the HTML.
+              Only the positioning differs between widths, so it moves to a
+              media query (`[data-resume-hero]` in styles.css); the Spacer
+              below stays conditional, since it only compensates for the
+              desktop variant leaving the flow. */}
+          <View dataSet={{ "resume-hero": "true" }}>{headline("text--front-end-architect")}</View>
           <IfWindowWidthIs largerThan={WindowWidth.m}>
-            <SpacedView
-              horizontal="l"
-              vertical="m"
-              style={{ position: "absolute", top: 0, left: 0, right: -300 }}
-            >
-              {headline("text--front-end-architect")}
-            </SpacedView>
             <Spacer size="xxxl" />
-          </IfWindowWidthIs>
-          <IfWindowWidthIs smallerThan={WindowWidth.m}>
-            <View>{headline("text--front-end-architect-m")}</View>
           </IfWindowWidthIs>
           <View>
             <IfWindowWidthIs largerThan={WindowWidth.m}>
@@ -479,7 +477,12 @@ function PageResume() {
       {/* =========================================================== Skills */}
       <Spacer size="xl" />
       <Container maxWidth={900}>
-        <SpacedView horizontal="l" gap="l">
+        <SpacedView
+          role="region"
+          aria-label={t({ en: "Skills", fr: "Compétences" })}
+          horizontal="l"
+          gap="l"
+        >
           <Text
             style={[fontStyles.iosEm.largeTitle, gradientTextIndigoStylesInv(theme)]}
             role="heading"
@@ -530,6 +533,7 @@ function PageResume() {
             </View>
           </View>
           <View
+            role="list"
             style={{
               flexDirection: "row",
               flexWrap: "wrap",
@@ -539,7 +543,7 @@ function PageResume() {
             }}
           >
             {techs.map(({ Icon, label }) => (
-              <View key={t(label)} style={{ alignItems: "center" }}>
+              <View role="listitem" key={t(label)} style={{ alignItems: "center" }}>
                 <View
                   style={{
                     width: 40,
@@ -561,7 +565,12 @@ function PageResume() {
       {/* ======================================================= Experience */}
       <Spacer size="xxl" />
       <Container maxWidth={900}>
-        <SpacedView horizontal="l" gap="m">
+        <SpacedView
+          role="region"
+          aria-label={t({ en: "Key Experience", fr: "Expériences clés" })}
+          horizontal="l"
+          gap="m"
+        >
           <Text
             style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
             role="heading"
@@ -611,7 +620,12 @@ function PageResume() {
           style={[StyleSheet.absoluteFill, { transform: [{ skewY: "-1deg" }] }]}
         />
         <Container maxWidth={900}>
-          <SpacedView horizontal="l" gap="m">
+          <SpacedView
+            role="region"
+            aria-label={t({ en: "Open Source", fr: "Open source" })}
+            horizontal="l"
+            gap="m"
+          >
             <View
               style={{
                 flexDirection: "row",
@@ -642,6 +656,7 @@ function PageResume() {
               {t(openSourceIntro)}
             </Text>
             <View
+              role="list"
               style={{
                 flexDirection: "row",
                 flexWrap: "wrap",
@@ -654,6 +669,7 @@ function PageResume() {
                 return (
                   <Card
                     key={item.slug}
+                    role="listitem"
                     style={{ flexBasis: 380 }}
                     background="glass"
                     icon={
@@ -743,6 +759,8 @@ function PageResume() {
       <Spacer size="xxl" />
       <Container maxWidth={900}>
         <SpacedView
+          role="region"
+          aria-label={t({ en: "Talks & Community", fr: "Conférences & communauté" })}
           horizontal="l"
           style={{
             flexDirection: "row",
@@ -809,7 +827,11 @@ function PageResume() {
               justifyContent: "space-between",
             }}
           >
-            <View style={{ gap: size("m") }}>
+            <View
+              role="region"
+              aria-label={t({ en: "Education", fr: "Formation" })}
+              style={{ gap: size("m") }}
+            >
               <Text
                 style={[fontStyles.iosEm.title1, gradientTextFlashyStyles(theme)]}
                 role="heading"
@@ -846,7 +868,11 @@ function PageResume() {
                 </View>
               ))}
             </View>
-            <View style={{ gap: size("m") }}>
+            <View
+              role="region"
+              aria-label={t({ en: "Beyond Code", fr: "Au-delà du code" })}
+              style={{ gap: size("m") }}
+            >
               <Text
                 style={[fontStyles.iosEm.title1, gradientTextIndigoStylesInv(theme)]}
                 role="heading"
@@ -855,6 +881,7 @@ function PageResume() {
                 {t({ en: "Beyond Code", fr: "Au-delà du code" })}
               </Text>
               <View
+                role="list"
                 style={{
                   flexDirection: "row",
                   flexWrap: "wrap",
@@ -862,7 +889,7 @@ function PageResume() {
                 }}
               >
                 {hobbies.map(({ Icon, label }) => (
-                  <View key={t(label)} style={{ alignItems: "center" }}>
+                  <View role="listitem" key={t(label)} style={{ alignItems: "center" }}>
                     <Icon width={48} height={48} fill="url(#profileGrad)" />
                     <Text
                       style={[
@@ -884,7 +911,11 @@ function PageResume() {
       {/* ===================================================== Full history */}
       <Spacer size="xxl" />
       <Container maxWidth={900}>
-        <SpacedView horizontal="l">
+        <SpacedView
+          role="region"
+          aria-label={t({ en: "All Experience", fr: "Tout le parcours" })}
+          horizontal="l"
+        >
           <Text
             style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
             role="heading"

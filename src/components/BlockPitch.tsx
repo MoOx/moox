@@ -22,7 +22,10 @@ export default function BlockPitch() {
 
   return (
     <View style={theme.styles.back}>
-      <Container>
+      <Container
+        role="region"
+        aria-label={t({ en: "Where I can help", fr: "Là où je peux aider" })}
+      >
         <View
           style={{
             flexDirection: "row",
