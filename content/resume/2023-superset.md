@@ -30,3 +30,4 @@ Le stand-up est mon loisir. J'ai créé une association avec des ami·e·s pour
 organiser des soirées de stand-up dans différents lieux de Toulouse, et j'y
 assurais l'essentiel du travail de promotion (site, communication, billetterie,
 etc.).
+Cette association est un des plus gros organisateurs de soirées standup à Toulouse.

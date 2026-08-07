@@ -31,39 +31,49 @@ image: /resume/tvapp.jpg
 remote: true
 ---
 
-Short mission to boost development of a TV/media remote app made with React
-Native (with ReScript) & GraphQL (with Apollo).
+Loewe builds televisions; this was the app that drives them, a remote written
+in React Native and ReScript, with GraphQL, Apollo and MQTT underneath. A short
+mission with one goal: unblock a codebase that had become slow to contribute
+to.
 
-- Re-architecture of the mobile app codebase based React Native with ReScript to
-  simplify it in order to increase ease for contributors.
-- Development of various low level React components to ease day-to-day
-  development to follow the rapidely evolving mockups
-- Time spend to polish UI details, including development of tons of animations
-  into the React Native app to make if feel really native & not just another
-  weird half web app / half native.
-- Transformation of Sketch designs into React components with management of
-  issues not anticipated because of the static aspect of mockups.
-- Open source contributions to bs-react-native, React Native bindings for
-  ReScript
-- Migration of part of the iOS .xcodeproj mess (hand linked libraries, some
-  copy/pasted) into a Cocoapods Podfile to ease React Native updates
+Three things were in the way. The ReScript code needed a structure people could
+add to without reverse-engineering it first, so it got one, along with the
+low-level components the team needed to keep up with mockups that kept moving.
+The iOS project was a hand-linked `.xcodeproj` (libraries wired in by hand,
+some of them copy-pasted), which turned every React Native upgrade into an
+archaeology session; moving it to a Cocoapods Podfile made upgrades routine
+again. And the app still felt like a web app in a native shell, which for a
+device remote is fatal: pressing a button has to answer instantly, or the phone
+loses to the plastic remote on the table. That is what the animation work
+bought, the kind that never shows up in a changelog.
+
+Turning the Sketch designs into components surfaced what static mockups always
+hide: the loading, empty and error states nobody draws. The work also fed back
+into bs-react-native, the ReScript bindings for React Native I was maintaining
+at the time.
 
 ---
 
-Mission courte pour accélérer le développement d'une application télécommande
-TV / média, faite avec React Native (et ReScript) et GraphQL (avec Apollo).
+Loewe fabrique des téléviseurs ; voici l'application qui les pilote, une
+télécommande écrite en React Native et ReScript, avec GraphQL, Apollo et MQTT
+en dessous. Une mission courte, avec un seul objectif : débloquer une base de
+code devenue lente à faire évoluer.
 
-- Ré-architecture de la base de code React Native + ReScript pour simplifier
-  les contributions
-- Développement de composants React bas niveau pour faciliter le travail
-  quotidien et suivre des maquettes qui évoluaient vite
-- Temps passé à affiner les détails de l'interface, avec une multitude
-  d'animations pour que l'application paraisse vraiment native, et non mi-web,
-  mi-native
-- Transformation des designs Sketch en composants React, avec la gestion de
-  tous les cas qu'une maquette statique n'anticipe pas
-- Contributions open source à bs-react-native, les bindings React Native pour
-  ReScript
-- Migration d'une partie du .xcodeproj iOS (bibliothèques liées à la main,
-  certaines copiées-collées) vers un Podfile Cocoapods, pour faciliter les
-  mises à jour de React Native
+Trois choses barraient la route. Le code ReScript avait besoin d'une structure
+à laquelle on puisse contribuer sans devoir d'abord la rétro-concevoir : il l'a
+eue, avec les composants bas niveau nécessaires pour suivre des maquettes qui
+n'arrêtaient pas de bouger. Le projet iOS était un `.xcodeproj` lié à la main
+(bibliothèques câblées une à une, certaines copiées-collées), ce qui
+transformait chaque montée de version de React Native en séance d'archéologie ;
+son passage à un Podfile Cocoapods a rendu ces mises à jour routinières. Enfin,
+l'application donnait encore la sensation d'un site web dans une coquille
+native, ce qui est rédhibitoire pour une télécommande : un appui doit répondre
+instantanément, sinon le téléphone perd face à la télécommande en plastique
+posée sur la table. C'est ce qu'a acheté le travail d'animation, celui qui
+n'apparaît jamais dans un journal de versions.
+
+Transformer les maquettes Sketch en composants a fait remonter ce qu'une
+maquette statique cache toujours : les états de chargement, les états vides et
+les erreurs, que personne ne dessine. Le travail a aussi nourri
+bs-react-native, les bindings ReScript pour React Native dont j'assurais alors
+la maintenance.

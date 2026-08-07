@@ -71,7 +71,7 @@ every decision. I bring that rigor to every client project I architect.
 
 ---
 
-J'ai créé cssnext en 2014 — un ensemble de plugins PostCSS qui permettait
+J'ai créé cssnext en 2014, un ensemble de plugins PostCSS qui permettait
 d'écrire dès aujourd'hui la syntaxe CSS de demain (variables, custom
 properties, imbrication, fonctions de couleur…) et de la transpiler pour tous
 les navigateurs. Un « Babel du CSS ». Le projet a atteint des millions de

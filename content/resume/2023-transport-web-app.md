@@ -24,8 +24,9 @@ image: /resume/hove-web.jpg
 remote: true
 ---
 
-Development of a web app to ease urban transportation, sell to cities &
-transportation networks as a white-label app.
+Based on my previous work, on a similar mobile web app, I handled the
+development of a web app to ease urban transportation, sell to cities
+& transportation networks as a white-label app.
 
 - Creation of a modern architecture to re-create a PHP/jQuery web app in
   React/TypeScript
@@ -35,8 +36,9 @@ transportation networks as a white-label app.
 
 ---
 
-Développement d'une application web pour faciliter les transports urbains,
-vendue aux villes et aux réseaux de transport en marque blanche.
+Basé sur mon précédente travail sur l'app mobile, j'ai géré le développement
+d'une application web pour faciliter les transports urbains, vendue aux villes
+et aux réseaux de transport en marque blanche.
 
 - Création d'une architecture moderne pour refaire en React/TypeScript une
   application web PHP/jQuery

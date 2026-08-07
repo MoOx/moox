@@ -42,7 +42,7 @@ linter it is today. A small nudge with a large ripple.
 
 ---
 
-J'ai ouvert la toute première issue qui a lancé stylelint en 2015 — la graine
+J'ai ouvert la toute première issue qui a lancé stylelint en 2015, la graine
 d'un linter CSS moderne et entièrement configurable, bâti sur PostCSS. J'ai
 donné la direction initiale, puis une équipe et une communauté formidables en
 ont fait le linter CSS standard qu'il est aujourd'hui. Une petite impulsion, de

@@ -36,9 +36,9 @@ The white-label transit app for cities and transport networks started here:
 I architected the React Native codebase for iOS and Android, developed half
 of the app myself, and built the team around it. Most developers were new to
 modern JavaScript, React and React Native, so training was part of the
-mission from day one — daily code reviews, and a safety net wired in early:
-Flow for static typing, Jest with Storybook snapshots for day-to-day work,
-Detox end-to-end tests running on a local Jenkins CI.
+mission from day one, with daily code reviews and a safety net wired in
+early: Flow for static typing, Jest with Storybook snapshots for day-to-day
+work, Detox end-to-end tests running on a local Jenkins CI.
 
 White-label is the defining constraint: every client network gets its own
 declination of the app, customized through a dedicated admin interface, with
@@ -48,7 +48,7 @@ The rest was the daily reality of React Native at scale: polished animations
 that had to stay smooth on low-end devices, Photoshop designs turned into
 components with all the cases a static mockup never anticipates, native code
 and bridges for both platforms, and a hand-linked .xcodeproj mess migrated
-to Cocoapods so that React Native upgrades — several over the mission —
+to Cocoapods so that React Native upgrades (several over the mission)
 stopped hurting. All of it remote, leading developers with very different
 profiles and levels.
 
@@ -59,8 +59,8 @@ transport commence ici : j'ai conçu l'architecture de la base de code React
 Native pour iOS et Android, développé la moitié de l'application moi-même et
 construit l'équipe autour. La plupart des développeurs découvraient le
 JavaScript moderne, React et React Native : la formation faisait partie de la
-mission dès le premier jour — revues de code quotidiennes, et un filet de
-sécurité posé tôt : Flow pour le typage statique, Jest avec des snapshots
+mission dès le premier jour, avec des revues de code quotidiennes et un filet
+de sécurité posé tôt : Flow pour le typage statique, Jest avec des snapshots
 Storybook pour le quotidien, des tests end-to-end Detox exécutés sur un Jenkins
 local.
 
@@ -74,6 +74,6 @@ soignées qui devaient rester fluides sur des appareils d'entrée de gamme, des
 maquettes Photoshop transformées en composants avec tous les cas qu'un visuel
 figé n'anticipe jamais, du code natif et des ponts pour les deux plateformes,
 et un .xcodeproj lié à la main, migré vers Cocoapods pour que les montées de
-version de React Native — plusieurs sur la mission — cessent de faire mal. Le
+version de React Native (plusieurs sur la mission) cessent de faire mal. Le
 tout à distance, en encadrant des développeurs aux profils et aux niveaux très
 différents.

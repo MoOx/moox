@@ -6,8 +6,8 @@ title:
   fr: "Application mobile pour trouver à manger et à boire autour de soi"
 job_title: "Front-End Developer"
 pitch:
-  en: "Took the app's UI and UX from MVP to production in React Native - shipping new features and fixing bugs along the way."
-  fr: "Interface et expérience de l'app menées du MVP à la production en React Native - nouvelles fonctionnalités livrées et bugs corrigés en chemin."
+  en: "Took the UI and UX from MVP to a published App Store release, in React Native and TypeScript."
+  fr: "Interface et expérience menées du MVP à une publication sur l'App Store, en React Native et TypeScript."
 dateStart: 2024-06-17
 dateEnd: 2024-08-12
 hashtags:
@@ -18,16 +18,35 @@ image: /resume/enjoyapp.jpg
 remote: true
 links:
   - title: Enjoy App
-    url: https://apps.apple.com/us/app/enjoy-restaurants-near-you/id6502472738
+    url: https://apps.apple.com/us/app/enjoy-app/6502472738
 ---
 
-Front-end development for a mobile app that helps you find food and drinks near
-you, the exact opposite of Uber Eats & friends. From MVP to production, I worked
-on the app's UI and UX, integrating new features and fixing bugs.
+Enjoy points you at the food and drinks around you, the opposite move from
+Uber Eats and its peers: it gets you out of the house instead of delivering to
+it.
+
+I came in for the stretch that decides whether a product exists at all, the one
+between an MVP that demos well and an app a stranger can download. Little of
+that work is new features; most of it is what a demo never has to survive: the
+screens nobody designed, the states nobody hit, the details that separate "it
+works" from "it feels finished". I took the UI and UX across that line in React
+Native and TypeScript, shipping features and closing bugs in the same motion.
+
+The app is live on the App Store, US only.
 
 ---
 
-Développement front-end d'une application mobile qui aide à trouver à manger et
-à boire autour de soi — l'exact opposé d'Uber Eats et consorts. Du MVP à la
-production, j'ai travaillé sur l'interface et l'expérience de l'application, en
-intégrant de nouvelles fonctionnalités et en corrigeant des bugs.
+Enjoy indique où manger et boire autour de soi, le mouvement inverse d'Uber
+Eats et consorts : l'application fait sortir de chez soi au lieu de livrer à
+domicile.
+
+Je suis arrivé pour la portion qui décide si un produit existe vraiment, celle
+qui sépare un MVP qui démontre bien d'une application qu'un inconnu peut
+télécharger. Cette portion tient rarement aux nouvelles fonctionnalités ;
+l'essentiel, c'est ce qu'une démo n'a jamais à encaisser : les écrans que
+personne n'a dessinés, les états que personne n'a rencontrés, les détails qui
+séparent « ça marche » de « c'est fini ». J'ai fait passer cette ligne à
+l'interface et à l'expérience, en React Native et TypeScript, en livrant des
+fonctionnalités et en fermant des bugs dans le même mouvement.
+
+L'application est publiée sur l'App Store mais uniquement aux US.

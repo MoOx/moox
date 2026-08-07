@@ -50,12 +50,12 @@ binding effort across dozens of packages, until I moved on from ReScript.
 
 ---
 
-J'ai repris la maintenance de bs-react-native — les bindings React Native typés
-pour ReasonML — et l'ai fait grandir pendant des années. Cela voulait dire
+J'ai repris la maintenance de bs-react-native (les bindings React Native typés
+pour ReasonML) et l'ai fait grandir pendant des années. Cela voulait dire
 mapper à la main toute l'API de React Native et son écosystème (navigation,
 paper, svg, async-storage…) en bindings fortement typés.
 
 Cela voulait dire aussi suivre les renommages successifs du langage, de bs-\*
 à reason-\* puis rescript-\*, chacun avec sa propre organisation à tenir
-synchronisée — un travail de binding vaste et méticuleux réparti sur des
+synchronisée : un travail de binding vaste et méticuleux réparti sur des
 dizaines de paquets, jusqu'à ce que je quitte ReScript.

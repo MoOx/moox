@@ -81,13 +81,14 @@ image: /resume/adm.jpg
 remote: true
 ---
 
-A year after my first Hove mission ended, the CTO called me back: the app I
-had created needed rescuing. The team had grown to ten and the product had
-grown fragile — my job was to tighten both. I rebuilt the team as a smaller,
+A year after my first Hove mission ended, the CTO called me back: the
+white labeled app I had created needed rescuing. The team had grown
+to ten and the product had grown fragile; my job was to tighten both.
+I rebuilt the team as a smaller,
 senior one, stabilized the app and simplified the code it had accumulated.
 
 The biggest win was operational. Shipping a change used to cost days per
-client network — builds, installs, QA for every declination. This second
+client network: builds, installs, QA for every declination. This second
 phase pushed the Fastlane automation to an "all-in-one" build embedding
 every client's data, so QA switches networks in-app without rebuilding:
 integrating a modification, QA included, went from several days to a few
@@ -95,18 +96,18 @@ hours, and releases became one click.
 
 Under the hood the product work continued: polished animations for low-end
 devices, native code and bridges for both platforms, several React Native
-upgrades — and the app was brought to the web with React Native Web.
+upgrades. The app was also brought to the web with React Native Web to be
+embed in a app builder with live preview.
 
 ---
 
 Un an après la fin de ma première mission chez Hove, le CTO m'a rappelé :
-l'application que j'avais créée avait besoin d'être sauvée. L'équipe était
-montée à dix et le produit était devenu fragile — mon travail a consisté à
-resserrer les deux. J'ai reconstitué une équipe plus petite et expérimentée,
-stabilisé l'application et simplifié le code accumulé.
+l'application en marque blanche que j'avais créée avait besoin d'être sauvée.
+L'équipe était montée à dix et le produit était devenu fragile ; mon travail
+a consisté à resserrer les deux. J'ai reconstitué une équipe plus petite et expérimentée, stabilisé l'application et simplifié le code accumulé.
 
 Le gain le plus fort a été opérationnel. Livrer une modification coûtait
-auparavant des jours par réseau client — builds, installations, recette pour
+auparavant des jours par réseau client : builds, installations, recette pour
 chaque déclinaison. Cette deuxième phase a poussé l'automatisation Fastlane
 vers un build « tout-en-un » embarquant les données de tous les clients : la
 recette change de réseau depuis l'application, sans reconstruire. Intégrer une
@@ -115,5 +116,5 @@ et les livraisons sont devenues affaire d'un clic.
 
 Sous le capot, le travail produit a continué : animations soignées pour les
 appareils d'entrée de gamme, code natif et ponts pour les deux plateformes,
-plusieurs montées de version de React Native — et l'application a été portée
-sur le web avec React Native Web.
+plusieurs montées de version de React Native. L'application a aussi été portée
+sur le web avec React Native Web dans le but de mettre en place un configurateur avec aperçu.

@@ -8,8 +8,8 @@ highlight: true
 job_title: "Lead Front-End Developer"
 icon: /resume/icons/aardvark.png
 pitch:
-  en: "Built the virtualized spreadsheet-like editor that keeps the UI instant on tens of thousands of rows, then made Playwright guard its performance in CI - so the release train never shipped a regression."
-  fr: "Éditeur de type tableur virtualisé, construit pour garder l'interface instantanée sur des dizaines de milliers de lignes, puis performance surveillée par Playwright en intégration continue - pour qu'aucune régression ne parte en production."
+  en: "Built an IA chat and a virtualized spreadsheet-like editor that keeps the UI instant on tens of thousands of rows, then made Playwright guard its performance in CI - so the release train never shipped a regression."
+  fr: "Chat IA & Éditeur de type tableur virtualisé, construit pour garder l'interface instantanée sur des dizaines de milliers de lignes, puis performance surveillée par Playwright en intégration continue - pour qu'aucune régression ne parte en production."
 stats:
   - stat: "50k+"
     label:
@@ -60,20 +60,20 @@ links:
 ---
 
 Aardvark automates legal and financial data with generative AI. The models
-produce the data; my job was the surface where people verify and correct it —
+produce the data; my job was the surface where people verify and correct it,
 at a scale where a regular table gives up: tens of thousands of rows, all
 editable, in the browser.
 
 Spreadsheet-grade editing means spreadsheet-grade details: units, dates and
 long text cells each needed their own editing behavior, and filtering started
 client-side then moved to the backend once the datasets outgrew the browser.
-Performance at that scale erodes silently, one innocent PR at a time — the
+Performance at that scale erodes silently, one innocent PR at a time; the
 Playwright performance tests in CI exist precisely for that, with a fully
 automated pipeline holding a two-week release cadence for almost two years.
 
 Sole front-end in a three-person product team, I also took over design after
-the designer's first drafts — up to a complete redesign once the product had
-outgrown them, dark mode included — sparing the company a dedicated design
+the designer's first drafts (up to a complete redesign once the product had
+outgrown them, dark mode included), sparing the company a dedicated design
 position. Built with React Native Web and TypeScript: a solid abstraction for
 web-only today, with the door open to native apps tomorrow.
 
@@ -81,7 +81,7 @@ web-only today, with the door open to native apps tomorrow.
 
 Aardvark automate le traitement de données juridiques et financières avec de
 l'IA générative. Les modèles produisent la donnée ; mon travail portait sur la
-surface où on la vérifie et la corrige — à une échelle où un tableau classique
+surface où on la vérifie et la corrige, à une échelle où un tableau classique
 abandonne : des dizaines de milliers de lignes, toutes éditables, dans le
 navigateur.
 
@@ -89,14 +89,14 @@ Une édition digne d'un tableur impose des détails dignes d'un tableur : unité
 dates et cellules de texte long demandaient chacune leur propre comportement
 d'édition, et le filtrage, d'abord côté client, est passé côté serveur quand
 les jeux de données ont dépassé ce que le navigateur encaisse. À cette échelle,
-la performance s'érode en silence, une pull request anodine après l'autre — les
+la performance s'érode en silence, une pull request anodine après l'autre ; les
 tests de performance Playwright en intégration continue sont là exactement pour
 ça, dans une chaîne entièrement automatisée qui a tenu une livraison toutes les
 deux semaines pendant près de deux ans.
 
 Seul front-end d'une équipe produit de trois personnes, j'ai aussi repris le
-design après les premières maquettes — jusqu'à une refonte complète quand le
-produit les avait dépassées, mode sombre compris — épargnant à l'entreprise un
+design après les premières maquettes (jusqu'à une refonte complète quand le
+produit les avait dépassées, mode sombre compris), épargnant à l'entreprise un
 poste de design dédié. Construit avec React Native Web et TypeScript : une
 abstraction solide pour un usage web aujourd'hui, la porte ouverte aux
 applications natives demain.

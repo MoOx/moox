@@ -52,6 +52,6 @@ Metalsmith) ; Gatsby existait mais faisait tout passer par webpack et se
 traînait. Phenomic a pris une autre voie, largement découplée de webpack, pour
 rester rapide.
 
-Le projet a rassemblé une vraie communauté et plus de 3 000 stars — un
+Le projet a rassemblé une vraie communauté et plus de 3 000 stars, un
 précurseur de ce que Next.js a ensuite imposé comme standard du rendu statique.
 Comme il se doit, son dépôt renvoie aujourd'hui simplement vers Next.js.

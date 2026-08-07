@@ -46,25 +46,25 @@ hashtags:
 ---
 
 Three courses at the IUT de Blagnac (DUT Informatique), spread over six years
-of teaching alongside client work — 2012–2015, then 2018–2020.
+of teaching alongside client work: 2012–2015, then 2018–2020.
 
 C, for first-year students, meant teaching the very first steps of
 programming to people who had never written a line of code. Web (HTML, CSS,
 JavaScript) came next: a classic project course, this time for students who
 already knew how to code. Agile, for second-years, was the closest to my day
 job: each group took over an existing project and had to ship it the Scrum
-way — tickets, planning poker — while the lectures were built on what
+way (tickets, planning poker), while the lectures were built on what
 companies actually do, straight from mission experience, which is exactly
 what the university had asked for.
 
 The format was hands-on throughout: two-hour sessions, semester-long lab
-work, every assignment reviewed and graded — one or two classes of twenty
+work, every assignment reviewed and graded, for one or two classes of twenty
 students a year.
 
 ---
 
 Trois cours à l'IUT de Blagnac (DUT Informatique), répartis sur six années
-d'enseignement menées en parallèle des missions clients — 2012–2015, puis
+d'enseignement menées en parallèle des missions clients : 2012–2015, puis
 2018–2020.
 
 Le C, en première année, c'était enseigner les tout premiers pas de la
@@ -72,10 +72,10 @@ programmation à des personnes qui n'avaient jamais écrit une ligne de code. Le
 Web (HTML, CSS, JavaScript) a suivi : un cours-projet classique, cette fois
 pour des étudiants qui savaient déjà coder. L'agilité, en deuxième année, était
 le plus proche de mon métier : chaque groupe reprenait un projet existant et
-devait le livrer à la manière Scrum — tickets, planning poker — pendant que les
+devait le livrer à la manière Scrum (tickets, planning poker), pendant que les
 cours s'appuyaient sur ce que font réellement les entreprises, directement
 tirés de l'expérience en mission, ce que l'université demandait précisément.
 
 Le format était concret d'un bout à l'autre : séances de deux heures, travaux
-pratiques sur tout le semestre, chaque rendu relu et noté — une à deux promos
-de vingt étudiants par an.
+pratiques sur tout le semestre, chaque rendu relu et noté, pour une à deux
+promos de vingt étudiants par an.

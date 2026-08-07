@@ -25,13 +25,13 @@ links:
     url: "https://unebonneboutique.com/collections/une-bonne-soiree"
 ---
 
-Kyan Khojandi sells his stand-up show "Une Bonne Soirée" in VOD — not on a
+Kyan Khojandi sells his stand-up show "Une Bonne Soirée" in VOD, not on a
 dedicated streaming service, but directly on
 [unebonneboutique.com](https://unebonneboutique.com), his existing
 merchandising shop.
 
-That was the point: rather than building and running a custom video backend,
-I assembled the platform from parts the studio already operates — Shopify for
+That was the point. Rather than building and running a custom video backend,
+I assembled the platform from parts the studio already operates: Shopify for
 the store and checkout, Vimeo for the secured streaming, Liquid and Gempages
 to shape the storefront. One shop to manage, one place for fans to buy, and
 room for the next shows to land on the same shelf.
@@ -41,14 +41,14 @@ e-commerce tasks across his different websites.
 
 ---
 
-Kyan Khojandi vend son spectacle « Une Bonne Soirée » en VOD — pas sur un
+Kyan Khojandi vend son spectacle « Une Bonne Soirée » en VOD, pas sur un
 service de streaming dédié, mais directement sur
 [unebonneboutique.com](https://unebonneboutique.com), sa boutique de
 merchandising existante.
 
-C'était tout l'enjeu : plutôt que de construire et d'exploiter un backend vidéo
+C'était tout l'enjeu. Plutôt que de construire et d'exploiter un backend vidéo
 sur mesure, j'ai assemblé la plateforme à partir de briques que le studio opère
-déjà — Shopify pour la boutique et le paiement, Vimeo pour le streaming
+déjà : Shopify pour la boutique et le paiement, Vimeo pour le streaming
 sécurisé, Liquid et Gempages pour façonner la vitrine. Une seule boutique à
 gérer, un seul endroit où les fans achètent, et de la place pour que les
 prochains spectacles se posent sur la même étagère.
