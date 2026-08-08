@@ -1,3 +1,11 @@
+/* This is what tints the browser chrome, not decoration: Safari stopped
+   honouring <meta name="theme-color">, and the canvas colour is the only lever
+   left. Do not move it to `back` - the toolbar goes flat grey.
+
+   The canvas colour is also what gets painted between committing the navigation
+   and the first layout of the body, so on its own it makes every page start
+   deep blue. `body` below covers the viewport from its first layout and carries
+   the page's real background, which is what closes that flash. */
 html {
   background-color: var(--react-multiversal--theme--textFlashy4);
 }

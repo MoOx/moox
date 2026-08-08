@@ -1,6 +1,7 @@
 import { fetchAll } from "@/api";
 import TalkList from "@/components/TalkList";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
+import { fullName, jobTitle, nickname } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
@@ -11,6 +12,18 @@ import { Text, View } from "react-native";
 
 export const Route = createFileRoute("/talks/")({
   loader: () => fetchAll({ data: "talks" }),
+  // English-only page (see `localizedPathPatterns` in i18n.ts), so no
+  // `alternateLinks` here - but it still needs a title: without one the tab,
+  // the search result and every share card fall back to the bare URL.
+  head: () => ({
+    meta: [
+      { title: `Talks - ${fullName} (${nickname}), ${jobTitle}` },
+      {
+        name: "description",
+        content: `Conference talks and meetup sessions given by ${nickname} on React, React Native, CSS tooling and front-end architecture.`,
+      },
+    ],
+  }),
   component: PageTalkList,
 });
 

@@ -50,7 +50,6 @@ export const standaloneUpdateHtmlClass = (value: UserColorScheme) => {
 
 export async function loadSavedColorScheme(value?: null | string) {
   if (value && (value === "light" || value === "dark" || value === "auto")) {
-    console.log("[colorScheme] Loading...");
     colorScheme = (value as UserColorScheme) || defaultColorScheme;
     updateHtmlClass(value as UserColorScheme);
     notifySubscribers();
@@ -61,7 +60,6 @@ export const getColorScheme = (): UserColorScheme => colorScheme;
 
 // for SSR/SSG, just update this value before rendering
 export async function setUserColorScheme(value: UserColorScheme) {
-  console.log("[userColorScheme] setUserColorScheme", value);
   updateHtmlClass(value);
   colorScheme = value;
   notifySubscribers();

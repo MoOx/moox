@@ -1,4 +1,4 @@
-import { supportsHover } from "@/react-multiversal/supports";
+import { useSupportsHover } from "@/react-multiversal/supports";
 import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
 import { useFocus } from "@/react-multiversal/useFocus";
 import { boxShadows } from "@/styles";
@@ -181,7 +181,8 @@ export default function ColorSchemeToggle({
     onBlur,
   });
   const activeTheme = hasAnyFocus ? focusedTheme : theme;
-  const value = supportsHover() ? (hasAnyFocus ? _value : actualValue) : _value;
+  const supportsHover = useSupportsHover();
+  const value = supportsHover ? (hasAnyFocus ? _value : actualValue) : _value;
 
   const dynamicStyles = useMemo(
     () =>

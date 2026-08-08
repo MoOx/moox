@@ -1,10 +1,10 @@
 import {
-  getColorScheme,
   getUserColorSchemeWebHtmlClass,
   UserColorScheme,
 } from "@/react-multiversal/theme/colorScheme";
+import { useSystemColorScheme } from "@/react-multiversal/theme/useSystemColorScheme";
 import { useUserColorScheme } from "@/react-multiversal/theme/useUserColorScheme";
-import { Platform, StyleSheet, useColorScheme } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { match, P } from "ts-pattern";
 
 export type t = "light" | "dark";
@@ -103,13 +103,15 @@ export function makeTheme<ThemeColorMap extends ThemeMinimalColorMap>(
   );
   const getWebHtmlClass = () => htmlClass;
 
-  const isClient = typeof window !== "undefined";
   function useTheme(_currentMode?: UserColorScheme): Theme<ThemeColorMap> {
-    const [userColorScheme] = !isClient ? [getColorScheme()] : useUserColorScheme();
+    // Both hooks are `useSyncExternalStore` under the hood, so they render the
+    // server value during hydration and only then read the browser. Calling
+    // them unconditionally keeps the hook order identical on both sides.
+    const [userColorScheme] = useUserColorScheme();
 
     const currentMode = _currentMode ?? userColorScheme ?? "auto";
 
-    const colorScheme = !isClient ? undefined : useColorScheme();
+    const colorScheme = useSystemColorScheme();
 
     const mode = match<UserColorScheme, t>(currentMode)
       .with("auto", () =>

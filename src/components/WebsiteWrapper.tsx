@@ -18,9 +18,10 @@ export default function WebsiteWrapper({
 }) {
   const theme = useTheme();
   return (
-    // minHeight: the html background is the flashy purple (overscroll); on
-    // short pages (e.g. /resume/<slug>) the wrapper must still cover the
-    // whole viewport or the purple shows below the content.
+    // minHeight: the html background is the flashy purple (it is what tints
+    // Safari's chrome, see styles.css); on short pages (e.g. /resume/<slug>)
+    // the wrapper must still cover the whole viewport or the purple shows
+    // below the content.
     <View style={[theme.styles.back, { flex: 1, minHeight: "100vh" }]}>
       {bare ? null : <WebsiteHeader />}
       <View role="main">{children}</View>

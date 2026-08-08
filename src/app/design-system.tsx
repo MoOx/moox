@@ -23,6 +23,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { StyleSheet, Text } from "react-native";
 
 export const Route = createFileRoute("/design-system")({
+  // An internal reference page, so it gets a title (a tab with a bare URL is
+  // still a bug) and a `noindex`: it has nothing to offer a search result.
+  head: () => ({
+    meta: [{ title: "Design system - moox.io" }, { name: "robots", content: "noindex" }],
+  }),
   component: DesignSystem,
 });
 

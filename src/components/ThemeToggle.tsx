@@ -5,11 +5,12 @@ import ColorSchemeToggle from "@/react-multiversal/ColorSchemeToggle";
 import InPlaceOrPortal from "@/react-multiversal/InPlaceOrPortal";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { UserColorScheme, userColorSchemeStorageKey } from "@/react-multiversal/theme/colorScheme";
+import { useSystemColorScheme } from "@/react-multiversal/theme/useSystemColorScheme";
 import { useUserColorScheme } from "@/react-multiversal/theme/useUserColorScheme";
 import { boxShadows, themedColors, useTheme } from "@/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useState } from "react";
-import { Text, useColorScheme, View } from "react-native";
+import { Text, View } from "react-native";
 
 // Deliberately NOT `lazy()`. This component is rendered by the header of every
 // page, so it sits inside the router's single Suspense boundary. A lazy import
@@ -66,12 +67,11 @@ export default function ThemeToggle({
   mode?: "light" | "default";
   size?: number;
 }) {
-  const colorScheme = useColorScheme();
+  const colorScheme = useSystemColorScheme();
   const [userColorScheme, setUserColorScheme] = useUserColorScheme();
   const theme = useTheme();
   const t = useT();
-  const actualColorScheme =
-    userColorScheme === "auto" ? (colorScheme === "dark" ? "dark" : "light") : userColorScheme;
+  const actualColorScheme = userColorScheme === "auto" ? colorScheme : userColorScheme;
   const handleChange = useCallback(
     (value: UserColorScheme) => {
       void AsyncStorage.setItem(userColorSchemeStorageKey, value);
@@ -94,7 +94,7 @@ export default function ThemeToggle({
         toggleSize={size}
         iconSize={size * 0.5}
         inactiveIconSize={size * 0.375}
-        systemColorScheme={colorScheme === "dark" ? "dark" : "light"}
+        systemColorScheme={colorScheme}
         value={userColorScheme}
         actualValue={actualColorScheme}
         onChange={handleChange}

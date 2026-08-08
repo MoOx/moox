@@ -78,6 +78,16 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["react", "react-dom"],
       include: [
+        // `react-native-web` MUST be prebundled on the server too. Every other
+        // entry below imports `react-native` (aliased to `react-native-web`),
+        // so leaving it out gives the SSR graph two instances of it: the one
+        // bundled inside these optimized deps, and the one Vite transforms for
+        // app code. `StyleSheet.create` registers styles in a module-level
+        // WeakMap, so a style object created by instance A is invisible to
+        // instance B: `StyleSheet.absoluteFill` handed to a react-native-svg
+        // `<Svg>` came out as an inline style server-side and as an atomic
+        // className client-side, i.e. a hydration mismatch on every gradient.
+        "react-native-web",
         "react-native-svg",
         "react-native-reanimated",
         "react-native-safe-area-context",
