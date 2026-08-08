@@ -104,6 +104,8 @@ export const ResumeTimeline = ({
                       : undefined
                   }
                 />
+                {/* Dev-only: copy the entry as text for LinkedIn. */}
+                {import.meta.env.DEV ? <DevCopyResumeEntry item={entry.item} /> : null}
               </View>
             ) : (
               <ExperienceCard

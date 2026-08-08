@@ -1,8 +1,6 @@
 import AvailabilityBadge from "@/components/AvailabilityBadge";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import LinkButton from "@/components/LinkButton";
-import ThemeToggle from "@/components/ThemeToggle";
-import { internalLinks, socials } from "@/consts";
+import { WebsiteMobileMenuLinks } from "@/components/WebsiteMobileMenu";
+import { socials } from "@/consts";
 import { useHref, useT } from "@/i18n";
 import { size, WindowWidth } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
@@ -11,14 +9,13 @@ import Container from "@/react-multiversal/Container";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
-import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import { default as SpacedView } from "@/react-multiversal/SpacedView";
 import { alpha, boxShadows, colors, gradientFlashyStops, useTheme } from "@/styles";
 import SVGMoox from "@/svgs/components/SVGMoox";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const styles = StyleSheet.create({
   menuGroup: {
@@ -39,34 +36,6 @@ export default function WebsiteHeader() {
   const theme = useTheme();
   const localizeHref = useHref();
   const t = useT();
-
-  const links = Object.entries(internalLinks).map(([text, link]) => (
-    <LinkText
-      key={link.href}
-      href={localizeHref(link.href)}
-      style={[theme.styles.text, styles.link]}
-      activeStyle={styles.linkActive}
-      underlineOnFocus={true}
-    >
-      {t(link.label) ?? text}
-    </LinkText>
-  ));
-
-  const contact = (
-    <LinkButton
-      href={localizeHref("/contact/")}
-      spaceHorizontal="m"
-      spaceVertical="xs"
-      effect="subtle"
-    >
-      <Text
-        numberOfLines={1}
-        style={[theme.styles.textOnMain, { fontSize: 16, fontWeight: "300" }]}
-      >
-        {t({ en: "Let's talk", fr: "Discutons" })}
-      </Text>
-    </LinkButton>
-  );
 
   return (
     <>
@@ -106,6 +75,7 @@ export default function WebsiteHeader() {
           <SpacedView
             horizontal="m"
             vertical="s"
+            gap="s"
             style={{
               borderWidth: 0.5,
               borderColor: alpha(colors.black, 0.15),
@@ -142,48 +112,27 @@ export default function WebsiteHeader() {
               </LinkView>
               <AvailabilityBadge showText={"on-focus"} />
             </View>
-            <IfWindowWidthIs
-              smallerThan={WindowWidth.xxs}
-              largerThan={WindowWidth.s}
-              style={[styles.menuGroup, { justifyContent: "flex-end" }]}
-            >
-              {contact}
-            </IfWindowWidthIs>
             <IfWindowWidthIs largerThan={WindowWidth.s} style={[styles.menuGroup, { flex: 2 }]}>
-              <SpacedView gap="m" style={[styles.menuGroup, { justifyContent: "center" }]}>
-                {links}
-              </SpacedView>
-              <SpacedView gap="m" style={[styles.menuGroup, { justifyContent: "flex-end" }]}>
-                <LinkView href={socials.linkedin.value} aria-label="@Max on LinkedIn">
-                  <SVGSocialLinkedin width={20} height={20} fill={theme.dynamicColors.text} />
-                </LinkView>
-                <LinkView href={socials.github.value} aria-label="@MoOx on GitHub">
-                  <SVGSocialGithub width={20} height={20} fill={theme.dynamicColors.text} />
-                </LinkView>
-                {contact}
-              </SpacedView>
-            </IfWindowWidthIs>
-
-            <IfWindowWidthIs largerThan={WindowWidth.s}>
+              {/* The site navigation, as a landmark: a screen reader can jump
+                  straight to it, and a crawler reads it as the menu rather than
+                  as five links in a row. */}
               <SpacedView
-                horizontal="m"
-                gap="xs"
-                style={[
-                  {
-                    alignItems: "flex-end",
-                    justifyContent: "center",
-                    position: "absolute",
-                    top: 72,
-                  },
-                  {
-                    right: Platform.OS === "web" ? "env(safe-area-inset-right)" : 0,
-                  },
-                ]}
+                role="navigation"
+                aria-label={t({ en: "Main", fr: "Principale" })}
+                gap="m"
+                style={[styles.menuGroup, { justifyContent: "center" }]}
               >
-                <LanguageSwitcher />
-                <ThemeToggle />
+                <WebsiteMobileMenuLinks />
               </SpacedView>
             </IfWindowWidthIs>
+            <SpacedView gap="m" style={[styles.menuGroup, { justifyContent: "flex-end" }]}>
+              <LinkView href={socials.linkedin.value} aria-label="@Max on LinkedIn">
+                <SVGSocialLinkedin width={20} height={20} fill={theme.dynamicColors.text} />
+              </LinkView>
+              <LinkView href={socials.github.value} aria-label="@MoOx on GitHub">
+                <SVGSocialGithub width={20} height={20} fill={theme.dynamicColors.text} />
+              </LinkView>
+            </SpacedView>
           </SpacedView>
         </BlurView>
       </Container>

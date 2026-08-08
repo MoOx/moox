@@ -1,14 +1,12 @@
-import { useT } from "@/i18n";
 import ThemePreview from "@/components/ThemePreview";
-import { AbsoluteSize, WindowWidth } from "@/react-multiversal";
+import { useT } from "@/i18n";
 import { white } from "@/react-multiversal/colors";
-import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
+import ColorSchemeToggle from "@/react-multiversal/ColorSchemeToggle";
 import InPlaceOrPortal from "@/react-multiversal/InPlaceOrPortal";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { UserColorScheme, userColorSchemeStorageKey } from "@/react-multiversal/theme/colorScheme";
 import { useUserColorScheme } from "@/react-multiversal/theme/useUserColorScheme";
-import ColorSchemeToggle from "@/react-multiversal/ColorSchemeToggle";
-import { themedColors, useTheme } from "@/styles";
+import { boxShadows, themedColors, useTheme } from "@/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useState } from "react";
 import { Text, useColorScheme, View } from "react-native";
@@ -61,12 +59,12 @@ const toggleThemes = {
 
 export default function ThemeToggle({
   showPreview = false,
-  showLabelFor: showLabels = WindowWidth.l,
   mode = "light",
+  size = 32,
 }: {
   showPreview?: boolean;
-  showLabelFor?: AbsoluteSize;
   mode?: "light" | "default";
+  size?: number;
 }) {
   const colorScheme = useColorScheme();
   const [userColorScheme, setUserColorScheme] = useUserColorScheme();
@@ -93,9 +91,9 @@ export default function ThemeToggle({
   return (
     <View>
       <ColorSchemeToggle
-        toggleSize={32}
-        iconSize={16}
-        inactiveIconSize={12}
+        toggleSize={size}
+        iconSize={size * 0.5}
+        inactiveIconSize={size * 0.375}
         systemColorScheme={colorScheme === "dark" ? "dark" : "light"}
         value={userColorScheme}
         actualValue={actualColorScheme}
@@ -107,36 +105,6 @@ export default function ThemeToggle({
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-      {showLabels ? (
-        <IfWindowWidthIs largerThan={showLabels}>
-          <View
-            style={{
-              position: "absolute",
-              top: 2,
-              right: 64,
-              alignItems: "flex-end",
-              opacity: mode === "light" ? (detailsVisible ? 1 : 0.25) : 1,
-            }}
-          >
-            <Text
-              style={[
-                mode === "light" ? theme.styles.textLight1 : theme.styles.text,
-                { fontSize: 12, lineHeight: 12 },
-              ]}
-            >
-              {t({ en: "Appearance", fr: "Apparence" })}
-            </Text>
-            <Text
-              style={[
-                mode === "light" ? theme.styles.textLight1 : theme.styles.text,
-                { fontSize: 14, lineHeight: 14, fontWeight: "800" },
-              ]}
-            >
-              {userColorScheme.toUpperCase()}
-            </Text>
-          </View>
-        </IfWindowWidthIs>
-      ) : null}
       {!detailsVisible ? null : !showPreview ? null : (
         <InPlaceOrPortal
           id="theme-details"
@@ -145,9 +113,10 @@ export default function ThemeToggle({
             theme.styles.backAlt,
             {
               position: "absolute",
-              top: 64,
-              right: 6,
-              borderRadius: 4,
+              top: 48,
+              right: 0,
+              borderRadius: 8,
+              boxShadow: boxShadows.moreVisible,
             },
           ]}
         >

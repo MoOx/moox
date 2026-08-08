@@ -1,5 +1,5 @@
 import WebsiteError from "@/components/WebsiteError";
-import { WebsiteMobileMenuBackdropStyles } from "@/components/WebsiteMobileMenu";
+import GlassFallbackStyles from "@/components/GlassFallbackStyles";
 import { cssRules } from "@/react-multiversal/IfWindowWidthIs";
 import baseCss from "@/react-multiversal/react-native/base.css?url";
 import ReactNativeProviders from "@/react-multiversal/react-native/ReactNativeProviders";
@@ -91,7 +91,7 @@ function RootShell({ children }: { children: ReactNode }) {
           }}
         />
         {getWebStyleSheet()}
-        <WebsiteMobileMenuBackdropStyles />
+        <GlassFallbackStyles />
         <ReactNativeStyleSheet />
       </head>
       <body>
