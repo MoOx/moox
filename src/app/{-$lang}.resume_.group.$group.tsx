@@ -7,7 +7,6 @@ import { fullName, pitchOf, titleOf } from "@/profile";
 import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -63,31 +62,29 @@ function PageResumeGroup() {
   return (
     <WebsiteWrapper>
       <Spacer size="l" />
-      <Container maxWidth={720}>
-        <SpacedView horizontal="l" gap="m">
-          <Link
-            to="/{-$lang}/resume"
-            params={{ lang }}
-            hash={lead.slug}
-            style={{ textDecoration: "none", alignSelf: "flex-start" }}
-          >
-            <Text style={[fontStyles.iosEm.callout, { color: theme.dynamicColors.textFlashy3 }]}>
-              {t({
-                en: "← All experience - back to the timeline",
-                fr: "← Toutes les expériences - retour à la frise",
-              })}
-            </Text>
-          </Link>
-          <View style={{ gap: size("m") }}>
-            {members.map((member) => (
-              <ResumeEntryDetailCard
-                key={member.slug}
-                item={member}
-                transitionEnabled={member.slug === lead.slug}
-              />
-            ))}
-          </View>
-        </SpacedView>
+      <Container horizontal="l" gap="m" maxWidth={720}>
+        <Link
+          to="/{-$lang}/resume"
+          params={{ lang }}
+          hash={lead.slug}
+          style={{ textDecoration: "none", alignSelf: "flex-start" }}
+        >
+          <Text style={[fontStyles.iosEm.callout, { color: theme.dynamicColors.textFlashy3 }]}>
+            {t({
+              en: "← All experience - back to the timeline",
+              fr: "← Toutes les expériences - retour à la frise",
+            })}
+          </Text>
+        </Link>
+        <View style={{ gap: size("m") }}>
+          {members.map((member) => (
+            <ResumeEntryDetailCard
+              key={member.slug}
+              item={member}
+              transitionEnabled={member.slug === lead.slug}
+            />
+          ))}
+        </View>
       </Container>
       <Spacer size="xl" />
     </WebsiteWrapper>

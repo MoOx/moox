@@ -6,7 +6,6 @@ import { alternateLinks, assertLangParam, langFromParam, useT } from "@/i18n";
 import { fullName, pitchOf } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -58,25 +57,23 @@ function PageResumeEntry() {
   return (
     <WebsiteWrapper>
       <Spacer size="l" />
-      <Container maxWidth={720}>
-        <SpacedView horizontal="l" gap="m">
-          {/* The timeline cards carry `id={item.slug}` anchors, so this lands
-              right back on the entry's card. */}
-          <Link
-            to="/{-$lang}/resume"
-            params={{ lang }}
-            hash={item.slug}
-            style={{ textDecoration: "none", alignSelf: "flex-start" }}
-          >
-            <Text style={[fontStyles.iosEm.callout, { color: theme.dynamicColors.textFlashy3 }]}>
-              {t({
-                en: "← All experience - back to the timeline",
-                fr: "← Toutes les expériences - retour à la frise",
-              })}
-            </Text>
-          </Link>
-          <ResumeEntryDetailCard item={item} />
-        </SpacedView>
+      <Container horizontal="l" gap="m" maxWidth={720}>
+        {/* The timeline cards carry `id={item.slug}` anchors, so this lands
+            right back on the entry's card. */}
+        <Link
+          to="/{-$lang}/resume"
+          params={{ lang }}
+          hash={item.slug}
+          style={{ textDecoration: "none", alignSelf: "flex-start" }}
+        >
+          <Text style={[fontStyles.iosEm.callout, { color: theme.dynamicColors.textFlashy3 }]}>
+            {t({
+              en: "← All experience - back to the timeline",
+              fr: "← Toutes les expériences - retour à la frise",
+            })}
+          </Text>
+        </Link>
+        <ResumeEntryDetailCard item={item} />
       </Container>
       <Spacer size="xl" />
     </WebsiteWrapper>

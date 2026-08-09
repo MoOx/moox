@@ -20,26 +20,24 @@ export default function ResumeStats({ stats }: { stats: ProfileStat[] }) {
         style={[StyleSheet.absoluteFill, { transform: [{ skewY: "1deg" }] }]}
         stops={gradientStaticIndigoStyles}
       />
-      <Container maxWidth={900}>
-        <SpacedView horizontal="l">
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              alignItems: "stretch",
-              gap: size("s"),
-            }}
-          >
-            {stats.map((stat) => (
-              <StatTile
-                key={stat.label}
-                stat={stat}
-                variant={stat.highlight ? "gradient" : "glass"}
-                flexBasis={140}
-              />
-            ))}
-          </View>
-        </SpacedView>
+      <Container horizontal="l" maxWidth={900}>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "stretch",
+            gap: size("s"),
+          }}
+        >
+          {stats.map((stat) => (
+            <StatTile
+              key={stat.label}
+              stat={stat}
+              variant={stat.highlight ? "gradient" : "glass"}
+              flexBasis={140}
+            />
+          ))}
+        </View>
       </Container>
     </SpacedView>
   );
