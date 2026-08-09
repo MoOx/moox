@@ -1,6 +1,6 @@
 import { glassDataSet } from "@/components/GlassFallbackStyles";
 import WebsiteMenu from "@/components/WebsiteMenu";
-import { useHref, useT } from "@/i18n";
+import { unlocalizedPath, useHref, useT } from "@/i18n";
 import { footerAnchor, menuBarLinks } from "@/consts";
 import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
@@ -59,7 +59,17 @@ const MenuBarItemContent = ({
 };
 
 export const WebsiteMobileMenuLinks = () => {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  // Unlocalized, and without a trailing slash: `menuBarLinks` holds the
+  // language-neutral hrefs (`/resume`), so comparing them to a raw pathname
+  // meant no menu item was ever active on a French page (`/fr/resume`).
+  // Normalising here rather than in `consts.tsx` keeps that file free of i18n -
+  // `i18n.ts` imports from it, so the dependency cannot go the other way.
+  const pathname = useRouterState({
+    select: (s) => {
+      const path = unlocalizedPath(s.location.pathname);
+      return path.length > 1 ? path.replace(/\/$/, "") : path;
+    },
+  });
   const localizeHref = useHref();
   const t = useT();
   return (
