@@ -146,9 +146,17 @@ aria-level={3}>` and hope.
 The important line in that table: **Unistyles does not reduce the DOM.** It
 still renders through react-native-web — every `View` is still a `<div>`, every
 `Text` is still a `<div dir="auto">`. What it changes is *where the styles go*
-(classNames + CSS variables instead of inline) and *how you write them*. It is
-the right answer to "my theme system is questionable" and "inline styles aren't
-great". It is not an answer to "my HTML is too deep".
+(classNames + CSS variables instead of inline) and *how you write them*. It
+would be an answer to "inline styles aren't great". It is not an answer to
+"my HTML is too deep".
+
+And it is not needed for the theming: **the existing `makeTheme` already solves
+the actual problem** — CSS variables so that `auto` resolves to light/dark
+reliably on the web, explicit light/dark on top, and the OS colour scheme on
+iOS and Android. That was the design goal, it is met, and Unistyles would buy
+a nicer authoring API at the price of a Babel plugin in a Vite pipeline.
+**Decision: keep the home-grown theme.** What needs work is the ergonomics on
+top of it (§4, step 3), not the mechanism underneath.
 
 ### react-strict-dom: you read it right
 
@@ -162,13 +170,20 @@ Verdict: **right idea, wrong time.** Do not bet a job-search portfolio on an
 unreleased `0.0.x`. But design toward it — see step 2 — so that adopting it
 later is a swap of one adapter file, not a rewrite.
 
-### One more thing worth knowing
+### react-native-web is not in maintenance mode (corrected)
 
-React Native for Web is widely reported to have entered **maintenance mode**:
-no major features planned, its author now working on react-strict-dom. Nothing
-breaks tomorrow, and it remains the pragmatic choice, but it argues for keeping
-the RNW surface area you depend on small and behind your own primitives —
-which is exactly what step 2 proposes.
+An earlier draft of this document repeated the widely-reported claim that RNW
+had gone quiet after Nicolas Gallagher moved to react-strict-dom. That is out
+of date: **RNW has been picked up by a maintainer at Expo**, and Expo needs it
+for its own web story, so it is moving again — the RNW Babel plugin is slated
+for removal, among other things. (Max's information, from the person doing the
+work.)
+
+That changes one conclusion: **RNW is a safe bet, not a managed risk.** The
+plan below does not need to hedge against it, and there is no urgency to
+abstract it away. The primitive layer in step 2 is still worth building, but
+for its own reasons — call-site ergonomics, semantics, and a single place where
+web and native diverge — not as an escape hatch.
 
 ---
 
@@ -261,49 +276,68 @@ the text styles **on the anchor** instead of a nested text node — that is
 DOM listeners, running ~200× per page) with a `:focus-visible` CSS rule on web,
 keeping the hook only for native.
 
-### Step 3 — the theme, and only then the library question
+### Step 3 — the ergonomics on top of the theme (the mechanism stays)
 
-The current `makeTheme` already does the clever part: on web it emits CSS
-variables and hands components `var(--…)` strings, so a theme switch costs no
-React render. Keep that idea. What is wrong is the surface:
+The theme mechanism is not the problem and is not changing. `makeTheme` does
+the thing it was built to do: CSS variables so `auto` resolves to light/dark
+reliably on the web, explicit light/dark on top, OS colour scheme on iOS and
+Android. **Keep it.** What is heavy is what you type at the call site.
 
-- Four ways to reach a colour — `theme.styles` (184 uses),
-  `theme.dynamicColors` (104), `theme.colors` (15), `theme.mode` (4) — where
-  the difference (literal vs `var(--…)`) is an implementation detail that
-  leaked into every component.
-- `useTheme()` in **58 components**, subscribing each of them to a store, to
-  produce values that on web are constant strings.
-- Only colours are themed. Spacing lives in `react-multiversal/index.ts`, type
-  in `font.ts`, radii nowhere. There is no single token object.
+**The fonts, first — that is where it hurts.** 207 call sites, and they all
+have the same shape: a scale from one module, a colour from another, and often
+a weight patched back on top.
 
-Two ways forward:
+```tsx
+style={[fontStyles.iosEm.title2, theme.styles.text, { fontWeight: weight.bold }]}
+style={[fontStyles.ios.caption1, theme.styles.textLight2]}
+```
 
-**(a) `react-native-unistyles` 3.3** — active (3.3.0, 2026-07-10), themes as
-CSS variables on web out of the box, breakpoints *inside* the stylesheet,
-variants, no `useTheme()` in components, no re-render on theme change. It is
-the answer a reviewer will recognise.
-Risk to check first: Unistyles 3 **requires its Babel plugin**, and this
-project builds with Vite + TanStack Start + prerender, not Metro. Vite support
-is not documented (`vite-plugin-babel` is the reported path). `vite.config.ts`
-already carries scar tissue about duplicate RNW instances breaking
-`StyleSheet.create` registration across the SSR boundary — the same class of
-problem. **Spike it on a branch before committing.** It also pulls in Nitro
-Modules / New Architecture on the native side (fine for a fresh Expo app).
+Three things are wrong with that, in increasing order of annoyance:
 
-**(b) Home-grown `makeStyles(tokens => …)`, ~60 lines.** On web, theme values
-are already constant `var(--…)` strings, so a stylesheet built from them is
-*static* and can be registered once, globally, with no hook at all. On native,
-build two and pick by mode. That is 80% of Unistyles' theming value, using
-infrastructure this repo already has, with zero risk to the build pipeline —
-and one token object (`space`, `radius`, `color`, `font`) instead of four
-accessors.
+1. **`fontStyles.android` and `fontStyles.androidEm` have zero call sites.**
+   The whole Material scale is dead code — roughly 120 of `font.ts`'s 402
+   lines. Delete it.
+2. **The `ios` / `iosEm` axis is a namespace pretending to be a variant.** On
+   web and Android you still write `.ios`, which means nothing, and emphasis
+   changes the *namespace* rather than a parameter. Flatten to `fontStyles.title2`
+   / `fontStyles.title2Em`, or make emphasis an argument.
+3. **Type and colour are always written together and always come from two
+   places.** One helper, resolving to registered styles, removes the pairing:
 
-My recommendation: **(b) first**, because it is a two-hour change that
-immediately removes 58 `useTheme()` calls and unifies the tokens, and because
-it keeps the Vite pipeline untouched while steps 1–2 are landing. Re-evaluate
-(a) once the component API is stable — at that point Unistyles is a mechanical
-swap, and you will know whether you actually miss variants and stylesheet
-breakpoints.
+```tsx
+style={text("title2", "text", "bold")}   // scale, theme colour key, optional weight
+style={text("caption1", "light2")}
+```
+
+On web the colour is a constant `var(--…)`, so `text(…)` can be memoized and
+registered once per distinct combination — no hook, no re-render, one atomic
+class set. On native, cache per (mode, key). Same trick as the spacing helpers
+in step 0.
+
+**Then most of those call sites should stop existing.** Once step 2 lands, a
+`<Heading level={3}>` knows its own scale and colour, and typography stops
+being something you spell out. `text()` stays for the exceptions, not for the
+common case — so do step 3 *after* step 2, or you will carefully redesign an
+API for 207 call sites and then delete most of them.
+
+**The colour accessors, second.** Four ways to reach a colour — `theme.styles`
+(184 uses), `theme.dynamicColors` (104), `theme.colors` (15), `theme.mode` (4)
+— where the difference (literal vs `var(--…)`) is an implementation detail that
+leaked into every component. Collapse to one accessor, and fold space, radius
+and type into the same token object instead of three modules.
+
+That also lets `useTheme()` disappear from most of the 58 components that call
+it: on web it returns constant strings, so a style built from tokens is static
+and can be registered at module level.
+
+For the record, since it came up: `react-native-unistyles` 3.3 would give most
+of this out of the box, and it is actively maintained. It is **not** being
+adopted — it requires its own Babel plugin, this project builds with Vite +
+TanStack Start + prerender rather than Metro, `vite.config.ts` already carries
+scar tissue from duplicate RNW instances breaking `StyleSheet.create`
+registration across the SSR boundary, and the theme mechanism it would replace
+already works. Revisit only if variants and stylesheet breakpoints become a
+real need.
 
 ### Step 4 — responsive without duplicating the DOM
 
@@ -315,8 +349,9 @@ the `<h1>` twice.
 
 The rule to adopt: **if only the styling differs, it must be one node.** Media
 queries on web, `useWindowDimensions` on native, behind one `useBreakpoint()`
-or Unistyles breakpoints. Reserve `IfWindowWidthIs` for the cases where the
-*children themselves* differ — and treat each remaining use as a design smell.
+in the same place the tokens live. Reserve `IfWindowWidthIs` for the cases
+where the *children themselves* differ — and treat each remaining use as a
+design smell.
 
 ### Step 5 — the Expo app
 
@@ -335,6 +370,9 @@ layout.
 
 - **Do not adopt react-strict-dom now.** Design toward it (step 2), adopt it
   when it releases a `0.1`.
+- **Do not replace the theme mechanism.** It solves the problem it was written
+  for (reliable `auto` via CSS variables on web, OS scheme on native). Only the
+  authoring surface on top of it is in scope.
 - **Do not expect a styling library to shrink the DOM.** Unistyles, Tamagui and
   NativeWind all render through RNW. Only fewer components do that.
 - **Do not chase HTML bytes.** Gzip already ate that problem; measured above.

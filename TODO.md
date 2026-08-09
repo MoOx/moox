@@ -91,11 +91,16 @@ decision itself.
       `role=` at 100+ call sites. Fold `LinkText` in: text styles on the `<a>`
       when the child is a string (−182 elements on `/resume`), and
       `:focus-visible` on web instead of the `useFocus` hook per link.
-- [ ] **Step 3 — one token object, no `useTheme()`.** Collapse `theme.styles` /
-      `dynamicColors` / `colors` into a single set of tokens (colour **and**
-      space, radius, type). Recommendation: home-grown `makeStyles` first
-      (~60 lines, no build-pipeline risk); re-evaluate `react-native-unistyles`
-      after, with a Vite/Babel-plugin spike before any commitment.
+- [ ] **Step 3 — font ergonomics, then one token object.** The theme mechanism
+      stays (CSS variables for a reliable `auto`, OS scheme on native); only the
+      call sites change. Delete `fontStyles.android` / `androidEm` (0 uses,
+      ~120 dead lines), flatten the `ios` / `iosEm` namespace, and pair type
+      with colour in one registered helper — `text("title2", "text", "bold")`
+      instead of `[fontStyles.iosEm.title2, theme.styles.text, {fontWeight}]`
+      (207 call sites). **After step 2**, since the primitives absorb most of
+      them. Then collapse `theme.styles` / `dynamicColors` / `colors` into one
+      token object (colour **and** space, radius, type), which lets `useTheme()`
+      leave most of its 58 components.
 - [ ] **Step 4 — responsive without duplication.** `IfWindowWidthIs` (20 uses)
       renders both branches into the HTML. If only styling differs it must be
       one node; keep the component only where the children genuinely differ.
