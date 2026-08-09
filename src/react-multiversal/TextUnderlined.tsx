@@ -1,7 +1,12 @@
 import { useFocus } from "@/react-multiversal/useFocus";
 import { Ref, RefCallback, RefObject, useCallback, useRef } from "react";
 import type { TextProps } from "react-native";
-import { Text, TextStyle } from "react-native";
+import { StyleSheet, Text } from "react-native";
+
+const styles = StyleSheet.create({
+  underline: { textDecorationLine: "underline" },
+  none: { textDecorationLine: "none" },
+});
 
 export type TextUnderlinedProps = TextProps & {
   ref?: RefObject<Text> | Ref<Text> | RefCallback<Text>;
@@ -37,9 +42,7 @@ export default function TextUnderlined({
       ref={setRefs}
       {...props}
       style={[
-        {
-          textDecorationLine: underline || (underlineOnFocus && hasAnyFocus) ? "underline" : "none",
-        } as TextStyle,
+        underline || (underlineOnFocus && hasAnyFocus) ? styles.underline : styles.none,
         _style,
       ]}
     />

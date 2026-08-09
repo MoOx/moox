@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import { match } from "ts-pattern";
 
 const baseSpace = 16;
@@ -44,22 +45,41 @@ export const size = (s?: Size): number => {
     .exhaustive();
 };
 
-export const styleSquare = (s?: AbsoluteSize) => {
-  const v = typeof s !== "number" ? size(s) : s;
-  return { width: v, height: v };
+// Registered once per distinct value: `StyleSheet.create` puts the object in
+// react-native-web's static style map, which is what makes it come out as an
+// atomic className instead of an inline `style` attribute. A fresh object
+// literal per render cannot be cached, so it is serialized into the HTML on
+// every node that uses it.
+const registered = <T extends object>(build: (v: number) => T) => {
+  const store = new Map<number, T>();
+  return (v: number): T => {
+    let style = store.get(v);
+    if (style === undefined) {
+      style = StyleSheet.create({ style: build(v) }).style;
+      store.set(v, style);
+    }
+    return style;
+  };
 };
-export const spaceStyleHorizontal = (s?: Size) => {
-  const v = typeof s !== "number" ? size(s) : s;
-  return v > 0 ? { paddingHorizontal: v } : { marginHorizontal: v };
-};
-export const spaceStyleVertical = (s?: Size) => {
-  const v = typeof s !== "number" ? size(s) : s;
-  return v > 0 ? { paddingVertical: v } : { marginVertical: v };
-};
-export const spaceStyleGap = (s?: Size) => {
-  const v = typeof s !== "number" ? size(s) : s;
-  return { gap: v };
-};
+
+const squareStyle = registered((v: number) => ({ width: v, height: v }));
+const horizontalStyle = registered((v: number) =>
+  v > 0 ? { paddingHorizontal: v } : { marginHorizontal: v },
+);
+const verticalStyle = registered((v: number) =>
+  v > 0 ? { paddingVertical: v } : { marginVertical: v },
+);
+const gapStyle = registered((v: number) => ({ gap: v }));
+
+export const styleSquare = (s?: AbsoluteSize) => squareStyle(size(s));
+// `undefined` in, `undefined` out: the zero-valued fallbacks these used to
+// return were no-ops that still shipped four `margin: 0px` declarations on
+// every node that did not ask for spacing.
+export const spaceStyleHorizontal = (s?: Size) =>
+  s === undefined ? undefined : horizontalStyle(size(s));
+export const spaceStyleVertical = (s?: Size) =>
+  s === undefined ? undefined : verticalStyle(size(s));
+export const spaceStyleGap = (s?: Size) => (s === undefined ? undefined : gapStyle(size(s)));
 
 export enum WindowWidth {
   xxs = 320,

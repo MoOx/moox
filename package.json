@@ -17,7 +17,8 @@
     "markdown": "markdown-to-json \"content/**/*.md\" public && node scripts/generate-content-indexes.mjs",
     "pdf": "node scripts/generate-resume-pdf.mjs",
     "test": "npm run lint && npm run build",
-    "a11y": "node scripts/audit-a11y.mjs"
+    "a11y": "node scripts/audit-a11y.mjs",
+    "visual": "node scripts/visual-diff.mjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^3.1.1",

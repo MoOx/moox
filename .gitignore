@@ -23,3 +23,6 @@ dist
 **/svgs/components/**
 public/content/**/*.json
 tmp
+
+# visual regression baselines (npm run visual -- --save=…)
+.visual
