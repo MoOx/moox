@@ -1,4 +1,5 @@
 import { fetchResume } from "@/api";
+import { size } from "@/react-multiversal";
 import BlockAugmentedWithAI from "@/components/BlockAugmentedWithAI";
 import BlockBuilder from "@/components/BlockBuilder";
 import BlockCompaniesTried from "@/components/BlockCompaniesTried";
@@ -65,8 +66,7 @@ function Home() {
       <View role="article">
         <BlockHey />
         <BlockBuilder resumeEntry={resumeEntry} />
-        <Spacer size="xxxl" />
-        <Spacer size="m" />
+        <Spacer size={size("xxxl") + size("m")} />
         <BlockPitch />
         <Spacer size="l" />
         <BlockCompaniesTrust />
