@@ -10,6 +10,10 @@ html {
   background-color: var(--react-multiversal--theme--textFlashy4);
 }
 
+body {
+  background-color: var(--react-multiversal--theme--back);
+}
+
 /* view transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -24,6 +28,14 @@ html {
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  /* The availability badge pulses forever, on every page. It is decoration:
+     the label next to the dot already says the same thing. Written here rather
+     than in the component because Reanimated emits it as an inline style, and
+     only a rule can outrank one. */
+  [data-availability-pulse="true"] {
     animation: none !important;
   }
 }

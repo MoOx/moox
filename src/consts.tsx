@@ -1,9 +1,8 @@
 import type { Localized } from "@/i18n";
 import SVGAppStoreNpm from "@/svgs/components/SVGAppStoreNpm";
-import SVGLine3Horizontal from "@/svgs/components/SVGLine3Horizontal";
+import SVGEllipsisMessage from "@/svgs/components/SVGEllipsisMessage";
+import SVGEllipsisMessageFill from "@/svgs/components/SVGEllipsisMessageFill";
 import SVGMenuBlog from "@/svgs/components/SVGMenuBlog";
-import SVGMenuContact from "@/svgs/components/SVGMenuContact";
-import SVGMenuContactFill from "@/svgs/components/SVGMenuContactFill";
 import SVGMenuHome from "@/svgs/components/SVGMenuHome";
 import SVGMenuHomeFill from "@/svgs/components/SVGMenuHomeFill";
 import SVGMenuResume from "@/svgs/components/SVGMenuResume";
@@ -15,6 +14,7 @@ import SVGSocialDribbble from "@/svgs/components/SVGSocialDribbble";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 import SVGSocialX from "@/svgs/components/SVGSocialX";
+import SVGTextMenu from "@/svgs/components/SVGTextMenu";
 import { ReactNode } from "react";
 import { StyleProp, ViewStyle } from "react-native";
 
@@ -25,7 +25,10 @@ export const footerAnchor = "links";
 export const visualUrl = (url: string) => {
   return url.replace(/^(?:https?:\/\/(www\.)?)/i, "");
 };
-export const sendStringAsMailString = (send: string, visual: boolean = false) => {
+export const sendStringAsMailString = (
+  send: string,
+  visual: boolean = false,
+) => {
   return visual ? send.replace("/", " @ ") : send.replace("/", "@");
 };
 
@@ -82,8 +85,11 @@ export const socials = {
   },
   npm: {
     value: "https://www.npmjs.com/~moox",
-    color: "#f7df1e",
-    colorAlt: "#73670d",
+    // npm's own red, the one inside `svgs/app-store-npm.svg`. It used to be the
+    // JavaScript yellow, back when the npm card wore the JavaScript logo; the
+    // card now wears npm's, and a yellow ring around a red logo read as a bug.
+    color: "#cb3837",
+    colorAlt: "#9b2a29",
   },
   youtube: {
     value: "https://www.youtube.com/channel/UCn_edMm2hg7k58E4eQGU7pA",
@@ -95,12 +101,19 @@ export const socials = {
     color: "#E51D58",
     colorAlt: "#CC0613",
   },
+  booking: {
+    value: "https://cal.com/max-t/call",
+    // The site's own indigo pair (`colors.indigo` → `textIndigoAlt`), so the
+    // booking card reads as a moox.io surface rather than as cal.com's brand.
+    color: "#4F3DFF",
+    colorAlt: "#792F93",
+  },
 };
 
 type LinkWithIcon = {
   href: string;
   /** Localized menu label; the record key is the English fallback. */
-  label?: Localized<string>;
+  label?: Localized;
   alt?: string;
   icon: (props: LinksIconProps) => ReactNode;
   isActive?: (currentLink: string | null, link: string) => boolean;
@@ -120,41 +133,65 @@ export const internalLinks: LinksWithIcon = {
     href: "/",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
-        <SVGMenuHomeFill style={style} width={size} height={size} fill={color} />
+        <SVGMenuHomeFill
+          style={style}
+          width={size}
+          height={size}
+          color={color}
+        />
       ) : (
-        <SVGMenuHome style={style} width={size} height={size} fill={color} />
+        <SVGMenuHome style={style} width={size} height={size} color={color} />
       ),
-    isActive: (currentLink: string | null, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
   Resume: {
     label: { en: "Resume", fr: "CV" },
     href: "/resume",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
-        <SVGMenuResumeFill style={style} width={size} height={size} fill={color} />
+        <SVGMenuResumeFill
+          style={style}
+          width={size}
+          height={size}
+          color={color}
+        />
       ) : (
-        <SVGMenuResume style={style} width={size} height={size} fill={color} />
+        <SVGMenuResume style={style} width={size} height={size} color={color} />
       ),
-    isActive: (currentLink: string | null, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
   Contact: {
     label: { en: "Contact", fr: "Contact" },
     href: "/contact",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
-        <SVGMenuContactFill style={style} width={size} height={size} fill={color} />
+        <SVGEllipsisMessageFill
+          style={style}
+          width={size}
+          height={size}
+          color={color}
+        />
       ) : (
-        <SVGMenuContact style={style} width={size} height={size} fill={color} />
+        <SVGEllipsisMessage
+          style={style}
+          width={size}
+          height={size}
+          color={color}
+        />
       ),
-    isActive: (currentLink: string | null, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
   More: {
     label: { en: "More", fr: "Plus" },
     href: "#" + footerAnchor,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGLine3Horizontal style={style} width={size} height={size} fill={color} />
+      <SVGTextMenu style={style} width={size} height={size} color={color} />
     ),
-    isActive: (currentLink: string | null, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
 };
 
@@ -163,14 +200,14 @@ export const internalLinks2: LinksWithIcon = {
     label: { en: "Blog", fr: "Blog" },
     href: "/blog",
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGMenuBlog style={style} width={size} height={size} fill={color} />
+      <SVGMenuBlog style={style} width={size} height={size} color={color} />
     ),
   },
   Talks: {
     label: { en: "Talks", fr: "Conférences" },
     href: "/talks",
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGMenuTalk style={style} fill={color} width={size} height={size} />
+      <SVGMenuTalk style={style} color={color} width={size} height={size} />
     ),
     alt: "",
   },
@@ -183,28 +220,33 @@ export const socialLinks: LinksWithIcon = {
     alt: "@Max on LinkedIn",
     href: socials.linkedin.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGSocialLinkedin style={style} fill={color} width={size} height={size} />
+      <SVGSocialLinkedin
+        style={style}
+        color={color}
+        width={size}
+        height={size}
+      />
     ),
   },
   GitHub: {
     alt: "@MoOx on GitHub",
     href: socials.github.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGSocialGithub style={style} fill={color} width={size} height={size} />
+      <SVGSocialGithub style={style} color={color} width={size} height={size} />
     ),
   },
   BlueSky: {
     alt: "@moox.io on bsky.app",
     href: socials.bsky.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGSocialBsky style={style} fill={color} width={size} height={size} />
+      <SVGSocialBsky style={style} color={color} width={size} height={size} />
     ),
   },
   X: {
     alt: "@MoOx on X",
     href: socials.x.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGSocialX style={style} fill={color} width={size} height={size} />
+      <SVGSocialX style={style} color={color} width={size} height={size} />
     ),
   },
 };
@@ -213,7 +255,12 @@ export const socialLinks2 = {
     alt: "@MoOx on Dribbble",
     href: socials.dribbble.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGSocialDribbble style={style} fill={color} width={size} height={size} />
+      <SVGSocialDribbble
+        style={style}
+        color={color}
+        width={size}
+        height={size}
+      />
     ),
   },
   /*
@@ -221,7 +268,7 @@ export const socialLinks2 = {
     alt: "@MoOx on Youtube",
     href: socials.youtube.value,
     icon: ({ style, size, color }: LinksIconProps) =>
-      <SVGSocialYoutube style={style} fill={color} width={size} height={size} />,
+      <SVGSocialYoutube style={style} color={color} width={size} height={size} />,
   },
  */
 };
@@ -231,7 +278,7 @@ export const moreLinks: LinksWithIcon = {
     alt: "@MoOx on npm",
     href: socials.npm.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGAppStoreNpm style={style} fill={color} width={size} height={size} />
+      <SVGAppStoreNpm style={style} color={color} width={size} height={size} />
     ),
   },
 };
@@ -239,7 +286,7 @@ export const moreLinks2: LinksWithIcon = {
   "putaindecode!": {
     href: socials.putaindecode.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGPutaindecode style={style} fill={color} width={size} height={size} />
+      <SVGPutaindecode style={style} color={color} width={size} height={size} />
     ),
   },
 };
@@ -250,7 +297,7 @@ export const menuBarLinks: LinksWithIcon = {
   //   alt: "@Maxime on LinkedIn",
   //   href: socials.linkedin.value,
   //   icon: ({ style, size, color }: LinksIconProps) => (
-  //     <SVGContact style={style} fill={color} width={size} height={size} />
+  //     <SVGContact style={style} color={color} width={size} height={size} />
   //   ),
   // },
 };

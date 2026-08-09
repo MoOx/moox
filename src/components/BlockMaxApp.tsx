@@ -1,5 +1,3 @@
-import { jobTitle } from "@/profile";
-import { useHref, useT } from "@/i18n";
 import { ResumeItem } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import ButtonView from "@/components/ButtonView";
@@ -10,7 +8,14 @@ import {
   WebsiteMobileMenuLinks,
   WebsiteMobileMenuLinksContainer,
 } from "@/components/WebsiteMobileMenu";
-import { sendStringAsMailString, socialLinks, socialLinks2, socials } from "@/consts";
+import {
+  sendStringAsMailString,
+  socialLinks,
+  socialLinks2,
+  socials,
+} from "@/consts";
+import { useHref, useT } from "@/i18n";
+import { jobTitle } from "@/profile";
 import Avatar from "@/react-multiversal/Avatar";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
@@ -18,10 +23,17 @@ import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { boxShadows, useTheme } from "@/styles";
 import SVGChevronRight from "@/svgs/components/SVGChevronRight";
-import SVGEmail from "@/svgs/components/SVGEmail";
+import SVGEnvelopeFill from "@/svgs/components/SVGEnvelopeFill";
 import Clipboard from "@react-native-clipboard/clipboard";
 import { useEffect, useState } from "react";
-import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
+import {
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+} from "react-native";
 import Animated from "react-native-reanimated";
 
 const useCurrentTime = () => {
@@ -92,7 +104,9 @@ export default function BlockMaxApp({
         >
           {time}
         </Text>
-        <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>{"Max Pro"}</Text>
+        <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
+          {"Max Pro"}
+        </Text>
       </SpacedView>
       <Spacer size="xl" />
       <Spacer size="xxs" />
@@ -144,7 +158,9 @@ export default function BlockMaxApp({
             aria-level={2}
           >
             <View style={{ flex: 1 }}>
-              <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>{"@MoOx"}</Text>
+              <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>
+                {"@MoOx"}
+              </Text>
               <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
                 {t({
                   en: `${jobTitle} for web & mobile apps.`,
@@ -152,7 +168,11 @@ export default function BlockMaxApp({
                 })}
               </Text>
             </View>
-            <Avatar size={64} borderWidth={8} borderColor={"rgba(0, 0, 0, 0.05)"} />
+            <Avatar
+              size={64}
+              borderWidth={8}
+              borderColor={"rgba(0, 0, 0, 0.05)"}
+            />
           </View>
           <Spacer />
           <View style={{ flexDirection: "row" }}>
@@ -196,7 +216,7 @@ export default function BlockMaxApp({
               >
                 {(textStyles) => (
                   <>
-                    <SVGEmail
+                    <SVGEnvelopeFill
                       width={14}
                       height={14}
                       fill={textStyles.color}
@@ -211,7 +231,9 @@ export default function BlockMaxApp({
                             transitionDuration: "250ms",
                             transitionTimingFunction: "ease-in-out",
                           },
-                          copied ? { opacity: 0, transform: [{ translateX: -6 }] } : {},
+                          copied
+                            ? { opacity: 0, transform: [{ translateX: -6 }] }
+                            : {},
                         ]}
                       >
                         {t({ en: "Copy Email", fr: "Copier l'e-mail" })}
@@ -297,7 +319,10 @@ export default function BlockMaxApp({
         {!resumeEntry ? null : (
           <LinkView href={"/resume/#" + resumeEntry.slug}>
             <Text style={[fontStyles.iosEm.headline, theme.styles.text]}>
-              {t({ en: "Latest Crazy Project", fr: "Dernier projet un peu fou" })}
+              {t({
+                en: "Latest Crazy Project",
+                fr: "Dernier projet un peu fou",
+              })}
             </Text>
             <Spacer size="s" />
             <View style={{ flexDirection: "row" }}>
