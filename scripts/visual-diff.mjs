@@ -55,13 +55,24 @@ const paths = (
 
 const shotName = (p, width) => `${p === "/" ? "home" : p.replace(/\//g, "_")}-${width}.png`;
 
-// Chromium ships with the image; `channel: "chrome"` (what the PDF export uses)
-// is not available in every environment.
-const launch = () =>
-  chromium.launch({
-    executablePath: process.env.CHROMIUM_PATH ?? "/opt/pw-browsers/chromium",
-    args: ["--no-sandbox"],
-  });
+// Above this, the comparison is not telling you about a refactor any more.
+const ABSURD_PCT = 50;
+
+// A laptop has Google Chrome, which is what the PDF export drives; a container
+// (CI, an agent sandbox) usually has a Chromium binary and no Chrome at all.
+// Take whichever is actually there rather than assuming, since a wrong guess
+// here means the whole harness refuses to start.
+const BUNDLED_CHROMIUM = "/opt/pw-browsers/chromium";
+const launch = () => {
+  const explicit = process.env.CHROMIUM_PATH;
+  if (explicit) {
+    return chromium.launch({ executablePath: explicit, args: ["--no-sandbox"] });
+  }
+  if (fs.existsSync(BUNDLED_CHROMIUM)) {
+    return chromium.launch({ executablePath: BUNDLED_CHROMIUM, args: ["--no-sandbox"] });
+  }
+  return chromium.launch({ channel: "chrome" });
+};
 
 async function capture(label) {
   const dir = path.join(outRoot, label);
@@ -124,13 +135,21 @@ async function diff(a, b) {
     }
     const res = await page.evaluate(
       async ([x, y]) => {
+        // `onerror` matters: without it a truncated or corrupt baseline never
+        // settles the promise and the run hangs with no output at all.
         const load = (d) =>
-          new Promise((r) => {
+          new Promise((resolve, reject) => {
             const i = new Image();
-            i.onload = () => r(i);
+            i.onload = () => resolve(i);
+            i.onerror = () => reject(new Error("PNG could not be decoded"));
             i.src = "data:image/png;base64," + d;
           });
-        const [ia, ib] = await Promise.all([load(x), load(y)]);
+        let ia, ib;
+        try {
+          [ia, ib] = await Promise.all([load(x), load(y)]);
+        } catch (e) {
+          return { failed: String(e.message ?? e) };
+        }
         if (ia.width !== ib.width || ia.height !== ib.height) {
           return { moved: true, a: `${ia.width}x${ia.height}`, b: `${ib.width}x${ib.height}` };
         }
@@ -139,6 +158,7 @@ async function diff(a, b) {
           c.width = img.width;
           c.height = img.height;
           const x2 = c.getContext("2d", { willReadFrequently: true });
+          if (!x2) throw new Error("no 2d canvas context — cannot diff");
           x2.drawImage(img, 0, 0);
           return x2.getImageData(0, 0, img.width, img.height).data;
         };
@@ -173,9 +193,21 @@ async function diff(a, b) {
         fs.readFileSync(path.join(dirB, name)).toString("base64"),
       ],
     );
-    if (res.moved) {
+    if (res.failed) {
+      failed++;
+      console.log(`${name.padEnd(24)} UNREADABLE  ${res.failed}`);
+    } else if (res.moved) {
       failed++;
       console.log(`${name.padEnd(24)} LAYOUT MOVED  ${res.a} → ${res.b}`);
+    } else if (res.pct > ABSURD_PCT) {
+      // A truncated PNG still decodes in Chromium — it just comes out mostly
+      // blank, which reads as a ~100% diff rather than a decode error. Nothing
+      // legitimate lands here: run-to-run noise is 0.003%, and the worst honest
+      // artifact (parallax, see above) is 11%.
+      failed++;
+      console.log(
+        `${name.padEnd(24)} ${res.size}  ${res.pct.toFixed(1)}% differs — corrupt baseline, or a change far too large to be a refactor`,
+      );
     } else if (res.n > 0) {
       console.log(
         `${name.padEnd(24)} ${res.size}  ${res.n} px (${res.pct.toFixed(3)}%)  worst row y=${res.worst.y}`,
@@ -186,7 +218,9 @@ async function diff(a, b) {
   }
   await browser.close();
   if (failed) {
-    console.error(`\n${failed} page(s) changed height — that is a layout regression.`);
+    console.error(
+      `\n${failed} page(s) changed height or could not be read — check before merging.`,
+    );
     process.exitCode = 1;
   }
 }
