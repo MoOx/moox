@@ -2,7 +2,7 @@ import { Size } from "@/react-multiversal";
 import BlurView from "@/react-multiversal/BlurView";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
 import { alpha, colors, useTheme } from "@/styles";
 import { ReactNode, useMemo } from "react";
@@ -183,12 +183,7 @@ const ButtonView = ({
   return (
     <BlurView blurAmount={blurAmount} style={styleBtn} {...props}>
       {elementBackground}
-      <SpacedView
-        horizontal={spaceHorizontal}
-        vertical={spaceVertical}
-        gap={spaceGap}
-        style={styles.row}
-      >
+      <Box px={spaceHorizontal} py={spaceVertical} gap={spaceGap} style={styles.row}>
         {elementIndicator ? (
           <View style={styles.indicatorContainer}>{elementIndicator}</View>
         ) : null}
@@ -197,7 +192,7 @@ const ButtonView = ({
         ) : (
           <Text style={[childrenStyles, styles.row]}>{children}</Text>
         )}
-      </SpacedView>
+      </Box>
     </BlurView>
   );
 };

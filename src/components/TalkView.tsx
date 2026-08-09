@@ -2,7 +2,7 @@ import { Talk } from "@/api";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkText from "@/react-multiversal/LinkText";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { StyleSheet, Text, View } from "react-native";
@@ -34,7 +34,7 @@ export default function TalkView({ item }: { item: Talk }) {
   const theme = useTheme();
 
   return (
-    <SpacedView role="article" horizontal="l" vertical="l" style={[styles.back, theme.styles.back]}>
+    <Box role="article" p="l" style={[styles.back, theme.styles.back]}>
       <Text role="heading" aria-level={1} style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
         {item.title}
       </Text>
@@ -87,6 +87,6 @@ export default function TalkView({ item }: { item: Talk }) {
         </LinkText>
       )}
       {item.body && <MdAsJsonRenderer body={item.body} />}
-    </SpacedView>
+    </Box>
   );
 }

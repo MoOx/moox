@@ -3,7 +3,7 @@ import { useT } from "@/i18n";
 import { white } from "@/react-multiversal/colors";
 import ColorSchemeToggle from "@/react-multiversal/ColorSchemeToggle";
 import InPlaceOrPortal from "@/react-multiversal/InPlaceOrPortal";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import { UserColorScheme, userColorSchemeStorageKey } from "@/react-multiversal/theme/colorScheme";
 import { useSystemColorScheme } from "@/react-multiversal/theme/useSystemColorScheme";
 import { useUserColorScheme } from "@/react-multiversal/theme/useUserColorScheme";
@@ -121,7 +121,7 @@ export default function ThemeToggle({
           ]}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <SpacedView horizontal="s" vertical="s" gap="xs">
+            <Box p="s" gap="xs">
               <ThemePreview mode="light" isActive={userColorScheme == "light"} />
               <Text
                 style={[
@@ -132,8 +132,8 @@ export default function ThemeToggle({
               >
                 {t({ en: "Light", fr: "Clair" })}
               </Text>
-            </SpacedView>
-            <SpacedView horizontal="s" vertical="s" gap="xs">
+            </Box>
+            <Box p="s" gap="xs">
               <View>
                 <ThemePreview mode="light" isActive={userColorScheme == "auto"} />
                 <div
@@ -158,8 +158,8 @@ export default function ThemeToggle({
               >
                 {t({ en: "Auto", fr: "Auto" })}
               </Text>
-            </SpacedView>
-            <SpacedView horizontal="s" vertical="s" gap="xs">
+            </Box>
+            <Box p="s" gap="xs">
               <ThemePreview mode="dark" isActive={userColorScheme == "dark"} />
               <Text
                 style={[
@@ -170,7 +170,7 @@ export default function ThemeToggle({
               >
                 {t({ en: "Dark", fr: "Sombre" })}
               </Text>
-            </SpacedView>
+            </Box>
           </View>
         </InPlaceOrPortal>
       )}

@@ -2,7 +2,7 @@ import LinkButton from "@/components/LinkButton";
 import { useHref, useT } from "@/i18n";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import { alpha, colors, useTheme } from "@/styles";
 import SVGEllipsisMessageFill from "@/svgs/components/SVGEllipsisMessageFill";
 import SVGMenuResumeFill from "@/svgs/components/SVGMenuResumeFill";
@@ -15,25 +15,14 @@ export default function BlockInterestedButtons() {
 
   return (
     <Container>
-      <SpacedView
-        vertical="xxxl"
-        horizontal="xxxl"
-        gap="xl"
-        style={{ alignItems: "center" }}
-      >
-        <Text
-          style={[
-            fontStyles.iosEm.title2,
-            theme.styles.text,
-            { textAlign: "center" },
-          ]}
-        >
+      <Box p="xxxl" gap="xl" style={{ alignItems: "center" }}>
+        <Text style={[fontStyles.iosEm.title2, theme.styles.text, { textAlign: "center" }]}>
           {t({
             en: "Ready to build something awesome together?",
             fr: "Prêt·e à construire quelque chose de chouette ensemble ?",
           })}
         </Text>
-        <SpacedView
+        <Box
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
@@ -51,22 +40,14 @@ export default function BlockInterestedButtons() {
           >
             {(textStyles) => (
               <>
-                <SVGMenuResumeFill
-                  width={36}
-                  height={36}
-                  color={theme.dynamicColors.textOnMain}
-                />
+                <SVGMenuResumeFill width={36} height={36} color={theme.dynamicColors.textOnMain} />
                 <Text style={[textStyles, fontStyles.iosEm.title3]}>
                   {t({ en: "More about me", fr: "En savoir plus sur moi" })}
                 </Text>
               </>
             )}
           </LinkButton>
-          <LinkButton
-            href={localizeHref("/contact/")}
-            spaceHorizontal="xl"
-            spaceVertical="m"
-          >
+          <LinkButton href={localizeHref("/contact/")} spaceHorizontal="xl" spaceVertical="m">
             {(textStyles) => (
               <>
                 <SVGEllipsisMessageFill
@@ -80,8 +61,8 @@ export default function BlockInterestedButtons() {
               </>
             )}
           </LinkButton>
-        </SpacedView>
-      </SpacedView>
+        </Box>
+      </Box>
     </Container>
   );
 }

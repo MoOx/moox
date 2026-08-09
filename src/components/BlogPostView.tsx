@@ -1,7 +1,7 @@
 import { BlogPost } from "@/api";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
 import { fontStyles } from "@/react-multiversal/font";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { Text } from "react-native";
@@ -10,8 +10,8 @@ export default function BlogPostView({ item }: { item: BlogPost }) {
   const theme = useTheme();
 
   return (
-    <SpacedView role="article" horizontal="l" vertical="l" style={theme.styles.back}>
-      <SpacedView>
+    <Box role="article" p="l" style={theme.styles.back}>
+      <Box>
         <Text
           role="heading"
           aria-level={1}
@@ -26,7 +26,7 @@ export default function BlogPostView({ item }: { item: BlogPost }) {
         )}
         <Spacer size="m" />
         {item.body && <MdAsJsonRenderer body={item.body} />}
-      </SpacedView>
-    </SpacedView>
+      </Box>
+    </Box>
   );
 }

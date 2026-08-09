@@ -8,7 +8,7 @@ import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import LinkText from "@/react-multiversal/LinkText";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { boxShadows, useTheme } from "@/styles";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
@@ -80,16 +80,16 @@ const getDurationText = (startDate: string, endDate: Date, lang: Lang = defaultL
 
 export const ResumeTimelineEntry = ({
   item,
-  horizontal = "l",
-  vertical = "l",
+  px = "l",
+  py = "l",
   showDetails = true,
   disableLinks = false,
   detail = false,
   transitionEnabled = true,
 }: {
   item: ResumeItem;
-  horizontal?: Size;
-  vertical?: Size;
+  px?: Size;
+  py?: Size;
   showDetails?: boolean;
   disableLinks?: boolean;
   /**
@@ -146,7 +146,7 @@ export const ResumeTimelineEntry = ({
         </View>
       )}
       <View style={[StyleSheet.absoluteFill, { borderRadius, boxShadow: boxShadowGlass() }]} />
-      <SpacedView style={{ flexGrow: 1 }} horizontal={horizontal} vertical={vertical}>
+      <Box style={{ flexGrow: 1 }} px={px} py={py}>
         <View
           style={{
             flexDirection: "row",
@@ -251,7 +251,7 @@ export const ResumeTimelineEntry = ({
             {!disableLinks && item.links && item.links.length > 0 && (
               <>
                 <Spacer size="xxs" />
-                <SpacedView gap="xxs" style={styles.links}>
+                <Box gap="xxs" style={styles.links}>
                   <SVGExternalLink width={12} height={12} fill={theme.dynamicColors.textMain} />
                   {item.links.map((link) => (
                     <LinkText
@@ -263,12 +263,12 @@ export const ResumeTimelineEntry = ({
                       {link.title}
                     </LinkText>
                   ))}
-                </SpacedView>
+                </Box>
               </>
             )}
           </>
         )}
-      </SpacedView>
+      </Box>
     </View>
   );
 };

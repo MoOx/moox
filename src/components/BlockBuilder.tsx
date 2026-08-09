@@ -10,7 +10,7 @@ import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import Parallax from "@/react-multiversal/Parallax";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { gradientStaticIndigoStyles, useTheme } from "@/styles";
 import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
@@ -82,10 +82,10 @@ export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem
             {device}
             <Spacer />
           </IfWindowWidthIs>
-          <SpacedView
-            horizontal="xl"
+          <Box
+            px="xl"
             gap="m"
-            // vertical="xxl"
+            // py="xxl"
             style={{
               paddingTop: size("xxl"),
               pointerEvents: "auto",
@@ -116,17 +116,17 @@ export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem
               spaceHorizontal="m"
               style={{ alignSelf: "flex-end" }}
             >
-              <SpacedView horizontal="m">
+              <Box px="m">
                 <Text style={fontStyles.iosEm.callout}>
                   {t({ en: "More about me", fr: "En savoir plus sur moi" })}
                 </Text>
-              </SpacedView>
+              </Box>
             </LinkButton>
             <Spacer size="m" />
             <IfWindowWidthIs largerThan={WindowWidth.m}>
               <Spacer size="xs" />
             </IfWindowWidthIs>
-          </SpacedView>
+          </Box>
           <IfWindowWidthIs smallerThan={WindowWidth.m}>{device}</IfWindowWidthIs>
         </Container>
       </View>

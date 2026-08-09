@@ -59,12 +59,7 @@ export default function ContactSideCard({
   const theme = useTheme();
   const m = metrics[variant];
   return (
-    <ContactSurface
-      color={color}
-      borderRadius={size("l")}
-      resting={true}
-      style={{ flexGrow: 1 }}
-    >
+    <ContactSurface color={color} borderRadius={size("l")} resting={true} style={{ flexGrow: 1 }}>
       <LinkView href={href} style={[m.layout, { padding: m.padding }]}>
         <ContactTile
           Icon={Icon}
@@ -84,9 +79,7 @@ export default function ContactSideCard({
           >
             {title}
           </Text>
-          <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-            {subtitle}
-          </Text>
+          <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>{subtitle}</Text>
         </View>
       </LinkView>
       <View

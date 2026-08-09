@@ -53,7 +53,7 @@ import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkText from "@/react-multiversal/LinkText";
-import { default as SpacedView } from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import TextForReader from "@/react-multiversal/TextForReader";
 import {
@@ -262,7 +262,7 @@ function PageResume() {
 
       {/* ============================================================ Hero */}
       <Container
-        wrapperStyle={{ zIndex: 1, overflow: "visible" }}
+        wrapperStyle={{ zIndex: 1 }}
         maxWidth={900}
         style={{
           flexDirection: "row",
@@ -270,9 +270,9 @@ function PageResume() {
           flexWrap: "wrap",
         }}
       >
-        <SpacedView
-          horizontal="l"
-          vertical="m"
+        <Box
+          px="l"
+          py="m"
           gap="xl"
           style={{
             flexGrow: 1,
@@ -447,16 +447,16 @@ function PageResume() {
               </View>
             </View>
           </View>
-        </SpacedView>
+        </Box>
         <BlockMe2WithPills />
-        <SpacedView horizontal="l" style={{ height: 3, width: "100%" }}>
+        <Box px="l" style={{ height: 3, width: "100%" }}>
           <GradientLinear style={{ borderRadius: 4 }} stops={gradientFlashyStops(theme)} />
-        </SpacedView>
+        </Box>
       </Container>
 
       {/* ==================================================== Summary intro */}
       <Container maxWidth={900}>
-        <SpacedView horizontal="l" vertical="l" gap="m">
+        <Box p="l" gap="m">
           <Text
             style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
             role="heading"
@@ -467,7 +467,7 @@ function PageResume() {
           <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]} role="paragraph">
             {t(summary)}
           </Text>
-        </SpacedView>
+        </Box>
       </Container>
 
       {/* ==================================================== Profile stats */}
@@ -477,12 +477,7 @@ function PageResume() {
       {/* =========================================================== Skills */}
       <Spacer size="xl" />
       <Container maxWidth={900}>
-        <SpacedView
-          role="region"
-          aria-label={t({ en: "Skills", fr: "Compétences" })}
-          horizontal="l"
-          gap="l"
-        >
+        <Box role="region" aria-label={t({ en: "Skills", fr: "Compétences" })} px="l" gap="l">
           <Text
             style={[fontStyles.iosEm.largeTitle, gradientTextIndigoStylesInv(theme)]}
             role="heading"
@@ -559,16 +554,16 @@ function PageResume() {
               </View>
             ))}
           </View>
-        </SpacedView>
+        </Box>
       </Container>
 
       {/* ======================================================= Experience */}
       <Spacer size="xxl" />
       <Container maxWidth={900}>
-        <SpacedView
+        <Box
           role="region"
           aria-label={t({ en: "Key Experience", fr: "Expériences clés" })}
-          horizontal="l"
+          px="l"
           gap="m"
         >
           <Text
@@ -603,14 +598,14 @@ function PageResume() {
               />
             ))}
           </View>
-        </SpacedView>
+        </Box>
       </Container>
 
       {/* ====================================================== Open Source */}
       {/* Full-bleed band like the stats one (opposite skew), so the entry
           cards sit directly on it - no more card-in-a-card. */}
       <Spacer size="xxl" />
-      <SpacedView vertical="xxxl">
+      <Box py="xxxl">
         <GradientLinear
           angle={60}
           stops={[
@@ -620,10 +615,10 @@ function PageResume() {
           style={[StyleSheet.absoluteFill, { transform: [{ skewY: "-1deg" }] }]}
         />
         <Container maxWidth={900}>
-          <SpacedView
+          <Box
             role="region"
             aria-label={t({ en: "Open Source", fr: "Open source" })}
-            horizontal="l"
+            px="l"
             gap="m"
           >
             <View
@@ -748,9 +743,9 @@ function PageResume() {
                 </LinkText>
               ))}
             </Text>
-          </SpacedView>
+          </Box>
         </Container>
-      </SpacedView>
+      </Box>
 
       {/* ============= Talks & Community, Education & Beyond Code */}
       {/* One wrapping row, three columns. The talk list itself lives in the
@@ -758,10 +753,10 @@ function PageResume() {
           the community figures, stacked. */}
       <Spacer size="xxl" />
       <Container maxWidth={900}>
-        <SpacedView
+        <Box
           role="region"
           aria-label={t({ en: "Talks & Community", fr: "Conférences & communauté" })}
-          horizontal="l"
+          px="l"
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
@@ -905,17 +900,13 @@ function PageResume() {
               </View>
             </View>
           </View>
-        </SpacedView>
+        </Box>
       </Container>
 
       {/* ===================================================== Full history */}
       <Spacer size="xxl" />
       <Container maxWidth={900}>
-        <SpacedView
-          role="region"
-          aria-label={t({ en: "All Experience", fr: "Tout le parcours" })}
-          horizontal="l"
-        >
+        <Box role="region" aria-label={t({ en: "All Experience", fr: "Tout le parcours" })} px="l">
           <Text
             style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
             role="heading"
@@ -931,7 +922,7 @@ function PageResume() {
             onOpenEntry={openEntry}
           />
           <Spacer />
-        </SpacedView>
+        </Box>
       </Container>
       <Spacer size="xl" />
       {/* The entry detail as a modal above the page (?detail=…, masked as

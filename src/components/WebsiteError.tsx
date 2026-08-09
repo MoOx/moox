@@ -4,7 +4,7 @@ import WebsiteWrapper from "@/components/WebsiteWrapper";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { Text } from "react-native";
@@ -15,7 +15,7 @@ export default function WebsiteError({ statusCode }: { statusCode: number }) {
   const theme = useTheme();
   return (
     <WebsiteWrapper>
-      <SpacedView horizontal="l" vertical="xxxl">
+      <Box px="l" py="xxxl">
         <Container>
           <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>Error {statusCode}</Text>
           <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
@@ -56,7 +56,7 @@ export default function WebsiteError({ statusCode }: { statusCode: number }) {
             <ButtonView>{t({ en: "Go back", fr: "Retour" })}</ButtonView>
           </LinkView>
         </Container>
-      </SpacedView>
+      </Box>
     </WebsiteWrapper>
   );
 }

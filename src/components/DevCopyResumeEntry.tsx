@@ -2,7 +2,7 @@ import { ResumeItem, ResumeItemSource } from "@/api";
 import { l, Lang, langs, Localized } from "@/i18n";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import { alpha, useTheme } from "@/styles";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
@@ -56,11 +56,7 @@ const mdJsonToText = (body: unknown): string =>
   blocksOf(body).reduce(
     (text, block, index, all) =>
       text +
-      (index === 0
-        ? ""
-        : block.bullet && all[index - 1]?.bullet
-          ? "\n"
-          : "\n\n") +
+      (index === 0 ? "" : block.bullet && all[index - 1]?.bullet ? "\n" : "\n\n") +
       (block.bullet ? `- ${block.text}` : block.text),
     "",
   );
@@ -70,9 +66,7 @@ export const resumeEntryAsText = (item: ResumeItemSource, lang: Lang) =>
   [
     l(item.title, lang) + ".\n",
     l(item.pitch, lang),
-    item.body
-      ? mdJsonToText(l(item.body as Localized<unknown>, lang))
-      : undefined,
+    item.body ? mdJsonToText(l(item.body as Localized<unknown>, lang)) : undefined,
   ]
     .filter(Boolean)
     .join("\n");
@@ -80,18 +74,14 @@ export const resumeEntryAsText = (item: ResumeItemSource, lang: Lang) =>
 let sourcesPromise: Promise<ResumeItemSource[]> | undefined;
 
 const resumeSources = (): Promise<ResumeItemSource[]> =>
-  (sourcesPromise ??= fetch("/content/resume.json").then((response) =>
-    response.json(),
-  ));
+  (sourcesPromise ??= fetch("/content/resume.json").then((response) => response.json()));
 
 export const DevCopyResumeEntry = ({ item }: { item: ResumeItem }) => {
   const theme = useTheme();
   const [copied, setCopied] = useState<Lang | undefined>();
 
   const copy = async (lang: Lang) => {
-    const source = (await resumeSources()).find(
-      (entry) => entry.slug === item.slug,
-    );
+    const source = (await resumeSources()).find((entry) => entry.slug === item.slug);
     if (!source) {
       console.error(`DevCopyResumeEntry: no source entry for ${item.slug}`);
       return;
@@ -116,14 +106,10 @@ export const DevCopyResumeEntry = ({ item }: { item: ResumeItem }) => {
       }}
     >
       {langs.map((lang) => (
-        <Pressable
-          key={lang}
-          onPress={() => copy(lang)}
-          style={{ cursor: "pointer" }}
-        >
-          <SpacedView
-            horizontal="xs"
-            vertical="xxxs"
+        <Pressable key={lang} onPress={() => copy(lang)} style={{ cursor: "pointer" }}>
+          <Box
+            px="xs"
+            py="xxxs"
             style={{
               alignItems: "center",
               minWidth: 32,
@@ -133,15 +119,10 @@ export const DevCopyResumeEntry = ({ item }: { item: ResumeItem }) => {
               backgroundColor: theme.dynamicColors.back,
             }}
           >
-            <Text
-              style={[
-                fontStyles.iosEm.caption2,
-                { color: theme.dynamicColors.inkFlashy },
-              ]}
-            >
+            <Text style={[fontStyles.iosEm.caption2, { color: theme.dynamicColors.inkFlashy }]}>
               {copied === lang ? "✓" : lang.toUpperCase()}
             </Text>
-          </SpacedView>
+          </Box>
         </Pressable>
       ))}
     </View>

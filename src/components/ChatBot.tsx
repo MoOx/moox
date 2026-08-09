@@ -1,6 +1,6 @@
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import SVGChevronRight from "@/svgs/components/SVGChevronRight";
@@ -71,9 +71,9 @@ function MessageBubble({ message, onComplete }: { message: Message; onComplete: 
   }, [words, onComplete, text, isFullyDisplayed]);
 
   return (
-    <SpacedView
-      horizontal="s"
-      vertical="xxs"
+    <Box
+      px="s"
+      py="xxs"
       style={[isBot ? theme.styles.backAlt : theme.styles.backMain, { borderRadius: size("s") }]}
     >
       <Text
@@ -81,7 +81,7 @@ function MessageBubble({ message, onComplete }: { message: Message; onComplete: 
       >
         {displayedText}
       </Text>
-    </SpacedView>
+    </Box>
   );
 }
 
@@ -177,9 +177,8 @@ function TypingIndicator() {
   const dots = [0, 1, 2];
 
   return (
-    <SpacedView
-      horizontal="s"
-      vertical="s"
+    <Box
+      p="s"
       style={[
         theme.styles.backMain,
         {
@@ -193,7 +192,7 @@ function TypingIndicator() {
       {dots.map((i) => (
         <AnimatedDot key={i} index={i} />
       ))}
-    </SpacedView>
+    </Box>
   );
 }
 
@@ -369,7 +368,7 @@ export default function ChatBot() {
   };
 
   return (
-    <SpacedView horizontal="l" vertical="m">
+    <Box px="l" py="m">
       {renderMessages()}
       <Spacer size="s" />
       <View
@@ -411,16 +410,16 @@ export default function ChatBot() {
             alignItems: "center",
           }}
         >
-          <SpacedView horizontal="xs" vertical="xs">
+          <Box p="xs">
             <SVGChevronRight
               width={size("s")}
               height={size("s")}
               fill={theme.dynamicColors.textOnMain}
               style={{ transform: [{ rotate: "-90deg" }] }}
             />
-          </SpacedView>
+          </Box>
         </Pressable>
       </View>
-    </SpacedView>
+    </Box>
   );
 }

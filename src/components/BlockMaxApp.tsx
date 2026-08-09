@@ -8,32 +8,20 @@ import {
   WebsiteMobileMenuLinks,
   WebsiteMobileMenuLinksContainer,
 } from "@/components/WebsiteMobileMenu";
-import {
-  sendStringAsMailString,
-  socialLinks,
-  socialLinks2,
-  socials,
-} from "@/consts";
+import { sendStringAsMailString, socialLinks, socialLinks2, socials } from "@/consts";
 import { useHref, useT } from "@/i18n";
 import { jobTitle } from "@/profile";
 import Avatar from "@/react-multiversal/Avatar";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { boxShadows, useTheme } from "@/styles";
 import SVGChevronRight from "@/svgs/components/SVGChevronRight";
 import SVGEnvelopeFill from "@/svgs/components/SVGEnvelopeFill";
 import Clipboard from "@react-native-clipboard/clipboard";
 import { useEffect, useState } from "react";
-import {
-  Pressable,
-  StyleProp,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-} from "react-native";
+import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 import Animated from "react-native-reanimated";
 
 const useCurrentTime = () => {
@@ -85,9 +73,9 @@ export default function BlockMaxApp({
         // { transform: [{ rotate: "-2deg" }] }
       ]}
     >
-      <SpacedView
-        horizontal="xl"
-        vertical="m"
+      <Box
+        px="xl"
+        py="m"
         style={{
           position: "absolute",
           top: 0,
@@ -104,16 +92,13 @@ export default function BlockMaxApp({
         >
           {time}
         </Text>
-        <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
-          {"Max Pro"}
-        </Text>
-      </SpacedView>
+        <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>{"Max Pro"}</Text>
+      </Box>
       <Spacer size="xl" />
       <Spacer size="xxs" />
-      <SpacedView horizontal="s" vertical="s">
-        <SpacedView
-          horizontal="m"
-          vertical="m"
+      <Box p="s">
+        <Box
+          p="m"
           style={[
             theme.styles.backOnAlt,
             {
@@ -124,7 +109,7 @@ export default function BlockMaxApp({
             },
           ]}
         >
-          <SpacedView
+          <Box
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -146,7 +131,7 @@ export default function BlockMaxApp({
               </Text>
             </View>
             <AvailabilityBadge showText={true} />
-          </SpacedView>
+          </Box>
           <Spacer size="m" />
           <View
             style={{
@@ -158,9 +143,7 @@ export default function BlockMaxApp({
             aria-level={2}
           >
             <View style={{ flex: 1 }}>
-              <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>
-                {"@MoOx"}
-              </Text>
+              <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>{"@MoOx"}</Text>
               <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
                 {t({
                   en: `${jobTitle} for web & mobile apps.`,
@@ -168,11 +151,7 @@ export default function BlockMaxApp({
                 })}
               </Text>
             </View>
-            <Avatar
-              size={64}
-              borderWidth={8}
-              borderColor={"rgba(0, 0, 0, 0.05)"}
-            />
+            <Avatar size={64} borderWidth={8} borderColor={"rgba(0, 0, 0, 0.05)"} />
           </View>
           <Spacer />
           <View style={{ flexDirection: "row" }}>
@@ -231,9 +210,7 @@ export default function BlockMaxApp({
                             transitionDuration: "250ms",
                             transitionTimingFunction: "ease-in-out",
                           },
-                          copied
-                            ? { opacity: 0, transform: [{ translateX: -6 }] }
-                            : {},
+                          copied ? { opacity: 0, transform: [{ translateX: -6 }] } : {},
                         ]}
                       >
                         {t({ en: "Copy Email", fr: "Copier l'e-mail" })}
@@ -262,16 +239,11 @@ export default function BlockMaxApp({
             </Pressable>
           </View>
           <Spacer size="m" />
-          <SpacedView
-            horizontal="s"
-            vertical="s"
-            gap="s"
-            style={[theme.styles.backAlt, { borderRadius: 12 }]}
-          >
+          <Box p="s" gap="s" style={[theme.styles.backAlt, { borderRadius: 12 }]}>
             <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>
               {t({ en: "Follow me", fr: "Me suivre" })}
             </Text>
-            <SpacedView
+            <Box
               style={{
                 flexDirection: "row",
                 flexWrap: "wrap",
@@ -285,13 +257,13 @@ export default function BlockMaxApp({
                   //   key={href}
                   //   arrowSize={4}
                   //   tooltip={
-                  //     <SpacedView horizontal="xs" vertical="xxs">
+                  //     <Box px="xs" py="xxs">
                   //       <Text
                   //         style={[fontStyles.iosEm.caption2, themeDark.styles.text]}
                   //       >
                   //         {title}
                   //       </Text>
-                  //     </SpacedView>
+                  //     </Box>
                   //   }
                   // >
                   <LinkButton
@@ -312,9 +284,9 @@ export default function BlockMaxApp({
                   </LinkButton>
                   // </TooltipOnFocus>
                 ))}
-            </SpacedView>
-          </SpacedView>
-        </SpacedView>
+            </Box>
+          </Box>
+        </Box>
         <Spacer size="s" />
         {!resumeEntry ? null : (
           <LinkView href={"/resume/#" + resumeEntry.slug}>
@@ -328,18 +300,18 @@ export default function BlockMaxApp({
             <View style={{ flexDirection: "row" }}>
               <ResumeTimelineEntry
                 item={resumeEntry}
-                horizontal="m"
-                vertical="m"
+                px="m"
+                py="m"
                 showDetails={false}
                 disableLinks={true}
               />
             </View>
           </LinkView>
         )}
-      </SpacedView>
-      <SpacedView
-        horizontal="xxs"
-        vertical="xs"
+      </Box>
+      <Box
+        px="xxs"
+        py="xs"
         style={{
           zIndex: 1,
           position: "absolute",
@@ -351,7 +323,7 @@ export default function BlockMaxApp({
         <WebsiteMobileMenuLinksContainer>
           <WebsiteMobileMenuLinks />
         </WebsiteMobileMenuLinksContainer>
-      </SpacedView>
+      </Box>
     </DeviceiPhoneDynamicIsland>
   );
 }

@@ -6,7 +6,7 @@ import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import { LinkTextProps } from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import TextForReader from "@/react-multiversal/TextForReader";
 import { alpha, colors, gradientFlashyStops, useTheme } from "@/styles";
 import SVGInfoCircle from "@/svgs/components/SVGInfoCircle";
@@ -158,12 +158,7 @@ export default function Card({
           <SVGInfoCircle width={24} height={24} color={alpha(colors.white, 0.5)} />
         </LinkView>
       ) : null}
-      <SpacedView
-        horizontal="m"
-        vertical="m"
-        gap="xxs"
-        style={{ flexGrow: 1, minHeight, justifyContent: "space-between" }}
-      >
+      <Box p="m" gap="xxs" style={{ flexGrow: 1, minHeight, justifyContent: "space-between" }}>
         <View>
           {icon ? (
             <View aria-hidden={true} style={{ alignSelf: "flex-start", marginBottom: size("s") }}>
@@ -215,7 +210,7 @@ export default function Card({
             </Text>
           ) : null}
         </View>
-      </SpacedView>
+      </Box>
     </View>
   );
 }

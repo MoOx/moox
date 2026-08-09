@@ -1,7 +1,7 @@
 import { AbsoluteSize } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import GlassView from "@/react-multiversal/GlassView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import TextForReader from "@/react-multiversal/TextForReader";
 import { l, Localized, useLang, useT } from "@/i18n";
 import { alpha, useTheme } from "@/styles";
@@ -59,10 +59,10 @@ export default function Pill({
         style,
       ]}
     >
-      <SpacedView horizontal={pillSpace} vertical={pillSpace} style={{ viewTransitionName }}>
-        <SpacedView
-          horizontal={spaceHorizontal}
-          vertical={spaceVertical}
+      <Box px={pillSpace} py={pillSpace} style={{ viewTransitionName }}>
+        <Box
+          px={spaceHorizontal}
+          py={spaceVertical}
           style={[theme.styles.backAlt, { borderRadius: 100 }]}
         >
           <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
@@ -135,8 +135,8 @@ export default function Pill({
               )}
             </Text>
           </Text>
-        </SpacedView>
-      </SpacedView>
+        </Box>
+      </Box>
     </GlassView>
   );
 }

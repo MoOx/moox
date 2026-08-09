@@ -6,7 +6,7 @@ import {
 } from "@/components/BlockCompaniesTried";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import TextForReader from "@/react-multiversal/TextForReader";
 import { useTheme } from "@/styles";
 import SVGCompanyAirbus from "@/svgs/components/SVGCompanyAirbus";
@@ -21,12 +21,7 @@ export default function BlockCompaniesTrust() {
 
   return (
     <Container role="region" aria-label={t({ en: "Trusted by", fr: "Ils m'ont fait confiance" })}>
-      <SpacedView
-        horizontal="l"
-        vertical="xl"
-        gap="l"
-        style={{ flex: 1, justifyContent: "center" }}
-      >
+      <Box px="l" py="xl" gap="l" style={{ flex: 1, justifyContent: "center" }}>
         <Text
           style={[
             fontStyles.ios.headline,
@@ -38,7 +33,7 @@ export default function BlockCompaniesTrust() {
         >
           {t({ en: "🇫🇷 Trusted by", fr: "🇫🇷 Ils m'ont fait confiance" })}
         </Text>
-        <SpacedView
+        <Box
           gap="m"
           style={{
             flex: 1,
@@ -88,8 +83,8 @@ export default function BlockCompaniesTrust() {
               style={companyIconStyle}
             />
           </View>
-        </SpacedView>
-      </SpacedView>
+        </Box>
+      </Box>
     </Container>
   );
 }

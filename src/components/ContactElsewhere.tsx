@@ -1,7 +1,4 @@
-import {
-  contactChipLabelDataSet,
-  contactHoverableDataSet,
-} from "@/components/ContactPageStyles";
+import { contactChipLabelDataSet, contactHoverableDataSet } from "@/components/ContactPageStyles";
 import ContactTile, { ContactTileIcon } from "@/components/ContactTile";
 import { socials } from "@/consts";
 import { useT } from "@/i18n";
@@ -81,10 +78,7 @@ function ContactApp({ app }: { app: App }) {
   const theme = useTheme();
   return (
     <View dataSet={contactHoverableDataSet}>
-      <LinkView
-        href={app.href}
-        style={{ alignItems: "center", gap: size("xxs") }}
-      >
+      <LinkView href={app.href} style={{ alignItems: "center", gap: size("xxs") }}>
         <ContactTile
           Icon={app.Icon}
           gradient={app.gradient}
@@ -94,11 +88,7 @@ function ContactApp({ app }: { app: App }) {
         <Text
           numberOfLines={1}
           dataSet={contactChipLabelDataSet}
-          style={[
-            fontStyles.ios.caption2,
-            theme.styles.textLight1,
-            { textAlign: "center" },
-          ]}
+          style={[fontStyles.ios.caption2, theme.styles.textLight1, { textAlign: "center" }]}
         >
           {app.label}
         </Text>
@@ -126,11 +116,7 @@ export default function ContactElsewhere() {
       }}
     >
       <View style={{ gap: size("xxxs") }}>
-        <Text
-          role="heading"
-          aria-level={2}
-          style={[overlineStyle, theme.styles.textLight1]}
-        >
+        <Text role="heading" aria-level={2} style={[overlineStyle, theme.styles.textLight1]}>
           {t({ en: "Elsewhere", fr: "Ailleurs" })}
         </Text>
         <Text style={[fontStyles.ios.caption1, theme.styles.textLight2]}>

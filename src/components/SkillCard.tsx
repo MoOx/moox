@@ -2,7 +2,7 @@ import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import { alpha, colors } from "@/styles";
 import { ComponentType } from "react";
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
@@ -90,7 +90,7 @@ export default function SkillCard({
         </View>
       ) : null}
 
-      <SpacedView horizontal={big ? "l" : "m"} vertical={big ? "l" : "m"} gap={big ? "l" : "xs"}>
+      <Box px={big ? "l" : "m"} py={big ? "l" : "m"} gap={big ? "l" : "xs"}>
         <View>
           {/* The whole feature card moves up one step together: its items are
               a `callout` where the small cards use `footnote`, so title and
@@ -129,7 +129,7 @@ export default function SkillCard({
         >
           {items.join(big ? "\n" : " · ")}
         </Text>
-      </SpacedView>
+      </Box>
     </View>
   );
 }

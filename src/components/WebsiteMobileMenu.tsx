@@ -5,7 +5,7 @@ import { footerAnchor, menuBarLinks } from "@/consts";
 import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import { alpha, boxShadows, colors, useTheme } from "@/styles";
 import { useRouterState } from "@tanstack/react-router";
 import { Text, View } from "react-native";
@@ -38,9 +38,9 @@ const MenuBarItemContent = ({
         ? "hsl(230 90% 70%)"
         : theme.dynamicColors.text;
   return (
-    <SpacedView
-      horizontal={size("m") * 1.25}
-      vertical="xxs"
+    <Box
+      px={size("m") * 1.25}
+      py="xxs"
       style={{
         alignItems: "center",
         justifyContent: "center",
@@ -54,7 +54,7 @@ const MenuBarItemContent = ({
     >
       {icon({ size: 24, color, active })}
       <Text style={{ fontSize: 10, fontWeight: active ? "700" : "500", color }}>{text}</Text>
-    </SpacedView>
+    </Box>
   );
 };
 
@@ -96,10 +96,9 @@ export const WebsiteMobileMenuLinksContainer = ({ children }: { children: React.
         justifyContent: "center",
       }}
     >
-      <SpacedView
+      <Box
         dataSet={glassDataSet}
-        horizontal="xxs"
-        vertical="xxs"
+        p="xxs"
         style={{
           marginInline: size("s"),
           marginBlock: size("xs"),
@@ -117,7 +116,7 @@ export const WebsiteMobileMenuLinksContainer = ({ children }: { children: React.
         }}
       >
         {children}
-      </SpacedView>
+      </Box>
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import { Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkText from "@/react-multiversal/LinkText";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import { useTheme } from "@/styles";
 import { ReactNode } from "react";
 import { Platform, StyleSheet, Text, TextProps, View } from "react-native";
@@ -73,11 +73,11 @@ type HeadingProps = {
 export const Heading = ({ id, style, textStyle, children, level = 1 }: HeadingProps) => {
   const theme = useTheme();
   return (
-    <SpacedView
+    <Box
       id={id}
       role="heading"
       aria-level={level}
-      vertical={
+      py={
         match(level)
           .with(1, () => "xl")
           .with(2, () => "l")
@@ -89,7 +89,7 @@ export const Heading = ({ id, style, textStyle, children, level = 1 }: HeadingPr
       style={style}
     >
       <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text, textStyle]}>{children}</Text>
-    </SpacedView>
+    </Box>
   );
 };
 
@@ -109,11 +109,11 @@ export const P = ({
   textStyle?: any;
   children?: ReactNode;
 }) => (
-  <SpacedView vertical="s" style={style}>
+  <Box py="s" style={style}>
     <TextNode role="paragraph" style={textStyle}>
       {children}
     </TextNode>
-  </SpacedView>
+  </Box>
 );
 
 export const Image = ({
@@ -134,9 +134,9 @@ export const Image = ({
 };
 
 export const Ul = ({ style, children }: { style?: any; children?: ReactNode }) => (
-  <SpacedView role="list" vertical="l" style={style}>
+  <Box role="list" py="l" style={style}>
     {children}
-  </SpacedView>
+  </Box>
 );
 
 export const Li = ({
@@ -149,9 +149,9 @@ export const Li = ({
   children?: ReactNode;
 }) => (
   <View role="listitem" style={styles.liWrapper}>
-    <SpacedView horizontal="s">
+    <Box px="s">
       <TextNode style={styles.liBullet}>{bullet}</TextNode>
-    </SpacedView>
+    </Box>
     <TextNode style={style}>{children}</TextNode>
   </View>
 );
@@ -165,25 +165,25 @@ export const BlockQuote = ({
   textStyle?: any;
   children?: ReactNode;
 }) => (
-  <SpacedView role="blockquote" horizontal="l" style={[styles.blockQuote, style]}>
+  <Box role="blockquote" px="l" style={[styles.blockQuote, style]}>
     <Text style={[styles.blockQuoteText, textStyle]}>{children}</Text>
-  </SpacedView>
+  </Box>
 );
 
 export const Pre = ({ style, children }: { style?: any; children?: ReactNode }) => (
-  <SpacedView vertical="m" style={style}>
+  <Box py="m" style={style}>
     <pre>{children}</pre>
-  </SpacedView>
+  </Box>
 );
 
 export const CodeBlock = ({ style, children }: { style?: any; children?: ReactNode }) => {
   const theme = useTheme();
   return (
-    <SpacedView horizontal="m" vertical="m" style={[styles.codeBlock, style]}>
+    <Box p="m" style={[styles.codeBlock, style]}>
       <Text role="code" style={[styles.codeBlockText, theme.styles.text]}>
         {children}
       </Text>
-    </SpacedView>
+    </Box>
   );
 };
 
@@ -199,9 +199,9 @@ export const Code = ({ style, children }: { style?: any; children?: ReactNode })
 export const Br = () => <Text>{"\n"}</Text>;
 
 export const Hr = () => (
-  <SpacedView vertical="l">
+  <Box py="l">
     <View style={styles.hr} />
-  </SpacedView>
+  </Box>
 );
 
 export const TextNode = ({

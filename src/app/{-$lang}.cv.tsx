@@ -1,9 +1,6 @@
 import { fetchAll, fetchResume, ResumeItem } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
-import {
-  featuredTestimonials,
-  TestimonialContent,
-} from "@/components/BlockTestimonials";
+import { featuredTestimonials, TestimonialContent } from "@/components/BlockTestimonials";
 import CvOpenSourceCard from "@/components/CvOpenSourceCard";
 import CvSectionTitle from "@/components/CvSectionTitle";
 import GradientText from "@/components/GradientText";
@@ -12,20 +9,8 @@ import Me from "@/components/Me";
 import SkillCard from "@/components/SkillCard";
 import StatTile from "@/components/StatTile";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
-import {
-  ind,
-  sendStringAsMailString,
-  socials,
-  visualUrl,
-  website,
-} from "@/consts";
-import {
-  alternateLinks,
-  assertLangParam,
-  langFromParam,
-  useLang,
-  useT,
-} from "@/i18n";
+import { ind, sendStringAsMailString, socials, visualUrl, website } from "@/consts";
+import { alternateLinks, assertLangParam, langFromParam, useLang, useT } from "@/i18n";
 import {
   availabilityDetail,
   availabilityLabel,
@@ -62,16 +47,9 @@ import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
-import {
-  getColorScheme,
-  setUserColorScheme,
-} from "@/react-multiversal/theme/colorScheme";
-import {
-  gradientFlashyStops,
-  gradientTextIndigoStylesInv,
-  useTheme,
-} from "@/styles";
+import Box from "@/react-multiversal/Box";
+import { getColorScheme, setUserColorScheme } from "@/react-multiversal/theme/colorScheme";
+import { gradientFlashyStops, gradientTextIndigoStylesInv, useTheme } from "@/styles";
 import SVGEnvelopeFill from "@/svgs/components/SVGEnvelopeFill";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
 import SVGPhoneFill from "@/svgs/components/SVGPhoneFill";
@@ -152,9 +130,7 @@ const ContactRow = ({
       style={{ flexDirection: "row", alignItems: "center", gap: size("xxs") }}
     >
       {/* <Icon width={16} height={16} color={theme.dynamicColors.textLight1} /> */}
-      <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
-        {children}
-      </Text>
+      <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>{children}</Text>
     </LinkView>
   );
 };
@@ -169,8 +145,7 @@ function PageCV() {
   // A CV row is a client, not a contract: an entry flagged `highlight` carries
   // the copy, and `group` folds its sibling missions in so the date span (and
   // therefore the sort key) is derived rather than hand-written.
-  const membersOf = (item: ResumeItem) =>
-    resume.filter((i) => groupKey(i) === groupKey(item));
+  const membersOf = (item: ResumeItem) => resume.filter((i) => groupKey(i) === groupKey(item));
   const highlights = resume
     .filter((i) => i.highlight)
     .map((i) => mergeGroup(i, membersOf(i)))
@@ -190,17 +165,10 @@ function PageCV() {
   const moreExperience = resume
     .filter(
       (i) =>
-        !i.openSource &&
-        !i.education &&
-        !i.personal &&
-        i.company &&
-        !shownGroups.has(groupKey(i)),
+        !i.openSource && !i.education && !i.personal && i.company && !shownGroups.has(groupKey(i)),
     )
     .sort(byDateDesc)
-    .filter(
-      (i, idx, all) =>
-        all.findIndex((o) => groupKey(o) === groupKey(i)) === idx,
-    )
+    .filter((i, idx, all) => all.findIndex((o) => groupKey(o) === groupKey(i)) === idx)
     .map((i) => mergeGroup(i, membersOf(i)));
   const moreExperienceShown = moreExperience.slice(0, moreExperienceRows);
   const moreExperienceEarlier = moreExperience.slice(moreExperienceRows);
@@ -388,21 +356,14 @@ function PageCV() {
             stops={gradientFlashyStops(theme)}
           />
         </View>
-        <SpacedView vertical="l" gap="m">
-          <Text
-            style={[fontStyles.iosEm.title2, theme.styles.text]}
-            role="heading"
-            aria-level={2}
-          >
+        <Box py="l" gap="m">
+          <Text style={[fontStyles.iosEm.title2, theme.styles.text]} role="heading" aria-level={2}>
             {t(tagline)}
           </Text>
-          <Text
-            style={[fontStyles.ios.callout, theme.styles.textLight1]}
-            role="paragraph"
-          >
+          <Text style={[fontStyles.ios.callout, theme.styles.textLight1]} role="paragraph">
             {t(summary)}
           </Text>
-        </SpacedView>
+        </Box>
 
         <View nativeID="cv-content" style={{ gap: size("l") }}>
           <View>
@@ -425,7 +386,7 @@ function PageCV() {
               ))}
             </View>
 
-            <SpacedView vertical="s" gap="xxs">
+            <Box py="s" gap="xxs">
               <View
                 style={{
                   flexDirection: "row",
@@ -434,11 +395,7 @@ function PageCV() {
                   justifyContent: "space-between",
                 }}
               >
-                <SVGExternalLink
-                  width={16}
-                  height={16}
-                  fill={theme.dynamicColors.textLight1}
-                />
+                <SVGExternalLink width={16} height={16} fill={theme.dynamicColors.textLight1} />
 
                 <ContactRow Icon={SVGExternalLink} href={website}>
                   {visualUrl(website)}
@@ -446,10 +403,7 @@ function PageCV() {
                 <ContactRow Icon={SVGSocialGithub} href={socials.github.value}>
                   {visualUrl(socials.github.value)}
                 </ContactRow>
-                <ContactRow
-                  Icon={SVGSocialLinkedin}
-                  href={socials.linkedin.value}
-                >
+                <ContactRow Icon={SVGSocialLinkedin} href={socials.linkedin.value}>
                   {visualUrl(socials.linkedin.value)}
                 </ContactRow>
 
@@ -469,14 +423,12 @@ function PageCV() {
                   </Text>
                 ))}
               </View>
-            </SpacedView>
+            </Box>
           </View>
 
           {/* -------------------------------------------------------- Skills */}
           <View nativeID="cv-skills" style={{ gap: size("s") }}>
-            <CvSectionTitle>
-              {t({ en: "Skills", fr: "Compétences" })}
-            </CvSectionTitle>
+            <CvSectionTitle>{t({ en: "Skills", fr: "Compétences" })}</CvSectionTitle>
 
             <View
               style={{
@@ -569,25 +521,17 @@ function PageCV() {
                   />
                 ) : null}
                 <View style={{ flexBasis: 168, flexGrow: 0, flexShrink: 0 }}>
-                  <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>
-                    {h.job_title}
-                  </Text>
-                  <Text
-                    style={[fontStyles.ios.footnote, theme.styles.textLight1]}
-                  >
+                  <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>{h.job_title}</Text>
+                  <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
                     {h.company}
                   </Text>
-                  <Text
-                    style={[fontStyles.ios.caption1, theme.styles.textLight2]}
-                  >
+                  <Text style={[fontStyles.ios.caption1, theme.styles.textLight2]}>
                     {/* Stints, not one span: Hove is "2017 – 2018 · 2019 – 2023",
                         which is what the pitch's "called back a year later"
                         describes. A single range would contradict it. */}
                     {(() => {
                       const periods = groupPeriods(membersOf(h));
-                      return periods.length > 1
-                        ? periods.join(" · ")
-                        : monthRange(h, lang);
+                      return periods.length > 1 ? periods.join(" · ") : monthRange(h, lang);
                     })()}
                   </Text>
                 </View>
@@ -595,12 +539,8 @@ function PageCV() {
                   {/* The what-it-is lead-in: the pitches deliberately stop
                       saying it (dedup rule - see CONTENT-NORMALIZATION.md),
                       so the row must. Inline, not stacked - page 1 is tight. */}
-                  <Text
-                    style={[fontStyles.ios.footnote, theme.styles.textLight1]}
-                  >
-                    <Text
-                      style={[fontStyles.iosEm.footnote, theme.styles.text]}
-                    >
+                  <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
+                    <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
                       {`${titleOf(h)}.`}
                     </Text>
                     {pitchOf(h) ? ` ${pitchOf(h)}` : null}
@@ -620,9 +560,7 @@ function PageCV() {
                       "#ReactNativeWeb" and "CI/CD" became "#CICD" - the exact
                       strings a recruiter or an ATS searches for, destroyed by
                       the decoration around them. */}
-                  <Text
-                    style={[fontStyles.ios.caption2, theme.styles.textLight2]}
-                  >
+                  <Text style={[fontStyles.ios.caption2, theme.styles.textLight2]}>
                     {h.hashtags.slice(0, 6).join(" · ")}
                   </Text>
                 </View>
@@ -674,31 +612,19 @@ function PageCV() {
                       { flexBasis: 300, flexGrow: 0, flexShrink: 0 },
                     ]}
                   >
-                    <Text
-                      style={[fontStyles.iosEm.footnote, theme.styles.text]}
-                    >
+                    <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
                       {m.job_title}
                     </Text>
-                    <Text
-                      style={theme.styles.textLight1}
-                    >{` · ${m.company}`}</Text>
+                    <Text style={theme.styles.textLight1}>{` · ${m.company}`}</Text>
                   </Text>
-                  <Text
-                    style={[
-                      fontStyles.ios.footnote,
-                      theme.styles.textLight1,
-                      { flex: 1 },
-                    ]}
-                  >
+                  <Text style={[fontStyles.ios.footnote, theme.styles.textLight1, { flex: 1 }]}>
                     {titleOf(m).trim()}
                   </Text>
                 </View>
               ))}
 
               {moreExperienceEarlier.length > 0 ? (
-                <Text
-                  style={[fontStyles.ios.caption1, theme.styles.textLight2]}
-                >
+                <Text style={[fontStyles.ios.caption1, theme.styles.textLight2]}>
                   {`Earlier: ${moreExperienceEarlier.map((m) => m.company).join(" · ")}.`}
                 </Text>
               ) : null}
@@ -725,18 +651,11 @@ function PageCV() {
                   }}
                 >
                   <Text
-                    style={[
-                      fontStyles.ios.footnote,
-                      theme.styles.text,
-                      { flex: 1 },
-                    ]}
+                    style={[fontStyles.ios.footnote, theme.styles.text, { flex: 1 }]}
                     {...(testimonial.originalLang !== lang ? { lang } : null)}
                   >
                     {/* Dimmed less than on the site: this prints on paper. */}
-                    <TestimonialContent
-                      text={testimonial.content[lang]}
-                      dim={0.85}
-                    />
+                    <TestimonialContent text={testimonial.content[lang]} dim={0.85} />
                   </Text>
                   <View
                     style={{
@@ -757,17 +676,10 @@ function PageCV() {
                       style={{ borderRadius: 14 }}
                     />
                     <View>
-                      <Text
-                        style={[fontStyles.iosEm.caption1, theme.styles.text]}
-                      >
+                      <Text style={[fontStyles.iosEm.caption1, theme.styles.text]}>
                         {testimonial.name}
                       </Text>
-                      <Text
-                        style={[
-                          fontStyles.ios.caption2,
-                          theme.styles.textLight2,
-                        ]}
-                      >
+                      <Text style={[fontStyles.ios.caption2, theme.styles.textLight2]}>
                         {testimonial.title[lang]}
                       </Text>
                     </View>
@@ -776,15 +688,10 @@ function PageCV() {
               ))}
 
               <LinkView href={recommendationsUrl} underlineOnFocus={true}>
-                <Text
-                  style={[fontStyles.ios.caption1, theme.styles.textLight2]}
-                >
+                <Text style={[fontStyles.ios.caption1, theme.styles.textLight2]}>
                   {"All recommendations on "}
                   <Text
-                    style={[
-                      fontStyles.iosEm.caption1,
-                      { color: theme.dynamicColors.textFlashy3 },
-                    ]}
+                    style={[fontStyles.iosEm.caption1, { color: theme.dynamicColors.textFlashy3 }]}
                   >
                     {visualUrl(socials.linkedin.value)}
                   </Text>
@@ -878,17 +785,10 @@ function PageCV() {
                       />
                     ) : null}
                     <View style={{ flex: 1 }}>
-                      <Text
-                        style={[fontStyles.iosEm.footnote, theme.styles.text]}
-                      >
+                      <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
                         {e.job_title}
                       </Text>
-                      <Text
-                        style={[
-                          fontStyles.ios.caption1,
-                          theme.styles.textLight1,
-                        ]}
-                      >
+                      <Text style={[fontStyles.ios.caption1, theme.styles.textLight1]}>
                         {`${e.company} · ${yearRange(e, lang)}`}
                       </Text>
                     </View>
@@ -943,9 +843,7 @@ function PageCV() {
               <View style={{ flexShrink: 1 }}>
                 {/* Dates the whole document, so a PDF that keeps circulating
                     says how old it is instead of quietly going stale. */}
-                <Text
-                  style={[fontStyles.ios.caption2, theme.styles.textLight2]}
-                >
+                <Text style={[fontStyles.ios.caption2, theme.styles.textLight2]}>
                   {updatedOn(lang)}
                 </Text>
                 <Text style={[fontStyles.ios.callout, theme.styles.text]}>

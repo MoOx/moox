@@ -19,7 +19,7 @@ import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import Parallax from "@/react-multiversal/Parallax";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { Text, View } from "react-native";
@@ -55,7 +55,7 @@ export default function WebsiteFooter() {
             flex: 1,
           }}
         >
-          <SpacedView horizontal="l" vertical="xl" gap="m" style={{ flexBasis: 190 }}>
+          <Box px="l" py="xl" gap="m" style={{ flexBasis: 190 }}>
             <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
               <Spacer size="m" />
               {"Navigation"}
@@ -76,16 +76,16 @@ export default function WebsiteFooter() {
                         style: { flexShrink: 0 },
                       })}
                     </Text>
-                    <SpacedView horizontal="xs" vertical="xs">
+                    <Box p="xs">
                       <Text style={[fontStyles.iosEm.body, theme.styles.text]}>
                         {t(label) ?? text}
                       </Text>
-                    </SpacedView>
+                    </Box>
                   </LinkView>
                 ))}
             </View>
-          </SpacedView>
-          <SpacedView horizontal="l" vertical="xl" gap="m" style={{ flexBasis: 190 }}>
+          </Box>
+          <Box px="l" py="xl" gap="m" style={{ flexBasis: 190 }}>
             <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
               <Spacer size="m" />
               {t({ en: "Follow Me", fr: "Me suivre" })}
@@ -102,9 +102,9 @@ export default function WebsiteFooter() {
                     color: theme.dynamicColors.text,
                     style: { flexShrink: 0 },
                   })}
-                  <SpacedView horizontal="xs" vertical="xs">
+                  <Box p="xs">
                     <Text style={[fontStyles.iosEm.body, theme.styles.text]}>{text}</Text>
-                  </SpacedView>
+                  </Box>
                 </LinkView>
               ))}
               {Object.entries(socialLinks2).map(([text, { href, icon }]) => (
@@ -118,14 +118,14 @@ export default function WebsiteFooter() {
                     color: theme.dynamicColors.text,
                     style: { flexShrink: 0 },
                   })}
-                  <SpacedView horizontal="xs" vertical="xs">
+                  <Box p="xs">
                     <Text style={[fontStyles.ios.body, theme.styles.text]}>{text}</Text>
-                  </SpacedView>
+                  </Box>
                 </LinkView>
               ))}
             </View>
-          </SpacedView>
-          <SpacedView horizontal="l" vertical="xl" gap="m" style={{ flexBasis: 190 }}>
+          </Box>
+          <Box px="l" py="xl" gap="m" style={{ flexBasis: 190 }}>
             <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
               <Spacer size="m" />
               {t({ en: "More", fr: "Plus" })}
@@ -142,9 +142,9 @@ export default function WebsiteFooter() {
                     color: theme.dynamicColors.text,
                     style: { flexShrink: 0 },
                   })}
-                  <SpacedView horizontal="xs" vertical="xs">
+                  <Box p="xs">
                     <Text style={[fontStyles.iosEm.body, theme.styles.text]}>{text}</Text>
-                  </SpacedView>
+                  </Box>
                 </LinkView>
               ))}
               {Object.entries(moreLinks2).map(([text, { href, icon }]) => (
@@ -158,9 +158,9 @@ export default function WebsiteFooter() {
                     color: theme.dynamicColors.text,
                     style: { flexShrink: 0 },
                   })}
-                  <SpacedView horizontal="xs" vertical="xs">
+                  <Box p="xs">
                     <Text style={[fontStyles.ios.body, theme.styles.text]}>{text}</Text>
-                  </SpacedView>
+                  </Box>
                 </LinkView>
               ))}
             </View>
@@ -170,16 +170,16 @@ export default function WebsiteFooter() {
             </Text>
             <LanguageSwitcher />
             <ThemeToggle mode="default" />
-          </SpacedView>
+          </Box>
           <Spacer />
         </Container>
 
         <Image src="/_/paintbrush-bold-orange.svg" alt="" width={512 / 2} height={124 / 2} />
         <Spacer size="xxl" />
       </View>
-      <SpacedView
-        horizontal="l"
-        vertical="s"
+      <Box
+        px="l"
+        py="s"
         style={[
           theme.styles.back,
           {
@@ -206,7 +206,7 @@ export default function WebsiteFooter() {
             {"100% Handcrafted & Over-engineered source available on GitHub"}
           </LinkText>
         </View>
-      </SpacedView>
+      </Box>
     </View>
   );
 }

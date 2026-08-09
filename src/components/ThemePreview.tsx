@@ -1,5 +1,5 @@
 import { platformColors } from "@/react-multiversal/colors";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { themedColors, useTheme } from "@/styles";
 import { View } from "react-native";
@@ -32,9 +32,8 @@ export default function ThemePreview({
         opacity: isActive ? 1 : 0.5,
       }}
     >
-      <SpacedView
-        horizontal="xxs"
-        vertical="xxs"
+      <Box
+        p="xxs"
         gap="xxs"
         style={[
           theme.styles.back,
@@ -45,7 +44,7 @@ export default function ThemePreview({
           },
         ]}
       >
-        <SpacedView gap="xxs" style={{ flexDirection: "row", alignItems: "center" }}>
+        <Box gap="xxs" style={{ flexDirection: "row", alignItems: "center" }}>
           <View
             style={{
               width: 6,
@@ -65,7 +64,7 @@ export default function ThemePreview({
               backgroundColor: themedColors.dark.textLight2,
             }}
           />
-        </SpacedView>
+        </Box>
         <View
           style={{
             width: 12,
@@ -74,11 +73,11 @@ export default function ThemePreview({
             backgroundColor: theme.dynamicColors.backMain,
           }}
         />
-      </SpacedView>
+      </Box>
       <Spacer />
-      <SpacedView horizontal="xxs" vertical="xxs">
+      <Box p="xxs">
         <View style={[theme.styles.backMain, { height: 8, borderRadius: 4 }]} />
-      </SpacedView>
+      </Box>
     </View>
   );
 }

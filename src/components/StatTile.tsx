@@ -3,7 +3,7 @@ import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import { alpha, colors, useTheme } from "@/styles";
 import { ReactNode } from "react";
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
@@ -75,7 +75,7 @@ export default function StatTile({
         />
       ) : null}
 
-      <SpacedView horizontal="s" vertical="s">
+      <Box p="s">
         <Text
           style={[
             fontStyles.ios.caption2,
@@ -126,7 +126,7 @@ export default function StatTile({
             {subSmall}
           </Text>
         ) : null}
-      </SpacedView>
+      </Box>
     </>
   );
 

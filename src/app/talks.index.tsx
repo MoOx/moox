@@ -4,7 +4,7 @@ import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { fullName, jobTitle, nickname } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { createFileRoute } from "@tanstack/react-router";
@@ -34,14 +34,14 @@ function PageTalkList() {
   return (
     <WebsiteWrapper>
       <Container maxWidth={640} role="article">
-        <SpacedView horizontal="l" vertical="m" style={theme.styles.back}>
+        <Box px="l" py="m" style={theme.styles.back}>
           <View role="heading" aria-level={1}>
             <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>{"Latest"}</Text>
             <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>{"Talks"}</Text>
           </View>
           <Spacer />
           <TalkList items={items} />
-        </SpacedView>
+        </Box>
       </Container>
     </WebsiteWrapper>
   );

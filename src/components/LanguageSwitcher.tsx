@@ -2,7 +2,7 @@ import { isLocalizedPath, Lang, langs, localizedHref, useLang } from "@/i18n";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
-import SpacedView from "@/react-multiversal/SpacedView";
+import Box from "@/react-multiversal/Box";
 import { useTheme } from "@/styles";
 import SVGTranslate from "@/svgs/components/SVGTranslate";
 import { useRouterState } from "@tanstack/react-router";
@@ -50,13 +50,13 @@ export default function LanguageSwitcher() {
               fill={theme.dynamicColors.text}
               style={{ flexShrink: 0, opacity: current ? 1 : 0.25 }}
             />
-            <SpacedView horizontal="xs" vertical="xs">
+            <Box p="xs">
               <Text
                 style={[current ? fontStyles.iosEm.body : fontStyles.ios.body, theme.styles.text]}
               >
                 {languageNames[alternate]}
               </Text>
-            </SpacedView>
+            </Box>
           </LinkView>
         );
       })}
