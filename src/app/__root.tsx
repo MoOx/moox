@@ -1,6 +1,7 @@
 import WebsiteError from "@/components/WebsiteError";
 import GlassFallbackStyles from "@/components/GlassFallbackStyles";
 import { cssRules } from "@/react-multiversal/IfWindowWidthIs";
+import { responsiveCssRules } from "@/react-multiversal/responsiveStyle";
 import baseCss from "@/react-multiversal/react-native/base.css?url";
 import ReactNativeProviders from "@/react-multiversal/react-native/ReactNativeProviders";
 import {
@@ -87,7 +88,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <style
           id="react-multiversal--IfWindowWidthIs"
           dangerouslySetInnerHTML={{
-            __html: cssRules.join("\n"),
+            __html: [...cssRules, ...responsiveCssRules].join("\n"),
           }}
         />
         {getWebStyleSheet()}

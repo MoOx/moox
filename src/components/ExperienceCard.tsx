@@ -8,6 +8,11 @@ import { size, WindowWidth } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GlassView from "@/react-multiversal/GlassView";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
+import {
+  responsiveAttrs,
+  responsiveProps,
+  responsiveStyle,
+} from "@/react-multiversal/responsiveStyle";
 import LinkText, { LinkTextProps } from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
 import Box from "@/react-multiversal/Box";
@@ -26,6 +31,59 @@ const borderRadius = size("s");
 const sideImageMask = "linear-gradient(100deg, transparent 10%, rgb(0, 0, 0) 90%)";
 // Narrow screens: image as a top band, fading down into the card.
 const topImageMask = "linear-gradient(185deg, rgb(0, 0, 0) 0%, transparent 75%)";
+
+/** Height of the image band on narrow screens; the header sits at its bottom. */
+const bandHeight = 300;
+
+// Compact mode used to be two subtrees with a media query hiding one, so the
+// image *and* the header were in the HTML twice - every job title and mission
+// description duplicated for anything reading the markup. One node each now,
+// with only the geometry switching. `responsiveStyle` emits media queries on
+// web and resolves against the window width on native, so this stays portable.
+const responsive = responsiveStyle({
+  image: {
+    base: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: bandHeight,
+      maskImage: topImageMask,
+      WebkitMaskImage: topImageMask,
+    },
+    [WindowWidth.m]: {
+      left: "auto",
+      right: 0,
+      width: "50%",
+      height: "100%",
+      maskImage: sideImageMask,
+      WebkitMaskImage: sideImageMask,
+    },
+  },
+  // Room for the band; the header is lifted out of the flow and into it.
+  body: {
+    base: { paddingTop: bandHeight + size("l") },
+    [WindowWidth.m]: { paddingTop: size("l") },
+  },
+  header: {
+    base: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      height: bandHeight,
+      justifyContent: "flex-end",
+      paddingLeft: size("l"),
+      paddingRight: size("l"),
+    },
+    [WindowWidth.m]: {
+      position: "relative",
+      height: "auto",
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
+  },
+});
 
 /**
  * Full-width experience row: quiet themed surface (hairline border + faint
@@ -187,60 +245,51 @@ export default function ExperienceCard({
         style,
       ]}
     >
-      {image
-        ? // Image band with the header laid over its faded bottom. Narrow
-          // screens in compact mode; every width in full mode (the side-image
-          // split would starve a long detail body of its width).
-          (() => {
-            const band = (
-              <View style={{ justifyContent: "flex-end", minHeight: 300 }}>
-                <Image
-                  src={image}
-                  alt=""
-                  width={640}
-                  height={480}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "top",
-                    maskImage: topImageMask,
-                    WebkitMaskImage: topImageMask,
-                  }}
-                />
-                <Box px="l">{header}</Box>
-              </View>
-            );
-            return full ? (
-              band
-            ) : (
-              <IfWindowWidthIs smallerThan={WindowWidth.m}>{band}</IfWindowWidthIs>
-            );
-          })()
-        : null}
-      {image && !full ? (
-        <IfWindowWidthIs largerThan={WindowWidth.m}>
+      {image ? (
+        full ? (
+          // Full mode is one layout at every width: the image is a band across
+          // the top with the header over its faded bottom. Nothing is
+          // duplicated here, so it stays as it was.
+          <View style={{ justifyContent: "flex-end", minHeight: 300 }}>
+            <Image
+              src={image}
+              alt=""
+              width={640}
+              height={480}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "top",
+                maskImage: topImageMask,
+                WebkitMaskImage: topImageMask,
+              }}
+            />
+            <Box px="l">{header}</Box>
+          </View>
+        ) : (
+          // Compact mode used to render the image *and* the header twice - a
+          // top band for narrow screens, a side image plus a header in the copy
+          // column for wide ones - with a media query hiding one set. Both were
+          // in the HTML, so every mission title and job title appeared twice to
+          // anything reading the markup: 3 559 of the 3 786 hidden characters
+          // on /resume were duplicates of visible text.
+          //
+          // One <img> now, positioned by `[data-card-image]` in styles.css:
+          // top band under 1024px, right half above. The header follows the
+          // same trick from the copy column below.
           <Image
             src={image}
             alt=""
             width={640}
             height={480}
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              width: "50%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "top",
-              maskImage: sideImageMask,
-              WebkitMaskImage: sideImageMask,
-            }}
+            {...responsiveAttrs(responsive.image)}
+            style={{ objectFit: "cover", objectPosition: "top" }}
           />
-        </IfWindowWidthIs>
+        )
       ) : null}
       {infoHref ? (
         <LinkView
@@ -269,17 +318,14 @@ export default function ExperienceCard({
         <Box
           p="l"
           gap="m"
+          {...(image && !full ? responsiveProps(responsive.body) : null)}
           style={{ flexGrow: 1, flexShrink: 1, flexBasis: 340, minWidth: 0 }}
         >
-          {/* With an image, the header lives inside the image band (narrow
-              compact screens, every width in full) - only the wide compact
-              layout keeps it in the copy column. */}
-          {image ? (
-            full ? null : (
-              <IfWindowWidthIs largerThan={WindowWidth.m}>{header}</IfWindowWidthIs>
-            )
-          ) : (
-            header
+          {/* One header, always here. Under 1024px `[data-card-header]` lifts
+              it out of the flow and onto the bottom of the image band, which is
+              where it used to be rendered a second time. */}
+          {full && image ? null : (
+            <View {...(image ? responsiveProps(responsive.header) : null)}>{header}</View>
           )}
           <Box gap="s">
             {text ? (
