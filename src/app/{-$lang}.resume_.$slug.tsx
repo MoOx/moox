@@ -6,7 +6,7 @@ import { alternateLinks, assertLangParam, langFromParam, useT } from "@/i18n";
 import { fullName, pitchOf } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -59,7 +59,7 @@ function PageResumeEntry() {
     <WebsiteWrapper>
       <Spacer size="l" />
       <Container maxWidth={720}>
-        <Box px="l" gap="m">
+        <SpacedView horizontal="l" gap="m">
           {/* The timeline cards carry `id={item.slug}` anchors, so this lands
               right back on the entry's card. */}
           <Link
@@ -76,7 +76,7 @@ function PageResumeEntry() {
             </Text>
           </Link>
           <ResumeEntryDetailCard item={item} />
-        </Box>
+        </SpacedView>
       </Container>
       <Spacer size="xl" />
     </WebsiteWrapper>

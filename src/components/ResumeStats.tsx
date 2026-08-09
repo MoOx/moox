@@ -3,7 +3,7 @@ import { ProfileStat } from "@/profile";
 import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import GradientLinear from "@/react-multiversal/GradientLinear";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import { gradientStaticIndigoStyles } from "@/styles";
 import { StyleSheet, View } from "react-native";
 
@@ -15,13 +15,13 @@ import { StyleSheet, View } from "react-native";
  */
 export default function ResumeStats({ stats }: { stats: ProfileStat[] }) {
   return (
-    <Box py="xl">
+    <SpacedView vertical="xl">
       <GradientLinear
         style={[StyleSheet.absoluteFill, { transform: [{ skewY: "1deg" }] }]}
         stops={gradientStaticIndigoStyles}
       />
       <Container maxWidth={900}>
-        <Box px="l">
+        <SpacedView horizontal="l">
           <View
             style={{
               flexDirection: "row",
@@ -39,8 +39,8 @@ export default function ResumeStats({ stats }: { stats: ProfileStat[] }) {
               />
             ))}
           </View>
-        </Box>
+        </SpacedView>
       </Container>
-    </Box>
+    </SpacedView>
   );
 }

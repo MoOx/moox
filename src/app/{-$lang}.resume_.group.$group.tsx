@@ -7,7 +7,7 @@ import { fullName, pitchOf, titleOf } from "@/profile";
 import { size } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -64,7 +64,7 @@ function PageResumeGroup() {
     <WebsiteWrapper>
       <Spacer size="l" />
       <Container maxWidth={720}>
-        <Box px="l" gap="m">
+        <SpacedView horizontal="l" gap="m">
           <Link
             to="/{-$lang}/resume"
             params={{ lang }}
@@ -87,7 +87,7 @@ function PageResumeGroup() {
               />
             ))}
           </View>
-        </Box>
+        </SpacedView>
       </Container>
       <Spacer size="xl" />
     </WebsiteWrapper>

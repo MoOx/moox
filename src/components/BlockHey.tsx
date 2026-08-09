@@ -5,7 +5,7 @@ import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { gradientTextFlashyStyles, gradientTextStyles, useTheme } from "@/styles";
 import { Text, View } from "react-native";
@@ -36,9 +36,9 @@ export default function BlockHey() {
           flexWrap: "wrap",
         }}
       >
-        <Box
-          px="l"
-          py="m"
+        <SpacedView
+          horizontal="l"
+          vertical="m"
           style={{
             flexGrow: 1,
             flexShrink: 1,
@@ -117,7 +117,7 @@ export default function BlockHey() {
           <IfWindowWidthIs largerThan={WindowWidth.m}>
             <Spacer size="xxxl" />
           </IfWindowWidthIs>
-        </Box>
+        </SpacedView>
         <BlockMe1WithSmallPills />
       </Container>
     </View>

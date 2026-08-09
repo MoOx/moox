@@ -2,7 +2,7 @@ import LinkButton from "@/components/LinkButton";
 import { useHref, useT } from "@/i18n";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import { alpha, colors, useTheme } from "@/styles";
 import SVGEllipsisMessageFill from "@/svgs/components/SVGEllipsisMessageFill";
 import SVGMenuResumeFill from "@/svgs/components/SVGMenuResumeFill";
@@ -15,8 +15,9 @@ export default function BlockInterestedButtons() {
 
   return (
     <Container>
-      <Box
-        p="xxxl"
+      <SpacedView
+        vertical="xxxl"
+        horizontal="xxxl"
         gap="xl"
         style={{ alignItems: "center" }}
       >
@@ -32,7 +33,7 @@ export default function BlockInterestedButtons() {
             fr: "Prêt·e à construire quelque chose de chouette ensemble ?",
           })}
         </Text>
-        <Box
+        <SpacedView
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
@@ -79,8 +80,8 @@ export default function BlockInterestedButtons() {
               </>
             )}
           </LinkButton>
-        </Box>
-      </Box>
+        </SpacedView>
+      </SpacedView>
     </Container>
   );
 }

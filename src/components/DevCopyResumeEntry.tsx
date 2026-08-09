@@ -2,7 +2,7 @@ import { ResumeItem, ResumeItemSource } from "@/api";
 import { l, Lang, langs, Localized } from "@/i18n";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import { alpha, useTheme } from "@/styles";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
@@ -121,9 +121,9 @@ export const DevCopyResumeEntry = ({ item }: { item: ResumeItem }) => {
           onPress={() => copy(lang)}
           style={{ cursor: "pointer" }}
         >
-          <Box
-            px="xs"
-            py="xxxs"
+          <SpacedView
+            horizontal="xs"
+            vertical="xxxs"
             style={{
               alignItems: "center",
               minWidth: 32,
@@ -141,7 +141,7 @@ export const DevCopyResumeEntry = ({ item }: { item: ResumeItem }) => {
             >
               {copied === lang ? "✓" : lang.toUpperCase()}
             </Text>
-          </Box>
+          </SpacedView>
         </Pressable>
       ))}
     </View>

@@ -10,7 +10,7 @@ import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import { GradientRadial } from "@/react-multiversal/GradientRadial";
 import Parallax from "@/react-multiversal/Parallax";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { boxShadows, themeLight, useTheme } from "@/styles";
 import SVGQuote from "@/svgs/components/SVGQuote";
@@ -189,7 +189,7 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
       <View
         style={[StyleSheet.absoluteFill, { borderRadius: size("s"), boxShadow: boxShadowGlass() }]}
       />
-      <Box key={item.name} p="m" gap="s">
+      <SpacedView key={item.name} horizontal="m" vertical="m" gap="s">
         <SVGQuote width={32} height={32} fill={theme.dynamicColors.text} style={{ zIndex: 1 }} />
         <View role="blockquote">
           <Text
@@ -202,7 +202,7 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
             <TestimonialContent text={item.content[lang]} />
           </Text>
         </View>
-        <Box
+        <SpacedView
           gap="xs"
           style={{
             flexDirection: "row",
@@ -218,8 +218,8 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
               {item.title[lang]}
             </Text>
           </Text>
-        </Box>
-      </Box>
+        </SpacedView>
+      </SpacedView>
     </BlurView>
   );
 };
@@ -318,8 +318,8 @@ export default function BlockTestimonials() {
         aria-label={t({ en: "Testimonials", fr: "Témoignages" })}
         wrapperStyle={{ zIndex: 1 }}
       >
-        <Box p="xl" gap="xl">
-          <Box gap="s">
+        <SpacedView vertical="xl" horizontal="xl" gap="xl">
+          <SpacedView gap="s">
             <Text
               style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
               role="heading"
@@ -336,12 +336,12 @@ export default function BlockTestimonials() {
                 fr: "De vrais retours de personnes qui connaissent mon travail.",
               })}
             </Text>
-          </Box>
+          </SpacedView>
           <View>
             {testimonialRows.map((row, rowIndex) => (
-              <Box
+              <SpacedView
                 key={row.map((item) => item.name).join("-")}
-                py="m"
+                vertical="m"
                 gap="xl"
                 style={{
                   flexDirection: "row",
@@ -352,7 +352,7 @@ export default function BlockTestimonials() {
                 {row.map((item) => (
                   <TestimonialItem key={item.name} item={item} />
                 ))}
-              </Box>
+              </SpacedView>
             ))}
           </View>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -381,7 +381,7 @@ export default function BlockTestimonials() {
             </LinkButton>
             <Spacer size="m" />
           </View>
-        </Box>
+        </SpacedView>
       </Container>
     </View>
   );

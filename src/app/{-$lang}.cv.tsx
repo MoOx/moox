@@ -62,7 +62,7 @@ import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkView from "@/react-multiversal/LinkView";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import {
   getColorScheme,
   setUserColorScheme,
@@ -388,7 +388,7 @@ function PageCV() {
             stops={gradientFlashyStops(theme)}
           />
         </View>
-        <Box py="l" gap="m">
+        <SpacedView vertical="l" gap="m">
           <Text
             style={[fontStyles.iosEm.title2, theme.styles.text]}
             role="heading"
@@ -402,7 +402,7 @@ function PageCV() {
           >
             {t(summary)}
           </Text>
-        </Box>
+        </SpacedView>
 
         <View nativeID="cv-content" style={{ gap: size("l") }}>
           <View>
@@ -425,7 +425,7 @@ function PageCV() {
               ))}
             </View>
 
-            <Box py="s" gap="xxs">
+            <SpacedView vertical="s" gap="xxs">
               <View
                 style={{
                   flexDirection: "row",
@@ -469,7 +469,7 @@ function PageCV() {
                   </Text>
                 ))}
               </View>
-            </Box>
+            </SpacedView>
           </View>
 
           {/* -------------------------------------------------------- Skills */}

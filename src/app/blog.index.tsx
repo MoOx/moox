@@ -11,7 +11,7 @@ import {
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkText from "@/react-multiversal/LinkText";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { createFileRoute } from "@tanstack/react-router";
@@ -41,7 +41,7 @@ function PageBlogList() {
   return (
     <WebsiteWrapper>
       <Container maxWidth={640} role="article">
-        <Box px="l" py="m" style={theme.styles.back}>
+        <SpacedView horizontal="l" vertical="m" style={theme.styles.back}>
           <View role="heading" aria-level={1}>
             <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>{"Latest"}</Text>
             <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>{"Posts"}</Text>
@@ -60,7 +60,7 @@ function PageBlogList() {
             </LinkText>
             {" on putaindecode.io."}
           </Text>
-        </Box>
+        </SpacedView>
       </Container>
     </WebsiteWrapper>
   );

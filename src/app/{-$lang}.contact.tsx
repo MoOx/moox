@@ -15,7 +15,7 @@ import Avatar from "@/react-multiversal/Avatar";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import SVGContact from "@/svgs/components/SVGContact";
@@ -321,7 +321,7 @@ function PageContact() {
 
       <IfWindowWidthIs smallerThan={WindowWidth.m}>
         <Container maxWidth={768}>
-          <Box px="m" py="l" gap={size("l")}>
+          <SpacedView horizontal="m" vertical="l" gap={size("l")}>
             <View style={{ gap: size("xs") }}>
               {heading}
               <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>
@@ -344,14 +344,15 @@ function PageContact() {
               {linkedinCard("row")}
             </View>
             <ContactElsewhere />
-          </Box>
+          </SpacedView>
         </Container>
       </IfWindowWidthIs>
 
       <IfWindowWidthIs largerThan={WindowWidth.m}>
         <Container maxWidth={1180}>
-          <Box
-            p="xl"
+          <SpacedView
+            horizontal="xl"
+            vertical="xl"
             gap={size("xxl")}
             style={{ flexDirection: "row", alignItems: "flex-start" }}
           >
@@ -412,7 +413,7 @@ function PageContact() {
                 {linkedinCard("card")}
               </View>
             </View>
-          </Box>
+          </SpacedView>
         </Container>
       </IfWindowWidthIs>
 

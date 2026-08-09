@@ -1,7 +1,7 @@
 import { useT } from "@/i18n";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import TextForReader from "@/react-multiversal/TextForReader";
 import { useTheme } from "@/styles";
 import SVGCompanyFacebook from "@/svgs/components/SVGCompanyFacebook";
@@ -24,9 +24,9 @@ export default function BlockCompaniesTried() {
       role="region"
       aria-label={t({ en: "They tried to hire me", fr: "Ils ont essayé de me recruter" })}
     >
-      <Box
-        px="l"
-        py="xl"
+      <SpacedView
+        horizontal="l"
+        vertical="xl"
         gap="l"
         style={{ flex: 1, justifyContent: "center" }}
       >
@@ -41,7 +41,7 @@ export default function BlockCompaniesTried() {
         >
           {t({ en: "They tried to hire me", fr: "Ils ont essayé de me recruter" })}
         </Text>
-        <Box
+        <SpacedView
           gap="m"
           style={{
             flex: 1,
@@ -91,8 +91,8 @@ export default function BlockCompaniesTried() {
               style={companyIconStyle}
             />
           </View>
-        </Box>
-      </Box>
+        </SpacedView>
+      </SpacedView>
     </Container>
   );
 }

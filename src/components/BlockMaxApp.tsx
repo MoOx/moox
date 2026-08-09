@@ -19,7 +19,7 @@ import { jobTitle } from "@/profile";
 import Avatar from "@/react-multiversal/Avatar";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { boxShadows, useTheme } from "@/styles";
 import SVGChevronRight from "@/svgs/components/SVGChevronRight";
@@ -85,9 +85,9 @@ export default function BlockMaxApp({
         // { transform: [{ rotate: "-2deg" }] }
       ]}
     >
-      <Box
-        px="xl"
-        py="m"
+      <SpacedView
+        horizontal="xl"
+        vertical="m"
         style={{
           position: "absolute",
           top: 0,
@@ -107,12 +107,13 @@ export default function BlockMaxApp({
         <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
           {"Max Pro"}
         </Text>
-      </Box>
+      </SpacedView>
       <Spacer size="xl" />
       <Spacer size="xxs" />
-      <Box p="s">
-        <Box
-          p="m"
+      <SpacedView horizontal="s" vertical="s">
+        <SpacedView
+          horizontal="m"
+          vertical="m"
           style={[
             theme.styles.backOnAlt,
             {
@@ -123,7 +124,7 @@ export default function BlockMaxApp({
             },
           ]}
         >
-          <Box
+          <SpacedView
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -145,7 +146,7 @@ export default function BlockMaxApp({
               </Text>
             </View>
             <AvailabilityBadge showText={true} />
-          </Box>
+          </SpacedView>
           <Spacer size="m" />
           <View
             style={{
@@ -261,15 +262,16 @@ export default function BlockMaxApp({
             </Pressable>
           </View>
           <Spacer size="m" />
-          <Box
-            p="s"
+          <SpacedView
+            horizontal="s"
+            vertical="s"
             gap="s"
             style={[theme.styles.backAlt, { borderRadius: 12 }]}
           >
             <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>
               {t({ en: "Follow me", fr: "Me suivre" })}
             </Text>
-            <Box
+            <SpacedView
               style={{
                 flexDirection: "row",
                 flexWrap: "wrap",
@@ -283,13 +285,13 @@ export default function BlockMaxApp({
                   //   key={href}
                   //   arrowSize={4}
                   //   tooltip={
-                  //     <Box px="xs" py="xxs">
+                  //     <SpacedView horizontal="xs" vertical="xxs">
                   //       <Text
                   //         style={[fontStyles.iosEm.caption2, themeDark.styles.text]}
                   //       >
                   //         {title}
                   //       </Text>
-                  //     </Box>
+                  //     </SpacedView>
                   //   }
                   // >
                   <LinkButton
@@ -310,9 +312,9 @@ export default function BlockMaxApp({
                   </LinkButton>
                   // </TooltipOnFocus>
                 ))}
-            </Box>
-          </Box>
-        </Box>
+            </SpacedView>
+          </SpacedView>
+        </SpacedView>
         <Spacer size="s" />
         {!resumeEntry ? null : (
           <LinkView href={"/resume/#" + resumeEntry.slug}>
@@ -326,18 +328,18 @@ export default function BlockMaxApp({
             <View style={{ flexDirection: "row" }}>
               <ResumeTimelineEntry
                 item={resumeEntry}
-                px="m"
-                py="m"
+                horizontal="m"
+                vertical="m"
                 showDetails={false}
                 disableLinks={true}
               />
             </View>
           </LinkView>
         )}
-      </Box>
-      <Box
-        px="xxs"
-        py="xs"
+      </SpacedView>
+      <SpacedView
+        horizontal="xxs"
+        vertical="xs"
         style={{
           zIndex: 1,
           position: "absolute",
@@ -349,7 +351,7 @@ export default function BlockMaxApp({
         <WebsiteMobileMenuLinksContainer>
           <WebsiteMobileMenuLinks />
         </WebsiteMobileMenuLinksContainer>
-      </Box>
+      </SpacedView>
     </DeviceiPhoneDynamicIsland>
   );
 }

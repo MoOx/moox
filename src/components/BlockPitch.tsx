@@ -5,7 +5,7 @@ import SkillsCards from "@/components/SkillsCards";
 import { skillsPitch, skillsPitchTitle } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { Text, View } from "react-native";
@@ -33,7 +33,7 @@ export default function BlockPitch() {
             alignItems: "center",
           }}
         >
-          <Box px="xl" gap="m" style={{ flexBasis: 1024 / 2, flexShrink: 1 }}>
+          <SpacedView horizontal="xl" gap="m" style={{ flexBasis: 1024 / 2, flexShrink: 1 }}>
             <Text
               style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
               role="heading"
@@ -44,10 +44,10 @@ export default function BlockPitch() {
             <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]} role="paragraph">
               {t(skillsPitch)}
             </Text>
-          </Box>
+          </SpacedView>
         </View>
         <Spacer size="xxl" />
-        <Box px="xl" gap="m">
+        <SpacedView horizontal="xl" gap="m">
           <SkillsCards mode="teaser" />
 
           <LinkButton
@@ -57,13 +57,13 @@ export default function BlockPitch() {
             spaceHorizontal="m"
             style={{ alignSelf: "flex-end" }}
           >
-            <Box px="m">
+            <SpacedView horizontal="m">
               <Text style={fontStyles.iosEm.callout}>
                 {t({ en: "Check my resume", fr: "Voir mon CV" })}
               </Text>
-            </Box>
+            </SpacedView>
           </LinkButton>
-        </Box>
+        </SpacedView>
       </Container>
     </View>
   );

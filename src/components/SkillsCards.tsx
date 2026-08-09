@@ -2,7 +2,7 @@ import { useT } from "@/i18n";
 import SkillCard from "@/components/SkillCard";
 import { skillsDomains } from "@/profile";
 import { size } from "@/react-multiversal";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import { View } from "react-native";
 
 /**
@@ -18,7 +18,7 @@ export default function SkillsCards({ mode = "full" }: { mode?: "teaser" | "full
   const t = useT();
   const teaser = mode === "teaser";
   return (
-    <Box
+    <SpacedView
       gap="m"
       style={{
         flex: 1,
@@ -52,6 +52,6 @@ export default function SkillsCards({ mode = "full" }: { mode?: "teaser" | "full
           />
         </View>
       ))}
-    </Box>
+    </SpacedView>
   );
 }

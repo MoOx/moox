@@ -2,7 +2,7 @@ import { useT } from "@/i18n";
 import AIPromptCircle from "@/components/AIPromptCircle";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { Text, View } from "react-native";
@@ -50,8 +50,8 @@ export default function BlockAugmentedWithAI() {
       <View style={{ maxWidth: 400, justifyContent: "center" }}>
         <AIPromptCircle size={200} circles={circles} />
       </View>
-      <Box
-        px="xl"
+      <SpacedView
+        horizontal="xl"
         gap="m"
         style={[
           {
@@ -75,7 +75,7 @@ export default function BlockAugmentedWithAI() {
           })}
         </Text>
         <Spacer size="s" />
-      </Box>
+      </SpacedView>
     </Container>
   );
 }

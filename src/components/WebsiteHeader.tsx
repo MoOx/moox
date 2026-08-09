@@ -10,7 +10,7 @@ import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkView from "@/react-multiversal/LinkView";
-import Box from "@/react-multiversal/Box";
+import { default as SpacedView } from "@/react-multiversal/SpacedView";
 import {
   alpha,
   boxShadows,
@@ -78,9 +78,9 @@ export default function WebsiteHeader() {
             borderRadius: 40,
           }}
         >
-          <Box
-            px="m"
-            py="xs"
+          <SpacedView
+            horizontal="m"
+            vertical="xs"
             gap="s"
             style={{
               borderWidth: 0.5,
@@ -125,16 +125,16 @@ export default function WebsiteHeader() {
               {/* The site navigation, as a landmark: a screen reader can jump
                   straight to it, and a crawler reads it as the menu rather than
                   as five links in a row. */}
-              <Box
+              <SpacedView
                 role="navigation"
                 aria-label={t({ en: "Main", fr: "Principale" })}
                 gap="m"
                 style={[styles.menuGroup, { justifyContent: "center" }]}
               >
                 <WebsiteMobileMenuLinks />
-              </Box>
+              </SpacedView>
             </IfWindowWidthIs>
-            <Box
+            <SpacedView
               gap="m"
               style={[styles.menuGroup, { justifyContent: "flex-end" }]}
             >
@@ -158,8 +158,8 @@ export default function WebsiteHeader() {
                   fill={theme.dynamicColors.text}
                 />
               </LinkView>
-            </Box>
-          </Box>
+            </SpacedView>
+          </SpacedView>
         </BlurView>
       </Container>
     </>

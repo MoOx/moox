@@ -15,7 +15,7 @@ import {
 } from "@/react-multiversal/responsiveStyle";
 import LinkText, { LinkTextProps } from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import TextForReader from "@/react-multiversal/TextForReader";
 import { alpha, useTheme } from "@/styles";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
@@ -160,7 +160,7 @@ export default function ExperienceCard({
   // copy column on wide screens; on narrow screens with an image (always in
   // full mode) it overlays the image band instead.
   const header = (
-    <Box gap="xxs">
+    <SpacedView gap="xxs">
       {pretitle ? (
         <Text
           style={[
@@ -228,7 +228,7 @@ export default function ExperienceCard({
           ) : null}
         </View>
       </View>
-    </Box>
+    </SpacedView>
   );
 
   return (
@@ -268,7 +268,7 @@ export default function ExperienceCard({
                 WebkitMaskImage: topImageMask,
               }}
             />
-            <Box px="l">{header}</Box>
+            <SpacedView horizontal="l">{header}</SpacedView>
           </View>
         ) : (
           // Compact mode used to render the image *and* the header twice - a
@@ -315,8 +315,9 @@ export default function ExperienceCard({
         </LinkView>
       ) : null}
       <View style={{ flexDirection: "row" }}>
-        <Box
-          p="l"
+        <SpacedView
+          horizontal="l"
+          vertical="l"
           gap="m"
           {...(image && !full ? responsiveProps(responsive.body) : null)}
           style={{ flexGrow: 1, flexShrink: 1, flexBasis: 340, minWidth: 0 }}
@@ -327,7 +328,7 @@ export default function ExperienceCard({
           {full && image ? null : (
             <View {...(image ? responsiveProps(responsive.header) : null)}>{header}</View>
           )}
-          <Box gap="s">
+          <SpacedView gap="s">
             {text ? (
               <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>{text}</Text>
             ) : null}
@@ -364,7 +365,7 @@ export default function ExperienceCard({
                         backgroundColor: alpha(theme.colors.textFlashy2, 0.08),
                       }}
                     >
-                      <Box px="xs" py="xxs">
+                      <SpacedView horizontal="xs" vertical="xxs">
                         <Text
                           style={[
                             fontStyles.iosEm.caption2,
@@ -373,7 +374,7 @@ export default function ExperienceCard({
                         >
                           {`${s.stat} ${lowerKeepingAcronyms(s.label)}`}
                         </Text>
-                      </Box>
+                      </SpacedView>
                     </View>
                   ))}
                 </View>
@@ -406,8 +407,8 @@ export default function ExperienceCard({
                 ))}
               </View>
             ) : null}
-          </Box>
-        </Box>
+          </SpacedView>
+        </SpacedView>
         {image && !full ? (
           // Reserved room so the copy never sits on the strong part of the
           // side image.

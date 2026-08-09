@@ -5,7 +5,7 @@ import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import Parallax from "@/react-multiversal/Parallax";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { gradientFlashyStops, useTheme } from "@/styles";
 import { StyleSheet, Text, View } from "react-native";
@@ -28,10 +28,10 @@ export default function BlockPassionated() {
         aria-label={t({ en: "Passionated and Curious", fr: "Passionné et curieux" })}
         style={{ flexDirection: "row", flexWrap: "wrap" }}
       >
-        <Box
-          px="xl"
+        <SpacedView
+          horizontal="xl"
           gap="m"
-          // py="xxl"
+          // vertical="xxl"
           style={{ maxWidth: 1024 * 0.5, flexShrink: 1 }}
         >
           <Spacer size="xxl" />
@@ -60,13 +60,13 @@ De Dreamweaver à Cursor, les années ont passé, mais pas mon appétit pour de 
             spaceHorizontal="m"
             style={{ alignSelf: "flex-start" }}
           >
-            <Box px="m">
+            <SpacedView horizontal="m">
               <Text style={fontStyles.iosEm.callout}>
                 {t({ en: "Discover my story", fr: "Découvrir mon parcours" })}
               </Text>
-            </Box>
+            </SpacedView>
           </LinkButton>
-        </Box>
+        </SpacedView>
         <View>
           <Parallax
             staticTransforms={[{ perspective: 800 }, { scale: 0.8 }]}
@@ -130,7 +130,7 @@ De Dreamweaver à Cursor, les années ont passé, mais pas mon appétit pour de 
                   boxShadow: "inset 0 0 16px rgba(255,255,255, 0.2)",
                 }}
               >
-                <Box p="xxs">
+                <SpacedView horizontal="xxs" vertical="xxs">
                   <Text
                     style={[
                       fontStyles.ios.caption1,
@@ -160,7 +160,7 @@ De Dreamweaver à Cursor, les années ont passé, mais pas mon appétit pour de 
                   >
                     {t({ en: "Feb. 1996", fr: "févr. 1996" })}
                   </Text>
-                </Box>
+                </SpacedView>
               </View>
               <Image
                 src="/max-kid.jpg"

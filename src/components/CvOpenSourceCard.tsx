@@ -15,7 +15,7 @@ import { size } from "@/react-multiversal";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkView from "@/react-multiversal/LinkView";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import { alpha, colors } from "@/styles";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import { StyleSheet, Text, View } from "react-native";
@@ -48,7 +48,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
         <SVGSocialGithub width={170} height={170} fill={colors.white} />
       </View>
 
-      <Box p="l" gap="s">
+      <SpacedView horizontal="l" vertical="l" gap="s">
         <View
           style={{
             flexDirection: "row",
@@ -104,7 +104,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
                   borderColor: alpha(colors.white, 0.18),
                 }}
               >
-                <Box p="s" gap="xxs">
+                <SpacedView horizontal="s" vertical="s" gap="xxs">
                   <View
                     style={{
                       flexDirection: "row",
@@ -169,7 +169,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
                   <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.82) }]}>
                     {item.title.trim()}
                   </Text>
-                </Box>
+                </SpacedView>
               </View>
             );
           })}
@@ -187,7 +187,7 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
             </Text>
           ))}
         </Text>
-      </Box>
+      </SpacedView>
     </View>
   );
 }

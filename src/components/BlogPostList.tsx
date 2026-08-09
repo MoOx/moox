@@ -1,7 +1,7 @@
 import { BlogPost } from "@/api";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
-import Box from "@/react-multiversal/Box";
+import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { useRef } from "react";
@@ -12,14 +12,14 @@ function BlogPostPreview({ item }: { item: BlogPost }) {
 
   return (
     <LinkView href={`/${item.slug}/`}>
-      <Box py="s">
+      <SpacedView vertical="s">
         <Text style={[fontStyles.ios.title3, theme.styles.text]}>
           {item.title}
           <Text style={[fontStyles.ios.footnote, theme.styles.text]}>
             {item.lang ? ` [${item.lang}]` : null}
           </Text>
         </Text>
-      </Box>
+      </SpacedView>
     </LinkView>
   );
 }
