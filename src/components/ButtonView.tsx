@@ -183,7 +183,12 @@ const ButtonView = ({
   return (
     <BlurView blurAmount={blurAmount} style={styleBtn} {...props}>
       {elementBackground}
-      <Box px={spaceHorizontal} py={spaceVertical} gap={spaceGap} style={styles.row}>
+      <Box
+        px={spaceHorizontal}
+        py={spaceVertical}
+        gap={spaceGap}
+        style={styles.row}
+      >
         {elementIndicator ? (
           <View style={styles.indicatorContainer}>{elementIndicator}</View>
         ) : null}

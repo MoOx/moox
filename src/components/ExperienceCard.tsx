@@ -266,7 +266,11 @@ export default function ExperienceCard({
         </LinkView>
       ) : null}
       <View style={{ flexDirection: "row" }}>
-        <Box p="l" gap="m" style={{ flexGrow: 1, flexShrink: 1, flexBasis: 340, minWidth: 0 }}>
+        <Box
+          p="l"
+          gap="m"
+          style={{ flexGrow: 1, flexShrink: 1, flexBasis: 340, minWidth: 0 }}
+        >
           {/* With an image, the header lives inside the image band (narrow
               compact screens, every width in full) - only the wide compact
               layout keeps it in the copy column. */}

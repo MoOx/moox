@@ -158,7 +158,11 @@ export default function Card({
           <SVGInfoCircle width={24} height={24} color={alpha(colors.white, 0.5)} />
         </LinkView>
       ) : null}
-      <Box p="m" gap="xxs" style={{ flexGrow: 1, minHeight, justifyContent: "space-between" }}>
+      <Box
+        p="m"
+        gap="xxs"
+        style={{ flexGrow: 1, minHeight, justifyContent: "space-between" }}
+      >
         <View>
           {icon ? (
             <View aria-hidden={true} style={{ alignSelf: "flex-start", marginBottom: size("s") }}>

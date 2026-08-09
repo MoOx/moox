@@ -24,7 +24,12 @@ export default function BlockCompaniesTried() {
       role="region"
       aria-label={t({ en: "They tried to hire me", fr: "Ils ont essayé de me recruter" })}
     >
-      <Box px="l" py="xl" gap="l" style={{ flex: 1, justifyContent: "center" }}>
+      <Box
+        px="l"
+        py="xl"
+        gap="l"
+        style={{ flex: 1, justifyContent: "center" }}
+      >
         <Text
           style={[
             fontStyles.ios.headline,

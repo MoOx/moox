@@ -1,6 +1,8 @@
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import ContactBookingCard from "@/components/ContactBookingCard";
-import ContactChannel, { type ContactChannel as Channel } from "@/components/ContactChannel";
+import ContactChannel, {
+  type ContactChannel as Channel,
+} from "@/components/ContactChannel";
 import ContactElsewhere from "@/components/ContactElsewhere";
 import ContactPageStyles from "@/components/ContactPageStyles";
 import ContactSideCard from "@/components/ContactSideCard";
@@ -48,7 +50,10 @@ export const Route = createFileRoute("/{-$lang}/contact")({
 });
 
 /** `678135439` → `6 78 13 54 39`, the way a French number is read out loud. */
-const groupedPhone = socials.call.value.replace(/^(\d)(\d\d)(\d\d)(\d\d)(\d\d)$/, "$1 $2 $3 $4 $5");
+const groupedPhone = socials.call.value.replace(
+  /^(\d)(\d\d)(\d\d)(\d\d)(\d\d)$/,
+  "$1 $2 $3 $4 $5",
+);
 const phoneDisplay = `+${ind} ${groupedPhone}`;
 const phoneValue = `+${ind}${socials.call.value}`;
 const smsValue = `+${ind}${socials.text.value}`;
@@ -80,7 +85,9 @@ function useToulouseTime() {
     const read = () => {
       const now = new Date();
       setTime({
-        hour: Number(new Intl.DateTimeFormat("en-GB", parisHourFormat).format(now)),
+        hour: Number(
+          new Intl.DateTimeFormat("en-GB", parisHourFormat).format(now),
+        ),
         zone:
           new Intl.DateTimeFormat("en-GB", parisZoneFormat)
             .formatToParts(now)
@@ -268,7 +275,10 @@ function PageContact() {
           channel={channel}
           variant={variant}
           copied={copied === channel.key}
-          onCopy={() => channel.copyValue && copy(channel.key as "sms" | "mail", channel.copyValue)}
+          onCopy={() =>
+            channel.copyValue &&
+            copy(channel.key as "sms" | "mail", channel.copyValue)
+          }
         />
       </View>
     ));
@@ -314,7 +324,9 @@ function PageContact() {
           <Box px="m" py="l" gap={size("l")}>
             <View style={{ gap: size("xs") }}>
               {heading}
-              <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>{statusLine}</Text>
+              <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>
+                {statusLine}
+              </Text>
             </View>
             <View
               role="list"
@@ -338,7 +350,11 @@ function PageContact() {
 
       <IfWindowWidthIs largerThan={WindowWidth.m}>
         <Container maxWidth={1180}>
-          <Box p="xl" gap={size("xxl")} style={{ flexDirection: "row", alignItems: "flex-start" }}>
+          <Box
+            p="xl"
+            gap={size("xxl")}
+            style={{ flexDirection: "row", alignItems: "flex-start" }}
+          >
             <View style={{ width: 340, gap: size("l") }}>
               <Avatar
                 size={size("xxxl") + size("l")}
@@ -347,14 +363,24 @@ function PageContact() {
               />
               <View style={{ gap: size("xs") }}>
                 {heading}
-                <Text style={[fontStyles.ios.callout, { lineHeight: 25 }, theme.styles.textLight1]}>
+                <Text
+                  style={[
+                    fontStyles.ios.callout,
+                    { lineHeight: 25 },
+                    theme.styles.textLight1,
+                  ]}
+                >
                   {t({
                     en: `${jobTitle}, freelance since ${freelanceSince}. ${t(workLocation)}. Pick whichever channel you actually like: they all reach me.`,
                     fr: `${jobTitle}, freelance depuis ${freelanceSince}. ${t(workLocation)}. Choisissez le canal qui vous va : ils arrivent tous jusqu'à moi.`,
                   })}
                 </Text>
                 <Text
-                  style={[fontStyles.ios.footnote, { lineHeight: 20 }, theme.styles.textLight1]}
+                  style={[
+                    fontStyles.ios.footnote,
+                    { lineHeight: 20 },
+                    theme.styles.textLight1,
+                  ]}
                 >
                   {statusLine}
                 </Text>

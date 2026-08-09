@@ -11,7 +11,13 @@ import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkView from "@/react-multiversal/LinkView";
 import Box from "@/react-multiversal/Box";
-import { alpha, boxShadows, colors, gradientFlashyStops, useTheme } from "@/styles";
+import {
+  alpha,
+  boxShadows,
+  colors,
+  gradientFlashyStops,
+  useTheme,
+} from "@/styles";
 import SVGMoox from "@/svgs/components/SVGMoox";
 import SVGSocialGithub from "@/svgs/components/SVGSocialGithub";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
@@ -112,7 +118,10 @@ export default function WebsiteHeader() {
               </LinkView>
               <AvailabilityBadge showText={"on-focus"} />
             </View>
-            <IfWindowWidthIs largerThan={WindowWidth.s} style={[styles.menuGroup, { flex: 2 }]}>
+            <IfWindowWidthIs
+              largerThan={WindowWidth.s}
+              style={[styles.menuGroup, { flex: 2 }]}
+            >
               {/* The site navigation, as a landmark: a screen reader can jump
                   straight to it, and a crawler reads it as the menu rather than
                   as five links in a row. */}
@@ -125,12 +134,29 @@ export default function WebsiteHeader() {
                 <WebsiteMobileMenuLinks />
               </Box>
             </IfWindowWidthIs>
-            <Box gap="m" style={[styles.menuGroup, { justifyContent: "flex-end" }]}>
-              <LinkView href={socials.linkedin.value} aria-label="@Max on LinkedIn">
-                <SVGSocialLinkedin width={20} height={20} fill={theme.dynamicColors.text} />
+            <Box
+              gap="m"
+              style={[styles.menuGroup, { justifyContent: "flex-end" }]}
+            >
+              <LinkView
+                href={socials.linkedin.value}
+                aria-label="@Max on LinkedIn"
+              >
+                <SVGSocialLinkedin
+                  width={20}
+                  height={20}
+                  fill={theme.dynamicColors.text}
+                />
               </LinkView>
-              <LinkView href={socials.github.value} aria-label="@MoOx on GitHub">
-                <SVGSocialGithub width={20} height={20} fill={theme.dynamicColors.text} />
+              <LinkView
+                href={socials.github.value}
+                aria-label="@MoOx on GitHub"
+              >
+                <SVGSocialGithub
+                  width={20}
+                  height={20}
+                  fill={theme.dynamicColors.text}
+                />
               </LinkView>
             </Box>
           </Box>

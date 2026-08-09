@@ -25,7 +25,10 @@ export const footerAnchor = "links";
 export const visualUrl = (url: string) => {
   return url.replace(/^(?:https?:\/\/(www\.)?)/i, "");
 };
-export const sendStringAsMailString = (send: string, visual: boolean = false) => {
+export const sendStringAsMailString = (
+  send: string,
+  visual: boolean = false,
+) => {
   return visual ? send.replace("/", " @ ") : send.replace("/", "@");
 };
 
@@ -130,33 +133,56 @@ export const internalLinks: LinksWithIcon = {
     href: "/",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
-        <SVGMenuHomeFill style={style} width={size} height={size} color={color} />
+        <SVGMenuHomeFill
+          style={style}
+          width={size}
+          height={size}
+          color={color}
+        />
       ) : (
         <SVGMenuHome style={style} width={size} height={size} color={color} />
       ),
-    isActive: (currentLink: string | null, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
   Resume: {
     label: { en: "Resume", fr: "CV" },
     href: "/resume",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
-        <SVGMenuResumeFill style={style} width={size} height={size} color={color} />
+        <SVGMenuResumeFill
+          style={style}
+          width={size}
+          height={size}
+          color={color}
+        />
       ) : (
         <SVGMenuResume style={style} width={size} height={size} color={color} />
       ),
-    isActive: (currentLink: string | null, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
   Contact: {
     label: { en: "Contact", fr: "Contact" },
     href: "/contact",
     icon: ({ style, size, color, active = true }: LinksIconProps) =>
       active ? (
-        <SVGEllipsisMessageFill style={style} width={size} height={size} color={color} />
+        <SVGEllipsisMessageFill
+          style={style}
+          width={size}
+          height={size}
+          color={color}
+        />
       ) : (
-        <SVGEllipsisMessage style={style} width={size} height={size} color={color} />
+        <SVGEllipsisMessage
+          style={style}
+          width={size}
+          height={size}
+          color={color}
+        />
       ),
-    isActive: (currentLink: string | null, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
   More: {
     label: { en: "More", fr: "Plus" },
@@ -164,7 +190,8 @@ export const internalLinks: LinksWithIcon = {
     icon: ({ style, size, color }: LinksIconProps) => (
       <SVGTextMenu style={style} width={size} height={size} color={color} />
     ),
-    isActive: (currentLink: string | null, link: string) => currentLink === link,
+    isActive: (currentLink: string | null, link: string) =>
+      currentLink === link,
   },
 };
 
@@ -193,7 +220,12 @@ export const socialLinks: LinksWithIcon = {
     alt: "@Max on LinkedIn",
     href: socials.linkedin.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGSocialLinkedin style={style} color={color} width={size} height={size} />
+      <SVGSocialLinkedin
+        style={style}
+        color={color}
+        width={size}
+        height={size}
+      />
     ),
   },
   GitHub: {
@@ -223,7 +255,12 @@ export const socialLinks2 = {
     alt: "@MoOx on Dribbble",
     href: socials.dribbble.value,
     icon: ({ style, size, color }: LinksIconProps) => (
-      <SVGSocialDribbble style={style} color={color} width={size} height={size} />
+      <SVGSocialDribbble
+        style={style}
+        color={color}
+        width={size}
+        height={size}
+      />
     ),
   },
   /*

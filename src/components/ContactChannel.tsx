@@ -110,7 +110,9 @@ export default function ContactChannel({
           m.padding,
           // Room for the copy button under the text, on the card variant where
           // it cannot sit beside it.
-          variant === "card" && hasCopy ? { paddingBottom: size("xxxl") } : null,
+          variant === "card" && hasCopy
+            ? { paddingBottom: size("xxxl") }
+            : null,
         ]}
       >
         <ContactTile
@@ -129,7 +131,9 @@ export default function ContactChannel({
           >
             {channel.title}
           </Text>
-          <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>{channel.subtitle}</Text>
+          <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
+            {channel.subtitle}
+          </Text>
         </View>
       </LinkView>
       <View
@@ -149,7 +153,10 @@ export default function ContactChannel({
                   backgroundColor: alpha(socials.call.color, 0.14),
                   color: theme.dynamicColors.inkSuccess,
                 }
-              : [{ backgroundColor: theme.dynamicColors.ultraLight }, theme.styles.textLight1],
+              : [
+                  { backgroundColor: theme.dynamicColors.ultraLight },
+                  theme.styles.textLight1,
+                ],
           ]}
         >
           {channel.estimate}
@@ -176,7 +183,11 @@ export default function ContactChannel({
             overflow: "hidden",
           }}
         >
-          <SVGCopy width={15} height={15} fill={theme.dynamicColors.textLight1} />
+          <SVGCopy
+            width={15}
+            height={15}
+            fill={theme.dynamicColors.textLight1}
+          />
           {!copied ? null : (
             <View
               style={{
@@ -191,7 +202,10 @@ export default function ContactChannel({
               }}
             >
               <Text
-                style={[fontStyles.iosEm.caption2, { fontSize: 10, color: themeDark.colors.back }]}
+                style={[
+                  fontStyles.iosEm.caption2,
+                  { fontSize: 10, color: themeDark.colors.back },
+                ]}
               >
                 OK
               </Text>

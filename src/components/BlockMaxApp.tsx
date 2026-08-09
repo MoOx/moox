@@ -8,7 +8,12 @@ import {
   WebsiteMobileMenuLinks,
   WebsiteMobileMenuLinksContainer,
 } from "@/components/WebsiteMobileMenu";
-import { sendStringAsMailString, socialLinks, socialLinks2, socials } from "@/consts";
+import {
+  sendStringAsMailString,
+  socialLinks,
+  socialLinks2,
+  socials,
+} from "@/consts";
 import { useHref, useT } from "@/i18n";
 import { jobTitle } from "@/profile";
 import Avatar from "@/react-multiversal/Avatar";
@@ -21,7 +26,14 @@ import SVGChevronRight from "@/svgs/components/SVGChevronRight";
 import SVGEnvelopeFill from "@/svgs/components/SVGEnvelopeFill";
 import Clipboard from "@react-native-clipboard/clipboard";
 import { useEffect, useState } from "react";
-import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
+import {
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+} from "react-native";
 import Animated from "react-native-reanimated";
 
 const useCurrentTime = () => {
@@ -92,7 +104,9 @@ export default function BlockMaxApp({
         >
           {time}
         </Text>
-        <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>{"Max Pro"}</Text>
+        <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
+          {"Max Pro"}
+        </Text>
       </Box>
       <Spacer size="xl" />
       <Spacer size="xxs" />
@@ -143,7 +157,9 @@ export default function BlockMaxApp({
             aria-level={2}
           >
             <View style={{ flex: 1 }}>
-              <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>{"@MoOx"}</Text>
+              <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>
+                {"@MoOx"}
+              </Text>
               <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
                 {t({
                   en: `${jobTitle} for web & mobile apps.`,
@@ -151,7 +167,11 @@ export default function BlockMaxApp({
                 })}
               </Text>
             </View>
-            <Avatar size={64} borderWidth={8} borderColor={"rgba(0, 0, 0, 0.05)"} />
+            <Avatar
+              size={64}
+              borderWidth={8}
+              borderColor={"rgba(0, 0, 0, 0.05)"}
+            />
           </View>
           <Spacer />
           <View style={{ flexDirection: "row" }}>
@@ -210,7 +230,9 @@ export default function BlockMaxApp({
                             transitionDuration: "250ms",
                             transitionTimingFunction: "ease-in-out",
                           },
-                          copied ? { opacity: 0, transform: [{ translateX: -6 }] } : {},
+                          copied
+                            ? { opacity: 0, transform: [{ translateX: -6 }] }
+                            : {},
                         ]}
                       >
                         {t({ en: "Copy Email", fr: "Copier l'e-mail" })}
@@ -239,7 +261,11 @@ export default function BlockMaxApp({
             </Pressable>
           </View>
           <Spacer size="m" />
-          <Box p="s" gap="s" style={[theme.styles.backAlt, { borderRadius: 12 }]}>
+          <Box
+            p="s"
+            gap="s"
+            style={[theme.styles.backAlt, { borderRadius: 12 }]}
+          >
             <Text style={[fontStyles.iosEm.subhead, theme.styles.text]}>
               {t({ en: "Follow me", fr: "Me suivre" })}
             </Text>

@@ -21,7 +21,12 @@ export default function BlockCompaniesTrust() {
 
   return (
     <Container role="region" aria-label={t({ en: "Trusted by", fr: "Ils m'ont fait confiance" })}>
-      <Box px="l" py="xl" gap="l" style={{ flex: 1, justifyContent: "center" }}>
+      <Box
+        px="l"
+        py="xl"
+        gap="l"
+        style={{ flex: 1, justifyContent: "center" }}
+      >
         <Text
           style={[
             fontStyles.ios.headline,

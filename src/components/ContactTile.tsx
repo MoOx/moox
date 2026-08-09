@@ -62,7 +62,8 @@ const gloss = {
   right: 0,
   left: 0,
   height: "55%",
-  backgroundImage: "linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0))",
+  backgroundImage:
+    "linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0))",
   pointerEvents: "none",
 } as const;
 

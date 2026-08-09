@@ -262,7 +262,7 @@ function PageResume() {
 
       {/* ============================================================ Hero */}
       <Container
-        wrapperStyle={{ zIndex: 1 }}
+        wrapperStyle={{ zIndex: 1, overflow: "visible" }}
         maxWidth={900}
         style={{
           flexDirection: "row",
@@ -477,7 +477,12 @@ function PageResume() {
       {/* =========================================================== Skills */}
       <Spacer size="xl" />
       <Container maxWidth={900}>
-        <Box role="region" aria-label={t({ en: "Skills", fr: "Compétences" })} px="l" gap="l">
+        <Box
+          role="region"
+          aria-label={t({ en: "Skills", fr: "Compétences" })}
+          px="l"
+          gap="l"
+        >
           <Text
             style={[fontStyles.iosEm.largeTitle, gradientTextIndigoStylesInv(theme)]}
             role="heading"
@@ -906,7 +911,11 @@ function PageResume() {
       {/* ===================================================== Full history */}
       <Spacer size="xxl" />
       <Container maxWidth={900}>
-        <Box role="region" aria-label={t({ en: "All Experience", fr: "Tout le parcours" })} px="l">
+        <Box
+          role="region"
+          aria-label={t({ en: "All Experience", fr: "Tout le parcours" })}
+          px="l"
+        >
           <Text
             style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
             role="heading"
