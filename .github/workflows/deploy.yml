@@ -1,3 +1,20 @@
+# Production. moox.io is served by GitHub Pages from this workflow, and only
+# from this workflow.
+#
+# Pull request previews are NOT here: they are built by Cloudflare Pages, wired
+# through its GitHub app rather than a workflow, so nothing about production
+# depends on them. Settings, for the record - build `npm run build`, output
+# `dist/client`, production branch `main`, no custom domain (moox.io DNS must
+# keep pointing at GitHub Pages). Cloudflare comments the preview URL on each PR
+# and serves preview deployments with `X-Robots-Tag: noindex`.
+#
+# Previews live at a *domain root*, which is the whole point: every asset and
+# link this site emits is root-absolute (`/assets/…`, `/resume`), so the build
+# runs unmodified at any root but would break under a sub-path. Serving previews
+# from a sub-path instead would mean `base` + router `basepath` + a prefix on
+# the ~60 hand-written paths in `src/` and in the content JSON - and `<base
+# href>` does not help, it only rewrites *relative* URLs, never `/…` ones.
+
 name: Deploy to GitHub Pages
 
 on:
