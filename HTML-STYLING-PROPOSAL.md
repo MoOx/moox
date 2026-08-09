@@ -248,33 +248,37 @@ handful of uses that need the outer `overflow: hidden`.
 Expected: **−400 to −500 elements on `/resume`**, −100 on `/`, with no visual
 change.
 
-### Step 2 — a thin semantic layer (~150 lines, no dependency)
+### Step 2 — links are one element *(done)*
 
-Stop writing `role` at call sites. Write the eight primitives the site actually
-uses, and let them decide per platform:
+This was drafted as "a thin semantic layer": `Heading` / `Paragraph` / `List` /
+`Link` primitives choosing their own tag per platform, with the `LinkText`
+merge folded in.
 
-```tsx
-// primitives/Text.tsx
-export const Heading = ({ level, ...p }) => …  // <h1>-<h6> on web, <Text> + a11y on native
-export const Paragraph = …                     // <p>          / <Text>
-export const List / ListItem = …               // <ul>/<li>    / <View role>
-export const Link = …                          // <a>          / <Text onPress>
-```
+**Only the link merge was worth doing, and it is done.** The primitive layer
+was dropped — react-native-web already maps `role` to the real tag (`<h3>`,
+`<nav>`, `<p>`, `<ul>`, `<article>`), so the markup is *already* semantic and
+the primitives would only have renamed ~100 call sites. Writing `role` on a
+`View` is fine.
 
-Two properties matter:
+The link merge carried the entire node win of the plan:
 
-1. **It is the react-strict-dom interface, hand-rolled.** If RSD ships, this
-   file is what you replace — nothing else. If it never ships, you lose
-   nothing.
-2. **It is the demo.** For a job search, "I wrote the cross-platform primitive
-   layer, here is the file" reads considerably better than "I added a
-   dependency".
+| | Before | After | |
+| --- | --- | --- | --- |
+| `/resume` | 3 122 | 2 925 | −197 |
+| `/` | 1 306 | 1 249 | −57 |
+| `/contact` | 641 | 590 | −51 |
+| anchors wrapping a lone text node | 182 | 0 | |
 
-Fold `LinkText` into it while you are there: when the child is a string, put
-the text styles **on the anchor** instead of a nested text node — that is
-**−182 elements on `/resume` alone**. And replace `useFocus` (a hook with four
-DOM listeners, running ~200× per page) with a `:focus-visible` CSS rule on web,
-keeping the hook only for native.
+The obstacle was worth recording: the two nodes could **not** be merged by
+handing the text styles to the router's `<Link>`, because that is a DOM anchor
+and React DOM reads `lineHeight: 26` as a ratio where React Native means
+pixels. `useLinkProps` supplies the router's href and click handling as plain
+props, and `<Text href>` renders the anchor itself with the styles compiled to
+classNames.
+
+`TextUnderlined` went with it, and with it a `useFocus` hook — four DOM
+listeners and a re-render on hover — that ran on every link, ~200 per page on
+`/resume`. It is one `:hover, :focus-visible` rule now.
 
 ### Step 3 — the ergonomics on top of the theme (the mechanism stays)
 
@@ -368,8 +372,10 @@ layout.
 
 ## 5. What not to do
 
-- **Do not adopt react-strict-dom now.** Design toward it (step 2), adopt it
-  when it releases a `0.1`.
+- **Do not adopt react-strict-dom now.** Revisit if it ever releases a `0.1`.
+  The plan no longer builds an adapter layer toward it (see step 2): with RNW
+  actively maintained again and `role` already producing the right tags, the
+  adapter would be written on the day it is needed, not before.
 - **Do not replace the theme mechanism.** It solves the problem it was written
   for (reliable `auto` via CSS variables on web, OS scheme on native). Only the
   authoring surface on top of it is in scope.
@@ -381,16 +387,34 @@ layout.
   the screenshot diff is the only thing standing between this refactor and a
   regression on a site whose visual result is its main asset.
 
-## 6. Target
+## 6. Target vs. what actually happened
 
-| | Now | After steps 1–2 | |
-| --- | --- | --- | --- |
-| `/resume` elements | 2 828 | ~1 900 | −33% |
-| `/` elements | 1 307 | ~1 050 | −20% |
-| Max depth (`/`) | 26 | ~18 | |
-| `useTheme()` call sites | 58 | 0 | after step 3 |
-| `style={{…}}` literals | 307 | ~80 | |
-| Deleted components | — | `SpacedView`, `Spacer`, `TextUnderlined` | |
+The projection in the first draft was wrong, and by a lot. It is kept here
+rather than quietly edited, because the gap is the useful part.
+
+| | Projected | Actual, after steps 1–2 |
+| --- | --- | --- |
+| `/resume` elements | 2 828 → ~1 900 (−33%) | 3 122 → 2 925 (−6%) |
+| `/` elements | 1 307 → ~1 050 (−20%) | 1 306 → 1 249 (−4%) |
+| Max depth (`/`) | 26 → ~18 | 26 → 25 |
+| Deleted components | `SpacedView`, `Spacer`, `TextUnderlined` | `SpacedView`, `TextUnderlined` |
+
+(The `/resume` figures are from the dev server, which renders a few more nodes
+than the production build the −33% was projected against; the *shape* of the
+miss is the point, not the last digit.)
+
+Where the projection went wrong: it read the 503 single-child wrappers on
+`/resume` as one removable population. They are not. 182 of them were the link
+inner nodes — removed, and that is essentially the whole win. The rest are
+`Spacer` and `Container` nodes whose removal each turned out to change layout
+(gap arithmetic, and padding applied outside `maxWidth`), plus wrappers that
+are simply the only node their subtree has.
+
+What the effort actually bought, beyond the ~300 nodes: `SpacedView` and
+`TextUnderlined` deleted, ~200 focus hooks per page replaced by one CSS rule,
+121 call sites shortened, and a verification harness that caught three separate
+regressions before they shipped. The DOM is not 33% lighter. It is honestly
+measured, and the parts that could safely go, went.
 
 Each step is independently shippable and independently verifiable:
 

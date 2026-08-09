@@ -1,5 +1,4 @@
-import TextUnderlined, { TextUnderlinedProps } from "@/react-multiversal/TextUnderlined";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { useLinkProps, useRouterState } from "@tanstack/react-router";
 import { MouseEvent, Ref, useCallback, useMemo } from "react";
 import {
   GestureResponderEvent,
@@ -7,16 +6,26 @@ import {
   StyleProp,
   StyleSheet,
   Text,
+  TextProps,
   TextStyle,
 } from "react-native";
 
-export type LinkTextProps = TextUnderlinedProps & {
+export type LinkTextProps = TextProps & {
+  ref?: Ref<Text>;
   href: string;
   style?: StyleProp<TextStyle>;
   activeStyle?: StyleProp<TextStyle>;
+  /**
+   * Kept for call sites that styled the `<a>` separately from the text inside
+   * it. There is only one node now, so this is merged before `style` rather
+   * than applied to a different element.
+   */
   containerStyle?: StyleProp<TextStyle>;
   containerActiveStyle?: StyleProp<TextStyle>;
   isActive?: (s: string, pathname: string) => boolean;
+  underline?: boolean;
+  /** Underline on hover or keyboard focus. CSS on web, no JS, no listeners. */
+  underlineOnFocus?: boolean;
   onPress?: (event: GestureResponderEvent | MouseEvent<HTMLAnchorElement>) => void;
 };
 
@@ -25,83 +34,154 @@ const defaultIsActive = (href: string, pathname: string) =>
 
 const isInternalLink = (href: string) => href.startsWith("/") || href.startsWith("#");
 
-const resetLinkStyle = {
-  color: "inherit",
-  textDecoration: "inherit",
-};
+const styles = StyleSheet.create({
+  // The anchor carries the text styles now, so it must not also inherit the
+  // browser's link colour and underline.
+  reset: { color: "inherit", textDecorationLine: "none" },
+  underline: { textDecorationLine: "underline" },
+});
 
-export default function LinkText({
-  ref,
-  role = "link",
+/**
+ * A link that is **one element**. It used to be an `<a>` wrapping a `<Text>`,
+ * because the router's `<Link>` is a DOM anchor and cannot take React Native
+ * styles - passing them straight through would misread `lineHeight: 26` as a
+ * ratio rather than pixels. `useLinkProps` gives the same href and click
+ * handling as `<Link>` as plain props, which react-native-web's `<Text href>`
+ * renders as an anchor with the styles compiled to classNames.
+ *
+ * On /resume that removed 182 nodes: 182 of the page's 198 anchors existed
+ * only to hold a text node.
+ */
+function useLinkStyles({
   style,
   activeStyle,
   containerStyle,
   containerActiveStyle,
+  underline,
+  active,
+}: Pick<
+  LinkTextProps,
+  "style" | "activeStyle" | "containerStyle" | "containerActiveStyle" | "underline"
+> & { active: boolean }) {
+  return useMemo(
+    () => [
+      styles.reset,
+      underline ? styles.underline : null,
+      containerStyle,
+      active ? containerActiveStyle : null,
+      style,
+      active ? activeStyle : null,
+    ],
+    [style, activeStyle, containerStyle, containerActiveStyle, underline, active],
+  );
+}
+
+function InternalLinkText({
+  ref,
+  role = "link",
   href,
+  style,
+  activeStyle,
+  containerStyle,
+  containerActiveStyle,
   isActive = defaultIsActive,
+  underline = false,
+  underlineOnFocus = false,
   onPress,
-  // Pulled out of `...props`: spread onto the inner text node it would name
-  // that node, leaving the <a> itself without an accessible name - which is
-  // what a screen reader and an audit both read. The name of a link belongs
-  // on the link.
-  "aria-label": ariaLabel,
   ...props
 }: LinkTextProps) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const active = isActive(href, pathname);
-  const textStyles = useMemo(
-    () => [style, active ? activeStyle : undefined],
-    [style, activeStyle, active],
-  );
-  const containerStyles = useMemo(
-    () =>
-      StyleSheet.flatten([
-        resetLinkStyle,
-        containerStyle,
-        active ? containerActiveStyle : undefined,
-      ]),
-    [containerStyle, containerActiveStyle, active],
-  );
+  const linkStyles = useLinkStyles({
+    style,
+    activeStyle,
+    containerStyle,
+    containerActiveStyle,
+    underline,
+    active,
+  });
+  const linkProps = useLinkProps({ to: href });
+  const routerClick = linkProps.onClick;
 
-  const handleLinkPress = useCallback(
+  const handleClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement>) => {
-      if (onPress !== undefined) {
-        onPress(event);
+      onPress?.(event);
+      // `onPress` may cancel the navigation - that is how the résumé cards open
+      // a modal while keeping a real, crawlable href.
+      if (!event.defaultPrevented) {
+        routerClick?.(event as never);
       }
     },
-    [onPress],
+    [onPress, routerClick],
   );
-  const handleTextPress = useCallback(
+
+  return (
+    <Text
+      {...props}
+      ref={ref}
+      role={role}
+      href={linkProps.href ?? href}
+      onClick={handleClick}
+      // Router preloading is driven by these on `<Link>`; they are plain DOM
+      // handlers, which react-native-web forwards to the anchor.
+      onMouseEnter={linkProps.onMouseEnter}
+      onFocus={linkProps.onFocus}
+      onTouchStart={linkProps.onTouchStart}
+      dataSet={underlineOnFocus ? { underlineOnFocus: "true" } : undefined}
+      style={linkStyles}
+    />
+  );
+}
+
+function ExternalLinkText({
+  ref,
+  role = "link",
+  href,
+  style,
+  activeStyle,
+  containerStyle,
+  containerActiveStyle,
+  underline = false,
+  underlineOnFocus = false,
+  onPress,
+  ...props
+}: LinkTextProps) {
+  const linkStyles = useLinkStyles({
+    style,
+    activeStyle,
+    containerStyle,
+    containerActiveStyle,
+    underline,
+    active: false,
+  });
+
+  const handlePress = useCallback(
     (event: GestureResponderEvent) => {
-      if (onPress !== undefined) {
-        onPress(event);
-      }
+      onPress?.(event);
+      // Native has no anchor to follow the href for it.
       Linking.openURL(href).catch(console.error);
       event.preventDefault();
     },
     [href, onPress],
   );
-  return isInternalLink(href) ? (
-    <Link
-      ref={ref as Ref<HTMLAnchorElement>}
-      to={href}
-      role={role}
-      aria-label={ariaLabel}
-      style={containerStyles as any}
-      onClick={handleLinkPress}
-    >
-      <TextUnderlined ref={ref} style={textStyles} {...props} />
-    </Link>
-  ) : (
+
+  return (
     <Text
+      {...props}
       ref={ref}
-      href={href}
       role={role}
-      aria-label={ariaLabel}
-      style={containerStyles}
-      onPress={handleTextPress}
-    >
-      <TextUnderlined style={textStyles} {...props} />
-    </Text>
+      href={href}
+      onPress={handlePress}
+      dataSet={underlineOnFocus ? { underlineOnFocus: "true" } : undefined}
+      style={linkStyles}
+    />
+  );
+}
+
+export default function LinkText(props: LinkTextProps) {
+  return isInternalLink(props.href) ? (
+    <InternalLinkText {...props} />
+  ) : (
+    <ExternalLinkText {...props} />
   );
 }
