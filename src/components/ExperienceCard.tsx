@@ -278,9 +278,9 @@ export default function ExperienceCard({
           // anything reading the markup: 3 559 of the 3 786 hidden characters
           // on /resume were duplicates of visible text.
           //
-          // One <img> now, positioned by `[data-card-image]` in styles.css:
-          // top band under 1024px, right half above. The header follows the
-          // same trick from the copy column below.
+          // One <img> now, positioned by `responsive.image` above: top band
+          // under 1024px, right half over. The header follows the same route
+          // from the copy column below.
           <Image
             src={image}
             alt=""
@@ -321,8 +321,8 @@ export default function ExperienceCard({
           {...(image && !full ? responsiveProps(responsive.body) : null)}
           style={{ flexGrow: 1, flexShrink: 1, flexBasis: 340, minWidth: 0 }}
         >
-          {/* One header, always here. Under 1024px `[data-card-header]` lifts
-              it out of the flow and onto the bottom of the image band, which is
+          {/* One header, always here. Under 1024px `responsive.header` lifts it
+              out of the flow and onto the bottom of the image band, which is
               where it used to be rendered a second time. */}
           {full && image ? null : (
             <View {...(image ? responsiveProps(responsive.header) : null)}>{header}</View>

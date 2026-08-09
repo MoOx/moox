@@ -40,6 +40,12 @@ let counter = 0;
 
 // React Native numbers are pixels. These are the CSS properties where a bare
 // number is *not* a length, so they must not get a unit.
+//
+// `lineHeight` is deliberately NOT in this list, even though React DOM treats
+// it as unitless: in React Native `lineHeight: 26` means 26 pixels, and
+// emitting `line-height: 26` would make it a multiple of the font size
+// instead. That is the exact ratio-vs-pixels mismatch that stopped the router's
+// `<Link>` from taking React Native text styles in the first place.
 const unitless = new Set([
   "opacity",
   "zIndex",
@@ -47,17 +53,18 @@ const unitless = new Set([
   "flexGrow",
   "flexShrink",
   "fontWeight",
-  "lineHeight",
   "order",
   "aspectRatio",
 ]);
 
-const cssProp = (key: string) =>
-  key
-    // WebkitMaskImage → -webkit-mask-image
-    .replace(/^Webkit/, "webkit")
-    .replace(/^webkit/, "-webkit-")
-    .replace(/[A-Z]/g, (c) => "-" + c.toLowerCase());
+/**
+ * `paddingTop` → `padding-top`, and a capitalised first letter is a vendor
+ * prefix: `WebkitMaskImage` → `-webkit-mask-image`.
+ */
+const cssProp = (key: string) => {
+  const kebab = key.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase());
+  return /^[A-Z]/.test(key) ? `-${kebab.slice(1)}` : kebab;
+};
 
 const cssValue = (key: string, value: unknown) =>
   typeof value === "number" && !unitless.has(key) ? `${value}px` : String(value);
