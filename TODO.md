@@ -82,15 +82,38 @@ Diagnosis, measurements and the reasoning behind the order live in
 are where the DOM win is and need no library decision; step 3 is the library
 decision itself.
 
-- [ ] **Step 1 — spacing as props.** One `Box` primitive (`p`/`px`/`py`/`gap`)
-      replacing `SpacedView` (121 uses) and `Spacer` (77 empty `<div>`, → `gap`
-      on the parent). `Container` from two nodes to one (`marginHorizontal:
-      "auto"`). Target −400/−500 elements on `/resume`.
-- [ ] **Step 2 — semantic primitives.** `Heading` / `Paragraph` / `List` /
-      `ListItem` / `Link` deciding their own tag per platform, instead of
-      `role=` at 100+ call sites. Fold `LinkText` in: text styles on the `<a>`
-      when the child is a string (−182 elements on `/resume`), and
-      `:focus-visible` on web instead of the `useFocus` hook per link.
+Corrected target, measured rather than projected: the earlier "−400/−500
+elements on `/resume`" for step 1 was wrong. The removable Spacer + Container
+population there is ~105, and both mechanical routes to it regress layout (see
+below). The bulk of the win was in step 2 instead.
+
+- [x] **Step 1 — spacing as props.** `Box` (`p`/`px`/`py`/`gap`) replaced
+      `SpacedView` at 121 call sites; `SpacedView` is deleted. Ergonomics only:
+      the DOM did not move (1307 → 1306 on `/`).
+      Tried and reverted, both caught by `npm run visual`:
+      **Container two nodes → one** (8 captures regressed — the wrapper's
+      padding applies outside `maxWidth`, and its `overflow: hidden` is what
+      stops decorative overflow widening the document on a phone);
+      **folding `<Spacer>` into the next element's `marginTop`** (4 captures
+      regressed — removing a child from a parent that has a `gap` removes a gap
+      too, so the two are not equivalent).
+- [ ] **Spacers, what is left of step 1.** Max's call, 2026-08: **the home
+      page's vertical rhythm stays exactly as it is** (80/24/48/32/48/48px), so
+      no normalising them into a single parent `gap`. Each remaining `Spacer`
+      has to be folded individually, checking the parent's flex direction and
+      whether it has a `gap`. ~65 sites for ~90 nodes a page; low value per
+      unit of risk, so it is not next.
+- [x] **Step 2a — links are one element.** `LinkText` renders a single node:
+      `useLinkProps` supplies the router's href and click handling as plain
+      props, and react-native-web's `<Text href>` renders the anchor with the
+      styles compiled to classNames. `TextUnderlined` and its per-link
+      `useFocus` are gone, replaced by a `:focus-visible` / `:hover` rule.
+      Measured: `/resume` 3122 → 2925, `/` 1306 → 1249, `/contact` 641 → 590;
+      anchors wrapping a lone text node 182 → 0; max depth 26 → 25.
+- [ ] **Step 2b — semantic primitives.** `Heading` / `Paragraph` / `List` /
+      `ListItem` deciding their own tag per platform, instead of `role=` at
+      100+ call sites. Ergonomics and semantics; the node win already landed in
+      2a.
 - [ ] **Step 3 — font ergonomics, then one token object.** The theme mechanism
       stays (CSS variables for a reliable `auto`, OS scheme on native); only the
       call sites change. Delete `fontStyles.android` / `androidEm` (0 uses,

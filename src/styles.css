@@ -66,6 +66,15 @@ body {
   scroll-margin-top: 100px;
 }
 
+/* `underlineOnFocus` on links. This replaces a `useFocus` hook that attached
+   four DOM listeners per link and re-rendered on hover - ~200 of them on
+   /resume. The atomic class react-native-web writes for `textDecorationLine`
+   is a single class selector, so this outranks it without `!important`. */
+[data-underline-on-focus="true"]:hover,
+[data-underline-on-focus="true"]:focus-visible {
+  text-decoration-line: underline;
+}
+
 /* code highlight */
 .hljs-operator {
   color: #a626a4;
