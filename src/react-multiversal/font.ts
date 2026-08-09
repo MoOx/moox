@@ -1,4 +1,4 @@
-import { Platform, TextStyle } from "react-native";
+import { Platform, StyleSheet, TextStyle } from "react-native";
 
 export const weight = {
   thin: "100",
@@ -372,19 +372,26 @@ const keepStylesEm = (styles: PlatformStyles): TextStyle => {
   };
 };
 
+// Through `StyleSheet.create`, not as plain objects: react-native-web only
+// turns a style into an atomic className when it recognizes the object, and it
+// recognizes the ones it registered. As plain literals these four declarations
+// (font-size, line-height, letter-spacing, font-weight) were written inline on
+// every single text node of every page.
+const createFontStyles = <K extends string>(
+  entries: Record<K, PlatformStyles>,
+  keep: (s: PlatformStyles) => TextStyle,
+): Record<K, TextStyle> =>
+  StyleSheet.create(
+    Object.fromEntries(
+      Object.entries<PlatformStyles>(entries).map(([key, s]) => [key, keep(s)]),
+    ) as Record<K, TextStyle>,
+  );
+
 export const fontStyles = {
-  ios: Object.fromEntries(
-    Object.entries(sizes.ios).map(([key, s]) => [key, keepStyles(s)]),
-  ) as Record<keyof (typeof platform)["ios"], TextStyle>,
-  iosEm: Object.fromEntries(
-    Object.entries(sizes.ios).map(([key, s]) => [key, keepStylesEm(s)]),
-  ) as Record<keyof (typeof platform)["ios"], TextStyle>,
-  android: Object.fromEntries(
-    Object.entries(sizes.android).map(([key, s]) => [key, keepStyles(s)]),
-  ) as Record<keyof (typeof platform)["android"], TextStyle>,
-  androidEm: Object.fromEntries(
-    Object.entries(sizes.android).map(([key, s]) => [key, keepStylesEm(s)]),
-  ) as Record<keyof (typeof platform)["android"], TextStyle>,
+  ios: createFontStyles(sizes.ios, keepStyles),
+  iosEm: createFontStyles(sizes.ios, keepStylesEm),
+  android: createFontStyles(sizes.android, keepStyles),
+  androidEm: createFontStyles(sizes.android, keepStylesEm),
 };
 // @todo for the web, we should use this
 // https://webkit.org/blog/3709/using-the-system-font-in-web-content/

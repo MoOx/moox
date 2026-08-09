@@ -32,5 +32,19 @@ You are a Front-End Web & Mobile developer expert. You use React Native & React 
 
 ## Styles
 
-- Prefer inline styles, unless specified
-- Avoid styles properties like margin and padding and prefer components dedicated for this like Space or SpacedView.
+- **Register styles, do not build them during render.** `StyleSheet.create` at
+  module level, or a helper that memoizes per value (`fontStyles`,
+  `spaceStyle*`). react-native-web only emits a className for a style object it
+  has registered — anything else is serialized into the `style` attribute of
+  every node that uses it. Keep inline literals for values that genuinely vary
+  per render.
+- **Spacing goes on the element that already exists**, never on a wrapper added
+  to carry it. A `View` whose only job is padding is a node in the HTML for
+  nothing. (`SpacedView` and `Spacer` are on the way out — see
+  `HTML-STYLING-PROPOSAL.md`.)
+- **Prefer `gap` on the parent** over spacer elements between children. It is
+  supported on iOS and Android too.
+- Use `useTheme`, the existing font styles and the spacing scale for values —
+  never a hard-coded colour, size or radius.
+- Before adding a node, ask whether an existing one can carry the style. The
+  DOM this produces is part of the portfolio.

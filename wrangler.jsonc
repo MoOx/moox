@@ -1,0 +1,42 @@
+// Pull request previews only. Production (moox.io) is GitHub Pages, deployed by
+// .github/workflows/deploy.yml — this file never touches it.
+//
+// Cloudflare Workers Builds runs `npm run build`, then `npx wrangler deploy` on
+// the production branch and `npx wrangler versions upload` on every other
+// branch. The second one is what matters: it returns a preview URL, and the
+// Cloudflare GitHub app comments it on the pull request (a commit URL, plus a
+// branch alias that follows new commits).
+//
+// No `main`: this is an assets-only Worker. There is no script, so requests are
+// served straight off Cloudflare's asset path.
+{
+  // Must match the Worker name in the dashboard, or `wrangler deploy` targets
+  // a different Worker than the one Workers Builds is wired to.
+  "name": "moox",
+
+  "compatibility_date": "2026-08-09",
+
+  "assets": {
+    "directory": "./dist/client",
+
+    // The site is prerendered with `autoSubfolderIndex: true`, so /resume is a
+    // directory holding index.html. This is the default, spelled out because
+    // the routing depends on it.
+    "html_handling": "auto-trailing-slash",
+
+    // Plain 404 for unknown paths, like GitHub Pages. NOT
+    // "single-page-application" — every route is prerendered, and rewriting
+    // misses to index.html would answer 200 for URLs that do not exist.
+    "not_found_handling": "none"
+  },
+
+  // No public production copy: moox.io is the only address this site should be
+  // reachable at, so the Worker gets no workers.dev route. Preview URLs default
+  // to following `workers_dev`, hence the explicit `true` — without it,
+  // disabling one disables the other and there would be no previews at all.
+  //
+  // If previews ever come back empty, this pair is the first thing to check:
+  // setting "workers_dev": true restores them.
+  "workers_dev": false,
+  "preview_urls": true
+}

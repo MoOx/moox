@@ -75,6 +75,41 @@ fixing in the same pass.
       cards (the full `items` are phrased as engagements, hence the separate
       `keywords` field).
 
+## 4. HTML & styling cleanup (cross-platform)
+
+Diagnosis, measurements and the reasoning behind the order live in
+`HTML-STYLING-PROPOSAL.md`. Step 0 is done (commit `pin styles`). Steps 1 and 2
+are where the DOM win is and need no library decision; step 3 is the library
+decision itself.
+
+- [ ] **Step 1 — spacing as props.** One `Box` primitive (`p`/`px`/`py`/`gap`)
+      replacing `SpacedView` (121 uses) and `Spacer` (77 empty `<div>`, → `gap`
+      on the parent). `Container` from two nodes to one (`marginHorizontal:
+      "auto"`). Target −400/−500 elements on `/resume`.
+- [ ] **Step 2 — semantic primitives.** `Heading` / `Paragraph` / `List` /
+      `ListItem` / `Link` deciding their own tag per platform, instead of
+      `role=` at 100+ call sites. Fold `LinkText` in: text styles on the `<a>`
+      when the child is a string (−182 elements on `/resume`), and
+      `:focus-visible` on web instead of the `useFocus` hook per link.
+- [ ] **Step 3 — font ergonomics, then one token object.** The theme mechanism
+      stays (CSS variables for a reliable `auto`, OS scheme on native); only the
+      call sites change. Delete `fontStyles.android` / `androidEm` (0 uses,
+      ~120 dead lines), flatten the `ios` / `iosEm` namespace, and pair type
+      with colour in one registered helper — `text("title2", "text", "bold")`
+      instead of `[fontStyles.iosEm.title2, theme.styles.text, {fontWeight}]`
+      (207 call sites). **After step 2**, since the primitives absorb most of
+      them. Then collapse `theme.styles` / `dynamicColors` / `colors` into one
+      token object (colour **and** space, radius, type), which lets `useTheme()`
+      leave most of its 58 components.
+- [ ] **Step 4 — responsive without duplication.** `IfWindowWidthIs` (20 uses)
+      renders both branches into the HTML. If only styling differs it must be
+      one node; keep the component only where the children genuinely differ.
+- [ ] **Invert the `AGENTS.md` styling rules** once step 1 lands — "prefer
+      inline styles" and "prefer SpacedView over padding" are what produced
+      both problems.
+- [ ] Verify every step with the screenshot harness described in the proposal
+      (full-page 390/1280 pixel diff; heights must not move).
+
 ---
 
 ## Parked on purpose (not forgotten, not next)
