@@ -15,7 +15,6 @@ export const weight = {
 export type weight = (typeof weight)[keyof typeof weight];
 
 const iosSpacing = (v: number) => (Platform.OS === "ios" ? v : 0);
-const androidLine = (v: number) => v * 1.2;
 
 type PlatformStyles = {
   fontSize: number;
@@ -191,100 +190,6 @@ export const platform = {
   },
   // Google Material Design
   // https://material.io/design/typography/the-type-system.html#type-scale
-  android: {
-    // line = nothing defined, web guide show "normal", which is approx 1.2
-    headline1: {
-      fontSize: 96,
-      lineHeight: androidLine(96),
-      letterSpacing: -1.5,
-      fontWeight: weight.light,
-      fontWeightEm: weight.medium,
-    } as PlatformStyles,
-    headline2: {
-      fontSize: 60,
-      lineHeight: androidLine(60),
-      letterSpacing: -0.5,
-      fontWeight: weight.light,
-      fontWeightEm: weight.medium,
-    } as PlatformStyles,
-    headline3: {
-      fontSize: 48,
-      lineHeight: androidLine(48),
-      letterSpacing: 0,
-      fontWeight: weight.regular,
-      fontWeightEm: weight.bold,
-    } as PlatformStyles,
-    headline4: {
-      fontSize: 34,
-      lineHeight: androidLine(34),
-      letterSpacing: 0.25,
-      fontWeight: weight.regular,
-      fontWeightEm: weight.bold,
-    } as PlatformStyles,
-    headline5: {
-      fontSize: 24,
-      lineHeight: androidLine(24),
-      letterSpacing: 0,
-      fontWeight: weight.regular,
-      fontWeightEm: weight.bold,
-    } as PlatformStyles,
-    headline6: {
-      fontSize: 20,
-      lineHeight: androidLine(20),
-      letterSpacing: 0.15,
-      fontWeight: weight.medium,
-      fontWeightEm: weight.semibold,
-    } as PlatformStyles,
-    subtitle1: {
-      fontSize: 16,
-      lineHeight: androidLine(16),
-      letterSpacing: 0.15,
-      fontWeight: weight.regular,
-      fontWeightEm: weight.semibold,
-    } as PlatformStyles,
-    subtitle2: {
-      fontSize: 14,
-      lineHeight: androidLine(14),
-      letterSpacing: 0.1,
-      fontWeight: weight.regular,
-      fontWeightEm: weight.semibold,
-    } as PlatformStyles,
-    body1: {
-      fontSize: 16,
-      lineHeight: androidLine(16),
-      letterSpacing: 0.5,
-      fontWeight: weight.regular,
-      fontWeightEm: weight.medium,
-    } as PlatformStyles,
-    body2: {
-      fontSize: 14,
-      lineHeight: androidLine(14),
-      letterSpacing: 0.25,
-      fontWeight: weight.regular,
-      fontWeightEm: weight.medium,
-    } as PlatformStyles,
-    button: {
-      fontSize: 14,
-      lineHeight: androidLine(14),
-      letterSpacing: 1.25,
-      fontWeight: weight.medium,
-      fontWeightEm: weight.semibold,
-    } as PlatformStyles,
-    caption: {
-      fontSize: 12,
-      lineHeight: androidLine(12),
-      letterSpacing: 0.4,
-      fontWeight: weight.regular,
-      fontWeightEm: weight.medium,
-    } as PlatformStyles,
-    overline: {
-      fontSize: 10,
-      lineHeight: androidLine(10),
-      letterSpacing: 1.5,
-      fontWeight: weight.regular,
-      fontWeightEm: weight.medium,
-    } as PlatformStyles,
-  },
 };
 
 // lets do this: allow people to use HIG or MD naming on any platform
@@ -322,34 +227,6 @@ export const sizes = {
       fontWeight: weight.regular,
       fontWeightEm: weight.semibold,
     } as PlatformStyles,
-  },
-  android: {
-    // Apple HIG mapping (inversed)
-    largeTitle: platform.android.headline3,
-    title1: platform.android.headline4,
-    title2: platform.android.headline5,
-    title3: platform.android.headline6,
-    headline: platform.android.subtitle1,
-    body: platform.android.body1,
-    callout: platform.android.button,
-    subhead: platform.android.subtitle2,
-    footnote: platform.android.caption,
-    caption1: platform.android.caption,
-    caption2: platform.android.caption,
-    // Google Material Design
-    headline1: platform.android.headline1,
-    headline2: platform.android.headline2,
-    headline3: platform.android.headline3,
-    headline4: platform.android.headline4,
-    headline5: platform.android.headline5,
-    headline6: platform.android.headline6,
-    subtitle1: platform.android.subtitle1,
-    subtitle2: platform.android.subtitle2,
-    body1: platform.android.body1,
-    body2: platform.android.body2,
-    button: platform.android.button,
-    caption: platform.android.caption,
-    overline: platform.android.overline,
   },
 };
 
@@ -390,8 +267,6 @@ const createFontStyles = <K extends string>(
 export const fontStyles = {
   ios: createFontStyles(sizes.ios, keepStyles),
   iosEm: createFontStyles(sizes.ios, keepStylesEm),
-  android: createFontStyles(sizes.android, keepStyles),
-  androidEm: createFontStyles(sizes.android, keepStylesEm),
 };
 // @todo for the web, we should use this
 // https://webkit.org/blog/3709/using-the-system-font-in-web-content/
