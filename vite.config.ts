@@ -34,6 +34,26 @@ const stubReactNativeInternals = {
   },
 };
 
+// The app landing pages (`public/apps/*/index.html`) are plain static HTML, not
+// routes: they predate the site and keep their own standalone design. A static
+// host resolves `/apps/lifetime/` to that directory's `index.html`, but the dev
+// server does not: Vite's public middleware has no directory index, so the
+// request falls through to the router, which strips the trailing slash and
+// answers 404. This rewrite gives dev the same URLs as production.
+const serveAppPagesInDev = {
+  name: "serve-app-pages-in-dev",
+  apply: "serve" as const,
+  configureServer(server: { middlewares: { use: (fn: unknown) => void } }) {
+    server.middlewares.use(
+      (req: { url?: string }, _res: unknown, next: () => void) => {
+        const match = req.url?.match(/^\/apps\/([\w-]+)\/?(?:$|\?)/);
+        if (match) req.url = `/apps/${match[1]}/index.html`;
+        next();
+      },
+    );
+  },
+};
+
 export default defineConfig({
   server: {
     port: 1337,
@@ -45,6 +65,7 @@ export default defineConfig({
     tsconfigPaths: true,
   },
   plugins: [
+    serveAppPagesInDev,
     tanstackStart({
       srcDirectory: "src",
       router: { routesDirectory: "app" },
