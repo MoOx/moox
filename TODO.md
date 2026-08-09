@@ -110,10 +110,14 @@ below). The bulk of the win was in step 2 instead.
       `useFocus` are gone, replaced by a `:focus-visible` / `:hover` rule.
       Measured: `/resume` 3122 → 2925, `/` 1306 → 1249, `/contact` 641 → 590;
       anchors wrapping a lone text node 182 → 0; max depth 26 → 25.
-- [ ] **Step 2b — semantic primitives.** `Heading` / `Paragraph` / `List` /
-      `ListItem` deciding their own tag per platform, instead of `role=` at
-      100+ call sites. Ergonomics and semantics; the node win already landed in
-      2a.
+- ~~**Step 2b — semantic primitives.**~~ **Dropped, Max, 2026-08.** `role=` on
+      a `View` is fine as it is: react-native-web already maps it to the real
+      tag (`<h3>`, `<nav>`, `<p>`, `<ul>`, `<article>`…), so the markup is
+      already semantic and a `Heading` / `Paragraph` layer would only rename the
+      call sites. The node win was in 2a and is banked.
+      Consequence for `HTML-STYLING-PROPOSAL.md` §4: the "react-strict-dom
+      interface, hand-rolled" argument goes with it. If RSD ever ships, the
+      adapter gets written then.
 - [ ] **Step 3 — font ergonomics, then one token object.** The theme mechanism
       stays (CSS variables for a reliable `auto`, OS scheme on native); only the
       call sites change. Delete `fontStyles.android` / `androidEm` (0 uses,
