@@ -145,7 +145,7 @@ export default function WebsiteHeader() {
                 <SVGSocialLinkedin
                   width={20}
                   height={20}
-                  fill={theme.dynamicColors.text}
+                  color={theme.dynamicColors.text}
                 />
               </LinkView>
               <LinkView
@@ -155,7 +155,7 @@ export default function WebsiteHeader() {
                 <SVGSocialGithub
                   width={20}
                   height={20}
-                  fill={theme.dynamicColors.text}
+                  color={theme.dynamicColors.text}
                 />
               </LinkView>
             </SpacedView>
