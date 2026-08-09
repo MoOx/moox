@@ -129,7 +129,7 @@ function DesignSystem() {
         <SpacedView style={styles.section}>
           <Text style={styles.componentName}>{"<Code />"}</Text>
           <Code>{`function example() {
-return "This is a code block";
+  return "This is a code block";
 }`}</Code>
         </SpacedView>
 
@@ -138,7 +138,7 @@ return "This is a code block";
           <Pre>
             <Code>
               {`function example() {
-return "This is a code block";
+  return "This is a code block";
 }`}
             </Code>
           </Pre>

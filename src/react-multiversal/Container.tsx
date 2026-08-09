@@ -1,4 +1,9 @@
-import { size, Size } from "@/react-multiversal";
+import {
+  size,
+  Size,
+  spaceStyleGap,
+  spaceStyleVertical,
+} from "@/react-multiversal";
 import { ReactNode } from "react";
 import { Platform, StyleProp, StyleSheet, View, ViewProps, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -25,14 +30,30 @@ const styles = StyleSheet.create({
  * `paddingLeft`/`paddingRight`, so a plain padding declared after these would
  * silently drop the inset and let content run under a notch in landscape.
  * Native takes no `env()` — `SafeAreaView` handles the insets there.
+ *
+ * Registered per distinct value, like the spacing helpers in `index.ts`: a
+ * fresh object literal per render cannot be recognised by react-native-web, so
+ * it is written into the `style` attribute of every Container instead of
+ * compiling to a className. The vertical and gap axes reuse those helpers
+ * directly; only this one needs its own cache, because of the `calc()`.
  */
-const horizontalPadding = (horizontal?: Size) => {
+const horizontalCache = new Map<number, ViewStyle>();
+const horizontalPadding = (horizontal?: Size): ViewStyle => {
   const v = horizontal === undefined ? 0 : size(horizontal);
-  if (Platform.OS !== "web") return { paddingLeft: v, paddingRight: v };
-  return {
-    paddingLeft: `calc(env(safe-area-inset-left) + ${v}px)`,
-    paddingRight: `calc(env(safe-area-inset-right) + ${v}px)`,
-  };
+  let style = horizontalCache.get(v);
+  if (style === undefined) {
+    style = StyleSheet.create({
+      style:
+        Platform.OS === "web"
+          ? {
+              paddingLeft: `calc(env(safe-area-inset-left) + ${v}px)`,
+              paddingRight: `calc(env(safe-area-inset-right) + ${v}px)`,
+            }
+          : { paddingLeft: v, paddingRight: v },
+    }).style as ViewStyle;
+    horizontalCache.set(v, style);
+  }
+  return style;
 };
 
 export default function Container({
@@ -59,13 +80,11 @@ export default function Container({
   gap?: Size;
   children: ReactNode;
 }) {
-  const spacing: ViewStyle = {
-    ...(horizontalPadding(horizontal) as ViewStyle),
-    ...(vertical === undefined
-      ? null
-      : { paddingTop: size(vertical), paddingBottom: size(vertical) }),
-    ...(gap === undefined ? null : { gap: size(gap) }),
-  };
+  const spacing = [
+    horizontalPadding(horizontal),
+    spaceStyleVertical(vertical),
+    spaceStyleGap(gap),
+  ];
   return (
     <View style={[styles.wrapper, wrapperStyle]} {...props}>
       {Platform.OS === "web" ? (

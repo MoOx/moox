@@ -49,8 +49,12 @@ const args = Object.fromEntries(
 const baseUrl = args.url ?? "http://localhost:1337";
 const outRoot = path.join(root, args.dir ?? ".visual");
 const widths = (args.widths ?? "390,1280").split(",").map(Number);
+// `/design-system` earns its place: it renders every HTML primitive and the
+// code samples, and a refactor once dedented content inside its template
+// literals with nothing to catch it, because it was not in this list.
 const paths = (
-  args.paths ?? "/,/resume,/contact,/talks,/blog,/cv,/fr,/fr/resume,/fr/contact,/fr/cv"
+  args.paths ??
+  "/,/resume,/contact,/talks,/blog,/cv,/design-system,/fr,/fr/resume,/fr/contact,/fr/cv"
 ).split(",");
 
 const shotName = (p, width) => `${p === "/" ? "home" : p.replace(/\//g, "_")}-${width}.png`;
