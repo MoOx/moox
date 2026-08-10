@@ -10,10 +10,6 @@ html {
   background-color: var(--react-multiversal--theme--textFlashy4);
 }
 
-body {
-  background-color: var(--react-multiversal--theme--back);
-}
-
 /* view transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {
