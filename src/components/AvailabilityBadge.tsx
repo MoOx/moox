@@ -1,12 +1,12 @@
 "use client";
 
-import { useTheme } from "@/styles";
 import { useHref, useT } from "@/i18n";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useFocus } from "@/react-multiversal/useFocus";
+import { useTheme } from "@/styles";
 import { useRef } from "react";
 import { StyleProp, Text, View, ViewStyle } from "react-native";
 import type { AnimatedStyle } from "react-native-reanimated";
@@ -54,7 +54,7 @@ export default function AvailabilityBadge({
   const localizeHref = useHref();
   const theme = useTheme();
   const t = useT();
-  const label = text ?? t({ en: "Available for Work", fr: "Disponible pour une mission" });
+  const label = text ?? t({ en: "Available for Work", fr: "Disponible" });
   const [hasAnyFocus] = useFocus(ref, { debounceOff: 500 });
 
   const badge = (

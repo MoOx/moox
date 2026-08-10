@@ -437,7 +437,7 @@ function PageCV() {
                 <SVGExternalLink
                   width={16}
                   height={16}
-                  fill={theme.dynamicColors.textLight1}
+                  color={theme.dynamicColors.textLight1}
                 />
 
                 <ContactRow Icon={SVGExternalLink} href={website}>

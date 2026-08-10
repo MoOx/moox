@@ -100,6 +100,17 @@ paint silently falls back to black, and you only see it in the exported PDF
 SVGs still define `url(#a)` / `url(#b)`, which resolve to whichever comes first
 in the document if two of them ever render on the same page.
 
+**Colour an icon with `color`, not `fill` or `fills`.** Most sources paint with
+`fill="currentColor"`, which is exactly what `color` sets, so one prop tints
+every path whatever the file declares: `<SVGCheckmark color={channel.color} />`.
+The generated `fills={[…]}` prop assigns colours per path by index, so it only
+exists for the few multicoloured marks (a logo whose parts must differ), and it
+breaks the moment the paths are reordered. `fill` is the fallback for the
+sources that declare no fill at all, because their paths inherit the `<Svg>`'s
+and never look at `currentColor`: `SVGCopy` is one of those. Rule of thumb:
+reach for `color`, and only if the icon comes out black, open the source and
+look at what its paths declare.
+
 ## Context
 
 Max is looking for a mission. Anything that improves matching — keywords,

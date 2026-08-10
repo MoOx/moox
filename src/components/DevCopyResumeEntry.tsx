@@ -1,6 +1,7 @@
 import { ResumeItem, ResumeItemSource } from "@/api";
 import { l, Lang, langs, Localized } from "@/i18n";
 import { size } from "@/react-multiversal";
+import { setClipboardString } from "@/react-multiversal/clipboard";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { alpha, useTheme } from "@/styles";
@@ -96,10 +97,7 @@ export const DevCopyResumeEntry = ({ item }: { item: ResumeItem }) => {
       console.error(`DevCopyResumeEntry: no source entry for ${item.slug}`);
       return;
     }
-    // The web clipboard directly: `@react-native-clipboard/clipboard` resolves
-    // to its `.web` build, whose export is named, so its default import has no
-    // `setString` here.
-    await navigator.clipboard.writeText(resumeEntryAsText(source, lang));
+    await setClipboardString(resumeEntryAsText(source, lang));
     setCopied(lang);
     setTimeout(() => setCopied(undefined), 1000);
   };

@@ -12,6 +12,7 @@ import { alternateLinks, assertLangParam, langFromParam, useT } from "@/i18n";
 import { freelanceSince, fullName, jobTitle, workLocation } from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
+import { setClipboardString } from "@/react-multiversal/clipboard";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
@@ -24,7 +25,6 @@ import SVGExternalLink from "@/svgs/components/SVGExternalLink";
 import SVGMessageFill from "@/svgs/components/SVGMessageFill";
 import SVGPhoneFill from "@/svgs/components/SVGPhoneFill";
 import SVGSocialLinkedinIn from "@/svgs/components/SVGSocialLinkedinIn";
-import Clipboard from "@react-native-clipboard/clipboard";
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Text, View } from "react-native";
@@ -120,13 +120,10 @@ function PageContact() {
   );
 
   const copy = useCallback((key: "sms" | "mail", value: string) => {
-    try {
-      Clipboard.setString(value);
-    } catch {
-      // A blocked clipboard is not a dead end: the number and the address are
-      // both written on the card, so the confirmation still tells the truth
-      // about what was selected.
-    }
+    // A blocked clipboard is not a dead end: the number and the address are
+    // both written on the card, so the confirmation still tells the truth
+    // about what was selected.
+    void setClipboardString(value);
     setCopied(key);
     if (copiedTimeout.current) clearTimeout(copiedTimeout.current);
     copiedTimeout.current = setTimeout(() => setCopied(null), 1600);

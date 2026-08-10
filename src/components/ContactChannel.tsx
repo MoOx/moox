@@ -4,7 +4,8 @@ import { socials } from "@/consts";
 import { size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
-import { alpha, themeDark, useTheme } from "@/styles";
+import { alpha, useTheme } from "@/styles";
+import SVGCheckmark from "@/svgs/components/SVGCheckmark";
 import SVGCopy from "@/svgs/components/SVGCopy";
 import { Pressable, Text, TextStyle, View } from "react-native";
 
@@ -180,36 +181,18 @@ export default function ContactChannel({
             backgroundColor: theme.dynamicColors.backAlt,
             alignItems: "center",
             justifyContent: "center",
-            overflow: "hidden",
           }}
         >
-          <SVGCopy
-            width={15}
-            height={15}
-            fill={theme.dynamicColors.textLight1}
-          />
-          {!copied ? null : (
-            <View
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: channel.color,
-              }}
-            >
-              <Text
-                style={[
-                  fontStyles.iosEm.caption2,
-                  { fontSize: 10, color: themeDark.colors.back },
-                ]}
-              >
-                OK
-              </Text>
-            </View>
+          {copied ? (
+            <SVGCheckmark width={15} height={15} color={channel.color} />
+          ) : (
+            // `fill`, not `color`: this one's paths declare no fill at all, so
+            // they inherit the `<Svg>`'s and never look at `currentColor`.
+            <SVGCopy
+              width={15}
+              height={15}
+              fill={theme.dynamicColors.textLight1}
+            />
           )}
         </Pressable>
       )}

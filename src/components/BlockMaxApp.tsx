@@ -17,6 +17,7 @@ import {
 import { useHref, useT } from "@/i18n";
 import { jobTitle } from "@/profile";
 import Avatar from "@/react-multiversal/Avatar";
+import { setClipboardString } from "@/react-multiversal/clipboard";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
@@ -24,7 +25,6 @@ import Spacer from "@/react-multiversal/Spacer";
 import { boxShadows, useTheme } from "@/styles";
 import SVGChevronRight from "@/svgs/components/SVGChevronRight";
 import SVGEnvelopeFill from "@/svgs/components/SVGEnvelopeFill";
-import Clipboard from "@react-native-clipboard/clipboard";
 import { useEffect, useState } from "react";
 import {
   Pressable,
@@ -199,8 +199,16 @@ export default function BlockMaxApp({
             </LinkButton>
             <Spacer size="s" />
             <Pressable
-              onPress={() => {
-                Clipboard.setString(sendStringAsMailString(socials.send.value));
+              onPress={async () => {
+                // Only confirm what actually happened: the address is nowhere
+                // else in this block, so a "Copied" over an empty clipboard
+                // would leave nothing to paste and no way to know.
+                if (
+                  !(await setClipboardString(
+                    sendStringAsMailString(socials.send.value),
+                  ))
+                )
+                  return;
                 setCopied(true);
                 setTimeout(() => {
                   setCopied(false);
