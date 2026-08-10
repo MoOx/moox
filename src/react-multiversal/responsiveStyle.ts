@@ -1,4 +1,5 @@
 import { WindowWidth } from "@/react-multiversal";
+import { insertCssRule } from "@/react-multiversal/cssRules";
 import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 
 export type AnyStyle = ViewStyle & TextStyle & ImageStyle & Record<string, unknown>;
@@ -32,11 +33,6 @@ export type AnyStyle = ViewStyle & TextStyle & ImageStyle & Record<string, unkno
  */
 export type Variants = { base?: AnyStyle } & { [minWidth: number]: AnyStyle };
 export type Responsive = { id: string };
-
-/** Collected at import time; `__root.tsx` writes them into a <style> tag. */
-export const responsiveCssRules: string[] = [];
-
-let counter = 0;
 
 // React Native numbers are pixels. These are the CSS properties where a bare
 // number is *not* a length, so they must not get a unit.
@@ -84,15 +80,42 @@ const declarations = (style: AnyStyle) =>
  */
 const selector = (id: string) => `[data-rs~="${id}"][data-rs]`;
 
+/**
+ * The id is derived from the declaration, never from a counter. These are
+ * registered as an import-time side effect, and the client's module graph is
+ * code-split while the server's is not, so the two evaluate in different
+ * orders. A counter would hand the same `rs3` to a different style on each
+ * side, and the attribute the server wrote into the HTML would then pick up
+ * the client's rule: a silent, layout-shaped mismatch.
+ */
+const hash = (value: string) => {
+  let h = 5381;
+  for (let i = 0; i < value.length; i++) {
+    h = (Math.imul(h, 33) ^ value.charCodeAt(i)) >>> 0;
+  }
+  return h.toString(36);
+};
+
+/** Two different declarations behind one id would merge silently. */
+const byId = new Map<string, string>();
+
 export function responsiveStyle<T extends Record<string, Variants>>(
   defs: T,
 ): { [K in keyof T]: Responsive } {
   const out = {} as { [K in keyof T]: Responsive };
   for (const [name, variants] of Object.entries<Variants>(defs)) {
-    const id = `rs${counter++}`;
+    const serialized = JSON.stringify(variants);
+    const id = `rs${hash(serialized)}`;
+    if (import.meta.env.DEV) {
+      const previous = byId.get(id);
+      if (previous !== undefined && previous !== serialized) {
+        throw new Error(`[responsiveStyle] Hash collision on "${id}" (${name}).`);
+      }
+      byId.set(id, serialized);
+    }
     const { base, ...breakpoints } = variants;
     if (base) {
-      responsiveCssRules.push(`${selector(id)} {\n${declarations(base)}\n}`);
+      insertCssRule(`${selector(id)} {\n${declarations(base)}\n}`);
     }
     // Ascending, so a wider breakpoint overrides a narrower one by source order.
     for (const width of Object.keys(breakpoints)
@@ -100,7 +123,7 @@ export function responsiveStyle<T extends Record<string, Variants>>(
       .sort((a, b) => a - b)) {
       const style = breakpoints[width];
       if (!style) continue;
-      responsiveCssRules.push(
+      insertCssRule(
         `@media (min-width: ${width}px) {\n${selector(id)} {\n${declarations(style)}\n}\n}`,
       );
     }

@@ -12,8 +12,6 @@ export type Responsive = { variants: Variants };
  * declared and resolved against the current width. Nothing is duplicated,
  * which is the whole point of the API on both platforms.
  */
-export const responsiveCssRules: string[] = [];
-
 export function responsiveStyle<T extends Record<string, Variants>>(
   defs: T,
 ): { [K in keyof T]: Responsive } {

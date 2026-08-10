@@ -54,6 +54,35 @@ pdftotext public/maxime-thirouin-freelance-front-end-developer-resume.fr.pdf - |
 pdfinfo public/maxime-thirouin-freelance-front-end-developer-resume.fr.pdf | grep Pages
 ```
 
+**`<ReactNativeStyleSheet />` is the last child of `<body>`, with `href` and
+`precedence` and no `id`. All three are load-bearing.** It serializes
+react-native-web's registry, and the library only knows a class once the style
+behind it is registered, so whatever has not been registered by the time this
+component runs ships as a class with no rule. Rendering it **last** is what
+makes the registry complete: it is the one-pass equivalent of the
+[Server API](https://necolas.github.io/react-native-web/docs/rendering/), which
+says to render the app first and read the sheet second. Move it back into
+`<head>` and React reaches it before the `<body>` subtree, so every style a
+component registers while rendering is lost, and the page paints unspaced until
+hydration. That only shows on a **cold** server process, since the registry is
+a module global the second request finds warm.
+
+`href` + `precedence` make it a React _style resource_, which is what puts it
+in `<head>` anyway however late it renders, and what keeps React from touching
+it afterwards: a resource is deduped by `href` and never re-rendered. Without
+them React rewrites the element each time it re-mounts the shell, once per
+navigation; the browser then discards its `CSSStyleSheet` and builds a new one,
+leaving react-native-web holding a detached sheet, so every style registered
+from then on lands nowhere and a page reached by clicking a link loses spacing
+the same page loaded directly has. As a resource React drops the `id` too, so
+the library finds nothing to adopt and keeps its own element, which is the
+separation wanted. None of this is new: it predates #125 and only became
+visible once spacing moved from inline styles to classNames.
+
+`npm run audit:ssr-css` requests every route from a **fresh** server and fails
+on a class with no rule. It exists to catch a regression on the above, not as a
+discipline to follow: nothing has to be pre-registered.
+
 **Derive, never hand-write.** Every hand-authored value on this CV has drifted
 at some point (date spans, teaching years, blog counts). Dates come from the
 markdown via `group` / `groupPeriods` / `monthRange` (`src/profile.tsx`); counts come from the

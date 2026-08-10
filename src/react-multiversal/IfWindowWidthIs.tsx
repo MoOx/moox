@@ -1,4 +1,5 @@
 import { size, Size, WindowWidth } from "@/react-multiversal";
+import { insertCssRule } from "@/react-multiversal/cssRules";
 import { StyleSheet, View, ViewProps } from "react-native";
 
 const cssKey = "IfWindowWidthIs";
@@ -40,7 +41,7 @@ const buildCssRules = (smallerThan?: Size, largerThan?: Size) => {
 
   return rules;
 };
-const generateAllCssRules = () => {
+const registerAllCssRules = () => {
   const validWindowSizes = Object.entries(WindowWidth)
     .filter(([, value]) => typeof value === "number" && value !== Infinity)
     .map(([key, value]) => ({ key, value: value as number }));
@@ -61,9 +62,9 @@ const generateAllCssRules = () => {
     });
   });
 
-  return Array.from(rules);
+  rules.forEach(insertCssRule);
 };
-export const cssRules = generateAllCssRules();
+registerAllCssRules();
 
 const styles = StyleSheet.create({
   ifWrapper: { display: "contents" },

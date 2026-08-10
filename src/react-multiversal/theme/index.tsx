@@ -83,7 +83,13 @@ export function makeTheme<ThemeColorMap extends ThemeMinimalColorMap>(
       Object.entries(themedColors.light).map(([key]) => [key, `var(${prefix}-${key})`]),
     ) as ThemeColorMap;
   }
-  const dynamicStyles: ThemeStyleSheet<ThemeColorMap> = generateStyles(dynamicColors);
+  // Registered once here rather than inside `useTheme`, which called
+  // `StyleSheet.create` on every render of every themed component. The object
+  // never changes, and `create` recompiles what it is handed: the insert was
+  // deduplicated downstream, the compile was not.
+  const dynamicStyles: ThemeStyleSheet<ThemeColorMap> = StyleSheet.create(
+    generateStyles(dynamicColors),
+  );
 
   const themeLight: Theme<ThemeColorMap> = {
     mode: "light" as t,
@@ -127,7 +133,7 @@ export function makeTheme<ThemeColorMap extends ThemeMinimalColorMap>(
     if (currentMode === "auto" && Platform.OS === "web") {
       return {
         mode,
-        styles: StyleSheet.create(dynamicStyles),
+        styles: dynamicStyles,
         colors: mode === "light" ? themedColors.light : themedColors.dark,
         dynamicColors,
       };

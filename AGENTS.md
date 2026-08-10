@@ -38,6 +38,9 @@ You are a Front-End Web & Mobile developer expert. You use React Native & React 
   has registered — anything else is serialized into the `style` attribute of
   every node that uses it. Keep inline literals for values that genuinely vary
   per render.
+  Registering during a render is fine for SSR: the sheet is serialized by the
+  last node of `<body>`, so it is already complete. Keep it that way, and see
+  the rule in `CLAUDE.md` before moving that node.
 - **Spacing goes on the element that already exists**, never on a wrapper added
   to carry it. A `View` whose only job is padding is a node in the HTML for
   nothing. (`SpacedView` and `Spacer` are on the way out — see
