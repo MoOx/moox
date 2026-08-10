@@ -314,74 +314,75 @@ export default function BlockTestimonials() {
         </Parallax>
       </View>
       <Container
+        vertical="xl"
+        horizontal="xl"
+        gap="xl"
         role="region"
         aria-label={t({ en: "Testimonials", fr: "Témoignages" })}
         wrapperStyle={{ zIndex: 1 }}
       >
-        <SpacedView vertical="xl" horizontal="xl" gap="xl">
-          <SpacedView gap="s">
-            <Text
-              style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
-              role="heading"
-              aria-level={2}
-            >
-              {t({ en: "What People Say About Me.", fr: "Ce qu'on dit de moi." })}
-            </Text>
-            <Text
-              style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
-              role="paragraph"
-            >
-              {t({
-                en: "Real feedback from those who know my work.",
-                fr: "De vrais retours de personnes qui connaissent mon travail.",
-              })}
-            </Text>
-          </SpacedView>
-          <View>
-            {testimonialRows.map((row, rowIndex) => (
-              <SpacedView
-                key={row.map((item) => item.name).join("-")}
-                vertical="m"
-                gap="xl"
-                style={{
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  justifyContent: rowIndex % 2 === 0 ? "flex-start" : "flex-end",
-                }}
-              >
-                {row.map((item) => (
-                  <TestimonialItem key={item.name} item={item} />
-                ))}
-              </SpacedView>
-            ))}
-          </View>
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <LinkButton
-              spaceHorizontal="xl"
-              spaceVertical="m"
-              color="rgb(10, 102, 194)"
-              href={`${socials.linkedin.value}/details/recommendations/`}
-            >
-              {() => (
-                <>
-                  <Text style={[fontStyles.iosEm.title3, theme.styles.textOnMain]}>
-                    {t({
-                      en: "Read all my Recommendations",
-                      fr: "Lire toutes mes recommandations",
-                    })}
-                  </Text>
-                  <SVGSocialLinkedin
-                    width={28}
-                    height={28}
-                    fill={theme.dynamicColors.textOnMain}
-                    style={{ flexShrink: 0 }}
-                  />
-                </>
-              )}
-            </LinkButton>
-            <Spacer size="m" />
-          </View>
+        <SpacedView gap="s">
+          <Text
+            style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
+            role="heading"
+            aria-level={2}
+          >
+            {t({ en: "What People Say About Me.", fr: "Ce qu'on dit de moi." })}
+          </Text>
+          <Text
+            style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
+            role="paragraph"
+          >
+            {t({
+              en: "Real feedback from those who know my work.",
+              fr: "De vrais retours de personnes qui connaissent mon travail.",
+            })}
+          </Text>
         </SpacedView>
+        <View>
+          {testimonialRows.map((row, rowIndex) => (
+            <SpacedView
+              key={row.map((item) => item.name).join("-")}
+              vertical="m"
+              gap="xl"
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: rowIndex % 2 === 0 ? "flex-start" : "flex-end",
+              }}
+            >
+              {row.map((item) => (
+                <TestimonialItem key={item.name} item={item} />
+              ))}
+            </SpacedView>
+          ))}
+        </View>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <LinkButton
+            spaceHorizontal="xl"
+            spaceVertical="m"
+            color="rgb(10, 102, 194)"
+            href={`${socials.linkedin.value}/details/recommendations/`}
+          >
+            {() => (
+              <>
+                <Text style={[fontStyles.iosEm.title3, theme.styles.textOnMain]}>
+                  {t({
+                    en: "Read all my Recommendations",
+                    fr: "Lire toutes mes recommandations",
+                  })}
+                </Text>
+                <SVGSocialLinkedin
+                  width={28}
+                  height={28}
+                  fill={theme.dynamicColors.textOnMain}
+                  style={{ flexShrink: 0 }}
+                />
+              </>
+            )}
+          </LinkButton>
+          <Spacer size="m" />
+        </View>
       </Container>
     </View>
   );

@@ -20,75 +20,75 @@ export default function BlockCompaniesTrust() {
   const t = useT();
 
   return (
-    <Container role="region" aria-label={t({ en: "Trusted by", fr: "Ils m'ont fait confiance" })}>
-      <SpacedView
-        horizontal="l"
-        vertical="xl"
-        gap="l"
-        style={{ flex: 1, justifyContent: "center" }}
+    <Container
+      horizontal="l"
+      vertical="xl"
+      gap="l"
+      style={{ flex: 1, justifyContent: "center" }}
+      role="region"
+      aria-label={t({ en: "Trusted by", fr: "Ils m'ont fait confiance" })}
+    >
+      <Text
+        style={[
+          fontStyles.ios.headline,
+          theme.styles.textLight1,
+          { textAlign: "center", textTransform: "uppercase" },
+        ]}
+        role="heading"
+        aria-level={2}
       >
-        <Text
-          style={[
-            fontStyles.ios.headline,
-            theme.styles.textLight1,
-            { textAlign: "center", textTransform: "uppercase" },
-          ]}
-          role="heading"
-          aria-level={2}
-        >
-          {t({ en: "🇫🇷 Trusted by", fr: "🇫🇷 Ils m'ont fait confiance" })}
-        </Text>
-        <SpacedView
-          gap="m"
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-          role="list"
-        >
-          <View role="listitem">
-            <TextForReader>{"FKLG"}</TextForReader>
-            <SVGCompanyFklg
-              role="img"
-              aria-label="FKLG"
-              width={companyIconWidth}
-              height={companyIconWidth * companyIconCoef}
-              style={companyIconStyle}
-            />
-          </View>
-          <View role="listitem">
-            <TextForReader>{"Molotov TV"}</TextForReader>
-            <SVGCompanyMolotovTv
-              role="img"
-              aria-label="Molotov TV"
-              width={companyIconWidth}
-              height={companyIconWidth * companyIconCoef}
-              style={companyIconStyle}
-            />
-          </View>
-          <View role="listitem">
-            <TextForReader>{"Hove"}</TextForReader>
-            <SVGCompanyHove
-              role="img"
-              aria-label="Hove"
-              width={companyIconWidth}
-              height={companyIconWidth * companyIconCoef}
-              style={companyIconStyle}
-            />
-          </View>
-          <View role="listitem">
-            <TextForReader>{"Airbus"}</TextForReader>
-            <SVGCompanyAirbus
-              role="img"
-              aria-label="Airbus"
-              width={companyIconWidth}
-              height={companyIconWidth * companyIconCoef}
-              style={companyIconStyle}
-            />
-          </View>
-        </SpacedView>
+        {t({ en: "🇫🇷 Trusted by", fr: "🇫🇷 Ils m'ont fait confiance" })}
+      </Text>
+      <SpacedView
+        gap="m"
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+        role="list"
+      >
+        <View role="listitem">
+          <TextForReader>{"FKLG"}</TextForReader>
+          <SVGCompanyFklg
+            role="img"
+            aria-label="FKLG"
+            width={companyIconWidth}
+            height={companyIconWidth * companyIconCoef}
+            style={companyIconStyle}
+          />
+        </View>
+        <View role="listitem">
+          <TextForReader>{"Molotov TV"}</TextForReader>
+          <SVGCompanyMolotovTv
+            role="img"
+            aria-label="Molotov TV"
+            width={companyIconWidth}
+            height={companyIconWidth * companyIconCoef}
+            style={companyIconStyle}
+          />
+        </View>
+        <View role="listitem">
+          <TextForReader>{"Hove"}</TextForReader>
+          <SVGCompanyHove
+            role="img"
+            aria-label="Hove"
+            width={companyIconWidth}
+            height={companyIconWidth * companyIconCoef}
+            style={companyIconStyle}
+          />
+        </View>
+        <View role="listitem">
+          <TextForReader>{"Airbus"}</TextForReader>
+          <SVGCompanyAirbus
+            role="img"
+            aria-label="Airbus"
+            width={companyIconWidth}
+            height={companyIconWidth * companyIconCoef}
+            style={companyIconStyle}
+          />
+        </View>
       </SpacedView>
     </Container>
   );

@@ -14,73 +14,52 @@ export default function BlockInterestedButtons() {
   const theme = useTheme("dark");
 
   return (
-    <Container>
+    <Container vertical="xxxl" horizontal="xxxl" gap="xl" style={{ alignItems: "center" }}>
+      <Text style={[fontStyles.iosEm.title2, theme.styles.text, { textAlign: "center" }]}>
+        {t({
+          en: "Ready to build something awesome together?",
+          fr: "Prêt·e à construire quelque chose de chouette ensemble ?",
+        })}
+      </Text>
       <SpacedView
-        vertical="xxxl"
-        horizontal="xxxl"
-        gap="xl"
-        style={{ alignItems: "center" }}
+        style={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+        gap="l"
       >
-        <Text
-          style={[
-            fontStyles.iosEm.title2,
-            theme.styles.text,
-            { textAlign: "center" },
-          ]}
+        <LinkButton
+          href={localizeHref("/resume/")}
+          blurAmount={16}
+          color={alpha(colors.white, 0.15)}
+          theme="dark"
+          spaceHorizontal="xl"
+          spaceVertical="m"
         >
-          {t({
-            en: "Ready to build something awesome together?",
-            fr: "Prêt·e à construire quelque chose de chouette ensemble ?",
-          })}
-        </Text>
-        <SpacedView
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-          gap="l"
-        >
-          <LinkButton
-            href={localizeHref("/resume/")}
-            blurAmount={16}
-            color={alpha(colors.white, 0.15)}
-            theme="dark"
-            spaceHorizontal="xl"
-            spaceVertical="m"
-          >
-            {(textStyles) => (
-              <>
-                <SVGMenuResumeFill
-                  width={36}
-                  height={36}
-                  color={theme.dynamicColors.textOnMain}
-                />
-                <Text style={[textStyles, fontStyles.iosEm.title3]}>
-                  {t({ en: "More about me", fr: "En savoir plus sur moi" })}
-                </Text>
-              </>
-            )}
-          </LinkButton>
-          <LinkButton
-            href={localizeHref("/contact/")}
-            spaceHorizontal="xl"
-            spaceVertical="m"
-          >
-            {(textStyles) => (
-              <>
-                <SVGEllipsisMessageFill
-                  width={36}
-                  height={36}
-                  color={theme.dynamicColors.textOnMain}
-                />
-                <Text style={[textStyles, fontStyles.iosEm.title3]}>
-                  {t({ en: "Hire me", fr: "Travailler avec moi" })}
-                </Text>
-              </>
-            )}
-          </LinkButton>
-        </SpacedView>
+          {(textStyles) => (
+            <>
+              <SVGMenuResumeFill width={36} height={36} color={theme.dynamicColors.textOnMain} />
+              <Text style={[textStyles, fontStyles.iosEm.title3]}>
+                {t({ en: "More about me", fr: "En savoir plus sur moi" })}
+              </Text>
+            </>
+          )}
+        </LinkButton>
+        <LinkButton href={localizeHref("/contact/")} spaceHorizontal="xl" spaceVertical="m">
+          {(textStyles) => (
+            <>
+              <SVGEllipsisMessageFill
+                width={36}
+                height={36}
+                color={theme.dynamicColors.textOnMain}
+              />
+              <Text style={[textStyles, fontStyles.iosEm.title3]}>
+                {t({ en: "Hire me", fr: "Travailler avec moi" })}
+              </Text>
+            </>
+          )}
+        </LinkButton>
       </SpacedView>
     </Container>
   );

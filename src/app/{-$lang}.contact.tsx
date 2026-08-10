@@ -15,7 +15,6 @@ import Avatar from "@/react-multiversal/Avatar";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
-import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import SVGContact from "@/svgs/components/SVGContact";
@@ -320,100 +319,91 @@ function PageContact() {
       <ContactPageStyles />
 
       <IfWindowWidthIs smallerThan={WindowWidth.m}>
-        <Container maxWidth={768}>
-          <SpacedView horizontal="m" vertical="l" gap={size("l")}>
+        <Container horizontal="m" vertical="l" gap={size("l")} maxWidth={768}>
+          <View style={{ gap: size("xs") }}>
+            {heading}
+            <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>
+              {statusLine}
+            </Text>
+          </View>
+          <View
+            role="list"
+            aria-label={t({
+              en: "Ways to reach Max",
+              fr: "Comment joindre Max",
+            })}
+            style={{ gap: size("s") }}
+          >
+            {renderChannels("row")}
+          </View>
+          <ContactBookingCard variant="row" subtitle={bookingSubtitle} />
+          <View style={{ flexDirection: "row", gap: size("s") }}>
+            {vcfCard("row")}
+            {linkedinCard("row")}
+          </View>
+          <ContactElsewhere />
+        </Container>
+      </IfWindowWidthIs>
+
+      <IfWindowWidthIs largerThan={WindowWidth.m}>
+        <Container horizontal="xl" vertical="xl" gap={size("xxl")} style={{ flexDirection: "row", alignItems: "flex-start" }} maxWidth={1180}>
+          <View style={{ width: 340, gap: size("l") }}>
+            <Avatar
+              size={size("xxxl") + size("l")}
+              borderWidth={2}
+              borderColor={theme.dynamicColors.ultraLight}
+            />
             <View style={{ gap: size("xs") }}>
               {heading}
-              <Text style={[fontStyles.ios.subhead, theme.styles.textLight1]}>
+              <Text
+                style={[
+                  fontStyles.ios.callout,
+                  { lineHeight: 25 },
+                  theme.styles.textLight1,
+                ]}
+              >
+                {t({
+                  en: `${jobTitle}, freelance since ${freelanceSince}. ${t(workLocation)}. Pick whichever channel you actually like: they all reach me.`,
+                  fr: `${jobTitle}, freelance depuis ${freelanceSince}. ${t(workLocation)}. Choisissez le canal qui vous va : ils arrivent tous jusqu'à moi.`,
+                })}
+              </Text>
+              <Text
+                style={[
+                  fontStyles.ios.footnote,
+                  { lineHeight: 20 },
+                  theme.styles.textLight1,
+                ]}
+              >
                 {statusLine}
               </Text>
             </View>
+            <ContactElsewhere />
+          </View>
+
+          <View style={{ flexGrow: 1, flexShrink: 1, gap: size("m") }}>
             <View
               role="list"
               aria-label={t({
                 en: "Ways to reach Max",
                 fr: "Comment joindre Max",
               })}
-              style={{ gap: size("s") }}
+              style={{
+                flexDirection: "row",
+                alignItems: "stretch",
+                gap: size("m"),
+              }}
             >
-              {renderChannels("row")}
+              {renderChannels("card")}
             </View>
-            <ContactBookingCard variant="row" subtitle={bookingSubtitle} />
-            <View style={{ flexDirection: "row", gap: size("s") }}>
-              {vcfCard("row")}
-              {linkedinCard("row")}
+            <ContactBookingCard
+              variant="card"
+              subtitle={`${bookingSubtitle} · ${socials.booking.value.replace(/^https?:\/\//, "")}`}
+            />
+            <View style={{ flexDirection: "row", gap: size("m") }}>
+              {vcfCard("card")}
+              {linkedinCard("card")}
             </View>
-            <ContactElsewhere />
-          </SpacedView>
-        </Container>
-      </IfWindowWidthIs>
-
-      <IfWindowWidthIs largerThan={WindowWidth.m}>
-        <Container maxWidth={1180}>
-          <SpacedView
-            horizontal="xl"
-            vertical="xl"
-            gap={size("xxl")}
-            style={{ flexDirection: "row", alignItems: "flex-start" }}
-          >
-            <View style={{ width: 340, gap: size("l") }}>
-              <Avatar
-                size={size("xxxl") + size("l")}
-                borderWidth={2}
-                borderColor={theme.dynamicColors.ultraLight}
-              />
-              <View style={{ gap: size("xs") }}>
-                {heading}
-                <Text
-                  style={[
-                    fontStyles.ios.callout,
-                    { lineHeight: 25 },
-                    theme.styles.textLight1,
-                  ]}
-                >
-                  {t({
-                    en: `${jobTitle}, freelance since ${freelanceSince}. ${t(workLocation)}. Pick whichever channel you actually like: they all reach me.`,
-                    fr: `${jobTitle}, freelance depuis ${freelanceSince}. ${t(workLocation)}. Choisissez le canal qui vous va : ils arrivent tous jusqu'à moi.`,
-                  })}
-                </Text>
-                <Text
-                  style={[
-                    fontStyles.ios.footnote,
-                    { lineHeight: 20 },
-                    theme.styles.textLight1,
-                  ]}
-                >
-                  {statusLine}
-                </Text>
-              </View>
-              <ContactElsewhere />
-            </View>
-
-            <View style={{ flexGrow: 1, flexShrink: 1, gap: size("m") }}>
-              <View
-                role="list"
-                aria-label={t({
-                  en: "Ways to reach Max",
-                  fr: "Comment joindre Max",
-                })}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "stretch",
-                  gap: size("m"),
-                }}
-              >
-                {renderChannels("card")}
-              </View>
-              <ContactBookingCard
-                variant="card"
-                subtitle={`${bookingSubtitle} · ${socials.booking.value.replace(/^https?:\/\//, "")}`}
-              />
-              <View style={{ flexDirection: "row", gap: size("m") }}>
-                {vcfCard("card")}
-                {linkedinCard("card")}
-              </View>
-            </View>
-          </SpacedView>
+          </View>
         </Container>
       </IfWindowWidthIs>
 

@@ -455,19 +455,17 @@ function PageResume() {
       </Container>
 
       {/* ==================================================== Summary intro */}
-      <Container maxWidth={900}>
-        <SpacedView horizontal="l" vertical="l" gap="m">
-          <Text
-            style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
-            role="heading"
-            aria-level={2}
-          >
-            {t(tagline)}
-          </Text>
-          <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]} role="paragraph">
-            {t(summary)}
-          </Text>
-        </SpacedView>
+      <Container horizontal="l" vertical="l" gap="m" maxWidth={900}>
+        <Text
+          style={[fontStyles.iosEm.largeTitle, theme.styles.text]}
+          role="heading"
+          aria-level={2}
+        >
+          {t(tagline)}
+        </Text>
+        <Text style={[fontStyles.iosEm.callout, theme.styles.textLight1]} role="paragraph">
+          {t(summary)}
+        </Text>
       </Container>
 
       {/* ==================================================== Profile stats */}
