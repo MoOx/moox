@@ -74,13 +74,32 @@ them React rewrites the element each time it re-mounts the shell, once per
 navigation; the browser then discards its `CSSStyleSheet` and builds a new one,
 leaving react-native-web holding a detached sheet, so every style registered
 from then on lands nowhere and a page reached by clicking a link loses spacing
-the same page loaded directly has. As a resource React drops the `id` too, so
-the library finds nothing to adopt and keeps its own element, which is the
-separation wanted. None of this is new: it predates #125 and only became
-visible once spacing moved from inline styles to classNames.
+the same page loaded directly has. None of this is new: it predates #125 and
+only became visible once spacing moved from inline styles to classNames.
+
+**As a resource React also drops the `id`, and an inline script has to put it
+back.** `createCSSStyleSheet` adopts the element it finds under
+`react-native-stylesheet` and otherwise builds its own **at `head.firstChild`**,
+in front of the served sheet. Two sheets then carry the same atomic classes and
+the cascade between them falls back to document order, so the `.css-view-*`
+reset (`padding: 0`, `margin: 0`, in the _server's_ sheet) beats every atomic
+class that exists only in the client's. Everything the client registers after
+the served HTML, which is every rule a route pulls in on a client-side
+navigation, is cancelled: `Container` loses its horizontal padding, and only
+when the page is reached by clicking a link. `__root.tsx` renders a one-line
+script next to the sheet that sets the `id` back from `data-href` before the
+deferred module graph runs, and the client adopts the served sheet instead of
+adding a second one.
+
+That one hides behind a warm registry the same way: once the server has served
+a few routes it holds nearly every rule, the served sheet is complete, and there
+is nothing left for the client to add. It reproduces on a **cold** server, and
+always in the prerendered build, where each page carries only its own rules.
 
 `npm run audit:ssr-css` requests every route from a **fresh** server and fails
-on a class with no rule. It exists to catch a regression on the above, not as a
+on a class with no rule. It would not have caught the sheet above: there the
+served class does have a rule, and it is the client that overrides it. It exists
+to catch a regression on the ordering, not as a
 discipline to follow: nothing has to be pre-registered.
 
 **Derive, never hand-write.** Every hand-authored value on this CV has drifted

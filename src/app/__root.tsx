@@ -139,19 +139,65 @@ function DesignSystemCssRules() {
  * rewrite also drops every vendor-prefixed declaration, which the browser does
  * not return in `cssText`.)
  *
- * As a resource React omits the `id` too, so react-native-web finds nothing to
- * adopt on the client and keeps its own element: this one paints the server's
- * HTML, the library owns everything after hydration.
+ * As a resource React omits the `id`, which is what `adoptStyleSheet` below puts
+ * back: without it the client builds a *second* sheet, and that is a layout bug
+ * rather than a separation of concerns.
  */
 function ReactNativeStyleSheet() {
   // @ts-expect-error getSheet is a react-native-web internal API
   const sheet = StyleSheet.getSheet() as { id: string; textContent: string };
   return (
-    <style
-      href={sheet.id}
-      precedence="react-native-web"
-      dangerouslySetInnerHTML={{ __html: sheet.textContent }}
-      suppressHydrationWarning
-    />
+    <>
+      <style
+        href={sheet.id}
+        precedence="react-native-web"
+        dangerouslySetInnerHTML={{ __html: sheet.textContent }}
+        suppressHydrationWarning
+      />
+      <script
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: `(${adoptStyleSheet.toString()})(${JSON.stringify(sheet.id)});`,
+        }}
+      />
+    </>
   );
 }
+
+/**
+ * Hands the served sheet back the `id` react-native-web looks for, before the
+ * library runs.
+ *
+ * `createCSSStyleSheet` adopts `document.getElementById("react-native-stylesheet")`
+ * when it finds one, and otherwise creates its own element **at
+ * `head.firstChild`** - in front of everything, the served sheet included. Two
+ * sheets then hold the same atomic classes, and the cascade between them is
+ * decided by document order rather than by react-native-web's groups: the
+ * `.css-view-*` reset, which declares `padding: 0` and `margin: 0` and sits in
+ * the *server's* sheet, wins over every atomic class that only exists in the
+ * client's. Any rule the client registers after the served HTML - which is
+ * every rule a route pulls in on a client-side navigation - is silently
+ * cancelled, and a page reached by clicking a link loses the padding the same
+ * page loaded directly has.
+ *
+ * In dev it only shows on a **cold** server, because the registry is a module
+ * global: once it has served a few routes it holds nearly every rule, so the
+ * served sheet is complete and there is nothing left for the client to add.
+ * That is the same warm-registry blind spot as the ordering rule above. The
+ * prerendered build has no such reprieve - every page carries its own rules and
+ * nothing else - so there the padding was lost on every client-side navigation.
+ * `npm run audit:ssr-css` cannot see any of it: it checks the served HTML,
+ * where the class does have a rule, and it is the client that overrides it.
+ *
+ * Rendered as a plain inline script, so it runs while the document is still
+ * parsing, ahead of the deferred module that pulls react-native-web in. React
+ * keeps the `href` as `data-href` on a hoisted style resource, which is what
+ * this looks the element up by.
+ */
+const adoptStyleSheet = (id: string) => {
+  // `~=`, not `=`: React merges every <style> sharing a `precedence` into one
+  // tag whose `data-href` is the space-separated list of their hrefs, and it
+  // looks its own resources up the same way.
+  const el = document.querySelector('style[data-href~="' + id + '"]');
+  if (el && !el.id) el.id = id;
+};
