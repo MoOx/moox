@@ -1,8 +1,7 @@
-import { useT } from "@/i18n";
-import { useHref } from "@/i18n";
 import { ResumeItem } from "@/api";
 import BlockMaxApp from "@/components/BlockMaxApp";
 import LinkButton from "@/components/LinkButton";
+import { useHref, useT } from "@/i18n";
 import { summary, taglineParts } from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
@@ -18,7 +17,11 @@ import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 const revertSkew = [{ scaleY: 1 / 1.1 }, { skewY: "-1deg" }];
 
-export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem }) {
+export default function BlockBuilder({
+  resumeEntry,
+}: {
+  resumeEntry?: ResumeItem;
+}) {
   const localizeHref = useHref();
   const theme = useTheme();
   const t = useT();
@@ -85,9 +88,8 @@ export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem
           <SpacedView
             horizontal="xl"
             gap="m"
-            // vertical="xxl"
             style={{
-              paddingTop: size("xxl"),
+              paddingBlockStart: size("xxl"),
               pointerEvents: "auto",
               flexBasis: 1024 / 2,
               flexShrink: 1,
@@ -98,36 +100,42 @@ export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem
                 this indigo band is the home's main pitch. */}
             <View role="heading" aria-level={2}>
               {t(taglineParts).map((part) => (
-                <Text key={part} style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}>
+                <Text
+                  key={part}
+                  style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
+                >
                   {part}
                 </Text>
               ))}
             </View>
             <Text
-              style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
+              style={[
+                fontStyles.iosEm.body,
+                theme.styles.textOnMain,
+                { opacity: 0.6 },
+              ]}
               role="paragraph"
             >
               {t(summary)}
             </Text>
             <LinkButton
               href={localizeHref("/resume/")}
-              color={theme.dynamicColors.back}
-              textColor={theme.dynamicColors.text}
-              spaceHorizontal="m"
+              color={theme.dynamicColors.backAlpha01}
+              textColor={theme.dynamicColors.textOnMain}
+              spaceHorizontal="l"
               style={{ alignSelf: "flex-end" }}
             >
-              <SpacedView horizontal="m">
-                <Text style={fontStyles.iosEm.callout}>
-                  {t({ en: "More about me", fr: "En savoir plus sur moi" })}
-                </Text>
-              </SpacedView>
+              <Text style={fontStyles.iosEm.callout}>
+                {t({ en: "More about me", fr: "En savoir plus sur moi" })}
+              </Text>
             </LinkButton>
-            <Spacer size="m" />
             <IfWindowWidthIs largerThan={WindowWidth.m}>
               <Spacer size="xs" />
             </IfWindowWidthIs>
           </SpacedView>
-          <IfWindowWidthIs smallerThan={WindowWidth.m}>{device}</IfWindowWidthIs>
+          <IfWindowWidthIs smallerThan={WindowWidth.m}>
+            {device}
+          </IfWindowWidthIs>
         </Container>
       </View>
     </View>

@@ -8,7 +8,7 @@ import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import { gradientFlashyStops, useTheme } from "@/styles";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 
@@ -173,7 +173,10 @@ De Dreamweaver à Cursor, les années ont passé, mais pas mon appétit pour de 
                   borderWidth: 1,
                   borderStyle: "solid",
                   borderColor: "rgba(0, 0, 0, 0.25)",
-                  filter: "contrast(130%) grayscale(25%)",
+                  // Web-only: `filter` is CSS. See BlockCompaniesTried.
+                  ...(Platform.OS === "web"
+                    ? { filter: "contrast(130%) grayscale(25%)" }
+                    : null),
                 }}
               />
               <Text

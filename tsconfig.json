@@ -1,13 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "preserve",
+    "moduleDetection": "force",
     "moduleResolution": "bundler",
     "resolvePackageJsonImports": false,
     "resolveJsonModule": true,
@@ -15,9 +20,24 @@
     "noUncheckedIndexedAccess": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["@types/react-native-web", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "types",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "dist-ios",
+    "dist-android",
+    "ios",
+    "android",
+    ".tanstack"
+  ],
+  "extends": "expo/tsconfig.base"
 }

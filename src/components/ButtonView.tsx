@@ -1,8 +1,7 @@
-import { Size } from "@/react-multiversal";
+import { size, Size } from "@/react-multiversal";
 import BlurView from "@/react-multiversal/BlurView";
 import { boxShadowGlass } from "@/react-multiversal/GlassView";
 import GradientLinear from "@/react-multiversal/GradientLinear";
-import SpacedView from "@/react-multiversal/SpacedView";
 import { UserColorScheme } from "@/react-multiversal/theme/colorScheme";
 import { alpha, colors, useTheme } from "@/styles";
 import { ReactNode, useMemo } from "react";
@@ -15,6 +14,7 @@ export type Indicator = "none" | "activity" | "success";
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
@@ -150,12 +150,34 @@ const ButtonView = ({
         .with("subtle", () => stylesEffect.subtle)
         .with("none", () => null)
         .exhaustive(),
+      {
+        paddingInline: size(spaceHorizontal),
+        paddingBlock: size(spaceVertical),
+        gap: size(spaceGap),
+      },
       style,
     ];
-  }, [mode, alt, color, colorAlt, borderColorAlt, style, effect]);
+  }, [
+    mode,
+    alt,
+    color,
+    colorAlt,
+    borderColorAlt,
+    style,
+    effect,
+    spaceHorizontal,
+    spaceVertical,
+    spaceGap,
+  ]);
   const elementBackground =
     mode !== "gradient" ? null : (
-      <View style={[StyleSheet.absoluteFill, styles.container, { overflow: "hidden" }]}>
+      <View
+        style={[
+          StyleSheet.absoluteFill,
+          styles.container,
+          { overflow: "hidden" },
+        ]}
+      >
         <GradientLinear
           stops={[
             {
@@ -173,7 +195,9 @@ const ButtonView = ({
       </View>
     );
   const elementIndicator = match(indicator)
-    .with("activity", () => <ActivityIndicator size={indicatorSize} color={textColor} />)
+    .with("activity", () => (
+      <ActivityIndicator size={indicatorSize} color={textColor} />
+    ))
     .with("success", () => (
       <Text style={[{ fontSize: indicatorSize, color: textColor }]}>{"✔"}</Text>
     ))
@@ -183,21 +207,14 @@ const ButtonView = ({
   return (
     <BlurView blurAmount={blurAmount} style={styleBtn} {...props}>
       {elementBackground}
-      <SpacedView
-        horizontal={spaceHorizontal}
-        vertical={spaceVertical}
-        gap={spaceGap}
-        style={styles.row}
-      >
-        {elementIndicator ? (
-          <View style={styles.indicatorContainer}>{elementIndicator}</View>
-        ) : null}
-        {typeof children === "function" ? (
-          children(childrenStyles)
-        ) : (
-          <Text style={[childrenStyles, styles.row]}>{children}</Text>
-        )}
-      </SpacedView>
+      {elementIndicator ? (
+        <View style={styles.indicatorContainer}>{elementIndicator}</View>
+      ) : null}
+      {typeof children === "function" ? (
+        children(childrenStyles)
+      ) : (
+        <Text style={[childrenStyles, styles.row]}>{children}</Text>
+      )}
     </BlurView>
   );
 };

@@ -1,26 +1,56 @@
 # moox.io
 
-Personal site + CV, in English and French. TanStack Start, React Native Web
-(`react-multiversal`), content authored as markdown in `content/` and compiled
-to JSON by `npm run markdown`.
+Personal site + CV, in English and French, and the iOS/Android app that mounts
+the same pages. TanStack Start, Expo, React Native Web (`react-multiversal`),
+content authored as markdown in `content/` and compiled to JSON by
+`npm run markdown`.
+
+**One project, two platforms.** There is a single `package.json`, a single
+`node_modules` and a single `tsconfig.json`. Native versions follow whatever
+`expo install --check` expects (`npm run lint:native`), which is why some are
+pinned exactly and others carry a `~`: the range is copied from Expo's own
+`bundledNativeModules.json`, never chosen here.
 
 ## Where things are
 
 | What                               | Where                                         |
 | ---------------------------------- | --------------------------------------------- |
-| The CV page (source of the PDFs)   | `src/app/{-$lang}.cv.tsx`                     |
-| The web CV                         | `src/app/{-$lang}.resume.tsx` (+ `resume_.*`) |
+| The pages, as components           | `src/pages/*.tsx` (+ `src/pages/README.md`)   |
+| The CV page (source of the PDFs)   | `src/pages/CvPage.tsx`                        |
+| The web CV                         | `src/pages/ResumePage.tsx`                    |
+| Web routes (loaders, `head`, i18n) | `src/routes.web/*.tsx` (TanStack Start)       |
+| App routes (queries, tabs, stacks) | `src/routes.native/**` (Expo Router)          |
 | CV copy, figures, derivations      | `src/profile.tsx`                             |
 | Missions / open source / education | `content/resume/*.md` frontmatter             |
 | Testimonials                       | `src/components/BlockTestimonials.tsx`        |
 | i18n contract (types, hooks, URLs) | `src/i18n.ts`                                 |
 | PDF export (one file per language) | `scripts/generate-resume-pdf.mjs`             |
+| Native-only shell (scroller, cache)| `src/native/` (+ `MOBILE.md`)                 |
+| Native build config                | `app.json`, `metro.config.ts`, `plugins/`     |
+| The prebuilt iOS project           | `ios/` (built with fastlane, not EAS)         |
 
 **Routes are file-based with an optional language segment**: `{-$lang}.cv.tsx`
 serves both `/cv` and `/fr/cv` — one definition, two languages. English is the
 default and carries no prefix. `/blog` and `/talks` are deliberately
 English-only, which is why `localizedHref` only prefixes the paths listed in
 `localizedPathPatterns`.
+
+**A page is a component, and a route is what mounts it.** `src/pages/*.tsx`
+take their data as props and know nothing about a router; `src/routes.web/*.tsx`
+(TanStack Start) and `src/routes.native/**` (Expo Router) each mount the same page,
+one with a `loader`, the other with a `useQuery`. Put a `loader`, a `head`, a
+`useSearch` or a `<Link to>` in a page and it stops being mountable by the
+other side. Shared code reaches a router through exactly two functions,
+`usePathname` and `useNavigateToHref` in `src/routing.ts` / `routing.native.ts`,
+never by importing one directly. `MOBILE.md` walks through the four places
+where the two platforms genuinely differ.
+
+**Neither routes directory may be called `app`.** Expo resolves its route tree
+with `getRouterDirectory()`, which returns `src/app` when that directory exists
+and `app` otherwise, and says so in one line of grey log. With two file-based
+routers in one project that guess is a trap, so both directories are named and
+both routers are told where to look: `routesDirectory` in `vite.config.ts`,
+`plugins.expo-router.root` in `app.json`.
 
 **`TODO.md` is the only place with open items.** Everything else is history or
 contract — if a document grows a checkbox, it belongs there instead.
@@ -33,8 +63,55 @@ Longer context, only read when relevant:
 - `CONTENT-NORMALIZATION.md` — the frontmatter field contract (registers and
   the ladder; the types themselves are commented in `src/api.tsx`)
 - `STATS.md` — the source and refresh command for every figure on the CV
+- `MOBILE.md`, the Expo app: the four differences between the site and the
+  app, and why each one is a difference rather than a gap
 
 ## Rules that cost real damage when broken
+
+**`typeof window !== "undefined"` is not a platform test.** React Native
+aliases `window` _and_ `self` to `global` and never defines `document`, so that
+check passes on a device and the code goes straight on to call a DOM API that is
+not there. It cost four boot crashes in the Expo port (`matchMedia` at module
+scope, `Node.ELEMENT_NODE`, `window.addEventListener("scroll")`,
+`IntersectionObserver`). Use `Platform.OS === "web"`; keep `typeof window` only
+for the extra SSR-vs-browser question _inside_ a web branch.
+
+**An unknown JSX tag is a redbox on native, and a passing test.** `<div>`,
+`<img>`, `<script>`, `<style>`, `<a>` and friends have no view manager, so a
+device fails with `View config getter callback for component "div" must be a
+function` — but the React Native test renderer instantiates them happily and
+reports success. The jest harness that used to walk the rendered tree for HTML
+tag names is gone (it was never run outside CI), so **nothing in this repo
+catches a `<div>` in shared code any more**: a device is the check. What is
+still automated is narrower and static, the `no-restricted-globals` override in
+`.oxlintrc.json`, which refuses `document`, `matchMedia`, `IntersectionObserver`
+and friends in any `.native`/`.ios` file or under `src/native` and
+`src/routes.native`. Web-only markup belongs behind `Platform.OS === "web"`, and
+anything structural belongs in a `.native.tsx` twin.
+
+**A worklet runs on the UI runtime, where almost nothing you wrote exists.**
+It may call other worklets and Reanimated's own primitives, and that is all: a
+plain module-level helper, a function passed as a prop, or a library like
+`ts-pattern` is captured but not callable, and calling it throws. So does any
+`throw` you author. There is no error boundary and no LogBox there - Hermes
+rethrows, the process aborts, and you get **no redbox and nothing in the Metro
+console**, only an `.ips` crash report whose stack ends in
+`WorkletRuntime::runSync` / `throwPendingError`. On web this is all invisible,
+because react-native-reanimated runs every "worklet" on the JS thread.
+`Parallax` had three of these at once (a `getScrollViewHeight` default that
+threw by design, two module helpers, and `match()` inside `useAnimatedStyle`)
+and crashed every page through the footer. Nothing automated can catch this
+class: a device is the only check.
+
+**Metro is a static bundler: a `Platform.OS` branch does not keep an import
+out of the native graph.** `readJson` guarded its `node:fs` import with
+`Platform.OS === "web"` and `expo start` still failed to resolve it. Worse, the
+usual check missed it: in production `babel-preset-expo` folds the comparison to
+`false` and drops the dead branch *before* resolution, so `expo export` bundled
+cleanly while the dev server crashed. Platform-only imports belong behind a
+`.native.ts` / plain-`.ts` pair (`api.readJson*.ts`), never behind an `if` —
+and the check that catches it is `npm run test:native`, which bundles through
+the dev server, on both platforms, with the cache cleared.
 
 **Never put Ghostscript back in the PDF pipeline.** `gs -sDEVICE=pdfwrite`
 rewrites the whole document, text included, and silently destroys the text

@@ -1,26 +1,15 @@
-import { useT } from "@/i18n";
 import BlockMe1WithSmallPills from "@/components/BlockMe1WithSmallPills";
+import { useT } from "@/i18n";
 import { jobSubtitle, jobTitleParts } from "@/profile";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import SpacedView from "@/react-multiversal/SpacedView";
+import TextBlock from "@/react-multiversal/TextBlock";
 import Spacer from "@/react-multiversal/Spacer";
 import { gradientTextFlashyStyles, gradientTextStyles, useTheme } from "@/styles";
-import { Text, View } from "react-native";
-
-/**
- * Fluid hero size: 34px on a phone, 48px from ~1440px up, interpolated in
- * between. A CSS function in an inline style, which is what react-native-web
- * writes anyway - so no stylesheet rule, no `!important`, and above all **one
- * node**: the two `IfWindowWidthIs` variants this replaces both sat in the
- * HTML, so the <h1> carried the job title twice.
- */
-const heroTitleSize = {
-  fontSize: "clamp(34px, 1.3vw + 29px, 48px)" as unknown as number,
-  lineHeight: "clamp(41px, 0.66vw + 38.5px, 48px)" as unknown as number,
-};
+import { Platform, Text, View } from "react-native";
 
 export default function BlockHey() {
   const theme = useTheme();
@@ -72,7 +61,10 @@ export default function BlockHey() {
                     {
                       fontWeight: weight.black,
                       viewTransitionName: "text--front-end-architect",
-                      ...heroTitleSize,
+                    },
+                    Platform.OS === "web" && {
+                      fontSize: "clamp(34px, 1.3vw + 29px, 48px)" as unknown as number,
+                      lineHeight: "clamp(41px, 0.66vw + 38.5px, 48px)" as unknown as number,
                     },
                   ]}
                 >
@@ -97,7 +89,7 @@ export default function BlockHey() {
               </Text>
             </View>
             <Spacer size="l" />
-            <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
+            <TextBlock>
               <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
                 {t({ en: "Hey,", fr: "Hey," })}
               </Text>
@@ -112,7 +104,7 @@ export default function BlockHey() {
                   {"Max."}
                 </Text>
               </Text>
-            </Text>
+            </TextBlock>
           </View>
           <IfWindowWidthIs largerThan={WindowWidth.m}>
             <Spacer size="xxxl" />

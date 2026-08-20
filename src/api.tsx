@@ -1,3 +1,4 @@
+import { readJson } from "@/api.readJson";
 import { l, Lang, Localized } from "@/i18n";
 
 export type ContentItem = {
@@ -153,20 +154,6 @@ function sortByDate<T extends { date?: string }>(items: T[]): T[] {
     const dateB = b.date ? new Date(b.date).getTime() : 0;
     return dateB - dateA;
   });
-}
-
-async function readJson<T>(urlPath: string): Promise<T> {
-  if (typeof window === "undefined") {
-    // SSR/prerender: read from filesystem
-    const fs = await import("node:fs");
-    const path = await import("node:path");
-    const filePath = path.join(process.cwd(), "public", urlPath);
-    return JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
-  }
-  // Client: fetch from static files
-  const res = await fetch(urlPath);
-  if (!res.ok) throw new Error(`Failed to fetch ${urlPath}: ${res.status}`);
-  return (await res.json()) as T;
 }
 
 export async function fetchAll<T extends ContentType>(opts: {

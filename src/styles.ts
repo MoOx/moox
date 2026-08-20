@@ -16,6 +16,7 @@ export const colors = {
 
 type ThemedColors = {
   back: string;
+  backAlpha01: string;
   backAlpha85: string;
   backAlt: string;
   backOnAlt: string;
@@ -49,6 +50,36 @@ type ThemedColors = {
   textIndigoAlt: string;
   textIndigoAlt2: string;
   ultraLight: string;
+  /**
+   * The liquid-glass material, as theme tokens rather than as a hand-written
+   * stylesheet. `makeTheme` already emits every token as a CSS variable and
+   * already switches it on `.userColorScheme-*` and `prefers-color-scheme`,
+   * which is the entirety of what `GlassFallbackStyles` used to duplicate by
+   * hand. Changing the material is now editing four values here.
+   *
+   * Web reads all four. Native reads `glassFill` (the painted fallback below
+   * iOS 26, and the liquid-glass tint above it); `glassFilter` and
+   * `glassBezel` are CSS and stay unused there.
+   */
+  glassFill: string;
+  glassBorder: string;
+  glassBezel: string;
+  glassFilter: string;
+  /**
+   * The second glass, and not a lighter version of the first one: `regular`
+   * guarantees legibility through an opaque enough fill, `clear` gives that up
+   * to let the background through. Which is why its fill turns neutral - black
+   * or white rather than the theme's background - since it is no longer
+   * tinting, it is the dimming layer that keeps the label readable over
+   * whatever is behind.
+   *
+   * Only use it where the background is yours: the hero and the synthwave
+   * footer, not a button that might land on plain white.
+   */
+  glassClearFill: string;
+  glassClearBorder: string;
+  glassClearBezel: string;
+  glassClearFilter: string;
 };
 
 export const boxShadows = {
@@ -79,6 +110,7 @@ export const boxShadows = {
 export const themedColors: ThemeColors<ThemedColors> = {
   light: {
     back: colors.white,
+    backAlpha01: alpha(colors.white, 0.1),
     backAlpha85: alpha(colors.white, 0.85),
     backAlt: "#f2f2f7",
     backOnAlt: colors.white,
@@ -113,9 +145,33 @@ export const themedColors: ThemeColors<ThemedColors> = {
     // flashy3: "#ff5b8a",
     // flashy4: "#2b0aff",
     ultraLight: alpha(colors.black, 0.1),
+    // Vibrancy comes from saturation, not brightness; the bezel is an inset
+    // white highlight (Safari-safe), and the ambient shadow is what separates
+    // the surface from the page.
+    glassFill: alpha(colors.white, 0.55),
+    glassBorder: alpha(colors.white, 0.5),
+    glassBezel: [
+      `inset 0.5px 0.25px 0.5px ${alpha(colors.white, 0.95)}`,
+      `inset -0.5px -0.25px 1px ${alpha(colors.white, 0.95)}`,
+      `inset -4px -6px 14px -8px ${alpha(colors.white, 0.2)}`,
+      `0 4px 20px ${alpha(colors.black, 0.12)}`,
+    ].join(", "),
+    glassFilter: "saturate(180%) blur(12px)",
+    // Less blur on purpose: the point is to see what is behind, so hiding it
+    // would defeat the variant. `brightness` above 1 is the dimming layer in
+    // reverse - this theme's text is dark, so the backdrop is lifted, not sunk.
+    glassClearFill: alpha(colors.white, 0.12),
+    glassClearBorder: alpha(colors.white, 0.35),
+    glassClearBezel: [
+      `inset 0.5px 0.25px 0.5px ${alpha(colors.white, 0.7)}`,
+      `inset -0.5px -0.25px 1px ${alpha(colors.white, 0.6)}`,
+      `0 2px 12px ${alpha(colors.black, 0.1)}`,
+    ].join(", "),
+    glassClearFilter: "saturate(200%) brightness(1.08) blur(6px)",
   },
   dark: {
     back: "#0c001b", //platformColors.ios.dark.gray6,
+    backAlpha01: alpha("#110028", 0.01),
     backAlpha85: alpha("#110028", 0.85),
     backAlt: "#0c001b",
     backOnAlt: "#150030",
@@ -150,6 +206,28 @@ export const themedColors: ThemeColors<ThemedColors> = {
     inkFlashy: "#fa5bd7",
     inkSuccess: "#049955",
     ultraLight: alpha(colors.white, 0.15),
+    // Dark needs a lift the light theme does not: `brightness(1.3)`, or the
+    // material reads as a grey card rather than as glass.
+    glassFill: alpha("#0c001b", 0.35),
+    glassBorder: alpha(colors.white, 0.18),
+    glassBezel: [
+      `inset 0.5px 0.25px 0.5px ${alpha(colors.white, 0.35)}`,
+      `inset -0.5px -0.25px 1px ${alpha(colors.white, 0.25)}`,
+      `inset 4px 6px 16px -8px ${alpha(colors.white, 0.2)}`,
+      `0 4px 20px ${alpha(colors.black, 0.4)}`,
+    ].join(", "),
+    glassFilter: "saturate(180%) brightness(1.3) blur(12px)",
+    // Dark reverses the dimming: the text is light, so the backdrop is pushed
+    // down rather than lifted, and the fill is neutral black instead of the
+    // theme's indigo-black.
+    glassClearFill: alpha(colors.black, 0.2),
+    glassClearBorder: alpha(colors.white, 0.12),
+    glassClearBezel: [
+      `inset 0.5px 0.25px 0.5px ${alpha(colors.white, 0.25)}`,
+      `inset -0.5px -0.25px 1px ${alpha(colors.white, 0.18)}`,
+      `0 2px 12px ${alpha(colors.black, 0.3)}`,
+    ].join(", "),
+    glassClearFilter: "saturate(200%) brightness(0.9) blur(6px)",
   },
 };
 

@@ -52,11 +52,23 @@ export default function WebsiteFooter() {
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
-            flex: 1,
+            flexGrow: 1,
+            flexShrink: 1,
           }}
         >
-          <SpacedView horizontal="l" vertical="xl" gap="m" style={{ flexBasis: 190 }}>
-            <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
+          <SpacedView
+            horizontal="l"
+            vertical="xl"
+            gap="m"
+            style={{ flexBasis: 190 }}
+          >
+            <Text
+              style={[
+                fontStyles.ios.headline,
+                theme.styles.text,
+                { fontWeight: "200" },
+              ]}
+            >
               <Spacer size="m" />
               {"Navigation"}
             </Text>
@@ -85,8 +97,19 @@ export default function WebsiteFooter() {
                 ))}
             </View>
           </SpacedView>
-          <SpacedView horizontal="l" vertical="xl" gap="m" style={{ flexBasis: 190 }}>
-            <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
+          <SpacedView
+            horizontal="l"
+            vertical="xl"
+            gap="m"
+            style={{ flexBasis: 190 }}
+          >
+            <Text
+              style={[
+                fontStyles.ios.headline,
+                theme.styles.text,
+                { fontWeight: "200" },
+              ]}
+            >
               <Spacer size="m" />
               {t({ en: "Follow Me", fr: "Me suivre" })}
             </Text>
@@ -103,7 +126,9 @@ export default function WebsiteFooter() {
                     style: { flexShrink: 0 },
                   })}
                   <SpacedView horizontal="xs" vertical="xs">
-                    <Text style={[fontStyles.iosEm.body, theme.styles.text]}>{text}</Text>
+                    <Text style={[fontStyles.iosEm.body, theme.styles.text]}>
+                      {text}
+                    </Text>
                   </SpacedView>
                 </LinkView>
               ))}
@@ -119,14 +144,27 @@ export default function WebsiteFooter() {
                     style: { flexShrink: 0 },
                   })}
                   <SpacedView horizontal="xs" vertical="xs">
-                    <Text style={[fontStyles.ios.body, theme.styles.text]}>{text}</Text>
+                    <Text style={[fontStyles.ios.body, theme.styles.text]}>
+                      {text}
+                    </Text>
                   </SpacedView>
                 </LinkView>
               ))}
             </View>
           </SpacedView>
-          <SpacedView horizontal="l" vertical="xl" gap="m" style={{ flexBasis: 190 }}>
-            <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
+          <SpacedView
+            horizontal="l"
+            vertical="xl"
+            gap="m"
+            style={{ flexBasis: 190 }}
+          >
+            <Text
+              style={[
+                fontStyles.ios.headline,
+                theme.styles.text,
+                { fontWeight: "200" },
+              ]}
+            >
               <Spacer size="m" />
               {t({ en: "More", fr: "Plus" })}
             </Text>
@@ -143,7 +181,9 @@ export default function WebsiteFooter() {
                     style: { flexShrink: 0 },
                   })}
                   <SpacedView horizontal="xs" vertical="xs">
-                    <Text style={[fontStyles.iosEm.body, theme.styles.text]}>{text}</Text>
+                    <Text style={[fontStyles.iosEm.body, theme.styles.text]}>
+                      {text}
+                    </Text>
                   </SpacedView>
                 </LinkView>
               ))}
@@ -159,12 +199,20 @@ export default function WebsiteFooter() {
                     style: { flexShrink: 0 },
                   })}
                   <SpacedView horizontal="xs" vertical="xs">
-                    <Text style={[fontStyles.ios.body, theme.styles.text]}>{text}</Text>
+                    <Text style={[fontStyles.ios.body, theme.styles.text]}>
+                      {text}
+                    </Text>
                   </SpacedView>
                 </LinkView>
               ))}
             </View>
-            <Text style={[fontStyles.ios.headline, theme.styles.text, { fontWeight: "200" }]}>
+            <Text
+              style={[
+                fontStyles.ios.headline,
+                theme.styles.text,
+                { fontWeight: "200" },
+              ]}
+            >
               <Spacer size="m" />
               {t({ en: "Options", fr: "Options" })}
             </Text>
@@ -174,7 +222,12 @@ export default function WebsiteFooter() {
           <Spacer />
         </Container>
 
-        <Image src="/_/paintbrush-bold-orange.svg" alt="" width={512 / 2} height={124 / 2} />
+        <Image
+          src="/_/paintbrush-bold-orange.svg"
+          alt=""
+          width={512 / 2}
+          height={124 / 2}
+        />
         <Spacer size="xxl" />
       </View>
       <SpacedView
@@ -200,7 +253,11 @@ export default function WebsiteFooter() {
           }}
         >
           <LinkText
-            style={[fontStyles.ios.footnote, theme.styles.text, { lineHeight: 36 }]}
+            style={[
+              fontStyles.ios.footnote,
+              theme.styles.text,
+              { lineHeight: 36 },
+            ]}
             href="https://github.com/MoOx/moox"
           >
             {"100% Handcrafted & Over-engineered source available on GitHub"}

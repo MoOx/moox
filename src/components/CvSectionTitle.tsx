@@ -42,7 +42,8 @@ export default function CvSectionTitle({
       </View>
       <View
         style={{
-          flex: 1,
+          flexGrow: 1,
+          flexShrink: 1,
           height: 1,
           backgroundColor: theme.dynamicColors.ultraLight,
         }}

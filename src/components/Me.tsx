@@ -4,7 +4,7 @@ import Image from "@/components/Image";
 import { GradientRadial } from "@/react-multiversal/GradientRadial";
 import { useTheme } from "@/styles";
 import { ReactNode } from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
+import { Platform, StyleProp, View, ViewStyle } from "react-native";
 
 const DEFAULT_WIDTH = 450;
 
@@ -119,7 +119,11 @@ export default function Me({
           style={{ position: "absolute", left: -10 * scale, bottom: -0 }}
         />
       </View>
-      <style
+      {/* The portrait is lifted in light mode and dimmed in dark mode. Both the
+          `<style>` element and the `filter` it drives are web-only, so native
+          renders the picture as-is. */}
+      {Platform.OS === "web" ? (
+        <style
         dangerouslySetInnerHTML={{
           __html: `
                 .userColorScheme-auto,
@@ -136,14 +140,17 @@ export default function Me({
                 }
                 `,
         }}
-      />
+        />
+      ) : null}
       <Image
         priority={true}
         src={src}
         alt={t({ en: "Picture of Max", fr: "Photo de Max" })}
         width={resolvedImgWidth}
         height={resolvedImgHeight}
-        style={{ filter: "brightness(var(--maxMeBrightness))" }}
+        style={
+          Platform.OS === "web" ? { filter: "brightness(var(--maxMeBrightness))" } : undefined
+        }
       />
       {children}
     </View>

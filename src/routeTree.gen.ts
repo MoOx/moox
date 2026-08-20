@@ -8,18 +8,18 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './app/__root'
-import { Route as DesignSystemRouteImport } from './app/design-system'
-import { Route as BlogIndexRouteImport } from './app/blog.index'
-import { Route as BlogSlugRouteImport } from './app/blog.$slug'
-import { Route as TalksIndexRouteImport } from './app/talks.index'
-import { Route as TalksSlugRouteImport } from './app/talks.$slug'
-import { Route as Char123LangChar125IndexRouteImport } from './app/{-$lang}.index'
-import { Route as Char123LangChar125ContactRouteImport } from './app/{-$lang}.contact'
-import { Route as Char123LangChar125CvRouteImport } from './app/{-$lang}.cv'
-import { Route as Char123LangChar125ResumeRouteImport } from './app/{-$lang}.resume'
-import { Route as Char123LangChar125ResumeSlugRouteImport } from './app/{-$lang}.resume_.$slug'
-import { Route as Char123LangChar125ResumeGroupGroupRouteImport } from './app/{-$lang}.resume_.group.$group'
+import { Route as rootRouteImport } from './routes.web/__root'
+import { Route as DesignSystemRouteImport } from './routes.web/design-system'
+import { Route as BlogIndexRouteImport } from './routes.web/blog.index'
+import { Route as BlogSlugRouteImport } from './routes.web/blog.$slug'
+import { Route as TalksIndexRouteImport } from './routes.web/talks.index'
+import { Route as TalksSlugRouteImport } from './routes.web/talks.$slug'
+import { Route as Char123LangChar125IndexRouteImport } from './routes.web/{-$lang}.index'
+import { Route as Char123LangChar125ContactRouteImport } from './routes.web/{-$lang}.contact'
+import { Route as Char123LangChar125CvRouteImport } from './routes.web/{-$lang}.cv'
+import { Route as Char123LangChar125ResumeRouteImport } from './routes.web/{-$lang}.resume'
+import { Route as Char123LangChar125ResumeSlugRouteImport } from './routes.web/{-$lang}.resume_.$slug'
+import { Route as Char123LangChar125ResumeGroupGroupRouteImport } from './routes.web/{-$lang}.resume_.group.$group'
 
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',

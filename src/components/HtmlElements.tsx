@@ -1,3 +1,4 @@
+import SharedImage from "@/components/Image";
 import { Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import LinkText from "@/react-multiversal/LinkText";
@@ -130,7 +131,10 @@ export const Image = ({
       <img src={src ?? ""} className={className} alt={alt ?? ""} style={{ maxWidth: "100%" }} />
     );
   }
-  return null;
+  // Used to return null, so an image in a markdown body simply vanished on
+  // native. `@/components/Image` has a `.native` half now, so it does not have
+  // to.
+  return <SharedImage src={src} className={className} alt={alt} />;
 };
 
 export const Ul = ({ style, children }: { style?: any; children?: ReactNode }) => (
@@ -172,7 +176,10 @@ export const BlockQuote = ({
 
 export const Pre = ({ style, children }: { style?: any; children?: ReactNode }) => (
   <SpacedView vertical="m" style={style}>
-    <pre>{children}</pre>
+    {/* `<pre>` has no native view manager; the whitespace it preserves is
+        already carried by `CodeBlock`'s `whiteSpace: "pre"` below, which is
+        what a `<pre>` actually wraps in these bodies. */}
+    {Platform.OS === "web" ? <pre>{children}</pre> : children}
   </SpacedView>
 );
 

@@ -1,6 +1,14 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "ignorePatterns": ["node_modules/**", "out/**", "public/**", "svgs/**/*.tsx"],
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "out/**",
+    "public/**",
+    "svgs/**/*.tsx",
+    "ios/**",
+    "dist-ios/**",
+    "dist-android/**"
+  ],
   "categories": {
     "correctness": "error",
     "suspicious": "warn",
@@ -15,5 +23,50 @@
     "react/react-in-jsx-scope": "off",
     "import/no-unassigned-import": "off",
     "jsx-a11y/prefer-tag-over-role": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.native.ts",
+        "**/*.native.tsx",
+        "**/*.ios.ts",
+        "**/*.ios.tsx",
+        "src/native/**",
+        "src/routes.native/**"
+      ],
+      "rules": {
+        "no-restricted-globals": [
+          "error",
+          {
+            "name": "document",
+            "message": "No DOM on a device. React Native aliases window and self to global and never defines document, so this compiles, ships, and throws at runtime."
+          },
+          {
+            "name": "matchMedia",
+            "message": "No DOM on a device. Use Appearance / useWindowDimensions."
+          },
+          {
+            "name": "IntersectionObserver",
+            "message": "No DOM on a device. Use onLayout or a scroll handler."
+          },
+          {
+            "name": "getComputedStyle",
+            "message": "No DOM on a device."
+          },
+          {
+            "name": "localStorage",
+            "message": "No DOM on a device. Use AsyncStorage."
+          },
+          {
+            "name": "HTMLElement",
+            "message": "No DOM on a device."
+          },
+          {
+            "name": "Node",
+            "message": "No DOM on a device. `Node.ELEMENT_NODE` was one of the four boot crashes of the Expo port."
+          }
+        ]
+      }
+    }
+  ]
 }

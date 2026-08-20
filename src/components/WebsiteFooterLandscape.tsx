@@ -1,21 +1,26 @@
 import Image from "@/components/Image";
+import { website } from "@/consts";
 import Avatar from "@/react-multiversal/Avatar";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import Parallax from "@/react-multiversal/Parallax";
 import { useTheme } from "@/styles";
 import SVGFlashyTriangle3 from "@/svgs/components/SVGFlashyTriangle3";
 import { ReactNode } from "react";
-import { StyleSheet, View } from "react-native";
+import { ImageBackground, Platform, StyleSheet, View } from "react-native";
 
 const skySize = 400;
 const floorHeight = 120;
 
-export default function WebsiteFooterLandscape({ children }: { children?: ReactNode }) {
+export default function WebsiteFooterLandscape({
+  children,
+}: {
+  children?: ReactNode;
+}) {
   const theme = useTheme();
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, overflow: "hidden" }}>
+    <View style={{ flexGrow: 1, flexShrink: 1 }}>
+      <View style={{ flexGrow: 1, flexShrink: 1, overflow: "hidden" }}>
         <GradientLinear
           stops={[
             { offset: 0, stopColor: "#01093C" },
@@ -23,16 +28,27 @@ export default function WebsiteFooterLandscape({ children }: { children?: ReactN
           ]}
           style={StyleSheet.absoluteFill}
         />
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            background: "url(/_/stars.png) repeat 0% 0% / 400px 300px",
-          }}
-        />
+        {/* The star field is a repeating CSS background, which needs a DOM
+            node and a shorthand `background` React Native does not parse.
+            Native gets its equivalent from `<ImageBackground resizeMode>`. */}
+        {Platform.OS === "web" ? (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              background: "url(/_/stars.png) repeat 0% 0% / 400px 300px",
+            }}
+          />
+        ) : (
+          <ImageBackground
+            source={{ uri: website + "/_/stars.png" }}
+            imageStyle={{ resizeMode: "repeat" }}
+            style={StyleSheet.absoluteFill}
+          />
+        )}
         <View style={{ height: skySize }} />
         <Parallax
           // Radial Sun Gradient
@@ -46,7 +62,10 @@ export default function WebsiteFooterLandscape({ children }: { children?: ReactN
             width: "50%",
             height: skySize + floorHeight + 40,
           }}
-          contentStyle={[StyleSheet.absoluteFill, { transformOrigin: "bottom center" }]}
+          contentStyle={[
+            StyleSheet.absoluteFill,
+            { transformOrigin: "bottom center" },
+          ]}
         >
           <View
             style={[
@@ -161,7 +180,9 @@ export default function WebsiteFooterLandscape({ children }: { children?: ReactN
       </View>
 
       {/* Max */}
-      <View style={{ position: "absolute", top: -40, left: "10%", right: "50%" }}>
+      <View
+        style={{ position: "absolute", top: -40, left: "10%", right: "50%" }}
+      >
         <Image
           src="/_/paintbrush-fast-turquoise.svg"
           alt=""
