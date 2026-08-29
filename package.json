@@ -54,7 +54,7 @@
     "oxfmt": "^0.62.0",
     "oxlint": "^1.77.0",
     "oxlint-tsgolint": "^7.0.2001",
-    "patch-package": "^8.0.0",
+    "patch-package": "^8.0.1",
     "playwright-core": "^1.61.1",
     "react-from-svg": "^8.0.2",
     "react-native": "^0.86.2",
