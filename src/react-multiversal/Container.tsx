@@ -1,9 +1,4 @@
-import {
-  size,
-  Size,
-  spaceStyleGap,
-  spaceStyleVertical,
-} from "@/react-multiversal";
+import { size, Size, spaceStyleGap, spaceStyleVertical } from "@/react-multiversal";
 import { ReactNode } from "react";
 import { Platform, StyleProp, StyleSheet, View, ViewProps, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -50,7 +45,7 @@ const horizontalPadding = (horizontal?: Size): ViewStyle => {
               paddingRight: `calc(env(safe-area-inset-right) + ${v}px)`,
             }
           : { paddingLeft: v, paddingRight: v },
-    }).style as ViewStyle;
+    }).style;
     horizontalCache.set(v, style);
   }
   return style;
@@ -80,20 +75,14 @@ export default function Container({
   gap?: Size;
   children: ReactNode;
 }) {
-  const spacing = [
-    horizontalPadding(horizontal),
-    spaceStyleVertical(vertical),
-    spaceStyleGap(gap),
-  ];
+  const spacing = [horizontalPadding(horizontal), spaceStyleVertical(vertical), spaceStyleGap(gap)];
+  const styleArray = [styles.container, { maxWidth }, spacing, style];
   return (
     <View style={[styles.wrapper, wrapperStyle]} {...props}>
       {Platform.OS === "web" ? (
-        <View style={[styles.container, { maxWidth }, spacing, style]}>{children}</View>
+        <View style={styleArray}>{children}</View>
       ) : (
-        <SafeAreaView
-          edges={{ bottom: "off", top: "off" }}
-          style={[styles.container, { maxWidth }, spacing, style]}
-        >
+        <SafeAreaView edges={{ bottom: "off", top: "off" }} style={styleArray}>
           {children}
         </SafeAreaView>
       )}

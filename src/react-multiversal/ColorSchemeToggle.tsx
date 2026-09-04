@@ -356,7 +356,7 @@ const App = () => {
   return (
     <View
       style={{
-        flex: 1,
+        flexGrow: 1, flexShrink: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: actualValue === 'dark' ? '#222' : '#fff',

@@ -111,13 +111,13 @@ below). The bulk of the win was in step 2 instead.
       Measured: `/resume` 3122 → 2925, `/` 1306 → 1249, `/contact` 641 → 590;
       anchors wrapping a lone text node 182 → 0; max depth 26 → 25.
 - ~~**Step 2b — semantic primitives.**~~ **Dropped, Max, 2026-08.** `role=` on
-      a `View` is fine as it is: react-native-web already maps it to the real
-      tag (`<h3>`, `<nav>`, `<p>`, `<ul>`, `<article>`…), so the markup is
-      already semantic and a `Heading` / `Paragraph` layer would only rename the
-      call sites. The node win was in 2a and is banked.
-      Consequence for `HTML-STYLING-PROPOSAL.md` §4: the "react-strict-dom
-      interface, hand-rolled" argument goes with it. If RSD ever ships, the
-      adapter gets written then.
+  a `View` is fine as it is: react-native-web already maps it to the real
+  tag (`<h3>`, `<nav>`, `<p>`, `<ul>`, `<article>`…), so the markup is
+  already semantic and a `Heading` / `Paragraph` layer would only rename the
+  call sites. The node win was in 2a and is banked.
+  Consequence for `HTML-STYLING-PROPOSAL.md` §4: the "react-strict-dom
+  interface, hand-rolled" argument goes with it. If RSD ever ships, the
+  adapter gets written then.
 - [ ] **Step 3 — font ergonomics, then one token object.** The theme mechanism
       stays (CSS variables for a reliable `auto`, OS scheme on native); only the
       call sites change. Delete `fontStyles.android` / `androidEm` (0 uses,
@@ -136,6 +136,69 @@ below). The bulk of the win was in step 2 instead.
       both problems.
 - [ ] Verify every step with the screenshot harness described in the proposal
       (full-page 390/1280 pixel diff; heights must not move).
+
+---
+
+## 5. Expo app — polish, if it is worth continuing
+
+The site boots and renders every route on iOS and Android from the same `src/`
+(see `MOBILE.md` for how, and `npm run test:native` for the proof). Nothing
+below blocks a demo; all of it is the difference between "opens" and "looks
+right".
+
+- [ ] Review the layout on a real device. Every route renders, which is not the
+      same claim as every route looking correct.
+- [ ] Parallax is static on native, and its animated path is switched off
+      there entirely (`animate` in `Parallax.tsx`) because the worklet cannot
+      run on the UI runtime: it calls `layoutToInputRange` and
+      `getTransformValue`, and the latter runs `ts-pattern`'s `match()`.
+      Making it move is two jobs, not one: move that work out of the worklet
+      (resolve the input range and the transform shapes at render time, leave
+      only `interpolate` inside), and wire `useScrollViewOffset` to the root
+      `ScrollView` so there is an offset to interpolate against.
+- [ ] `GlassView` / `BlurView` are a plain `View` on native (they are built on
+      CSS `backdrop-filter`). `expo-blur` and `expo-glass-effect` both ship in
+      Expo Go.
+- [ ] No native back gesture: navigation is TanStack's memory history, not a
+      native stack. An Android hardware-back handler is the minimum.
+- [ ] `/talks` embeds link out instead of playing inline; `react-native-webview`
+      is in Expo Go if inline playback is wanted.
+- [ ] TestFlight needs one `scripts/bootstrap-ios io.moox.site` run in the
+      `certificates` repo (a Mac and an Apple account). Nothing structural: the
+      distribution certificate is reused, only a profile for the new bundle ID
+      is missing. The build is fastlane, not EAS, and `ios/` is committed for
+      that reason.
+
+## 6. Fallout from flattening the repo (2026-08-20)
+
+The Expo project moved from `mobile/` to the repo root: one `package.json`, one
+`node_modules`, one `tsconfig.json`, native versions aligned on what
+`expo install --check` expects. `MOBILE.md` has the full account. What that left
+open:
+
+- [ ] **`Btn` reaches back into the site.** It moved to
+      `react-multiversal/Btn.tsx` but still imports `useTheme` from `@/styles`,
+      and reads five names from the site's colour map (`backMain`, `textOnMain`,
+      `backOnAlt`, `backAlpha85`, `ultraLight`). It is the only import going
+      that way. Turning it into a colour contract the kit owns is the first
+      piece of the wider `react-multiversal` tidy-up, which is deliberately
+      parked until there are more components to move in.
+- [ ] **Nothing catches a `<div>` in shared code any more.** The jest harness
+      went with the flattening (it was never run outside CI). What replaces it
+      covers less: `no-restricted-globals` for the DOM globals, and
+      `src/platformPairs.types.ts` for export surfaces. A ~50-line AST check
+      with `oxc-parser` would close the gap without bringing jest back.
+- [ ] **Node 26 breaks every TypeScript Expo config.** `app.config.ts`,
+      `metro.config.ts` and TS config plugins all load through
+      `@expo/require-utils`, which strips types with `mode: "transform"`, and
+      Node 26 only accepts `strip`. Hence `app.json` + `.cjs` configs. Worth
+      retrying when Expo updates that dependency. Unrelated but adjacent:
+      `engines` says `24.x` and the machine runs 26, so `npm install` warns
+      `EBADENGINE` on every run.
+- [ ] **The web CI now installs Expo.** `npm ci` for a GitHub Pages build pulls
+      Metro, the Expo CLI and the native packages. Acceptable, and the price of
+      one dependency tree; if it ever hurts, the fix is npm workspaces, not a
+      second lockfile.
 
 ---
 

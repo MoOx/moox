@@ -1,21 +1,15 @@
+import { GradientStop } from "@/react-multiversal/gradient";
 import { StyleProp, ViewStyle } from "react-native";
 import { Defs, LinearGradient, Rect, Stop, Svg } from "react-native-svg";
-
-export type GradientStop = {
-  offset: number;
-  stopColor: string;
-  stopOpacity?: string;
-};
 
 export const transparentToBlack: GradientStop[] = [
   {
     offset: 0,
-    stopColor: "#000",
-    stopOpacity: "0",
+    color: "#00000000",
   },
   {
     offset: 100,
-    stopColor: "#000",
+    color: "#000000",
   },
 ];
 
@@ -65,10 +59,9 @@ export const GradientLinearDefs = ({
     >
       {stops.map((stop) => (
         <Stop
-          key={`${stop.offset}-${stop.stopColor}-${stop.stopOpacity}`}
+          key={`${stop.offset}-${stop.color}`}
           offset={`${stop.offset}%`}
-          stopColor={stop.stopColor}
-          stopOpacity={stop.stopOpacity ?? "1"}
+          stopColor={stop.color}
         />
       ))}
     </LinearGradient>
@@ -92,7 +85,7 @@ export default function GradientLinear({
   const id =
     idPrefix +
     stops
-      .map((stop) => `o:${stop.offset}c:${stop.stopColor}o:${stop.stopOpacity}:a${angle}`)
+      .map((stop) => `o:${stop.offset}c:${stop.color}:a${angle}`)
       .join("::")
       .replace(/[^a-zA-Z0-9]/g, "_");
 

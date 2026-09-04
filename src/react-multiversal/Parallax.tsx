@@ -336,10 +336,14 @@ export default function Parallax({
         document.documentElement.clientHeight,
       );
     }
-    throw new Error(
-      "Parallax: getScrollViewHeight() should be provided for this platform." +
-        "You should probably listen to <ScrollView> 'onContentSizeChange' prop and retrieve 'event.nativeEvent.layout.height' in a state.",
-    );
+    // Native has no scrolling document to measure. This used to throw, which
+    // is a fine contract on the JS thread and fatal on the UI one: the call
+    // sits inside `useAnimatedStyle` below, and an exception thrown on the UI
+    // runtime has no boundary to catch it - Hermes rethrows and the process
+    // aborts with no redbox and nothing in the Metro console. Returning 0 is
+    // safe because the animated path is off on native anyway (see `animate`).
+    // A real value would come from a <ScrollView> `onContentSizeChange`.
+    return 0;
   },
 }: {
   style?: StyleProp<ViewStyle>;
@@ -356,6 +360,21 @@ export default function Parallax({
 }) {
   const [scrollOffsetAnimValue, getOffset] = useScrollWindowOffset(springOptions);
   const targetRef = useRef<View>(null);
+  /**
+   * The animated path is web-only, and not just because there is no scroll
+   * offset to drive it (`useScrollWindowOffset` is inert on native, see
+   * `animate.utils.ts`). The worklet below cannot run on the UI runtime as
+   * written: a worklet may only call other worklets, and it calls
+   * `layoutToInputRange` and `getTransformValue` - plain module functions, the
+   * second of which runs `ts-pattern`'s `match()`. On web every "worklet" runs
+   * on the JS thread, so none of that ever surfaced.
+   *
+   * So native renders the resting position, which is what the app showed
+   * anyway. Making it move means moving the non-worklet work out of the
+   * worklet and wiring `useScrollViewOffset` to the app's ScrollView - see
+   * TODO.md §5.
+   */
+  const animate = !disabled && Platform.OS === "web";
   const windowDimensions = useWindowDimensions();
   const [layoutInWindow, setLayoutInWindow] = useState<ElementLayout | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -393,16 +412,14 @@ export default function Parallax({
         observerRef.current?.disconnect();
         animationFrames.forEach((af) => cancelAnimationFrame(af));
       };
-    } else {
-      const animationFrame = updateLayout();
-      return () => {
-        cancelAnimationFrame(animationFrame);
-      };
     }
+    // Nothing to measure on native: the layout only feeds the animated style,
+    // which native does not use (see `animate`). It cost a frame and a
+    // re-render per Parallax, and there are several on every page.
   }, [updateLayout, windowDimensions]);
 
   const animatedStyles = useAnimatedStyle(() => {
-    if (!layoutInWindow) {
+    if (!animate || !layoutInWindow) {
       return { transform: staticTransforms };
     }
 
@@ -444,6 +461,7 @@ export default function Parallax({
       ],
     };
   }, [
+    animate,
     layoutInWindow,
     windowDimensions,
     staticTransforms,
@@ -457,7 +475,7 @@ export default function Parallax({
   return (
     <View ref={targetRef} style={style}>
       <Animated.View
-        style={[contentStyle, disabled ? { transform: staticTransforms } : animatedStyles]}
+        style={[contentStyle, animate ? animatedStyles : { transform: staticTransforms }]}
       >
         {children}
       </Animated.View>

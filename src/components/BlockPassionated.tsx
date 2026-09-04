@@ -7,8 +7,8 @@ import GradientLinear from "@/react-multiversal/GradientLinear";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
-import { gradientFlashyStops, useTheme } from "@/styles";
-import { StyleSheet, Text, View } from "react-native";
+import { alpha, gradientFlashyStops, useTheme } from "@/styles";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 
@@ -105,10 +105,10 @@ De Dreamweaver à Cursor, les années ont passé, mais pas mon appétit pour de 
                 >
                   <GradientLinear
                     stops={[
-                      { stopColor: "#f0f0cf", offset: 0 },
-                      { stopColor: "#ffffff", offset: 30 },
-                      { stopColor: "#ffffff", offset: 60 },
-                      { stopColor: "#e0e0d8", offset: 100 },
+                      { color: "#f0f0cf", offset: 0 },
+                      { color: "#ffffff", offset: 30 },
+                      { color: "#ffffff", offset: 60 },
+                      { color: "#e0e0d8", offset: 100 },
                     ]}
                     angle={10}
                   />
@@ -173,7 +173,10 @@ De Dreamweaver à Cursor, les années ont passé, mais pas mon appétit pour de 
                   borderWidth: 1,
                   borderStyle: "solid",
                   borderColor: "rgba(0, 0, 0, 0.25)",
-                  filter: "contrast(130%) grayscale(25%)",
+                  // Web-only: `filter` is CSS. See BlockCompaniesTried.
+                  ...(Platform.OS === "web"
+                    ? { filter: "contrast(130%) grayscale(25%)" }
+                    : null),
                 }}
               />
               <Text
@@ -229,11 +232,11 @@ De Dreamweaver à Cursor, les années ont passé, mais pas mon appétit pour de 
                   <GradientLinear
                     style={[StyleSheet.absoluteFill, { scale: 1.4 }]}
                     stops={[
-                      { stopColor: "#fff", offset: 0, stopOpacity: "0.0" },
-                      { stopColor: "#fff", offset: 25, stopOpacity: "0.05" },
-                      { stopColor: "#fff", offset: 45, stopOpacity: "0.35" },
-                      { stopColor: "#fff", offset: 65, stopOpacity: "0.05" },
-                      { stopColor: "#fff", offset: 100, stopOpacity: "0.0" },
+                      { offset: 0, color: alpha("#fff", 0.0) },
+                      { offset: 25, color: alpha("#fff", 0.05) },
+                      { offset: 45, color: alpha("#fff", 0.35) },
+                      { offset: 65, color: alpha("#fff", 0.05) },
+                      { offset: 100, color: alpha("#fff", 0.0) },
                     ]}
                     angle={8}
                   />

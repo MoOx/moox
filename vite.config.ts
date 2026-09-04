@@ -68,7 +68,7 @@ export default defineConfig({
     serveAppPagesInDev,
     tanstackStart({
       srcDirectory: "src",
-      router: { routesDirectory: "app" },
+      router: { routesDirectory: "routes.web" },
       // spa: { enabled: true },
       prerender: {
         enabled: true,
@@ -94,7 +94,6 @@ export default defineConfig({
       "react-native-gesture-handler",
       "react-native-worklets",
       "@react-native-async-storage/async-storage",
-      "@react-native-clipboard/clipboard",
     ],
     optimizeDeps: {
       exclude: ["react", "react-dom"],
@@ -114,7 +113,6 @@ export default defineConfig({
         "react-native-safe-area-context",
         "react-native-gesture-handler",
         "react-native-worklets",
-        "@react-native-clipboard/clipboard",
         "@react-native-async-storage/async-storage",
       ],
       rolldownOptions: {
