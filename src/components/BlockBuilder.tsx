@@ -1,13 +1,14 @@
 import { ResumeItem } from "@/api";
 import BlockMaxApp from "@/components/BlockMaxApp";
-import LinkButton from "@/components/LinkButton";
 import { useHref, useT } from "@/i18n";
 import { summary, taglineParts } from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
+import Btn from "@/react-multiversal/Btn";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
+import LinkView from "@/react-multiversal/LinkView";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
@@ -118,17 +119,21 @@ export default function BlockBuilder({
             >
               {t(summary)}
             </Text>
-            <LinkButton
-              href={localizeHref("/resume/")}
-              color={theme.dynamicColors.backAlpha01}
-              textColor={theme.dynamicColors.textOnMain}
-              spaceHorizontal="l"
+            <Btn
+              variant="glass"
+              // material="clear"
+              // The block paints its own dark surface, in both themes, so the
+              // button is not standing on the page's scheme.
+              // backdrop="dark"
+              render={<LinkView href={localizeHref("/resume/")} />}
               style={{ alignSelf: "flex-end" }}
+              size="l"
+              // density="tight"
             >
-              <Text style={fontStyles.iosEm.callout}>
-                {t({ en: "More about me", fr: "En savoir plus sur moi" })}
-              </Text>
-            </LinkButton>
+              {/* <Text style={fontStyles.iosEm.callout}> */}
+              {t({ en: "More about me", fr: "En savoir plus sur moi" })}
+              {/* </Text> */}
+            </Btn>
             <IfWindowWidthIs largerThan={WindowWidth.m}>
               <Spacer size="xs" />
             </IfWindowWidthIs>

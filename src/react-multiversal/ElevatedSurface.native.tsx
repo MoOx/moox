@@ -20,7 +20,9 @@ export default function ElevatedSurface({
   colorScheme,
   elevation,
   language,
-  // Both are iOS-only: there is no glass here to pick a variant of, or to tint.
+  // All three are iOS-only: there is no glass here to pick a variant of, to
+  // pin to a scheme, or to tint.
+  backdrop: _backdrop,
   material: _material,
   radius,
   style,

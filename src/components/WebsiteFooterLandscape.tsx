@@ -23,8 +23,8 @@ export default function WebsiteFooterLandscape({
       <View style={{ flexGrow: 1, flexShrink: 1, overflow: "hidden" }}>
         <GradientLinear
           stops={[
-            { offset: 0, stopColor: "#01093C" },
-            { offset: 100, stopColor: "#060C4E" },
+            { offset: 0, color: "#01093C" },
+            { offset: 100, color: "#060C4E" },
           ]}
           style={StyleSheet.absoluteFill}
         />

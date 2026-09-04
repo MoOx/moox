@@ -33,7 +33,7 @@ export default function TabsLayout() {
       // reason `ElevatedSurface.ios.tsx` passes an explicit `colorScheme`.
       blurEffect={theme.mode === "dark" ? "systemChromeMaterialDark" : "systemChromeMaterial"}
       // iOS 26: the bar shrinks to a pill as the content scrolls up.
-      minimizeBehavior="onScrollDown"
+      // minimizeBehavior="onScrollDown"
       tintColor={theme.dynamicColors.textMain}
     >
       <NativeTabs.Trigger name="index">

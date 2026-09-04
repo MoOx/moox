@@ -1,9 +1,17 @@
 import { platformColors } from "@/react-multiversal/colors";
-import { GradientStop } from "@/react-multiversal/GradientLinear";
+import { GradientStop, reverseStops } from "@/react-multiversal/gradient";
 import { makeTheme, Theme, ThemeColors } from "@/react-multiversal/theme";
-import { TextStyle } from "react-native";
 import tinycolor from "tinycolor2";
 
+/**
+ * The same color, forced to `value` alpha.
+ *
+ * Reads the color in JS, so it takes a real value: `theme.colors`, or a literal.
+ * Never `theme.dynamicColors`, which are `var(--…)` references on web that
+ * tinycolor cannot parse - it would return black. A dynamic color that needs
+ * transparency gets its own theme token instead, the way `backMainAlpha05` and
+ * `backAlpha85` already do.
+ */
 export function alpha(color: string, value: number): string {
   return tinycolor(color).setAlpha(value).toHex8String();
 }
@@ -50,6 +58,17 @@ type ThemedColors = {
   textIndigoAlt: string;
   textIndigoAlt2: string;
   ultraLight: string;
+  /**
+   * The surface of a lifted pane, as a veil rather than as a colour.
+   *
+   * An absolute value only reads as elevation against the page it was picked
+   * for: `#150030` is a step above this theme's background and a black hole on
+   * anything else, which is what a raised button looked like over a bright
+   * gradient. A translucent light veil lifts whatever is behind it instead, so
+   * the same token works on the page, on a photo and on a gradient. It is the
+   * same idea as Material's elevation tint.
+   */
+  backElevated: string;
   /**
    * The liquid-glass material, as theme tokens rather than as a hand-written
    * stylesheet. `makeTheme` already emits every token as a CSS variable and
@@ -145,6 +164,9 @@ export const themedColors: ThemeColors<ThemedColors> = {
     // flashy3: "#ff5b8a",
     // flashy4: "#2b0aff",
     ultraLight: alpha(colors.black, 0.1),
+    // Light mode lifts by going opaque white: there is nothing above white to
+    // veil towards.
+    backElevated: colors.white,
     // Vibrancy comes from saturation, not brightness; the bezel is an inset
     // white highlight (Safari-safe), and the ambient shadow is what separates
     // the surface from the page.
@@ -206,6 +228,7 @@ export const themedColors: ThemeColors<ThemedColors> = {
     inkFlashy: "#fa5bd7",
     inkSuccess: "#049955",
     ultraLight: alpha(colors.white, 0.15),
+    backElevated: alpha(colors.white, 0.12),
     // Dark needs a lift the light theme does not: `brightness(1.3)`, or the
     // material reads as a grey card rather than as glass.
     glassFill: alpha("#0c001b", 0.35),
@@ -253,83 +276,27 @@ export {
   useTheme,
 };
 
-const reverseStops = (stops: GradientStop[]) =>
-  stops
-    .slice(0)
-    .reverse()
-    .map((s) => ({
-      ...s,
-      offset: 100 - s.offset,
-    }));
-export const gradientFlashyStops = (theme: Theme<ThemedColors>) => [
-  { offset: 0, stopColor: theme.dynamicColors.textFlashy1 },
-  { offset: 10, stopColor: theme.dynamicColors.textFlashy2 },
-  { offset: 50, stopColor: theme.dynamicColors.textFlashy3 },
-  { offset: 100, stopColor: theme.dynamicColors.textFlashy4 },
+export const gradientFlashyStops = (theme: Theme<ThemedColors>): GradientStop[] => [
+  { offset: 0, color: theme.dynamicColors.textFlashy1 },
+  { offset: 10, color: theme.dynamicColors.textFlashy2 },
+  { offset: 50, color: theme.dynamicColors.textFlashy3 },
+  { offset: 100, color: theme.dynamicColors.textFlashy4 },
 ];
 // need to reverse the stops and the offsets
 export const gradientFlashyStopsInv = (theme: Theme<ThemedColors>) =>
   reverseStops(gradientFlashyStops(theme));
-export const gradientIndigoStops = (theme: Theme<ThemedColors>) => [
-  { offset: 0, stopColor: theme.dynamicColors.textIndigoAlt },
-  { offset: 100, stopColor: theme.dynamicColors.textIndigoAlt2 },
+export const gradientIndigoStops = (theme: Theme<ThemedColors>): GradientStop[] => [
+  { offset: 0, color: theme.dynamicColors.textIndigoAlt },
+  { offset: 100, color: theme.dynamicColors.textIndigoAlt2 },
 ];
 export const gradientIndigoStopsInv = (theme: Theme<ThemedColors>) =>
   reverseStops(gradientIndigoStops(theme));
 
-export const gradientStaticIndigoStyles = [
-  { offset: 0, stopColor: themeLight.colors.textIndigoAlt },
-  { offset: 100, stopColor: themeLight.colors.textIndigoAlt2 },
+export const gradientStaticIndigoStyles: GradientStop[] = [
+  { offset: 0, color: themeLight.colors.textIndigoAlt },
+  { offset: 100, color: themeLight.colors.textIndigoAlt2 },
 ];
-const makeGradientTextStyles = (
-  stops: GradientStop[],
-  angle: number = 90,
-  // Print/PDF option (used by `/cv`): `background-clip: text` + transparent
-  // fill is dropped when printing (notably Safari → invisible text), so fall
-  // back to a solid color.
-  print: boolean = false,
-) =>
-  (print
-    ? {
-        alignSelf: "flex-start",
-        color: stops[Math.floor(stops.length / 2)]?.stopColor,
-      }
-    : {
-        alignSelf: "flex-start",
-        backgroundClip: "text",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        backgroundImage: `linear-gradient(${angle}deg, ${stops.map((s) => `${s.stopColor} ${s.offset}%`).join(", ")})`,
-        printColorAdjust: "exact",
-      }) as TextStyle;
-
-export const gradientTextIndigoStyles = (
-  theme: Theme<ThemedColors>,
-  angle?: number,
-  print?: boolean,
-) => makeGradientTextStyles(gradientIndigoStops(theme), angle, print);
-export const gradientTextIndigoStylesInv = (
-  theme: Theme<ThemedColors>,
-  angle?: number,
-  print?: boolean,
-) => makeGradientTextStyles(gradientIndigoStopsInv(theme), angle, print);
-export const gradientTextFlashyStyles = (
-  theme: Theme<ThemedColors>,
-  angle?: number,
-  print?: boolean,
-) => makeGradientTextStyles(gradientFlashyStops(theme), angle, print);
-export const gradientTextFlashyStylesInv = (
-  theme: Theme<ThemedColors>,
-  angle?: number,
-  print?: boolean,
-) => makeGradientTextStyles(gradientFlashyStopsInv(theme), angle, print);
-
-export const gradientText = (theme: Theme<ThemedColors>) => [
-  { offset: 0, stopColor: theme.dynamicColors.textAlt },
-  { offset: 100, stopColor: theme.dynamicColors.textDark },
+export const gradientText = (theme: Theme<ThemedColors>): GradientStop[] => [
+  { offset: 0, color: theme.dynamicColors.textAlt },
+  { offset: 100, color: theme.dynamicColors.textDark },
 ];
-export const gradientTextStyles = (
-  theme: Theme<ThemedColors>,
-  angle: number = 180,
-  print?: boolean,
-) => makeGradientTextStyles(gradientText(theme), angle, print);

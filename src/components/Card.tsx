@@ -129,9 +129,9 @@ export default function Card({
           <GradientLinear
             angle={86}
             stops={[
-              { offset: 0, stopColor: alpha("#000", 0.8) },
-              { offset: 50, stopColor: alpha("#000", 0) },
-              { offset: 100, stopColor: alpha("#000", 0.95) },
+              { offset: 0, color: alpha("#000", 0.8) },
+              { offset: 50, color: alpha("#000", 0) },
+              { offset: 100, color: alpha("#000", 0.95) },
             ]}
             style={StyleSheet.absoluteFill}
           />

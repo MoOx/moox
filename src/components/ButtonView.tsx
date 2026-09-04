@@ -182,11 +182,11 @@ const ButtonView = ({
           stops={[
             {
               offset: 0,
-              stopColor: !alt ? color : colorAlt,
+              color: !alt ? color : colorAlt,
             },
             {
               offset: 100,
-              stopColor: !alt ? colorAlt : color,
+              color: !alt ? colorAlt : color,
             },
           ]}
           width="100%"

@@ -4,16 +4,28 @@ import { jobSubtitle, jobTitleParts } from "@/profile";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
+import GradientText from "@/react-multiversal/GradientText";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import SpacedView from "@/react-multiversal/SpacedView";
-import TextBlock from "@/react-multiversal/TextBlock";
 import Spacer from "@/react-multiversal/Spacer";
-import { gradientTextFlashyStyles, gradientTextStyles, useTheme } from "@/styles";
+import TextBlock from "@/react-multiversal/TextBlock";
+import TextRow from "@/react-multiversal/TextRow";
+import { gradientFlashyStops, gradientText, useTheme } from "@/styles";
 import { Platform, Text, View } from "react-native";
 
 export default function BlockHey() {
   const theme = useTheme();
   const t = useT();
+  // Shared by both halves of the title so they stay one typographic line.
+  const titleStyle = [
+    fontStyles.iosEm.title1,
+    theme.styles.text,
+    { fontWeight: weight.black },
+    Platform.OS === "web" && {
+      fontSize: "clamp(34px, 1.3vw + 29px, 48px)" as unknown as number,
+      lineHeight: "clamp(41px, 0.66vw + 38.5px, 48px)" as unknown as number,
+    },
+  ];
   return (
     <View style={{ zIndex: 1 }}>
       <Container
@@ -45,34 +57,43 @@ export default function BlockHey() {
                 subtitle must travel together to keep the subtitle under the
                 title. */}
             <View>
-              <View style={{ alignSelf: "flex-start" }} role="heading" aria-level={1}>
+              <View
+                style={{ alignSelf: "flex-start" }}
+                role="heading"
+                aria-level={1}
+              >
                 {/* Trailing space: the parts are stacked blocks, so without it a
                   text extractor reads "LeadFront-End Developer.". */}
                 <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
                   {`${jobTitleParts[0]} `}
                 </Text>
                 {/* "Front-End" carries the flashy gradient: it is the term
-                  clients search for, so it is the one the eye should catch. */}
-                <Text
-                  style={[
-                    fontStyles.iosEm.largeTitle,
-                    theme.styles.text,
-                    gradientTextStyles(theme, 176),
-                    {
-                      fontWeight: weight.black,
-                      viewTransitionName: "text--front-end-architect",
-                    },
-                    Platform.OS === "web" && {
-                      fontSize: "clamp(34px, 1.3vw + 29px, 48px)" as unknown as number,
-                      lineHeight: "clamp(41px, 0.66vw + 38.5px, 48px)" as unknown as number,
-                    },
-                  ]}
-                >
-                  <Text style={[theme.styles.text, gradientTextFlashyStyles(theme, 176)]}>
+                  clients search for, so it is the one the eye should catch.
+                  Two siblings rather than one nested inside the other: a
+                  gradient is painted over the box of the node that carries it,
+                  so nesting would stretch the flashy ramp across the whole
+                  title and only show its first half over the word. */}
+                <TextRow>
+                  {/* The view transition name lives on this half alone: two
+                      elements may not share one. */}
+                  <GradientText
+                    stops={gradientFlashyStops(theme)}
+                    angle={176}
+                    style={[
+                      titleStyle,
+                      { viewTransitionName: "text--front-end-architect" },
+                    ]}
+                  >
                     {jobTitleParts[1]}
-                  </Text>
-                  {` ${jobTitleParts[2]}.`}
-                </Text>
+                  </GradientText>
+                  <GradientText
+                    stops={gradientText(theme)}
+                    angle={176}
+                    style={titleStyle}
+                  >
+                    {` ${jobTitleParts[2]}.`}
+                  </GradientText>
+                </TextRow>
               </View>
               <Text
                 style={[
@@ -93,17 +114,27 @@ export default function BlockHey() {
               <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
                 {t({ en: "Hey,", fr: "Hey," })}
               </Text>
-              <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-                {t({ en: "I'm ", fr: "Moi c'est " })}
-                <Text
+              {/* A `TextRow` rather than one `Text`: the gradient masks through
+                  a view on a device, which cannot flow inline in a `Text`. On
+                  web it stays a flexed <span>, so the paragraph is untouched.
+                  The trailing space stays inside the string - react-native-web
+                  keeps it (`white-space: pre-wrap`), so a text extractor still
+                  reads "I'm Max.". */}
+              <TextRow>
+                <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
+                  {t({ en: "I'm ", fr: "Moi c'est " })}
+                </Text>
+                <GradientText
+                  stops={gradientFlashyStops(theme)}
+                  angle={-16}
                   style={[
-                    gradientTextFlashyStyles(theme, -16),
+                    fontStyles.iosEm.largeTitle,
                     { viewTransitionName: "text--max" },
                   ]}
                 >
                   {"Max."}
-                </Text>
-              </Text>
+                </GradientText>
+              </TextRow>
             </TextBlock>
           </View>
           <IfWindowWidthIs largerThan={WindowWidth.m}>

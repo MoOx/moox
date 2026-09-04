@@ -2,7 +2,7 @@ import { useT } from "@/i18n";
 import GradientBorderCircle from "@/components/GradientBorderCircle";
 import Image from "@/components/Image";
 import { GradientRadial } from "@/react-multiversal/GradientRadial";
-import { useTheme } from "@/styles";
+import { alpha, useTheme } from "@/styles";
 import { ReactNode } from "react";
 import { Platform, StyleProp, View, ViewStyle } from "react-native";
 
@@ -62,13 +62,11 @@ export default function Me({
           stops={[
             {
               offset: 0,
-              stopColor: theme.dynamicColors.textLight2,
-              stopOpacity: "0.3",
+              color: alpha(theme.colors.textLight2, 0.3),
             },
             {
               offset: 80,
-              stopColor: theme.dynamicColors.textLight1,
-              stopOpacity: "0",
+              color: alpha(theme.colors.textLight1, 0),
             },
           ]}
           style={{
@@ -87,13 +85,11 @@ export default function Me({
           stops={[
             {
               offset: 0,
-              stopColor: theme.dynamicColors.textLight2,
-              stopOpacity: "0.4",
+              color: alpha(theme.colors.textLight2, 0.4),
             },
             {
               offset: 80,
-              stopColor: theme.dynamicColors.textLight1,
-              stopOpacity: "0",
+              color: alpha(theme.colors.textLight1, 0),
             },
           ]}
           style={{
@@ -107,13 +103,11 @@ export default function Me({
           stops={[
             {
               offset: 0,
-              stopColor: theme.colors.backMain,
-              stopOpacity: "0.25",
+              color: alpha(theme.colors.backMain, 0.25),
             },
             {
               offset: 100,
-              stopColor: theme.colors.backMain,
-              stopOpacity: "0",
+              color: alpha(theme.colors.backMain, 0),
             },
           ]}
           style={{ position: "absolute", left: -10 * scale, bottom: -0 }}
@@ -124,8 +118,8 @@ export default function Me({
           renders the picture as-is. */}
       {Platform.OS === "web" ? (
         <style
-        dangerouslySetInnerHTML={{
-          __html: `
+          dangerouslySetInnerHTML={{
+            __html: `
                 .userColorScheme-auto,
                 .userColorScheme-light {
                   --maxMeBrightness: 105%
@@ -139,7 +133,7 @@ export default function Me({
                   }
                 }
                 `,
-        }}
+          }}
         />
       ) : null}
       <Image
@@ -148,9 +142,7 @@ export default function Me({
         alt={t({ en: "Picture of Max", fr: "Photo de Max" })}
         width={resolvedImgWidth}
         height={resolvedImgHeight}
-        style={
-          Platform.OS === "web" ? { filter: "brightness(var(--maxMeBrightness))" } : undefined
-        }
+        style={Platform.OS === "web" ? { filter: "brightness(var(--maxMeBrightness))" } : undefined}
       />
       {children}
     </View>

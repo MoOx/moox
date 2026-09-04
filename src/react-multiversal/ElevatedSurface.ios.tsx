@@ -20,6 +20,9 @@ import { StyleSheet, View } from "react-native";
 const liquidGlass = isLiquidGlassAvailable();
 
 export default function ElevatedSurface({
+  // The pin reaches the material as `colorScheme` below, which `Btn` already
+  // resolves from the same backdrop, so there is nothing to read here.
+  backdrop: _backdrop,
   background,
   borderColor,
   colorScheme,
@@ -44,8 +47,15 @@ export default function ElevatedSurface({
         // a `StyleProp`, and `types/react-native-web.d.ts` widens `ViewStyle`
         // on top of that, so the two never line up. The value is a style
         // either way.
+        // The rim is opt-in here too: the native material draws its own bezel,
+        // so a border only appears when the caller asked for one.
         style={
-          [StyleSheet.absoluteFill, { borderRadius: radius }, style] as GlassViewProps["style"]
+          [
+            StyleSheet.absoluteFill,
+            { borderRadius: radius },
+            borderColor !== undefined && { borderWidth: 1, borderColor },
+            style,
+          ] as GlassViewProps["style"]
         }
         tintColor={tint}
       />

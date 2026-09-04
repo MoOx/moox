@@ -3,7 +3,7 @@ import AvailabilityBadge from "@/components/AvailabilityBadge";
 import { featuredTestimonials, TestimonialContent } from "@/components/BlockTestimonials";
 import CvOpenSourceCard from "@/components/CvOpenSourceCard";
 import CvSectionTitle from "@/components/CvSectionTitle";
-import GradientText from "@/components/GradientText";
+import GradientText from "@/react-multiversal/GradientText";
 import Image from "@/components/Image";
 import Me from "@/components/Me";
 import SkillCard from "@/components/SkillCard";
@@ -43,7 +43,7 @@ import GradientLinear from "@/react-multiversal/GradientLinear";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { getColorScheme, setUserColorScheme } from "@/react-multiversal/theme/colorScheme";
-import { gradientFlashyStops, gradientTextIndigoStylesInv, useTheme } from "@/styles";
+import { gradientFlashyStops, gradientIndigoStopsInv, useTheme } from "@/styles";
 import SVGEnvelopeFill from "@/svgs/components/SVGEnvelopeFill";
 import SVGExternalLink from "@/svgs/components/SVGExternalLink";
 import SVGPhoneFill from "@/svgs/components/SVGPhoneFill";
@@ -260,6 +260,7 @@ export default function CvPage({
             <View>
               <Text role="heading" aria-level={1}>
                 <GradientText
+                  letter
                   style={{
                     fontSize: 48,
                     lineHeight: 48,
@@ -267,9 +268,9 @@ export default function CvPage({
                   }}
                   stops={[
                     { offset: 0, color: theme.colors.textFlashy1 },
-                    { offset: 0.1, color: theme.colors.textFlashy2 },
-                    { offset: 0.5, color: theme.colors.textFlashy3 },
-                    { offset: 1, color: theme.colors.textFlashy4 },
+                    { offset: 10, color: theme.colors.textFlashy2 },
+                    { offset: 50, color: theme.colors.textFlashy3 },
+                    { offset: 100, color: theme.colors.textFlashy4 },
                   ]}
                 >
                   {`${jobTitle}.`}
@@ -308,10 +309,11 @@ export default function CvPage({
               }}
             >
               <GradientText
+                letter
                 style={{ fontSize: 46, lineHeight: 46, fontWeight: "900" }}
                 stops={[
                   { offset: 0, color: theme.colors.textIndigoAlt2 },
-                  { offset: 1, color: theme.colors.textIndigoAlt },
+                  { offset: 100, color: theme.colors.textIndigoAlt },
                 ]}
               >
                 {"Max."}
@@ -846,14 +848,13 @@ export default function CvPage({
                   {"Full history & all my experiences online:"}
                 </Text>
                 <LinkView href={website} underlineOnFocus={true}>
-                  <Text
-                    style={[
-                      fontStyles.iosEm.title3,
-                      gradientTextIndigoStylesInv(theme, undefined, true),
-                    ]}
+                  <GradientText
+                    letter
+                    stops={gradientIndigoStopsInv(theme)}
+                    style={fontStyles.iosEm.title3}
                   >
                     {visualUrl(website)}
-                  </Text>
+                  </GradientText>
                 </LinkView>
               </View>
               <Image

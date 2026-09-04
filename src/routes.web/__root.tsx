@@ -11,7 +11,7 @@ import {
   userColorSchemeStorageKey,
 } from "@/react-multiversal/theme/colorScheme";
 import { useLang } from "@/i18n";
-import { dynamicColors, getWebHtmlClass, getWebStyleSheet } from "@/styles";
+import { dynamicColors, getWebHtmlClass, getWebStyleSheet, themeDark, themeLight } from "@/styles";
 import appCss from "@/styles.css?url";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { ReactNode, useEffect } from "react";
@@ -20,18 +20,29 @@ import { StyleSheet } from "react-native";
 // At module scope, and pointing at variables rather than at values: the theme
 // already switches these between light and dark, so the material follows
 // without the glass rule knowing that a colour scheme exists.
-configureGlass({
+const glassMaterials = (c: typeof dynamicColors) => ({
   regular: {
-    fill: dynamicColors.glassFill,
-    border: dynamicColors.glassBorder,
-    bezel: dynamicColors.glassBezel,
-    filter: dynamicColors.glassFilter,
+    fill: c.glassFill,
+    border: c.glassBorder,
+    bezel: c.glassBezel,
+    filter: c.glassFilter,
   },
   clear: {
-    fill: dynamicColors.glassClearFill,
-    border: dynamicColors.glassClearBorder,
-    bezel: dynamicColors.glassClearBezel,
-    filter: dynamicColors.glassClearFilter,
+    fill: c.glassClearFill,
+    border: c.glassClearBorder,
+    bezel: c.glassClearBezel,
+    filter: c.glassClearFilter,
+  },
+});
+
+configureGlass({
+  // Variables, so the material follows the theme between light and dark.
+  materials: glassMaterials(dynamicColors),
+  // Literals, for a surface that pins itself to a background rather than to the
+  // page: a button on a block that stays dark in both themes.
+  schemes: {
+    light: glassMaterials(themeLight.colors),
+    dark: glassMaterials(themeDark.colors),
   },
 });
 

@@ -48,6 +48,7 @@ import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
+import GradientText from "@/react-multiversal/GradientText";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import LinkText from "@/react-multiversal/LinkText";
 import LinkView from "@/react-multiversal/LinkView";
@@ -59,9 +60,8 @@ import {
   alpha,
   colors,
   gradientFlashyStops,
-  gradientTextFlashyStyles,
-  gradientTextFlashyStylesInv,
-  gradientTextIndigoStylesInv,
+  gradientFlashyStopsInv,
+  gradientIndigoStopsInv,
   useTheme,
 } from "@/styles";
 import SVGCssnext from "@/svgs/components/SVGCssnext";
@@ -191,10 +191,11 @@ export default function ResumePage({
       >
         {freelanceLine}
       </Text>
-      <Text
+      <GradientText
+        stops={gradientFlashyStops(theme)}
+        angle={172}
         style={[
           theme.styles.text,
-          gradientTextFlashyStyles(theme, 172),
           {
             fontSize: 42,
             lineHeight: 42,
@@ -206,7 +207,7 @@ export default function ResumePage({
         aria-level={1}
       >
         {`${jobTitle}.`}
-      </Text>
+      </GradientText>
       <Text
         style={[fontStyles.ios.subhead, theme.styles.textLight1, { fontStyle: "italic" }]}
         role="heading"
@@ -281,11 +282,11 @@ export default function ResumePage({
                   alignItems: "flex-end",
                 }}
               >
-                <Text
+                <GradientText
+                  stops={gradientFlashyStopsInv(theme)}
                   role="paragraph"
                   style={[
                     theme.styles.text,
-                    gradientTextFlashyStylesInv(theme),
                     {
                       fontSize: 64,
                       lineHeight: 64,
@@ -296,7 +297,7 @@ export default function ResumePage({
                 >
                   <TextForReader>{t({ en: "Nickname :", fr: "Surnom :" })}</TextForReader>
                   {"Max."}
-                </Text>
+                </GradientText>
                 <TextBlock>
                   <TextForReader>{t({ en: "Full name :", fr: "Nom complet :" })}</TextForReader>
                   <Text
@@ -316,11 +317,11 @@ export default function ResumePage({
               </View>
             </IfWindowWidthIs>
             <IfWindowWidthIs smallerThan={WindowWidth.m}>
-              <Text
+              <GradientText
+                stops={gradientFlashyStopsInv(theme)}
                 role="paragraph"
                 style={[
                   theme.styles.text,
-                  gradientTextFlashyStylesInv(theme),
                   {
                     fontSize: 64,
                     lineHeight: 64,
@@ -331,7 +332,7 @@ export default function ResumePage({
               >
                 <TextForReader>{t({ en: "Nickname :", fr: "Surnom :" })}</TextForReader>
                 {"Max."}
-              </Text>
+              </GradientText>
               <TextBlock>
                 <TextForReader>{t({ en: "Full name :", fr: "Nom complet :" })}</TextForReader>
                 <Text
@@ -407,17 +408,18 @@ export default function ResumePage({
                     {({ color }) => (
                       <>
                         <SVGDownload width={16} height={16} fill={color} />
-                        <Text
+                        <GradientText
+                          stops={gradientFlashyStops(theme)}
+                          angle={20}
                           style={[
                             {
                               color,
                               fontWeight: weight.bold,
                             },
-                            gradientTextFlashyStyles(theme, 20),
                           ]}
                         >
                           {t({ en: "Download PDF", fr: "Télécharger le PDF" })}
-                        </Text>
+                        </GradientText>
                       </>
                     )}
                   </ButtonView>
@@ -459,13 +461,14 @@ export default function ResumePage({
           horizontal="l"
           gap="l"
         >
-          <Text
-            style={[fontStyles.iosEm.largeTitle, gradientTextIndigoStylesInv(theme)]}
+          <GradientText
+            stops={gradientIndigoStopsInv(theme)}
+            style={[fontStyles.iosEm.largeTitle]}
             role="heading"
             aria-level={2}
           >
             {t({ en: "Skills", fr: "Compétences" })}
-          </Text>
+          </GradientText>
           {/* Same distribution as /cv: the feature card big on the left, the
               other domains stacked in a column next to it - the flat mosaic
               left the blocks unbalanced. */}
@@ -547,13 +550,14 @@ export default function ResumePage({
           horizontal="l"
           gap="m"
         >
-          <Text
-            style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
+          <GradientText
+            stops={gradientFlashyStops(theme)}
+            style={[fontStyles.iosEm.largeTitle]}
             role="heading"
             aria-level={2}
           >
             {t({ en: "Key Experience", fr: "Expériences clés" })}
-          </Text>
+          </GradientText>
           {/* Full-width rows: copy on the left, the illustration fading in
               from the right. The ⓘ opens the detail modal (the whole group's
               missions for grouped clients). */}
@@ -590,8 +594,8 @@ export default function ResumePage({
         <GradientLinear
           angle={60}
           stops={[
-            { offset: 10, stopColor: "#010244" },
-            { offset: 100, stopColor: "#0F7CB7" },
+            { offset: 10, color: "#010244" },
+            { offset: 100, color: "#0F7CB7" },
           ]}
           style={[StyleSheet.absoluteFill, { transform: [{ skewY: "-1deg" }] }]}
         />
@@ -749,13 +753,14 @@ export default function ResumePage({
           }}
         >
           <View style={{ flexGrow: 1, flexBasis: 280, gap: size("m") }}>
-            <Text
-              style={[fontStyles.iosEm.title1, gradientTextIndigoStylesInv(theme)]}
+            <GradientText
+              stops={gradientIndigoStopsInv(theme)}
+              style={[fontStyles.iosEm.title1]}
               role="heading"
               aria-level={2}
             >
               {t({ en: "Talks & Community", fr: "Conférences & communauté" })}
-            </Text>
+            </GradientText>
             <View style={{ gap: size("s") }}>
               <View style={{ flexDirection: "row" }}>
                 <StatTile
@@ -814,13 +819,14 @@ export default function ResumePage({
               aria-label={t({ en: "Education", fr: "Formation" })}
               style={{ gap: size("m") }}
             >
-              <Text
-                style={[fontStyles.iosEm.title1, gradientTextFlashyStyles(theme)]}
+              <GradientText
+                stops={gradientFlashyStops(theme)}
+                style={[fontStyles.iosEm.title1]}
                 role="heading"
                 aria-level={2}
               >
                 {t({ en: "Education", fr: "Formation" })}
-              </Text>
+              </GradientText>
               {education.map((e) => (
                 <View
                   key={e.slug}
@@ -855,13 +861,14 @@ export default function ResumePage({
               aria-label={t({ en: "Beyond Code", fr: "Au-delà du code" })}
               style={{ gap: size("m") }}
             >
-              <Text
-                style={[fontStyles.iosEm.title1, gradientTextIndigoStylesInv(theme)]}
+              <GradientText
+                stops={gradientIndigoStopsInv(theme)}
+                style={[fontStyles.iosEm.title1]}
                 role="heading"
                 aria-level={2}
               >
                 {t({ en: "Beyond Code", fr: "Au-delà du code" })}
-              </Text>
+              </GradientText>
               <View
                 role="list"
                 style={{
@@ -898,13 +905,14 @@ export default function ResumePage({
           aria-label={t({ en: "All Experience", fr: "Tout le parcours" })}
           horizontal="l"
         >
-          <Text
-            style={[fontStyles.iosEm.largeTitle, gradientTextFlashyStyles(theme)]}
+          <GradientText
+            stops={gradientFlashyStops(theme)}
+            style={[fontStyles.iosEm.largeTitle]}
             role="heading"
             aria-level={2}
           >
             {t({ en: "All Experience", fr: "Tout le parcours" })}
-          </Text>
+          </GradientText>
           <Spacer size="l" />
           <ResumeTimeline
             items={items}

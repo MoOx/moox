@@ -28,6 +28,12 @@ export type ElevatedSurfaceProps = {
   language: DesignLanguage;
   /** Only consulted at `floating`, the one elevation made of glass. */
   material?: GlassMaterial;
+  /**
+   * Set when the surface stands on a background whose scheme is not the page's,
+   * so the material stops following the page. Web-only: on a device the same
+   * information reaches `GlassView` as `colorScheme`.
+   */
+  backdrop?: "light" | "dark";
   radius: number;
   style?: StyleProp<ViewStyle>;
   /** iOS only: tints the liquid glass. Ignored everywhere else. */

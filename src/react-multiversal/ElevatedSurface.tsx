@@ -1,14 +1,8 @@
 import { surfacePaint } from "@/react-multiversal/design/elevation";
 // Importing the module is what registers the material's one CSS rule.
-import { glassDataSet } from "@/react-multiversal/design/glass";
+import { glassDataSet, pinnedGlassVars } from "@/react-multiversal/design/glass";
 import { ElevatedSurfaceProps } from "@/react-multiversal/ElevatedSurface.types";
 import { StyleSheet, View, type ViewStyle } from "react-native";
-
-const styles = StyleSheet.create({
-  // The glass rules set `border-color`, never `border-width`: without a width
-  // there is nothing for them to colour.
-  glass: { borderWidth: 1, borderColor: "transparent" },
-});
 
 /**
  * Web half. Read `ElevatedSurface.types.ts` for why this is a layer, and
@@ -21,8 +15,13 @@ const styles = StyleSheet.create({
  * that cannot keeps a perfectly good raised surface. The degradation is a
  * cascade fact: no capability check of ours, no JS, and nothing that could
  * differ between the server render and the client one.
+ *
+ * The rule sets `border-color` and never `border-width`, so the rim only paints
+ * on a surface that asked for a border: glass without one is glass with nothing
+ * but its bezel, which is a real style and used to be impossible.
  */
 export default function ElevatedSurface({
+  backdrop,
   background,
   borderColor,
   colorScheme,
@@ -39,6 +38,12 @@ export default function ElevatedSurface({
   // rule's `!important`: the declaration is untouched, only what it reads
   // changes. `color-mix` keeps the value a `var(…)`, so it still follows the
   // theme between light and dark.
+  // Before the tint, so a tinted glass still wins: pinning answers "which
+  // scheme", tinting answers "which colour".
+  const pinned =
+    glass && backdrop !== undefined
+      ? (pinnedGlassVars(material, backdrop) as ViewStyle)
+      : undefined;
   const tinted =
     glass && tint !== undefined
       ? ({ "--rm-glass-fill": `color-mix(in srgb, ${tint} 65%, transparent)` } as ViewStyle)
@@ -57,7 +62,7 @@ export default function ElevatedSurface({
           elevation: glass ? "raised" : elevation,
           language,
         }),
-        glass && styles.glass,
+        pinned,
         tinted,
         style,
       ]}

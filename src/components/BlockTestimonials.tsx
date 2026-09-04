@@ -13,7 +13,7 @@ import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import TextBlock from "@/react-multiversal/TextBlock";
 import Spacer from "@/react-multiversal/Spacer";
-import { boxShadows, themeLight, useTheme } from "@/styles";
+import { alpha, boxShadows, themeLight, useTheme } from "@/styles";
 import SVGQuote from "@/svgs/components/SVGQuote";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 import { StyleSheet, Text, View } from "react-native";
@@ -178,11 +178,10 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
       <GradientLinear
         angle={-90}
         stops={[
-          { offset: 0, stopColor: "#F2F2F2", stopOpacity: "0.1" },
+          { offset: 0, color: alpha("#F2F2F2", 0.1) },
           {
             offset: 100,
-            stopColor: "#E1E1E1",
-            stopOpacity: "0.35",
+            color: alpha("#E1E1E1", 0.35),
           },
         ]}
         style={[StyleSheet.absoluteFill, { borderRadius: size("s") }]}
@@ -244,8 +243,8 @@ export default function BlockTestimonials() {
           // global gradient
           style={StyleSheet.absoluteFill}
           stops={[
-            { offset: 0, stopColor: "#9623c0" },
-            { offset: 100, stopColor: themeLight.colors.textIndigoAlt2 },
+            { offset: 0, color: "#9623c0" },
+            { offset: 100, color: themeLight.colors.textIndigoAlt2 },
           ]}
           angle={160}
         />
@@ -266,8 +265,8 @@ export default function BlockTestimonials() {
               { transform: [{ translateX: -100 }, { translateY: -100 }] },
             ]}
             stops={[
-              { offset: 0, stopColor: "#12e9ec", stopOpacity: "0.75" },
-              { offset: 100, stopColor: "#12e9ec", stopOpacity: "0" },
+              { offset: 0, color: alpha("#12e9ec", 0.75) },
+              { offset: 100, color: alpha("#12e9ec", 0) },
             ]}
             coordinates={{ cx: "10%", cy: "20%", fx: "5%", fy: "25%" }}
           />
@@ -285,8 +284,8 @@ export default function BlockTestimonials() {
               { transform: [{ translateX: -100 }, { translateY: 100 }] },
             ]}
             stops={[
-              { offset: 0, stopColor: "#9623c0", stopOpacity: "0.75" },
-              { offset: 100, stopColor: "#9623c0", stopOpacity: "0" },
+              { offset: 0, color: alpha("#9623c0", 0.75) },
+              { offset: 100, color: alpha("#9623c0", 0) },
             ]}
             coordinates={{
               cx: "20%",
@@ -307,8 +306,8 @@ export default function BlockTestimonials() {
           <GradientRadial
             style={StyleSheet.absoluteFill}
             stops={[
-              { offset: 0, stopColor: "#2816A8", stopOpacity: "0.6" },
-              { offset: 100, stopColor: "#2816A8", stopOpacity: "0" },
+              { offset: 0, color: alpha("#2816A8", 0.6) },
+              { offset: 100, color: alpha("#2816A8", 0) },
             ]}
             coordinates={{ cx: "50%", cy: "100%", fx: "60%", fy: "100%" }}
           />

@@ -32,8 +32,8 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
       <GradientLinear
         angle={60}
         stops={[
-          { offset: 10, stopColor: "#010244" },
-          { offset: 100, stopColor: "#0F7CB7" },
+          { offset: 10, color: "#010244" },
+          { offset: 100, color: "#0F7CB7" },
         ]}
         style={StyleSheet.absoluteFill}
       />

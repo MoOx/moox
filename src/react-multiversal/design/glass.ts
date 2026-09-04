@@ -6,8 +6,36 @@ export type { GlassMaterial, GlassTokens };
 /** The `dataSet` that opts an element into the glass material. */
 export const glassDataSet = (material: GlassMaterial = "regular") => ({ glass: material });
 
-const variable = (token: keyof GlassTokens, material: GlassMaterial) =>
-  material === "regular" ? `--rm-glass-${token}` : `--rm-glass-${material}-${token}`;
+/**
+ * `--rm-glass[-<scheme>][-<material>]-<token>`. The scheme-less names are the
+ * live ones, the pair the rule actually reads; the scheme-qualified ones are
+ * frozen copies, there for a surface that has to ignore the page.
+ */
+const variable = (token: keyof GlassTokens, material: GlassMaterial, scheme?: GlassScheme) =>
+  ["--rm-glass", scheme, material === "regular" ? undefined : material, token]
+    .filter((part) => part !== undefined)
+    .join("-");
+
+export type GlassScheme = "light" | "dark";
+
+/**
+ * Pins the material to one scheme, as inline custom properties.
+ *
+ * A button standing on a background it owns resolves against that background's
+ * scheme, not the page's - and until this existed, that was true of everything
+ * except the glass itself, which kept reading the variables on `:root`. A white
+ * label on a white pane, over a dark gradient, in light mode.
+ *
+ * It overrides the *variables*, never the declarations, so it wins over both
+ * the rule's `!important` and the `clear` remap without fighting either.
+ */
+export const pinnedGlassVars = (material: GlassMaterial, scheme: GlassScheme) =>
+  Object.fromEntries(
+    (["fill", "border", "bezel", "filter"] as const).map((token) => [
+      `--rm-glass-${token}`,
+      `var(${variable(token, material, scheme)})`,
+    ]),
+  );
 
 /**
  * Two things about glass cannot be expressed as a React Native style, and they
@@ -61,16 +89,34 @@ insertCssRule(
  * effect and written into one <style> by the shell, so a call made while
  * rendering would arrive after the sheet was serialised.
  */
-export const configureGlass = (materials: Partial<Record<GlassMaterial, Partial<GlassTokens>>>) => {
-  const declarations = Object.entries(materials)
-    .flatMap(([material, tokens]) =>
-      Object.entries(tokens ?? {})
-        .filter(([, value]) => value !== undefined)
-        .map(
-          ([token, value]) =>
-            `  ${variable(token as keyof GlassTokens, material as GlassMaterial)}: ${value};`,
-        ),
-    )
-    .join("\n");
+export type GlassMaterials = Partial<Record<GlassMaterial, Partial<GlassTokens>>>;
+
+export type GlassConfig = {
+  /** Follows the page. Point these at theme variables. */
+  materials: GlassMaterials;
+  /**
+   * The same values, frozen per scheme, for surfaces that pin themselves to a
+   * background rather than to the page. Point these at literal colours.
+   */
+  schemes?: Partial<Record<GlassScheme, GlassMaterials>>;
+};
+
+const declare = (materials: GlassMaterials, scheme?: GlassScheme) =>
+  Object.entries(materials).flatMap(([material, tokens]) =>
+    Object.entries(tokens ?? {})
+      .filter(([, value]) => value !== undefined)
+      .map(
+        ([token, value]) =>
+          `  ${variable(token as keyof GlassTokens, material as GlassMaterial, scheme)}: ${value};`,
+      ),
+  );
+
+export const configureGlass = ({ materials, schemes }: GlassConfig) => {
+  const declarations = [
+    ...declare(materials),
+    ...Object.entries(schemes ?? {}).flatMap(([scheme, byMaterial]) =>
+      declare(byMaterial ?? {}, scheme as GlassScheme),
+    ),
+  ].join("\n");
   if (declarations !== "") insertCssRule(`:root {\n${declarations}\n}`);
 };

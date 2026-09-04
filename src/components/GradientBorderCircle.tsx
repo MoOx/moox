@@ -1,12 +1,7 @@
+import { GradientStop } from "@/react-multiversal/gradient";
 import { useId } from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg";
-
-interface StopData {
-  offset: number;
-  stopColor: string;
-  stopOpacity: string;
-}
 
 export default function GradientBorderCircle({
   width,
@@ -17,7 +12,7 @@ export default function GradientBorderCircle({
   width: number;
   borderWidth: number;
   style?: StyleProp<ViewStyle>;
-  stops: StopData[];
+  stops: GradientStop[];
 }) {
   const id = useId();
 
@@ -27,10 +22,9 @@ export default function GradientBorderCircle({
         <LinearGradient id={id} x1="0%" y1="0%" x2="100%" y2="0%">
           {stops.map((stop) => (
             <Stop
-              key={`${stop.offset}-${stop.stopColor}-${stop.stopOpacity}`}
+              key={`${stop.offset}-${stop.color}`}
               offset={`${stop.offset}%`}
-              stopColor={stop.stopColor}
-              stopOpacity={stop.stopOpacity}
+              stopColor={stop.color}
             />
           ))}
         </LinearGradient>
