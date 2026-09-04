@@ -49,13 +49,23 @@ export default function WebsiteError({ statusCode }: { statusCode: number }) {
           <Spacer size="l" />
           <LinkView
             href={localizeHref("/")}
-            onPress={() => {
-              if (Platform.OS === "web" && window.history.length > 1) {
-                window.history.back();
-              } else {
-                window.location.href = "/";
-              }
-            }}
+            // Web only, and the guard has to wrap the whole handler rather
+            // than sit inside it: on a device the `else` branch ran, and
+            // `window.location` is undefined there (React Native aliases
+            // `window` to `global`), so the app's 404 screen threw on press.
+            // With no handler the link navigates through the router instead,
+            // which lands on the same page.
+            onPress={
+              Platform.OS === "web"
+                ? () => {
+                    if (window.history.length > 1) {
+                      window.history.back();
+                    } else {
+                      window.location.href = "/";
+                    }
+                  }
+                : undefined
+            }
           >
             <ButtonView>{t({ en: "Go back", fr: "Retour" })}</ButtonView>
           </LinkView>

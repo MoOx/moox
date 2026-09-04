@@ -130,9 +130,7 @@ export default function BlockBuilder({
               size="l"
               // density="tight"
             >
-              {/* <Text style={fontStyles.iosEm.callout}> */}
               {t({ en: "More about me", fr: "En savoir plus sur moi" })}
-              {/* </Text> */}
             </Btn>
             <IfWindowWidthIs largerThan={WindowWidth.m}>
               <Spacer size="xs" />
