@@ -111,13 +111,13 @@ below). The bulk of the win was in step 2 instead.
       Measured: `/resume` 3122 → 2925, `/` 1306 → 1249, `/contact` 641 → 590;
       anchors wrapping a lone text node 182 → 0; max depth 26 → 25.
 - ~~**Step 2b — semantic primitives.**~~ **Dropped, Max, 2026-08.** `role=` on
-      a `View` is fine as it is: react-native-web already maps it to the real
-      tag (`<h3>`, `<nav>`, `<p>`, `<ul>`, `<article>`…), so the markup is
-      already semantic and a `Heading` / `Paragraph` layer would only rename the
-      call sites. The node win was in 2a and is banked.
-      Consequence for `HTML-STYLING-PROPOSAL.md` §4: the "react-strict-dom
-      interface, hand-rolled" argument goes with it. If RSD ever ships, the
-      adapter gets written then.
+  a `View` is fine as it is: react-native-web already maps it to the real
+  tag (`<h3>`, `<nav>`, `<p>`, `<ul>`, `<article>`…), so the markup is
+  already semantic and a `Heading` / `Paragraph` layer would only rename the
+  call sites. The node win was in 2a and is banked.
+  Consequence for `HTML-STYLING-PROPOSAL.md` §4: the "react-strict-dom
+  interface, hand-rolled" argument goes with it. If RSD ever ships, the
+  adapter gets written then.
 - [ ] **Step 3 — font ergonomics, then one token object.** The theme mechanism
       stays (CSS variables for a reliable `auto`, OS scheme on native); only the
       call sites change. Delete `fontStyles.android` / `androidEm` (0 uses,
@@ -136,6 +136,32 @@ below). The bulk of the win was in step 2 instead.
       both problems.
 - [ ] Verify every step with the screenshot harness described in the proposal
       (full-page 390/1280 pixel diff; heights must not move).
+
+## 5. App pages
+
+`/apps` lists them, `/apps/<slug>` is one app's page and
+`/apps/<slug>/privacy` its policy — all three built from three files the app's
+own repository publishes. `content/apps.json` lists the repositories,
+`npm run apps` fetches them, fails the build rather than serve a page without
+its policy or its store links, and commits what it fetched. Nothing about an
+app is written here.
+
+Hide The Notch's `listing.json` already declares
+`https://moox.io/apps/hide-the-notch/privacy` as its store privacy URL, and
+that is the page this repo serves — checked 2026-09-06. The landing page keeps
+a `#privacy` block anyway, so the older URL still lands on something that says
+Privacy.
+
+- [ ] `public/apps/lifetime/` is still a hand-written HTML page. Publishing the
+      same trio from its repository is all it would need to become a route too
+      — one entry in `content/apps.json`, no code.
+- [ ] The page shows one device, the phone. The press kit also ships iPad and
+      Android captures of the same screens, and `story` names them per
+      platform — a device switch is a `useState` away if it ever earns its
+      place. It is deliberately not there: a landing page that makes you pick
+      before it makes its point is worse than one that picks for you.
+- [ ] `extras.seal` (the "Free / tips welcome" stamp the deck draws) is read
+      past, not rendered. The three `badges` next to it are.
 
 ---
 

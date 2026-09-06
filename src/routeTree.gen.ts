@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './app/__root'
 import { Route as DesignSystemRouteImport } from './app/design-system'
+import { Route as AppsIndexRouteImport } from './app/apps.index'
+import { Route as AppsSlugRouteImport } from './app/apps.$slug'
 import { Route as BlogIndexRouteImport } from './app/blog.index'
 import { Route as BlogSlugRouteImport } from './app/blog.$slug'
 import { Route as TalksIndexRouteImport } from './app/talks.index'
@@ -18,12 +20,23 @@ import { Route as Char123LangChar125IndexRouteImport } from './app/{-$lang}.inde
 import { Route as Char123LangChar125ContactRouteImport } from './app/{-$lang}.contact'
 import { Route as Char123LangChar125CvRouteImport } from './app/{-$lang}.cv'
 import { Route as Char123LangChar125ResumeRouteImport } from './app/{-$lang}.resume'
+import { Route as AppsSlugPrivacyRouteImport } from './app/apps.$slug_.privacy'
 import { Route as Char123LangChar125ResumeSlugRouteImport } from './app/{-$lang}.resume_.$slug'
 import { Route as Char123LangChar125ResumeGroupGroupRouteImport } from './app/{-$lang}.resume_.group.$group'
 
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppsIndexRoute = AppsIndexRouteImport.update({
+  id: '/apps/',
+  path: '/apps/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppsSlugRoute = AppsSlugRouteImport.update({
+  id: '/apps/$slug',
+  path: '/apps/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -68,6 +81,11 @@ const Char123LangChar125ResumeRoute =
     path: '/{-$lang}/resume',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AppsSlugPrivacyRoute = AppsSlugPrivacyRouteImport.update({
+  id: '/apps/$slug_/privacy',
+  path: '/apps/$slug/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char123LangChar125ResumeSlugRoute =
   Char123LangChar125ResumeSlugRouteImport.update({
     id: '/{-$lang}/resume_/$slug',
@@ -83,41 +101,50 @@ const Char123LangChar125ResumeGroupGroupRoute =
 
 export interface FileRoutesByFullPath {
   '/design-system': typeof DesignSystemRoute
+  '/apps/$slug': typeof AppsSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
   '/{-$lang}/cv': typeof Char123LangChar125CvRoute
   '/{-$lang}/resume': typeof Char123LangChar125ResumeRoute
+  '/apps/': typeof AppsIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
   '/{-$lang}/': typeof Char123LangChar125IndexRoute
+  '/apps/$slug/privacy': typeof AppsSlugPrivacyRoute
   '/{-$lang}/resume/$slug': typeof Char123LangChar125ResumeSlugRoute
   '/{-$lang}/resume/group/$group': typeof Char123LangChar125ResumeGroupGroupRoute
 }
 export interface FileRoutesByTo {
   '/design-system': typeof DesignSystemRoute
+  '/apps/$slug': typeof AppsSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
   '/{-$lang}/cv': typeof Char123LangChar125CvRoute
   '/{-$lang}/resume': typeof Char123LangChar125ResumeRoute
+  '/apps': typeof AppsIndexRoute
   '/blog': typeof BlogIndexRoute
   '/talks': typeof TalksIndexRoute
   '/{-$lang}': typeof Char123LangChar125IndexRoute
+  '/apps/$slug/privacy': typeof AppsSlugPrivacyRoute
   '/{-$lang}/resume/$slug': typeof Char123LangChar125ResumeSlugRoute
   '/{-$lang}/resume/group/$group': typeof Char123LangChar125ResumeGroupGroupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/design-system': typeof DesignSystemRoute
+  '/apps/$slug': typeof AppsSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
   '/{-$lang}/cv': typeof Char123LangChar125CvRoute
   '/{-$lang}/resume': typeof Char123LangChar125ResumeRoute
+  '/apps/': typeof AppsIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/talks/': typeof TalksIndexRoute
   '/{-$lang}/': typeof Char123LangChar125IndexRoute
+  '/apps/$slug_/privacy': typeof AppsSlugPrivacyRoute
   '/{-$lang}/resume_/$slug': typeof Char123LangChar125ResumeSlugRoute
   '/{-$lang}/resume_/group/$group': typeof Char123LangChar125ResumeGroupGroupRoute
 }
@@ -125,54 +152,66 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/design-system'
+    | '/apps/$slug'
     | '/blog/$slug'
     | '/talks/$slug'
     | '/{-$lang}/contact'
     | '/{-$lang}/cv'
     | '/{-$lang}/resume'
+    | '/apps/'
     | '/blog/'
     | '/talks/'
     | '/{-$lang}/'
+    | '/apps/$slug/privacy'
     | '/{-$lang}/resume/$slug'
     | '/{-$lang}/resume/group/$group'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/design-system'
+    | '/apps/$slug'
     | '/blog/$slug'
     | '/talks/$slug'
     | '/{-$lang}/contact'
     | '/{-$lang}/cv'
     | '/{-$lang}/resume'
+    | '/apps'
     | '/blog'
     | '/talks'
     | '/{-$lang}'
+    | '/apps/$slug/privacy'
     | '/{-$lang}/resume/$slug'
     | '/{-$lang}/resume/group/$group'
   id:
     | '__root__'
     | '/design-system'
+    | '/apps/$slug'
     | '/blog/$slug'
     | '/talks/$slug'
     | '/{-$lang}/contact'
     | '/{-$lang}/cv'
     | '/{-$lang}/resume'
+    | '/apps/'
     | '/blog/'
     | '/talks/'
     | '/{-$lang}/'
+    | '/apps/$slug_/privacy'
     | '/{-$lang}/resume_/$slug'
     | '/{-$lang}/resume_/group/$group'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   DesignSystemRoute: typeof DesignSystemRoute
+  AppsSlugRoute: typeof AppsSlugRoute
   BlogSlugRoute: typeof BlogSlugRoute
   TalksSlugRoute: typeof TalksSlugRoute
   Char123LangChar125ContactRoute: typeof Char123LangChar125ContactRoute
   Char123LangChar125CvRoute: typeof Char123LangChar125CvRoute
   Char123LangChar125ResumeRoute: typeof Char123LangChar125ResumeRoute
+  AppsIndexRoute: typeof AppsIndexRoute
   BlogIndexRoute: typeof BlogIndexRoute
   TalksIndexRoute: typeof TalksIndexRoute
   Char123LangChar125IndexRoute: typeof Char123LangChar125IndexRoute
+  AppsSlugPrivacyRoute: typeof AppsSlugPrivacyRoute
   Char123LangChar125ResumeSlugRoute: typeof Char123LangChar125ResumeSlugRoute
   Char123LangChar125ResumeGroupGroupRoute: typeof Char123LangChar125ResumeGroupGroupRoute
 }
@@ -184,6 +223,20 @@ declare module '@tanstack/react-router' {
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apps/': {
+      id: '/apps/'
+      path: '/apps'
+      fullPath: '/apps/'
+      preLoaderRoute: typeof AppsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apps/$slug': {
+      id: '/apps/$slug'
+      path: '/apps/$slug'
+      fullPath: '/apps/$slug'
+      preLoaderRoute: typeof AppsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -242,6 +295,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LangChar125ResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/apps/$slug_/privacy': {
+      id: '/apps/$slug_/privacy'
+      path: '/apps/$slug/privacy'
+      fullPath: '/apps/$slug/privacy'
+      preLoaderRoute: typeof AppsSlugPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/{-$lang}/resume_/$slug': {
       id: '/{-$lang}/resume_/$slug'
       path: '/{-$lang}/resume/$slug'
@@ -261,14 +321,17 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   DesignSystemRoute: DesignSystemRoute,
+  AppsSlugRoute: AppsSlugRoute,
   BlogSlugRoute: BlogSlugRoute,
   TalksSlugRoute: TalksSlugRoute,
   Char123LangChar125ContactRoute: Char123LangChar125ContactRoute,
   Char123LangChar125CvRoute: Char123LangChar125CvRoute,
   Char123LangChar125ResumeRoute: Char123LangChar125ResumeRoute,
+  AppsIndexRoute: AppsIndexRoute,
   BlogIndexRoute: BlogIndexRoute,
   TalksIndexRoute: TalksIndexRoute,
   Char123LangChar125IndexRoute: Char123LangChar125IndexRoute,
+  AppsSlugPrivacyRoute: AppsSlugPrivacyRoute,
   Char123LangChar125ResumeSlugRoute: Char123LangChar125ResumeSlugRoute,
   Char123LangChar125ResumeGroupGroupRoute:
     Char123LangChar125ResumeGroupGroupRoute,

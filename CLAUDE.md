@@ -15,6 +15,11 @@ to JSON by `npm run markdown`.
 | Testimonials                       | `src/components/BlockTestimonials.tsx`        |
 | i18n contract (types, hooks, URLs) | `src/i18n.ts`                                 |
 | PDF export (one file per language) | `scripts/generate-resume-pdf.mjs`             |
+| The apps index (`/apps`)           | `src/app/apps.index.tsx` + `AppHero`          |
+| App landing pages (`/apps/<slug>`) | `src/app/apps.$slug.tsx` + `AppLandingPage`   |
+| An app's privacy policy            | `src/app/apps.$slug_.privacy.tsx`             |
+| Which apps, and from which repo    | `content/apps.json`                           |
+| Fetching an app's copy & shots     | `scripts/fetch-apps.mjs` (`npm run apps`)     |
 
 **Routes are file-based with an optional language segment**: `{-$lang}.cv.tsx`
 serves both `/cv` and `/fr/cv` — one definition, two languages. English is the
@@ -147,6 +152,59 @@ paint silently falls back to black, and you only see it in the exported PDF
 `nextjsMask`, `nextjsPaint0`. Watch for cross-file collisions too — several
 SVGs still define `url(#a)` / `url(#b)`, which resolve to whichever comes first
 in the document if two of them ever render on the same page.
+
+**An app landing page is never written here, and the build fails rather than
+serve half of one.** `/apps/<slug>` is a template over three files the app's
+own repository publishes - `marketing/listing.json` (the store copy, six
+languages, plus the store URLs), `marketing/privacy.md` (the policy) and the
+`press-kit` branch's `index.json` (the deck as data). `npm run apps` reads them
+and exits non-zero if any of it is missing: the policy is what the two stores
+were given, and a page with a hero and no policy is a review rejection, so
+there is no degraded mode. Adding an app is an entry in `content/apps.json` and
+nothing else - if you find yourself typing an app's name, a screenshot path or
+a sentence of its description into this repository, you are writing the same
+words for the second time and one of the two copies will go stale.
+
+**What `npm run apps` writes is committed** - the one exception to
+`public/content` being generated and ignored. The `press-kit` branch is
+force-pushed on every run of the app's own tooling, so without a copy in here
+the site would build from whatever that branch happens to say and nobody would
+see the change in a diff. Re-running is idempotent by design: each asset
+carries the `sha` of its bytes upstream, and one that has not moved is left
+untouched, so a rebuild never churns the repository. The captures are
+re-encoded to 560px wide (twice the 280px the page draws them at) through the
+Chromium this repo already drives, best effort - no browser and the press kit's
+own JPEG is committed as it came.
+
+**The policy has its own page, `/apps/<slug>/privacy`.** It is a document, not
+a section of a pitch, and it is long enough to bury everything under it. The
+landing page keeps a `#privacy` block - heading, the policy's opening
+paragraph, a link - so the anchor still lands on something that says Privacy.
+`urls.privacy` in the app's own `listing.json` points at the `/privacy` URL and
+not at the landing page, which is the way round it has to be: what a reviewer
+follows should *be* the policy.
+
+**The page's shape comes from the press kit's `story`, not from its `shots`.**
+A store deck is already a sequence somebody composed - one screen, one line, in
+one order - and `story` is that sequence with the text still text instead of
+burned into the picture: `headline` (with the newlines it was composed on),
+`sub`, and the capture per platform. So the page is one block per step,
+alternating white and a tinted band the way the home page does, with the
+screenshot inside the same iPhone frame `BlockBuilder` uses; the first step
+illustrates the hero, and the step with no image is the card the deck closes
+on. `shots` is the raw list the same manifest also carries - fifteen files,
+three devices - and laying that out is the version of this page that read as a
+contact sheet. Only the device the page shows is downloaded.
+
+**The two store badges are their owners' artwork and are served as files.**
+`public/badges/*.svg` came from Apple's badge page and Google's partner
+marketing hub, byte for byte. Both guidelines allow a page to choose the size
+and nothing else, so never redraw, recolour, crop, tint or rename them, and
+never put them through `npm run svg` - that pipeline rewrites paths and ids,
+and the Play badge carries a `<style>` block react-native-svg has no
+equivalent for. Render both at the same height, at least 40px, with clear space
+around them (Apple asks a tenth of the height, Google a quarter; the row in
+`AppLandingPage` uses the quarter).
 
 **Colour an icon with `color`, not `fill` or `fills`.** Most sources paint with
 `fill="currentColor"`, which is exactly what `color` sets, so one prop tints

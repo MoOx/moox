@@ -1,0 +1,11 @@
+{
+  "//": "The apps that have a landing page here. An entry is a repository and nothing else: the name, the copy, the screenshots and the privacy policy are read from it at build time by scripts/fetch-apps.mjs, so no word of an app's listing is written twice - once in its store metadata and once here. `ref` is the branch or tag holding marketing/listing.json and marketing/privacy.md; `pressKit` is the branch its CI force-pushes the screenshots and their manifest to. Adding an app is adding an entry, provided it publishes that same trio.",
+  "apps": [
+    {
+      "slug": "hide-the-notch",
+      "repo": "MoOx/HideTheNotch",
+      "ref": "v2",
+      "pressKit": "press-kit"
+    }
+  ]
+}

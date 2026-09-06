@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "patch-package && husky && npm run svg && npm run markdown",
+    "prepare": "patch-package && husky && npm run svg && npm run markdown && npm run apps",
     "dev": "vite dev --host",
     "build": "npm run prepare && vite build",
     "preview": "npx serve dist/client",
@@ -15,6 +15,7 @@
     "svg:web": "react-from-svg svgs src/svgs/components --with-native-for-typescript --allow-override-fill",
     "svg": "npm run svg:clean && npm run svg:web",
     "markdown": "markdown-to-json \"content/**/*.md\" public && node scripts/generate-content-indexes.mjs",
+    "apps": "node scripts/fetch-apps.mjs",
     "pdf": "node scripts/generate-resume-pdf.mjs",
     "test": "npm run lint && npm run build",
     "a11y": "node scripts/audit-a11y.mjs",

@@ -1,4 +1,5 @@
 import type { Localized } from "@/i18n";
+import SVGAppStoreApple from "@/svgs/components/SVGAppStoreApple";
 import SVGAppStoreNpm from "@/svgs/components/SVGAppStoreNpm";
 import SVGEllipsisMessage from "@/svgs/components/SVGEllipsisMessage";
 import SVGEllipsisMessageFill from "@/svgs/components/SVGEllipsisMessageFill";
@@ -196,6 +197,18 @@ export const internalLinks: LinksWithIcon = {
 };
 
 export const internalLinks2: LinksWithIcon = {
+  Apps: {
+    // English-only, like Blog and Talks: an app's own listing already speaks
+    // the visitor's language, so this path is not in `localizedPathPatterns`.
+    label: { en: "Apps", fr: "Apps" },
+    href: "/apps",
+    // The App Store's own mark rather than a tinted glyph: `color` does
+    // nothing to it (its paths carry their own fills), which is why it is the
+    // one icon in these menus that keeps its colours.
+    icon: ({ style, size }: LinksIconProps) => (
+      <SVGAppStoreApple style={style} width={size} height={size} />
+    ),
+  },
   Blog: {
     label: { en: "Blog", fr: "Blog" },
     href: "/blog",

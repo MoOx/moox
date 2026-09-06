@@ -204,3 +204,98 @@ export async function fetchResumeEntry(filename: string, lang: Lang): Promise<Re
   const item = await fetchOne({ data: { filename, contentType: "resume" } });
   return item && localizeResumeItem(item, lang);
 }
+
+/**
+ * An app landing page, as `scripts/fetch-apps.mjs` assembles it at build time
+ * from the app's own repository: its store listing, its press kit and its
+ * privacy policy. Nothing in here is authored on this site - the page
+ * (`src/app/apps.$slug.tsx`) is a template over this shape, and a second app
+ * is a second entry in `content/apps.json`.
+ */
+export type AppPage = {
+  slug: string;
+  /** The public repository every field below was read from. */
+  repoUrl: string;
+  /** The day the press kit was generated, as the manifest reports it. */
+  generated?: string;
+  /** The listing locale the copy comes from, e.g. `en-US`. */
+  locale: string;
+  name: string;
+  subtitle: string;
+  /** Play's short description - one line, used as the page's lead. */
+  short: string;
+  /** The store description, split on its blank lines. */
+  description: string[];
+  keywords: string[];
+  stores: { appStore: string; play: string };
+  icon: AppImage;
+  /** The device the story is illustrated with, for the alt texts: "iPhone". */
+  device: string;
+  /**
+   * The store deck, as data: one screen and one line per step, in the order
+   * the deck put them. The page is a block per step, so this is what shapes
+   * it - the first step illustrates the hero, the rest follow, and the one
+   * without an image is the card the deck closes on.
+   */
+  story: AppStoryStep[];
+  /** The deck's own short claims, e.g. Free / No ads / No account. */
+  badges: string[];
+  /**
+   * The policy. It has a page of its own (`/apps/<slug>/privacy`) because it
+   * is a document rather than a section, and the landing page links to it from
+   * a `#privacy` block carrying `summary`, its opening paragraph.
+   */
+  privacy: { title: string; summary?: string; body: any };
+};
+
+export type AppImage = {
+  src: string;
+  width?: number;
+  height?: number;
+  /** Of the file upstream, so a refetch only rewrites what actually moved. */
+  sha?: string;
+  bytes?: number;
+};
+
+export type AppStoryStep = {
+  id: string;
+  /** The headline, already split on the newlines the deck composed it with. */
+  headline: string[];
+  /** The line under it, on a step that shows a screen. */
+  sub?: string;
+  /** The paragraph the deck has no room for and a web page does. */
+  body?: string;
+  /** The claim, on the card the deck closes on. */
+  line?: string;
+  /** Its footnote, same step. */
+  note?: string;
+  /** Absent on that closing card, which the deck draws rather than captures. */
+  image?: AppImage;
+};
+
+/** The top of every app's page, which is all `/apps` needs to list them. */
+export type AppSummary = Pick<
+  AppPage,
+  "slug" | "name" | "subtitle" | "short" | "icon" | "stores" | "badges"
+> & {
+  /** The deck's first step - the screen the app's own hero is built on. */
+  lead?: AppStoryStep;
+};
+
+/** One app landing page. */
+export async function fetchApp(slug: string): Promise<AppPage | null> {
+  try {
+    return await readJson<AppPage>(`/content/apps/${slug}.json`);
+  } catch {
+    return null;
+  }
+}
+
+/** Every app that has a landing page, in the order the registry lists them. */
+export async function fetchApps(): Promise<AppSummary[]> {
+  try {
+    return await readJson<AppSummary[]>("/content/apps/index.json");
+  } catch {
+    return [];
+  }
+}
