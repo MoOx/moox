@@ -65,14 +65,6 @@ function PageAppPrivacy() {
               </Text>
             </View>
             <MdAsJsonRenderer body={app.privacy.body} />
-            <Spacer size="l" />
-            <Text style={[fontStyles.ios.footnote, theme.styles.textLight2]}>
-              {"This policy is read from the app's own repository, "}
-              <LinkText href={app.repoUrl} style={theme.styles.textMainDark}>
-                {app.repoUrl.replace(/^https:\/\//, "")}
-              </LinkText>
-              {", so it cannot drift away from the one the app ships."}
-            </Text>
           </SpacedView>
         </Container>
       </View>

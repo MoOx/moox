@@ -180,8 +180,9 @@ own JPEG is committed as it came.
 a section of a pitch, and it is long enough to bury everything under it. The
 landing page keeps a `#privacy` block - heading, the policy's opening
 paragraph, a link - so the anchor still lands on something that says Privacy.
-`urls.privacy` in the app's own `listing.json` should point at the `/privacy`
-URL, not at the landing page: what a reviewer follows should *be* the policy.
+`urls.privacy` in the app's own `listing.json` points at the `/privacy` URL and
+not at the landing page, which is the way round it has to be: what a reviewer
+follows should *be* the policy.
 
 **The page's shape comes from the press kit's `story`, not from its `shots`.**
 A store deck is already a sequence somebody composed - one screen, one line, in

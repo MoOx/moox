@@ -146,12 +146,12 @@ own repository publishes. `content/apps.json` lists the repositories,
 its policy or its store links, and commits what it fetched. Nothing about an
 app is written here.
 
-- [ ] **One thing to change upstream**: `urls.privacy` in Hide The Notch's
-      `marketing/listing.json` still points at `https://moox.io/apps/hide-the-notch`,
-      which is now the landing page. It should be
-      `https://moox.io/apps/hide-the-notch/privacy` — what a reviewer follows
-      should be the policy itself, not a page that links to it. The landing
-      page keeps a `#privacy` block either way, so nothing is broken meanwhile.
+Hide The Notch's `listing.json` already declares
+`https://moox.io/apps/hide-the-notch/privacy` as its store privacy URL, and
+that is the page this repo serves — checked 2026-09-06. The landing page keeps
+a `#privacy` block anyway, so the older URL still lands on something that says
+Privacy.
+
 - [ ] `public/apps/lifetime/` is still a hand-written HTML page. Publishing the
       same trio from its repository is all it would need to become a route too
       — one entry in `content/apps.json`, no code.

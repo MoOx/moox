@@ -7,17 +7,10 @@ import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
-import LinkText from "@/react-multiversal/LinkText";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
-import {
-  alpha,
-  colors,
-  gradientFlashyStops,
-  gradientStaticIndigoStyles,
-  useTheme,
-} from "@/styles";
+import { alpha, colors, gradientFlashyStops, gradientStaticIndigoStyles, useTheme } from "@/styles";
 import { pTransforms } from "@/utils.styles";
 import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 
@@ -112,14 +105,6 @@ export default function AppLandingPage({ app }: { app: AppPage }) {
                 <Text style={fontStyles.iosEm.callout}>{`Read the ${app.privacy.title}`}</Text>
               </SpacedView>
             </LinkButton>
-            <Spacer size="m" />
-            <Text style={[fontStyles.ios.footnote, theme.styles.textLight2]}>
-              {"Every word and every picture on this page is read from "}
-              <LinkText href={app.repoUrl} style={theme.styles.textMainDark}>
-                {app.repoUrl.replace(/^https:\/\//, "")}
-              </LinkText>
-              {app.generated ? `, press kit of ${app.generated}.` : "."}
-            </Text>
           </SpacedView>
         </Container>
       </View>
