@@ -22,9 +22,10 @@ dist
 # custom
 **/svgs/components/**
 public/content/**/*.json
-# The app landing pages, fetched from the apps' own repositories at build time
-# (npm run apps): their data and their press-kit images alike.
-public/content/apps
+# …except the app landing pages. `npm run apps` fetches those from repositories
+# that force-push their press kit, so the copy in here is the reviewed one: it
+# is committed, and a refresh shows up as a diff like any other change.
+!public/content/apps/**
 tmp
 
 # visual regression baselines (npm run visual -- --save=…)

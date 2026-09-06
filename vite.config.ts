@@ -61,9 +61,10 @@ const serveAppPagesInDev = {
   },
 };
 
-// The app landing pages, one per entry of the registry. Nothing on the site
-// links to them - they are entered from a store listing - so `crawlLinks` never
-// reaches them and the prerender has to be told they exist.
+// The app pages: the index, one page per entry of the registry, and its
+// privacy policy. `/apps` is in the menus, so a crawl would find the rest -
+// listing them is what keeps a policy prerendered even if a link ever moves,
+// and that URL is the one the two stores were given.
 const appRegistry = JSON.parse(fs.readFileSync("content/apps.json", "utf8")) as {
   apps: Array<{ slug: string }>;
 };
@@ -83,7 +84,13 @@ export default defineConfig({
     tanstackStart({
       srcDirectory: "src",
       router: { routesDirectory: "app" },
-      pages: appRegistry.apps.map((app) => ({ path: `/apps/${app.slug}` })),
+      pages: [
+        { path: "/apps" },
+        ...appRegistry.apps.flatMap((app) => [
+          { path: `/apps/${app.slug}` },
+          { path: `/apps/${app.slug}/privacy` },
+        ]),
+      ],
       // spa: { enabled: true },
       prerender: {
         enabled: true,

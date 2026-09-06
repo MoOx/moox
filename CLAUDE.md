@@ -15,7 +15,9 @@ to JSON by `npm run markdown`.
 | Testimonials                       | `src/components/BlockTestimonials.tsx`        |
 | i18n contract (types, hooks, URLs) | `src/i18n.ts`                                 |
 | PDF export (one file per language) | `scripts/generate-resume-pdf.mjs`             |
+| The apps index (`/apps`)           | `src/app/apps.index.tsx` + `AppHero`          |
 | App landing pages (`/apps/<slug>`) | `src/app/apps.$slug.tsx` + `AppLandingPage`   |
+| An app's privacy policy            | `src/app/apps.$slug_.privacy.tsx`             |
 | Which apps, and from which repo    | `content/apps.json`                           |
 | Fetching an app's copy & shots     | `scripts/fetch-apps.mjs` (`npm run apps`)     |
 
@@ -156,14 +158,30 @@ serve half of one.** `/apps/<slug>` is a template over three files the app's
 own repository publishes - `marketing/listing.json` (the store copy, six
 languages, plus the store URLs), `marketing/privacy.md` (the policy) and the
 `press-kit` branch's `index.json` (the deck as data). `npm run apps` reads them
-at **build** time, downloads the images into `public/content/apps/` and exits
-non-zero if any of it is missing. That URL is the one declared to Apple and to
-Google as the app's privacy policy: a page that renders a hero and no policy is
-a review rejection, so there is no degraded mode. Adding an app is an entry in
-`content/apps.json` and nothing else - if you find yourself typing an app's
-name, a screenshot path or a sentence of its description into this repository,
-you are writing the same words for the second time and one of the two copies
-will go stale.
+and exits non-zero if any of it is missing: the policy is what the two stores
+were given, and a page with a hero and no policy is a review rejection, so
+there is no degraded mode. Adding an app is an entry in `content/apps.json` and
+nothing else - if you find yourself typing an app's name, a screenshot path or
+a sentence of its description into this repository, you are writing the same
+words for the second time and one of the two copies will go stale.
+
+**What `npm run apps` writes is committed** - the one exception to
+`public/content` being generated and ignored. The `press-kit` branch is
+force-pushed on every run of the app's own tooling, so without a copy in here
+the site would build from whatever that branch happens to say and nobody would
+see the change in a diff. Re-running is idempotent by design: each asset
+carries the `sha` of its bytes upstream, and one that has not moved is left
+untouched, so a rebuild never churns the repository. The captures are
+re-encoded to 560px wide (twice the 280px the page draws them at) through the
+Chromium this repo already drives, best effort - no browser and the press kit's
+own JPEG is committed as it came.
+
+**The policy has its own page, `/apps/<slug>/privacy`.** It is a document, not
+a section of a pitch, and it is long enough to bury everything under it. The
+landing page keeps a `#privacy` block - heading, the policy's opening
+paragraph, a link - so the anchor still lands on something that says Privacy.
+`urls.privacy` in the app's own `listing.json` should point at the `/privacy`
+URL, not at the landing page: what a reviewer follows should *be* the policy.
 
 **The page's shape comes from the press kit's `story`, not from its `shots`.**
 A store deck is already a sequence somebody composed - one screen, one line, in

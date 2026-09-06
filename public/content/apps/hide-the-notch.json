@@ -1,0 +1,294 @@
+{
+  "slug": "hide-the-notch",
+  "repoUrl": "https://github.com/MoOx/HideTheNotch",
+  "generated": "2026-09-06",
+  "locale": "en-US",
+  "name": "Hide The Notch",
+  "subtitle": "Your photo, minus the notch.",
+  "short": "Your wallpaper, whole again: the notch goes, your photo stays.",
+  "description": [
+    "Your wallpaper is the picture you look at most often in your life. Fifty times a day, a hundred. Someone, a place, a light, a three second memory before you answer a message.",
+    "And there is a notch in it.",
+    "This app adjusts your wallpaper to hide it. The top of the screen turns black, the same night as the one already around the camera, the kind only OLED screens can make, and your picture carries on underneath as if nothing had happened.",
+    "Notch, punch hole, Dynamic Island: whatever your phone calls it, it disappears.",
+    "You choose your photo, the one that matters, and frame it the way you want. Or you start from a gradient and push it around with your finger until you land on the right colour, the one you would not have found anywhere else.",
+    "There are several ways to make the notch disappear, and a single setting for each. You try, you see straight away, you keep the one you like.",
+    "Then the picture is yours. It lands in your photos, at the exact size of your screen. You keep it, you send it to someone, you make another one tomorrow because the light has changed.",
+    "Free. No ads, no account, no tracking, no subscription. Your photos never leave your phone."
+  ],
+  "keywords": [
+    "notch",
+    "dynamic island",
+    "punch hole",
+    "wallpaper",
+    "screen",
+    "camera",
+    "hide",
+    "cover",
+    "oled",
+    "black",
+    "gradient"
+  ],
+  "stores": {
+    "appStore": "https://apps.apple.com/us/app/hide-the-notch/id1312839983",
+    "play": "https://play.google.com/store/apps/details?id=io.moox.hidethenotch"
+  },
+  "icon": {
+    "src": "/content/apps/hide-the-notch/icon.png",
+    "sha": "8f323e7b611603da",
+    "bytes": 33347,
+    "width": 256,
+    "height": 256
+  },
+  "device": "iPhone",
+  "story": [
+    {
+      "id": "split",
+      "headline": [
+        "The notch",
+        "disappears."
+      ],
+      "sub": "Forget it, in a couple of taps.",
+      "body": "On an OLED screen a black pixel is an off pixel, so the black the app draws is optically the same as the panel around the camera. The cutout does not get covered up. It stops existing.",
+      "image": {
+        "src": "/content/apps/hide-the-notch/ios/05-compare.jpg",
+        "sha": "8bf69503c31ce8ea",
+        "bytes": 112747,
+        "height": 1216,
+        "width": 560
+      }
+    },
+    {
+      "id": "effect",
+      "headline": [
+        "The effect",
+        "you want."
+      ],
+      "sub": "Fade, rounded band, retro stripes…",
+      "body": "Three ways, and one slider each. A fade that dissolves into the image with no edge at all, a rounded band that follows the corners of the screen, or a halftone that breaks the black into stripes.",
+      "image": {
+        "src": "/content/apps/hide-the-notch/ios/01-editor.jpg",
+        "sha": "0e4b07566fe18e5f",
+        "bytes": 25038,
+        "height": 1216,
+        "width": 560
+      }
+    },
+    {
+      "id": "photo",
+      "headline": [
+        "Any photo",
+        "you like."
+      ],
+      "sub": "Pick one from your collection, or generate a wallpaper of your own.",
+      "body": "Bring the photo that matters and frame it the way you want, or start from a gradient and reshape it by hand. Either way it is decoded and exported on the phone, and never sent anywhere.",
+      "image": {
+        "src": "/content/apps/hide-the-notch/ios/02-import.jpg",
+        "sha": "7329c2bbdaa98f73",
+        "bytes": 83528,
+        "height": 1216,
+        "width": 560
+      }
+    },
+    {
+      "id": "shape",
+      "headline": [
+        "Preview it,",
+        "at a glance."
+      ],
+      "sub": "Adjust the effect in a moment.",
+      "body": "Hold the wallpaper and it appears on a sketched home screen, icons on top. It is the only way to judge the thing that actually matters: whether the black reads as hardware rather than as a black rectangle.",
+      "image": {
+        "src": "/content/apps/hide-the-notch/ios/03-home.jpg",
+        "sha": "fbc8ed380c2ca9f8",
+        "bytes": 30416,
+        "height": 1216,
+        "width": 560
+      }
+    },
+    {
+      "id": "export",
+      "headline": [
+        "Export it,",
+        "free."
+      ],
+      "sub": "Keep the image, or share it.",
+      "body": "PNG at the exact resolution of your screen, and never JPEG. JPEG makes block artefacts where the black meets the image, and those artefacts are precisely what makes a cutout reappear.",
+      "image": {
+        "src": "/content/apps/hide-the-notch/ios/04-export.jpg",
+        "sha": "f733e83f885a7ada",
+        "bytes": 47486,
+        "height": 1216,
+        "width": 560
+      }
+    },
+    {
+      "id": "card",
+      "headline": [
+        "Nothing to unlock,",
+        "nothing to pay."
+      ],
+      "body": "Free, with no advertising, no account and no tracking. The only purchase is a tip, if you ever feel like leaving one.",
+      "line": "No ads. No account. No tracking.",
+      "note": "The only purchase is a tip, if you ever feel like leaving one."
+    }
+  ],
+  "badges": [
+    "Free",
+    "No ads",
+    "No account"
+  ],
+  "privacy": {
+    "title": "Privacy Policy",
+    "summary": "Hide The Notch is made by Maxime Thirouin. It has no account, no ads, no analytics and no tracking. It sends one thing, to one place, and only when something goes wrong.",
+    "body": {
+      "tag": "div",
+      "children": [
+        "\n",
+        {
+          "tag": "p",
+          "children": [
+            "Hide The Notch is made by Maxime Thirouin. It has no account, no ads, no\nanalytics and no tracking. It sends one thing, to one place, and only when\nsomething goes wrong."
+          ]
+        },
+        "\n",
+        {
+          "tag": "p",
+          "children": [
+            "This describes the code rather than an intention: the app is open source, and\nevery claim below can be checked against it."
+          ]
+        },
+        "\n",
+        {
+          "tag": "h2",
+          "props": {
+            "id": "your-photos-are-not-collected"
+          },
+          "children": [
+            "Your photos are not collected"
+          ]
+        },
+        "\n",
+        {
+          "tag": "p",
+          "children": [
+            "The system photo picker hands the app the one image you chose and nothing else.\nIt is decoded, drawn and exported on the device. Nothing about it is uploaded,\nbecause the app has no server. A wallpaper you export is written to your photo\nlibrary, and only when you ask for it."
+          ]
+        },
+        "\n",
+        {
+          "tag": "h2",
+          "props": {
+            "id": "crash-reports"
+          },
+          "children": [
+            "Crash reports"
+          ]
+        },
+        "\n",
+        {
+          "tag": "p",
+          "children": [
+            "When the app fails it sends a crash report to ",
+            {
+              "tag": "a",
+              "props": {
+                "href": "https://sentry.io"
+              },
+              "children": [
+                "Sentry"
+              ]
+            },
+            ", over\nan encrypted connection. Sentry is the only third party that receives anything,\nand the reports are used to fix bugs and for nothing else. Nothing is sold, and\nnothing is shared with anyone else."
+          ]
+        },
+        "\n",
+        {
+          "tag": "p",
+          "children": [
+            {
+              "tag": "strong",
+              "children": [
+                "In the report"
+              ]
+            },
+            ": the error and where it happened in the code, the app version,\nthe device model and operating system version, and a random identifier generated\nat installation so that several reports from one phone can be recognised as the\nsame phone. That identifier is not linked to you, is not an advertising\nidentifier, and is not used to follow you anywhere."
+          ]
+        },
+        "\n",
+        {
+          "tag": "p",
+          "children": [
+            {
+              "tag": "strong",
+              "children": [
+                "Deliberately not in it"
+              ]
+            },
+            ", each turned off in the app's own source: your IP\naddress, screen recordings, performance measurements, and the app's own log\nmessages."
+          ]
+        },
+        "\n",
+        {
+          "tag": "h2",
+          "props": {
+            "id": "keeping-and-deleting"
+          },
+          "children": [
+            "Keeping and deleting"
+          ]
+        },
+        "\n",
+        {
+          "tag": "p",
+          "children": [
+            "Crash reports are kept for 90 days and then deleted automatically. To have\nearlier ones removed, write to the address below and say so."
+          ]
+        },
+        "\n",
+        {
+          "tag": "h2",
+          "props": {
+            "id": "permissions"
+          },
+          "children": [
+            "Permissions"
+          ]
+        },
+        "\n",
+        {
+          "tag": "p",
+          "children": [
+            "Your photo library, so you can pick a photo and save a wallpaper. On Android the\napp asks for the narrowest permission that allows a single pick and a single\nwrite rather than for the whole library. Nothing else is requested: no location,\nno contacts, no microphone."
+          ]
+        },
+        "\n",
+        {
+          "tag": "h2",
+          "props": {
+            "id": "contact"
+          },
+          "children": [
+            "Contact"
+          ]
+        },
+        "\n",
+        {
+          "tag": "p",
+          "children": [
+            "Questions, or a request about a report the app may have sent:\n",
+            {
+              "tag": "a",
+              "props": {
+                "href": "mailto:apps+hide-the-notch@moox.io"
+              },
+              "children": [
+                "apps+hide-the-notch@moox.io"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

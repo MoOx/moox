@@ -241,13 +241,21 @@ export type AppPage = {
   /** The deck's own short claims, e.g. Free / No ads / No account. */
   badges: string[];
   /**
-   * The policy, rendered in full on the page under `#privacy` - this URL is
-   * the one declared to Apple and to Google.
+   * The policy. It has a page of its own (`/apps/<slug>/privacy`) because it
+   * is a document rather than a section, and the landing page links to it from
+   * a `#privacy` block carrying `summary`, its opening paragraph.
    */
-  privacy: { title: string; body: any };
+  privacy: { title: string; summary?: string; body: any };
 };
 
-export type AppImage = { src: string; width?: number; height?: number };
+export type AppImage = {
+  src: string;
+  width?: number;
+  height?: number;
+  /** Of the file upstream, so a refetch only rewrites what actually moved. */
+  sha?: string;
+  bytes?: number;
+};
 
 export type AppStoryStep = {
   id: string;
@@ -255,6 +263,8 @@ export type AppStoryStep = {
   headline: string[];
   /** The line under it, on a step that shows a screen. */
   sub?: string;
+  /** The paragraph the deck has no room for and a web page does. */
+  body?: string;
   /** The claim, on the card the deck closes on. */
   line?: string;
   /** Its footnote, same step. */
@@ -263,11 +273,29 @@ export type AppStoryStep = {
   image?: AppImage;
 };
 
+/** The top of every app's page, which is all `/apps` needs to list them. */
+export type AppSummary = Pick<
+  AppPage,
+  "slug" | "name" | "subtitle" | "short" | "icon" | "stores" | "badges"
+> & {
+  /** The deck's first step - the screen the app's own hero is built on. */
+  lead?: AppStoryStep;
+};
+
 /** One app landing page. */
 export async function fetchApp(slug: string): Promise<AppPage | null> {
   try {
     return await readJson<AppPage>(`/content/apps/${slug}.json`);
   } catch {
     return null;
+  }
+}
+
+/** Every app that has a landing page, in the order the registry lists them. */
+export async function fetchApps(): Promise<AppSummary[]> {
+  try {
+    return await readJson<AppSummary[]>("/content/apps/index.json");
+  } catch {
+    return [];
   }
 }

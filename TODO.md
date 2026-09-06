@@ -137,28 +137,24 @@ below). The bulk of the win was in step 2 instead.
 - [ ] Verify every step with the screenshot harness described in the proposal
       (full-page 390/1280 pixel diff; heights must not move).
 
-## 5. App landing pages
+## 5. App pages
 
-`/apps/<slug>` is a route (`src/app/apps.$slug.tsx` +
-`src/components/AppLandingPage.tsx`) built from three files the app's own
-repository publishes: `marketing/listing.json`, `marketing/privacy.md` and the
-`press-kit` branch's `index.json`. `content/apps.json` lists the repositories,
-`npm run apps` fetches them at build time and fails the build rather than serve
-a page without its policy or its store links. Nothing about an app is written
-here.
+`/apps` lists them, `/apps/<slug>` is one app's page and
+`/apps/<slug>/privacy` its policy — all three built from three files the app's
+own repository publishes. `content/apps.json` lists the repositories,
+`npm run apps` fetches them, fails the build rather than serve a page without
+its policy or its store links, and commits what it fetched. Nothing about an
+app is written here.
 
-Hide The Notch is live and complete: the deck rebuilt as blocks from the press
-kit's `story`, the two official store badges, the six-language listing behind
-it, and the whole privacy policy under `#privacy`, which is the URL declared to
-Apple and to Google.
-
+- [ ] **One thing to change upstream**: `urls.privacy` in Hide The Notch's
+      `marketing/listing.json` still points at `https://moox.io/apps/hide-the-notch`,
+      which is now the landing page. It should be
+      `https://moox.io/apps/hide-the-notch/privacy` — what a reviewer follows
+      should be the policy itself, not a page that links to it. The landing
+      page keeps a `#privacy` block either way, so nothing is broken meanwhile.
 - [ ] `public/apps/lifetime/` is still a hand-written HTML page. Publishing the
       same trio from its repository is all it would need to become a route too
       — one entry in `content/apps.json`, no code.
-- [ ] Nothing on the site links to `/apps/<slug>`: they are entered from a
-      store listing, which is why the prerender is told about them explicitly
-      (`pages` in `vite.config.ts`). Worth revisiting only if the apps should
-      also be discoverable from the site itself.
 - [ ] The page shows one device, the phone. The press kit also ships iPad and
       Android captures of the same screens, and `story` names them per
       platform — a device switch is a `useState` away if it ever earns its

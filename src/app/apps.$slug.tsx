@@ -62,7 +62,7 @@ function PageApp() {
               .filter((step) => step.image)
               .map((step) => website + step.image?.src),
             sameAs: [app.stores.appStore, app.stores.play],
-            privacyPolicy: `${website}/apps/${app.slug}#privacy`,
+            privacyPolicy: `${website}/apps/${app.slug}/privacy`,
             offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
           }),
         }}

@@ -1,19 +1,21 @@
 /**
- * The app landing pages, assembled at build time from the apps' own
- * repositories.
+ * The app landing pages, assembled from the apps' own repositories.
  *
  *   npm run apps
  *
  * Every app listed in `content/apps.json` publishes the same trio, and this
  * reads it:
  *
- *   marketing/listing.json   the store copy, in every language the stores have
+ *   marketing/listing.json   the store copy in every language the stores have
  *   marketing/privacy.md     the privacy policy
- *   index.json (press kit)   the screenshots, and where they are served from
+ *   index.json (press-kit)   the deck, as data: the screenshots, and the words
+ *                            each of them was composed to carry
  *
- * Nothing here is copied into this repository by hand. The page is a template
- * over that trio (`src/app/apps.$slug.tsx`), so publishing a second app is
- * adding a line to `content/apps.json`.
+ * The third one is what shapes the page. A store deck is a sequence - one
+ * screen, one sentence, in an order somebody chose - and its `story` is that
+ * sequence with the text still text instead of burned into a picture. The page
+ * rebuilds it in HTML, so the same words are selectable, translatable and
+ * readable aloud, and lays out one block per step.
  *
  * **This exits non-zero rather than emit a partial page.** The URL is what the
  * two stores were given as the app's privacy policy, and a page that answers
@@ -21,13 +23,23 @@
  * for the store links: a landing page nobody can install the app from is not
  * worth shipping either.
  *
- * Output, all of it generated and none of it committed (see .gitignore):
+ * **What it writes is committed**, unlike the rest of `public/content`. The
+ * press-kit branch is force-pushed on every run of the app's own tooling, so
+ * without a copy in here the site would build from whatever that branch says
+ * today and nobody would see the difference in a diff. Committing it means the
+ * page's words and pictures are reviewed like anything else, and that a build
+ * is reproducible. Re-running is idempotent: an asset whose bytes upstream are
+ * unchanged is left exactly as it is, so a rebuild does not churn the repo.
  *
- *   public/content/apps/<slug>.json    the page's data
- *   public/content/apps/<slug>/…       the icon and the screenshots
+ * Output, under `public/content/apps/`:
+ *
+ *   index.json          one summary per app, for `/apps`
+ *   <slug>.json         the page's data
+ *   <slug>/…            the icon and the screenshots
  */
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
@@ -55,6 +67,15 @@ const platformLabels = {
   ipad: "iPad",
   android: "Android",
 };
+
+/**
+ * The page draws its phone 280px wide, so twice that is what a retina screen
+ * asks for and everything past it is bytes nobody sees. The press kit ships
+ * 720px because a press kit cannot know what it will be laid out in; these are
+ * committed, so the difference is repository weight and not only bandwidth.
+ */
+const captureWidth = 560;
+const captureQuality = 0.82;
 
 function fail(message, hint) {
   console.error(`\n  ${message}\n`);
@@ -94,6 +115,8 @@ const getBuffer = async (url, what) => Buffer.from(await (await get(url, what)).
  */
 const asUrl = (value) => (typeof value === "string" && /^https?:\/\//.test(value) ? value : null);
 
+const sha = (buffer) => createHash("sha256").update(buffer).digest("hex").slice(0, 16);
+
 /**
  * Width and height straight out of the file, so every `<img>` reserves its
  * box before it loads. The screenshots are the tallest thing on the page;
@@ -130,34 +153,85 @@ function imageSize(buffer) {
   return {};
 }
 
+/**
+ * Downscaling and re-encoding, through the browser this repository already
+ * drives for the PDF and for the screenshot harness rather than a new
+ * dependency. Best effort by design: no Chromium, or a file it will not
+ * decode, and the press kit's own JPEG is committed unchanged - a heavier
+ * page, never a missing one.
+ */
+/** @type {Promise<import("playwright-core").Browser | null> | undefined} */
+let browserPromise;
+async function encodeJpeg(buffer) {
+  browserPromise ??= (async () => {
+    const { chromium } = await import("playwright-core");
+    const bundled = "/opt/pw-browsers/chromium";
+    const executablePath = process.env.CHROMIUM_PATH ?? (fs.existsSync(bundled) ? bundled : null);
+    return executablePath
+      ? chromium.launch({ executablePath, args: ["--no-sandbox"] })
+      : chromium.launch({ channel: "chrome" });
+  })().catch(() => null);
+
+  const browser = await browserPromise;
+  if (!browser) return null;
+  const page = await browser.newPage();
+  try {
+    const base64 = await page.evaluate(
+      async ({ bytes, width, quality }) => {
+        const bitmap = await createImageBitmap(new Blob([new Uint8Array(bytes)]));
+        const scale = Math.min(1, width / bitmap.width);
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(bitmap.width * scale);
+        canvas.height = Math.round(bitmap.height * scale);
+        const context = canvas.getContext("2d");
+        context.imageSmoothingQuality = "high";
+        context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+        const url = canvas.toDataURL("image/jpeg", quality);
+        return url.startsWith("data:image/jpeg") ? url.slice(url.indexOf(",") + 1) : null;
+      },
+      { bytes: [...buffer], width: captureWidth, quality: captureQuality },
+    );
+    return base64 ? Buffer.from(base64, "base64") : null;
+  } catch {
+    return null;
+  } finally {
+    await page.close();
+  }
+}
+
 const isNode = (node) => typeof node === "object" && node !== null;
 const childrenOf = (node) =>
   node.children === undefined ? [] : Array.isArray(node.children) ? node.children : [node.children];
 
 /**
- * The policy, ready to sit inside the page rather than be the page.
+ * The policy, ready to be a page of its own.
  *
- * Its own `<h1>` becomes the section heading rendered by the route (with the
- * `#privacy` anchor the stores were given), so it is dropped here and every
- * heading below it moves down one level: the page's `<h1>` is the app name,
- * and a document with two of them has no outline left. The anchor links
- * `rehype-autolink-headings` prepends go too - they carry no text, and the
- * renderer drops the `aria-hidden` that made them invisible to a reader.
+ * Its own `<h1>` becomes that page's heading, rendered by the route, so it is
+ * dropped here rather than repeated; every level below it is kept as authored,
+ * which is what makes the page read h1 then h2 and not h1 then h3. The anchor
+ * links `rehype-autolink-headings` prepends go too - they carry no text, and
+ * the renderer drops the `aria-hidden` that made them invisible to a reader.
  */
 function policyBody(body) {
   const children = childrenOf(body);
   const titleIndex = children.findIndex((child) => isNode(child) && /^h[1-6]$/.test(child.tag));
   const rest = titleIndex === -1 ? children : children.slice(titleIndex + 1);
-  return { ...body, children: rest.map(demoteHeading) };
+  return { ...body, children: rest.map(withoutAnchorLink) };
 }
 
-function demoteHeading(node) {
-  if (!isNode(node) || typeof node.tag !== "string") return node;
-  const level = node.tag.match(/^h([1-5])$/);
-  if (!level) return node;
+/** The policy's opening paragraph, as plain text: the page links to the whole. */
+function policySummary(body) {
+  const paragraph = childrenOf(body).find((child) => isNode(child) && child.tag === "p");
+  if (!paragraph) return undefined;
+  const text = (node) =>
+    typeof node === "string" ? node : isNode(node) ? childrenOf(node).map(text).join("") : "";
+  return text(paragraph).replace(/\s+/g, " ").trim() || undefined;
+}
+
+function withoutAnchorLink(node) {
+  if (!isNode(node) || !/^h[1-6]$/.test(node.tag ?? "")) return node;
   return {
     ...node,
-    tag: `h${Number(level[1]) + 1}`,
     children: childrenOf(node).filter(
       (child) => !(isNode(child) && child.tag === "a" && child.props?.["aria-hidden"]),
     ),
@@ -183,6 +257,12 @@ function storeLinks(app, manifest, listing) {
   return { appStore, play };
 }
 
+/** A per-language block, in the page's language, English then whatever exists. */
+const pickLocale = (byLocale, locale) =>
+  byLocale[locale] ??
+  localePreference.map((code) => byLocale[code]).find(Boolean) ??
+  Object.values(byLocale)[0];
+
 /**
  * The deck, as the page renders it: one step per block, in the order the deck
  * put them, with the copy resolved to one language and the headline split on
@@ -203,6 +283,8 @@ function storySteps(story, locale, platform, slug) {
       id: step.id ?? String(index),
       headline: String(copy.headline).split("\n"),
       sub: copy.sub,
+      // The paragraph the deck has no room for and a web page does.
+      body: copy.body,
       line: copy.line,
       note: copy.note,
       imagePath: step.image?.[platform],
@@ -217,22 +299,73 @@ function storyPlatform(story, slug, pressKitUrl) {
   if (!platform) {
     fail(
       `${slug}: the story in ${pressKitUrl} has no screenshots.`,
-      "Each step names its capture per platform, e.g. \"image\": { \"ios\": \"ios/01-editor.jpg\" }.",
+      'Each step names its capture per platform, e.g. "image": { "ios": "ios/01-editor.jpg" }.',
     );
   }
   return platform;
 }
 
-/** A per-language block, in the page's language, English then whatever exists. */
-const pickLocale = (byLocale, locale) =>
-  byLocale[locale] ?? localePreference.map((code) => byLocale[code]).find(Boolean) ??
-  Object.values(byLocale)[0];
-
-async function download(url, to, what) {
-  const buffer = await getBuffer(url, what);
+/**
+ * One asset, fetched and rewritten only if it actually changed.
+ *
+ * `known` is what the last run recorded for this file, so a byte-identical
+ * upstream leaves the committed copy untouched - which is what keeps a rebuild
+ * out of the diff, the re-encoding included: two runs of the same encoder are
+ * not guaranteed to agree to the byte, and this output is committed.
+ */
+async function keepAsset({ url, to, what, known, recompress }) {
+  const source = await getBuffer(url, what);
+  const hash = sha(source);
+  if (known?.sha === hash && fs.existsSync(to)) return known;
+  const encoded = recompress ? await encodeJpeg(source) : null;
+  const buffer = encoded && encoded.length < source.length ? encoded : source;
   fs.mkdirSync(path.dirname(to), { recursive: true });
   fs.writeFileSync(to, buffer);
-  return { bytes: buffer.length, ...imageSize(buffer) };
+  return { sha: hash, bytes: buffer.length, ...imageSize(buffer) };
+}
+
+/** What the previous run wrote, keyed by the file it wrote it to. */
+function knownAssets(slug) {
+  const known = new Map();
+  const file = path.join(outDir, `${slug}.json`);
+  if (!fs.existsSync(file)) return known;
+  try {
+    const previous = JSON.parse(fs.readFileSync(file, "utf8"));
+    const images = [previous.icon, ...(previous.story ?? []).map((step) => step.image)];
+    for (const image of images) {
+      if (image?.src && image.sha) known.set(path.join(root, "public", image.src), image);
+    }
+  } catch {
+    // A file this run is about to replace anyway.
+  }
+  return known;
+}
+
+/** Everything under the app's folder that this run did not write. */
+function pruneAssets(assetsDir, kept) {
+  if (!fs.existsSync(assetsDir)) return 0;
+  let removed = 0;
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walk(full);
+        if (fs.readdirSync(full).length === 0) fs.rmdirSync(full);
+      } else if (!kept.has(full)) {
+        fs.rmSync(full);
+        removed++;
+      }
+    }
+  };
+  walk(assetsDir);
+  return removed;
+}
+
+/** Writing only a real change, so a rebuild leaves the working tree clean. */
+function writeIfChanged(file, content) {
+  if (fs.existsSync(file) && fs.readFileSync(file, "utf8") === content) return false;
+  fs.writeFileSync(file, content);
+  return true;
 }
 
 async function build(app) {
@@ -278,14 +411,18 @@ async function build(app) {
   const extras = pickLocale(manifest.extras ?? {}, locale) ?? {};
 
   const assetsDir = path.join(outDir, app.slug);
-  fs.rmSync(assetsDir, { recursive: true, force: true });
+  const known = knownAssets(app.slug);
+  const written = new Set();
 
   const iconPath = manifest.icon ?? "icon.png";
-  const icon = await download(
-    `${base}/${iconPath}`,
-    path.join(assetsDir, iconPath),
-    `${app.slug} icon`,
-  );
+  const iconFile = path.join(assetsDir, iconPath);
+  written.add(iconFile);
+  const icon = await keepAsset({
+    url: `${base}/${iconPath}`,
+    to: iconFile,
+    what: `${app.slug} icon`,
+    known: known.get(iconFile),
+  });
 
   // Only the device the page shows is downloaded: the press kit carries three
   // sets of the same screens, and two of them would be megabytes nothing reads.
@@ -297,20 +434,18 @@ async function build(app) {
       steps.push(rest);
       continue;
     }
-    const size = await download(
-      `${base}/${imagePath}`,
-      path.join(assetsDir, imagePath),
-      `${app.slug} screenshot ${imagePath}`,
-    );
-    steps.push({
-      ...rest,
-      image: {
-        src: `/content/apps/${app.slug}/${imagePath}`,
-        width: size.width,
-        height: size.height,
-      },
+    const file = path.join(assetsDir, imagePath);
+    written.add(file);
+    const image = await keepAsset({
+      url: `${base}/${imagePath}`,
+      to: file,
+      what: `${app.slug} screenshot ${imagePath}`,
+      known: known.get(file),
+      recompress: true,
     });
+    steps.push({ ...rest, image: { src: `/content/apps/${app.slug}/${imagePath}`, ...image } });
   }
+  const pruned = pruneAssets(assetsDir, written);
 
   const page = {
     slug: app.slug,
@@ -333,22 +468,59 @@ async function build(app) {
     device: platformLabels[platform] ?? platform,
     story: steps,
     badges: extras.badges ?? [],
-    privacy: { title: privacy.title ?? "Privacy", body: policyBody(privacy.body) },
+    privacy: {
+      title: privacy.title ?? "Privacy",
+      summary: policySummary(privacy.body),
+      body: policyBody(privacy.body),
+    },
   };
 
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, `${app.slug}.json`), JSON.stringify(page));
+  writeIfChanged(path.join(outDir, `${app.slug}.json`), JSON.stringify(page, null, 2) + "\n");
 
-  const shotCount = steps.filter((step) => step.image).length;
-  console.log(
-    `Generated ${path.join("public", "content", "apps", app.slug + ".json")}` +
-      ` (${locale}, ${steps.length} story steps, ${shotCount} ${platform} shots,` +
-      ` ${page.description.length} paragraphs)`,
+  const shots = steps.filter((step) => step.image);
+  const bytes = [icon, ...shots.map((step) => step.image)].reduce(
+    (total, image) => total + (image.bytes ?? 0),
+    0,
   );
+  console.log(
+    `  ${app.slug}: ${steps.length} story steps, ${shots.length} ${platform} shots,` +
+      ` ${page.description.length} paragraphs, ${(bytes / 1024).toFixed(0)} kB` +
+      (pruned > 0 ? `, ${pruned} stale file(s) removed` : ""),
+  );
+  return page;
 }
 
 if (!fs.existsSync(registryPath)) fail(`No app registry at ${registryPath}.`);
 const registry = JSON.parse(fs.readFileSync(registryPath, "utf8"));
+
+console.log("");
+const pages = [];
 for (const app of registry.apps ?? []) {
-  await build(app);
+  pages.push(await build(app));
 }
+
+// What `/apps` needs and nothing more, so the index does not load a full page
+// per card to render a card.
+writeIfChanged(
+  path.join(outDir, "index.json"),
+  JSON.stringify(
+    pages.map((page) => ({
+      slug: page.slug,
+      name: page.name,
+      subtitle: page.subtitle,
+      short: page.short,
+      icon: page.icon,
+      stores: page.stores,
+      badges: page.badges,
+      lead: page.story.find((step) => step.image),
+    })),
+    null,
+    2,
+  ) + "\n",
+);
+console.log("");
+
+// The encoder's browser, if anything actually needed re-encoding.
+const browser = await browserPromise;
+if (browser) await browser.close();
