@@ -40,9 +40,18 @@ const outDir = path.join(root, "public", "content", "apps");
 /** The page is English. The stores' locale for it, then the plain code. */
 const localePreference = ["en-US", "en-GB", "en"];
 
-/** What each press-kit platform folder is called on the page. */
+/**
+ * One device tells the story; the press kit ships three. A phone is what the
+ * deck was composed for and what most visitors arrive on, so it wins, and the
+ * others are only there so an app that ships no phone captures still has a
+ * page.
+ */
+const platformPreference = ["ios", "iphone", "phone", "android", "ipad", "tablet"];
+
+/** What each press-kit platform folder is called, for the alt texts. */
 const platformLabels = {
   ios: "iPhone",
+  iphone: "iPhone",
   ipad: "iPad",
   android: "Android",
 };
@@ -175,22 +184,49 @@ function storeLinks(app, manifest, listing) {
 }
 
 /**
- * The screenshots, as groups the page can label.
- *
- * The manifest names them per platform (`{ ios: [...], android: [...] }`),
- * which is what the page lays out; a flat list is the older shape of the same
- * file and comes through as one unlabelled group.
+ * The deck, as the page renders it: one step per block, in the order the deck
+ * put them, with the copy resolved to one language and the headline split on
+ * the newlines the deck composed it with. A step with no image is a step the
+ * deck drew rather than photographed (the closing card), and it keeps its
+ * place in the sequence.
  */
-function shotGroups(shots) {
-  if (Array.isArray(shots)) return [{ platform: "", label: "", paths: shots }];
-  return Object.entries(shots)
-    .filter(([, paths]) => Array.isArray(paths) && paths.length > 0)
-    .map(([platform, paths]) => ({
-      platform,
-      label: platformLabels[platform] ?? platform,
-      paths,
-    }));
+function storySteps(story, locale, platform, slug) {
+  return story.map((step, index) => {
+    const copy = pickLocale(step.copy ?? {}, locale) ?? {};
+    if (!copy.headline) {
+      fail(
+        `${slug}: story step ${step.id ?? index} has no headline in any language.`,
+        "Every step of the deck carries a line; a block with a picture and no words is not one.",
+      );
+    }
+    return {
+      id: step.id ?? String(index),
+      headline: String(copy.headline).split("\n"),
+      sub: copy.sub,
+      line: copy.line,
+      note: copy.note,
+      imagePath: step.image?.[platform],
+    };
+  });
 }
+
+/** The one this manifest's story is best told with. */
+function storyPlatform(story, slug, pressKitUrl) {
+  const available = new Set(story.flatMap((step) => Object.keys(step.image ?? {})));
+  const platform = platformPreference.find((name) => available.has(name)) ?? [...available][0];
+  if (!platform) {
+    fail(
+      `${slug}: the story in ${pressKitUrl} has no screenshots.`,
+      "Each step names its capture per platform, e.g. \"image\": { \"ios\": \"ios/01-editor.jpg\" }.",
+    );
+  }
+  return platform;
+}
+
+/** A per-language block, in the page's language, English then whatever exists. */
+const pickLocale = (byLocale, locale) =>
+  byLocale[locale] ?? localePreference.map((code) => byLocale[code]).find(Boolean) ??
+  Object.values(byLocale)[0];
 
 async function download(url, to, what) {
   const buffer = await getBuffer(url, what);
@@ -230,6 +266,17 @@ async function build(app) {
     );
   }
 
+  const story = manifest.story ?? [];
+  if (story.length === 0) {
+    fail(
+      `${app.slug}: the press kit at ${pressKitUrl} has no story.`,
+      "The page is built from the deck, not from a list of files: `story` is that\n" +
+        "  deck as data - one entry per step, each with its `image` per platform and\n" +
+        "  its `copy` per language. `npm run press-kit` in the app writes it.",
+    );
+  }
+  const extras = pickLocale(manifest.extras ?? {}, locale) ?? {};
+
   const assetsDir = path.join(outDir, app.slug);
   fs.rmSync(assetsDir, { recursive: true, force: true });
 
@@ -240,24 +287,30 @@ async function build(app) {
     `${app.slug} icon`,
   );
 
-  const screenshots = [];
-  for (const group of shotGroups(manifest.shots ?? [])) {
-    const shots = [];
-    for (const shotPath of group.paths) {
-      const size = await download(
-        `${base}/${shotPath}`,
-        path.join(assetsDir, shotPath),
-        `${app.slug} screenshot ${shotPath}`,
-      );
-      shots.push({
-        src: `/content/apps/${app.slug}/${shotPath}`,
+  // Only the device the page shows is downloaded: the press kit carries three
+  // sets of the same screens, and two of them would be megabytes nothing reads.
+  const platform = storyPlatform(story, app.slug, pressKitUrl);
+  const steps = [];
+  for (const step of storySteps(story, locale, platform, app.slug)) {
+    const { imagePath, ...rest } = step;
+    if (!imagePath) {
+      steps.push(rest);
+      continue;
+    }
+    const size = await download(
+      `${base}/${imagePath}`,
+      path.join(assetsDir, imagePath),
+      `${app.slug} screenshot ${imagePath}`,
+    );
+    steps.push({
+      ...rest,
+      image: {
+        src: `/content/apps/${app.slug}/${imagePath}`,
         width: size.width,
         height: size.height,
-      });
-    }
-    screenshots.push({ platform: group.platform, label: group.label, shots });
+      },
+    });
   }
-  if (screenshots.length === 0) fail(`${app.slug}: the press kit at ${pressKitUrl} has no shots.`);
 
   const page = {
     slug: app.slug,
@@ -277,17 +330,20 @@ async function build(app) {
       .filter(Boolean),
     stores,
     icon: { src: `/content/apps/${app.slug}/${iconPath}`, ...icon },
-    screenshots,
+    device: platformLabels[platform] ?? platform,
+    story: steps,
+    badges: extras.badges ?? [],
     privacy: { title: privacy.title ?? "Privacy", body: policyBody(privacy.body) },
   };
 
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, `${app.slug}.json`), JSON.stringify(page));
 
-  const shotCount = screenshots.reduce((total, group) => total + group.shots.length, 0);
+  const shotCount = steps.filter((step) => step.image).length;
   console.log(
     `Generated ${path.join("public", "content", "apps", app.slug + ".json")}` +
-      ` (${locale}, ${shotCount} shots, ${page.description.length} paragraphs)`,
+      ` (${locale}, ${steps.length} story steps, ${shotCount} ${platform} shots,` +
+      ` ${page.description.length} paragraphs)`,
   );
 }
 

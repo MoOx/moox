@@ -147,9 +147,10 @@ repository publishes: `marketing/listing.json`, `marketing/privacy.md` and the
 a page without its policy or its store links. Nothing about an app is written
 here.
 
-Hide The Notch is live and complete: the six-language listing, both store
-links, the three device strips and the whole privacy policy under `#privacy`,
-which is the URL declared to Apple and to Google.
+Hide The Notch is live and complete: the deck rebuilt as blocks from the press
+kit's `story`, the two official store badges, the six-language listing behind
+it, and the whole privacy policy under `#privacy`, which is the URL declared to
+Apple and to Google.
 
 - [ ] `public/apps/lifetime/` is still a hand-written HTML page. Publishing the
       same trio from its repository is all it would need to become a route too
@@ -158,6 +159,13 @@ which is the URL declared to Apple and to Google.
       store listing, which is why the prerender is told about them explicitly
       (`pages` in `vite.config.ts`). Worth revisiting only if the apps should
       also be discoverable from the site itself.
+- [ ] The page shows one device, the phone. The press kit also ships iPad and
+      Android captures of the same screens, and `story` names them per
+      platform — a device switch is a `useState` away if it ever earns its
+      place. It is deliberately not there: a landing page that makes you pick
+      before it makes its point is worse than one that picks for you.
+- [ ] `extras.seal` (the "Free / tips welcome" stamp the deck draws) is read
+      past, not rendered. The three `badges` next to it are.
 
 ---
 

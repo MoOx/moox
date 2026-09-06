@@ -155,15 +155,37 @@ in the document if two of them ever render on the same page.
 serve half of one.** `/apps/<slug>` is a template over three files the app's
 own repository publishes - `marketing/listing.json` (the store copy, six
 languages, plus the store URLs), `marketing/privacy.md` (the policy) and the
-`press-kit` branch's `index.json` (the raw screenshots and where they are
-served from). `npm run apps` reads them at **build** time, downloads the images
-into `public/content/apps/` and exits non-zero if any of it is missing. That
-URL is the one declared to Apple and to Google as the app's privacy policy: a
-page that renders a hero and no policy is a review rejection, so there is no
-degraded mode. Adding an app is an entry in `content/apps.json` and nothing
-else - if you find yourself typing an app's name, a screenshot path or a
-sentence of its description into this repository, you are writing the same
-words for the second time and one of the two copies will go stale.
+`press-kit` branch's `index.json` (the deck as data). `npm run apps` reads them
+at **build** time, downloads the images into `public/content/apps/` and exits
+non-zero if any of it is missing. That URL is the one declared to Apple and to
+Google as the app's privacy policy: a page that renders a hero and no policy is
+a review rejection, so there is no degraded mode. Adding an app is an entry in
+`content/apps.json` and nothing else - if you find yourself typing an app's
+name, a screenshot path or a sentence of its description into this repository,
+you are writing the same words for the second time and one of the two copies
+will go stale.
+
+**The page's shape comes from the press kit's `story`, not from its `shots`.**
+A store deck is already a sequence somebody composed - one screen, one line, in
+one order - and `story` is that sequence with the text still text instead of
+burned into the picture: `headline` (with the newlines it was composed on),
+`sub`, and the capture per platform. So the page is one block per step,
+alternating white and a tinted band the way the home page does, with the
+screenshot inside the same iPhone frame `BlockBuilder` uses; the first step
+illustrates the hero, and the step with no image is the card the deck closes
+on. `shots` is the raw list the same manifest also carries - fifteen files,
+three devices - and laying that out is the version of this page that read as a
+contact sheet. Only the device the page shows is downloaded.
+
+**The two store badges are their owners' artwork and are served as files.**
+`public/badges/*.svg` came from Apple's badge page and Google's partner
+marketing hub, byte for byte. Both guidelines allow a page to choose the size
+and nothing else, so never redraw, recolour, crop, tint or rename them, and
+never put them through `npm run svg` - that pipeline rewrites paths and ids,
+and the Play badge carries a `<style>` block react-native-svg has no
+equivalent for. Render both at the same height, at least 40px, with clear space
+around them (Apple asks a tenth of the height, Google a quarter; the row in
+`AppLandingPage` uses the quarter).
 
 **Colour an icon with `color`, not `fill` or `fills`.** Most sources paint with
 `fill="currentColor"`, which is exactly what `color` sets, so one prop tints

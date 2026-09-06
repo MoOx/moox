@@ -229,8 +229,17 @@ export type AppPage = {
   keywords: string[];
   stores: { appStore: string; play: string };
   icon: AppImage;
-  /** The raw screenshots, grouped by device: iPhone, iPad, Android. */
-  screenshots: AppScreenshots[];
+  /** The device the story is illustrated with, for the alt texts: "iPhone". */
+  device: string;
+  /**
+   * The store deck, as data: one screen and one line per step, in the order
+   * the deck put them. The page is a block per step, so this is what shapes
+   * it - the first step illustrates the hero, the rest follow, and the one
+   * without an image is the card the deck closes on.
+   */
+  story: AppStoryStep[];
+  /** The deck's own short claims, e.g. Free / No ads / No account. */
+  badges: string[];
   /**
    * The policy, rendered in full on the page under `#privacy` - this URL is
    * the one declared to Apple and to Google.
@@ -240,12 +249,18 @@ export type AppPage = {
 
 export type AppImage = { src: string; width?: number; height?: number };
 
-export type AppScreenshots = {
-  /** The press kit's own folder name (`ios`, `ipad`, `android`), or "". */
-  platform: string;
-  /** What to call it on the page; empty for an ungrouped press kit. */
-  label: string;
-  shots: AppImage[];
+export type AppStoryStep = {
+  id: string;
+  /** The headline, already split on the newlines the deck composed it with. */
+  headline: string[];
+  /** The line under it, on a step that shows a screen. */
+  sub?: string;
+  /** The claim, on the card the deck closes on. */
+  line?: string;
+  /** Its footnote, same step. */
+  note?: string;
+  /** Absent on that closing card, which the deck draws rather than captures. */
+  image?: AppImage;
 };
 
 /** One app landing page. */

@@ -58,9 +58,9 @@ function PageApp() {
             operatingSystem: "iOS, Android",
             url: `${website}/apps/${app.slug}`,
             image: website + app.icon.src,
-            screenshot: app.screenshots.flatMap((group) =>
-              group.shots.map((shot) => website + shot.src),
-            ),
+            screenshot: app.story
+              .filter((step) => step.image)
+              .map((step) => website + step.image?.src),
             sameAs: [app.stores.appStore, app.stores.play],
             privacyPolicy: `${website}/apps/${app.slug}#privacy`,
             offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
