@@ -111,13 +111,13 @@ below). The bulk of the win was in step 2 instead.
       Measured: `/resume` 3122 → 2925, `/` 1306 → 1249, `/contact` 641 → 590;
       anchors wrapping a lone text node 182 → 0; max depth 26 → 25.
 - ~~**Step 2b — semantic primitives.**~~ **Dropped, Max, 2026-08.** `role=` on
-      a `View` is fine as it is: react-native-web already maps it to the real
-      tag (`<h3>`, `<nav>`, `<p>`, `<ul>`, `<article>`…), so the markup is
-      already semantic and a `Heading` / `Paragraph` layer would only rename the
-      call sites. The node win was in 2a and is banked.
-      Consequence for `HTML-STYLING-PROPOSAL.md` §4: the "react-strict-dom
-      interface, hand-rolled" argument goes with it. If RSD ever ships, the
-      adapter gets written then.
+  a `View` is fine as it is: react-native-web already maps it to the real
+  tag (`<h3>`, `<nav>`, `<p>`, `<ul>`, `<article>`…), so the markup is
+  already semantic and a `Heading` / `Paragraph` layer would only rename the
+  call sites. The node win was in 2a and is banked.
+  Consequence for `HTML-STYLING-PROPOSAL.md` §4: the "react-strict-dom
+  interface, hand-rolled" argument goes with it. If RSD ever ships, the
+  adapter gets written then.
 - [ ] **Step 3 — font ergonomics, then one token object.** The theme mechanism
       stays (CSS variables for a reliable `auto`, OS scheme on native); only the
       call sites change. Delete `fontStyles.android` / `androidEm` (0 uses,
@@ -136,6 +136,28 @@ below). The bulk of the win was in step 2 instead.
       both problems.
 - [ ] Verify every step with the screenshot harness described in the proposal
       (full-page 390/1280 pixel diff; heights must not move).
+
+## 5. App landing pages
+
+`/apps/<slug>` is a route (`src/app/apps.$slug.tsx` +
+`src/components/AppLandingPage.tsx`) built from three files the app's own
+repository publishes: `marketing/listing.json`, `marketing/privacy.md` and the
+`press-kit` branch's `index.json`. `content/apps.json` lists the repositories,
+`npm run apps` fetches them at build time and fails the build rather than serve
+a page without its policy or its store links. Nothing about an app is written
+here.
+
+Hide The Notch is live and complete: the six-language listing, both store
+links, the three device strips and the whole privacy policy under `#privacy`,
+which is the URL declared to Apple and to Google.
+
+- [ ] `public/apps/lifetime/` is still a hand-written HTML page. Publishing the
+      same trio from its repository is all it would need to become a route too
+      — one entry in `content/apps.json`, no code.
+- [ ] Nothing on the site links to `/apps/<slug>`: they are entered from a
+      store listing, which is why the prerender is told about them explicitly
+      (`pages` in `vite.config.ts`). Worth revisiting only if the apps should
+      also be discoverable from the site itself.
 
 ---
 

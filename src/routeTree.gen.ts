@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './app/__root'
 import { Route as DesignSystemRouteImport } from './app/design-system'
+import { Route as AppsSlugRouteImport } from './app/apps.$slug'
 import { Route as BlogIndexRouteImport } from './app/blog.index'
 import { Route as BlogSlugRouteImport } from './app/blog.$slug'
 import { Route as TalksIndexRouteImport } from './app/talks.index'
@@ -24,6 +25,11 @@ import { Route as Char123LangChar125ResumeGroupGroupRouteImport } from './app/{-
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppsSlugRoute = AppsSlugRouteImport.update({
+  id: '/apps/$slug',
+  path: '/apps/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -83,6 +89,7 @@ const Char123LangChar125ResumeGroupGroupRoute =
 
 export interface FileRoutesByFullPath {
   '/design-system': typeof DesignSystemRoute
+  '/apps/$slug': typeof AppsSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/design-system': typeof DesignSystemRoute
+  '/apps/$slug': typeof AppsSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
@@ -110,6 +118,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/design-system': typeof DesignSystemRoute
+  '/apps/$slug': typeof AppsSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/design-system'
+    | '/apps/$slug'
     | '/blog/$slug'
     | '/talks/$slug'
     | '/{-$lang}/contact'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/design-system'
+    | '/apps/$slug'
     | '/blog/$slug'
     | '/talks/$slug'
     | '/{-$lang}/contact'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/design-system'
+    | '/apps/$slug'
     | '/blog/$slug'
     | '/talks/$slug'
     | '/{-$lang}/contact'
@@ -165,6 +177,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   DesignSystemRoute: typeof DesignSystemRoute
+  AppsSlugRoute: typeof AppsSlugRoute
   BlogSlugRoute: typeof BlogSlugRoute
   TalksSlugRoute: typeof TalksSlugRoute
   Char123LangChar125ContactRoute: typeof Char123LangChar125ContactRoute
@@ -184,6 +197,13 @@ declare module '@tanstack/react-router' {
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apps/$slug': {
+      id: '/apps/$slug'
+      path: '/apps/$slug'
+      fullPath: '/apps/$slug'
+      preLoaderRoute: typeof AppsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -261,6 +281,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   DesignSystemRoute: DesignSystemRoute,
+  AppsSlugRoute: AppsSlugRoute,
   BlogSlugRoute: BlogSlugRoute,
   TalksSlugRoute: TalksSlugRoute,
   Char123LangChar125ContactRoute: Char123LangChar125ContactRoute,

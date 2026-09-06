@@ -204,3 +204,55 @@ export async function fetchResumeEntry(filename: string, lang: Lang): Promise<Re
   const item = await fetchOne({ data: { filename, contentType: "resume" } });
   return item && localizeResumeItem(item, lang);
 }
+
+/**
+ * An app landing page, as `scripts/fetch-apps.mjs` assembles it at build time
+ * from the app's own repository: its store listing, its press kit and its
+ * privacy policy. Nothing in here is authored on this site - the page
+ * (`src/app/apps.$slug.tsx`) is a template over this shape, and a second app
+ * is a second entry in `content/apps.json`.
+ */
+export type AppPage = {
+  slug: string;
+  /** The public repository every field below was read from. */
+  repoUrl: string;
+  /** The day the press kit was generated, as the manifest reports it. */
+  generated?: string;
+  /** The listing locale the copy comes from, e.g. `en-US`. */
+  locale: string;
+  name: string;
+  subtitle: string;
+  /** Play's short description - one line, used as the page's lead. */
+  short: string;
+  /** The store description, split on its blank lines. */
+  description: string[];
+  keywords: string[];
+  stores: { appStore: string; play: string };
+  icon: AppImage;
+  /** The raw screenshots, grouped by device: iPhone, iPad, Android. */
+  screenshots: AppScreenshots[];
+  /**
+   * The policy, rendered in full on the page under `#privacy` - this URL is
+   * the one declared to Apple and to Google.
+   */
+  privacy: { title: string; body: any };
+};
+
+export type AppImage = { src: string; width?: number; height?: number };
+
+export type AppScreenshots = {
+  /** The press kit's own folder name (`ios`, `ipad`, `android`), or "". */
+  platform: string;
+  /** What to call it on the page; empty for an ungrouped press kit. */
+  label: string;
+  shots: AppImage[];
+};
+
+/** One app landing page. */
+export async function fetchApp(slug: string): Promise<AppPage | null> {
+  try {
+    return await readJson<AppPage>(`/content/apps/${slug}.json`);
+  } catch {
+    return null;
+  }
+}

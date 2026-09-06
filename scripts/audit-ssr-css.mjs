@@ -43,7 +43,8 @@ const args = Object.fromEntries(
 const paths = (
   args.paths ??
   "/,/resume,/contact,/talks,/blog,/cv,/design-system,/fr,/fr/resume,/fr/contact,/fr/cv," +
-    "/resume/1985-hello-world,/blog/about-simplicity,/talks/a-static-website-with-react-really"
+    "/resume/1985-hello-world,/blog/about-simplicity,/talks/a-static-website-with-react-really," +
+    "/apps/hide-the-notch"
 ).split(",");
 const jobs = Number(args.jobs ?? 3);
 const firstPort = Number(args.port ?? 6100);

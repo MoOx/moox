@@ -22,6 +22,9 @@ dist
 # custom
 **/svgs/components/**
 public/content/**/*.json
+# The app landing pages, fetched from the apps' own repositories at build time
+# (npm run apps): their data and their press-kit images alike.
+public/content/apps
 tmp
 
 # visual regression baselines (npm run visual -- --save=…)

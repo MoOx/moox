@@ -15,6 +15,9 @@ to JSON by `npm run markdown`.
 | Testimonials                       | `src/components/BlockTestimonials.tsx`        |
 | i18n contract (types, hooks, URLs) | `src/i18n.ts`                                 |
 | PDF export (one file per language) | `scripts/generate-resume-pdf.mjs`             |
+| App landing pages (`/apps/<slug>`) | `src/app/apps.$slug.tsx` + `AppLandingPage`   |
+| Which apps, and from which repo    | `content/apps.json`                           |
+| Fetching an app's copy & shots     | `scripts/fetch-apps.mjs` (`npm run apps`)     |
 
 **Routes are file-based with an optional language segment**: `{-$lang}.cv.tsx`
 serves both `/cv` and `/fr/cv` — one definition, two languages. English is the
@@ -147,6 +150,20 @@ paint silently falls back to black, and you only see it in the exported PDF
 `nextjsMask`, `nextjsPaint0`. Watch for cross-file collisions too — several
 SVGs still define `url(#a)` / `url(#b)`, which resolve to whichever comes first
 in the document if two of them ever render on the same page.
+
+**An app landing page is never written here, and the build fails rather than
+serve half of one.** `/apps/<slug>` is a template over three files the app's
+own repository publishes - `marketing/listing.json` (the store copy, six
+languages, plus the store URLs), `marketing/privacy.md` (the policy) and the
+`press-kit` branch's `index.json` (the raw screenshots and where they are
+served from). `npm run apps` reads them at **build** time, downloads the images
+into `public/content/apps/` and exits non-zero if any of it is missing. That
+URL is the one declared to Apple and to Google as the app's privacy policy: a
+page that renders a hero and no policy is a review rejection, so there is no
+degraded mode. Adding an app is an entry in `content/apps.json` and nothing
+else - if you find yourself typing an app's name, a screenshot path or a
+sentence of its description into this repository, you are writing the same
+words for the second time and one of the two copies will go stale.
 
 **Colour an icon with `color`, not `fill` or `fills`.** Most sources paint with
 `fill="currentColor"`, which is exactly what `color` sets, so one prop tints
