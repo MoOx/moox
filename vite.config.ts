@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
@@ -34,24 +35,38 @@ const stubReactNativeInternals = {
   },
 };
 
-// The app landing pages (`public/apps/*/index.html`) are plain static HTML, not
-// routes: they predate the site and keep their own standalone design. A static
-// host resolves `/apps/lifetime/` to that directory's `index.html`, but the dev
+// The app landing pages that are still plain static HTML in `public/apps/*/`
+// (they predate the site and keep their own standalone design). A static host
+// resolves `/apps/lifetime/` to that directory's `index.html`, but the dev
 // server does not: Vite's public middleware has no directory index, so the
 // request falls through to the router, which strips the trailing slash and
 // answers 404. This rewrite gives dev the same URLs as production.
+//
+// Only for the slugs that still have such a file: `/apps/<slug>` is a route
+// now (see `src/app/apps.$slug.tsx`), and rewriting it here would answer it in
+// dev with an `index.html` that does not exist.
+const staticAppPages = fs.existsSync("public/apps")
+  ? fs.readdirSync("public/apps").filter((slug) => fs.existsSync(`public/apps/${slug}/index.html`))
+  : [];
+
 const serveAppPagesInDev = {
   name: "serve-app-pages-in-dev",
   apply: "serve" as const,
   configureServer(server: { middlewares: { use: (fn: unknown) => void } }) {
-    server.middlewares.use(
-      (req: { url?: string }, _res: unknown, next: () => void) => {
-        const match = req.url?.match(/^\/apps\/([\w-]+)\/?(?:$|\?)/);
-        if (match) req.url = `/apps/${match[1]}/index.html`;
-        next();
-      },
-    );
+    server.middlewares.use((req: { url?: string }, _res: unknown, next: () => void) => {
+      const slug = req.url?.match(/^\/apps\/([\w-]+)\/?(?:$|\?)/)?.[1];
+      if (slug !== undefined && staticAppPages.includes(slug)) req.url = `/apps/${slug}/index.html`;
+      next();
+    });
   },
+};
+
+// The app pages: the index, one page per entry of the registry, and its
+// privacy policy. `/apps` is in the menus, so a crawl would find the rest -
+// listing them is what keeps a policy prerendered even if a link ever moves,
+// and that URL is the one the two stores were given.
+const appRegistry = JSON.parse(fs.readFileSync("content/apps.json", "utf8")) as {
+  apps: Array<{ slug: string }>;
 };
 
 export default defineConfig({
@@ -69,6 +84,13 @@ export default defineConfig({
     tanstackStart({
       srcDirectory: "src",
       router: { routesDirectory: "app" },
+      pages: [
+        { path: "/apps" },
+        ...appRegistry.apps.flatMap((app) => [
+          { path: `/apps/${app.slug}` },
+          { path: `/apps/${app.slug}/privacy` },
+        ]),
+      ],
       // spa: { enabled: true },
       prerender: {
         enabled: true,

@@ -1,0 +1,40 @@
+[
+  {
+    "slug": "hide-the-notch",
+    "name": "Hide The Notch",
+    "subtitle": "Your photo, minus the notch.",
+    "short": "Your wallpaper, whole again: the notch goes, your photo stays.",
+    "icon": {
+      "src": "/content/apps/hide-the-notch/icon.png",
+      "sha": "8f323e7b611603da",
+      "bytes": 33347,
+      "width": 256,
+      "height": 256
+    },
+    "stores": {
+      "appStore": "https://apps.apple.com/us/app/hide-the-notch/id1312839983",
+      "play": "https://play.google.com/store/apps/details?id=io.moox.hidethenotch"
+    },
+    "badges": [
+      "Free",
+      "No ads",
+      "No account"
+    ],
+    "lead": {
+      "id": "split",
+      "headline": [
+        "The notch",
+        "disappears."
+      ],
+      "sub": "Forget it, in a couple of taps.",
+      "body": "On an OLED screen a black pixel is an off pixel, so the black the app draws is optically the same as the panel around the camera. The cutout does not get covered up. It stops existing.",
+      "image": {
+        "src": "/content/apps/hide-the-notch/ios/05-compare.jpg",
+        "sha": "8bf69503c31ce8ea",
+        "bytes": 112747,
+        "height": 1216,
+        "width": 560
+      }
+    }
+  }
+]
