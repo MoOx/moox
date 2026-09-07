@@ -137,6 +137,32 @@ below). The bulk of the win was in step 2 instead.
 - [ ] Verify every step with the screenshot harness described in the proposal
       (full-page 390/1280 pixel diff; heights must not move).
 
+## 5. App pages
+
+`/apps` lists them, `/apps/<slug>` is one app's page and
+`/apps/<slug>/privacy` its policy — all three built from three files the app's
+own repository publishes. `content/apps.json` lists the repositories,
+`npm run apps` fetches them, refuses to write a page without its policy or its
+store links, and what it writes is committed — so it is a refresh command, not
+a build step. Nothing about an app is written here.
+
+Hide The Notch's `listing.json` already declares
+`https://moox.io/apps/hide-the-notch/privacy` as its store privacy URL, and
+that is the page this repo serves — checked 2026-09-06. The landing page keeps
+a `#privacy` block anyway, so the older URL still lands on something that says
+Privacy.
+
+- [ ] `public/apps/lifetime/` is still a hand-written HTML page. Publishing the
+      same trio from its repository is all it would need to become a route too
+      — one entry in `content/apps.json`, no code.
+- [ ] The page shows one device, the phone. The press kit also ships iPad and
+      Android captures of the same screens, and `story` names them per
+      platform — a device switch is a `useState` away if it ever earns its
+      place. It is deliberately not there: a landing page that makes you pick
+      before it makes its point is worse than one that picks for you.
+- [ ] `extras.seal` (the "Free / tips welcome" stamp the deck draws) is read
+      past, not rendered. The three `badges` next to it are.
+
 ---
 
 ## 5. Expo app — polish, if it is worth continuing

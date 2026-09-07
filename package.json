@@ -25,6 +25,7 @@
     "svg:web": "react-from-svg svgs src/svgs/components --with-native-for-typescript --allow-override-fill",
     "svg": "npm run svg:clean && npm run svg:web",
     "markdown": "markdown-to-json \"content/**/*.md\" public && node scripts/generate-content-indexes.mjs",
+    "apps": "node scripts/fetch-apps.mjs",
     "pdf": "node scripts/generate-resume-pdf.mjs",
     "a11y": "node scripts/audit-a11y.mjs",
     "audit:ssr-css": "node scripts/audit-ssr-css.mjs",
