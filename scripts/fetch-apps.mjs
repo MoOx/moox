@@ -115,6 +115,28 @@ const getBuffer = async (url, what) => Buffer.from(await (await get(url, what)).
  */
 const asUrl = (value) => (typeof value === "string" && /^https?:\/\//.test(value) ? value : null);
 
+/**
+ * The manifest's URL for one of the other two files, on the branch the
+ * registry tracks rather than the one the press kit was generated from.
+ *
+ * The two sources know different halves of it: the press kit knows the *path*
+ * (`marketing/listing.json`, which this site should not have to guess), and it
+ * pins that path to whatever ref its own tooling ran on - `v2` while the work
+ * was on a branch. `content/apps.json` knows which ref the site should follow.
+ * So the path is taken from the manifest and the ref from the registry, and a
+ * merged branch does not leave the site reading a ref that may be deleted.
+ * A URL pointing anywhere else is used exactly as it is.
+ */
+function sourceUrl(manifestValue, { repo, ref }, fallbackPath) {
+  const url = asUrl(manifestValue);
+  const raw = `https://raw.githubusercontent.com/${repo}`;
+  if (!url) return `${raw}/${ref}/${fallbackPath}`;
+  const sameRepo = url.match(
+    new RegExp(`^https://raw\\.githubusercontent\\.com/${repo}/[^/]+/(.+)$`, "i"),
+  );
+  return sameRepo ? `${raw}/${ref}/${sameRepo[1]}` : url;
+}
+
 const sha = (buffer) => createHash("sha256").update(buffer).digest("hex").slice(0, 16);
 
 /**
@@ -383,10 +405,10 @@ async function build(app) {
   const pressKitUrl = `${raw}/${app.pressKit}/index.json`;
   const manifest = await getJson(pressKitUrl, `${app.slug} press kit`);
 
-  // The manifest names the two other files itself; the registry's `ref` is the
-  // fallback for the older manifests that do not.
-  const listingUrl = asUrl(manifest.listing) ?? `${raw}/${app.ref}/marketing/listing.json`;
-  const privacyUrl = asUrl(manifest.privacy) ?? `${raw}/${app.ref}/marketing/privacy.md`;
+  // The manifest names the two other files itself; `sourceUrl` keeps its paths
+  // and puts them back on the ref the registry follows.
+  const listingUrl = sourceUrl(manifest.listing, app, "marketing/listing.json");
+  const privacyUrl = sourceUrl(manifest.privacy, app, "marketing/privacy.md");
   const base = (asUrl(manifest.base) ?? `${raw}/${app.pressKit}`).replace(/\/$/, "");
 
   const listing = await getJson(listingUrl, `${app.slug} listing`);
