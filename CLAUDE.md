@@ -160,7 +160,11 @@ languages, plus the store URLs), `marketing/privacy.md` (the policy) and the
 `press-kit` branch's `index.json` (the deck as data). `npm run apps` reads them
 and exits non-zero if any of it is missing: the policy is what the two stores
 were given, and a page with a hero and no policy is a review rejection, so
-there is no degraded mode. Adding an app is an entry in `content/apps.json` and
+there is no degraded mode. It is **not** part of `prepare` or `build` - what it
+writes is committed (below), so it is a refresh you run when the app publishes
+something new, the way `npm run pdf` is. A build that fetched would put every
+deploy at the mercy of a raw.githubusercontent hiccup for content already
+sitting in the repository. Adding an app is an entry in `content/apps.json` and
 nothing else - if you find yourself typing an app's name, a screenshot path or
 a sentence of its description into this repository, you are writing the same
 words for the second time and one of the two copies will go stale.

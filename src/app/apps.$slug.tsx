@@ -1,4 +1,4 @@
-import { fetchApp } from "@/api";
+import { AppPage, fetchApp } from "@/api";
 import AppLandingPage from "@/components/AppLandingPage";
 import WebsiteError from "@/components/WebsiteError";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
@@ -12,6 +12,10 @@ import { createFileRoute } from "@tanstack/react-router";
  * for people arriving from them, and the listing they arrive from is already
  * in their language.
  */
+/** The one line that describes the app, whichever of the two the app has. */
+const appDescription = (app: AppPage) =>
+  app.short || app.description[0] || app.subtitle || app.name;
+
 export const Route = createFileRoute("/apps/$slug")({
   loader: ({ params }) => fetchApp(params.slug),
   head: ({ loaderData: app }) =>
@@ -20,12 +24,16 @@ export const Route = createFileRoute("/apps/$slug")({
       : {
           links: [{ rel: "canonical", href: `${website}/apps/${app.slug}` }],
           meta: [
-            { title: `${app.name} - ${app.subtitle}` },
-            { name: "description", content: app.short || app.description[0] },
+            // Every one of these is optional in a store listing, so none of
+            // them is assumed: an app with no subtitle would otherwise get a
+            // title ending in a dash, and one with no short description a
+            // `content` of `undefined`.
+            { title: [app.name, app.subtitle].filter(Boolean).join(" - ") },
+            { name: "description", content: appDescription(app) },
             { name: "keywords", content: app.keywords.join(", ") },
             { property: "og:type", content: "website" },
             { property: "og:title", content: app.name },
-            { property: "og:description", content: app.short || app.description[0] },
+            { property: "og:description", content: appDescription(app) },
             // The icon rather than a screenshot: the shots are phone-shaped,
             // and a card built for a landscape image crops them to a stripe.
             { property: "og:image", content: website + app.icon.src },
@@ -63,7 +71,9 @@ function PageApp() {
               .map((step) => website + step.image?.src),
             sameAs: [app.stores.appStore, app.stores.play],
             privacyPolicy: `${website}/apps/${app.slug}/privacy`,
-            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+            // No `offers`: the trio publishes no price, and a hard-coded free
+            // one is a fact this page would be inventing for every app after
+            // the first paid one. Structured data is read as a claim.
           }),
         }}
       />

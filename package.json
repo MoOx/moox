@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "patch-package && husky && npm run svg && npm run markdown && npm run apps",
+    "prepare": "patch-package && husky && npm run svg && npm run markdown",
     "dev": "vite dev --host",
     "build": "npm run prepare && vite build",
     "preview": "npx serve dist/client",

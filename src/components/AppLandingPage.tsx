@@ -69,13 +69,13 @@ export default function AppLandingPage({ app }: { app: AppPage }) {
       <View style={theme.styles.backAlt}>
         <Container role="region" aria-label={`About ${app.name}`} horizontal="l" vertical="xl">
           <SpacedView horizontal="l" style={styles.prose}>
-            {app.description.map((paragraph) => (
+            {keyed(app.description).map((paragraph) => (
               <Text
-                key={paragraph}
+                key={paragraph.key}
                 role="paragraph"
                 style={[fontStyles.ios.body, theme.styles.text, styles.paragraph]}
               >
-                {paragraph}
+                {paragraph.text}
               </Text>
             ))}
           </SpacedView>
@@ -113,13 +113,21 @@ export default function AppLandingPage({ app }: { app: AppPage }) {
 }
 
 /**
+ * Keys for a list that never moves but may repeat itself: two identical
+ * paragraphs, or two identical headline lines, would collide on the text
+ * alone. Built here rather than in the JSX so the key is one value with one
+ * reason, instead of an expression the reader has to decode.
+ */
+const keyed = (lines: string[]) => lines.map((text, index) => ({ key: `${index}-${text}`, text }));
+
+/**
  * The deck composes its headlines on two lines, and they are two stacked
  * `Text` blocks here. Trailing space on all but the last: without it a text
  * extractor - a crawler, a screen reader buffer, an LLM - reads
  * "The effectyou want." (the same reason `BlockHey` carries one).
  */
 const headlineLines = (headline: string[]) =>
-  headline.map((line, index) => (index < headline.length - 1 ? `${line} ` : line));
+  keyed(headline.map((line, index) => (index < headline.length - 1 ? `${line} ` : line)));
 
 /** One step of the deck: the screen on one side, the words it carries on the other. */
 function StoryBlock({
@@ -158,14 +166,14 @@ function StoryBlock({
           <View role="heading" aria-level={2}>
             {headlineLines(step.headline).map((line) => (
               <Text
-                key={line}
+                key={line.key}
                 style={[
                   fontStyles.iosEm.largeTitle,
                   heroTitleSize,
                   band ? theme.styles.textOnMain : theme.styles.text,
                 ]}
               >
-                {line}
+                {line.text}
               </Text>
             ))}
           </View>
@@ -211,10 +219,10 @@ function ClosingBlock({ step }: { step: AppStoryStep }) {
           <View role="heading" aria-level={2}>
             {headlineLines(step.headline).map((line) => (
               <Text
-                key={line}
+                key={line.key}
                 style={[fontStyles.iosEm.largeTitle, heroTitleSize, styles.onGradient]}
               >
-                {line}
+                {line.text}
               </Text>
             ))}
           </View>
@@ -265,13 +273,21 @@ function Device({
             width={step.image.width}
             height={step.image.height}
             alt={`${app.name} on ${app.device}: ${step.headline.join(" ")}`}
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            style={screenStyle}
           />
         </DeviceiPhoneDynamicIsland>
       </Parallax>
     </View>
   );
 }
+
+/** Constant, so it is one object rather than one per render per screenshot. */
+const screenStyle = {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  display: "block",
+} as const;
 
 const styles = StyleSheet.create({
   /** Two columns that become one, the way every split block on the home does. */

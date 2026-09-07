@@ -142,9 +142,9 @@ below). The bulk of the win was in step 2 instead.
 `/apps` lists them, `/apps/<slug>` is one app's page and
 `/apps/<slug>/privacy` its policy — all three built from three files the app's
 own repository publishes. `content/apps.json` lists the repositories,
-`npm run apps` fetches them, fails the build rather than serve a page without
-its policy or its store links, and commits what it fetched. Nothing about an
-app is written here.
+`npm run apps` fetches them, refuses to write a page without its policy or its
+store links, and what it writes is committed — so it is a refresh command, not
+a build step. Nothing about an app is written here.
 
 Hide The Notch's `listing.json` already declares
 `https://moox.io/apps/hide-the-notch/privacy` as its store privacy URL, and

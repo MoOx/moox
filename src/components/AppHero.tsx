@@ -135,7 +135,7 @@ function AppHeroDevice({
             height={image.height}
             alt={`${name}: ${(lead?.headline ?? []).join(" ")}`}
             priority={priority}
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            style={screenStyle}
           />
         </DeviceiPhoneDynamicIsland>
       </Parallax>
@@ -217,6 +217,14 @@ function BadgeRow({ badges }: { badges: string[] }) {
     </View>
   );
 }
+
+/** Constant, so it is one object rather than one per render. */
+const screenStyle = {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  display: "block",
+} as const;
 
 /** Same fluid scale as the home page's own hero (see `BlockHey`). */
 const heroTitleSize = {

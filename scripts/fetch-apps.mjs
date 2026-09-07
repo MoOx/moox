@@ -211,12 +211,22 @@ const childrenOf = (node) =>
  * which is what makes the page read h1 then h2 and not h1 then h3. The anchor
  * links `rehype-autolink-headings` prepends go too - they carry no text, and
  * the renderer drops the `aria-hidden` that made them invisible to a reader.
+ *
+ * Only the `h1`, and only the one at the top. Dropping everything up to the
+ * first heading of any level - which is what this did - deletes the opening
+ * paragraphs of a policy that leads with prose, and eats the first section of
+ * one that has no `h1` at all. On a page whose whole point is that it is
+ * complete, that is the worst kind of bug: silent, and only visible to whoever
+ * knows what the source said.
  */
 function policyBody(body) {
-  const children = childrenOf(body);
-  const titleIndex = children.findIndex((child) => isNode(child) && /^h[1-6]$/.test(child.tag));
-  const rest = titleIndex === -1 ? children : children.slice(titleIndex + 1);
-  return { ...body, children: rest.map(withoutAnchorLink) };
+  let titleSeen = false;
+  const children = childrenOf(body).filter((child) => {
+    if (titleSeen || !isNode(child) || child.tag !== "h1") return true;
+    titleSeen = true;
+    return false;
+  });
+  return { ...body, children: children.map(withoutAnchorLink) };
 }
 
 /** The policy's opening paragraph, as plain text: the page links to the whole. */
