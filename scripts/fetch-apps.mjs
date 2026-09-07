@@ -3,8 +3,10 @@
  *
  *   npm run apps
  *
- * Every app listed in `content/apps.json` publishes the same trio, and this
- * reads it:
+ * An entry in `content/apps.json` is a repository and the branch its press kit
+ * is published on, and that is the whole of what this site knows: the press
+ * kit names the other two files, so nothing here reconstructs a path or picks
+ * a branch. Every app publishes the same trio, and this reads it:
  *
  *   marketing/listing.json   the store copy in every language the stores have
  *   marketing/privacy.md     the privacy policy
@@ -116,25 +118,23 @@ const getBuffer = async (url, what) => Buffer.from(await (await get(url, what)).
 const asUrl = (value) => (typeof value === "string" && /^https?:\/\//.test(value) ? value : null);
 
 /**
- * The manifest's URL for one of the other two files, on the branch the
- * registry tracks rather than the one the press kit was generated from.
- *
- * The two sources know different halves of it: the press kit knows the *path*
- * (`marketing/listing.json`, which this site should not have to guess), and it
- * pins that path to whatever ref its own tooling ran on - `v2` while the work
- * was on a branch. `content/apps.json` knows which ref the site should follow.
- * So the path is taken from the manifest and the ref from the registry, and a
- * merged branch does not leave the site reading a ref that may be deleted.
- * A URL pointing anywhere else is used exactly as it is.
+ * One of the two files the press kit names, which it must: it knows where they
+ * are, and it publishes them on a ref that does not go stale. Nothing here
+ * reconstructs the path or picks a branch, so a merge, a rename or a deleted
+ * branch upstream is not something this site has to be told about.
  */
-function sourceUrl(manifestValue, { repo, ref }, fallbackPath) {
-  const url = asUrl(manifestValue);
-  const raw = `https://raw.githubusercontent.com/${repo}`;
-  if (!url) return `${raw}/${ref}/${fallbackPath}`;
-  const sameRepo = url.match(
-    new RegExp(`^https://raw\\.githubusercontent\\.com/${repo}/[^/]+/(.+)$`, "i"),
-  );
-  return sameRepo ? `${raw}/${ref}/${sameRepo[1]}` : url;
+function requiredUrl(value, what, slug, pressKitUrl) {
+  const url = asUrl(value);
+  if (!url) {
+    fail(
+      `${slug}: the press kit at ${pressKitUrl} does not say where its ${what} is.`,
+      "It names both files it does not carry, on a ref that follows the default\n" +
+        "  branch. `npm run press-kit` in the app writes them:\n\n" +
+        '      "listing": "https://raw.githubusercontent.com/<repo>/HEAD/marketing/listing.json",\n' +
+        '      "privacy": "https://raw.githubusercontent.com/<repo>/HEAD/marketing/privacy.md"',
+    );
+  }
+  return url;
 }
 
 const sha = (buffer) => createHash("sha256").update(buffer).digest("hex").slice(0, 16);
@@ -405,10 +405,10 @@ async function build(app) {
   const pressKitUrl = `${raw}/${app.pressKit}/index.json`;
   const manifest = await getJson(pressKitUrl, `${app.slug} press kit`);
 
-  // The manifest names the two other files itself; `sourceUrl` keeps its paths
-  // and puts them back on the ref the registry follows.
-  const listingUrl = sourceUrl(manifest.listing, app, "marketing/listing.json");
-  const privacyUrl = sourceUrl(manifest.privacy, app, "marketing/privacy.md");
+  // The manifest names the two other files itself, on a ref that follows the
+  // default branch, so this site holds no opinion about which one that is.
+  const listingUrl = requiredUrl(manifest.listing, "listing", app.slug, pressKitUrl);
+  const privacyUrl = requiredUrl(manifest.privacy, "privacy policy", app.slug, pressKitUrl);
   const base = (asUrl(manifest.base) ?? `${raw}/${app.pressKit}`).replace(/\/$/, "");
 
   const listing = await getJson(listingUrl, `${app.slug} listing`);
