@@ -1,38 +1,12 @@
-import { useLinkProps, useRouterState } from "@tanstack/react-router";
-import { MouseEvent, Ref, useCallback, useMemo } from "react";
-import {
-  GestureResponderEvent,
-  Linking,
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextProps,
-  TextStyle,
-} from "react-native";
+import { useInternalLinkPress, useExternalLinkPress } from "@/react-multiversal/LinkPress";
+import { defaultIsActive, isInternalLink, LinkTextProps } from "@/react-multiversal/LinkText.types";
+import { usePathname } from "@/routing";
+import { useLinkProps } from "@tanstack/react-router";
+import { MouseEvent, useCallback, useMemo } from "react";
+import { Platform, StyleSheet, Text } from "react-native";
 
-export type LinkTextProps = TextProps & {
-  ref?: Ref<Text>;
-  href: string;
-  style?: StyleProp<TextStyle>;
-  activeStyle?: StyleProp<TextStyle>;
-  /**
-   * Kept for call sites that styled the `<a>` separately from the text inside
-   * it. There is only one node now, so this is merged before `style` rather
-   * than applied to a different element.
-   */
-  containerStyle?: StyleProp<TextStyle>;
-  containerActiveStyle?: StyleProp<TextStyle>;
-  isActive?: (s: string, pathname: string) => boolean;
-  underline?: boolean;
-  /** Underline on hover or keyboard focus. CSS on web, no JS, no listeners. */
-  underlineOnFocus?: boolean;
-  onPress?: (event: GestureResponderEvent | MouseEvent<HTMLAnchorElement>) => void;
-};
-
-const defaultIsActive = (href: string, pathname: string) =>
-  pathname === href || pathname + "/" === href;
-
-const isInternalLink = (href: string) => href.startsWith("/") || href.startsWith("#");
+export type { LinkTextProps };
+export { isInternalLink };
 
 const styles = StyleSheet.create({
   // The anchor carries the text styles now, so it must not also inherit the
@@ -51,6 +25,11 @@ const styles = StyleSheet.create({
  *
  * On /resume that removed 182 nodes: 182 of the page's 198 anchors existed
  * only to hold a text node.
+ *
+ * `LinkText.native.tsx` is the other half. The split is not cosmetic: this
+ * file is built on an anchor and a click, and a device has neither. It is also
+ * what keeps `useLinkProps` - and the whole of TanStack Router - out of the app
+ * bundle.
  */
 function useLinkStyles({
   style,
@@ -90,7 +69,7 @@ function InternalLinkText({
   onPress,
   ...props
 }: LinkTextProps) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const pathname = usePathname();
   const active = isActive(href, pathname);
   const linkStyles = useLinkStyles({
     style,
@@ -115,13 +94,17 @@ function InternalLinkText({
     [onPress, routerClick],
   );
 
+  // react-native-web still renders this component under a native test renderer
+  // and in the PDF export, where there is no click.
+  const handlePress = useInternalLinkPress(href, onPress);
+
   return (
     <Text
       {...props}
       ref={ref}
       role={role}
       href={linkProps.href ?? href}
-      onClick={handleClick}
+      {...(Platform.OS === "web" ? { onClick: handleClick } : { onPress: handlePress })}
       // Router preloading is driven by these on `<Link>`; they are plain DOM
       // handlers, which react-native-web forwards to the anchor.
       onMouseEnter={linkProps.onMouseEnter}
@@ -155,15 +138,7 @@ function ExternalLinkText({
     active: false,
   });
 
-  const handlePress = useCallback(
-    (event: GestureResponderEvent) => {
-      onPress?.(event);
-      // Native has no anchor to follow the href for it.
-      Linking.openURL(href).catch(console.error);
-      event.preventDefault();
-    },
-    [href, onPress],
-  );
+  const handlePress = useExternalLinkPress(href, onPress);
 
   return (
     <Text

@@ -43,7 +43,7 @@ const stubReactNativeInternals = {
 // answers 404. This rewrite gives dev the same URLs as production.
 //
 // Only for the slugs that still have such a file: `/apps/<slug>` is a route
-// now (see `src/app/apps.$slug.tsx`), and rewriting it here would answer it in
+// now (see `src/routes.web/apps.$slug.tsx`), and rewriting it here would answer it in
 // dev with an `index.html` that does not exist.
 const staticAppPages = fs.existsSync("public/apps")
   ? fs.readdirSync("public/apps").filter((slug) => fs.existsSync(`public/apps/${slug}/index.html`))
@@ -83,7 +83,7 @@ export default defineConfig({
     serveAppPagesInDev,
     tanstackStart({
       srcDirectory: "src",
-      router: { routesDirectory: "app" },
+      router: { routesDirectory: "routes.web" },
       pages: [
         { path: "/apps" },
         ...appRegistry.apps.flatMap((app) => [
@@ -116,7 +116,6 @@ export default defineConfig({
       "react-native-gesture-handler",
       "react-native-worklets",
       "@react-native-async-storage/async-storage",
-      "@react-native-clipboard/clipboard",
     ],
     optimizeDeps: {
       exclude: ["react", "react-dom"],
@@ -136,7 +135,6 @@ export default defineConfig({
         "react-native-safe-area-context",
         "react-native-gesture-handler",
         "react-native-worklets",
-        "@react-native-clipboard/clipboard",
         "@react-native-async-storage/async-storage",
       ],
       rolldownOptions: {

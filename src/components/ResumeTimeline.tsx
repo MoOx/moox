@@ -9,7 +9,7 @@ import { fontStyles } from "@/react-multiversal/font";
 import Spacer from "@/react-multiversal/Spacer";
 import { useTheme } from "@/styles";
 import { Fragment } from "react";
-import { Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
 
 /**
  * The chronological feed closing `/resume`: every mission, project and
@@ -104,8 +104,15 @@ export const ResumeTimeline = ({
                       : undefined
                   }
                 />
-                {/* Dev-only: copy the entry as text for LinkedIn. */}
-                {import.meta.env.DEV ? <DevCopyResumeEntry item={entry.item} /> : null}
+                {/* Dev-only, web-only: copy the entry as text for LinkedIn.
+                    `import.meta.env` is a Vite API - Metro leaves `import.meta`
+                    an empty object, so reading `.DEV` off it throws on native.
+                    The `Platform` test short-circuits before that, and it is
+                    the honest guard anyway: the tool writes to the browser
+                    clipboard (see DevCopyResumeEntry). */}
+                {Platform.OS === "web" && import.meta.env.DEV ? (
+                  <DevCopyResumeEntry item={entry.item} />
+                ) : null}
               </View>
             ) : (
               <ExperienceCard

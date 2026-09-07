@@ -58,8 +58,8 @@ export default function SkillCard({
       <GradientLinear
         angle={60}
         stops={[
-          { offset: 10, stopColor: gradient[0] },
-          { offset: 100, stopColor: gradient[1] },
+          { offset: 10, color: gradient[0] },
+          { offset: 100, color: gradient[1] },
         ]}
         style={StyleSheet.absoluteFill}
       />

@@ -12,7 +12,12 @@ const htmlClass = (colorScheme: UserColorScheme) => htmlClassKey + "-" + colorSc
 const htmlClasses = [htmlClass("light"), htmlClass("dark"), htmlClass("auto")];
 export const getUserColorSchemeWebHtmlClass = (value: UserColorScheme) => htmlClass(value);
 export const updateHtmlClass = (value: UserColorScheme) => {
-  if (document.documentElement) {
+  // The `<html>` class is how the web build switches CSS variables. Native has
+  // no document to put a class on and does not need one: `useTheme` reads the
+  // mode straight from the store there. Guarding on `document` rather than
+  // `Platform` keeps this file free of a react-native import, which matters
+  // because `standaloneUpdateHtmlClass` below is serialized into the HTML.
+  if (typeof document !== "undefined" && document.documentElement) {
     const colorSchemeClass = htmlClass(value);
     // eslint-disable-next-line prefer-spread
     document.documentElement.classList.remove.apply(

@@ -1,14 +1,14 @@
-import { useT } from "@/i18n";
-import { useHref } from "@/i18n";
 import { ResumeItem } from "@/api";
 import BlockMaxApp from "@/components/BlockMaxApp";
-import LinkButton from "@/components/LinkButton";
+import { useHref, useT } from "@/i18n";
 import { summary, taglineParts } from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
+import Btn from "@/react-multiversal/Btn";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import GradientLinear from "@/react-multiversal/GradientLinear";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
+import LinkView from "@/react-multiversal/LinkView";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
@@ -18,7 +18,11 @@ import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 const skew = [{ skewY: "1deg" }, { scaleY: 1.1 }];
 const revertSkew = [{ scaleY: 1 / 1.1 }, { skewY: "-1deg" }];
 
-export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem }) {
+export default function BlockBuilder({
+  resumeEntry,
+}: {
+  resumeEntry?: ResumeItem;
+}) {
   const localizeHref = useHref();
   const theme = useTheme();
   const t = useT();
@@ -85,9 +89,8 @@ export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem
           <SpacedView
             horizontal="xl"
             gap="m"
-            // vertical="xxl"
             style={{
-              paddingTop: size("xxl"),
+              paddingBlockStart: size("xxl"),
               pointerEvents: "auto",
               flexBasis: 1024 / 2,
               flexShrink: 1,
@@ -98,36 +101,44 @@ export default function BlockBuilder({ resumeEntry }: { resumeEntry?: ResumeItem
                 this indigo band is the home's main pitch. */}
             <View role="heading" aria-level={2}>
               {t(taglineParts).map((part) => (
-                <Text key={part} style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}>
+                <Text
+                  key={part}
+                  style={[fontStyles.iosEm.largeTitle, theme.styles.textOnMain]}
+                >
                   {part}
                 </Text>
               ))}
             </View>
             <Text
-              style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
+              style={[
+                fontStyles.iosEm.body,
+                theme.styles.textOnMain,
+                { opacity: 0.6 },
+              ]}
               role="paragraph"
             >
               {t(summary)}
             </Text>
-            <LinkButton
-              href={localizeHref("/resume/")}
-              color={theme.dynamicColors.back}
-              textColor={theme.dynamicColors.text}
-              spaceHorizontal="m"
+            <Btn
+              variant="glass"
+              // material="clear"
+              // The block paints its own dark surface, in both themes, so the
+              // button is not standing on the page's scheme.
+              // backdrop="dark"
+              render={<LinkView href={localizeHref("/resume/")} />}
               style={{ alignSelf: "flex-end" }}
+              size="l"
+              // density="tight"
             >
-              <SpacedView horizontal="m">
-                <Text style={fontStyles.iosEm.callout}>
-                  {t({ en: "More about me", fr: "En savoir plus sur moi" })}
-                </Text>
-              </SpacedView>
-            </LinkButton>
-            <Spacer size="m" />
+              {t({ en: "More about me", fr: "En savoir plus sur moi" })}
+            </Btn>
             <IfWindowWidthIs largerThan={WindowWidth.m}>
               <Spacer size="xs" />
             </IfWindowWidthIs>
           </SpacedView>
-          <IfWindowWidthIs smallerThan={WindowWidth.m}>{device}</IfWindowWidthIs>
+          <IfWindowWidthIs smallerThan={WindowWidth.m}>
+            {device}
+          </IfWindowWidthIs>
         </Container>
       </View>
     </View>

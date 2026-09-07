@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react";
+import { Platform } from "react-native";
 import { useSharedValue, withSpring, type WithSpringConfig } from "react-native-reanimated";
 
-const isClient = typeof window !== "undefined";
+// `typeof window !== "undefined"` is true on native too: React Native aliases
+// `window` to `global`. Only `Platform.OS` tells the two apart, and this file
+// is entirely about a *scrolling document* - `window.scrollY` and the window
+// `scroll` event - neither of which a native app has.
+const isClient = Platform.OS === "web" && typeof window !== "undefined";
 
 // export const useScrollViewOrWindowOffset = (
 //   animatedRef?: AnimatedRef<AnimatedScrollView>
@@ -22,6 +27,12 @@ export const useScrollWindowOffset = (
   const scrollOffset = useSharedValue(getOffset());
 
   useEffect(() => {
+    // Native scrolling belongs to a ScrollView, not to a window. Until the
+    // native app wires `useScrollViewOffset(animatedRef)` in here (see the
+    // commented-out helper above), the offset stays at its initial value and
+    // anything driven by it renders in its resting position - static, not
+    // broken.
+    if (!isClient) return;
     const listener = () => {
       if (!requested.current) {
         requested.current = true;

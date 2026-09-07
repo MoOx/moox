@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import Animated, {
   cancelAnimation,
   Easing,
@@ -397,7 +397,14 @@ const AIPromptCircle = ({ size = 300, circles = [defaultCircleConfig] }: AIPromp
 
   // Observe intersection
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    // `typeof window` does not separate web from native (React Native aliases
+    // `window` to `global`), and `IntersectionObserver` is web-only. Native has
+    // no equivalent here, so the animation just runs: this only gates a
+    // decorative circle, and not animating it at all is the worse default.
+    if (Platform.OS !== "web") {
+      setIsVisible(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {

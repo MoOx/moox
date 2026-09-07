@@ -208,7 +208,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: size("xxs"),
   },
   item: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
     flexDirection: "row",
     alignItems: "center",
     gap: size("xs"),
@@ -217,7 +218,8 @@ const styles = StyleSheet.create({
     borderRadius: itemRadius,
   },
   itemLabel: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
     flexDirection: "row",
     alignItems: "center",
     gap: size("xs"),
@@ -414,7 +416,7 @@ function MenuItem({
         <LinkView
           href={item.href}
           onPress={handlePress}
-          containerStyle={{ flex: 1 }}
+          containerStyle={{ flexGrow: 1, flexShrink: 1 }}
           style={itemStyle}
         >
           {content}

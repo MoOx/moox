@@ -1,12 +1,21 @@
+import { Platform } from "react-native";
 import { useSyncExternalStore } from "react";
 
-export const supportsPointerEvent = () =>
-  !!(typeof window !== "undefined" && window.PointerEvent != null);
+/**
+ * `typeof window !== "undefined"` is not a platform test. React Native aliases
+ * `window` (and `self`) to `global` in `setUpGlobals`, so the check passes on a
+ * device and the code goes straight on to call a DOM API that is not there.
+ * `matchMedia` at module scope crashed the Expo app on import, before anything
+ * rendered. Only `Platform.OS` separates the two.
+ */
+const isWeb = Platform.OS === "web";
+const isBrowser = isWeb && typeof window !== "undefined";
 
-export const supportsHover = () =>
-  typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches;
+export const supportsPointerEvent = () => !!(isBrowser && window.PointerEvent != null);
 
-const hoverQuery = typeof window === "undefined" ? null : window.matchMedia("(hover: hover)");
+export const supportsHover = () => isBrowser && window.matchMedia("(hover: hover)").matches;
+
+const hoverQuery = isBrowser ? window.matchMedia("(hover: hover)") : null;
 
 const subscribeToHover = (onStoreChange: () => void) => {
   hoverQuery?.addEventListener("change", onStoreChange);

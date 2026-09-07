@@ -1,3 +1,4 @@
+import { readJson } from "@/api.readJson";
 import { l, Lang, Localized } from "@/i18n";
 
 export type ContentItem = {
@@ -155,20 +156,6 @@ function sortByDate<T extends { date?: string }>(items: T[]): T[] {
   });
 }
 
-async function readJson<T>(urlPath: string): Promise<T> {
-  if (typeof window === "undefined") {
-    // SSR/prerender: read from filesystem
-    const fs = await import("node:fs");
-    const path = await import("node:path");
-    const filePath = path.join(process.cwd(), "public", urlPath);
-    return JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
-  }
-  // Client: fetch from static files
-  const res = await fetch(urlPath);
-  if (!res.ok) throw new Error(`Failed to fetch ${urlPath}: ${res.status}`);
-  return (await res.json()) as T;
-}
-
 export async function fetchAll<T extends ContentType>(opts: {
   data: T;
 }): Promise<ContentTypeMap[T][]> {
@@ -209,7 +196,7 @@ export async function fetchResumeEntry(filename: string, lang: Lang): Promise<Re
  * An app landing page, as `scripts/fetch-apps.mjs` assembles it at build time
  * from the app's own repository: its store listing, its press kit and its
  * privacy policy. Nothing in here is authored on this site - the page
- * (`src/app/apps.$slug.tsx`) is a template over this shape, and a second app
+ * (`src/routes.web/apps.$slug.tsx`) is a template over this shape, and a second app
  * is a second entry in `content/apps.json`.
  */
 export type AppPage = {

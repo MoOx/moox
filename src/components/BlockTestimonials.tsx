@@ -11,8 +11,9 @@ import GradientLinear from "@/react-multiversal/GradientLinear";
 import { GradientRadial } from "@/react-multiversal/GradientRadial";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
+import TextBlock from "@/react-multiversal/TextBlock";
 import Spacer from "@/react-multiversal/Spacer";
-import { boxShadows, themeLight, useTheme } from "@/styles";
+import { alpha, boxShadows, themeLight, useTheme } from "@/styles";
 import SVGQuote from "@/svgs/components/SVGQuote";
 import SVGSocialLinkedin from "@/svgs/components/SVGSocialLinkedin";
 import { StyleSheet, Text, View } from "react-native";
@@ -46,13 +47,7 @@ export type Testimonial = {
  * a quote stays reviewable as text - it has to be translated, and compared with
  * what the person actually wrote.
  */
-export const TestimonialContent = ({
-  text,
-  dim = 0.6,
-}: {
-  text: string;
-  dim?: number;
-}) => (
+export const TestimonialContent = ({ text, dim = 0.6 }: { text: string; dim?: number }) => (
   <>
     {text
       .split(/(\*\*[^*]+\*\*)/g)
@@ -183,28 +178,19 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
       <GradientLinear
         angle={-90}
         stops={[
-          { offset: 0, stopColor: "#F2F2F2", stopOpacity: "0.1" },
+          { offset: 0, color: alpha("#F2F2F2", 0.1) },
           {
             offset: 100,
-            stopColor: "#E1E1E1",
-            stopOpacity: "0.35",
+            color: alpha("#E1E1E1", 0.35),
           },
         ]}
         style={[StyleSheet.absoluteFill, { borderRadius: size("s") }]}
       />
       <View
-        style={[
-          StyleSheet.absoluteFill,
-          { borderRadius: size("s"), boxShadow: boxShadowGlass() },
-        ]}
+        style={[StyleSheet.absoluteFill, { borderRadius: size("s"), boxShadow: boxShadowGlass() }]}
       />
       <SpacedView key={item.name} horizontal="m" vertical="m" gap="s">
-        <SVGQuote
-          width={32}
-          height={32}
-          fill={theme.dynamicColors.text}
-          style={{ zIndex: 1 }}
-        />
+        <SVGQuote width={32} height={32} fill={theme.dynamicColors.text} style={{ zIndex: 1 }} />
         <View role="blockquote">
           <Text
             role="paragraph"
@@ -223,35 +209,15 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
             alignItems: "center",
           }}
         >
-          <Avatar
-            size={36}
-            borderWidth={1}
-            borderColor="#979797"
-            uri={item.avatar}
-          />
-          <Text
-            role="paragraph"
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <Text
-              style={[
-                fontStyles.iosEm.body,
-                theme.styles.text,
-                { opacity: 0.75 },
-              ]}
-            >
+          <Avatar size={36} borderWidth={1} borderColor="#979797" uri={item.avatar} />
+          <TextBlock>
+            <Text style={[fontStyles.iosEm.body, theme.styles.text, { opacity: 0.75 }]}>
               {item.name}
             </Text>
-            <Text
-              style={[
-                fontStyles.ios.caption1,
-                theme.styles.text,
-                { opacity: 0.5 },
-              ]}
-            >
+            <Text style={[fontStyles.ios.caption1, theme.styles.text, { opacity: 0.5 }]}>
               {item.title[lang]}
             </Text>
-          </Text>
+          </TextBlock>
         </SpacedView>
       </SpacedView>
     </BlurView>
@@ -277,8 +243,8 @@ export default function BlockTestimonials() {
           // global gradient
           style={StyleSheet.absoluteFill}
           stops={[
-            { offset: 0, stopColor: "#9623c0" },
-            { offset: 100, stopColor: themeLight.colors.textIndigoAlt2 },
+            { offset: 0, color: "#9623c0" },
+            { offset: 100, color: themeLight.colors.textIndigoAlt2 },
           ]}
           angle={160}
         />
@@ -299,8 +265,8 @@ export default function BlockTestimonials() {
               { transform: [{ translateX: -100 }, { translateY: -100 }] },
             ]}
             stops={[
-              { offset: 0, stopColor: "#12e9ec", stopOpacity: "0.75" },
-              { offset: 100, stopColor: "#12e9ec", stopOpacity: "0" },
+              { offset: 0, color: alpha("#12e9ec", 0.75) },
+              { offset: 100, color: alpha("#12e9ec", 0) },
             ]}
             coordinates={{ cx: "10%", cy: "20%", fx: "5%", fy: "25%" }}
           />
@@ -318,8 +284,8 @@ export default function BlockTestimonials() {
               { transform: [{ translateX: -100 }, { translateY: 100 }] },
             ]}
             stops={[
-              { offset: 0, stopColor: "#9623c0", stopOpacity: "0.75" },
-              { offset: 100, stopColor: "#9623c0", stopOpacity: "0" },
+              { offset: 0, color: alpha("#9623c0", 0.75) },
+              { offset: 100, color: alpha("#9623c0", 0) },
             ]}
             coordinates={{
               cx: "20%",
@@ -340,8 +306,8 @@ export default function BlockTestimonials() {
           <GradientRadial
             style={StyleSheet.absoluteFill}
             stops={[
-              { offset: 0, stopColor: "#2816A8", stopOpacity: "0.6" },
-              { offset: 100, stopColor: "#2816A8", stopOpacity: "0" },
+              { offset: 0, color: alpha("#2816A8", 0.6) },
+              { offset: 100, color: alpha("#2816A8", 0) },
             ]}
             coordinates={{ cx: "50%", cy: "100%", fx: "60%", fy: "100%" }}
           />
@@ -364,11 +330,7 @@ export default function BlockTestimonials() {
             {t({ en: "What People Say About Me.", fr: "Ce qu'on dit de moi." })}
           </Text>
           <Text
-            style={[
-              fontStyles.iosEm.body,
-              theme.styles.textOnMain,
-              { opacity: 0.6 },
-            ]}
+            style={[fontStyles.iosEm.body, theme.styles.textOnMain, { opacity: 0.6 }]}
             role="paragraph"
           >
             {t({
@@ -404,9 +366,7 @@ export default function BlockTestimonials() {
           >
             {() => (
               <>
-                <Text
-                  style={[fontStyles.iosEm.title3, theme.styles.textOnMain]}
-                >
+                <Text style={[fontStyles.iosEm.title3, theme.styles.textOnMain]}>
                   {t({
                     en: "Read all my Recommendations",
                     fr: "Lire toutes mes recommandations",
