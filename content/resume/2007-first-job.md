@@ -17,14 +17,16 @@ hashtags:
 remote: true
 ---
 
-Development of a real estate portal with PHP & the Zend Framework.
+Development of a real estate portal with PHP & the Zend Framework, from the
+database design to the front-end.
 
 Also in charge of developing several online shops using osCommerce, Prestashop &
 Magento.
 
 ---
 
-Développement d'un portail immobilier en PHP avec le Zend Framework.
+Développement d'un portail immobilier en PHP avec le Zend Framework, de la
+conception de la base de données au front-end.
 
 Également en charge du développement de plusieurs boutiques en ligne sous
 osCommerce, Prestashop et Magento.

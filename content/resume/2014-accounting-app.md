@@ -4,7 +4,7 @@ url: "https://insightsoftware.com/viareport/"
 title:
   en: "Modernize a legacy bulky UI into an accessible one with modern techs"
   fr: "Modernisation d'une interface lourde et vieillissante en une interface accessible, avec des technos actuelles"
-job_title: "Lead Front-End Developer"
+job_title: "Senior Front-End Developer"
 dateStart: 2014-07-01
 dateEnd: 2015-03-01
 hashtags:

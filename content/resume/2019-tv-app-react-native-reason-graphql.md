@@ -3,7 +3,7 @@ company: "Loewe"
 title:
   en: "TV/media remote app made with React Native, ReScript, GraphQL & Apollo"
   fr: "Application télécommande TV/média en React Native, ReScript, GraphQL & Apollo"
-job_title: "Front-End Developer"
+job_title: "Mobile Developer"
 pitch:
   en: "Re-architected the React Native + ReScript codebase to make contributing easy, and polished the UI with tons of animations so the app feels truly native - not half web, half native. Untangled the hand-linked Xcode project into a Cocoapods Podfile, so React Native updates stopped hurting."
   fr: "Base de code React Native + ReScript ré-architecturée pour rendre les contributions faciles, et interface soignée à coups d'animations pour que l'app paraisse vraiment native - pas mi-web, mi-native. Projet Xcode lié à la main démêlé en un Podfile Cocoapods, pour que les mises à jour de React Native cessent de faire mal."

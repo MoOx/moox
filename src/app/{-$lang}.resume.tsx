@@ -1,4 +1,4 @@
-import { ResumeItem, fetchAll, fetchResume } from "@/api";
+import { fetchAll, fetchResume, ResumeItem } from "@/api";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
 import BlockMe2WithPills from "@/components/BlockMe2WithPills";
 import ButtonView from "@/components/ButtonView";
@@ -12,6 +12,7 @@ import SkillCard from "@/components/SkillCard";
 import StatTile from "@/components/StatTile";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { socials, visualUrl } from "@/consts";
+import { alternateLinks, assertLangParam, l, langFromParam, useLang, useT } from "@/i18n";
 import {
   availabilityLabel,
   compactCount,
@@ -37,6 +38,7 @@ import {
   projectName,
   putaindecodeArticles,
   resumeEntryPath,
+  resumePdfPath,
   skillsDomains,
   summary,
   tagline,
@@ -44,9 +46,7 @@ import {
   titleOf,
   workLocation,
   yearRange,
-  resumePdfPath,
 } from "@/profile";
-import { alternateLinks, assertLangParam, langFromParam, useLang, useT } from "@/i18n";
 import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles, weight } from "@/react-multiversal/font";
@@ -102,8 +102,8 @@ export const Route = createFileRoute("/{-$lang}/resume")({
       {
         title:
           langFromParam(params.lang) === "fr"
-            ? `${fullName} (${nickname}) - CV & parcours - ${jobTitle}`
-            : `${fullName} (${nickname}) - Résumé & Experience Timeline - ${jobTitle}`,
+            ? `${fullName} (${nickname}) - CV & parcours - ${l(jobTitle, "fr")}`
+            : `${fullName} (${nickname}) - Résumé & Experience Timeline - ${l(jobTitle, "en")}`,
       },
       { name: "description", content: metaDescription(langFromParam(params.lang)) },
     ],
@@ -221,7 +221,7 @@ function PageResume() {
           gradientTextFlashyStyles(theme, 172),
           {
             fontSize: 42,
-            lineHeight: 42,
+            lineHeight: 42 * 1.2,
             fontWeight: "900",
             viewTransitionName,
           },
@@ -229,7 +229,7 @@ function PageResume() {
         role="heading"
         aria-level={1}
       >
-        {`${jobTitle}.`}
+        {`${t(jobTitle)}.`}
       </Text>
       <Text
         style={[fontStyles.ios.subhead, theme.styles.textLight1, { fontStyle: "italic" }]}
@@ -288,7 +288,7 @@ function PageResume() {
               media query (`[data-resume-hero]` in styles.css); the Spacer
               below stays conditional, since it only compensates for the
               desktop variant leaving the flow. */}
-          <View dataSet={{ "resume-hero": "true" }}>{headline("text--front-end-architect")}</View>
+          <View dataSet={{ "resume-hero": "true" }}>{headline("text--senior-developer")}</View>
           <IfWindowWidthIs largerThan={WindowWidth.m}>
             <Spacer size="xxxl" />
           </IfWindowWidthIs>

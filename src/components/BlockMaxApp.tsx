@@ -14,7 +14,7 @@ import {
   socialLinks2,
   socials,
 } from "@/consts";
-import { useHref, useT } from "@/i18n";
+import { l, useHref, useT } from "@/i18n";
 import { jobTitle } from "@/profile";
 import Avatar from "@/react-multiversal/Avatar";
 import { setClipboardString } from "@/react-multiversal/clipboard";
@@ -163,8 +163,8 @@ export default function BlockMaxApp({
               </Text>
               <Text style={[fontStyles.ios.footnote, theme.styles.textLight1]}>
                 {t({
-                  en: `${jobTitle} for web & mobile apps.`,
-                  fr: `${jobTitle} pour applications web & mobiles.`,
+                  en: `${l(jobTitle, "en")} for web & mobile apps.`,
+                  fr: `${l(jobTitle, "fr")} pour applications web & mobiles.`,
                 })}
               </Text>
             </View>

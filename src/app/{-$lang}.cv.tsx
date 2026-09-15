@@ -325,7 +325,7 @@ function PageCV() {
                     { offset: 1, color: theme.colors.textFlashy4 },
                   ]}
                 >
-                  {`${jobTitle}.`}
+                  {`${t(jobTitle)}.`}
                 </GradientText>
               </Text>
               <Text

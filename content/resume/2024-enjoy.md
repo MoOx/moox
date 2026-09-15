@@ -4,7 +4,7 @@ url: "https://enjoyapp.io"
 title:
   en: "Mobile app to find food and drinks near you"
   fr: "Application mobile pour trouver à manger et à boire autour de soi"
-job_title: "Front-End Developer"
+job_title: "Mobile Developer"
 pitch:
   en: "Took the UI and UX from MVP to a published App Store release, in React Native and TypeScript."
   fr: "Interface et expérience menées du MVP à une publication sur l'App Store, en React Native et TypeScript."

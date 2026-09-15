@@ -8,8 +8,8 @@ import ContactPageStyles from "@/components/ContactPageStyles";
 import ContactSideCard from "@/components/ContactSideCard";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { ind, sendStringAsMailString, socials } from "@/consts";
-import { alternateLinks, assertLangParam, langFromParam, useT } from "@/i18n";
-import { freelanceSince, fullName, jobTitle, workLocation } from "@/profile";
+import { alternateLinks, assertLangParam, l, langFromParam, useT } from "@/i18n";
+import { freelanceSince, fullName, jobTitle, lowerKeepingAcronyms, workLocation } from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
 import { setClipboardString } from "@/react-multiversal/clipboard";
@@ -40,8 +40,8 @@ export const Route = createFileRoute("/{-$lang}/contact")({
         // rework retired everywhere else.
         title:
           langFromParam(params.lang) === "fr"
-            ? `Contacter ${fullName}, ${jobTitle}, expert React & React Native.`
-            : `Contact ${fullName}, ${jobTitle}, React & React Native Expert.`,
+            ? `Contacter ${fullName}, ${lowerKeepingAcronyms(l(jobTitle, "fr"))}, expert React & React Native.`
+            : `Contact ${fullName}, ${l(jobTitle, "en")}, React & React Native Expert.`,
       },
     ],
   }),
@@ -360,8 +360,8 @@ function PageContact() {
                 ]}
               >
                 {t({
-                  en: `${jobTitle}, freelance since ${freelanceSince}. ${t(workLocation)}. Pick whichever channel you actually like: they all reach me.`,
-                  fr: `${jobTitle}, freelance depuis ${freelanceSince}. ${t(workLocation)}. Choisissez le canal qui vous va : ils arrivent tous jusqu'à moi.`,
+                  en: `${l(jobTitle, "en")}, freelance since ${freelanceSince}. ${t(workLocation)}. Pick whichever channel you actually like: they all reach me.`,
+                  fr: `${l(jobTitle, "fr")}, freelance depuis ${freelanceSince}. ${t(workLocation)}. Choisissez le canal qui vous va : ils arrivent tous jusqu'à moi.`,
                 })}
               </Text>
               <Text

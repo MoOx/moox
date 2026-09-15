@@ -55,12 +55,14 @@ const args = Object.fromEntries(
  * Per-language print scale. French runs ~15% longer than English at equal
  * meaning, which pushed the CV onto a third page: the page-1 content no longer
  * fitted, so the explicit `breakBefore: "page"` of page 2 landed one page late.
- * 0.97 buys back the overflow - three percent, invisible next to a reflow of
- * the whole layout, and the text stays vector (selectable, extractable).
+ * A few percent buys back the overflow - invisible next to a reflow of the
+ * whole layout, and the text stays vector (selectable, extractable).
+ * The fifth key-experience row (Learnee, the end-to-end product proof) cost
+ * one more line in English and three in French, hence 0.98 / 0.94.
  * Verified: page 1 still ends on the teaching row, page 2 still opens on Open
- * Source. Recheck the page count whenever the French copy grows.
+ * Source. Recheck the page count whenever the copy or the highlights grow.
  */
-const SCALES = { en: 1, fr: 0.97 };
+const SCALES = { en: 0.98, fr: 0.94 };
 const scaleFor = (lang) => Math.min(2, Math.max(0.1, Number(args.scale ?? SCALES[lang] ?? 1)));
 const format = args.format ?? "A4";
 const margin = args.margin ?? "0mm";
@@ -78,7 +80,7 @@ const outFor = (lang) =>
   path.resolve(
     root,
     args.out ??
-      `public/maxime-thirouin-freelance-front-end-developer-resume${
+      `public/maxime-thirouin-freelance-developer-resume${
         lang === "en" ? "" : `.${lang}`
       }.pdf`,
   );

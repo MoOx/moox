@@ -38,15 +38,17 @@ import type { ComponentType } from "react";
 // without the joke, in the only borrowed voice on the page. Same idea, own
 // words. The second sentence repeats `Simple` instead of pronominalizing it
 // ("That's the hard part") - nothing for a pronoun to point at, so the line
-// survives translation to French word for word: "Je rends les front-ends
-// simples. Le simple, c'est le plus dur."
+// survives translation to French word for word: "Je rends les apps simples.
+// Le simple, c'est le plus dur."
+// "Apps", not "front-ends": the headline stopped naming a layer, and so does
+// the promise - it covers whatever the mission spans, web or mobile.
 // Split in two parts so the home band can stack them as a two-line punch;
 // the one-line `tagline` is derived from the same value.
 export const taglineParts: Localized<readonly string[]> = {
-  en: ["I make front-ends simple.", "Simple is the hard part."],
-  fr: ["Je rends les front-ends simples.", "Le simple, c'est le plus dur."],
+  en: ["I make apps simple.", "Simple is the hard part."],
+  fr: ["Je rends les apps simples.", "Le simple, c'est le plus dur."],
 };
-export const tagline: Localized<string> = {
+export const tagline: Localized = {
   en: l(taglineParts, "en").join(" "),
   fr: l(taglineParts, "fr").join(" "),
 };
@@ -57,37 +59,60 @@ export const tagline: Localized<string> = {
 // whether it meant "very productive" or "works alone". And leading with the
 // speed AI buys is an invitation to negotiate the rate down, so AI appears here
 // as what makes the pace safe, not as what makes it cheap.
-export const summary: Localized<string> = {
-  en: "Almost two decades turning tangled front-ends into systems teams can actually maintain: simpler architecture, less overhead, and devs who level up along the way. Today I own the whole front-end, from architecture to release - strict types, end-to-end (E2E) tests and CI keep it safe at that pace.",
-  fr: "Presque deux décennies passées à transformer des front-ends emmêlés en systèmes qu'une équipe peut réellement maintenir : architecture plus simple, moins de frictions, et des devs qui montent en compétence en chemin. Aujourd'hui je prends en charge tout le front-end, de l'architecture à la mise en production - types stricts, tests end-to-end (E2E) et intégration continue sécurisent ce rythme.",
+// "From architecture to release" claims exactly what the missions show: the
+// whole delivery of an app, not a layer of it - and not a backend the CV
+// cannot evidence beyond Learnee. "Web and mobile" is the scope the title
+// leaves to the subtitle.
+export const summary: Localized = {
+  en: "Almost two decades turning tangled codebases into systems teams can actually maintain: simpler architecture, less overhead, and devs who level up along the way. Today I take web and mobile apps from architecture to release - strict types, end-to-end (E2E) tests and CI keep it safe at that pace.",
+  fr: "Presque deux décennies passées à transformer des bases de code emmêlées en systèmes qu'une équipe peut réellement maintenir : architecture plus simple, moins de frictions, et des devs qui montent en compétence en chemin. Aujourd'hui je mène des applications web et mobiles de l'architecture à la mise en production - types stricts, tests end-to-end (E2E) et intégration continue sécurisent ce rythme.",
 };
 
 /**
  * Where I work from - recruiters and job boards filter on it.
  * Not named `location`: importing that would shadow `window.location`.
  */
-export const workLocation: Localized<string> = {
+export const workLocation: Localized = {
   en: "Toulouse, France · Remote",
   fr: "Toulouse, France · Télétravail",
 };
 
 /**
- * The headline: what a client searches for. It mirrors the job titles of the
- * last missions, so the claim is a summary of the CV, not a promotion.
+ * The headline: the common denominator of the mission titles below it, so the
+ * claim is a summary of the CV, not a promotion. The recent missions read
+ * senior front-end, mobile and full-stack; the only honest summary of that
+ * list is a senior developer across web and mobile. English says it the way
+ * the international market labels the role ("Software Engineer" is the
+ * standard name, no diploma connotation); French says it the way a French
+ * client types it - "ingénieur" on a French CV invites the diploma question.
+ * Neither says "Lead": it belongs on the missions where a team was actually
+ * led, and reads as a claim once it sits above missions done solo.
  *
- * Split into parts so heroes can highlight "Front-End" (the searched term)
- * while the full title is derived from the same value - the two can't drift.
+ * Three parts so heroes can stack them: a muted `prefix` line, then the
+ * `highlight` in the flashy gradient and the `rest` in the dark one on the
+ * big line; any part may be empty (French has no prefix). The full title is
+ * derived from the same parts - the two can't drift.
  */
-export const jobTitleParts = ["Lead", "Front-End", "Developer"] as const;
-export const jobTitle = jobTitleParts.join(" ");
+export const jobTitleParts: Localized<readonly [prefix: string, highlight: string, rest: string]> =
+  {
+    en: ["Senior", "Software", "Engineer"],
+    fr: ["", "Développeur", "Senior"],
+  };
+const joinTitleParts = (parts: readonly string[]) => parts.filter(Boolean).join(" ");
+export const jobTitle: Localized = {
+  en: joinTitleParts(l(jobTitleParts, "en")),
+  fr: joinTitleParts(l(jobTitleParts, "fr")),
+};
 
 /**
- * Carries the platform reach the title deliberately leaves out - and does it
- * with the terms clients actually search for ("React Native" beats "mobile").
+ * Carries the scope the title deliberately leaves out - the platforms, then
+ * the stack in the terms clients actually search for ("React Native" beats
+ * "mobile" on a job board, so both are here). Node.js is backed by the
+ * open-source tooling, the SSR work and the Learnee API, not a promise.
  */
-export const jobSubtitle: Localized<string> = {
-  en: "React, React Native & cross-platform.",
-  fr: "React, React Native & multiplateforme.",
+export const jobSubtitle: Localized = {
+  en: "Web & mobile · React, React Native, TypeScript & Node.js.",
+  fr: "Web & mobile · React, React Native, TypeScript & Node.js.",
 };
 
 /**
@@ -96,11 +121,11 @@ export const jobSubtitle: Localized<string> = {
  * PDF is handled by `updatedOn` in the CV footer, which dates the whole
  * document instead of just this line.
  */
-export const availabilityLabel: Localized<string> = {
+export const availabilityLabel: Localized = {
   en: "Available now",
   fr: "Disponible maintenant",
 };
-export const availabilityDetail: Localized<string> = {
+export const availabilityDetail: Localized = {
   en: "full time or less",
   fr: "temps plein ou partiel",
 };
@@ -116,8 +141,8 @@ export const updatedOn = (lang: Lang = defaultLang) => {
 
 export const languages: Array<{
   flag: string;
-  label: Localized<string>;
-  level: Localized<string>;
+  label: Localized;
+  level: Localized;
 }> = [
   {
     flag: "🇫🇷",
@@ -153,14 +178,19 @@ export const putaindecodePodcastsUrl = "https://putaindecode.io/podcasts";
  * types ("télétravail", not "remote"), and the English ones stay in the French
  * list too - half the French job ads for this role are written in English.
  */
-const sharedKeywords = ["React", "React Native", "TypeScript", "freelance", "Toulouse"];
+const sharedKeywords = ["React", "React Native", "TypeScript", "Node.js", "freelance", "Toulouse"];
 
+// "front-end" stays in the keywords after leaving the headline: it is still
+// what most clients type, and the missions still evidence it.
 export const metaKeywords = (lang: Lang = defaultLang) =>
   lang === "fr"
     ? [
         ...sharedKeywords,
-        "architecture front-end",
+        "développeur senior",
         "développeur front-end",
+        "développeur mobile",
+        "développeur full-stack",
+        "architecture front-end",
         "design system",
         "accessibilité",
         "multiplateforme",
@@ -169,6 +199,10 @@ export const metaKeywords = (lang: Lang = defaultLang) =>
       ]
     : [
         ...sharedKeywords,
+        "software engineer",
+        "front-end developer",
+        "mobile developer",
+        "full-stack developer",
         "front-end architecture",
         "design systems",
         "accessibility",
@@ -178,19 +212,19 @@ export const metaKeywords = (lang: Lang = defaultLang) =>
 
 export const metaTitle = (lang: Lang = defaultLang) =>
   lang === "fr"
-    ? `${fullName} (${nickname}) - CV - ${jobTitle}, web & mobile`
-    : `${fullName} (${nickname}) - CV / Résumé - ${jobTitle}, Web & Mobile`;
+    ? `${fullName} (${nickname}) - CV - ${l(jobTitle, lang)}, web & mobile`
+    : `${fullName} (${nickname}) - CV / Résumé - ${l(jobTitle, lang)}, Web & Mobile`;
 
 export type SkillDomain = {
-  title: Localized<string>;
+  title: Localized;
   /** Lead-in line, only read on the feature card. */
-  subtitle?: Localized<string>;
+  subtitle?: Localized;
   items: Localized<string[]>;
   /**
    * One-sentence teaser for the home cards - the "why call him" of the domain
    * in prose, where `items` carry the detail on `/resume` and `/cv`.
    */
-  blurb?: Localized<string>;
+  blurb?: Localized;
   /**
    * The few terms the home teaser shows under the blurb. A curated field, not
    * `items.slice(0, n)`: the full items are phrased as engagements
@@ -213,7 +247,7 @@ export type SkillDomain = {
 
 export const skillsDomains: SkillDomain[] = [
   {
-    title: { en: "Front-End Architecture", fr: "Architecture front-end" },
+    title: { en: "Application Architecture", fr: "Architecture applicative" },
     subtitle: {
       en: "Simpler systems, less overhead, teams that ship.",
       fr: "Des systèmes plus simples, moins de frictions, des équipes qui livrent.",
@@ -334,7 +368,7 @@ export type ProfileIcon = ComponentType<{
 }>;
 
 export type IconItem = {
-  label: Localized<string>;
+  label: Localized;
   Icon: ProfileIcon;
   /** Shown on the condensed print CV; the site renders the full list. */
   cv?: boolean;
@@ -388,18 +422,18 @@ export const hobbies: IconItem[] = [
  * (the indigo band); this block answers the next question: in what shape does
  * the help come.
  */
-export const skillsPitchTitle: Localized<string> = {
+export const skillsPitchTitle: Localized = {
   en: "Where I can help.",
   fr: "Là où je peux aider.",
 };
-export const skillsPitch: Localized<string> = {
+export const skillsPitch: Localized = {
   en: "Years of shipping web & mobile apps made me confident in the high-level choices - architecture, stack, tooling - and in picking what fits the interface you actually need. Advice, training, or hands-on building: I help you and your team focus on what your users need.",
   fr: "Des années à livrer des applications web et mobiles m'ont donné de l'assurance sur les choix structurants - architecture, stack, outillage - et sur le choix de ce qui convient vraiment à l'interface dont vous avez besoin. Conseil, formation ou développement : j'aide votre équipe à se concentrer sur ce dont vos utilisateurs ont besoin.",
 };
 
 // Names the packages behind the "200M+ downloads / month" tile: without them the
 // headline figure is a number nobody can reconcile with the cards below it.
-export const openSourceIntro: Localized<string> = {
+export const openSourceIntro: Localized = {
   en: "Contributing to open source since the early days. The PostCSS plugins I created - postcss-calc, postcss-custom-properties, postcss-color-hex-alpha & co - are downloaded 200M+ times a month. GitHub Arctic Code Vault Contributor.",
   fr: "Contributeur open source depuis les débuts. Les plugins PostCSS que j'ai créés - postcss-calc, postcss-custom-properties, postcss-color-hex-alpha & co - sont téléchargés plus de 200 millions de fois par mois. GitHub Arctic Code Vault Contributor.",
 };
@@ -414,13 +448,13 @@ export const freelanceSince = 2013;
 // `freelanceSince`, which is defined just above.
 export const metaDescription = (lang: Lang = defaultLang) =>
   lang === "fr"
-    ? `CV de ${fullName} (${nickname}), ${jobTitle} - web & mobile, freelance depuis ${freelanceSince}. Expert React & React Native, disponible maintenant.`
-    : `CV of ${fullName} (${nickname}), ${jobTitle} - Web & Mobile, freelance since ${freelanceSince}. React & React Native expert, available now.`;
+    ? `CV de ${fullName} (${nickname}), ${lowerKeepingAcronyms(l(jobTitle, lang))} - web & mobile, freelance depuis ${freelanceSince}. Expert React & React Native, disponible maintenant.`
+    : `CV of ${fullName} (${nickname}), ${l(jobTitle, lang)} - Web & Mobile, freelance since ${freelanceSince}. React & React Native expert, available now.`;
 
 export const metaSubject = (lang: Lang = defaultLang) =>
   lang === "fr"
-    ? `${jobTitle} - web & mobile. Freelance depuis ${freelanceSince}. React & React Native.`
-    : `${jobTitle} - Web & Mobile. Freelance since ${freelanceSince}. React & React Native.`;
+    ? `${l(jobTitle, lang)} - web & mobile. Freelance depuis ${freelanceSince}. React & React Native.`
+    : `${l(jobTitle, lang)} - Web & Mobile. Freelance since ${freelanceSince}. React & React Native.`;
 
 /**
  * Figures that can't be computed at build time (the static build makes no
@@ -693,7 +727,7 @@ export const openSourceCredits = [
  * exactly these paths; keep the two in sync.
  */
 export const resumePdfPath = (lang: Lang = defaultLang) =>
-  `/maxime-thirouin-freelance-front-end-developer-resume${lang === defaultLang ? "" : `.${lang}`}.pdf`;
+  `/maxime-thirouin-freelance-developer-resume${lang === defaultLang ? "" : `.${lang}`}.pdf`;
 
 /** Where the quotes come from - makes them checkable, which is the whole point. */
 export const recommendationsUrl =
@@ -714,7 +748,7 @@ export const personJsonLd = (items: ResumeItem[], lang: Lang = defaultLang) => (
   "@type": "Person",
   name: fullName,
   alternateName: nickname,
-  jobTitle: jobTitle,
+  jobTitle: l(jobTitle, lang),
   description: l(summary, lang),
   url: website,
   email: `mailto:${sendStringAsMailString(socials.send.value)}`,

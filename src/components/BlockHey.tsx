@@ -1,5 +1,5 @@
-import { useT } from "@/i18n";
 import BlockMe1WithSmallPills from "@/components/BlockMe1WithSmallPills";
+import { useT } from "@/i18n";
 import { jobSubtitle, jobTitleParts } from "@/profile";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
@@ -19,12 +19,13 @@ import { Text, View } from "react-native";
  */
 const heroTitleSize = {
   fontSize: "clamp(34px, 1.3vw + 29px, 48px)" as unknown as number,
-  lineHeight: "clamp(41px, 0.66vw + 38.5px, 48px)" as unknown as number,
+  lineHeight: "1.2",
 };
 
 export default function BlockHey() {
   const theme = useTheme();
   const t = useT();
+  const [prefix, highlight, rest] = t(jobTitleParts);
   return (
     <View style={{ zIndex: 1 }}>
       <Container
@@ -58,11 +59,15 @@ export default function BlockHey() {
             <View>
               <View style={{ alignSelf: "flex-start" }} role="heading" aria-level={1}>
                 {/* Trailing space: the parts are stacked blocks, so without it a
-                  text extractor reads "LeadFront-End Developer.". */}
-                <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
-                  {`${jobTitleParts[0]} `}
-                </Text>
-                {/* "Front-End" carries the flashy gradient: it is the term
+                  text extractor reads "SeniorSoftware Engineer.". The French
+                  title has no prefix, so the muted line is not rendered at all
+                  rather than left as an empty block with a line's height. */}
+                {prefix ? (
+                  <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
+                    {`${prefix} `}
+                  </Text>
+                ) : null}
+                {/* The highlight carries the flashy gradient: it is the term
                   clients search for, so it is the one the eye should catch. */}
                 <Text
                   style={[
@@ -71,15 +76,15 @@ export default function BlockHey() {
                     gradientTextStyles(theme, 176),
                     {
                       fontWeight: weight.black,
-                      viewTransitionName: "text--front-end-architect",
+                      viewTransitionName: "text--senior-developer",
                       ...heroTitleSize,
                     },
                   ]}
                 >
                   <Text style={[theme.styles.text, gradientTextFlashyStyles(theme, 176)]}>
-                    {jobTitleParts[1]}
+                    {highlight}
                   </Text>
-                  {` ${jobTitleParts[2]}.`}
+                  {rest ? ` ${rest}.` : "."}
                 </Text>
               </View>
               <Text

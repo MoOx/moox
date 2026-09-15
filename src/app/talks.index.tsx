@@ -1,3 +1,4 @@
+import { l } from "@/i18n";
 import { fetchAll } from "@/api";
 import TalkList from "@/components/TalkList";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
@@ -16,7 +17,7 @@ export const Route = createFileRoute("/talks/")({
   // the search result and every share card fall back to the bare URL.
   head: () => ({
     meta: [
-      { title: `Talks - ${fullName} (${nickname}), ${jobTitle}` },
+      { title: `Talks - ${fullName} (${nickname}), ${l(jobTitle, "en")}` },
       {
         name: "description",
         content: `Conference talks and meetup sessions given by ${nickname} on React, React Native, CSS tooling and front-end architecture.`,
