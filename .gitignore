@@ -9,6 +9,13 @@
 
 # production
 dist
+dist-ios
+dist-android
+
+# native
+.expo
+ios/Pods
+ios/build
 
 # debug
 *.log*

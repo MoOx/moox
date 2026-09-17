@@ -1,6 +1,6 @@
-import { useT, useLang } from "@/i18n";
 import { ResumeItem } from "@/api";
 import Image from "@/components/Image";
+import { useLang, useT } from "@/i18n";
 import {
   compactCount,
   githubFollowers,
@@ -32,8 +32,8 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
       <GradientLinear
         angle={60}
         stops={[
-          { offset: 10, stopColor: "#010244" },
-          { offset: 100, stopColor: "#0F7CB7" },
+          { offset: 10, color: "#010244" },
+          { offset: 100, color: "#0F7CB7" },
         ]}
         style={StyleSheet.absoluteFill}
       />
@@ -71,13 +71,23 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
           >
             {"Open Source"}
           </Text>
-          <View style={{ flex: 1 }} />
-          <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.72) }]}>
+          <View style={{ flexGrow: 1, flexShrink: 1 }} />
+          <Text
+            style={[
+              fontStyles.ios.caption1,
+              { color: alpha(colors.white, 0.72) },
+            ]}
+          >
             {`${compactCount(githubFollowers)} followers · on GitHub since ${githubSince}`}
           </Text>
         </View>
 
-        <Text style={[fontStyles.ios.footnote, { color: alpha(colors.white, 0.85) }]}>
+        <Text
+          style={[
+            fontStyles.ios.footnote,
+            { color: alpha(colors.white, 0.85) },
+          ]}
+        >
           {t(openSourceIntro)}
         </Text>
 
@@ -123,7 +133,12 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
                         {projectName(item)}
                       </Text>
                     </LinkView>
-                    <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.66) }]}>
+                    <Text
+                      style={[
+                        fontStyles.ios.caption1,
+                        { color: alpha(colors.white, 0.66) },
+                      ]}
+                    >
                       {`${item.job_title ?? ""} · ${yearRange(item, lang)}`}
                     </Text>
                   </View>
@@ -149,24 +164,38 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
                           {headline.stat}
                         </Text>
                         <Text
-                          style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.8) }]}
+                          style={[
+                            fontStyles.ios.caption1,
+                            { color: alpha(colors.white, 0.8) },
+                          ]}
                         >
                           {` ${headline.label}`}
                         </Text>
                       </Text>
                       {rest.length > 0 ? (
                         <Text
-                          style={[fontStyles.ios.caption2, { color: alpha(colors.white, 0.6) }]}
+                          style={[
+                            fontStyles.ios.caption2,
+                            { color: alpha(colors.white, 0.6) },
+                          ]}
                         >
                           {rest
-                            .map((s) => `${s.stat} ${lowerKeepingAcronyms(s.label)}`)
+                            .map(
+                              (s) =>
+                                `${s.stat} ${lowerKeepingAcronyms(s.label)}`,
+                            )
                             .join(" · ")}
                         </Text>
                       ) : null}
                     </View>
                   ) : null}
 
-                  <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.82) }]}>
+                  <Text
+                    style={[
+                      fontStyles.ios.caption1,
+                      { color: alpha(colors.white, 0.82) },
+                    ]}
+                  >
                     {item.title.trim()}
                   </Text>
                 </SpacedView>
@@ -175,12 +204,19 @@ export default function CvOpenSourceCard({ items }: { items: ResumeItem[] }) {
           })}
         </View>
 
-        <Text style={[fontStyles.ios.caption1, { color: alpha(colors.white, 0.72) }]}>
+        <Text
+          style={[
+            fontStyles.ios.caption1,
+            { color: alpha(colors.white, 0.72) },
+          ]}
+        >
           {"Also: "}
           {openSourceCredits.map((credit, i) => (
             <Text key={credit.label}>
               {i > 0 ? " · " : ""}
-              <Text style={{ color: colors.white, fontWeight: weight.semibold }}>
+              <Text
+                style={{ color: colors.white, fontWeight: weight.semibold }}
+              >
                 {credit.label}
               </Text>
               {` ${credit.note}`}

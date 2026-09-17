@@ -4,10 +4,13 @@ import { useT } from "@/i18n";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
+import GradientText from "@/react-multiversal/GradientText";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
-import { gradientTextFlashyStyles, useTheme } from "@/styles";
+import TextBlock from "@/react-multiversal/TextBlock";
+import TextRow from "@/react-multiversal/TextRow";
+import { gradientFlashyStops, useTheme } from "@/styles";
 import { Text, View } from "react-native";
 
 export default function BlockHey() {
@@ -46,22 +49,32 @@ export default function BlockHey() {
                 image (JobTitleHeading), so the two cannot drift. */}
             <JobTitleHeading viewTransitionName="text--senior-developer" />
             <Spacer size="l" />
-            <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
+            <TextBlock>
               <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>
                 {t({ en: "Hey,", fr: "Hey," })}
               </Text>
-              <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
-                {t({ en: "I'm ", fr: "Moi c'est " })}
-                <Text
+              {/* A `TextRow` rather than one `Text`: the gradient masks through
+                  a view on a device, which cannot flow inline in a `Text`. On
+                  web it stays a flexed <span>, so the paragraph is untouched.
+                  The trailing space stays inside the string - react-native-web
+                  keeps it (`white-space: pre-wrap`), so a text extractor still
+                  reads "I'm Max.". */}
+              <TextRow>
+                <Text style={[fontStyles.iosEm.largeTitle, theme.styles.text]}>
+                  {t({ en: "I'm ", fr: "Moi c'est " })}
+                </Text>
+                <GradientText
+                  stops={gradientFlashyStops(theme)}
+                  angle={-16}
                   style={[
-                    gradientTextFlashyStyles(theme, -16),
+                    fontStyles.iosEm.largeTitle,
                     { viewTransitionName: "text--max" },
                   ]}
                 >
                   {"Max."}
-                </Text>
-              </Text>
-            </Text>
+                </GradientText>
+              </TextRow>
+            </TextBlock>
           </View>
           <IfWindowWidthIs largerThan={WindowWidth.m}>
             <Spacer size="xxxl" />

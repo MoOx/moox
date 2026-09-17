@@ -1,21 +1,17 @@
-import { useT } from "@/i18n";
 import Me from "@/components/Me";
 import Pill from "@/components/Pill";
+import { useT } from "@/i18n";
 import { WindowWidth } from "@/react-multiversal";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import Parallax from "@/react-multiversal/Parallax";
 import TextForReader from "@/react-multiversal/TextForReader";
 import { pTransforms } from "@/utils.styles";
-import { StyleSheet } from "react-native";
 
 export default function BlockMe1WithSmallPills() {
   const t = useT();
   return (
     <>
-      <IfWindowWidthIs
-        largerThan={WindowWidth.xs}
-        style={[StyleSheet.absoluteFill, { alignItems: "center" }]}
-      >
+      <IfWindowWidthIs largerThan={WindowWidth.xs}>
         <TextForReader>
           {t({
             en: "I am building things for a long time.",
@@ -47,14 +43,21 @@ export default function BlockMe1WithSmallPills() {
             style={{ position: "absolute", top: 200, right: 40 }}
             transforms={pTransforms(5, -5, -0.1)}
           >
-            <Pill title={{ en: "First Website", fr: "Premier site web" }} year={1999} mode="year" />
+            <Pill
+              title={{ en: "First Website", fr: "Premier site web" }}
+              year={1999}
+              mode="year"
+            />
           </Parallax>
           <Parallax
             style={{ position: "absolute", top: 300, left: -60 }}
             transforms={pTransforms(-5, 5, -0.05)}
           >
             <Pill
-              title={{ en: "First Mobile Web App", fr: "Première app web mobile" }}
+              title={{
+                en: "First Mobile Web App",
+                fr: "Première app web mobile",
+              }}
               detail="PalmOS"
               year={2006}
               mode="ago"
@@ -62,10 +65,7 @@ export default function BlockMe1WithSmallPills() {
           </Parallax>
         </Me>
       </IfWindowWidthIs>
-      <IfWindowWidthIs
-        smallerThan={WindowWidth.xs}
-        style={[StyleSheet.absoluteFill, { alignItems: "center" }]}
-      >
+      <IfWindowWidthIs smallerThan={WindowWidth.xs}>
         <Me>
           <Parallax
             style={{ position: "absolute", top: 150, right: 10 }}
@@ -105,7 +105,10 @@ export default function BlockMe1WithSmallPills() {
             transforms={pTransforms(-5, 10, -0.1)}
           >
             <Pill
-              title={{ en: "First Mobile Web App", fr: "Première app web mobile" }}
+              title={{
+                en: "First Mobile Web App",
+                fr: "Première app web mobile",
+              }}
               detail="PalmOS"
               year={2006}
               mode="ago"

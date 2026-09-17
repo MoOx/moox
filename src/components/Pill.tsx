@@ -1,9 +1,10 @@
+import { l, Localized, useLang, useT } from "@/i18n";
 import { AbsoluteSize } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
 import GlassView from "@/react-multiversal/GlassView";
 import SpacedView from "@/react-multiversal/SpacedView";
+import TextBlock from "@/react-multiversal/TextBlock";
 import TextForReader from "@/react-multiversal/TextForReader";
-import { l, Localized, useLang, useT } from "@/i18n";
 import { alpha, useTheme } from "@/styles";
 import { useMemo } from "react";
 import { StyleProp, Text, TextStyle, ViewStyle } from "react-native";
@@ -22,10 +23,10 @@ export default function Pill({
   transitionSize = "",
 }: {
   style?: StyleProp<ViewStyle>;
-  pre?: Localized<string>;
-  title: Localized<string>;
+  pre?: Localized;
+  title: Localized;
   titleStyle?: StyleProp<TextStyle>;
-  detail?: Localized<string>;
+  detail?: Localized;
   year: number;
   mode?: "default" | "ago" | "year";
   pillSpace?: AbsoluteSize;
@@ -65,7 +66,7 @@ export default function Pill({
           vertical={spaceVertical}
           style={[theme.styles.backAlt, { borderRadius: 100 }]}
         >
-          <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
+          <TextBlock>
             {!pre ? null : (
               <Text
                 style={[
@@ -134,7 +135,7 @@ export default function Pill({
                 </>
               )}
             </Text>
-          </Text>
+          </TextBlock>
         </SpacedView>
       </SpacedView>
     </GlassView>

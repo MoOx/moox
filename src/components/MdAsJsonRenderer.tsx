@@ -1,4 +1,5 @@
 import { Fragment, ReactElement, ReactNode, createElement } from "react";
+import { Platform, View } from "react-native";
 import {
   A,
   BlockQuote,
@@ -194,7 +195,16 @@ const renderChild = (
         case "hr":
           return <Hr key={key} />;
         default:
-          return createElement(tag, props, renderChildren(tag, children, keepNewlines));
+          // Every tag the switch above does not name falls through to the DOM.
+          // That is fine on web and fatal on native, where an unknown host
+          // component has no view manager: markdown bodies wrap in a `<div>`,
+          // so this crashed every content page. A `View` is the same box
+          // without the attributes only a browser reads.
+          return Platform.OS === "web" ? (
+            createElement(tag, props, renderChildren(tag, children, keepNewlines))
+          ) : (
+            <View key={key}>{renderChildren(tag, children, keepNewlines)}</View>
+          );
       }
     }
 

@@ -157,7 +157,7 @@ export default function BlockMaxApp({
             role="heading"
             aria-level={2}
           >
-            <View style={{ flex: 1 }}>
+            <View style={{ flexGrow: 1, flexShrink: 1 }}>
               <Text style={[fontStyles.iosEm.title2, theme.styles.text]}>
                 {"@MoOx"}
               </Text>

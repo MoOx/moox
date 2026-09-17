@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "MoOx",
+    "slug": "moox",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "moox",
+    "userInterfaceStyle": "automatic",
+    "plugins": [
+      "./plugins/withUIScene",
+      ["expo-router", { "root": "./src/routes.native" }]
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "io.moox.site"
+    },
+    "android": {
+      "package": "io.moox.site"
+    }
+  }
+}

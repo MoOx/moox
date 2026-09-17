@@ -8,7 +8,7 @@ import Spacer from "@/react-multiversal/Spacer";
 import { useFocus } from "@/react-multiversal/useFocus";
 import { useTheme } from "@/styles";
 import { useRef } from "react";
-import { StyleProp, Text, View, ViewStyle } from "react-native";
+import { Platform, StyleProp, Text, View, ViewStyle } from "react-native";
 import type { AnimatedStyle } from "react-native-reanimated";
 import Animated, { CSSAnimationKeyframes } from "react-native-reanimated";
 
@@ -72,7 +72,12 @@ export default function AvailabilityBadge({
           paddingHorizontal: size("xs"),
           paddingVertical: size("xs"),
         },
-        pulseAnimationStyle,
+        // Web only: the pulse animates `boxShadow`, and Reanimated builds
+        // box shadows in `common/web/style/builders` - there is no native
+        // counterpart, so on a device this describes an animation the engine
+        // cannot run. The badge keeps its shape and its label, which is what
+        // carries the meaning anyway.
+        Platform.OS === "web" ? pulseAnimationStyle : null,
         style,
       ]}
     >

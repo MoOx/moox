@@ -1,5 +1,5 @@
 import { contactHoverableDataSet, contactHoverDataSet } from "@/components/ContactPageStyles";
-import { glassDataSet } from "@/components/GlassFallbackStyles";
+import { glassDataSet } from "@/react-multiversal/design/glass";
 import { alpha, useTheme } from "@/styles";
 import { ReactNode } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
@@ -49,7 +49,7 @@ export default function ContactSurface({
   const theme = useTheme();
   return (
     <View
-      dataSet={{ ...glassDataSet, ...contactHoverableDataSet }}
+      dataSet={{ ...glassDataSet(), ...contactHoverableDataSet }}
       style={[
         {
           position: "relative",

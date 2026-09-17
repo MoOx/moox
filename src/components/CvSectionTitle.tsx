@@ -1,4 +1,4 @@
-import GradientText from "@/components/GradientText";
+import GradientText from "@/react-multiversal/GradientText";
 import { size } from "@/react-multiversal";
 import { weight } from "@/react-multiversal/font";
 import { useTheme } from "@/styles";
@@ -6,7 +6,7 @@ import { View } from "react-native";
 
 /**
  * Section heading of the CV: gradient title + hairline rule filling the row.
- * Uses `GradientText` (per-character solid colors) so it survives PDF export.
+ * Rendered `letter` (per-character solid colors) so it survives PDF export.
  */
 export default function CvSectionTitle({
   children,
@@ -26,6 +26,7 @@ export default function CvSectionTitle({
     >
       <View role="heading" aria-level={2}>
         <GradientText
+          letter
           style={{
             fontSize,
             lineHeight: fontSize * 1.15,
@@ -33,8 +34,8 @@ export default function CvSectionTitle({
           }}
           stops={[
             { offset: 0, color: theme.colors.textFlashy4 },
-            { offset: 0.5, color: theme.colors.textFlashy3 },
-            { offset: 1, color: theme.colors.textFlashy2 },
+            { offset: 50, color: theme.colors.textFlashy3 },
+            { offset: 100, color: theme.colors.textFlashy2 },
           ]}
         >
           {children}
@@ -42,7 +43,8 @@ export default function CvSectionTitle({
       </View>
       <View
         style={{
-          flex: 1,
+          flexGrow: 1,
+          flexShrink: 1,
           height: 1,
           backgroundColor: theme.dynamicColors.ultraLight,
         }}

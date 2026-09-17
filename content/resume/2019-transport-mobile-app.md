@@ -97,7 +97,7 @@ hours, and releases became one click.
 Under the hood the product work continued: polished animations for low-end
 devices, native code and bridges for both platforms, several React Native
 upgrades. The app was also brought to the web with React Native Web to be
-embed in a app builder with live preview.
+embed in an app builder with live preview.
 
 ---
 

@@ -1,5 +1,6 @@
 import { supportsPointerEvent } from "@/react-multiversal/supports";
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { Platform } from "react-native";
 
 const POINTERENTER = supportsPointerEvent() ? "pointerenter" : "mouseenter";
 const POINTERLEAVE = supportsPointerEvent() ? "pointerleave" : "mouseleave";
@@ -24,7 +25,7 @@ export function useFocus<T>(
   } = {},
 ) {
   const [pointerFocused, setPointerFocused] = useState(false);
-  const debouncePointerFocused = useRef<number | null>(null);
+  const debouncePointerFocused = useRef<ReturnType<typeof setTimeout> | null>(null);
   const handlePointerFocusedOn = useCallback(() => {
     if (debouncePointerFocused.current) clearTimeout(debouncePointerFocused.current);
     onPointerFocus?.();
@@ -36,7 +37,7 @@ export function useFocus<T>(
   }, [debounceOff, onPointerLeave]);
 
   const [focused, setFocused] = useState(false);
-  const debounceFocus = useRef<number | null>(null);
+  const debounceFocus = useRef<ReturnType<typeof setTimeout> | null>(null);
   const handleFocusOn = useCallback(() => {
     if (debounceFocus.current) clearTimeout(debounceFocus.current);
     onFocus?.();
@@ -57,6 +58,11 @@ export function useFocus<T>(
   }, [debounceOff]);
 
   useEffect(() => {
+    // `Node` is a DOM global, so reading `Node.ELEMENT_NODE` throws on native
+    // rather than returning false. There is nothing to subscribe to there
+    // either: hover and DOM focus are web events, and the hook's return value
+    // is already the right answer without them.
+    if (Platform.OS !== "web") return;
     const n = ref?.current as HTMLElement;
     if (n?.nodeType === Node.ELEMENT_NODE) {
       const opts = { passive: true, capture: false };

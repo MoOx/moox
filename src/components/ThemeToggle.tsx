@@ -10,7 +10,7 @@ import { useUserColorScheme } from "@/react-multiversal/theme/useUserColorScheme
 import { boxShadows, themedColors, useTheme } from "@/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useState } from "react";
-import { Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
 
 // Deliberately NOT `lazy()`. This component is rendered by the header of every
 // page, so it sits inside the router's single Suspense boundary. A lazy import
@@ -136,18 +136,23 @@ export default function ThemeToggle({
             <SpacedView horizontal="s" vertical="s" gap="xs">
               <View>
                 <ThemePreview mode="light" isActive={userColorScheme == "auto"} />
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: 0,
-                    clipPath: "polygon(100% 100%, 100% 0, 0 100%)",
-                  }}
-                >
-                  <ThemePreview mode="dark" isActive={userColorScheme == "auto"} />
-                </div>
+                {/* The "auto" tile is the light preview with the dark one
+                    clipped diagonally over it. `clipPath` is CSS, so native
+                    shows the light preview alone rather than a wrong one. */}
+                {Platform.OS === "web" ? (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      bottom: 0,
+                      right: 0,
+                      clipPath: "polygon(100% 100%, 100% 0, 0 100%)",
+                    }}
+                  >
+                    <ThemePreview mode="dark" isActive={userColorScheme == "auto"} />
+                  </div>
+                ) : null}
               </View>
               <Text
                 style={[

@@ -68,8 +68,8 @@ export default function StatTile({
         <GradientLinear
           angle={130}
           stops={[
-            { offset: 0, stopColor: theme.dynamicColors.textFlashy2 },
-            { offset: 100, stopColor: theme.dynamicColors.textFlashy3 },
+            { offset: 0, color: theme.dynamicColors.textFlashy2 },
+            { offset: 100, color: theme.dynamicColors.textFlashy3 },
           ]}
           style={StyleSheet.absoluteFill}
         />

@@ -1,9 +1,9 @@
-import { useT } from "@/i18n";
 import {
   companyIconCoef,
   companyIconStyle,
   companyIconWidth,
 } from "@/components/BlockCompaniesTried";
+import { useT } from "@/i18n";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import SpacedView from "@/react-multiversal/SpacedView";
@@ -24,7 +24,7 @@ export default function BlockCompaniesTrust() {
       horizontal="l"
       vertical="xl"
       gap="l"
-      style={{ flex: 1, justifyContent: "center" }}
+      style={{ flexGrow: 1, flexShrink: 1, justifyContent: "center" }}
       role="region"
       aria-label={t({ en: "Trusted by", fr: "Ils m'ont fait confiance" })}
     >
@@ -42,7 +42,8 @@ export default function BlockCompaniesTrust() {
       <SpacedView
         gap="m"
         style={{
-          flex: 1,
+          flexGrow: 1,
+          flexShrink: 1,
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "center",

@@ -1,6 +1,10 @@
 import { size, Size } from "@/react-multiversal";
 import { ReactNode } from "react";
-import { StyleProp, useWindowDimensions, View, ViewStyle } from "react-native";
+import { StyleProp, StyleSheet, useWindowDimensions, View, ViewStyle } from "react-native";
+
+const styles = StyleSheet.create({
+  ifWrapper: { display: "contents" },
+});
 
 /**
  * Native counterpart of the web component. The web one renders both branches
@@ -40,5 +44,5 @@ export default function IfWindowWidthIs({
     (smallerThan != null && width >= size(smallerThan)) ||
     (largerThan != null && width < size(largerThan));
 
-  return hidden ? null : <View style={style}>{children}</View>;
+  return hidden ? null : <View style={[styles.ifWrapper, style]}>{children}</View>;
 }

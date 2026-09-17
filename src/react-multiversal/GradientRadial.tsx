@@ -1,21 +1,15 @@
+import { GradientStop } from "@/react-multiversal/gradient";
 import { StyleProp, ViewStyle } from "react-native";
 import { Defs, RadialGradient, Rect, Stop, Svg } from "react-native-svg";
 
-interface StopData {
-  offset: number;
-  stopColor: string;
-  stopOpacity?: string;
-}
-
-export const transparentToBlack: StopData[] = [
+export const transparentToBlack: GradientStop[] = [
   {
     offset: 0,
-    stopColor: "#000",
+    color: "#000000",
   },
   {
     offset: 100,
-    stopColor: "#000",
-    stopOpacity: "0",
+    color: "#00000000",
   },
 ];
 
@@ -44,14 +38,14 @@ export function GradientRadial({
 }: {
   width?: number | string;
   height?: number | string;
-  stops?: StopData[];
+  stops?: GradientStop[];
   coordinates?: GradientCoordinates;
   style?: StyleProp<ViewStyle>;
 }) {
   const id =
     idPrefix +
     stops
-      .map((stop) => `o:${stop.offset}c:${stop.stopColor}o:${stop.stopOpacity}`)
+      .map((stop) => `o:${stop.offset}c:${stop.color}`)
       .join("::")
       .replace(/[^a-zA-Z0-9]/g, "_");
 
@@ -61,10 +55,9 @@ export function GradientRadial({
         <RadialGradient id={id} {...coordinates}>
           {stops.map((stop) => (
             <Stop
-              key={`${stop.offset}-${stop.stopColor}-${stop.stopOpacity}`}
+              key={`${stop.offset}-${stop.color}`}
               offset={`${stop.offset}%`}
-              stopColor={stop.stopColor}
-              stopOpacity={stop.stopOpacity ?? "1"}
+              stopColor={stop.color}
             />
           ))}
         </RadialGradient>
