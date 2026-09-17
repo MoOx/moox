@@ -8,6 +8,7 @@ import {
   nickname,
   putaindecodeArticles,
   putaindecodeArticlesUrl,
+  socialImageMeta,
 } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
@@ -24,6 +25,7 @@ export const Route = createFileRoute("/blog/")({
   // the search result and every share card fall back to the bare URL.
   head: () => ({
     meta: [
+      ...socialImageMeta("en"),
       { title: `Blog - ${fullName} (${nickname}), ${l(jobTitle, "en")}` },
       {
         name: "description",

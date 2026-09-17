@@ -1,31 +1,18 @@
 import BlockMe1WithSmallPills from "@/components/BlockMe1WithSmallPills";
+import JobTitleHeading from "@/components/JobTitleHeading";
 import { useT } from "@/i18n";
-import { jobSubtitle, jobTitleParts } from "@/profile";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
-import { fontStyles, weight } from "@/react-multiversal/font";
+import { fontStyles } from "@/react-multiversal/font";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
-import { gradientTextFlashyStyles, gradientTextStyles, useTheme } from "@/styles";
+import { gradientTextFlashyStyles, useTheme } from "@/styles";
 import { Text, View } from "react-native";
-
-/**
- * Fluid hero size: 34px on a phone, 48px from ~1440px up, interpolated in
- * between. A CSS function in an inline style, which is what react-native-web
- * writes anyway - so no stylesheet rule, no `!important`, and above all **one
- * node**: the two `IfWindowWidthIs` variants this replaces both sat in the
- * HTML, so the <h1> carried the job title twice.
- */
-const heroTitleSize = {
-  fontSize: "clamp(34px, 1.3vw + 29px, 48px)" as unknown as number,
-  lineHeight: "1.2",
-};
 
 export default function BlockHey() {
   const theme = useTheme();
   const t = useT();
-  const [prefix, highlight, rest] = t(jobTitleParts);
   return (
     <View style={{ zIndex: 1 }}>
       <Container
@@ -55,52 +42,9 @@ export default function BlockHey() {
                 put the title in the HTML twice. */}
             {/* Wrapper: the parent stacks in `column-reverse`, so heading and
                 subtitle must travel together to keep the subtitle under the
-                title. */}
-            <View>
-              <View style={{ alignSelf: "flex-start" }} role="heading" aria-level={1}>
-                {/* Trailing space: the parts are stacked blocks, so without it a
-                  text extractor reads "SeniorSoftware Engineer.". The French
-                  title has no prefix, so the muted line is not rendered at all
-                  rather than left as an empty block with a line's height. */}
-                {prefix ? (
-                  <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
-                    {`${prefix} `}
-                  </Text>
-                ) : null}
-                {/* The highlight carries the flashy gradient: it is the term
-                  clients search for, so it is the one the eye should catch. */}
-                <Text
-                  style={[
-                    fontStyles.iosEm.largeTitle,
-                    theme.styles.text,
-                    gradientTextStyles(theme, 176),
-                    {
-                      fontWeight: weight.black,
-                      viewTransitionName: "text--senior-developer",
-                      ...heroTitleSize,
-                    },
-                  ]}
-                >
-                  <Text style={[theme.styles.text, gradientTextFlashyStyles(theme, 176)]}>
-                    {highlight}
-                  </Text>
-                  {rest ? ` ${rest}.` : "."}
-                </Text>
-              </View>
-              <Text
-                style={[
-                  fontStyles.ios.headline,
-                  theme.styles.textLight1,
-                  {
-                    fontWeight: weight.regular,
-                    fontStyle: "italic",
-                    textAlign: "right",
-                  },
-                ]}
-              >
-                {t(jobSubtitle)}
-              </Text>
-            </View>
+                title. The title itself is shared with the social-preview
+                image (JobTitleHeading), so the two cannot drift. */}
+            <JobTitleHeading viewTransitionName="text--senior-developer" />
             <Spacer size="l" />
             <Text role="paragraph" style={{ display: "flex", flexDirection: "column" }}>
               <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>

@@ -729,6 +729,24 @@ export const openSourceCredits = [
 export const resumePdfPath = (lang: Lang = defaultLang) =>
   `/maxime-thirouin-freelance-developer-resume${lang === defaultLang ? "" : `.${lang}`}.pdf`;
 
+/**
+ * The social-preview image (Open Graph / Twitter card), one per language,
+ * rendered from `/og` by `npm run og` - the same components as the home hero,
+ * so the picture can never advertise a title the page no longer carries.
+ * Absolute URL on purpose: scrapers do not resolve a relative `og:image`.
+ */
+export const socialImagePath = (lang: Lang = defaultLang) =>
+  `/preview-1200x630${lang === defaultLang ? "" : `.${lang}`}.jpg`;
+export const socialImageMeta = (lang: Lang = defaultLang) => [
+  { property: "og:type", content: "website" },
+  { property: "og:image", content: `${website}${socialImagePath(lang)}` },
+  { property: "og:image:width", content: "1200" },
+  { property: "og:image:height", content: "630" },
+  { property: "og:image:alt", content: `${fullName} - ${l(jobTitle, lang)}` },
+  // Without it the card shows the image as a thumbnail next to the title.
+  { name: "twitter:card", content: "summary_large_image" },
+];
+
 /** Where the quotes come from - makes them checkable, which is the whole point. */
 export const recommendationsUrl =
   "https://www.linkedin.com/in/maxthirouin/details/recommendations/";

@@ -46,6 +46,7 @@ import {
   titleOf,
   workLocation,
   yearRange,
+  socialImageMeta,
 } from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
@@ -97,6 +98,7 @@ export const Route = createFileRoute("/{-$lang}/resume")({
   head: ({ params }) => ({
     links: alternateLinks("/resume", langFromParam(params.lang)),
     meta: [
+      ...socialImageMeta(langFromParam(params.lang)),
       // Same title vocabulary as `/` and `/cv` (see profile.tsx) - one job
       // title site-wide, for humans and crawlers alike.
       {

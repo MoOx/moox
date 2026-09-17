@@ -9,7 +9,14 @@ import ContactSideCard from "@/components/ContactSideCard";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { ind, sendStringAsMailString, socials } from "@/consts";
 import { alternateLinks, assertLangParam, l, langFromParam, useT } from "@/i18n";
-import { freelanceSince, fullName, jobTitle, lowerKeepingAcronyms, workLocation } from "@/profile";
+import {
+  freelanceSince,
+  fullName,
+  jobTitle,
+  lowerKeepingAcronyms,
+  socialImageMeta,
+  workLocation,
+} from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
 import { setClipboardString } from "@/react-multiversal/clipboard";
@@ -34,6 +41,7 @@ export const Route = createFileRoute("/{-$lang}/contact")({
   head: ({ params }) => ({
     links: alternateLinks("/contact", langFromParam(params.lang)),
     meta: [
+      ...socialImageMeta(langFromParam(params.lang)),
       {
         // Derived from `profile.tsx`, like every other page title: this one had
         // been left behind on "Senior Front-End Architect", the title the CV

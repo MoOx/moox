@@ -36,6 +36,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
+import { startDevServer } from "./lib/dev-server.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
@@ -62,8 +63,9 @@ const args = Object.fromEntries(
  * Verified: page 1 still ends on the teaching row, page 2 still opens on Open
  * Source. Recheck the page count whenever the copy or the highlights grow.
  */
-const SCALES = { en: 0.98, fr: 0.94 };
-const scaleFor = (lang) => Math.min(2, Math.max(0.1, Number(args.scale ?? SCALES[lang] ?? 1)));
+const SCALES = { en: 0.96, fr: 0.92 };
+const scaleFor = (lang) =>
+  Math.min(2, Math.max(0.1, Number(args.scale ?? SCALES[lang] ?? 1)));
 const format = args.format ?? "A4";
 const margin = args.margin ?? "0mm";
 // Post-processing pass: "qpdf" (default) or "none". See optimizeWithQpdf below
@@ -90,46 +92,8 @@ const port = Number(args.port ?? "4319");
 const externalUrl = args.url; // if set, don't spawn a dev server
 
 // --- Dev server (renders PDF mode server-side) ----------------------------
-/** @returns {Promise<{ baseUrl: string, stop: () => void }>} */
-async function startServer() {
-  if (externalUrl) {
-    return { baseUrl: externalUrl.replace(/\/$/, ""), stop: () => {} };
-  }
-  const bin = path.join(root, "node_modules", ".bin", "vite");
-  const child = spawn(bin, ["dev", "--port", String(port)], {
-    cwd: root,
-    detached: true,
-    stdio: ["ignore", "pipe", "pipe"],
-  });
-
-  const baseUrl = await new Promise((resolve, reject) => {
-    const timeout = setTimeout(
-      () => reject(new Error("Dev server did not start within 90s")),
-      90_000,
-    );
-    let buf = "";
-    const onData = (d) => {
-      buf += d.toString();
-      const m = buf.match(/http:\/\/localhost:(\d+)/);
-      if (m && /ready in/.test(buf)) {
-        clearTimeout(timeout);
-        resolve(`http://localhost:${m[1]}`);
-      }
-    };
-    child.stdout.on("data", onData);
-    child.stderr.on("data", onData);
-    child.on("exit", (code) => reject(new Error(`Dev server exited early (code ${code})`)));
-  });
-
-  const stop = () => {
-    try {
-      if (child.pid) process.kill(-child.pid); // kill the whole process group
-    } catch {
-      /* already gone */
-    }
-  };
-  return { baseUrl, stop };
-}
+// Shared with the social-preview export (scripts/lib/dev-server.mjs).
+const startServer = () => startDevServer({ root, port, externalUrl });
 
 /**
  * Quantize a PNG buffer with pngquant (palette, 8-bit). Resolves to `null` if
@@ -143,7 +107,9 @@ function quantizePng(buffer) {
     const chunks = [];
     p.stdout.on("data", (c) => chunks.push(c));
     p.on("error", () => resolve(null));
-    p.on("close", (code) => resolve(code === 0 && chunks.length ? Buffer.concat(chunks) : null));
+    p.on("close", (code) =>
+      resolve(code === 0 && chunks.length ? Buffer.concat(chunks) : null),
+    );
     p.stdin.on("error", () => resolve(null));
     p.stdin.end(buffer);
   });
@@ -167,9 +133,12 @@ async function routeQuantizedImages(page) {
     if (!fs.existsSync(file) || fs.statSync(file).size < 100_000) {
       return route.fallback();
     }
-    if (!cache.has(file)) cache.set(file, await quantizePng(fs.readFileSync(file)));
+    if (!cache.has(file))
+      cache.set(file, await quantizePng(fs.readFileSync(file)));
     const body = cache.get(file);
-    return body ? route.fulfill({ contentType: "image/png", body }) : route.fallback();
+    return body
+      ? route.fulfill({ contentType: "image/png", body })
+      : route.fallback();
   });
 }
 
@@ -205,7 +174,11 @@ async function stampMetadata(file, meta) {
     // qpdf's JSON encodes strings with a "u:" (unicode) prefix.
     const str = (v) => (v ? `u:${v}` : undefined);
     for (const obj of Object.values(objects)) {
-      if (obj?.value && typeof obj.value === "object" && obj.value["/Producer"]) {
+      if (
+        obj?.value &&
+        typeof obj.value === "object" &&
+        obj.value["/Producer"]
+      ) {
         for (const [key, value] of Object.entries({
           "/Author": str(meta.author),
           "/Creator": str(meta.author),
@@ -278,7 +251,9 @@ function optimizeWithQpdf(rawPath, outPath) {
         fs.rmSync(rawPath, { force: true });
         resolve(true);
       } else {
-        console.warn(`[resume:pdf] qpdf exited with code ${code}; keeping unoptimized PDF.`);
+        console.warn(
+          `[resume:pdf] qpdf exited with code ${code}; keeping unoptimized PDF.`,
+        );
         fs.renameSync(rawPath, outPath);
         resolve(false);
       }
@@ -305,7 +280,9 @@ async function renderPdf(browser, baseUrl, lang, out) {
     await page.goto(target, { waitUntil: "networkidle", timeout: 60_000 });
     // Confirm we are in PDF mode (Download button removed, body text rendered).
     await page.waitForFunction(
-      () => !document.querySelector("a[download]") && document.body.innerText.length > 500,
+      () =>
+        !document.querySelector("a[download]") &&
+        document.body.innerText.length > 500,
       { timeout: 30_000 },
     );
     // Ensure every image is fully loaded AND decoded before snapshotting -
@@ -361,15 +338,21 @@ async function renderPdf(browser, baseUrl, lang, out) {
 
 async function main() {
   if (!VALID_QUALITY.includes(quality)) {
-    throw new Error(`Invalid --optimize=${quality}. Use one of: ${VALID_QUALITY.join(", ")}`);
+    throw new Error(
+      `Invalid --optimize=${quality}. Use one of: ${VALID_QUALITY.join(", ")}`,
+    );
   }
   for (const lang of langs) {
     if (!LANGS.includes(lang)) {
-      throw new Error(`Invalid --lang=${lang}. Use one of: ${LANGS.join(", ")}`);
+      throw new Error(
+        `Invalid --lang=${lang}. Use one of: ${LANGS.join(", ")}`,
+      );
     }
   }
   if (args.out && langs.length > 1) {
-    throw new Error("--out writes a single file: pass --lang=en or --lang=fr with it.");
+    throw new Error(
+      "--out writes a single file: pass --lang=en or --lang=fr with it.",
+    );
   }
   console.log(
     `[resume:pdf] langs=${langs.join(",")} format=${format} ` +
@@ -383,7 +366,11 @@ async function main() {
     browser = await chromium.launch({ channel: "chrome" });
     for (const lang of langs) {
       const out = outFor(lang);
-      results.push({ lang, out, ...(await renderPdf(browser, baseUrl, lang, out)) });
+      results.push({
+        lang,
+        out,
+        ...(await renderPdf(browser, baseUrl, lang, out)),
+      });
     }
   } finally {
     if (browser) await browser.close();
@@ -400,7 +387,9 @@ async function main() {
   }
   console.log(
     "[resume:pdf] verify the text layer of each file:\n" +
-      results.map((r) => `  pdftotext ${path.relative(root, r.out)} - | head -40`).join("\n"),
+      results
+        .map((r) => `  pdftotext ${path.relative(root, r.out)} - | head -40`)
+        .join("\n"),
   );
 }
 

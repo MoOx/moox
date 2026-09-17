@@ -19,6 +19,7 @@ import {
   nickname,
   personJsonLd,
   workLocation,
+  socialImageMeta,
 } from "@/profile";
 import { alternateLinks, assertLangParam, l, langFromParam } from "@/i18n";
 import Spacer from "@/react-multiversal/Spacer";
@@ -31,6 +32,7 @@ export const Route = createFileRoute("/{-$lang}/")({
   head: ({ params }) => ({
     links: alternateLinks("/", langFromParam(params.lang)),
     meta: [
+      ...socialImageMeta(langFromParam(params.lang)),
       // Same title vocabulary as `/cv` and `/resume` (see profile.tsx): three
       // pages advertising three different job titles read as sloppiness to a
       // human and as a contradiction to a crawler.

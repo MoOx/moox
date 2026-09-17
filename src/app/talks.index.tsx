@@ -2,7 +2,7 @@ import { l } from "@/i18n";
 import { fetchAll } from "@/api";
 import TalkList from "@/components/TalkList";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
-import { fullName, jobTitle, nickname } from "@/profile";
+import { fullName, jobTitle, nickname, socialImageMeta } from "@/profile";
 import Container from "@/react-multiversal/Container";
 import { fontStyles } from "@/react-multiversal/font";
 import Spacer from "@/react-multiversal/Spacer";
@@ -17,6 +17,7 @@ export const Route = createFileRoute("/talks/")({
   // the search result and every share card fall back to the bare URL.
   head: () => ({
     meta: [
+      ...socialImageMeta("en"),
       { title: `Talks - ${fullName} (${nickname}), ${l(jobTitle, "en")}` },
       {
         name: "description",
