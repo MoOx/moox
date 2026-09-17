@@ -1,8 +1,8 @@
 import { fetchAll, fetchResume, ResumeItem } from "@/api";
-import { alternateLinks, langFromParam } from "@/i18n";
+import { alternateLinks, l, langFromParam } from "@/i18n";
 import { assertLangParam } from "@/i18n.route";
 import ResumePage from "@/pages/ResumePage";
-import { fullName, jobTitle, metaDescription, nickname } from "@/profile";
+import { fullName, jobTitle, metaDescription, nickname, socialImageMeta } from "@/profile";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/{-$lang}/resume")({
@@ -27,13 +27,14 @@ export const Route = createFileRoute("/{-$lang}/resume")({
   head: ({ params }) => ({
     links: alternateLinks("/resume", langFromParam(params.lang)),
     meta: [
+      ...socialImageMeta(langFromParam(params.lang)),
       // Same title vocabulary as `/` and `/cv` (see profile.tsx) - one job
       // title site-wide, for humans and crawlers alike.
       {
         title:
           langFromParam(params.lang) === "fr"
-            ? `${fullName} (${nickname}) - CV & parcours - ${jobTitle}`
-            : `${fullName} (${nickname}) - Résumé & Experience Timeline - ${jobTitle}`,
+            ? `${fullName} (${nickname}) - CV & parcours - ${l(jobTitle, "fr")}`
+            : `${fullName} (${nickname}) - Résumé & Experience Timeline - ${l(jobTitle, "en")}`,
       },
       {
         name: "description",

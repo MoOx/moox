@@ -128,12 +128,12 @@ source assets are never degraded.
 
 After **any** change to the export script, verify **both** files — text layer
 _and_ page count (the CV is two pages, and French runs ~15% longer, which is
-why it renders at `scale: 0.97`):
+why it renders smaller: `SCALES` in the export script, 0.98 / 0.94 today):
 
 ```sh
-pdftotext public/maxime-thirouin-freelance-front-end-developer-resume.pdf - | head -40
-pdftotext public/maxime-thirouin-freelance-front-end-developer-resume.fr.pdf - | head -40
-pdfinfo public/maxime-thirouin-freelance-front-end-developer-resume.fr.pdf | grep Pages
+pdftotext public/maxime-thirouin-freelance-developer-resume.pdf - | head -40
+pdftotext public/maxime-thirouin-freelance-developer-resume.fr.pdf - | head -40
+pdfinfo public/maxime-thirouin-freelance-developer-resume.fr.pdf | grep Pages
 ```
 
 **`<ReactNativeStyleSheet />` is the last child of `<body>`, with `href` and
@@ -195,9 +195,17 @@ derivation instead. Manual figures that genuinely cannot be computed live in
 frontmatter/data flags — `group`, `personal`, `highlight`, `feature`,
 `cv` — never as `slice(0, n)` or index arithmetic.
 
-**The job title is `Lead Front-End Developer`**, identical to the title of the
-last three missions. That is deliberate: the headline must stay a summary of
-the evidence below it, not a claim above it. Do not reintroduce "Architect".
+**The job title is `Senior Software Engineer` (`Développeur senior` in
+French)**, the common denominator of the mission titles below it: the recent
+missions read senior front-end, mobile and full-stack, and that list summarizes
+to a senior developer across web and mobile, nothing narrower. That is
+deliberate: the headline must stay a summary of the evidence below it, not a
+claim above it. Mission titles say `Lead` only where a team was actually led
+and `Senior` where Max carried the subject alone; `Developer` on missions,
+`Engineer` only in the English headline (the standard label there, while
+"ingénieur" on a French CV invites the diploma question). Do not reintroduce
+"Architect", and do not put "Lead" or "Front-End" back in the headline: the
+scope lives in the subtitle and the keywords.
 
 **Numbers must be checkable.** Every figure on the CV either derives from the
 content or is documented in `STATS.md` with the command to recompute it. Never

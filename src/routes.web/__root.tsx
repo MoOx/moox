@@ -59,7 +59,6 @@ export const Route = createRootRoute({
       { name: "application-name", content: "MoOx" },
       { name: "author", content: "Maxime Thirouin" },
       { name: "creator", content: "Maxime Thirouin" },
-      { property: "og:image", content: "/preview-1200x630.jpg" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

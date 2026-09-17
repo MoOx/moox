@@ -16,7 +16,7 @@ job_title:
 icon: /resume/icons/universite-toulouse.svg
 groupPitch:
   en: "Taught alongside client missions - and the habit stuck: reviewing code to level up a team is the part of the job I like most."
-  fr: "Enseignement mené en parallèle des missions clients - et l'habitude est restée : relire du code pour faire monter une équipe en compétence est la partie du métier que je préfère."
+  fr: "Mené en parallèle des missions clients, et l'habitude est restée : relire du code pour faire progresser une équipe est ce que je préfère."
 stats:
   - stat: "200+"
     label:

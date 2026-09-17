@@ -5,7 +5,7 @@ title:
   en: "Generative AI solution for automating legal and financial data"
   fr: "Solution d'IA générative pour l'automatisation de données juridiques et financières"
 highlight: true
-job_title: "Lead Front-End Developer"
+job_title: "Senior Front-End Developer"
 icon: /resume/icons/aardvark.png
 pitch:
   en: "Built an IA chat and a virtualized spreadsheet-like editor that keeps the UI instant on tens of thousands of rows, then made Playwright guard its performance in CI - so the release train never shipped a regression."

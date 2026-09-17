@@ -5,7 +5,7 @@ group: hove
 title:
   en: "iOS / Android app built for cities and transport networks"
   fr: "Application iOS / Android pour les villes et les réseaux de transport"
-job_title: "Lead Front-End Developer"
+job_title: "Lead Mobile Developer"
 dateStart: 2017-03-01
 dateEnd: 2018-06-01
 hashtags:

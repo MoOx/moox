@@ -16,10 +16,16 @@ hashtags:
 remote: true
 ---
 
+Led the front-end for a team of PHP developers, bringing them the front-end
+practices of the time.
+
 PHP used for data restitution. HTML5 / CSS 3 for the client side with a lot of
 JavaScript (& jQuery).
 
 ---
+
+Lead front-end d'une équipe de développeurs PHP, à qui j'ai apporté les bonnes
+pratiques front-end de l'époque.
 
 PHP pour la restitution des données. HTML5 / CSS3 côté client, avec beaucoup de
 JavaScript (et de jQuery).

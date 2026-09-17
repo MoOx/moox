@@ -24,7 +24,7 @@ type BotResponse = string[];
 
 const botResponses: BotResponse[] = [
   [
-    "Hello, I’m BotMax. Max is a front-end developer, so he didn’t really build me to be a smart assistant.",
+    "Hello, I’m BotMax. Max is a developer, not a chatbot maker, so he didn’t really build me to be a smart assistant.",
     "If you ask me anything, I’ll just tell you to click on the links above.",
   ],
   [

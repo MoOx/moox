@@ -4,7 +4,7 @@ url: "https://fklg.art"
 title:
   en: "VOD platform built with Shopify & Vimeo"
   fr: "Plateforme VOD construite avec Shopify & Vimeo"
-job_title: "Full-Stack Developer"
+job_title: "Full-Stack Developer & Designer"
 icon: /resume/icons/fklg.jpg
 group: fklg
 dateStart: 2023-11-01

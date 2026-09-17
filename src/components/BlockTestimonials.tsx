@@ -189,9 +189,15 @@ const TestimonialItem = ({ item }: { item: Testimonial }) => {
       <View
         style={[StyleSheet.absoluteFill, { borderRadius: size("s"), boxShadow: boxShadowGlass() }]}
       />
-      <SpacedView key={item.name} horizontal="m" vertical="m" gap="s">
+      <SpacedView
+        key={item.name}
+        horizontal="m"
+        vertical="m"
+        gap="s"
+        style={{ flexGrow: 1, justifyContent: "space-between" }}
+      >
         <SVGQuote width={32} height={32} fill={theme.dynamicColors.text} style={{ zIndex: 1 }} />
-        <View role="blockquote">
+        <View role="blockquote" style={{ flexGrow: 1 }}>
           <Text
             role="paragraph"
             style={[fontStyles.ios.callout, theme.styles.text]}

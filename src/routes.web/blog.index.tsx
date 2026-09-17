@@ -1,6 +1,7 @@
 import { fetchAll } from "@/api";
+import { l } from "@/i18n";
 import BlogListPage from "@/pages/BlogListPage";
-import { fullName, jobTitle, nickname } from "@/profile";
+import { fullName, jobTitle, nickname, socialImageMeta } from "@/profile";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/blog/")({
@@ -10,7 +11,8 @@ export const Route = createFileRoute("/blog/")({
   // the search result and every share card fall back to the bare URL.
   head: () => ({
     meta: [
-      { title: `Blog - ${fullName} (${nickname}), ${jobTitle}` },
+      ...socialImageMeta("en"),
+      { title: `Blog - ${fullName} (${nickname}), ${l(jobTitle, "en")}` },
       {
         name: "description",
         content: `Posts by ${nickname} on front-end engineering: React, React Native, tooling and the craft of shipping web and mobile apps.`,

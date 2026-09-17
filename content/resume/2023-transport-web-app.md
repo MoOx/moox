@@ -4,7 +4,7 @@ url: "https://hove.com/"
 title:
   en: "Web app built for cities and transport networks"
   fr: "Application web pour les villes et les réseaux de transport"
-job_title: "Lead Front-End Developer"
+job_title: "Senior Front-End Developer"
 group: hove
 dateStart: 2023-01-01
 dateEnd: 2023-10-30

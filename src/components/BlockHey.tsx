@@ -1,31 +1,21 @@
 import BlockMe1WithSmallPills from "@/components/BlockMe1WithSmallPills";
+import JobTitleHeading from "@/components/JobTitleHeading";
 import { useT } from "@/i18n";
-import { jobSubtitle, jobTitleParts } from "@/profile";
 import { WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
-import { fontStyles, weight } from "@/react-multiversal/font";
+import { fontStyles } from "@/react-multiversal/font";
 import GradientText from "@/react-multiversal/GradientText";
 import IfWindowWidthIs from "@/react-multiversal/IfWindowWidthIs";
 import SpacedView from "@/react-multiversal/SpacedView";
 import Spacer from "@/react-multiversal/Spacer";
 import TextBlock from "@/react-multiversal/TextBlock";
 import TextRow from "@/react-multiversal/TextRow";
-import { gradientFlashyStops, gradientText, useTheme } from "@/styles";
-import { Platform, Text, View } from "react-native";
+import { gradientFlashyStops, useTheme } from "@/styles";
+import { Text, View } from "react-native";
 
 export default function BlockHey() {
   const theme = useTheme();
   const t = useT();
-  // Shared by both halves of the title so they stay one typographic line.
-  const titleStyle = [
-    fontStyles.iosEm.title1,
-    theme.styles.text,
-    { fontWeight: weight.black },
-    Platform.OS === "web" && {
-      fontSize: "clamp(34px, 1.3vw + 29px, 48px)" as unknown as number,
-      lineHeight: "clamp(41px, 0.66vw + 38.5px, 48px)" as unknown as number,
-    },
-  ];
   return (
     <View style={{ zIndex: 1 }}>
       <Container
@@ -55,60 +45,9 @@ export default function BlockHey() {
                 put the title in the HTML twice. */}
             {/* Wrapper: the parent stacks in `column-reverse`, so heading and
                 subtitle must travel together to keep the subtitle under the
-                title. */}
-            <View>
-              <View
-                style={{ alignSelf: "flex-start" }}
-                role="heading"
-                aria-level={1}
-              >
-                {/* Trailing space: the parts are stacked blocks, so without it a
-                  text extractor reads "LeadFront-End Developer.". */}
-                <Text style={[fontStyles.ios.title1, theme.styles.textLight1]}>
-                  {`${jobTitleParts[0]} `}
-                </Text>
-                {/* "Front-End" carries the flashy gradient: it is the term
-                  clients search for, so it is the one the eye should catch.
-                  Two siblings rather than one nested inside the other: a
-                  gradient is painted over the box of the node that carries it,
-                  so nesting would stretch the flashy ramp across the whole
-                  title and only show its first half over the word. */}
-                <TextRow>
-                  {/* The view transition name lives on this half alone: two
-                      elements may not share one. */}
-                  <GradientText
-                    stops={gradientFlashyStops(theme)}
-                    angle={176}
-                    style={[
-                      titleStyle,
-                      { viewTransitionName: "text--front-end-architect" },
-                    ]}
-                  >
-                    {jobTitleParts[1]}
-                  </GradientText>
-                  <GradientText
-                    stops={gradientText(theme)}
-                    angle={176}
-                    style={titleStyle}
-                  >
-                    {` ${jobTitleParts[2]}.`}
-                  </GradientText>
-                </TextRow>
-              </View>
-              <Text
-                style={[
-                  fontStyles.ios.headline,
-                  theme.styles.textLight1,
-                  {
-                    fontWeight: weight.regular,
-                    fontStyle: "italic",
-                    textAlign: "right",
-                  },
-                ]}
-              >
-                {t(jobSubtitle)}
-              </Text>
-            </View>
+                title. The title itself is shared with the social-preview
+                image (JobTitleHeading), so the two cannot drift. */}
+            <JobTitleHeading viewTransitionName="text--senior-developer" />
             <Spacer size="l" />
             <TextBlock>
               <Text style={[fontStyles.ios.headline, theme.styles.textLight1]}>

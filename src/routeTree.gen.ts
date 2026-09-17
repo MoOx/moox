@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes.web/__root'
 import { Route as DesignSystemRouteImport } from './routes.web/design-system'
+import { Route as OgPreviewRouteImport } from './routes.web/og-preview'
 import { Route as AppsIndexRouteImport } from './routes.web/apps.index'
 import { Route as AppsSlugRouteImport } from './routes.web/apps.$slug'
 import { Route as BlogIndexRouteImport } from './routes.web/blog.index'
@@ -19,6 +20,7 @@ import { Route as TalksSlugRouteImport } from './routes.web/talks.$slug'
 import { Route as Char123LangChar125IndexRouteImport } from './routes.web/{-$lang}.index'
 import { Route as Char123LangChar125ContactRouteImport } from './routes.web/{-$lang}.contact'
 import { Route as Char123LangChar125CvRouteImport } from './routes.web/{-$lang}.cv'
+import { Route as Char123LangChar125OgRouteImport } from './routes.web/{-$lang}.og'
 import { Route as Char123LangChar125ResumeRouteImport } from './routes.web/{-$lang}.resume'
 import { Route as AppsSlugPrivacyRouteImport } from './routes.web/apps.$slug_.privacy'
 import { Route as Char123LangChar125ResumeSlugRouteImport } from './routes.web/{-$lang}.resume_.$slug'
@@ -27,6 +29,11 @@ import { Route as Char123LangChar125ResumeGroupGroupRouteImport } from './routes
 const DesignSystemRoute = DesignSystemRouteImport.update({
   id: '/design-system',
   path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OgPreviewRoute = OgPreviewRouteImport.update({
+  id: '/og-preview',
+  path: '/og-preview',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppsIndexRoute = AppsIndexRouteImport.update({
@@ -75,6 +82,11 @@ const Char123LangChar125CvRoute = Char123LangChar125CvRouteImport.update({
   path: '/{-$lang}/cv',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char123LangChar125OgRoute = Char123LangChar125OgRouteImport.update({
+  id: '/{-$lang}/og',
+  path: '/{-$lang}/og',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char123LangChar125ResumeRoute =
   Char123LangChar125ResumeRouteImport.update({
     id: '/{-$lang}/resume',
@@ -101,11 +113,13 @@ const Char123LangChar125ResumeGroupGroupRoute =
 
 export interface FileRoutesByFullPath {
   '/design-system': typeof DesignSystemRoute
+  '/og-preview': typeof OgPreviewRoute
   '/apps/$slug': typeof AppsSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
   '/{-$lang}/cv': typeof Char123LangChar125CvRoute
+  '/{-$lang}/og': typeof Char123LangChar125OgRoute
   '/{-$lang}/resume': typeof Char123LangChar125ResumeRoute
   '/apps/': typeof AppsIndexRoute
   '/blog/': typeof BlogIndexRoute
@@ -117,11 +131,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/design-system': typeof DesignSystemRoute
+  '/og-preview': typeof OgPreviewRoute
   '/apps/$slug': typeof AppsSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
   '/{-$lang}/cv': typeof Char123LangChar125CvRoute
+  '/{-$lang}/og': typeof Char123LangChar125OgRoute
   '/{-$lang}/resume': typeof Char123LangChar125ResumeRoute
   '/apps': typeof AppsIndexRoute
   '/blog': typeof BlogIndexRoute
@@ -134,11 +150,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/design-system': typeof DesignSystemRoute
+  '/og-preview': typeof OgPreviewRoute
   '/apps/$slug': typeof AppsSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/talks/$slug': typeof TalksSlugRoute
   '/{-$lang}/contact': typeof Char123LangChar125ContactRoute
   '/{-$lang}/cv': typeof Char123LangChar125CvRoute
+  '/{-$lang}/og': typeof Char123LangChar125OgRoute
   '/{-$lang}/resume': typeof Char123LangChar125ResumeRoute
   '/apps/': typeof AppsIndexRoute
   '/blog/': typeof BlogIndexRoute
@@ -152,11 +170,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/design-system'
+    | '/og-preview'
     | '/apps/$slug'
     | '/blog/$slug'
     | '/talks/$slug'
     | '/{-$lang}/contact'
     | '/{-$lang}/cv'
+    | '/{-$lang}/og'
     | '/{-$lang}/resume'
     | '/apps/'
     | '/blog/'
@@ -168,11 +188,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/design-system'
+    | '/og-preview'
     | '/apps/$slug'
     | '/blog/$slug'
     | '/talks/$slug'
     | '/{-$lang}/contact'
     | '/{-$lang}/cv'
+    | '/{-$lang}/og'
     | '/{-$lang}/resume'
     | '/apps'
     | '/blog'
@@ -184,11 +206,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/design-system'
+    | '/og-preview'
     | '/apps/$slug'
     | '/blog/$slug'
     | '/talks/$slug'
     | '/{-$lang}/contact'
     | '/{-$lang}/cv'
+    | '/{-$lang}/og'
     | '/{-$lang}/resume'
     | '/apps/'
     | '/blog/'
@@ -201,11 +225,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   DesignSystemRoute: typeof DesignSystemRoute
+  OgPreviewRoute: typeof OgPreviewRoute
   AppsSlugRoute: typeof AppsSlugRoute
   BlogSlugRoute: typeof BlogSlugRoute
   TalksSlugRoute: typeof TalksSlugRoute
   Char123LangChar125ContactRoute: typeof Char123LangChar125ContactRoute
   Char123LangChar125CvRoute: typeof Char123LangChar125CvRoute
+  Char123LangChar125OgRoute: typeof Char123LangChar125OgRoute
   Char123LangChar125ResumeRoute: typeof Char123LangChar125ResumeRoute
   AppsIndexRoute: typeof AppsIndexRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -223,6 +249,13 @@ declare module '@tanstack/react-router' {
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/og-preview': {
+      id: '/og-preview'
+      path: '/og-preview'
+      fullPath: '/og-preview'
+      preLoaderRoute: typeof OgPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/apps/': {
@@ -288,6 +321,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LangChar125CvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/{-$lang}/og': {
+      id: '/{-$lang}/og'
+      path: '/{-$lang}/og'
+      fullPath: '/{-$lang}/og'
+      preLoaderRoute: typeof Char123LangChar125OgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/{-$lang}/resume': {
       id: '/{-$lang}/resume'
       path: '/{-$lang}/resume'
@@ -321,11 +361,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   DesignSystemRoute: DesignSystemRoute,
+  OgPreviewRoute: OgPreviewRoute,
   AppsSlugRoute: AppsSlugRoute,
   BlogSlugRoute: BlogSlugRoute,
   TalksSlugRoute: TalksSlugRoute,
   Char123LangChar125ContactRoute: Char123LangChar125ContactRoute,
   Char123LangChar125CvRoute: Char123LangChar125CvRoute,
+  Char123LangChar125OgRoute: Char123LangChar125OgRoute,
   Char123LangChar125ResumeRoute: Char123LangChar125ResumeRoute,
   AppsIndexRoute: AppsIndexRoute,
   BlogIndexRoute: BlogIndexRoute,

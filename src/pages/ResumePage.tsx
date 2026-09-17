@@ -198,7 +198,7 @@ export default function ResumePage({
           theme.styles.text,
           {
             fontSize: 42,
-            lineHeight: 42,
+            lineHeight: 42 * 1.2,
             fontWeight: "900",
             viewTransitionName,
           },
@@ -206,7 +206,7 @@ export default function ResumePage({
         role="heading"
         aria-level={1}
       >
-        {`${jobTitle}.`}
+        {`${t(jobTitle)}.`}
       </GradientText>
       <Text
         style={[fontStyles.ios.subhead, theme.styles.textLight1, { fontStyle: "italic" }]}
@@ -268,7 +268,7 @@ export default function ResumePage({
               media query (`[data-resume-hero]` in styles.css); the Spacer
               below stays conditional, since it only compensates for the
               desktop variant leaving the flow. */}
-          <View dataSet={{ "resume-hero": "true" }}>{headline("text--front-end-architect")}</View>
+          <View dataSet={{ "resume-hero": "true" }}>{headline("text--senior-developer")}</View>
           <IfWindowWidthIs largerThan={WindowWidth.m}>
             <Spacer size="xxxl" />
           </IfWindowWidthIs>

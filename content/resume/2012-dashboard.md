@@ -4,7 +4,7 @@ url: "http://twitter.com/jirafe"
 title:
   en: "Dashboard with different kinds of widgets for Jirafe analytics"
   fr: "Tableau de bord à widgets pour la solution analytics Jirafe"
-job_title: "Lead Front-End Developer"
+job_title: "Senior Front-End Developer"
 dateStart: 2012-11-01
 dateEnd: 2013-11-01
 hashtags:

@@ -8,7 +8,7 @@ groupTitle:
   en: "iOS / Android & web apps built for cities and transport networks"
   fr: "Applications iOS / Android et web pour les villes et les réseaux de transport"
 highlight: true
-job_title: "Lead Front-End Developer"
+job_title: "Lead Mobile Developer"
 icon: /resume/icons/hove.png
 group: hove
 # The accessibility sentence claims what happened and nothing more: the app was
@@ -17,7 +17,7 @@ group: hove
 # is checkable; "RGAA compliant" would be a claim nobody ran the audit for.
 groupPitch:
   en: "Created the white-label transit app for cities and grew it across 20 client networks. Called back by the CTO a year later to rescue it: rebuilt it with a smaller, senior team, stabilized the product, and automated multi-client QA and releases with Jenkins and Detox end-to-end tests - one QA pass switches client networks in-app. Made the app fully accessible, validated by a disability users' association."
-  fr: "Application de transport en marque blanche créée pour les villes, puis déployée sur 20 réseaux clients. Rappelé un an plus tard par le CTO pour la sauver : reconstruite avec une équipe réduite et expérimentée, produit stabilisé, recette multi-clients et livraisons automatisées avec Jenkins et des tests end-to-end Detox - une seule passe de recette suffit, l'app changeant de réseau client de l'intérieur. Application rendue pleinement accessible, validée par une association d'usagers en situation de handicap."
+  fr: "Application de transport en marque blanche créée pour les villes, puis déployée sur 20 réseaux clients. Rappelé un an plus tard par le CTO pour la sauver : équipe réduite et expérimentée, produit stabilisé, recette multi-clients et livraisons automatisées avec Jenkins et des tests end-to-end Detox : une seule recette, l'app changeant de réseau client de l'intérieur. Rendue pleinement accessible, validée par une association d'usagers en situation de handicap."
 stats:
   - title:
       en: "Networks served"

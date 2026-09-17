@@ -8,10 +8,11 @@ url: "https://web.archive.org/web/20251010182648/https://learnee.fr/"
 title:
   en: "Online learning platform with a neuroscience-based approach"
   fr: "Plateforme d'apprentissage en ligne fondée sur les neurosciences"
-job_title: "CTO & Designer"
+job_title: "Full-Stack Developer & Designer"
+highlight: true
 pitch:
-  en: "Owned everything from brand to backend: designed the identity - a logo that morphs into a friendly smiley, error face included - the product UX, the front-end, a Supabase-backed API and the automated delivery."
-  fr: "Tout pris en charge, de la marque au backend : identité dessinée - un logo qui se métamorphose en smiley, tête des mauvais jours comprise -, UX du produit, front-end, API sur Supabase et livraison automatisée."
+  en: "Owned the whole product, brand to backend: identity and logo, product UX, the front-end, a Supabase-backed API and automated delivery."
+  fr: "Tout le produit, de la marque au backend : identité et logo, UX du produit, front-end, API sur Supabase et livraison automatisée."
 dateStart: 2025-04-01
 dateEnd: 2025-09-30
 hashtags:

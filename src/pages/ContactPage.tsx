@@ -6,7 +6,7 @@ import ContactPageStyles from "@/components/ContactPageStyles";
 import ContactSideCard from "@/components/ContactSideCard";
 import WebsiteWrapper from "@/components/WebsiteWrapper";
 import { ind, sendStringAsMailString, socials } from "@/consts";
-import { useT } from "@/i18n";
+import { l, useT } from "@/i18n";
 import { freelanceSince, jobTitle, workLocation } from "@/profile";
 import { size, WindowWidth } from "@/react-multiversal";
 import Avatar from "@/react-multiversal/Avatar";
@@ -328,8 +328,8 @@ export default function ContactPage() {
               {heading}
               <Text style={[fontStyles.ios.callout, { lineHeight: 25 }, theme.styles.textLight1]}>
                 {t({
-                  en: `${jobTitle}, freelance since ${freelanceSince}. ${t(workLocation)}. Pick whichever channel you actually like: they all reach me.`,
-                  fr: `${jobTitle}, freelance depuis ${freelanceSince}. ${t(workLocation)}. Choisissez le canal qui vous va : ils arrivent tous jusqu'à moi.`,
+                  en: `${l(jobTitle, "en")}, freelance since ${freelanceSince}. ${t(workLocation)}. Pick whichever channel you actually like: they all reach me.`,
+                  fr: `${l(jobTitle, "fr")}, freelance depuis ${freelanceSince}. ${t(workLocation)}. Choisissez le canal qui vous va : ils arrivent tous jusqu'à moi.`,
                 })}
               </Text>
               <Text style={[fontStyles.ios.footnote, { lineHeight: 20 }, theme.styles.textLight1]}>

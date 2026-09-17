@@ -273,7 +273,7 @@ export default function CvPage({
                     { offset: 100, color: theme.colors.textFlashy4 },
                   ]}
                 >
-                  {`${jobTitle}.`}
+                  {`${t(jobTitle)}.`}
                 </GradientText>
               </Text>
               <Text

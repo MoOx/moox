@@ -9,6 +9,7 @@ import {
   metaSubject,
   metaTitle,
   nickname,
+  socialImageMeta,
 } from "@/profile";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/{-$lang}/cv")({
   head: ({ params }) => ({
     links: alternateLinks("/cv", langFromParam(params.lang)),
     meta: [
+      ...socialImageMeta(langFromParam(params.lang)),
       // The page keeps the title short for the eye; the keywords a crawler, an
       // LLM or a job board matches on live here, where length is free. The PDF
       // export reads these same tags back off the rendered page to fill the
