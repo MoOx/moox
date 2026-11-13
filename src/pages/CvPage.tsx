@@ -515,6 +515,13 @@ export default function CvPage({
                       return periods.length > 1 ? periods.join(" · ") : monthRange(h, lang);
                     })()}
                   </Text>
+                  {h.schedule ? (
+                    <Text
+                      style={[fontStyles.ios.caption1, theme.styles.textLight2]}
+                    >
+                      {h.schedule}
+                    </Text>
+                  ) : null}
                 </View>
                 <View
                   style={{
@@ -591,8 +598,16 @@ export default function CvPage({
                     ]}
                   >
                     {/* Years only: this is a compact table, and the month
-                        earns its space on key experiences, not here. */}
-                    {yearRange(m, lang)}
+                        earns its space on key experiences, not here. Stints
+                        for the same reason as the key rows: FKLG's two short
+                        missions three years apart must not read as
+                        "2023 – 2026", three years of continuous work. */}
+                    {(() => {
+                      const periods = groupPeriods(membersOf(m));
+                      return periods.length > 1
+                        ? periods.join(" · ")
+                        : yearRange(m, lang);
+                    })()}
                   </Text>
                   <Text
                     style={[
@@ -603,7 +618,9 @@ export default function CvPage({
                     <Text style={[fontStyles.iosEm.footnote, theme.styles.text]}>
                       {m.job_title}
                     </Text>
-                    <Text style={theme.styles.textLight1}>{` · ${m.company}`}</Text>
+                    <Text
+                      style={theme.styles.textLight1}
+                    >{` · ${m.company}${m.schedule ? ` · ${m.schedule}` : ""}`}</Text>
                   </Text>
                   <Text
                     style={[

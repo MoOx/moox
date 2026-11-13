@@ -8,16 +8,23 @@ highlight: true
 job_title: "Senior Front-End Developer"
 icon: /resume/icons/aardvark.png
 pitch:
-  en: "Built an IA chat and a virtualized spreadsheet-like editor that keeps the UI instant on tens of thousands of rows, then made Playwright guard its performance in CI - so the release train never shipped a regression."
-  fr: "Chat IA & Éditeur de type tableur virtualisé, construit pour garder l'interface instantanée sur des dizaines de milliers de lignes, puis performance surveillée par Playwright en intégration continue - pour qu'aucune régression ne parte en production."
+  en: "Built an AI chat and a virtualized spreadsheet-like editor, checked by hand at 50,000 rows with no visible lag, then had Storybook interaction tests in CI (Vitest + Playwright) fail the build whenever the 10,000-row table stopped virtualizing or lost search, sort or filters."
+  fr: "Chat IA et éditeur de type tableur virtualisé, vérifié à la main sur 50 000 lignes sans latence visible, puis tests d'interaction Storybook en intégration continue (Vitest + Playwright) qui font échouer le build dès que la table de 10 000 lignes cesse d'être virtualisée ou perd recherche, tri ou filtres."
+# 4 days a week: Enjoy (2024) then Exem (2025-2026) took the other days.
+schedule:
+  en: "4 days/week"
+  fr: "4 j/semaine"
 stats:
-  - stat: "50k+"
+  # 50k is the size tested by hand during development; the CI story runs on
+  # 10k (TableView.stories.tsx: fewer than 100 rows in the DOM, rows change on
+  # scroll). No timing was ever measured, so no "performance test" claim.
+  - stat: "50k"
     label:
       en: "Rows"
       fr: "Lignes"
     comment:
-      en: "editable in-browser, lag-free (virtualized)"
-      fr: "éditables dans le navigateur, sans latence (virtualisées)"
+      en: "tested by hand, no visible lag (virtualized)"
+      fr: "testées à la main, sans latence visible (virtualisées)"
   - stat:
       en: "2 weeks"
       fr: "2 semaines"
@@ -25,8 +32,8 @@ stats:
       en: "Release cadence"
       fr: "Cadence de livraison"
     comment:
-      en: "fully automated CI (Playwright perf tests)"
-      fr: "CI entièrement automatisée (tests de performance Playwright)"
+      en: "fully automated CI (Storybook interaction tests in Playwright)"
+      fr: "CI entièrement automatisée (tests d'interaction Storybook sous Playwright)"
   # Not "Solo": in bold right under the "Lead Front-End Developer" title it read
   # as a contradiction. Ownership is the point, headcount isn't.
   - stat:
@@ -67,9 +74,12 @@ editable, in the browser.
 Spreadsheet-grade editing means spreadsheet-grade details: units, dates and
 long text cells each needed their own editing behavior, and filtering started
 client-side then moved to the backend once the datasets outgrew the browser.
-Performance at that scale erodes silently, one innocent PR at a time; the
-Playwright performance tests in CI exist precisely for that, with a fully
-automated pipeline holding a two-week release cadence for almost two years.
+Performance at that scale erodes silently, one innocent PR at a time. I
+checked the editor by hand at 50,000 rows while building it, and Storybook
+interaction tests running in Chromium on every CI run (Vitest + Playwright)
+fail the build if the 10,000-row table stops virtualizing or loses search,
+sort or filters. The fully automated pipeline held a two-week release cadence
+for almost two years.
 
 Sole front-end in a three-person product team, I also took over design after
 the designer's first drafts (up to a complete redesign once the product had
@@ -89,10 +99,13 @@ Une édition digne d'un tableur impose des détails dignes d'un tableur : unité
 dates et cellules de texte long demandaient chacune leur propre comportement
 d'édition, et le filtrage, d'abord côté client, est passé côté serveur quand
 les jeux de données ont dépassé ce que le navigateur encaisse. À cette échelle,
-la performance s'érode en silence, une pull request anodine après l'autre ; les
-tests de performance Playwright en intégration continue sont là exactement pour
-ça, dans une chaîne entièrement automatisée qui a tenu une livraison toutes les
-deux semaines pendant près de deux ans.
+la performance s'érode en silence, une pull request anodine après l'autre. J'ai
+vérifié l'éditeur à la main sur 50 000 lignes pendant sa construction, et des
+tests d'interaction Storybook exécutés dans Chromium à chaque passage de la CI
+(Vitest + Playwright) font échouer le build si la table de 10 000 lignes cesse
+d'être virtualisée ou perd la recherche, le tri ou les filtres. La chaîne
+entièrement automatisée a tenu une livraison toutes les deux semaines pendant
+près de deux ans.
 
 Seul front-end d'une équipe produit de trois personnes, j'ai aussi repris le
 design après les premières maquettes (jusqu'à une refonte complète quand le

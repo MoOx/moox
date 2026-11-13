@@ -706,17 +706,16 @@ export const resumeEntryPath = (item: ResumeItem) => `/${item.slug}`;
 export const resumeEntryTransitionName = (item: ResumeItem) =>
   `resume-entry--${item.slug.split("/").pop()}`;
 
-/** OSS credentials with no résumé entry of their own. */
+/**
+ * OSS credentials with no résumé entry of their own. PostCSS left this list
+ * when it got one (`2026-postcss.md`), which carries the org and its commits.
+ */
 export const openSourceCredits = [
   {
-    label: "PostCSS",
-    note: "org creator, 500+ commits",
-    url: "https://github.com/search?q=org%3Apostcss+author%3Amoox&type=commits",
-  },
-  {
-    label: "react-native",
-    note: "core contributions",
-    url: "https://github.com/search?q=repo%3Afacebook%2Freact-native+author%3Amoox&type=commits",
+    // The repository moved from facebook/ to react/; Expo joined in 2026.
+    label: "React Native & Expo",
+    note: "contributions",
+    url: "https://github.com/search?q=repo%3Aexpo%2Fexpo+repo%3Areact%2Freact-native+author%3Amoox&type=commits",
   },
 ];
 

@@ -1,19 +1,13 @@
-![I build apps.](./github.jpg)
+[![I build apps.](./github.jpg)](https://moox.io)
 
 # Hey, I'm [Max](https://moox.io)
 
 I am a [Senior Software Engineer](https://moox.io) making web & mobile apps, available as Freelance.
 
-I build apps with:
-
-- ⛑ JavaScript & **TypeScript** to feel confident,
-- ⚛️ **React** (with **React Native** if needed, for Web, iOS, Android, Windows, macOS) using [React Strict DOM](https://facebook.github.io/react-strict-dom/),
-- TanStack Start, Expo, Next.js, depending on your need and preferences.
-
-## 💬 Want to hire me ?
+Most of the time I use React & React Native.
 
 <a href="https://moox.io/contact">
-  <img height="48"  alt="Let's talk" src="https://img.shields.io/badge/Let's%20talk-8A2BE2?style=plastic&logo=iMessage&logoColor=%23fff&logoSize=8" />
+  <img width="158" height="36"  alt="Let's talk" src="https://img.shields.io/badge/Let's%20talk-8A2BE2?style=plastic&logo=iMessage&logoColor=%23fff&logoSize=8" />
 </a>
 
 ##
@@ -24,4 +18,4 @@ I build apps with:
 [![BlueSky Follow](https://img.shields.io/badge/BlueSky-%20?style=social&logo=bluesky)](https://bsky.app/profile/moox.io)
 [![X Follow](https://img.shields.io/twitter/follow/MoOx?style=social&label=)](https://x.com/MoOx)
 
-## _Curious about me❓ **<https://moox.io>**._
+## **<https://moox.io>**

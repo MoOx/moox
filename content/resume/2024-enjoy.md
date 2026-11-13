@@ -8,6 +8,10 @@ job_title: "Mobile Developer"
 pitch:
   en: "Took the UI and UX from MVP to a published App Store release, in React Native and TypeScript."
   fr: "Interface et expérience menées du MVP à une publication sur l'App Store, en React Native et TypeScript."
+# Fridays to Sundays, alongside Aardvark (invoices LARN-01 to 04).
+schedule:
+  en: "3 days/week"
+  fr: "3 j/semaine"
 dateStart: 2024-06-17
 dateEnd: 2024-08-12
 hashtags:

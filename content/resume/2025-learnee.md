@@ -9,10 +9,17 @@ title:
   en: "Online learning platform with a neuroscience-based approach"
   fr: "Plateforme d'apprentissage en ligne fondée sur les neurosciences"
 job_title: "Full-Stack Developer & Designer"
-highlight: true
+# Not a key experience since Lyv (2026): part-time, alongside Aardvark, and the
+# page-1 space went to the latest mission.
+highlight: false
 pitch:
   en: "Owned the whole product, brand to backend: identity and logo, product UX, the front-end, a Supabase-backed API and automated delivery."
   fr: "Tout le produit, de la marque au backend : identité et logo, UX du produit, front-end, API sur Supabase et livraison automatisée."
+# The days Aardvark (4 days/week) left free. A company run with my wife, so
+# no invoices to check this against.
+schedule:
+  en: "3 days/week"
+  fr: "3 j/semaine"
 dateStart: 2025-04-01
 dateEnd: 2025-09-30
 hashtags:

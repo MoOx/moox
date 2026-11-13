@@ -22,17 +22,19 @@ stats:
   - title:
       en: "Networks served"
       fr: "Réseaux desservis"
+    # The networks' scale, not the app's usage: say so in the label itself,
+    # since the CV line drops the title.
     stat: "900M+"
     label:
-      en: "Trips / year"
-      fr: "Trajets / an"
+      en: "Trips / year on client networks"
+      fr: "Trajets / an sur les réseaux clients"
     comment:
       en: "TCL · Ilévia · TBM (public data)"
       fr: "TCL · Ilévia · TBM (données publiques)"
   - stat: "4M+"
     label:
-      en: "People served"
-      fr: "Voyageurs desservis"
+      en: "Residents across client networks"
+      fr: "Habitants sur les réseaux clients"
   - stat: "10"
     label:
       en: "Devs led"
@@ -47,8 +49,8 @@ stats:
       en: "For build, QA & releases"
       fr: "Pour les builds, la recette et les livraisons"
     comment:
-      en: "was a full day: builds, installs & QA per client network"
-      fr: "une journée entière auparavant : builds, installations et recette par réseau client"
+      en: "a change took several days per client network, QA included; a few hours after"
+      fr: "plusieurs jours par réseau client pour une modification, recette comprise ; quelques heures après"
 dateStart: 2019-06-06
 dateEnd: 2022-12-31
 # Order matters: the CV only renders the first 6, so the distinctive ones lead.
@@ -88,11 +90,12 @@ I rebuilt the team as a smaller,
 senior one, stabilized the app and simplified the code it had accumulated.
 
 The biggest win was operational. Shipping a change used to cost days per
-client network: builds, installs, QA for every declination. This second
+client network: builds, installs, QA for every declination, and most of that
+time went into hand-offs between people rather than into the work itself. This second
 phase pushed the Fastlane automation to an "all-in-one" build embedding
 every client's data, so QA switches networks in-app without rebuilding:
 integrating a modification, QA included, went from several days to a few
-hours, and releases became one click.
+hours over 2019–2022, and releases became one click.
 
 Under the hood the product work continued: polished animations for low-end
 devices, native code and bridges for both platforms, several React Native
@@ -108,11 +111,12 @@ a consisté à resserrer les deux. J'ai reconstitué une équipe plus petite et 
 
 Le gain le plus fort a été opérationnel. Livrer une modification coûtait
 auparavant des jours par réseau client : builds, installations, recette pour
-chaque déclinaison. Cette deuxième phase a poussé l'automatisation Fastlane
+chaque déclinaison, et l'essentiel de ce temps partait dans les passages de
+relais entre personnes plutôt que dans le travail lui-même. Cette deuxième phase a poussé l'automatisation Fastlane
 vers un build « tout-en-un » embarquant les données de tous les clients : la
 recette change de réseau depuis l'application, sans reconstruire. Intégrer une
-modification, recette comprise, est passé de plusieurs jours à quelques heures,
-et les livraisons sont devenues affaire d'un clic.
+modification, recette comprise, est passé de plusieurs jours à quelques heures
+entre 2019 et 2022, et les livraisons sont devenues affaire d'un clic.
 
 Sous le capot, le travail produit a continué : animations soignées pour les
 appareils d'entrée de gamme, code natif et ponts pour les deux plateformes,
