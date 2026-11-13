@@ -123,9 +123,11 @@ PY
 | stylelint             | ~10M/wk (I instigated it - issue #1, community-built)         | `curl api.npmjs.org/downloads/point/last-week/stylelint`          |
 | phenomic              | 3.2k ★ · precursor of Next.js SSG                             | GitHub stars (below)                                              |
 | rescript-react-native | 35 repos · ~1.2k ★ across the org                             | GitHub org (below)                                                |
+| postcss (2026 entry)  | postcss-selector-parser ~178M/wk (2026-11-12) · 3 advisories fixed since 2026-06 · 13 packages lifted on Tidelift (4 created by me: postcss-url, reduce-css-calc, postcss-font-variant, postcss-selector-matches; first publisher on npm) · 500+ org commits | `curl api.npmjs.org/downloads/point/last-week/postcss-selector-parser`; advisories in its `CHANGELOG.md` (CVE-2026-9358, CVE-2026-104844, GHSA-67xj-gfww-g738); package count from the Tidelift lifter dashboard (tidelift.com/lifter) |
 
-**Excluded** (only maintainer, not creator): postcss-selector-parser (611M/mo,
-beneb) · postcss-media-minmax (yisi) · postcss-nesting (jonathantneal) ·
+**Excluded from the "created by me" headline** (only maintainer, not creator):
+postcss-selector-parser (611M/mo, beneb; its maintenance is part of the `2026-postcss`
+entry, never counted in the +200M) · postcss-media-minmax (yisi) · postcss-nesting (jonathantneal) ·
 color-name (1.36B/mo, dfcreative).
 
 ---

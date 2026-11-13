@@ -9,7 +9,7 @@ title:
 groupTitle:
   en: "Teaching C, web fundamentals & Agile methodology to university students"
   fr: "Enseignement du C, des fondamentaux du web et des méthodes agiles à l'université"
-highlight: true
+highlight: false
 job_title:
   en: "University Lecturer"
   fr: "Enseignant vacataire"

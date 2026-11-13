@@ -72,6 +72,14 @@ export type ResumeItem = ContentItem & {
    * Condensed views read `groupTitle ?? title` (see `titleOf`).
    */
   groupTitle?: string;
+  /**
+   * The working pattern when it is not full time ("4 days/week"). Absent
+   * means full time: only the exception is written down, so the CV stays quiet
+   * on the common case. Missions that ran side by side must say so next to
+   * their dates: two overlapping full-time spans read as a dating error, or
+   * worse.
+   */
+  schedule?: string;
   stats?: ResumeStat[];
 };
 
@@ -87,10 +95,19 @@ export type ResumeItem = ContentItem & {
  */
 export type ResumeItemSource = Omit<
   ResumeItem,
-  "title" | "groupTitle" | "pitch" | "groupPitch" | "job_title" | "stats" | "links" | "body"
+  | "title"
+  | "groupTitle"
+  | "pitch"
+  | "groupPitch"
+  | "job_title"
+  | "schedule"
+  | "stats"
+  | "links"
+  | "body"
 > & {
   title: Localized<string>;
   groupTitle?: Localized<string>;
+  schedule?: Localized<string>;
   pitch?: Localized<string>;
   groupPitch?: Localized<string>;
   job_title?: Localized<string>;
@@ -115,6 +132,7 @@ export const localizeResumeItem = (item: ResumeItemSource, lang: Lang): ResumeIt
   pitch: l(item.pitch, lang),
   groupPitch: l(item.groupPitch, lang),
   job_title: l(item.job_title, lang),
+  schedule: l(item.schedule, lang),
   stats: item.stats?.map((stat) => ({
     ...stat,
     stat: l(stat.stat, lang),
