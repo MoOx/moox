@@ -1,5 +1,5 @@
-import { useT } from "@/i18n";
 import SkillCard from "@/components/SkillCard";
+import { useT } from "@/i18n";
 import { skillsDomains } from "@/profile";
 import { size } from "@/react-multiversal";
 import SpacedView from "@/react-multiversal/SpacedView";
@@ -14,14 +14,19 @@ import { View } from "react-native";
  * - `full` (`/resume`): the complete `items` lists, like the CV but with the
  *   web's room.
  */
-export default function SkillsCards({ mode = "full" }: { mode?: "teaser" | "full" }) {
+export default function SkillsCards({
+  mode = "full",
+}: {
+  mode?: "teaser" | "full";
+}) {
   const t = useT();
   const teaser = mode === "teaser";
   return (
     <SpacedView
       gap="m"
       style={{
-        flex: 1,
+        flexGrow: 1,
+        flexShrink: 1,
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "center",

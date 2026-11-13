@@ -25,7 +25,8 @@ import { StyleSheet, View } from "react-native";
 
 const styles = StyleSheet.create({
   menuGroup: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
     flexDirection: "row",
     alignItems: "center",
   },

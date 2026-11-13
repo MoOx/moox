@@ -1,8 +1,8 @@
-import { useHref, defaultLang, Lang, useT, useLang } from "@/i18n";
 import { ResumeItem } from "@/api";
 import Image from "@/components/Image";
 import MdAsJsonRenderer from "@/components/MdAsJsonRenderer";
 import StatTile from "@/components/StatTile";
+import { defaultLang, Lang, useHref, useLang, useT } from "@/i18n";
 import { pitchOf, resumeEntryPath, resumeEntryTransitionName } from "@/profile";
 import { size, Size } from "@/react-multiversal";
 import { fontStyles } from "@/react-multiversal/font";
@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   links: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "flex-end",
@@ -48,19 +49,26 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   tags: {
-    // flex: 1,
+    // flexGrow: 1, flexShrink: 1,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "flex-end",
   },
 });
 
-const getDurationText = (startDate: string, endDate: Date, lang: Lang = defaultLang) => {
-  const durationInMonths = Math.floor(differenceInCalendarMonths(endDate, new Date(startDate)));
+const getDurationText = (
+  startDate: string,
+  endDate: Date,
+  lang: Lang = defaultLang,
+) => {
+  const durationInMonths = Math.floor(
+    differenceInCalendarMonths(endDate, new Date(startDate)),
+  );
   const durationYears = Math.floor(durationInMonths / 12);
   const durationMonths = durationInMonths % 12;
 
-  const plural = (n: number, one: string, many: string) => (n === 1 ? `1 ${one}` : `${n} ${many}`);
+  const plural = (n: number, one: string, many: string) =>
+    n === 1 ? `1 ${one}` : `${n} ${many}`;
   const yearText =
     durationYears === 0
       ? ""
@@ -119,7 +127,9 @@ export const ResumeTimelineEntry = ({
           flexBasis: 640,
           boxShadow: boxShadows.default,
         },
-        transitionEnabled ? { viewTransitionName: resumeEntryTransitionName(item) } : null,
+        transitionEnabled
+          ? { viewTransitionName: resumeEntryTransitionName(item) }
+          : null,
       ]}
       role="article"
       // Deep-link target, offset by `scroll-margin-top` (see styles.css). Not
@@ -145,8 +155,17 @@ export const ResumeTimelineEntry = ({
           />
         </View>
       )}
-      <View style={[StyleSheet.absoluteFill, { borderRadius, boxShadow: boxShadowGlass() }]} />
-      <SpacedView style={{ flexGrow: 1 }} horizontal={horizontal} vertical={vertical}>
+      <View
+        style={[
+          StyleSheet.absoluteFill,
+          { borderRadius, boxShadow: boxShadowGlass() },
+        ]}
+      />
+      <SpacedView
+        style={{ flexGrow: 1 }}
+        horizontal={horizontal}
+        vertical={vertical}
+      >
         <View
           style={{
             flexDirection: "row",
@@ -160,7 +179,9 @@ export const ResumeTimelineEntry = ({
               nothing in it. */}
           <Text
             style={[fontStyles.iosEm.subhead, theme.styles.textLight2]}
-            {...(item.job_title ? { role: "heading" as const, "aria-level": 4 } : null)}
+            {...(item.job_title
+              ? { role: "heading" as const, "aria-level": 4 }
+              : null)}
           >
             {(item.job_title ?? "").toUpperCase()}
           </Text>
@@ -173,20 +194,30 @@ export const ResumeTimelineEntry = ({
               {item.company ?? ""}
             </LinkText>
           ) : (
-            <Text style={[styles.company, theme.styles.textLight1]}>{item.company ?? ""}</Text>
+            <Text style={[styles.company, theme.styles.textLight1]}>
+              {item.company ?? ""}
+            </Text>
           )}
         </View>
         {!detail && !disableLinks ? (
           <LinkText
             href={localizeHref(resumeEntryPath(item))}
             underlineOnFocus={true}
-            style={[styles.description, fontStyles.iosEm.title2, theme.styles.text]}
+            style={[
+              styles.description,
+              fontStyles.iosEm.title2,
+              theme.styles.text,
+            ]}
           >
             {item.title}
           </LinkText>
         ) : (
           <Text
-            style={[styles.description, fontStyles.iosEm.title2, theme.styles.text]}
+            style={[
+              styles.description,
+              fontStyles.iosEm.title2,
+              theme.styles.text,
+            ]}
             role="paragraph"
           >
             {item.title}
@@ -211,7 +242,9 @@ export const ResumeTimelineEntry = ({
         {detail && pitchOf(item) ? (
           <>
             <Spacer size="s" />
-            <Text style={[fontStyles.iosEm.callout, theme.styles.text]}>{pitchOf(item)}</Text>
+            <Text style={[fontStyles.iosEm.callout, theme.styles.text]}>
+              {pitchOf(item)}
+            </Text>
           </>
         ) : null}
         {detail && item.body ? (
@@ -252,13 +285,21 @@ export const ResumeTimelineEntry = ({
               <>
                 <Spacer size="xxs" />
                 <SpacedView gap="xxs" style={styles.links}>
-                  <SVGExternalLink width={12} height={12} fill={theme.dynamicColors.textMain} />
+                  <SVGExternalLink
+                    width={12}
+                    height={12}
+                    fill={theme.dynamicColors.textMain}
+                  />
                   {item.links.map((link) => (
                     <LinkText
                       key={link.title}
                       underline={true}
                       href={link.url}
-                      style={[styles.link, fontStyles.ios.footnote, theme.styles.textMain]}
+                      style={[
+                        styles.link,
+                        fontStyles.ios.footnote,
+                        theme.styles.textMain,
+                      ]}
                     >
                       {link.title}
                     </LinkText>

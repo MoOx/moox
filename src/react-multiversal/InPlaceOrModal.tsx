@@ -5,21 +5,8 @@ import {
   PositionName,
 } from "@/react-multiversal/positions.utils";
 import { useClickOutside } from "@/react-multiversal/useClickOutside";
-import {
-  ReactNode,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import {
-  StyleProp,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-  ViewStyle,
-} from "react-native";
+import { ReactNode, RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { StyleProp, StyleSheet, useWindowDimensions, View, ViewStyle } from "react-native";
 
 /**
  * Below the anchor, aligned to whichever edge keeps it on screen; above it when
@@ -206,8 +193,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const clamp = (value: number, min: number, max: number) =>
-  Math.max(min, Math.min(value, max));
+const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(value, max));
 
 /**
  * The two ends of the reveal, as numbers rather than as a `clip-path` string:
@@ -226,13 +212,7 @@ const insetPath = ({ top, right, bottom, left, radius }: RevealBox) =>
   `inset(${top}px ${right}px ${bottom}px ${left}px round ${radius}px)`;
 
 /** What the shadow layer animates to follow the clip, in `styles.shadow`. */
-const shadowShapeProperties = [
-  "top",
-  "right",
-  "bottom",
-  "left",
-  "border-radius",
-];
+const shadowShapeProperties = ["top", "right", "bottom", "left", "border-radius"];
 
 /**
  * Shows its content anchored to another element: at the trigger when there is
@@ -365,9 +345,7 @@ export default function InPlaceOrModal({
   const windowDimensions = useWindowDimensions();
 
   const contentRef = useRef<HTMLElement | null>(null);
-  const [contentElement, setContentElement] = useState<HTMLElement | null>(
-    null,
-  );
+  const [contentElement, setContentElement] = useState<HTMLElement | null>(null);
   const setContentNode = useCallback(
     (node: View | null) => {
       const element = node as unknown as HTMLElement | null;
@@ -388,9 +366,7 @@ export default function InPlaceOrModal({
 
   useClickOutside(contentRef, onExit, true, [anchorRef, ...(skipRefs ?? [])]);
 
-  const [placement, setPlacement] = useState<StyleProp<ViewStyle>>(
-    styles.unplaced,
-  );
+  const [placement, setPlacement] = useState<StyleProp<ViewStyle>>(styles.unplaced);
   const hasMeasuredReveal = useRef(false);
   // The two ends of the reveal: the trigger's footprint expressed in the
   // panel's own coordinates, and the panel itself.
@@ -432,9 +408,7 @@ export default function InPlaceOrModal({
       const maxHeight = coverAnchor
         ? windowSize.height - viewportMargin * 2
         : Math.max(
-            windowSize.height -
-              (referenceItem.y + referenceItem.height) -
-              viewportMargin,
+            windowSize.height - (referenceItem.y + referenceItem.height) - viewportMargin,
             referenceItem.y - viewportMargin,
           );
       const maxWidth = windowSize.width - viewportMargin * 2;
@@ -489,8 +463,7 @@ export default function InPlaceOrModal({
       if (hasMeasuredReveal.current) return;
       hasMeasuredReveal.current = true;
       const revealFrom =
-        (revealFromRef ?? anchorRef).current?.getBoundingClientRect() ??
-        anchorRect;
+        (revealFromRef ?? anchorRef).current?.getBoundingClientRect() ?? anchorRect;
       const panelElement = panelRef.current;
       // The panel is not always the whole wrapper: a caller pushing it off its
       // trigger with a margin leaves that margin inside the wrapper. Everything
@@ -503,14 +476,10 @@ export default function InPlaceOrModal({
         top: panelElement?.offsetTop ?? 0,
         left: panelElement?.offsetLeft ?? 0,
         right: panelElement
-          ? element.offsetWidth -
-            panelElement.offsetLeft -
-            panelElement.offsetWidth
+          ? element.offsetWidth - panelElement.offsetLeft - panelElement.offsetWidth
           : 0,
         bottom: panelElement
-          ? element.offsetHeight -
-            panelElement.offsetTop -
-            panelElement.offsetHeight
+          ? element.offsetHeight - panelElement.offsetTop - panelElement.offsetHeight
           : 0,
       };
       const panel = {
@@ -527,11 +496,7 @@ export default function InPlaceOrModal({
       // Keep a sliver of panel visible even when the trigger sits entirely
       // outside it, so the reveal starts from a drop rather than from nothing.
       const minSize = 12;
-      const left = clamp(
-        revealFrom.left - panel.left,
-        0,
-        panel.width - minSize,
-      );
+      const left = clamp(revealFrom.left - panel.left, 0, panel.width - minSize);
       const right = clamp(
         panel.left + panel.width - revealFrom.right,
         0,
@@ -544,8 +509,7 @@ export default function InPlaceOrModal({
         panel.height - top - minSize,
       );
       const radius =
-        revealRadius ??
-        Math.min(panel.width - left - right, panel.height - top - bottom) / 2;
+        revealRadius ?? Math.min(panel.width - left - right, panel.height - top - bottom) / 2;
       setReveal({
         from: { top, right, bottom, left, radius },
         to: { top: 0, right: 0, bottom: 0, left: 0, radius: panelRadius },
@@ -614,10 +578,7 @@ export default function InPlaceOrModal({
   const [hasSettled, setHasSettled] = useState(false);
   useEffect(() => {
     if (!isRevealed) return;
-    const timer = setTimeout(
-      () => setHasSettled(true),
-      motion.bounceDelay + motion.bounceDuration,
-    );
+    const timer = setTimeout(() => setHasSettled(true), motion.bounceDelay + motion.bounceDuration);
     return () => clearTimeout(timer);
   }, [isRevealed]);
 
@@ -654,8 +615,7 @@ export default function InPlaceOrModal({
   const isDissolving = isExiting && exitAnimation === "fade";
   // The one shape the clip and the shadow layer both read, so they cannot come
   // apart: the same rectangle, once as a `clip-path` and once as a geometry.
-  const shape =
-    reveal === null ? null : isShown || isDissolving ? reveal.to : reveal.from;
+  const shape = reveal === null ? null : isShown || isDissolving ? reveal.to : reveal.from;
   const shapeDuration = isExiting ? motion.exitDuration : motion.revealDuration;
   // Going in, a share of the reveal: a beginning, not a duration of its own.
   // Going out, the whole exit. A fade held to the end of a closing panel is a
@@ -705,11 +665,7 @@ export default function InPlaceOrModal({
                 // clip alone.
                 transform: [
                   {
-                    scale: isDimmed
-                      ? motion.dimScale
-                      : isRevealed
-                        ? 1
-                        : motion.openScale,
+                    scale: isDimmed ? motion.dimScale : isRevealed ? 1 : motion.openScale,
                   },
                 ],
                 transformOrigin: reveal.origin,
@@ -718,9 +674,7 @@ export default function InPlaceOrModal({
                 // Let the clip uncover the panel before it starts growing: a
                 // scale under a shut clip has nothing to show.
                 transitionDelay: `${isBouncing ? motion.bounceDelay : 0}ms`,
-                transitionTimingFunction: isBouncing
-                  ? motion.bounceEasing
-                  : motion.easing,
+                transitionTimingFunction: isBouncing ? motion.bounceEasing : motion.easing,
               },
         ]}
       >
@@ -743,11 +697,7 @@ export default function InPlaceOrModal({
                 // it through.
                 opacity: fade,
                 filter: dim,
-                transitionProperty: [
-                  ...shadowShapeProperties,
-                  "filter",
-                  "opacity",
-                ].join(", "),
+                transitionProperty: [...shadowShapeProperties, "filter", "opacity"].join(", "),
                 transitionDuration: [
                   ...shadowShapeProperties.map(() => `${shapeDuration}ms`),
                   `${motion.dimDuration}ms`,
@@ -800,13 +750,8 @@ export default function InPlaceOrModal({
                 // The content sharpens as the shape settles - the blur is what
                 // sells it as one material forming rather than two things
                 // moving.
-                filter:
-                  isRevealed && !isExiting
-                    ? "blur(0px)"
-                    : `blur(${motion.contentBlur}px)`,
-                transform: [
-                  { scale: isRevealed && !isExiting ? 1 : motion.contentScale },
-                ],
+                filter: isRevealed && !isExiting ? "blur(0px)" : `blur(${motion.contentBlur}px)`,
+                transform: [{ scale: isRevealed && !isExiting ? 1 : motion.contentScale }],
                 transitionProperty: "opacity, filter, transform",
                 // On the way out the content goes first, so the shape is not
                 // left closing around text that is still sharp.
@@ -814,15 +759,11 @@ export default function InPlaceOrModal({
                 // they have to land together: a content that clears first leaves
                 // an empty box folding shut, which is what reads as broken.
                 transitionDuration: `${isExiting ? motion.exitDuration : motion.revealContentDuration}ms`,
-                transitionDelay: isExiting
-                  ? "0ms"
-                  : `${motion.revealContentDelay}ms`,
+                transitionDelay: isExiting ? "0ms" : `${motion.revealContentDelay}ms`,
                 // Going out, the content rides the mirror curve: it holds while
                 // the shape closes over it, instead of emptying in the first
                 // third and leaving a bare box to fold shut.
-                transitionTimingFunction: isExiting
-                  ? motion.exitContentEasing
-                  : motion.easing,
+                transitionTimingFunction: isExiting ? motion.exitContentEasing : motion.easing,
               },
             ]}
           >

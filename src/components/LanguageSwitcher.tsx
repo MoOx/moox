@@ -5,7 +5,7 @@ import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { useTheme } from "@/styles";
 import SVGTranslate from "@/svgs/components/SVGTranslate";
-import { useRouterState } from "@tanstack/react-router";
+import { usePathname } from "@/routing";
 import { Text, View } from "react-native";
 
 /** What each language calls itself - never the visitor's current language. */
@@ -26,7 +26,7 @@ const languageNames: Record<Lang, string> = {
 export default function LanguageSwitcher() {
   const theme = useTheme();
   const lang = useLang();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const pathname = usePathname();
 
   if (!isLocalizedPath(pathname)) return null;
 
