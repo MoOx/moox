@@ -263,11 +263,11 @@ export const skillsDomains: SkillDomain[] = [
         "Modernizing legacy React codebases",
         "Design systems & component APIs",
         "Performance & rendering budgets",
+        "Release automation & end-to-end (E2E) testing",
         // Backed by the Hove pitch on page 1, which names who validated it. A
         // skills card may only claim what an experience row can evidence, and
         // "validated by disabled users" is the part almost no CV can show.
         "Accessibility, validated by disabled users",
-        "Release automation & end-to-end (E2E) testing",
         "Maintainability at scale",
         "Mentoring & technical direction",
       ],
@@ -275,8 +275,8 @@ export const skillsDomains: SkillDomain[] = [
         "Modernisation de bases de code React vieillissantes",
         "Design systems & API de composants",
         "Performance & budgets de rendu",
-        "Accessibilité, validée par des personnes en situation de handicap",
         "Automatisation des livraisons & tests end-to-end (E2E)",
+        "Accessibilité, validée par des personnes en situation de handicap",
         "Maintenabilité à grande échelle",
         "Mentorat & direction technique",
       ],
@@ -514,7 +514,7 @@ export function profileStats(items: ResumeItem[], lang: Lang = defaultLang): Pro
     {
       stat: `${yearsPro}`,
       label: fr ? "Années" : "Years",
-      comment: fr ? `en poste depuis ${proSince}` : `pro since ${proSince}`,
+      comment: fr ? `pro depuis ${proSince}` : `pro since ${proSince}`,
     },
     {
       stat: roundedDownCount(projects.length),
