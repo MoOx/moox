@@ -13,7 +13,8 @@ import {
   responsiveProps,
   responsiveStyle,
 } from "@/react-multiversal/responsiveStyle";
-import LinkText, { LinkTextProps } from "@/react-multiversal/LinkText";
+import LinkText from "@/react-multiversal/LinkText";
+import { LinkTextProps } from "@/react-multiversal/LinkText.types";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import TextForReader from "@/react-multiversal/TextForReader";

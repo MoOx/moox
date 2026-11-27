@@ -1,13 +1,13 @@
-import { glassDataSet } from "@/components/GlassFallbackStyles";
+import { glassDataSet } from "@/react-multiversal/design/glass";
 import WebsiteMenu from "@/components/WebsiteMenu";
 import { unlocalizedPath, useHref, useT } from "@/i18n";
 import { footerAnchor, menuBarLinks } from "@/consts";
 import { size } from "@/react-multiversal";
+import { usePathname } from "@/routing";
 import Container from "@/react-multiversal/Container";
 import LinkView from "@/react-multiversal/LinkView";
 import SpacedView from "@/react-multiversal/SpacedView";
 import { alpha, boxShadows, colors, useTheme } from "@/styles";
-import { useRouterState } from "@tanstack/react-router";
 import { Text, View } from "react-native";
 
 export const WebsiteMobileMenuPlaceholder = () => {
@@ -19,7 +19,7 @@ export const WebsiteMobileMenuPlaceholder = () => {
  * plain link any more - it opens `WebsiteMenu` - and the two must stay
  * indistinguishable in the bar.
  */
-const MenuBarItemContent = ({
+const MenuBarItem = ({
   icon,
   text,
   active = false,
@@ -64,23 +64,15 @@ export const WebsiteMobileMenuLinks = () => {
   // meant no menu item was ever active on a French page (`/fr/resume`).
   // Normalising here rather than in `consts.tsx` keeps that file free of i18n -
   // `i18n.ts` imports from it, so the dependency cannot go the other way.
-  const pathname = useRouterState({
-    select: (s) => {
-      const path = unlocalizedPath(s.location.pathname);
-      return path.length > 1 ? path.replace(/\/$/, "") : path;
-    },
-  });
+  const path = unlocalizedPath(usePathname());
+  const pathname = path.length > 1 ? path.replace(/\/$/, "") : path;
   const localizeHref = useHref();
   const t = useT();
   return (
     <>
       {Object.entries(menuBarLinks).map(([text, { href, label, isActive, icon }]) => {
         const content = (
-          <MenuBarItemContent
-            icon={icon}
-            text={t(label) ?? text}
-            active={isActive?.(pathname, href)}
-          />
+          <MenuBarItem icon={icon} text={t(label) ?? text} active={isActive?.(pathname, href)} />
         );
         // "More" pointed at the footer; it now opens the same links as a menu,
         // and keeps that href as its no-JS fallback.
@@ -107,7 +99,7 @@ export const WebsiteMobileMenuLinksContainer = ({ children }: { children: React.
       }}
     >
       <SpacedView
-        dataSet={glassDataSet}
+        dataSet={glassDataSet()}
         horizontal="xxs"
         vertical="xxs"
         style={{

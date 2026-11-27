@@ -1,4 +1,4 @@
-import { glassDataSet } from "@/components/GlassFallbackStyles";
+import { glassDataSet } from "@/react-multiversal/design/glass";
 import { allInternalLinks, footerAnchor, menuBarLinks, socialLinks, socialLinks2 } from "@/consts";
 import { isLocalizedPath, Lang, langs, localizedHref, useHref, useLang, useT } from "@/i18n";
 import { size } from "@/react-multiversal";
@@ -12,7 +12,7 @@ import { UserColorScheme, userColorSchemeStorageKey } from "@/react-multiversal/
 import { useUserColorScheme } from "@/react-multiversal/theme/useUserColorScheme";
 import SVGTranslate from "@/svgs/components/SVGTranslate";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRouterState } from "@tanstack/react-router";
+import { usePathname } from "@/routing";
 import { MouseEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GestureResponderEvent, Text, View } from "react-native";
 import Svg, { Path } from "react-native-svg";
@@ -64,7 +64,7 @@ export default function WebsiteMenu({ children }: { children: ReactNode }) {
   const t = useT();
   const lang = useLang();
   const localizeHref = useHref();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const pathname = usePathname();
   const [userColorScheme, setUserColorScheme] = useUserColorScheme();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -201,7 +201,7 @@ export default function WebsiteMenu({ children }: { children: ReactNode }) {
           // The trigger is the pill of the menu bar: the reveal starts with its
           // corners, not with a radius guessed from the clip.
           revealRadius={36}
-          dataSet={glassDataSet}
+          dataSet={glassDataSet()}
           items={items}
           selectedItemIds={[`color-scheme-${userColorScheme}`, `language-${lang}`]}
           onExit={close}

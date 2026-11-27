@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 /**
  * The three behaviours of /contact that a style object cannot express:
  * a parent `:hover` painting a child, keyframes, and a reduced-motion opt-out.
@@ -86,5 +87,8 @@ const css = `
 `;
 
 export default function ContactPageStyles() {
+  // A `<style>` element, i.e. web only. The rules it carries are hover,
+  // `:active` and reduced-motion states, none of which exist on native.
+  if (Platform.OS !== "web") return null;
   return <style dangerouslySetInnerHTML={{ __html: css }} />;
 }

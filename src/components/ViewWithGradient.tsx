@@ -1,4 +1,3 @@
-import React from "react";
 import { View, ViewProps } from "react-native";
 
 export default function ViewWithGradient({
@@ -14,7 +13,8 @@ export default function ViewWithGradient({
       {...props}
       style={[
         {
-          flex: 1,
+          flexGrow: 1,
+          flexShrink: 1,
           borderRadius: 6,
           backgroundImage: `linear-gradient(0.45turn, ${color} 10%, ${color2} 110%)`,
           overflow: "hidden",

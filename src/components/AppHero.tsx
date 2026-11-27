@@ -4,11 +4,12 @@ import Image from "@/components/Image";
 import LinkButton from "@/components/LinkButton";
 import { size, WindowWidth } from "@/react-multiversal";
 import Container from "@/react-multiversal/Container";
+import GradientText from "@/react-multiversal/GradientText";
 import { fontStyles, weight } from "@/react-multiversal/font";
 import LinkView from "@/react-multiversal/LinkView";
 import Parallax from "@/react-multiversal/Parallax";
 import SpacedView from "@/react-multiversal/SpacedView";
-import { colors, gradientTextFlashyStyles, useTheme } from "@/styles";
+import { colors, gradientFlashyStops, useTheme } from "@/styles";
 import { pTransforms } from "@/utils.styles";
 import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 
@@ -36,17 +37,18 @@ export default function AppHero({
   // carries at the head of its story. Same screen either way.
   const lead: AppStoryStep | undefined = "story" in app ? app.story[0] : app.lead;
   const title = (
-    <Text
+    <GradientText
+      angle={176}
+      stops={gradientFlashyStops(theme)}
       style={[
         fontStyles.iosEm.largeTitle,
         theme.styles.text,
-        gradientTextFlashyStyles(theme, 176),
         heroTitleSize,
         { fontWeight: weight.black },
       ]}
     >
       {app.name}
-    </Text>
+    </GradientText>
   );
 
   return (
